@@ -26,11 +26,11 @@ public struct Progress: Codable, Equatable {
     public var haptics = true
     public var auroraTheme = false
     public init() {}
-    public var nextLevel: Int { min(12, (completed.keys.max() ?? 0) + 1) }
-    public var chapterComplete: Bool { completed.count == 12 }
+    public var nextLevel: Int { min(Level.total, (completed.keys.max() ?? 0) + 1) }
+    public var chapterComplete: Bool { (1...12).allSatisfy { completed[$0] != nil } }
     public var gardenComplete: Bool { restored.count == GardenTask.all.count }
     @discardableResult public mutating func finish(level: Int, score: Int) -> Bool {
-        guard (1...12).contains(level) else { return false }
+        guard (1...Level.total).contains(level) else { return false }
         let first = completed[level] == nil
         completed[level] = max(completed[level, default: 0], score)
         if first { stars += 1; coins += 120 } else { coins += 30 }

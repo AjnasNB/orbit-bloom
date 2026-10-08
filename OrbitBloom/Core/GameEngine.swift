@@ -33,7 +33,14 @@ public struct Level: Identifiable {
     public let goals: [Gem: Int]
     public let frost: Int
     public var subtitle: String { frost > 0 ? "Bloom beside frozen patches to melt them." : "Collect resources to bring your little moon to life." }
-    public static let campaign: [Level] = [
+    public static let total = 1020
+    public static let campaign: [Level] = opening + (13...total).map { id in
+        let region = (id-13)/20
+        let names = ["Orchid orbit", "Applewood trails", "Dewdrop canyon", "Rose nebula", "Crystal canopy", "Solar orchard"]
+        let a = Gem.allCases[id%5], b = Gem.allCases[(id+2)%5]
+        return Level(id:id,title:"\(names[region%names.count]) \(id)",biome:"Expedition \(region+1)",moves:32+id%5,target:1500+id%7*150,goals:[a:12+id%7,b:10+id%6],frost:4+id%9)
+    }
+    public static let opening: [Level] = [
         .init(id: 1, title: "A little life", biome: "Moonseed Meadow", moves: 22, target: 450, goals: [.leaf: 6], frost: 0),
         .init(id: 2, title: "Morning dew", biome: "Moonseed Meadow", moves: 24, target: 700, goals: [.water: 9], frost: 0),
         .init(id: 3, title: "First flowers", biome: "Moonseed Meadow", moves: 25, target: 900, goals: [.flower: 10, .sun: 8], frost: 0),
@@ -54,6 +61,7 @@ public struct CellState: Identifiable, Codable {
     public let column: Int
     public let row: Int
     public let gem: Gem
+    public var power: GardenTool? = nil
     public var key: Int { row * 7 + column }
 }
 public struct Cascade {
@@ -66,6 +74,7 @@ public struct Turn {
     public let accepted: Bool
     public let cascades: [Cascade]
     public let earnedCharge: Bool
+    public var swappedCells: [CellState]? = nil
 }
 
 public final class GameEngine {
@@ -76,10 +85,12 @@ public final class GameEngine {
     public private(set) var collected: [Gem: Int] = [:]
     public private(set) var frost: Set<Int> = []
     public let level: Level
+    public private(set) var specials: [UUID:GardenTool] = [:]
+    public var powers: [Int:GardenTool] { Dictionary(uniqueKeysWithValues:cells.compactMap { cell in cell.power.map { (cell.key,$0) } }) }
     public var cells: [CellState] {
         board.grid.allIndices().map { index in
             let cell = board.grid[index]
-            return .init(id: cell.id, column: index.column, row: index.row, gem: cell.filling)
+            return .init(id: cell.id, column: index.column, row: index.row, gem: cell.filling, power:specials[cell.id])
         }
     }
     public var won: Bool { score >= level.target && frost.isEmpty && level.goals.allSatisfy { collected[$0.key, default: 0] >= $0.value } }
@@ -125,28 +136,48 @@ public final class GameEngine {
         let group = cluster(at:cell)
         guard group.count >= 2, !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
         moves -= 1
-        return resolve(initial:Set(group.map(index)), bloomWarmth:true)
+        let turn = resolve(initial:Set(group.map(index)), bloomWarmth:true)
+        if let tool = PowerRules.tool(for:group) { specials[board.grid[index(cell)].id] = tool }
+        return turn
+    }
+    public func blastArea(_ tool:GardenTool, at cell:Int) -> Set<Int> {
+        guard (0..<49).contains(cell) else { return [] }
+        let color = board.grid[index(cell)].filling
+        return Set(cells.filter { item in
+            switch tool {
+            case .bomb: return abs(item.row-cell/7) <= 1 && abs(item.column-cell%7) <= 1
+            case .tnt: return item.row == cell/7 || item.column == cell%7
+            case .mega: return abs(item.row-cell/7) <= 2 && abs(item.column-cell%7) <= 2
+            case .rainbow: return item.gem == color
+            }
+        }.map(\.key))
     }
     public func activate(_ tool: GardenTool, at cell: Int) -> Turn {
         guard (0..<49).contains(cell), !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
-        let center = index(cell), color = board.grid[center].filling
-        let affected = Set(board.grid.allIndices().filter { item in
-            switch tool {
-            case .bomb: return abs(item.row-center.row) <= 1 && abs(item.column-center.column) <= 1
-            case .tnt: return item.row == center.row || item.column == center.column
-            case .mega: return abs(item.row-center.row) <= 2 && abs(item.column-center.column) <= 2
-            case .rainbow: return board.grid[item].filling == color
-            }
-        })
-        return resolve(initial:affected)
+        return resolve(initial:Set(blastArea(tool,at:cell).map(index)))
+    }
+    public func detonate(at cell:Int) -> Turn {
+        guard let tool = powers[cell], !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
+        moves -= 1
+        return resolve(initial:Set(blastArea(tool,at:cell).map(index)))
     }
     public func swap(_ a: Int, _ b: Int) -> Turn {
         guard (0..<49).contains(a), (0..<49).contains(b), moves > 0, !won else { return Turn(accepted: false, cascades: [], earnedCharge: false) }
         let source = index(a), target = index(b)
-        guard board.canSwapCell(at: source, with: target), board.shouldSwapCell(at: source, with: target) else { return Turn(accepted: false, cascades: [], earnedCharge: false) }
+        guard board.canSwapCell(at:source,with:target) else { return .init(accepted:false,cascades:[],earnedCharge:false) }
+        if powers[a] != nil || powers[b] != nil {
+            board.swapCell(at:source,with:target); let swapped = cells; moves -= 1
+            let areas = [a,b].reduce(into:Set<Int>()) { keys, cell in if let tool = powers[cell] { keys.formUnion(blastArea(tool,at:cell)) } }
+            var turn = resolve(initial:Set(areas.map(index))); turn.swappedCells = swapped; return turn
+        }
+        guard board.shouldSwapCell(at: source, with: target) else { return .init(accepted:false,cascades:[],earnedCharge:false) }
         moves -= 1
-        let initial = board.swapAndMatchCell(at: source, with: target)
-        return resolve(initial: initial)
+        let initial = board.swapAndMatchCell(at: source, with: target), swapped = cells
+        let matchedByKind = Dictionary(grouping:initial,by:{ board.grid[$0].filling })
+        let tool = matchedByKind.values.compactMap { PowerRules.tool(for:Set($0.map(key))) }.max { GardenTool.allCases.firstIndex(of:$0)! < GardenTool.allCases.firstIndex(of:$1)! }
+        var turn = resolve(initial:initial,bloomWarmth:true)
+        if let tool { specials[board.grid[target].id] = tool }
+        turn.swappedCells = swapped; return turn
     }
     public func burst(at key: Int) -> Turn {
         guard (0..<49).contains(key), !won, !lost else { return Turn(accepted: false, cascades: [], earnedCharge: false) }
@@ -155,8 +186,13 @@ public final class GameEngine {
         return resolve(initial: indices)
     }
     public func shuffle() {
-        // A free recovery action; it never spends moves or progress.
-        resetBoard()
+        // Rearrange actual identities, preserving all pieces and power-ups.
+        for _ in 0..<150 {
+            let order = Array(0..<49).shuffled()
+            for a in 0..<49 { board.swapCell(at:index(a),with:index(order[a])) }
+            if board.findAllMatches().isEmpty && hint != nil && bestCluster() != nil { return }
+        }
+        resetBoard(preservePowers:true)
     }
     public func addMoves(_ count: Int) { moves += max(0, count) }
     private func resolve(initial: Set<Index>, bloomWarmth: Bool = false) -> Turn {
@@ -165,6 +201,19 @@ public final class GameEngine {
         let charge = matches.count >= 4
         for chain in 1...64 {
             guard !matches.isEmpty else { break }
+            // Expand every touched on-board power before removing any pieces.
+            var detonated:Set<UUID> = []
+            var expanded = true
+            while expanded {
+                expanded = false
+                for item in Array(matches) {
+                    let id = board.grid[item].id
+                    if let tool = specials[id], !detonated.contains(id) {
+                        detonated.insert(id); matches.formUnion(blastArea(tool,at:key(item)).map(index)); expanded = true
+                    }
+                }
+            }
+            for id in detonated { specials.removeValue(forKey:id) }
             var tally: [Gem: Int] = [:]
             for i in matches { tally[board.grid[i].filling, default: 0] += 1 }
             for (gem, amount) in tally { collected[gem, default: 0] += amount }
@@ -184,12 +233,15 @@ public final class GameEngine {
         }
         // Guarantee a stable, playable board, including after a pathological long cascade.
         if !board.findAllMatches().isEmpty || board.findPossibleSwap() == nil || bestCluster() == nil {
-            resetBoard()
+            resetBoard(preservePowers:true)
             waves.append(.init(cleared: [], cells: cells, collected: [:], points: 0))
         }
         return Turn(accepted: true, cascades: waves, earnedCharge: charge)
     }
-    private func resetBoard() {
+    private func resetBoard(preservePowers:Bool = false) {
+        let kept = preservePowers ? Array(specials.values) : []
+        specials.removeAll()
+        defer { for (offset,tool) in kept.prefix(49).enumerated() { specials[board.grid[index(offset)].id] = tool } }
         for _ in 0..<100 {
             for index in board.grid.allIndices() { _ = board.spawn(filling: board.generator.generate(at: index).filling, at: index) }
             for _ in 0..<100 {
@@ -236,12 +288,14 @@ extension GameEngine {
         public let moves: Int
         public let collected: [Gem: Int]
         public let frost: Set<Int>
+        public var specials: [UUID:GardenTool]? = nil
     }
-    public var snapshot: Snapshot { .init(levelID: level.id, grid: board.grid, score: score, moves: moves, collected: collected, frost: frost) }
+    public var snapshot: Snapshot { .init(levelID: level.id, grid: board.grid, score: score, moves: moves, collected: collected, frost: frost, specials:specials) }
     public convenience init?(snapshot: Snapshot) {
         guard let level = Level.campaign.first(where: { $0.id == snapshot.levelID }), snapshot.grid.size == Size(columns: 7, rows: 7), snapshot.grid.columns.count == 7, snapshot.grid.columns.allSatisfy({ $0.count == 7 }), snapshot.moves >= 0 else { return nil }
         self.init(level: level, seed: UInt64.random(in: 1...UInt64.max))
         board = Board(grid: snapshot.grid, basic: Set(Gem.allCases), bonuse: [], obstacles: [])
+        specials = snapshot.specials ?? [:]
         score = snapshot.score; moves = snapshot.moves; collected = snapshot.collected; frost = snapshot.frost.filter { (0..<49).contains($0) }
         if !board.findAllMatches().isEmpty || board.findPossibleSwap() == nil || bestCluster() == nil { resetBoard() }
     }

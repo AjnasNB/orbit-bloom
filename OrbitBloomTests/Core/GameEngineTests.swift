@@ -104,8 +104,8 @@ final class GameEngineTests: XCTestCase {
         XCTAssertTrue(progress.chapterComplete)
         for task in GardenTask.all { XCTAssertTrue(progress.restore(task.id)) }
         XCTAssertTrue(progress.gardenComplete)
-        XCTAssertEqual(progress.stars, 0)
-        print("CAMPAIGN REPORT: all 12 levels and 6 garden projects complete; \(totalTurns) legal swaps, \(totalRetries) retries, no paid items or extra moves.")
+        XCTAssertEqual(progress.stars, Level.total - 12)
+        print("CAMPAIGN REPORT: all \(Level.total) levels and 6 garden projects complete; \(totalTurns) legal swaps, \(totalRetries) retries, no paid items or extra moves.")
     }
     func testLossRetryAndFreeShuffle() {
         let game = GameEngine(level: Level.campaign[11], seed: 12)
