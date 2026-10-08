@@ -18,6 +18,16 @@ import StoreKitTest
         }
         throw XCTSkip("Installed StoreKit test service cannot load the local product (SKInternalErrorDomain 3 on iOS 26.5). Rerun on a working runtime or signed sandbox device.")
     }
+    func testAppleConsumableCreditsCoinsAndDoesNotDoubleCredit() async throws {
+        let store = try await loadedStore()
+        let defaults = UserDefaults(suiteName:"orbitbloom.purchase.\(UUID().uuidString)")!
+        let model = GameModel(defaults:defaults); store.game = model
+        let before = model.progress.coins
+        guard store.products["com.orbitbloom.coins400"] != nil else { throw XCTSkip("Apple local consumable product did not load") }
+        await store.purchase("com.orbitbloom.coins400")
+        XCTAssertEqual(model.progress.coins,before+400)
+        await store.recoverUnfinished(); XCTAssertEqual(model.progress.coins,before+400)
+    }
     func testPurchaseAndRestoreNonConsumable() async throws {
         let store = try await loadedStore()
         XCTAssertEqual(store.product?.id, PurchaseStore.productID)
@@ -89,4 +99,22 @@ import StoreKitTest
         XCTAssertNil(relaunched.engine)
         XCTAssertEqual(relaunched.progress.stars, 1)
     }
+    func testWalletTransactionAndLifeAreDurableAndIdempotent() throws {
+        let suite = "orbitbloom.wallet.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName:suite)); defer { defaults.removePersistentDomain(forName:suite) }
+        let model = GameModel(defaults:defaults)
+        model.start(Level.campaign[0]); XCTAssertEqual(model.ecosystem.lives.hearts,4)
+        XCTAssertTrue(model.applyTransaction(productID:"com.orbitbloom.starter",transactionID:"verified-unit-fixture"))
+        let restored = GameModel(defaults:defaults)
+        XCTAssertEqual(restored.progress.coins,760); XCTAssertEqual(restored.ecosystem.lives.reserve,3)
+        XCTAssertTrue(restored.applyTransaction(productID:"com.orbitbloom.starter",transactionID:"verified-unit-fixture"))
+        XCTAssertEqual(restored.progress.coins,760); XCTAssertEqual(restored.ecosystem.lives.reserve,3)
+    }
+    func testAudioAndSpritesAreActuallyBundled() {
+        for name in ["music-garden","music-farm","music-puzzle","music-race","sfx-tap","sfx-match","sfx-cascade","sfx-harvest","sfx-plant","sfx-water","sfx-collision","sfx-blast","sfx-coin","sfx-craft","sfx-win"] {
+            XCTAssertNotNil(Bundle.main.url(forResource:name,withExtension:"m4a"),name)
+        }
+        XCTAssertEqual(BotanicalSprites.images.count,12)
+    }
+
 }

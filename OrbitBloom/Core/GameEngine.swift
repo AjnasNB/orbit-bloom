@@ -4,7 +4,7 @@ import Match3Kit
 public enum Gem: Int, CaseIterable, GridFilling {
     case leaf, water, sun, flower, crystal
     public var pattern: Pattern { Pattern(indices: []) }
-    public var name: String { ["Leaf", "Dewdrop", "Sun", "Blossom", "Crystal"][rawValue] }
+    public var name: String { ["Leaf", "Dewdrop", "Apple", "Rose", "Diamond"][rawValue] }
 }
 
 public final class SeededGenerator: Generator<Gem> {
@@ -99,6 +99,47 @@ public final class GameEngine {
     }
     private func key(_ index: Index) -> Int { index.row * 7 + index.column }
     private func index(_ key: Int) -> Index { Index(column: key % 7, row: key / 7) }
+    public func cluster(at cell: Int) -> Set<Int> {
+        guard (0..<49).contains(cell) else { return [] }
+        let gem = board.grid[index(cell)].filling
+        var seen: Set<Int> = [cell], pending = [cell]
+        while let current = pending.popLast() {
+            for neighbor in [current-1,current+1,current-7,current+7] where (0..<49).contains(neighbor) {
+                guard abs(current/7-neighbor/7)+abs(current%7-neighbor%7) == 1,
+                      !seen.contains(neighbor), board.grid[index(neighbor)].filling == gem else { continue }
+                seen.insert(neighbor); pending.append(neighbor)
+            }
+        }
+        return seen
+    }
+    public func bestCluster() -> Int? {
+        cells.filter { cluster(at:$0.key).count >= 2 }.max { a,b in
+            func value(_ cell: CellState) -> Int {
+                let group = cluster(at:cell.key)
+                return group.count * (collected[cell.gem,default:0] < level.goals[cell.gem,default:0] ? 5 : 1) + group.intersection(frost).count * 8
+            }
+            return value(a) < value(b)
+        }?.key
+    }
+    public func harvestCluster(at cell: Int) -> Turn {
+        let group = cluster(at:cell)
+        guard group.count >= 2, !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
+        moves -= 1
+        return resolve(initial:Set(group.map(index)))
+    }
+    public func activate(_ tool: GardenTool, at cell: Int) -> Turn {
+        guard (0..<49).contains(cell), !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
+        let center = index(cell), color = board.grid[center].filling
+        let affected = Set(board.grid.allIndices().filter { item in
+            switch tool {
+            case .bomb: return abs(item.row-center.row) <= 1 && abs(item.column-center.column) <= 1
+            case .tnt: return item.row == center.row || item.column == center.column
+            case .mega: return abs(item.row-center.row) <= 2 && abs(item.column-center.column) <= 2
+            case .rainbow: return board.grid[item].filling == color
+            }
+        })
+        return resolve(initial:affected)
+    }
     public func swap(_ a: Int, _ b: Int) -> Turn {
         guard (0..<49).contains(a), (0..<49).contains(b), moves > 0, !won else { return Turn(accepted: false, cascades: [], earnedCharge: false) }
         let source = index(a), target = index(b)
