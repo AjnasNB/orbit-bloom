@@ -7,7 +7,7 @@ import SwiftUI
     var body: some Scene {
         WindowGroup {
             RootView().environmentObject(game).environmentObject(purchases).preferredColorScheme(.dark)
-                .onChange(of: scenePhase) { _, value in if value != .active { game.save() } }
+                .onChange(of: scenePhase) { _, value in if value != .active { game.save(); AudioDirector.shared.suspend() } else { game.refreshClock(); game.updateMusic() } }
         }
     }
 }

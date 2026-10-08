@@ -16,3 +16,7 @@ evidence/swipe-screenshots/
 research/audio/*/Audio/
 research/audio/*.zip
 .swiftpm/
+
+research/audio/*.ogg
+research/audio/*.mp3
+research/audio/*.html

@@ -1,0 +1,30 @@
+{
+  "ambient": {
+    "page": "https://opengameart.org/node/73989",
+    "file": "https://opengameart.org/sites/default/files/013_Another_August_0.mp3",
+    "license": "CC0"
+  },
+  "adventure": {
+    "page": "https://opengameart.org/content/happy-adventure-loop",
+    "file": "https://opengameart.org/sites/default/files/happy_adveture.mp3",
+    "license": "CC0"
+  },
+  "rally": {
+    "page": "https://opengameart.org/content/rhythm-garden",
+    "file": "https://opengameart.org/sites/default/files/rhythm_garden_0.ogg",
+    "license": "CC0"
+  },
+  "effects": {
+    "tap": "interface-sounds/Audio/click_003.ogg",
+    "match": "interface-sounds/Audio/glass_001.ogg",
+    "cascade": "interface-sounds/Audio/glass_006.ogg",
+    "harvest": "impact-sounds/Audio/footstep_grass_001.ogg",
+    "plant": "impact-sounds/Audio/impactSoft_medium_000.ogg",
+    "water": "interface-sounds/Audio/glass_003.ogg",
+    "collision": "impact-sounds/Audio/impactMetal_medium_000.ogg",
+    "blast": "impact-sounds/Audio/impactWood_heavy_002.ogg",
+    "coin": "interface-sounds/Audio/confirmation_001.ogg",
+    "craft": "interface-sounds/Audio/confirmation_002.ogg",
+    "win": "music-jingles/Audio/Pizzicato jingles/jingles_PIZZI09.ogg"
+  }
+}

@@ -7,234 +7,291 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A235E8F7CFAF66B59E6BFAC /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A167D970544704D246112D /* Progress.swift */; };
-		0E2A65BF5720CFE40ED45B48 /* bloom3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F4E43003260143141FBA /* bloom3.wav */; };
-		12E40F9338978C8F5CFB8557 /* Match3Kit in Frameworks */ = {isa = PBXBuildFile; productRef = E1E218D95D9F7F437CC59E5F /* Match3Kit */; };
-		18213C3977655472A4715492 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490C035E7EBE1DB703EC9CC7 /* GameEngine.swift */; };
-		1B5EF9C38F64ABDF00B407AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFB4B958631126550AF7016 /* Foundation.framework */; };
-		2119B0E3D6F416744FF3A5D1 /* OrbitBloom.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5BF037EE181D1080B0A9A65B /* OrbitBloom.storekit */; };
-		227C5571A540EB924EEA5B8F /* bloom2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF333A0C1991F54DC4CDFD98 /* bloom2.wav */; };
-		5FC770BE6BAEC73D7AB507C4 /* OrbitBloomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8601C21BE75C129EB8B1441D /* OrbitBloomApp.swift */; };
-		6828064E404F224ABD637664 /* GemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F8839D4358CE90A0D6C7EE /* GemView.swift */; };
-		6F824BE1C5FCA5E702CC2488 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCC6DAA27E931655A11F3BD /* GameModel.swift */; };
-		78E12781DF0EFBD53674C82E /* bloom0.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5AC43787046376F7935880D0 /* bloom0.wav */; };
-		7A4C9FA6CFD8390DB9DA8471 /* ThirdPartyNotices.txt in Resources */ = {isa = PBXBuildFile; fileRef = CC69E5EDED6832998EC3804C /* ThirdPartyNotices.txt */; };
-		80E1CB9B15ACDEAC45FA0794 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AA35DCFB48E217F73798FD /* ShopView.swift */; };
-		8BC99ADDCF424EF222F86B0D /* GameplayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D1421AFB43AE9B902922C7 /* GameplayUITests.swift */; };
-		A0AE46E4AFE6C71B79F74A32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C86532D8C6ABAA6737EDCCEC /* Assets.xcassets */; };
-		ABC602897D1EC435696933C2 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BEE38B232CEAC03D32D724 /* RootView.swift */; };
-		AD39784C619C5358F05C9ABA /* bloom1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 646EA1742E7F34CFC0CEDED2 /* bloom1.wav */; };
-		B348BF36B38DCB8BBCA8410A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E1903B63BEE293C3369B8E2D /* PrivacyInfo.xcprivacy */; };
-		B3BE92A933FFFD2628E35785 /* bloom4.wav in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E139E55CB8C1B0E0B914 /* bloom4.wav */; };
-		BB6D3A82418B05409B36315A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C8F0D45F7FD4C278487B4 /* Theme.swift */; };
-		C7ECC234BC10751EC6BAE0DB /* PurchaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB109381EEEAF4BA5AA1760 /* PurchaseTests.swift */; };
-		CFDB7E1C0A037D488D35F042 /* OrbitBloom.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5BF037EE181D1080B0A9A65B /* OrbitBloom.storekit */; };
-		D2D011709DD8D1BEA619EF7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFB4B958631126550AF7016 /* Foundation.framework */; };
-		EE6DCF9B052F9B1FC4097A19 /* PurchaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE38C9E4B2E2806171DDD6F /* PurchaseStore.swift */; };
-		F04844A6D7E413E642C2B380 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFB4B958631126550AF7016 /* Foundation.framework */; };
-		FC468684C8CDCE655143ACA8 /* PuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E8654A60E023CB3AE4A34 /* PuzzleView.swift */; };
+		0450C1EDBFA5BE9B044DE397 /* music-puzzle.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 61F3BE2577AC7B4D68B02B30 /* music-puzzle.m4a */; };
+		07BE4A922FD41A288F3E2F91 /* sfx-craft.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EF2E796FF703DFD44AEBE682 /* sfx-craft.m4a */; };
+		082829404EC9911261740AF6 /* FarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8373BE7F3671BCA11A56B97E /* FarmView.swift */; };
+		0FC1B5638B1BC1DFB45A075B /* PuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18C8A27F7C3F2D4164DF0B /* PuzzleView.swift */; };
+		1051A7BABB33C2A76C6A5311 /* sfx-plant.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 69A4B5CF04E854166FD65714 /* sfx-plant.m4a */; };
+		148B3D41F83C18B1C9A22CF7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5747C4FAC04201E727376677 /* GameEngine.swift */; };
+		15B4EF1A04F76C7A40BECD5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B172A1CBFED8E8EF358E99C5 /* Foundation.framework */; };
+		18B6E86C32669A93BCE6D82E /* music-garden.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 822235B7CFDEAFE029062F5C /* music-garden.m4a */; };
+		201A99DF1D92C7C9E2A3B31D /* sfx-blast.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E1192B4BBA501F412CF708C7 /* sfx-blast.m4a */; };
+		224B128CBAA951431C374C12 /* bloom2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4807BB3EF053A7015A43836B /* bloom2.wav */; };
+		239D50EAAEE91BD990E7644B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B172A1CBFED8E8EF358E99C5 /* Foundation.framework */; };
+		23BBBE990B63F48C82418A77 /* sfx-win.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 94D9B13849EFD4126B8BD7EE /* sfx-win.m4a */; };
+		26B07090077161901A07BDB1 /* Match3Kit in Frameworks */ = {isa = PBXBuildFile; productRef = 16A214D75DA300C71E6643BA /* Match3Kit */; };
+		295FA2FC0651F1966D7E81B9 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BBD2F7935D99AF41F4259 /* GameModel.swift */; };
+		30DE04AD5DF90477267AC735 /* OrbitBloom.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 8B5E57DC3D01E6C111587906 /* OrbitBloom.storekit */; };
+		3CBD04DFEFAE829ED63EE09D /* sfx-collision.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6E0764E5D2F10063AC7098F1 /* sfx-collision.m4a */; };
+		498C2EBA3BBB383C080F5EC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8369C8E3D341234AC743E12 /* Assets.xcassets */; };
+		4A706158E38AE5554404500D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 848206E7D5304A87D08AA3FB /* PrivacyInfo.xcprivacy */; };
+		4B3A8A4C23A75488182E6560 /* PurchaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED8FC5C77D1E2E8CB45F57 /* PurchaseTests.swift */; };
+		4E8F3F0037760B49D000CA64 /* bloom1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0D5772C0447C00B7E3B39187 /* bloom1.wav */; };
+		56DA211BD554C5345DEAB4AF /* OrbitBloomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945B9C20BB83935DF5FC5FC1 /* OrbitBloomApp.swift */; };
+		691DC0A3B3255DC1340B0B17 /* sfx-water.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EAA9903A242CBD9576E2871E /* sfx-water.m4a */; };
+		6C0EEEEE5C64EB8DE9B1D0B7 /* GameplayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9490DA265AF488CFD3DA763F /* GameplayUITests.swift */; };
+		76ACFA81DFDABEDD27146608 /* sfx-tap.m4a in Resources */ = {isa = PBXBuildFile; fileRef = BA869F9488B277A840C5FE13 /* sfx-tap.m4a */; };
+		89CE6D7B9981E6727FC1B6D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B172A1CBFED8E8EF358E99C5 /* Foundation.framework */; };
+		8BF4E31F2C7F391707C698A3 /* Ecosystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6552354D5EE9809EA6DA0 /* Ecosystem.swift */; };
+		99890FBB7D6D60E83D3637B7 /* sfx-coin.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22D4C873C2F0125ECA9C5114 /* sfx-coin.m4a */; };
+		A61A25CE030F11812D0E3C52 /* sfx-match.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EE3E6A2694C45D53198496CF /* sfx-match.m4a */; };
+		AF163DA2B4A7D164E00EA88F /* bloom0.wav in Resources */ = {isa = PBXBuildFile; fileRef = B8B3DAFF99F087DA846D5B3B /* bloom0.wav */; };
+		B584DD639C504162332C6739 /* bloom3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 621CEE55DF2302146DA81EEF /* bloom3.wav */; };
+		C296488635D23639CCEAC299 /* sfx-harvest.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 60EB85A9779DF35788952A1F /* sfx-harvest.m4a */; };
+		C412C14A3887E2AFFC3B3EBF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FF7154EFB1008927E655F2 /* Theme.swift */; };
+		CA5858519C6DE8BC3112BA68 /* ThirdPartyNotices.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE17BD12FEDCBD2B4ED25D70 /* ThirdPartyNotices.txt */; };
+		CEC5564AA4A6C064116D08B8 /* OrbitBloom.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 8B5E57DC3D01E6C111587906 /* OrbitBloom.storekit */; };
+		CFAC0953AD424EE2F4774886 /* music-farm.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6F89CCD83F6CD0B67B930FAD /* music-farm.m4a */; };
+		D4E6C8094691ADF1940C5742 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305DB6BAA2CF1056199AD820 /* RootView.swift */; };
+		DBA51F48C2238046756FD98F /* PurchaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483283F1AB31C9695602748D /* PurchaseStore.swift */; };
+		DCE9B49ABAAF071EF93BA64D /* AudioDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064DBFFE3A7008F0DDD7FF0E /* AudioDirector.swift */; };
+		E81E72F10DD234938D362EE4 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A0EB3A4DF0539467C95BA /* Progress.swift */; };
+		EE577FE1D015ED931F9E5648 /* DeliveryRaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA95882624BB7525ED2DE37 /* DeliveryRaceView.swift */; };
+		EF316546AAA9720334D949FC /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D449276BB102FBB9D24E373 /* ShopView.swift */; };
+		F416AB7FD6DE0F1B0C858BA5 /* GemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054A8D61367605A2645BB2CB /* GemView.swift */; };
+		F5EA1129473718C171B1B8E5 /* music-race.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CA50EA8A371FE8F01FA4D353 /* music-race.m4a */; };
+		F66D5006B428C371B027CEB5 /* bloom4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 72F76451380D0E72C15979A2 /* bloom4.wav */; };
+		FD3A64F3671B4D38FA971C8C /* sfx-cascade.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8F8377CCF4EE9A4C38AA3691 /* sfx-cascade.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2B0F316BE2EF2B19F44DBD26 /* PBXContainerItemProxy */ = {
+		3A969718CEF961E62C2EEBD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8EF819CF51D32926480BCCB8 /* Project object */;
+			containerPortal = B1FDDA713785AAC09CB13BF4 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F77E03F49D50596103A01FFB;
+			remoteGlobalIDString = DBDB692D5A29182824B34AB6;
 			remoteInfo = OrbitBloom;
 		};
-		CAF00A869BFA0948579862BA /* PBXContainerItemProxy */ = {
+		814D32266AB7AFEC88277241 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8EF819CF51D32926480BCCB8 /* Project object */;
+			containerPortal = B1FDDA713785AAC09CB13BF4 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F77E03F49D50596103A01FFB;
+			remoteGlobalIDString = DBDB692D5A29182824B34AB6;
 			remoteInfo = OrbitBloom;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		089599A42186B370E9D536FB /* OrbitBloom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrbitBloom.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		490C035E7EBE1DB703EC9CC7 /* GameEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameEngine.swift; path = Core/GameEngine.swift; sourceTree = "<group>"; };
-		5AC43787046376F7935880D0 /* bloom0.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom0.wav; path = Resources/bloom0.wav; sourceTree = "<group>"; };
-		5BF037EE181D1080B0A9A65B /* OrbitBloom.storekit */ = {isa = PBXFileReference; includeInIndex = 1; path = OrbitBloom.storekit; sourceTree = "<group>"; };
-		5CE38C9E4B2E2806171DDD6F /* PurchaseStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PurchaseStore.swift; sourceTree = "<group>"; };
-		646EA1742E7F34CFC0CEDED2 /* bloom1.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom1.wav; path = Resources/bloom1.wav; sourceTree = "<group>"; };
-		69AA35DCFB48E217F73798FD /* ShopView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShopView.swift; path = Views/ShopView.swift; sourceTree = "<group>"; };
-		6B3750CFE994A078AD98C510 /* OrbitBloomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrbitBloomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		751E7D068AA9FBB8A5737A26 /* OrbitBloomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrbitBloomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BFB4B958631126550AF7016 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7E9C8F0D45F7FD4C278487B4 /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Views/Theme.swift; sourceTree = "<group>"; };
-		8601C21BE75C129EB8B1441D /* OrbitBloomApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OrbitBloomApp.swift; sourceTree = "<group>"; };
-		87D1421AFB43AE9B902922C7 /* GameplayUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameplayUITests.swift; path = OrbitBloomUITests/GameplayUITests.swift; sourceTree = "<group>"; };
-		90D8F4E43003260143141FBA /* bloom3.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom3.wav; path = Resources/bloom3.wav; sourceTree = "<group>"; };
-		99A167D970544704D246112D /* Progress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Progress.swift; path = Core/Progress.swift; sourceTree = "<group>"; };
-		B2A1E139E55CB8C1B0E0B914 /* bloom4.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom4.wav; path = Resources/bloom4.wav; sourceTree = "<group>"; };
-		B9F8839D4358CE90A0D6C7EE /* GemView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GemView.swift; path = Views/GemView.swift; sourceTree = "<group>"; };
-		BA4E8654A60E023CB3AE4A34 /* PuzzleView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PuzzleView.swift; path = Views/PuzzleView.swift; sourceTree = "<group>"; };
-		C86532D8C6ABAA6737EDCCEC /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
-		CC69E5EDED6832998EC3804C /* ThirdPartyNotices.txt */ = {isa = PBXFileReference; includeInIndex = 1; name = ThirdPartyNotices.txt; path = Resources/ThirdPartyNotices.txt; sourceTree = "<group>"; };
-		CCCC6DAA27E931655A11F3BD /* GameModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
-		D5BEE38B232CEAC03D32D724 /* RootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RootView.swift; path = Views/RootView.swift; sourceTree = "<group>"; };
-		E1903B63BEE293C3369B8E2D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Resources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		EFB109381EEEAF4BA5AA1760 /* PurchaseTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PurchaseTests.swift; path = OrbitBloomTests/iOS/PurchaseTests.swift; sourceTree = "<group>"; };
-		FF333A0C1991F54DC4CDFD98 /* bloom2.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom2.wav; path = Resources/bloom2.wav; sourceTree = "<group>"; };
+		054A8D61367605A2645BB2CB /* GemView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GemView.swift; path = OrbitBloom/Views/GemView.swift; sourceTree = SOURCE_ROOT; };
+		064DBFFE3A7008F0DDD7FF0E /* AudioDirector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AudioDirector.swift; path = OrbitBloom/AudioDirector.swift; sourceTree = SOURCE_ROOT; };
+		0D5772C0447C00B7E3B39187 /* bloom1.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom1.wav; path = OrbitBloom/Resources/bloom1.wav; sourceTree = SOURCE_ROOT; };
+		1C18C8A27F7C3F2D4164DF0B /* PuzzleView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PuzzleView.swift; path = OrbitBloom/Views/PuzzleView.swift; sourceTree = SOURCE_ROOT; };
+		1CA95882624BB7525ED2DE37 /* DeliveryRaceView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeliveryRaceView.swift; path = OrbitBloom/Views/DeliveryRaceView.swift; sourceTree = SOURCE_ROOT; };
+		1F844F77174FAFE43CE28549 /* OrbitBloomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrbitBloomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D4C873C2F0125ECA9C5114 /* sfx-coin.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-coin.m4a"; path = "OrbitBloom/Resources/sfx-coin.m4a"; sourceTree = SOURCE_ROOT; };
+		305DB6BAA2CF1056199AD820 /* RootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RootView.swift; path = OrbitBloom/Views/RootView.swift; sourceTree = SOURCE_ROOT; };
+		4807BB3EF053A7015A43836B /* bloom2.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom2.wav; path = OrbitBloom/Resources/bloom2.wav; sourceTree = SOURCE_ROOT; };
+		483283F1AB31C9695602748D /* PurchaseStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PurchaseStore.swift; path = OrbitBloom/PurchaseStore.swift; sourceTree = SOURCE_ROOT; };
+		4D449276BB102FBB9D24E373 /* ShopView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShopView.swift; path = OrbitBloom/Views/ShopView.swift; sourceTree = SOURCE_ROOT; };
+		4F8BBD2F7935D99AF41F4259 /* GameModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameModel.swift; path = OrbitBloom/GameModel.swift; sourceTree = SOURCE_ROOT; };
+		562A0EB3A4DF0539467C95BA /* Progress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Progress.swift; path = OrbitBloom/Core/Progress.swift; sourceTree = SOURCE_ROOT; };
+		5747C4FAC04201E727376677 /* GameEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameEngine.swift; path = OrbitBloom/Core/GameEngine.swift; sourceTree = SOURCE_ROOT; };
+		60EB85A9779DF35788952A1F /* sfx-harvest.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-harvest.m4a"; path = "OrbitBloom/Resources/sfx-harvest.m4a"; sourceTree = SOURCE_ROOT; };
+		61F3BE2577AC7B4D68B02B30 /* music-puzzle.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "music-puzzle.m4a"; path = "OrbitBloom/Resources/music-puzzle.m4a"; sourceTree = SOURCE_ROOT; };
+		621CEE55DF2302146DA81EEF /* bloom3.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom3.wav; path = OrbitBloom/Resources/bloom3.wav; sourceTree = SOURCE_ROOT; };
+		65ED8FC5C77D1E2E8CB45F57 /* PurchaseTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PurchaseTests.swift; path = OrbitBloomTests/iOS/PurchaseTests.swift; sourceTree = SOURCE_ROOT; };
+		69A4B5CF04E854166FD65714 /* sfx-plant.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-plant.m4a"; path = "OrbitBloom/Resources/sfx-plant.m4a"; sourceTree = SOURCE_ROOT; };
+		6E0764E5D2F10063AC7098F1 /* sfx-collision.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-collision.m4a"; path = "OrbitBloom/Resources/sfx-collision.m4a"; sourceTree = SOURCE_ROOT; };
+		6F89CCD83F6CD0B67B930FAD /* music-farm.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "music-farm.m4a"; path = "OrbitBloom/Resources/music-farm.m4a"; sourceTree = SOURCE_ROOT; };
+		72F76451380D0E72C15979A2 /* bloom4.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom4.wav; path = OrbitBloom/Resources/bloom4.wav; sourceTree = SOURCE_ROOT; };
+		822235B7CFDEAFE029062F5C /* music-garden.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "music-garden.m4a"; path = "OrbitBloom/Resources/music-garden.m4a"; sourceTree = SOURCE_ROOT; };
+		8373BE7F3671BCA11A56B97E /* FarmView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FarmView.swift; path = OrbitBloom/Views/FarmView.swift; sourceTree = SOURCE_ROOT; };
+		848206E7D5304A87D08AA3FB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = OrbitBloom/Resources/PrivacyInfo.xcprivacy; sourceTree = SOURCE_ROOT; };
+		8B5E57DC3D01E6C111587906 /* OrbitBloom.storekit */ = {isa = PBXFileReference; includeInIndex = 1; path = OrbitBloom.storekit; sourceTree = "<group>"; };
+		8F8377CCF4EE9A4C38AA3691 /* sfx-cascade.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-cascade.m4a"; path = "OrbitBloom/Resources/sfx-cascade.m4a"; sourceTree = SOURCE_ROOT; };
+		945B9C20BB83935DF5FC5FC1 /* OrbitBloomApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OrbitBloomApp.swift; path = OrbitBloom/OrbitBloomApp.swift; sourceTree = SOURCE_ROOT; };
+		9490DA265AF488CFD3DA763F /* GameplayUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameplayUITests.swift; path = OrbitBloomUITests/GameplayUITests.swift; sourceTree = SOURCE_ROOT; };
+		94D9B13849EFD4126B8BD7EE /* sfx-win.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-win.m4a"; path = "OrbitBloom/Resources/sfx-win.m4a"; sourceTree = SOURCE_ROOT; };
+		9BD7D5156730C936EE07963B /* OrbitBloomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrbitBloomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B172A1CBFED8E8EF358E99C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B8B3DAFF99F087DA846D5B3B /* bloom0.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom0.wav; path = OrbitBloom/Resources/bloom0.wav; sourceTree = SOURCE_ROOT; };
+		BA869F9488B277A840C5FE13 /* sfx-tap.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-tap.m4a"; path = "OrbitBloom/Resources/sfx-tap.m4a"; sourceTree = SOURCE_ROOT; };
+		CA50EA8A371FE8F01FA4D353 /* music-race.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "music-race.m4a"; path = "OrbitBloom/Resources/music-race.m4a"; sourceTree = SOURCE_ROOT; };
+		CE17BD12FEDCBD2B4ED25D70 /* ThirdPartyNotices.txt */ = {isa = PBXFileReference; includeInIndex = 1; name = ThirdPartyNotices.txt; path = OrbitBloom/Resources/ThirdPartyNotices.txt; sourceTree = SOURCE_ROOT; };
+		D8369C8E3D341234AC743E12 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OrbitBloom/Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		E1192B4BBA501F412CF708C7 /* sfx-blast.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-blast.m4a"; path = "OrbitBloom/Resources/sfx-blast.m4a"; sourceTree = SOURCE_ROOT; };
+		EAA9903A242CBD9576E2871E /* sfx-water.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-water.m4a"; path = "OrbitBloom/Resources/sfx-water.m4a"; sourceTree = SOURCE_ROOT; };
+		EE3E6A2694C45D53198496CF /* sfx-match.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-match.m4a"; path = "OrbitBloom/Resources/sfx-match.m4a"; sourceTree = SOURCE_ROOT; };
+		EF2E796FF703DFD44AEBE682 /* sfx-craft.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-craft.m4a"; path = "OrbitBloom/Resources/sfx-craft.m4a"; sourceTree = SOURCE_ROOT; };
+		F1DB3B54B1A21FC2EA6D5C10 /* OrbitBloom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrbitBloom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2FF7154EFB1008927E655F2 /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = OrbitBloom/Views/Theme.swift; sourceTree = SOURCE_ROOT; };
+		FCF6552354D5EE9809EA6DA0 /* Ecosystem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Ecosystem.swift; path = OrbitBloom/Core/Ecosystem.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		128D40D6569CB5EE76B28FDF /* Frameworks */ = {
+		4C24ADA17AB75233D398A918 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2D011709DD8D1BEA619EF7B /* Foundation.framework in Frameworks */,
+				89CE6D7B9981E6727FC1B6D5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4961ABEA54F184B0E00FA0D7 /* Frameworks */ = {
+		81D5EA36E1C5D4961DABCF92 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04844A6D7E413E642C2B380 /* Foundation.framework in Frameworks */,
-				12E40F9338978C8F5CFB8557 /* Match3Kit in Frameworks */,
+				239D50EAAEE91BD990E7644B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6AB8A6384FDC735A71539204 /* Frameworks */ = {
+		981C8C5B59D7D8C36AC812F0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B5EF9C38F64ABDF00B407AF /* Foundation.framework in Frameworks */,
+				15B4EF1A04F76C7A40BECD5E /* Foundation.framework in Frameworks */,
+				26B07090077161901A07BDB1 /* Match3Kit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01DCAF58431D6B6AA05B3BB0 /* Products */ = {
+		15330CAB9F37A451F318F38E /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				089599A42186B370E9D536FB /* OrbitBloom.app */,
-				6B3750CFE994A078AD98C510 /* OrbitBloomTests.xctest */,
-				751E7D068AA9FBB8A5737A26 /* OrbitBloomUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		03F3EBEF510CC1A06D67E618 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				EFB109381EEEAF4BA5AA1760 /* PurchaseTests.swift */,
-				87D1421AFB43AE9B902922C7 /* GameplayUITests.swift */,
-			);
-			name = Tests;
-			sourceTree = "<group>";
-		};
-		0A56EF8B321B1AEF568F5CD2 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				7BFB4B958631126550AF7016 /* Foundation.framework */,
+				B172A1CBFED8E8EF358E99C5 /* Foundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		925EC0B72A45258E31E05597 /* Resources */ = {
+		435677929C47602B3AC517D8 /* OrbitBloom */ = {
 			isa = PBXGroup;
 			children = (
-				C86532D8C6ABAA6737EDCCEC /* Assets.xcassets */,
-				E1903B63BEE293C3369B8E2D /* PrivacyInfo.xcprivacy */,
-				CC69E5EDED6832998EC3804C /* ThirdPartyNotices.txt */,
-				5AC43787046376F7935880D0 /* bloom0.wav */,
-				646EA1742E7F34CFC0CEDED2 /* bloom1.wav */,
-				FF333A0C1991F54DC4CDFD98 /* bloom2.wav */,
-				90D8F4E43003260143141FBA /* bloom3.wav */,
-				B2A1E139E55CB8C1B0E0B914 /* bloom4.wav */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		B53CBB5946FEFC73EAF538AF = {
-			isa = PBXGroup;
-			children = (
-				01DCAF58431D6B6AA05B3BB0 /* Products */,
-				B805E00739123BA807A2C07A /* Frameworks */,
-				EB8149310AA4EAF43397FF71 /* OrbitBloom */,
-				03F3EBEF510CC1A06D67E618 /* Tests */,
-				5BF037EE181D1080B0A9A65B /* OrbitBloom.storekit */,
-			);
-			sourceTree = "<group>";
-		};
-		B805E00739123BA807A2C07A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0A56EF8B321B1AEF568F5CD2 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EB8149310AA4EAF43397FF71 /* OrbitBloom */ = {
-			isa = PBXGroup;
-			children = (
-				490C035E7EBE1DB703EC9CC7 /* GameEngine.swift */,
-				99A167D970544704D246112D /* Progress.swift */,
-				CCCC6DAA27E931655A11F3BD /* GameModel.swift */,
-				8601C21BE75C129EB8B1441D /* OrbitBloomApp.swift */,
-				5CE38C9E4B2E2806171DDD6F /* PurchaseStore.swift */,
-				B9F8839D4358CE90A0D6C7EE /* GemView.swift */,
-				BA4E8654A60E023CB3AE4A34 /* PuzzleView.swift */,
-				D5BEE38B232CEAC03D32D724 /* RootView.swift */,
-				69AA35DCFB48E217F73798FD /* ShopView.swift */,
-				7E9C8F0D45F7FD4C278487B4 /* Theme.swift */,
-				925EC0B72A45258E31E05597 /* Resources */,
+				064DBFFE3A7008F0DDD7FF0E /* AudioDirector.swift */,
+				FCF6552354D5EE9809EA6DA0 /* Ecosystem.swift */,
+				5747C4FAC04201E727376677 /* GameEngine.swift */,
+				562A0EB3A4DF0539467C95BA /* Progress.swift */,
+				4F8BBD2F7935D99AF41F4259 /* GameModel.swift */,
+				945B9C20BB83935DF5FC5FC1 /* OrbitBloomApp.swift */,
+				483283F1AB31C9695602748D /* PurchaseStore.swift */,
+				1CA95882624BB7525ED2DE37 /* DeliveryRaceView.swift */,
+				8373BE7F3671BCA11A56B97E /* FarmView.swift */,
+				054A8D61367605A2645BB2CB /* GemView.swift */,
+				1C18C8A27F7C3F2D4164DF0B /* PuzzleView.swift */,
+				305DB6BAA2CF1056199AD820 /* RootView.swift */,
+				4D449276BB102FBB9D24E373 /* ShopView.swift */,
+				F2FF7154EFB1008927E655F2 /* Theme.swift */,
+				DE01866E5A10C3C8F6C8621C /* Resources */,
 			);
 			name = OrbitBloom;
 			path = OrbitBloom;
 			sourceTree = "<group>";
 		};
+		80EFAC9C02E311C512108E3E /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				65ED8FC5C77D1E2E8CB45F57 /* PurchaseTests.swift */,
+				9490DA265AF488CFD3DA763F /* GameplayUITests.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		DE01866E5A10C3C8F6C8621C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D8369C8E3D341234AC743E12 /* Assets.xcassets */,
+				848206E7D5304A87D08AA3FB /* PrivacyInfo.xcprivacy */,
+				CE17BD12FEDCBD2B4ED25D70 /* ThirdPartyNotices.txt */,
+				B8B3DAFF99F087DA846D5B3B /* bloom0.wav */,
+				0D5772C0447C00B7E3B39187 /* bloom1.wav */,
+				4807BB3EF053A7015A43836B /* bloom2.wav */,
+				621CEE55DF2302146DA81EEF /* bloom3.wav */,
+				72F76451380D0E72C15979A2 /* bloom4.wav */,
+				6F89CCD83F6CD0B67B930FAD /* music-farm.m4a */,
+				822235B7CFDEAFE029062F5C /* music-garden.m4a */,
+				61F3BE2577AC7B4D68B02B30 /* music-puzzle.m4a */,
+				CA50EA8A371FE8F01FA4D353 /* music-race.m4a */,
+				E1192B4BBA501F412CF708C7 /* sfx-blast.m4a */,
+				8F8377CCF4EE9A4C38AA3691 /* sfx-cascade.m4a */,
+				22D4C873C2F0125ECA9C5114 /* sfx-coin.m4a */,
+				6E0764E5D2F10063AC7098F1 /* sfx-collision.m4a */,
+				EF2E796FF703DFD44AEBE682 /* sfx-craft.m4a */,
+				60EB85A9779DF35788952A1F /* sfx-harvest.m4a */,
+				EE3E6A2694C45D53198496CF /* sfx-match.m4a */,
+				BA869F9488B277A840C5FE13 /* sfx-tap.m4a */,
+				EAA9903A242CBD9576E2871E /* sfx-water.m4a */,
+				94D9B13849EFD4126B8BD7EE /* sfx-win.m4a */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		DE03257FC684BFCED40ABDBF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15330CAB9F37A451F318F38E /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EBA89FA767248903C686B3C0 = {
+			isa = PBXGroup;
+			children = (
+				F020CB93C628893389EBA7D4 /* Products */,
+				DE03257FC684BFCED40ABDBF /* Frameworks */,
+				435677929C47602B3AC517D8 /* OrbitBloom */,
+				80EFAC9C02E311C512108E3E /* Tests */,
+				8B5E57DC3D01E6C111587906 /* OrbitBloom.storekit */,
+				69A4B5CF04E854166FD65714 /* sfx-plant.m4a */,
+			);
+			sourceTree = "<group>";
+		};
+		F020CB93C628893389EBA7D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1DB3B54B1A21FC2EA6D5C10 /* OrbitBloom.app */,
+				1F844F77174FAFE43CE28549 /* OrbitBloomTests.xctest */,
+				9BD7D5156730C936EE07963B /* OrbitBloomUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3EDB990277EE9969130F6DDA /* OrbitBloomTests */ = {
+		581A5D5D2E55889CE52A0001 /* OrbitBloomTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46DBF4A8A6F8C04846A67BDE /* Build configuration list for PBXNativeTarget "OrbitBloomTests" */;
+			buildConfigurationList = E14134403A4237D2CD3B19EC /* Build configuration list for PBXNativeTarget "OrbitBloomTests" */;
 			buildPhases = (
-				0309EE6A946EE7888D0B0169 /* Sources */,
-				6AB8A6384FDC735A71539204 /* Frameworks */,
-				92485023C3000EE1EE459999 /* Resources */,
+				0BDCF52B9C3D3A1829BFD9C1 /* Sources */,
+				81D5EA36E1C5D4961DABCF92 /* Frameworks */,
+				9F5C5D8B0BFDBCA5021B550C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C5EF6606F211C055AEAFAC6B /* PBXTargetDependency */,
+				50DF7A70CC5EC30E9B3063A0 /* PBXTargetDependency */,
 			);
 			name = OrbitBloomTests;
 			productName = OrbitBloomTests;
-			productReference = 6B3750CFE994A078AD98C510 /* OrbitBloomTests.xctest */;
+			productReference = 1F844F77174FAFE43CE28549 /* OrbitBloomTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A1259C50E59A523A7C6B2206 /* OrbitBloomUITests */ = {
+		BABC353A95315A8A063189DD /* OrbitBloomUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 110C1CC5BBCCA07F7BC06C31 /* Build configuration list for PBXNativeTarget "OrbitBloomUITests" */;
+			buildConfigurationList = 4DE8A32B44A9C3E511154826 /* Build configuration list for PBXNativeTarget "OrbitBloomUITests" */;
 			buildPhases = (
-				D404284CD050A40693F811DA /* Sources */,
-				128D40D6569CB5EE76B28FDF /* Frameworks */,
-				A71FE827ACE2C638057D58B9 /* Resources */,
+				97B15ED929A60E2A75FACC79 /* Sources */,
+				4C24ADA17AB75233D398A918 /* Frameworks */,
+				52A222B22282982B3E68B6FF /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D062E71A5F23F3DEB19DD5DE /* PBXTargetDependency */,
+				C83B330BA8532F371182C0E0 /* PBXTargetDependency */,
 			);
 			name = OrbitBloomUITests;
 			productName = OrbitBloomUITests;
-			productReference = 751E7D068AA9FBB8A5737A26 /* OrbitBloomUITests.xctest */;
+			productReference = 9BD7D5156730C936EE07963B /* OrbitBloomUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		F77E03F49D50596103A01FFB /* OrbitBloom */ = {
+		DBDB692D5A29182824B34AB6 /* OrbitBloom */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D7BE288DE08C1180725B126 /* Build configuration list for PBXNativeTarget "OrbitBloom" */;
+			buildConfigurationList = CB109233F30E23FFD0EE90A4 /* Build configuration list for PBXNativeTarget "OrbitBloom" */;
 			buildPhases = (
-				F32A9800F242E540E2A642EC /* Sources */,
-				4961ABEA54F184B0E00FA0D7 /* Frameworks */,
-				8BAF7CDB0DEBE1BB9E4F760A /* Resources */,
+				73AA1881D67A6057E4743F53 /* Sources */,
+				981C8C5B59D7D8C36AC812F0 /* Frameworks */,
+				1C4190711C2BB7FD0C11F7D5 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -242,22 +299,22 @@
 			);
 			name = OrbitBloom;
 			packageProductDependencies = (
-				E1E218D95D9F7F437CC59E5F /* Match3Kit */,
+				16A214D75DA300C71E6643BA /* Match3Kit */,
 			);
 			productName = OrbitBloom;
-			productReference = 089599A42186B370E9D536FB /* OrbitBloom.app */;
+			productReference = F1DB3B54B1A21FC2EA6D5C10 /* OrbitBloom.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		8EF819CF51D32926480BCCB8 /* Project object */ = {
+		B1FDDA713785AAC09CB13BF4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 			};
-			buildConfigurationList = 16DEDC818CFB41498239D2FD /* Build configuration list for PBXProject "OrbitBloom" */;
+			buildConfigurationList = 7CEA941546E14584E57D1D3D /* Build configuration list for PBXProject "OrbitBloom" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -265,123 +322,129 @@
 				en,
 				Base,
 			);
-			mainGroup = B53CBB5946FEFC73EAF538AF;
+			mainGroup = EBA89FA767248903C686B3C0;
 			minimizedProjectReferenceProxies = 0;
 			packageReferences = (
-				AC4F7E590C05A6740503FD3A /* XCLocalSwiftPackageReference "Match3Kit" */,
+				7DC0495D0FD5947D1C2C7D47 /* XCLocalSwiftPackageReference "Match3Kit" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 01DCAF58431D6B6AA05B3BB0 /* Products */;
+			productRefGroup = F020CB93C628893389EBA7D4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F77E03F49D50596103A01FFB /* OrbitBloom */,
-				3EDB990277EE9969130F6DDA /* OrbitBloomTests */,
-				A1259C50E59A523A7C6B2206 /* OrbitBloomUITests */,
+				DBDB692D5A29182824B34AB6 /* OrbitBloom */,
+				581A5D5D2E55889CE52A0001 /* OrbitBloomTests */,
+				BABC353A95315A8A063189DD /* OrbitBloomUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8BAF7CDB0DEBE1BB9E4F760A /* Resources */ = {
+		1C4190711C2BB7FD0C11F7D5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0AE46E4AFE6C71B79F74A32 /* Assets.xcassets in Resources */,
-				B348BF36B38DCB8BBCA8410A /* PrivacyInfo.xcprivacy in Resources */,
-				7A4C9FA6CFD8390DB9DA8471 /* ThirdPartyNotices.txt in Resources */,
-				78E12781DF0EFBD53674C82E /* bloom0.wav in Resources */,
-				AD39784C619C5358F05C9ABA /* bloom1.wav in Resources */,
-				227C5571A540EB924EEA5B8F /* bloom2.wav in Resources */,
-				0E2A65BF5720CFE40ED45B48 /* bloom3.wav in Resources */,
-				B3BE92A933FFFD2628E35785 /* bloom4.wav in Resources */,
+				498C2EBA3BBB383C080F5EC7 /* Assets.xcassets in Resources */,
+				4A706158E38AE5554404500D /* PrivacyInfo.xcprivacy in Resources */,
+				CA5858519C6DE8BC3112BA68 /* ThirdPartyNotices.txt in Resources */,
+				AF163DA2B4A7D164E00EA88F /* bloom0.wav in Resources */,
+				4E8F3F0037760B49D000CA64 /* bloom1.wav in Resources */,
+				224B128CBAA951431C374C12 /* bloom2.wav in Resources */,
+				B584DD639C504162332C6739 /* bloom3.wav in Resources */,
+				F66D5006B428C371B027CEB5 /* bloom4.wav in Resources */,
+				CFAC0953AD424EE2F4774886 /* music-farm.m4a in Resources */,
+				18B6E86C32669A93BCE6D82E /* music-garden.m4a in Resources */,
+				0450C1EDBFA5BE9B044DE397 /* music-puzzle.m4a in Resources */,
+				F5EA1129473718C171B1B8E5 /* music-race.m4a in Resources */,
+				201A99DF1D92C7C9E2A3B31D /* sfx-blast.m4a in Resources */,
+				FD3A64F3671B4D38FA971C8C /* sfx-cascade.m4a in Resources */,
+				99890FBB7D6D60E83D3637B7 /* sfx-coin.m4a in Resources */,
+				3CBD04DFEFAE829ED63EE09D /* sfx-collision.m4a in Resources */,
+				07BE4A922FD41A288F3E2F91 /* sfx-craft.m4a in Resources */,
+				C296488635D23639CCEAC299 /* sfx-harvest.m4a in Resources */,
+				A61A25CE030F11812D0E3C52 /* sfx-match.m4a in Resources */,
+				76ACFA81DFDABEDD27146608 /* sfx-tap.m4a in Resources */,
+				691DC0A3B3255DC1340B0B17 /* sfx-water.m4a in Resources */,
+				23BBBE990B63F48C82418A77 /* sfx-win.m4a in Resources */,
+				1051A7BABB33C2A76C6A5311 /* sfx-plant.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92485023C3000EE1EE459999 /* Resources */ = {
+		52A222B22282982B3E68B6FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2119B0E3D6F416744FF3A5D1 /* OrbitBloom.storekit in Resources */,
+				CEC5564AA4A6C064116D08B8 /* OrbitBloom.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A71FE827ACE2C638057D58B9 /* Resources */ = {
+		9F5C5D8B0BFDBCA5021B550C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFDB7E1C0A037D488D35F042 /* OrbitBloom.storekit in Resources */,
+				30DE04AD5DF90477267AC735 /* OrbitBloom.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0309EE6A946EE7888D0B0169 /* Sources */ = {
+		0BDCF52B9C3D3A1829BFD9C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7ECC234BC10751EC6BAE0DB /* PurchaseTests.swift in Sources */,
+				4B3A8A4C23A75488182E6560 /* PurchaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D404284CD050A40693F811DA /* Sources */ = {
+		73AA1881D67A6057E4743F53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BC99ADDCF424EF222F86B0D /* GameplayUITests.swift in Sources */,
+				DCE9B49ABAAF071EF93BA64D /* AudioDirector.swift in Sources */,
+				8BF4E31F2C7F391707C698A3 /* Ecosystem.swift in Sources */,
+				148B3D41F83C18B1C9A22CF7 /* GameEngine.swift in Sources */,
+				E81E72F10DD234938D362EE4 /* Progress.swift in Sources */,
+				295FA2FC0651F1966D7E81B9 /* GameModel.swift in Sources */,
+				56DA211BD554C5345DEAB4AF /* OrbitBloomApp.swift in Sources */,
+				DBA51F48C2238046756FD98F /* PurchaseStore.swift in Sources */,
+				EE577FE1D015ED931F9E5648 /* DeliveryRaceView.swift in Sources */,
+				082829404EC9911261740AF6 /* FarmView.swift in Sources */,
+				F416AB7FD6DE0F1B0C858BA5 /* GemView.swift in Sources */,
+				0FC1B5638B1BC1DFB45A075B /* PuzzleView.swift in Sources */,
+				D4E6C8094691ADF1940C5742 /* RootView.swift in Sources */,
+				EF316546AAA9720334D949FC /* ShopView.swift in Sources */,
+				C412C14A3887E2AFFC3B3EBF /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F32A9800F242E540E2A642EC /* Sources */ = {
+		97B15ED929A60E2A75FACC79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18213C3977655472A4715492 /* GameEngine.swift in Sources */,
-				0A235E8F7CFAF66B59E6BFAC /* Progress.swift in Sources */,
-				6F824BE1C5FCA5E702CC2488 /* GameModel.swift in Sources */,
-				5FC770BE6BAEC73D7AB507C4 /* OrbitBloomApp.swift in Sources */,
-				EE6DCF9B052F9B1FC4097A19 /* PurchaseStore.swift in Sources */,
-				6828064E404F224ABD637664 /* GemView.swift in Sources */,
-				FC468684C8CDCE655143ACA8 /* PuzzleView.swift in Sources */,
-				ABC602897D1EC435696933C2 /* RootView.swift in Sources */,
-				80E1CB9B15ACDEAC45FA0794 /* ShopView.swift in Sources */,
-				BB6D3A82418B05409B36315A /* Theme.swift in Sources */,
+				6C0EEEEE5C64EB8DE9B1D0B7 /* GameplayUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C5EF6606F211C055AEAFAC6B /* PBXTargetDependency */ = {
+		50DF7A70CC5EC30E9B3063A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OrbitBloom;
-			target = F77E03F49D50596103A01FFB /* OrbitBloom */;
-			targetProxy = CAF00A869BFA0948579862BA /* PBXContainerItemProxy */;
+			target = DBDB692D5A29182824B34AB6 /* OrbitBloom */;
+			targetProxy = 3A969718CEF961E62C2EEBD2 /* PBXContainerItemProxy */;
 		};
-		D062E71A5F23F3DEB19DD5DE /* PBXTargetDependency */ = {
+		C83B330BA8532F371182C0E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OrbitBloom;
-			target = F77E03F49D50596103A01FFB /* OrbitBloom */;
-			targetProxy = 2B0F316BE2EF2B19F44DBD26 /* PBXContainerItemProxy */;
+			target = DBDB692D5A29182824B34AB6 /* OrbitBloom */;
+			targetProxy = 814D32266AB7AFEC88277241 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		27AEABDB50D525CB43F6AEE3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.orbitbloom.game.uitests;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = OrbitBloom;
-			};
-			name = Debug;
-		};
-		50B4ABCC73F3FC5E1118F3CC /* Release */ = {
+		07CE36390AA52B8C3218AF21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -435,21 +498,7 @@
 			};
 			name = Release;
 		};
-		7004817B31477C0A03F06CAE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.orbitbloom.game.uitests;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = OrbitBloom;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		743754D3FE3E9DF0005955C0 /* Debug */ = {
+		53AE6F2E944180F6917225AF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -471,10 +520,39 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		774FA204A352078CE9F38152 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.orbitbloom.game.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = OrbitBloom;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F829E5592B4652815AEA470 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.orbitbloom.game.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OrbitBloom.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OrbitBloom";
 			};
 			name = Debug;
 		};
-		84201832E2D0E3B7816111A8 /* Debug */ = {
+		A4F807EA9AC9832528DC9EDB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -535,7 +613,20 @@
 			};
 			name = Debug;
 		};
-		A6FF1E6E85D0630B2602FC38 /* Release */ = {
+		BE1002AD64026D0BCC9B753B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.orbitbloom.game.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = OrbitBloom;
+			};
+			name = Debug;
+		};
+		E2C0A4F1CE67DB1836F644E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -557,74 +648,59 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		A88950AEFDE1AF3D03724150 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.orbitbloom.game.tests;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OrbitBloom.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OrbitBloom";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		E76EFA1505089978ABB56146 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.orbitbloom.game.tests;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OrbitBloom.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OrbitBloom";
 			};
 			name = Debug;
+		};
+		FE9BC343A6CACFE102AE1114 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.orbitbloom.game.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OrbitBloom.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OrbitBloom";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		110C1CC5BBCCA07F7BC06C31 /* Build configuration list for PBXNativeTarget "OrbitBloomUITests" */ = {
+		4DE8A32B44A9C3E511154826 /* Build configuration list for PBXNativeTarget "OrbitBloomUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7004817B31477C0A03F06CAE /* Release */,
-				27AEABDB50D525CB43F6AEE3 /* Debug */,
+				774FA204A352078CE9F38152 /* Release */,
+				BE1002AD64026D0BCC9B753B /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		16DEDC818CFB41498239D2FD /* Build configuration list for PBXProject "OrbitBloom" */ = {
+		7CEA941546E14584E57D1D3D /* Build configuration list for PBXProject "OrbitBloom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84201832E2D0E3B7816111A8 /* Debug */,
-				50B4ABCC73F3FC5E1118F3CC /* Release */,
+				A4F807EA9AC9832528DC9EDB /* Debug */,
+				07CE36390AA52B8C3218AF21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1D7BE288DE08C1180725B126 /* Build configuration list for PBXNativeTarget "OrbitBloom" */ = {
+		CB109233F30E23FFD0EE90A4 /* Build configuration list for PBXNativeTarget "OrbitBloom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A6FF1E6E85D0630B2602FC38 /* Release */,
-				743754D3FE3E9DF0005955C0 /* Debug */,
+				53AE6F2E944180F6917225AF /* Release */,
+				E2C0A4F1CE67DB1836F644E6 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46DBF4A8A6F8C04846A67BDE /* Build configuration list for PBXNativeTarget "OrbitBloomTests" */ = {
+		E14134403A4237D2CD3B19EC /* Build configuration list for PBXNativeTarget "OrbitBloomTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A88950AEFDE1AF3D03724150 /* Release */,
-				E76EFA1505089978ABB56146 /* Debug */,
+				FE9BC343A6CACFE102AE1114 /* Release */,
+				8F829E5592B4652815AEA470 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -632,19 +708,19 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		AC4F7E590C05A6740503FD3A /* XCLocalSwiftPackageReference "Match3Kit" */ = {
+		7DC0495D0FD5947D1C2C7D47 /* XCLocalSwiftPackageReference "Match3Kit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = vendor/Match3Kit;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E1E218D95D9F7F437CC59E5F /* Match3Kit */ = {
+		16A214D75DA300C71E6643BA /* Match3Kit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AC4F7E590C05A6740503FD3A /* XCLocalSwiftPackageReference "Match3Kit" */;
+			package = 7DC0495D0FD5947D1C2C7D47 /* XCLocalSwiftPackageReference "Match3Kit" */;
 			productName = Match3Kit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 8EF819CF51D32926480BCCB8 /* Project object */;
+	rootObject = B1FDDA713785AAC09CB13BF4 /* Project object */;
 }

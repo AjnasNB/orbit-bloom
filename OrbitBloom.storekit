@@ -1,18 +1,125 @@
 {
-  "identifier" : "71C900BC-14F0-45ED-9198-541660276B43",
-  "nonRenewingSubscriptions" : [],
-  "products" : [
+  "identifier": "71C900BC-14F0-45ED-9198-541660276B43",
+  "nonRenewingSubscriptions": [],
+  "products": [
     {
-      "displayPrice" : "2.99",
-      "familyShareable" : true,
-      "internalID" : "8424113721",
-      "localizations" : [{"description" : "A permanent cosmetic aurora atmosphere for your moon garden. No subscription.", "displayName" : "Aurora Nights", "locale" : "en_US"}],
-      "productID" : "com.orbitbloom.aurora",
-      "referenceName" : "Aurora Nights",
-      "type" : "NonConsumable"
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "8424113721",
+      "localizations": [
+        {
+          "description": "A permanent cosmetic aurora atmosphere for your moon garden. No subscription.",
+          "displayName": "Aurora Nights",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.orbitbloom.aurora",
+      "referenceName": "Aurora Nights",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "99",
+      "familyShareable": false,
+      "internalID": "8424113800",
+      "localizations": [
+        {
+          "description": "400 coins for your connected garden world.",
+          "displayName": "400 coins",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.orbitbloom.coins400",
+      "referenceName": "400 coins",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "299",
+      "familyShareable": false,
+      "internalID": "8424113801",
+      "localizations": [
+        {
+          "description": "1500 coins for your connected garden world.",
+          "displayName": "1500 coins",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.orbitbloom.coins1500",
+      "referenceName": "1500 coins",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "499",
+      "familyShareable": false,
+      "internalID": "8424113802",
+      "localizations": [
+        {
+          "description": "3000 coins for your connected garden world.",
+          "displayName": "3000 coins",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.orbitbloom.coins3000",
+      "referenceName": "3000 coins",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "999",
+      "familyShareable": false,
+      "internalID": "8424113803",
+      "localizations": [
+        {
+          "description": "7000 coins for your connected garden world.",
+          "displayName": "7000 coins",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.orbitbloom.coins7000",
+      "referenceName": "7000 coins",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "99",
+      "familyShareable": false,
+      "internalID": "8424113804",
+      "localizations": [
+        {
+          "description": "5 extra lives for your connected garden world.",
+          "displayName": "5 extra lives",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.orbitbloom.lives5",
+      "referenceName": "5 extra lives",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "99",
+      "familyShareable": false,
+      "internalID": "8424113805",
+      "localizations": [
+        {
+          "description": "First bloom bundle for your connected garden world.",
+          "displayName": "First bloom bundle",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.orbitbloom.starter",
+      "referenceName": "First bloom bundle",
+      "type": "NonConsumable"
     }
   ],
-  "settings" : {"_applicationInternalID" : "0", "_developerTeamID" : "", "_failTransactionsEnabled" : false, "_locale" : "en_US", "_storefront" : "USA", "_storeKitErrors" : [], "_timeRate" : 0},
-  "subscriptionGroups" : [],
-  "version" : {"major" : 3, "minor" : 0}
+  "settings": {
+    "_applicationInternalID": "0",
+    "_developerTeamID": "",
+    "_failTransactionsEnabled": false,
+    "_locale": "en_IN",
+    "_storefront": "IND",
+    "_storeKitErrors": [],
+    "_timeRate": 0
+  },
+  "subscriptionGroups": [],
+  "version": {
+    "major": 3,
+    "minor": 0
+  }
 }

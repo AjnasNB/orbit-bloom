@@ -25,3 +25,78 @@ Original game rules, progression, interface, procedural gem artwork, icon, and s
 MoonGarden illustration: created for this project with OpenAI ImageGen on 8 October 2026. AI-generated artwork, not a third-party MIT asset. Its use is subject to the applicable OpenAI terms. No existing game artwork, characters, music, or branding was copied.
 SF Symbols, SwiftUI, StoreKit, AVFoundation, and UIKit are Apple platform resources governed by their respective Apple terms; they are not MIT-licensed dependencies.
 The MatchPuzzle repository in research/ is an MIT-licensed reference only and is not compiled into this app.
+
+
+	Interface Sounds (1.0)
+
+	Created/distributed by Kenney (www.kenney.nl)
+	Creation date: 11-02-2020
+
+			------------------------------
+
+	License: (Creative Commons Zero, CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	This content is free to use in personal, educational and commercial projects.
+
+	Support us by crediting Kenney or www.kenney.nl (this is not mandatory)
+
+			------------------------------
+
+	Donate:   http://support.kenney.nl
+	Patreon:  http://patreon.com/kenney/
+
+	Follow on Twitter for updates:
+	http://twitter.com/KenneyNL
+
+	Impact Sounds (1.0)
+
+	Created/distributed by Kenney (www.kenney.nl)
+	Creation date: 19-12-2019
+
+			------------------------------
+
+	License: (Creative Commons Zero, CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	This content is free to use in personal, educational and commercial projects.
+
+	Support us by crediting Kenney or www.kenney.nl (this is not mandatory)
+
+			------------------------------
+
+	Donate:   http://support.kenney.nl
+	Request:  http://request.kenney.nl
+	Patreon:  http://patreon.com/kenney/
+
+	Follow on Twitter for updates:
+	http://twitter.com/KenneyNL
+
+	Music Jingles
+
+	by  Kenney Vleugels (Kenney.nl)
+
+			------------------------------
+
+	License (Creative Commons Zero, CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	You may use these assets in personal and commercial projects.
+	Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
+
+			------------------------------
+
+	Donate:   http://support.kenney.nl
+	Request:  http://request.kenney.nl
+
+	Follow on Twitter for updates:
+	@KenneyNL
+Orbit Bloom 0.2 soundtrack and art:
+Another August — The Cynic Project / cynicmusic.com / pixelsphere.org
+https://opengameart.org/node/73989 — CC0 1.0
+Happy Adventure (Loop) — TinyWorlds
+https://opengameart.org/content/happy-adventure-loop — CC0 1.0
+Rhythm Garden — congusbongus
+https://opengameart.org/content/rhythm-garden — CC0 1.0
+Files transcoded to AAC for native playback. See docs/AUDIO_PROVENANCE.json.
+Botanical sprites, LivingGarden and BloomLogo were generated for this project with OpenAI ImageGen on 8 October 2026. They are original rendered images, not real-time 3D meshes. Applicable OpenAI terms apply. Prompts and provenance are included in docs/V2_ARTWORK_PROMPTS.json.

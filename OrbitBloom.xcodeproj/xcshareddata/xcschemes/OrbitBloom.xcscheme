@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F77E03F49D50596103A01FFB"
+               BlueprintIdentifier = "DBDB692D5A29182824B34AB6"
                BuildableName = "OrbitBloom.app"
                BlueprintName = "OrbitBloom"
                ReferencedContainer = "container:OrbitBloom.xcodeproj">
@@ -30,7 +30,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F77E03F49D50596103A01FFB"
+            BlueprintIdentifier = "DBDB692D5A29182824B34AB6"
             BuildableName = "OrbitBloom.app"
             BlueprintName = "OrbitBloom"
             ReferencedContainer = "container:OrbitBloom.xcodeproj">
@@ -41,7 +41,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3EDB990277EE9969130F6DDA"
+               BlueprintIdentifier = "581A5D5D2E55889CE52A0001"
                BuildableName = "OrbitBloomTests.xctest"
                BlueprintName = "OrbitBloomTests"
                ReferencedContainer = "container:OrbitBloom.xcodeproj">
@@ -51,7 +51,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A1259C50E59A523A7C6B2206"
+               BlueprintIdentifier = "BABC353A95315A8A063189DD"
                BuildableName = "OrbitBloomUITests.xctest"
                BlueprintName = "OrbitBloomUITests"
                ReferencedContainer = "container:OrbitBloom.xcodeproj">
@@ -76,7 +76,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F77E03F49D50596103A01FFB"
+            BlueprintIdentifier = "DBDB692D5A29182824B34AB6"
             BuildableName = "OrbitBloom.app"
             BlueprintName = "OrbitBloom"
             ReferencedContainer = "container:OrbitBloom.xcodeproj">
@@ -96,7 +96,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F77E03F49D50596103A01FFB"
+            BlueprintIdentifier = "DBDB692D5A29182824B34AB6"
             BuildableName = "OrbitBloom.app"
             BlueprintName = "OrbitBloom"
             ReferencedContainer = "container:OrbitBloom.xcodeproj">
