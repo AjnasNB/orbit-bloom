@@ -1,46 +1,42 @@
 # Orbit Bloom verification — 8 October 2026
 
-The native game builds and runs on the dedicated **Orbit Bloom QA** iPhone 17 Pro simulator. The entire twelve-level chapter and all six restorations were completed through real UI interactions. This verifies the delivered first chapter, not production readiness or App Store approval.
+**40 unique tests passed across the verified rules, native session, local StoreKit and targeted UI runs.** The first twelve stages and all six restoration projects were completed through actual simulator interactions. All 1,020 stages were completed separately by the rules solver. This does not mean all 1,020 stages were played through the UI or that the app has passed App Review.
 
-## Verified results
+| Verified area | Passing unique tests | Evidence |
+| --- | ---: | --- |
+| Swift rules, economy and powers | 24 | evidence/v3-core-verified.log; GitHub Core game rules CI for b8a2efe |
+| Native save, hint migration, atomic grants, interruption recovery, bundled media | 5 | evidence/V3SwipeFixed.xcresult; refreshed with release materials |
+| Apple local purchase flows | 6 | evidence/V3ApplePurchases.xcresult; evidence/v3-apple-purchases.log |
+| Actual swipe campaign and six restorations | 1 | evidence/V3SwipeFixed.xcresult, 393.208 seconds |
+| Farm, harvesting, task claim, craft and relaunch | 1 | evidence/V3SwipeFixed.xcresult |
+| Pause, tool use, durable puzzle and Shop-to-Farm navigation | 1 | evidence/V3SwipeFixed.xcresult |
+| Swipe steering, delivery reward and return navigation | 1 | evidence/V3RaceVerified.xcresult |
+| On-board power formation, animated shuffle preservation and detonation | 1 | evidence/V3BoardPower.xcresult |
 
-| Run | Result | Evidence |
-| --- | --- | --- |
-| Pure Swift rules and economy | 12 tests passed, zero failures | `evidence/core-tests-final.log` |
-| Native session persistence and interrupted victory recovery | 2 tests passed, zero failures | `evidence/FinalGameplay.xcresult` |
-| Native UI campaign, pause/resume, and shop-to-free-gameplay flow | 3 tests passed, zero failures | `evidence/FinalGameplay.xcresult`, `evidence/final-gameplay.log` |
-| Real drag gesture on a suggested matching pair | 1 UI test passed, zero failures | `evidence/SwipeVerification.xcresult`, `evidence/swipe-verification.log` |
-| Final simulator app build, including the original app icon | Build succeeded | `evidence/final-build.log` |
+These results span several focused runs. The common UI run caught a race finish-button failure; the finish card was moved outside the steering gesture and that entire race flow then passed. Earlier diagnostic runs also caught vertical drags scrolling the puzzle page. Page scrolling now locks while a tile is held, and the campaign test asserts that every hinted swipe spends exactly one turn. Diagnostic failures are not counted as passing evidence.
 
-Total: **18 passing tests** across the rules, native session, and UI runs. The separate swipe test dragged between the actual accessible tile centers and verified that a legal move was consumed.
+## Gameplay and economy
 
-The full UI campaign test took 409.45 seconds. It used actual piece taps, the public free hint control, and earned starlight bursts. It did not inject completed levels, grant stars, bypass victory checks, or unlock purchases. It won levels 1–12, spent the earned stars on six ordered projects, asserted the chapter ending, and checked that garden progress survived termination and relaunch. The separate core simulation completed the campaign in 54 legal swaps with no retries, paid items, or extra moves; that solver result is a reachability check rather than a human difficulty rating.
+The core campaign solver completed all 1,020 stages and six projects in **6,068 legal swaps, zero retries, and no paid items or extra moves**. This is a reachability check, not a human difficulty rating. Twelve opening stages are authored; 1,008 later stages use deterministic generated goals and boards.
 
-Rules coverage includes 100 stable initial boards, reproducible seeded boards and refills, valid swaps and cascades, invalid swaps preserving moves, frost and cross clears, loss/retry, free shuffling, session serialization, reward accounting, and restoration order. Native session tests also recreate the model from saved data and recover a victory interrupted before its animation completes without duplicating rewards.
+The native UI campaign uses public hints, real horizontal/vertical drags, supplied inventory tools and earned cross bursts. It does not inject completed stages, grant stars or bypass victory checks. It verifies early relaunch persistence, twelve victories and six ordered restoration purchases with earned stars.
 
-Screenshots exported directly from the passing UI run:
+Additional checks cover fixed power formations, chained blasts consuming powers once, power persistence through saves/shuffles, first ten free hints, paid assistance, one-time field rewards, 30-minute life boundaries, non-expiring reserve lives, offline crop growth, compost crafting, cargo delivery and reward idempotency.
 
-- `evidence/01-garden-home.png`
-- `evidence/02-playable-puzzle.png`
-- `evidence/03-real-level-victory.png`
-- `evidence/04-restored-greenhouse.png`
-- `evidence/07-chapter-finale.png`
-- `evidence/08-complete-garden.png`
+## Purchase verification
 
-The home, puzzle, frost-level, and completed-garden images were visually inspected. The branded header and individual accessible piece identifiers were corrected during testing. Earlier diagnostic logs remain in `evidence/`; the final named runs above are the passing results.
+Six tests pass on **iOS 26.1** using Apple's local StoreKit test service: verified 400-coin credits without duplicate recovery, extra-life and starter-bundle grants with durable restore, cancellation, pending Ask to Buy approval, non-consumable purchase/restore, and asynchronous refund revocation of the legacy cosmetic entitlement. They use real StoreKit APIs with local test transactions and charge no money.
 
-## Purchase verification remains blocked
+The iOS 26.5 runtime cannot reliably load the local catalogue, so it is used for gameplay/UI testing while iOS 26.1 handles purchase verification. Signed sandbox/device purchases are still required before release. Production consumable recovery/refund policy remains release work; the passing legacy cosmetic refund test does not establish consumable clawback behavior.
 
-StoreKit 2 purchase code and a local `OrbitBloom.storekit` configuration are present. The installed iOS 26.5 runtime rejects the test configuration with `SKInternalErrorDomain Code=3`; it cannot reliably return the configured product. Configuration was tried through command-line tests and an Xcode launch. No successful purchase is claimed, and the app does not simulate ownership to make a test pass.
+## Visual and web checks
 
-Four native purchase tests (purchase/restore, cancellation, pending approval, and refund revocation) and one purchase UI test are excluded from the final passing run. These five tests are **unverified**, not passed. Apple describes a related iOS 26.5 command-line StoreKit configuration problem in this [Developer Forums thread](https://developer.apple.com/forums/thread/826971). A working local runtime or signed sandbox build is required to resolve verification.
+Native screenshots are exported from actual runs at **1206 × 2622** without fabricating device dimensions. See release-draft/README.md for the gallery and selected ten App Store screenshots. Home, puzzle, on-board power, field tasks and race completion were visually inspected. The art consists of original rendered bitmap sprites, not interactive 3D meshes.
 
-The shop's absence of a connection does not block the free chapter. It shows a retryable status, and the native UI test returned from Shop and started a real puzzle successfully. Real App Store product registration, distribution signing, TestFlight, and sandbox transactions remain release work.
+The standalone website was inspected in Chrome at its default desktop size and 390 × 844. All three bundled images loaded, horizontal overflow was absent, and the privacy page opened through navigation. JavaScript syntax and repository whitespace checks pass. Cloudflare deployment and final browser proof are blocked by the owner's authenticator verification and Mac lock; the intended subdomain is not claimed live.
 
-## Reproduce
+## Reproduce and limits
 
-Use the commands in `README.md`. Environment: Xcode 26.6 (17F113), Swift 6.3.3, iOS 26.5 (23F77), iPhone 17 Pro simulator. The dedicated device identifier is `64173F47-C4DC-46B4-82EC-0027675F7780`; select an available simulator identifier when running elsewhere. Dependencies are vendored, and the project uses relative source paths.
+`swift test` runs core checks. `scripts/test-ios.sh` runs core and all native checks on the separate Orbit Bloom Store QA iOS 26.1 simulator. `scripts/run-ios.sh` builds/installs the preview without clearing its save. Xcode 26.6 (17F113), Swift 6.3.3; gameplay device: iPhone 17 Pro, iOS 26.5; StoreKit device: iPhone 17 Pro Max, iOS 26.1.
 
-## Scope still requiring device testing
-
-Physical-device sound and haptics, VoiceOver, accessibility text sizes, older supported iOS versions, iPad orientations, interruption/network cases, and signed purchase flows have not been fully verified. Content tuning, stronger visible construction changes, and separate biome illustrations are production milestones described in `CONCEPT_AND_ROADMAP.md`. Only Orbit Bloom is built; the other three games remain concepts.
+Physical-device audio/haptics, VoiceOver and larger text, iPad layouts/orientations, older iOS versions, signed purchase interruptions and production save recovery remain unverified. There is no TestFlight upload, public release or App Review approval. Distribution signing requires the owner's Xcode account sign-in. Only Orbit Bloom is built; the other portfolio games remain concepts.

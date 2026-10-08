@@ -9,6 +9,7 @@ xcuserdata/
 *.p12
 **/.build/
 .upstream-cache/
+evidence/
 evidence/*.xcresult/
 evidence/*.log
 evidence/screenshots/
@@ -23,3 +24,13 @@ research/audio/*.html
 research/audio/*/*.url
 research/audio/*/Preview.ogg
 evidence/v2-first-attachments/
+evidence/v2-attachments/
+evidence/v2-final-attachments/
+
+evidence/v2-store-attachments/
+evidence/v3-attachments/
+site-preview.log
+evidence/v3-final-attachments/
+evidence/v3-race-attachments/
+evidence/v3-board-attachments/
+evidence/v3-materials-attachments/

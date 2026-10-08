@@ -1,34 +1,34 @@
-# Four mobile game concepts and first release scope
+# Orbit Bloom and the four-game portfolio
 
-Orbit Bloom is the first playable build: a calm, native iOS match-3 adventure that connects resource gathering to restoring a botanical moon. The initial portfolio has two restoration puzzle games and two distinct shooters. Only Orbit Bloom is implemented in this workspace; the other three are product concepts.
+## Delivered first: Orbit Bloom: Garden Arcade
 
-| Game | Core play | Additional aspects | Proposed purchase | Status |
-| --- | --- | --- | --- | --- |
-| Orbit Bloom | Swap botanical pieces to match three | Resource goals, frozen patches, cascades, garden restoration, three campaign biomes | One-time cosmetic Aurora Nights atmosphere | Native playable 12-level chapter |
-| Tidal Terraces | Water-channel and match puzzles | Restore coastal gardens, tide states, habitat choices, rescued creatures | A substantial optional island expansion | Concept; build after feedback on Orbit Bloom |
-| Comet Courier | One-finger vertical space shooter | Cargo routes, rescue missions, ship equipment, distinct bosses | Permanent expansion with new routes and ships | Concept; open-source candidate requires full asset audit |
-| Seedguard | Top-down auto-fire shooter | Protect botanical domes, choose defensive plants, day/night enemies, wave survival | Permanent biome pack and cosmetic ships | Concept; procedural native art preferred |
+One native iOS app connects three playable activities through a shared economy: bloom circuits, a six-plot farm and a rover delivery race. Five destinations—World, Garden, Farm, Race and Shop—make those activities easy to find. This is an original small connected arcade, not a claim of a wholly unprecedented genre.
 
-These products should have distinct mechanics and content. A recolor of one app under multiple bundle IDs would create a weak product and review risk under Apple's [guideline 4.3](https://developer.apple.com/app-store/review/guidelines/#spam). Commercial games named by the user are genre references only; their code, names, characters, music, and visual identity are not reused. The reference “Redticket” has not been conclusively identified and was not treated as a source asset.
+Swipe neighboring botanical pieces to match three, or tap adjacent groups. Fixed formations create Bomb, TNT, Mega Bomb and Rainbow powers on the board, with chained blasts. The campaign has 1,020 stages: twelve authored opening stages and 1,008 generated stages; the opening funds six restoration projects. Six permanent field tasks reward tools, hints and shuffles. Frost melts when an adjacent circuit blooms. Farm roses or apples, water them, harvest produce and compost, craft more tools, then deliver cargo in a three-lane rover run. Puzzle dew supplies farming water; all activities contribute to the same wallet.
 
-## Orbit Bloom loop
+Five ordinary puzzle lives regenerate one every 30 minutes, including while closed. A win returns the life spent on entry. Purchased extra lives form a separate durable reserve. Farm and Race remain available when ordinary lives run out. Coins can be earned or bought; 100 earned coins refill normal lives. There is no forced subscription or advertising.
 
-First launch introduces the moon garden without login or permissions. The player starts a puzzle, swaps neighboring pieces, reaches resource and score goals, and earns one restoration star for the first win. Two stars restore one garden project. Six projects and twelve puzzles complete the chapter. Replays retain best scores and give a small coin reward. Hints, shuffling, retries, and the entire chapter are free.
+The art uses original dimensional botanical renders, a new orbit-and-leaf logo, an illustrated space garden and a floating robot companion. Coin flights, particles, harvest feedback, collisions, tool blasts, action sounds and looping music provide feedback. These are rendered sprites, not a fully modeled 3D world. The six restorations share one environment with completion treatments; a broader commercial campaign and distinct environments remain future work.
 
-The current restoration scene uses one original illustration. Fog, saturation, and completion markers change as projects are restored. The biomes have different level names, targets, and frost quantities but share one piece set and one garden illustration. Separate fully modeled biome environments, branching decoration choices, character story scenes, and a large campaign are later production work.
+## Portfolio
 
-## Next content milestones
+| Game | Distinct direction | Status |
+| --- | --- | --- |
+| Orbit Bloom: Garden Arcade | Connected botanical circuits, farming, crafting and delivery racing | Implemented; native simulator testing and App Store draft |
+| Tidal Terraces | Route water through coastal gardens, balance tides and restore habitats | Concept |
+| Comet Courier | One-finger space shooter with rescue cargo, ship upgrades and bosses | Concept |
+| Seedguard | Top-down botanical defense shooter with plant defenses and night waves | Concept |
 
-1. Evaluate the playable chapter on physical iPhones and collect feedback on swaps, readability, and puzzle difficulty.
-2. Tune the free burst economy and level seeds; the automated solver verifies reachability, not human difficulty or long-term engagement.
-3. Add a second illustrated environment, more substantial visible construction changes, short story beats, and a broader authored level set.
-4. Complete TestFlight validation and the App Store setup described in `APP_STORE_PREPARATION.md`.
-5. Start Comet Courier with one complete boss route, then develop the second puzzle game and the mechanically different Seedguard.
+The first delivery is one connected app. The other three games are not claimed to be built. Commercial titles mentioned by the user are genre references; their code, assets, names and music are not reused. “Redticket” remains unidentified.
 
-## Shooter research candidates
+## Source comparison and next milestones
 
-[Space Shooter by M4rdine](https://github.com/M4rdine/space-shooter-godot-game) advertises an MIT source license, five-minute runs, weapon evolutions, and bosses. Its own README separates CC0 Kenney art from audio and fonts that need item-level review. It is a candidate, not a commercially cleared bundle.
+See `V2_SYSTEMS_AND_SOURCES.md` for the full mechanic/source list and `LICENSE_AUDIT.md` for copied source and asset provenance. Match3Kit supplies MIT grid/refill primitives; the connected-group mode, native farming and delivery race are local implementations. Imported sound and music are CC0. Generated artwork is separately documented and is not described as MIT.
 
-[Stellar Vortex](https://github.com/UnusualTitan711x/Stellar-Vortex) advertises MIT source and a boss encounter, but its Kenney assets and Pixabay soundtrack have separate provenance. It is a second candidate; do not ship its music without reviewing the actual asset terms. Neither candidate is downloaded into or incorporated into the first game.
+1. Collect hands-on feedback on circuit readability, farming pace and steering.
+2. Validate signed sandbox purchases, cancellation, pending approval and restore on a device/TestFlight build.
+3. Test VoiceOver, large accessibility text, physical-device audio/haptics, older iOS and iPad layouts.
+4. Add distinct garden environments, stronger construction changes, more authored levels and story scenes.
+5. Prototype Comet Courier with one complete boss route, then Tidal Terraces and Seedguard.
 
-A strict MIT requirement applies to copied source code. Asset terms are checked independently. Original procedural visuals and synthesized audio can avoid uncertainty; CC0 artwork is commercially reusable when its actual provenance is verified, though it is not MIT.
+Shooter candidates previously researched include [M4rdine/space-shooter-godot-game](https://github.com/M4rdine/space-shooter-godot-game) and [UnusualTitan711x/Stellar-Vortex](https://github.com/UnusualTitan711x/Stellar-Vortex). These are candidates only: code and every asset need an item-level license audit before import. Neither is bundled in this app.

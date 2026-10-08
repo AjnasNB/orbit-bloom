@@ -1,29 +1,29 @@
-# Orbit Bloom mobile flow verification
+# Connected arcade: mobile UX verification
 
-Orbit Bloom targets casual iPhone and iPad players who want a short, calm puzzle and a visible restoration reward. The first native build uses a dark teal space setting, warm illustrated garden art, distinct botanical piece silhouettes, and a simple three-destination structure.
+## Flow map
 
-## Screen and flow map
+First launch → brief animated loading screen → World automatically. Five persistent destinations are World, Garden, Farm, Race and Shop. World starts the next circuit and shows six restoration projects. Circuits earn stars and farming water; Farm produces coins, compost and cargo; crafting supplies circuit tools; Race converts a delivered cargo run into shared coins. No account or permission gate is present.
 
-First launch → short garden introduction → Garden → Play puzzle → real match/cascade → resource and score completion → Victory → Garden → restoration project.
+Circuit entry spends one normal life or an extra-life reserve item. Pause exposes resume, restart with an explicit life cost, and leave. A win returns one normal life. Five normal lives regenerate one every 30 minutes, with elapsed time preserved offline. Farm and Race remain playable without lives. Shop shows the life timer, a coin-funded refill, Apple coin/life packs, the one-time starter bonus, and Restore purchases.
 
-Garden, Journey, and Shop remain available outside a puzzle. A puzzle has pause/help, resume, restart, and an explicitly labeled leave action. Settings contains sound, haptics, instructions, privacy, licenses, and a confirmed local reset. There is no account or permission gate. Backgrounding saves the current resolved board before its cascade animation finishes.
+## Findings addressed
 
-## Findings and fixes
+| Issue | Change |
+| --- | --- |
+| Flat generic pieces lacked recognizable forms | Replaced the main piece set with dimensional roses, apples, leaves, droplets and diamonds; original logo and garden art |
+| A frost cell could remain isolated after useful circuit groups disappeared | Adjacent circuits melt frost; board recovery guarantees a connected group |
+| Hint controls moved when instruction text appeared | Fixed-height instruction region and stable controls above the board |
+| Shop scroll position carried into Farm | Shared page scroll view gets a distinct identity for each destination |
+| Puzzle scroll position carried between circuits | Puzzle scroll identity resets for each stage |
+| Vertical piece drags could scroll the page | Disable page scrolling while holding a piece; assert that suggested horizontal and vertical swipes spend a turn |
+| Tool activation consumed a normal turn in earlier design assumptions | Native UI asserts that a bomb leaves the turn count unchanged; tool inventory is consumed instead |
+| Wallet and transaction grants could diverge during interruptions | A single durable wallet blob saves balance, transaction ledger, ecosystem and board atomically |
+| No cross-activity sensory feedback | Bundled action effects, mode music, particles, coin flights, harvest and collision feedback |
 
-| Severity | Flow | Evidence | Fix or remaining work |
-| --- | --- | --- | --- |
-| P1 resolved | Victory → next level | Simulator UI automation treated reward pills as separate alerts | Removed inherited modal traits, contained the result group, and hid the underlying puzzle from accessibility while the result is visible |
-| P1 resolved | Selecting puzzle pieces | First simulator AX inspection showed the board's identifier on every piece | Removed the parent identifier; each piece now exposes its own stable tile identifier, shape name, row, column, and frozen state |
-| P2 resolved | Home header | iPhone simulator screenshot showed the brand wrapping | Kept the brand on one line with calibrated size and a modest minimum scale factor |
-| P1 remaining | Purchase verification | Installed iOS 26.5 local StoreKit service logs SKInternalErrorDomain 3 and cannot load the configured product | Live/sandbox purchase, pending approval, refund, and restore tests must run on a working runtime or signed device before release |
-| P2 remaining | Large text and physical device accessibility | Native AX labels were inspected, but a full VoiceOver and accessibility-size walkthrough has not been completed | Test physical iPhone VoiceOver, large text, contrast, older supported OS versions, and iPad layout before TestFlight release |
+## Accessibility and platform behavior
 
-## Interaction and platform checks
+Piece accessibility labels include the recognizable kind, row, column and frozen state; matching does not depend on color alone. Tap groups avoid a drag-only requirement. Navigation, plot, tool, pause and race-road controls expose stable labels/identifiers. Controls generally provide 44-point tap regions; a seven-column board uses approximately 45-point tiles on the tested iPhone 17 Pro. Reduce Motion shortens/disables large movement. Music, sound effects and haptics have separate settings, and the audio session respects silent mode and app inactivity.
 
-The seven-column board has distinct leaf, droplet, sun, blossom, and crystal silhouettes, so matching does not depend on color alone. Two taps provide an alternative to dragging. Puzzle pieces expose their type and position to accessibility. The observed iPhone 17 Pro layout has approximately 45-point piece targets, with larger controls for pause and tools. Phone content uses safe areas; the space backdrop alone extends behind system bars.
+Native UI tests exercise actual taps, public hints, supplied/earned tools, plot watering/harvesting, crafting, swipe steering, pause/relaunch and returning from a long Shop page to Farm. Final results and screenshots are recorded in `TEST_REPORT.md`; diagnostic runs are not treated as passing results.
 
-Hints and shuffling preserve moves and earned goals. Invalid swaps preserve the board and move count. First wins award one star; replaying a completed level cannot duplicate restoration stars. Leaving a level explicitly discards that puzzle while retaining earned garden progress. All retries are free, with no energy timer, ads, forced purchase, or subscription.
-
-Reduce Motion disables piece collapse/position animation and button scaling. Sound and haptics can be switched off. The app centers constrained-width content on larger screens rather than stretching the phone board across the entire display.
-
-The static scan is saved in `evidence/mobile-ux-scan.txt`. Its remaining image warnings include symbols explicitly marked `accessibilityHidden(true)` or grouped under labeled controls; these are heuristic signals, not verified missing-label defects. Background safe-area warnings apply to intentional decorative layers. No claim of complete accessibility certification is made.
+Physical-device VoiceOver, accessibility text sizes, older iOS, iPad orientations and physical audio/haptic behavior still need verification. The native screenshot review does not establish full accessibility certification. Live payment completion requires signed sandbox verification before release.
