@@ -1,0 +1,18 @@
+{
+  "identifier" : "71C900BC-14F0-45ED-9198-541660276B43",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : true,
+      "internalID" : "8424113721",
+      "localizations" : [{"description" : "A permanent cosmetic aurora atmosphere for your moon garden. No subscription.", "displayName" : "Aurora Nights", "locale" : "en_US"}],
+      "productID" : "com.orbitbloom.aurora",
+      "referenceName" : "Aurora Nights",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {"_applicationInternalID" : "0", "_developerTeamID" : "", "_failTransactionsEnabled" : false, "_locale" : "en_US", "_storefront" : "USA", "_storeKitErrors" : [], "_timeRate" : 0},
+  "subscriptionGroups" : [],
+  "version" : {"major" : 3, "minor" : 0}
+}
