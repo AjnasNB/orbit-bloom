@@ -3,6 +3,7 @@ import SwiftUI
 struct RootView: View {
     @EnvironmentObject var game: GameModel
     @EnvironmentObject var purchases: PurchaseStore
+    @State private var loading = true
     private let clock = Timer.publish(every:1,on:.main,in:.common).autoconnect()
     var body: some View {
         ZStack {
@@ -22,17 +23,23 @@ struct RootView: View {
                             default: GardenView()
                             }
                         }.frame(maxWidth:600).frame(maxWidth:.infinity)
-                    }.scrollIndicators(.hidden)
+                    }.id(game.tab).scrollIndicators(.hidden)
+                    .simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
+                        guard game.tab != 1, abs(value.translation.width) > abs(value.translation.height)*1.5 else { return }
+                        withAnimation(.easeInOut(duration:0.25)) { game.tab = min(4,max(0,game.tab+(value.translation.width < 0 ? 1 : -1))) }
+                    })
                     navigation
-                }.accessibilityHidden(!game.progress.hasSeenIntro)
+                }.accessibilityHidden(loading)
             }
-            if !game.progress.hasSeenIntro { intro }
+            if loading { loadingScreen.transition(.opacity) }
             if let flight = game.coinFlight { CoinFlightView(amount:game.lastCoinAward).id(flight).allowsHitTesting(false) }
             if let toast = game.toast {
                 VStack { Spacer(); Text(toast).font(.system(.subheadline,design:.rounded,weight:.semibold)).multilineTextAlignment(.center).foregroundStyle(Palette.night).padding(16).background(Palette.cream,in:RoundedRectangle(cornerRadius:20)).padding(.horizontal,24).padding(.bottom,80) }.allowsHitTesting(false)
             }
         }
         .sheet(isPresented:$game.showSettings) { SettingsView() }
+        .sheet(isPresented:$game.showTasks) { FieldJournalView() }
+        .task { try? await Task.sleep(for:.milliseconds(game.testing ? 120 : 1000)); game.progress.hasSeenIntro = true; game.save(); withAnimation(.easeOut(duration:0.35)) { loading = false } }
         .onAppear { purchases.game = game; game.updateMusic(); Task { await purchases.recoverUnfinished() } }
         .onChange(of:game.tab) { _,_ in game.updateMusic() }
         .onChange(of:game.engine != nil) { _,_ in game.updateMusic() }
@@ -53,20 +60,19 @@ struct RootView: View {
             VStack(spacing:5) { Image(systemName:icon).font(.system(size:20)); Text(title).font(.system(size:10,weight:.bold,design:.rounded)) }.foregroundStyle(game.tab == id ? Palette.gold : Palette.muted).frame(maxWidth:.infinity).frame(minHeight:44)
         }.accessibilityIdentifier("tab\(title)").accessibilityAddTraits(game.tab == id ? .isSelected : [])
     }
-    var intro: some View {
+    var loadingScreen: some View {
         ZStack {
-            Image("LivingGarden").resizable().scaledToFill().ignoresSafeArea().overlay(LinearGradient(colors:[.clear,Palette.night,Palette.night],startPoint:.top,endPoint:.bottom))
-            VStack(spacing:18) {
-                Spacer()
-                Image("BloomLogo").resizable().scaledToFit().frame(width:100,height:100).clipShape(RoundedRectangle(cornerRadius:25))
-                SectionEyebrow(text:"One world. Many ways to play.")
-                Text("Grow a little\nextraordinary.").font(.system(size:39,weight:.heavy,design:.rounded)).tracking(-1).multilineTextAlignment(.center).foregroundStyle(Palette.cream)
-                Text("Clear bloom circuits. Farm living gardens. Race your harvest home. Everything you play helps your world grow.").font(.system(.body,design:.rounded)).multilineTextAlignment(.center).foregroundStyle(Palette.mint)
-                PrimaryButton(title:"Enter your world",symbol:"leaf.fill",id:"introStart") { game.progress.hasSeenIntro = true; game.save(); game.effect("win") }
-                Text("5 garden lives · one returns every 30 minutes\nFarming and racing are always open.").font(.system(.caption,design:.rounded)).multilineTextAlignment(.center).foregroundStyle(Palette.muted)
-            }.padding(28).padding(.bottom,24).frame(maxWidth:500)
-        }.accessibilityElement(children:.contain)
+            Palette.night.ignoresSafeArea()
+            Image("LivingGarden").resizable().scaledToFill().ignoresSafeArea().opacity(0.22)
+            VStack(spacing:24) {
+                Image("BloomLogo").resizable().scaledToFit().frame(width:132,height:132).clipShape(RoundedRectangle(cornerRadius:33))
+                Text("ORBIT BLOOM").font(.system(size:28,weight:.black,design:.rounded)).tracking(3).foregroundStyle(Palette.cream)
+                Text("Your next little adventure is growing.").font(.system(.subheadline,design:.rounded)).foregroundStyle(Palette.mint)
+                ProgressView().tint(Palette.gold).accessibilityLabel("Loading your garden")
+            }.padding(24)
+        }.accessibilityIdentifier("loadingScreen")
     }
+
 }
 
 struct GameHUD: View {
@@ -85,6 +91,7 @@ struct GameHUD: View {
 
 struct GardenView: View {
     @EnvironmentObject var game: GameModel
+    @State private var arrived = false
     var nextTask: GardenTask? { GardenTask.all.first { !game.progress.restored.contains($0.id) } }
     var body: some View {
         VStack(alignment:.leading,spacing:18) {
@@ -93,10 +100,10 @@ struct GardenView: View {
                 LinearGradient(colors:[.clear,Palette.night.opacity(0.98)],startPoint:.center,endPoint:.bottom)
                 VStack(alignment:.leading,spacing:8) {
                     SectionEyebrow(text:"Your botanical moon / Chapter 01")
-                    Text(game.progress.gardenComplete ? "A world in bloom." : "A world worth\ngrowing.").font(.system(size:35,weight:.heavy,design:.rounded)).tracking(-1).foregroundStyle(Palette.cream)
+                    Text(game.progress.gardenComplete ? "A world in bloom." : "Welcome to\nyour wild side.").font(.system(size:35,weight:.heavy,design:.rounded)).tracking(-1).foregroundStyle(Palette.cream)
                     Text("\(game.progress.restored.count)/6 restored").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.gold)
                 }.padding(24)
-            }.clipShape(RoundedRectangle(cornerRadius:28))
+            }.clipShape(RoundedRectangle(cornerRadius:28)).scaleEffect(arrived ? 1 : 0.96).opacity(arrived ? 1 : 0).onAppear { withAnimation(.spring(response:0.7,dampingFraction:0.8)) { arrived = true } }
             HStack(spacing:12) {
                 SpriteView(index:10).frame(width:68,height:72)
                 VStack(alignment:.leading,spacing:5) { Text("Pip's field notes").font(.system(.headline,design:.rounded)).foregroundStyle(Palette.cream); Text("Dew feeds your farm. Harvests craft tools. Deliveries earn coins. Let's make something grow.").font(.system(.caption,design:.rounded)).foregroundStyle(Palette.mint) }
@@ -106,6 +113,9 @@ struct GardenView: View {
                 activity("Farm & craft","\(game.ecosystem.produce) cargo ready",sprite:3,tab:2,id:"openFarm")
                 activity("Harvest rally","22-second delivery",sprite:9,tab:3,id:"openRace")
             }
+            Button { game.showTasks = true; game.effect("tap") } label: {
+                HStack { SpriteView(index:6).frame(width:49,height:49); VStack(alignment:.leading,spacing:5) { Text("Field tasks & power patterns").font(.headline); Text("Earn TNT, hints and shuffles by playing.").font(.caption).foregroundStyle(Palette.mint) }; Spacer(); Image(systemName:"sparkles") }.foregroundStyle(Palette.gold).padding(18).background(Palette.deep,in:RoundedRectangle(cornerRadius:22))
+            }.buttonStyle(PressStyle()).accessibilityIdentifier("openTasks")
             if let task = nextTask {
                 HStack(spacing:12) {
                     Image(systemName:task.icon).foregroundStyle(Palette.mint).font(.title2)
@@ -133,12 +143,14 @@ struct GardenScene: View {
 
 struct JourneyView: View {
     @EnvironmentObject var game: GameModel
+    @State private var page = 0
     var body: some View {
-        VStack(alignment:.leading,spacing:18) {
-            SectionEyebrow(text:"Garden / Bloom circuits")
+        LazyVStack(alignment:.leading,spacing:18) {
+            SectionEyebrow(text:"Garden / 1,020 bloom trails")
             Text("Clear. Collect.\nBring it to life.").font(.system(size:33,weight:.heavy,design:.rounded)).foregroundStyle(Palette.cream)
-            Text("Tap groups of 2+ touching pieces. Larger groups create tools. Collect dew for the farm and stars for the world.").font(.system(.subheadline,design:.rounded)).foregroundStyle(Palette.mint)
-            ForEach(Level.campaign) { level in
+            Text("Swipe neighbors for 3 in a row, or tap 2+ touching pieces. Form power patterns. Swipe this trail list to explore regions.").font(.system(.subheadline,design:.rounded)).foregroundStyle(Palette.mint)
+            Picker("Garden region",selection:$page) { ForEach(0..<51) { region in Text("Region \(region+1) · \(region*20+1)–\(min(Level.total,(region+1)*20))").tag(region) } }.tint(Palette.gold)
+            ForEach(Array(Level.campaign.dropFirst(page*20).prefix(20))) { level in
                 let unlocked = level.id <= game.progress.nextLevel
                 Button { game.start(level) } label: {
                     HStack(spacing:14) {
@@ -148,8 +160,49 @@ struct JourneyView: View {
                     }.padding(18).background(Palette.deep,in:RoundedRectangle(cornerRadius:20)).opacity(unlocked ? 1 : 0.5)
                 }.disabled(!unlocked).accessibilityIdentifier("level\(level.id)")
             }
-        }.padding(24)
+        }.padding(24).onAppear { page = (game.progress.nextLevel-1)/20 }
+        .simultaneousGesture(DragGesture(minimumDistance:40).onEnded { value in
+            guard abs(value.translation.width) > abs(value.translation.height)*1.5 else { return }
+            page = min(50,max(0,page+(value.translation.width < 0 ? 1 : -1)))
+        })
     }
+}
+
+struct FieldJournalView: View {
+    @EnvironmentObject var game:GameModel
+    @Environment(\.dismiss) var dismiss
+    var body:some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment:.leading,spacing:20) {
+                    Text("Good things grow together.").font(.system(size:30,weight:.heavy,design:.rounded)).foregroundStyle(Palette.cream)
+                    Text("Permanent field tasks, with no daily deadline. Your first ten hints are free; earn more here. After free supplies, a hint costs 3 coins and a shuffle costs 15.").font(.subheadline).foregroundStyle(Palette.mint)
+                    ForEach(FieldTask.all) { task in
+                        let value = task.value(progress:game.progress,ecosystem:game.ecosystem,assistance:game.assistance)
+                        let claimed = game.assistance.claimed.contains(task.id)
+                        HStack(spacing:16) {
+                            SpriteView(index:task.tool.sprite).frame(width:58,height:62)
+                            VStack(alignment:.leading,spacing:5) { Text(task.title).font(.headline).foregroundStyle(Palette.cream); Text("\(min(value,task.target))/\(task.target) · \(task.tool.title)" + (task.hints > 0 ? " + \(task.hints) hints" : "") + (task.shuffles > 0 ? " + \(task.shuffles) shuffles" : "")).font(.caption).foregroundStyle(Palette.mint) }
+                            Spacer()
+                            Button(claimed ? "Claimed" : value >= task.target ? "Claim" : "Growing") { game.claim(task) }.font(.caption.bold()).foregroundStyle(value >= task.target || claimed ? Palette.gold : Palette.muted).frame(minWidth:55,minHeight:44).disabled(claimed || value < task.target).accessibilityIdentifier("claim_\(task.id)")
+                        }.padding(16).background(Palette.deep,in:RoundedRectangle(cornerRadius:22))
+                    }
+                    Text("Patterns make power.").font(.title2.bold()).foregroundStyle(Palette.cream)
+                    ForEach(Array(GardenTool.allCases.enumerated()),id:\.offset) { item in
+                        HStack(spacing:18) {
+                            PatternDiagram(tool:item.element).frame(width:100,height:100)
+                            VStack(alignment:.leading,spacing:5) { Text(item.element.title).font(.headline).foregroundStyle(Palette.gold); Text(["4 in a line, or a 4-piece circuit", "L or T of 5, or a 6-piece circuit", "A 7-piece cross, or an 8-piece circuit", "5 in a line, or a 10-piece circuit"][item.offset]).font(.subheadline).foregroundStyle(Palette.mint); Text(item.element.detail).font(.caption).foregroundStyle(Palette.muted) }
+                        }
+                    }
+                }.padding(24)
+            }.background(Palette.night).navigationTitle("Field journal").toolbar { ToolbarItem(placement:.confirmationAction) { Button("Done") { dismiss() } } }
+        }
+    }
+}
+struct PatternDiagram:View {
+    let tool:GardenTool
+    var keys:Set<Int> { switch tool { case .bomb: return [10,11,12,13]; case .tnt: return [2,7,12,13,14]; case .mega: return [2,7,10,11,12,13,17]; case .rainbow: return [10,11,12,13,14] } }
+    var body:some View { LazyVGrid(columns:Array(repeating:GridItem(.flexible(),spacing:2),count:5),spacing:2) { ForEach(0..<25) { key in ZStack { RoundedRectangle(cornerRadius:3).fill(Palette.deep); if keys.contains(key) { SpriteView(index:3).padding(1) } }.aspectRatio(1,contentMode:.fit) } }.accessibilityElement(children:.ignore).accessibilityLabel("\(tool.title) formation") }
 }
 
 struct CoinFlightView: View {

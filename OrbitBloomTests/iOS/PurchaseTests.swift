@@ -28,6 +28,23 @@ import StoreKitTest
         XCTAssertEqual(model.progress.coins,before+400)
         await store.recoverUnfinished(); XCTAssertEqual(model.progress.coins,before+400)
     }
+    func testAppleLivesAndStarterCreditsPersistWithoutDuplicateRestore() async throws {
+        let store = try await loadedStore()
+        let suite = "orbitbloom.purchase.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))
+        defer { defaults.removePersistentDomain(forName:suite) }
+        let model = GameModel(defaults:defaults); store.game = model
+        await store.purchase("com.orbitbloom.lives5")
+        XCTAssertEqual(model.ecosystem.lives.reserve,5)
+        let before = model.progress.coins
+        await store.purchase("com.orbitbloom.starter")
+        XCTAssertEqual(model.progress.coins,before+600)
+        XCTAssertEqual(model.ecosystem.lives.reserve,8)
+        let restored = GameModel(defaults:defaults); store.game = restored
+        await store.restore(); await store.recoverUnfinished()
+        XCTAssertEqual(restored.progress.coins,before+600)
+        XCTAssertEqual(restored.ecosystem.lives.reserve,8)
+    }
     func testPurchaseAndRestoreNonConsumable() async throws {
         let store = try await loadedStore()
         XCTAssertEqual(store.product?.id, PurchaseStore.productID)
@@ -55,7 +72,11 @@ import StoreKitTest
         XCTAssertTrue(store.ownsAurora)
         let transaction = try XCTUnwrap(session.allTransactions().first)
         try session.refundTransaction(identifier: transaction.identifier)
-        await store.refreshEntitlements()
+        for _ in 0..<50 {
+            await store.refreshEntitlements()
+            if !store.ownsAurora { break }
+            try await Task.sleep(for:.milliseconds(100))
+        }
         XCTAssertFalse(store.ownsAurora)
     }
     func testPendingAskToBuyDoesNotUnlockBeforeApproval() async throws {
@@ -109,6 +130,20 @@ import StoreKitTest
         XCTAssertEqual(restored.progress.coins,760); XCTAssertEqual(restored.ecosystem.lives.reserve,3)
         XCTAssertTrue(restored.applyTransaction(productID:"com.orbitbloom.starter",transactionID:"verified-unit-fixture"))
         XCTAssertEqual(restored.progress.coins,760); XCTAssertEqual(restored.ecosystem.lives.reserve,3)
+    }
+    func testHintBalancePersistsAndOlderWalletReceivesFreeAssistance() throws {
+        let suite = "orbitbloom.assistance.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))
+        defer { defaults.removePersistentDomain(forName:suite) }
+        let model = GameModel(defaults:defaults); model.start(Level.campaign[0])
+        for _ in 0..<5 { model.hint() }
+        XCTAssertEqual(model.assistance.freeHints,5)
+        XCTAssertFalse(model.hintText.isEmpty)
+        XCTAssertEqual(GameModel(defaults:defaults).assistance.freeHints,5)
+        var oldWallet = try XCTUnwrap(JSONSerialization.jsonObject(with:try XCTUnwrap(defaults.data(forKey:"orbitBloom.wallet.v2"))) as? [String:Any])
+        oldWallet.removeValue(forKey:"assistance")
+        defaults.set(try JSONSerialization.data(withJSONObject:oldWallet),forKey:"orbitBloom.wallet.v2")
+        XCTAssertEqual(GameModel(defaults:defaults).assistance.freeHints,10)
     }
     func testAudioAndSpritesAreActuallyBundled() {
         for name in ["music-garden","music-farm","music-puzzle","music-race","sfx-tap","sfx-match","sfx-cascade","sfx-harvest","sfx-plant","sfx-water","sfx-collision","sfx-blast","sfx-coin","sfx-craft","sfx-win"] {

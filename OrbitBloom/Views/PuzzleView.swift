@@ -3,12 +3,12 @@ import SwiftUI
 struct PuzzleView: View {
     @EnvironmentObject var game: GameModel
     @Environment(\.accessibilityReduceMotion) var reduceMotion
+    @GestureState private var pieceDragActive = false
     var body: some View {
         ZStack {
             VStack(spacing:0) {
                 GameHUD()
-                ScrollView {
-                    VStack(spacing:15) {
+                VStack(spacing:10) {
                         HStack {
                             Button { game.paused = true; game.effect("tap") } label: { Image(systemName:"pause.fill").frame(width:44,height:44).background(Palette.deep,in:Circle()) }.foregroundStyle(Palette.cream).accessibilityLabel("Pause garden").accessibilityIdentifier("pauseGame")
                             Spacer()
@@ -17,24 +17,27 @@ struct PuzzleView: View {
                             VStack(spacing:2) { Text("\(game.moves)").font(.system(size:28,weight:.black,design:.rounded)).foregroundStyle(Palette.gold).accessibilityIdentifier("movesCounter"); Text("TURNS").font(.system(size:8,weight:.bold)).tracking(2).foregroundStyle(Palette.mint) }.frame(width:44)
                         }
                         goals
+                        HStack(spacing:12) {
+                            utility(game.assistance.freeHints > 0 ? "Hint · \(game.assistance.freeHints) free" : "Hint · 3 coins","lightbulb.fill",id:"hintButton") { game.hint() }
+                            utility(game.charged ? "Burst ready" : "Cross burst","sparkles",id:"burstButton") { game.toggleBurst() }.accessibilityLabel(game.charged ? "Ready! Cross burst" : "Cross burst")
+                            utility(game.assistance.shuffles > 0 ? "Shuffle · \(game.assistance.shuffles)" : "Shuffle · 15","shuffle",id:"shuffleButton") { game.shuffle() }
+                        }
+                        Text(game.hintText.isEmpty ? "Swipe for 3 in a row, or tap 2+ touching pieces." : game.hintText).font(.system(size:10,design:.rounded)).foregroundStyle(Palette.gold).frame(height:14).accessibilityIdentifier("hintInstruction")
+                }.padding(.horizontal,20).padding(.bottom,10).frame(maxWidth:550).frame(maxWidth:.infinity)
+                ScrollView {
+                    VStack(spacing:10) {
                         board
                         Text(game.message).font(.system(size:12,weight:.semibold,design:.rounded)).multilineTextAlignment(.center).foregroundStyle(Palette.mint).frame(minHeight:30)
-                        if !game.hintText.isEmpty { Text(game.hintText).font(.system(size:10,design:.rounded)).foregroundStyle(Palette.gold).accessibilityIdentifier("hintInstruction") }
                         HStack(spacing:8) {
                             ForEach(GardenTool.allCases) { tool in
                                 Button { game.selectTool(tool) } label: {
-                                    VStack(spacing:4) { SpriteView(index:tool.sprite).frame(height:43); Text(tool.title).font(.system(size:10,weight:.bold,design:.rounded)); Text("×\(game.ecosystem.tools[tool,default:0])").font(.system(size:11,weight:.bold,design:.rounded)).foregroundStyle(Palette.gold) }.foregroundStyle(Palette.cream).frame(maxWidth:.infinity).padding(.vertical,8).background(game.pendingTool == tool ? Palette.mint.opacity(0.25) : Palette.deep,in:RoundedRectangle(cornerRadius:17)).overlay(RoundedRectangle(cornerRadius:17).stroke(game.pendingTool == tool ? Palette.gold : .clear,lineWidth:2))
+                                    VStack(spacing:4) { SpriteView(index:tool.sprite).frame(height:36); Text(tool.title).font(.system(size:10,weight:.bold,design:.rounded)); Text("×\(game.ecosystem.tools[tool,default:0])").font(.system(size:11,weight:.bold,design:.rounded)).foregroundStyle(Palette.gold) }.foregroundStyle(Palette.cream).frame(maxWidth:.infinity).padding(.vertical,6).background(game.pendingTool == tool ? Palette.mint.opacity(0.25) : Palette.deep,in:RoundedRectangle(cornerRadius:17)).overlay(RoundedRectangle(cornerRadius:17).stroke(game.pendingTool == tool ? Palette.gold : .clear,lineWidth:2))
                                 }.disabled(game.busy).accessibilityLabel("\(tool.title), \(game.ecosystem.tools[tool,default:0]) available. \(tool.detail)").accessibilityIdentifier("tool\(tool.rawValue)")
                             }
                         }
-                        HStack(spacing:12) {
-                            utility("Hint","lightbulb.fill",id:"hintButton") { game.hint() }
-                            utility(game.charged ? "Burst ready" : "Cross burst","sparkles",id:"burstButton") { game.toggleBurst() }.accessibilityLabel(game.charged ? "Ready! Cross burst" : "Cross burst")
-                            utility("Shuffle","shuffle",id:"shuffleButton") { game.engine?.shuffle(); game.sync(); game.save(); game.effect("tap") }
-                        }
-                        Text("2+ connected pieces collect a circuit. Groups of 4 / 6 / 8 / 10 craft stronger tools.").font(.system(size:10,design:.rounded)).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
+                        Text("4 in line: Bomb · L/T: TNT · 5 in line: Rainbow. Tap a board power-up to blast and chain nearby tools.").font(.system(size:10,design:.rounded)).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
                     }.padding(.horizontal,20).padding(.bottom,20).frame(maxWidth:550).frame(maxWidth:.infinity)
-                }.scrollIndicators(.hidden)
+                }.scrollIndicators(.hidden).scrollDisabled(pieceDragActive).id(game.engine?.level.id)
             }.disabled(game.result != nil || game.paused).accessibilityHidden(game.result != nil || game.paused)
             if let won = game.result { resultView(won) }
             if game.paused { pauseView }
@@ -66,11 +69,15 @@ struct PuzzleView: View {
                     Button { game.tap(key) } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius:10).fill(LinearGradient(colors:[Color(hex:0xDDE9C9),Color(hex:0xAABD91)],startPoint:.topLeading,endPoint:.bottomTrailing)).shadow(color:.black.opacity(0.3),radius:1,y:3)
-                            GemView(gem:cell.gem).padding(side*0.05)
+                            if let power = cell.power { SpriteView(index:power.sprite).padding(side*0.04) }
+                            else { GemView(gem:cell.gem).padding(side*0.05) }
                             if game.frost.contains(key) { RoundedRectangle(cornerRadius:10).fill(.cyan.opacity(0.24)).overlay(RoundedRectangle(cornerRadius:10).stroke(.cyan.opacity(0.8),lineWidth:2)); Image(systemName:"snowflake").font(.system(size:10)).foregroundStyle(.white).offset(x:side*0.3,y:-side*0.3) }
                             if game.hinted.contains(key) || game.pendingTool != nil || game.burstMode { RoundedRectangle(cornerRadius:10).stroke(Palette.gold,lineWidth:3) }
                         }.frame(width:side,height:side).scaleEffect(game.clearing.contains(key) && !reduceMotion ? 0.04 : 1).opacity(game.clearing.contains(key) ? 0 : 1)
-                    }.buttonStyle(.plain).disabled(game.busy).accessibilityLabel("\(cell.gem.name), row \(7-cell.row), column \(cell.column+1)\(game.frost.contains(key) ? ", frozen" : "")").accessibilityHint("Tap to collect a connected group, or target your selected tool").accessibilityIdentifier("tile\(key)").position(x:inset+CGFloat(cell.column)*(side+gap)+side/2,y:inset+CGFloat(6-cell.row)*(side+gap)+side/2)
+                    }.buttonStyle(.plain).highPriorityGesture(DragGesture(minimumDistance:0).updating($pieceDragActive) { _,active,_ in active = true }.onEnded { value in
+                        if max(abs(value.translation.width),abs(value.translation.height)) >= 16 { game.swipe(key,dx:value.translation.width,dy:value.translation.height) }
+                        else { game.tap(key) }
+                    }).disabled(game.busy).accessibilityLabel("\(cell.power?.title ?? cell.gem.name), row \(7-cell.row), column \(cell.column+1)\(game.frost.contains(key) ? ", frozen" : "")").accessibilityHint("Swipe to swap neighbors. Tap a group, board power-up or tool target").accessibilityIdentifier("tile\(key)").position(x:inset+CGFloat(cell.column)*(side+gap)+side/2,y:inset+CGFloat(6-cell.row)*(side+gap)+side/2)
                 }
                 if let key = game.blastKey {
                     BlastParticles().id(game.blastID).frame(width:side*4,height:side*4).position(x:inset+CGFloat(key%7)*(side+gap)+side/2,y:inset+CGFloat(6-key/7)*(side+gap)+side/2).allowsHitTesting(false)
@@ -79,7 +86,7 @@ struct PuzzleView: View {
         }.aspectRatio(1,contentMode:.fit)
     }
     func utility(_ title:String,_ icon:String,id:String,action:@escaping ()->Void) -> some View {
-        Button(action:action) { Label(title,systemImage:icon).font(.system(size:11,weight:.bold,design:.rounded)).frame(maxWidth:.infinity,minHeight:44).background(Palette.deep,in:Capsule()).foregroundStyle(Palette.gold) }.disabled(game.busy).accessibilityIdentifier(id)
+        Button(action:action) { Label(title,systemImage:icon).font(.system(size:11,weight:.bold,design:.rounded)).frame(maxWidth:.infinity,minHeight:44).background(Palette.deep,in:Capsule()).foregroundStyle(Palette.gold).contentShape(Capsule()) }.buttonStyle(PressStyle()).disabled(game.busy).accessibilityIdentifier(id)
     }
     func resultView(_ won:Bool) -> some View {
         ZStack {
@@ -93,7 +100,7 @@ struct PuzzleView: View {
                 Text(won ? "Dew goes to your farm. Coins go to your wallet. Your life is returned." : "A new garden life returns every 30 minutes. Farming and racing are still open.").font(.system(.body,design:.rounded)).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
                 if won { HStack { ResourcePill(symbol:"star.fill",value:game.firstWin ? "+1" : "Replay"); ResourcePill(symbol:"circle.inset.filled",value:game.firstWin ? "+120" : "+30") } }
                 Spacer()
-                if won, let level = game.engine?.level, level.id < 12 {
+                if won, let level = game.engine?.level, level.id < Level.total {
                     PrimaryButton(title:"Next garden circuit",id:"nextLevel") { game.start(Level.campaign[level.id]) }
                 } else if !won { PrimaryButton(title:"Try again · 1 life",symbol:"arrow.clockwise",id:"retryLevel") { if let level = game.engine?.level { game.start(level) } } }
                 PrimaryButton(title:"Return to your world",symbol:"globe",id:"backToGarden") { game.gardenAfterWin() }
@@ -106,7 +113,7 @@ struct PuzzleView: View {
             VStack(spacing:22) {
                 PipCompanion().frame(height:130)
                 Text("A little breather.").font(.system(size:32,weight:.bold,design:.rounded)).foregroundStyle(Palette.cream)
-                Text("Tap 2+ touching pieces. Use tools to clear frost. Bomb: 3×3. TNT: cross. Mega: 5×5. Rainbow: all of one kind.").font(.body).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
+                Text("Swipe neighbors for 3 in a row, or tap 2+ touching pieces. 4 in line makes a Bomb, L/T makes TNT, a 7-piece cross makes Mega, and 5 in line makes Rainbow. Tap power-ups to chain blasts.").font(.body).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
                 PrimaryButton(title:"Keep growing",id:"resumeGame") { game.paused = false }
                 Button("Restart · spend another life") { if let level = game.engine?.level { game.start(level) } }.foregroundStyle(Palette.gold).frame(minHeight:44).accessibilityIdentifier("restartLevel")
                 Button("Leave circuit · keep world progress") { game.leave() }.foregroundStyle(Palette.muted).frame(minHeight:44).accessibilityIdentifier("leaveLevel")

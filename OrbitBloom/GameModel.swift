@@ -6,6 +6,8 @@ import Match3Kit
 @MainActor final class GameModel: ObservableObject {
     @Published var progress: Progress
     @Published var ecosystem = Ecosystem()
+    @Published var assistance = Assistance()
+    @Published var showTasks = false
     @Published var pendingTool: GardenTool?
     @Published var raceActive = false
     @Published var coinFlight: UUID?
@@ -24,7 +26,7 @@ import Match3Kit
     @Published var moves = 0
     @Published var collected: [Gem: Int] = [:]
     @Published var frost: Set<Int> = []
-    @Published var message = "Tap touching pieces to collect a bloom circuit."
+    @Published var message = "Swipe neighbors to match three, or tap a touching group."
     @Published var hintText = ""
     @Published var burstMode = false
     @Published var charged = false
@@ -33,7 +35,7 @@ import Match3Kit
     @Published var paused = false
     @Published var firstWin = false
     private let defaults: UserDefaults
-    private struct Wallet: Codable { var progress: Progress; var ecosystem: Ecosystem; var session: GameEngine.Snapshot?; var charged: Bool? }
+    private struct Wallet: Codable { var progress: Progress; var ecosystem: Ecosystem; var session: GameEngine.Snapshot?; var charged: Bool?; var assistance: Assistance? = nil }
     private var runID = UUID()
     let testing: Bool
 
@@ -47,7 +49,7 @@ import Match3Kit
         }
         progress = defaults.data(forKey: "orbitBloom.progress.v1").flatMap { try? JSONDecoder().decode(Progress.self, from: $0) } ?? Progress()
         let wallet = defaults.data(forKey:"orbitBloom.wallet.v2").flatMap { try? JSONDecoder().decode(Wallet.self,from:$0) }
-        if let wallet { progress = wallet.progress; ecosystem = wallet.ecosystem }
+        if let wallet { progress = wallet.progress; ecosystem = wallet.ecosystem; assistance = wallet.assistance ?? Assistance() }
         ecosystem.lives.refresh(at:Date())
         // Resume a saved puzzle, including earned/consumed boosters.
         let snapshot = wallet != nil ? wallet?.session : defaults.data(forKey:"orbitBloom.session.v1").flatMap { try? JSONDecoder().decode(GameEngine.Snapshot.self,from:$0) }
@@ -58,7 +60,7 @@ import Match3Kit
         }
     }
     func save() {
-        if let data = try? JSONEncoder().encode(Wallet(progress:progress,ecosystem:ecosystem,session:result == nil ? engine?.snapshot : nil,charged:charged)) { defaults.set(data,forKey:"orbitBloom.wallet.v2") }
+        if let data = try? JSONEncoder().encode(Wallet(progress:progress,ecosystem:ecosystem,session:result == nil ? engine?.snapshot : nil,charged:charged,assistance:assistance)) { defaults.set(data,forKey:"orbitBloom.wallet.v2") }
         defaults.set(charged, forKey: "orbitBloom.charged.v1")
         if let data = try? JSONEncoder().encode(progress) { defaults.set(data, forKey: "orbitBloom.progress.v1") }
         if let engine, result == nil, let data = try? JSONEncoder().encode(engine.snapshot) { defaults.set(data, forKey: "orbitBloom.session.v1") }
@@ -68,10 +70,10 @@ import Match3Kit
         guard ecosystem.lives.spend(at:Date()) else { leave(); tab = 4; showToast("No lives yet. One returns every 30 minutes; farming and racing stay open."); return }
         pendingTool = nil
         runID = UUID()
-        let seed: UInt64 = testing ? UInt64(level.id * 101) : UInt64.random(in: 1...UInt64.max)
+        let seed = UInt64(level.id * 101)
         engine = GameEngine(level: level, seed: seed)
         selected = nil; hinted = []; clearing = []; result = nil; busy = false; paused = false
-        charged = false; burstMode = false; hintText = ""; message = "Tap touching pieces to collect a bloom circuit."
+        charged = false; burstMode = false; hintText = ""; message = "Swipe neighbors to match three, or tap a touching group."
         sync(); save()
     }
     func sync() {
@@ -83,7 +85,7 @@ import Match3Kit
         if let tool = pendingTool {
             guard ecosystem.tools[tool,default:0] > 0 else { return }
             ecosystem.tools[tool,default:0] -= 1; pendingTool = nil
-            blastKey = key; blastID = UUID(); effect("blast")
+            blastKey = key; blastID = UUID(); effect("blast"); assistance.blasts += 1
             play(engine.activate(tool,at:key),allowCharge:false); return
         }
         if burstMode {
@@ -92,22 +94,29 @@ import Match3Kit
             burstMode = false; blastKey = key; blastID = UUID(); effect("blast")
             play(engine.burst(at:key),allowCharge:false); return
         }
-        let count = engine.cluster(at:key).count
+        if engine.powers[key] != nil {
+            assistance.blasts += 1; blastKey = key; blastID = UUID(); effect("blast")
+            play(engine.detonate(at:key),allowCharge:false); return
+        }
         let turn = engine.harvestCluster(at:key)
         if turn.accepted {
-            if count >= 4 {
-                let tool: GardenTool = count >= 10 ? .rainbow : count >= 8 ? .mega : count >= 6 ? .tnt : .bomb
-                ecosystem.tools[tool,default:0] += 1
-            }
             play(turn)
         } else { message = "Find 2 or more touching pieces of the same kind."; effect("tap") }
     }
-    func swipe(_ key: Int, dx: CGFloat, dy: CGFloat) { tap(key) }
+    func swipe(_ key: Int, dx: CGFloat, dy: CGFloat) {
+        guard !busy, !paused, result == nil, let engine, max(abs(dx),abs(dy)) >= 16 else { return }
+        let other = abs(dx) > abs(dy) ? key + (dx > 0 ? 1 : -1) : key + (dy > 0 ? -7 : 7)
+        guard (0..<49).contains(other), abs(other/7-key/7)+abs(other%7-key%7) == 1 else { return }
+        if engine.powers[key] != nil || engine.powers[other] != nil { assistance.blasts += 1; blastKey = other; blastID = UUID(); effect("blast") }
+        let turn = engine.swap(key,other)
+        if turn.accepted { pendingTool = nil; burstMode = false; play(turn) }
+        else { message = "Slide a neighbor to make 3 in a row. No turn spent."; effect("tap"); feedback(.rigid) }
+    }
     func selectTool(_ tool: GardenTool) {
         guard !busy else { return }
         guard ecosystem.tools[tool,default:0] > 0 else { showToast("Harvest compost in Farm to craft this tool."); return }
         pendingTool = pendingTool == tool ? nil : tool; burstMode = false
-        message = pendingTool == nil ? "Tap a connected group to collect it." : tool.detail + ". Tap a target."; effect("tap")
+        message = pendingTool == nil ? "Swipe neighbors or tap a touching group." : tool.detail + ". Tap a target."; effect("tap")
     }
     private func play(_ turn: Turn, allowCharge: Bool = true) {
         guard turn.accepted else { message = "That swap needs to make a match. Try another!"; feedback(.rigid); return }
@@ -117,6 +126,10 @@ import Match3Kit
         // Persist the resolved board before animation, so an interruption cannot lose a turn.
         save()
         Task {
+            if let swapped = turn.swappedCells {
+                withAnimation(UIAccessibility.isReduceMotionEnabled ? nil : .spring(response:0.22,dampingFraction:0.8)) { cells = swapped }
+                try? await Task.sleep(for:.milliseconds(testing ? 80 : 230))
+            }
             for (i, wave) in turn.cascades.enumerated() {
                 guard runID == currentRun else { return }
                 withAnimation(UIAccessibility.isReduceMotionEnabled ? nil : .easeOut(duration: 0.15)) { clearing = wave.cleared }
@@ -142,16 +155,31 @@ import Match3Kit
     }
     func hint() {
         guard !busy, let engine else { return }
-        guard let key = engine.bestCluster() else { engine.shuffle(); sync(); save(); message = "Fresh growth. Try another group."; return }
-        hinted = engine.cluster(at:key)
-        hintText = "Tap row \(7-key/7), column \(key%7+1) to collect this group."
-        message = "Touching pieces grow together."; effect("tap")
+        guard let pair = engine.bestMove() else {
+            engine.shuffle(); sync(); save(); message = "Fresh growth. Your hint was kept. Try again."; return
+        }
+        pendingTool = nil; burstMode = false
+        guard assistance.spendHint(coins:&progress.coins) else { showToast("Earn hints in Field Tasks, or 3 coins from your farm or race."); return }
+        hinted = [pair.0,pair.1]
+        hintText = "Slide row \(7-pair.0/7), column \(pair.0%7+1) to row \(7-pair.1/7), column \(pair.1%7+1)."
+        message = "Swipe the two glowing pieces."; effect("tap"); save()
+    }
+    func shuffle() {
+        guard !busy, let engine else { return }
+        guard assistance.spendShuffle(coins:&progress.coins) else { showToast("Earn shuffles in Field Tasks, or use 15 earned coins."); return }
+        hinted = []; hintText = ""; effect("cascade")
+        withAnimation(UIAccessibility.isReduceMotionEnabled ? nil : .spring(response:0.55,dampingFraction:0.7)) { engine.shuffle(); sync() }
+        message = "A fresh arrangement. Tools and turns are kept."; save()
+    }
+    func claim(_ task:FieldTask) {
+        guard task.claim(progress:progress,ecosystem:&ecosystem,assistance:&assistance) else { return }
+        effect("craft"); showToast("\(task.tool.title), hints and shuffles added to your supplies."); save()
     }
     func toggleBurst() {
         guard !busy else { return }
         guard charged || progress.boosters > 0 else { showToast("Get a burst in the shop for 80 earned coins."); return }
         burstMode.toggle(); selected = nil
-        message = burstMode ? "Tap a piece to clear its row and column." : "Tap touching pieces to collect a bloom circuit."
+        message = burstMode ? "Tap a piece to clear its row and column." : "Swipe neighbors to match three, or tap a touching group."
     }
     func leave() { pendingTool = nil; runID = UUID(); engine = nil; result = nil; busy = false; paused = false; save() }
     func gardenAfterWin() { leave(); tab = 0 }

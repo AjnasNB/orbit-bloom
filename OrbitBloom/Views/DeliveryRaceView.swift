@@ -10,7 +10,7 @@ struct DeliveryLobby: View {
                 Image("LivingGarden").resizable().scaledToFill().frame(height:260).clipped().opacity(0.5)
                 SpriteView(index:9).frame(height:200).rotationEffect(.degrees(-12)).shadow(color:.black.opacity(0.5),radius:12,y:12)
             }.clipShape(RoundedRectangle(cornerRadius:26))
-            Text("Steer your rover through three lanes. Dodge stone barriers, collect coins, and deliver your harvest in 22 seconds.").font(.system(.body,design:.rounded)).foregroundStyle(Palette.mint)
+            Text("Swipe left or right to steer your rover through three lanes. Dodge stone barriers, collect coins, and deliver your harvest in 22 seconds.").font(.system(.body,design:.rounded)).foregroundStyle(Palette.mint)
             HStack { Label("3 shield points",systemImage:"shield.fill"); Spacer(); Label("No life cost",systemImage:"heart.fill") }.font(.caption).foregroundStyle(Palette.gold)
             Text(game.ecosystem.produce > 0 ? "\(game.ecosystem.produce) cargo ready · +40 delivery bonus" : "No cargo? You can still race for coins. Farm a harvest for a delivery bonus.").font(.system(.subheadline,design:.rounded)).foregroundStyle(Palette.cream)
             PrimaryButton(title:"Start harvest rally",subtitle:"440 m",symbol:"flag.checkered",id:"startRace") { game.raceActive = true; game.effect("tap") }
@@ -67,14 +67,15 @@ struct DeliveryRaceView: View {
                     SpriteView(index:9).frame(width:76,height:104).rotationEffect(.degrees(flash ? 10 : 0)).position(x:laneX(run.lane,width:geo.size.width),y:geo.size.height*0.78).animation(reduceMotion ? nil : .spring(response:0.2),value:run.lane)
                     if flash { Color.red.opacity(0.2).clipShape(RoundedRectangle(cornerRadius:28)).allowsHitTesting(false) }
                     if paused { Text("Race paused").font(.title2.bold()).foregroundStyle(Palette.cream).padding(24).background(Palette.night,in:Capsule()) }
-                    if run.finished { finish }
-                }.clipped().clipShape(RoundedRectangle(cornerRadius:28))
+                }.clipped().clipShape(RoundedRectangle(cornerRadius:28)).contentShape(Rectangle())
+                .gesture(DragGesture(minimumDistance:20).onEnded { value in
+                    guard !run.finished, !paused else { return }
+                    run.lane = min(2,max(0,run.lane+(value.translation.width < 0 ? -1 : 1))); game.effect("tap")
+                }).accessibilityElement(children:.contain).accessibilityLabel("Harvest rally road. Swipe to steer.").accessibilityValue("Lane \(run.lane+1) of 3").accessibilityIdentifier("raceTrack")
+                .accessibilityAdjustableAction { direction in if direction == .increment { run.lane = min(2,run.lane+1) } else if direction == .decrement { run.lane = max(0,run.lane-1) } }
+                .overlay { if run.finished { finish } }
             }.padding(.horizontal,20)
-            HStack(spacing:12) {
-                ForEach(0..<3) { lane in
-                    Button { guard !run.finished else { return }; run.lane = lane; game.effect("tap") } label: { Text(["← Left","Center","Right →"][lane]).font(.system(.subheadline,design:.rounded,weight:.bold)).frame(maxWidth:.infinity,minHeight:55).background(run.lane == lane ? Palette.gold : Palette.deep,in:RoundedRectangle(cornerRadius:17)).foregroundStyle(run.lane == lane ? Palette.night : Palette.cream) }.accessibilityIdentifier("raceLane\(lane)")
-                }
-            }.padding(.horizontal,20)
+            Label("Swipe the road to steer",systemImage:"hand.draw.fill").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.mint).frame(minHeight:44)
             Button("Return to world") { game.raceActive = false; game.tab = 0 }.font(.system(.caption,design:.rounded,weight:.bold)).foregroundStyle(Palette.mint).frame(minHeight:44).accessibilityIdentifier("leaveRace")
         }
         .onReceive(timer) { _ in

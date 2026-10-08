@@ -7,8 +7,7 @@ import StoreKitTest
         continueAfterFailure = false
         app.launchArguments = ["--uitesting"]
         app.launch()
-        XCTAssertTrue(app.buttons["introStart"].waitForExistence(timeout:15))
-        app.buttons["introStart"].tap()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
     }
     func attach(_ name:String) { let shot = XCTAttachment(screenshot:app.screenshot()); shot.name = name; shot.lifetime = .keepAlways; add(shot) }
     func target() -> XCUIElement {
@@ -35,14 +34,22 @@ import StoreKitTest
                 if app.staticTexts["winTitle"].exists { return }
             }
             let hint = app.buttons["hintButton"]
-            XCTAssertTrue(hint.waitForExistence(timeout:5)); XCTAssertTrue(hint.isEnabled); hint.tap()
+            XCTAssertTrue(hint.waitForExistence(timeout:5)); XCTAssertTrue(hint.isEnabled); hint.press(forDuration:0.15)
             let label = app.staticTexts["hintInstruction"]
             XCTAssertTrue(label.waitForExistence(timeout:5))
+            let suggested = NSPredicate(format:"label CONTAINS 'Slide row'")
+            if XCTWaiter.wait(for:[XCTNSPredicateExpectation(predicate:suggested,object:label)],timeout:5) != .completed {
+                attach("hint-failure"); XCTFail("Hint failed: \(label.label). \(app.debugDescription)"); return
+            }
             let text = label.label as NSString
             let values = try NSRegularExpression(pattern:"[0-9]+").matches(in:text as String,range:NSRange(location:0,length:text.length)).compactMap { Int(text.substring(with:$0.range)) }
-            XCTAssertEqual(values.count,2)
-            let key = (7-values[0])*7+values[1]-1
-            app.buttons["tile\(key)"].tap(); settle()
+            XCTAssertEqual(values.count,4)
+            guard values.count == 4 else { return }
+            let key = (7-values[0])*7+values[1]-1, other = (7-values[2])*7+values[3]-1
+            let turns = Int(app.staticTexts["movesCounter"].label)!
+            app.buttons["tile\(key)"].press(forDuration:0.1,thenDragTo:app.buttons["tile\(other)"])
+            settle()
+            if !app.staticTexts["winTitle"].exists { XCTAssertEqual(Int(app.staticTexts["movesCounter"].label),turns-1,"The hinted swipe must swap pieces and spend exactly one turn") }
         }
         XCTFail("Circuit never completed")
     }
@@ -72,14 +79,50 @@ import StoreKitTest
             XCTAssertTrue(plot.label.contains("ready")); plot.tap()
         }
         XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
+        app.buttons["tabWorld"].tap(); app.swipeUp(); app.buttons["openTasks"].tap()
+        let reward = app.buttons["claim_harvest1"]; XCTAssertTrue(reward.waitForExistence(timeout:5)); reward.tap(); XCTAssertFalse(reward.isEnabled)
+        attach("v3-15-field-tasks"); app.navigationBars.buttons["Done"].tap(); app.buttons["tabFarm"].tap()
         app.swipeUp()
         app.buttons["craftbomb"].tap(); attach("v2-05-tool-shed")
         app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch(); app.buttons["tabFarm"].tap(); app.swipeUp()
         XCTAssertTrue(app.staticTexts["farmTotals"].waitForExistence(timeout:5)); XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
     }
+    func testBoardPowerFormationAndAnimatedShuffle() {
+        attach("v3-01-world")
+        app.buttons["playLevel"].tap(); attach("v3-02-botanical-circuit")
+        let powers = app.buttons.matching(NSPredicate(format:"identifier BEGINSWITH 'tile' AND (label BEGINSWITH 'Bomb,' OR label BEGINSWITH 'TNT,' OR label BEGINSWITH 'Mega bomb,' OR label BEGINSWITH 'Rainbow,')"))
+        for _ in 0..<10 {
+            var kinds:[Int:String] = [:]
+            for key in 0..<49 { kinds[key] = app.buttons["tile\(key)"].label.components(separatedBy:",").first }
+            var candidate:Int?
+            var smallest = 50
+            for key in 0..<49 {
+                var group:Set<Int> = [key], pending = [key]
+                while let item = pending.popLast() {
+                    for neighbor in [item-7,item+7,item-1,item+1] where (0..<49).contains(neighbor) && abs(item/7-neighbor/7)+abs(item%7-neighbor%7) == 1 {
+                        if kinds[neighbor] == kinds[key] && group.insert(neighbor).inserted { pending.append(neighbor) }
+                    }
+                }
+                if group.count >= 4 && group.count < smallest { candidate = key; smallest = group.count }
+            }
+            guard let key = candidate else { app.buttons["shuffleButton"].tap(); continue }
+            app.buttons["tile\(key)"].tap(); settle()
+            if app.staticTexts["winTitle"].exists { app.buttons["nextLevel"].tap(); continue }
+            XCTAssertGreaterThan(powers.count,0,"A real formation must create a power on the board")
+            attach("v3-16-board-power")
+            let count = powers.count, turns = app.staticTexts["movesCounter"].label
+            app.buttons["shuffleButton"].tap()
+            XCTAssertEqual(powers.count,count,"Shuffling must preserve on-board powers")
+            XCTAssertEqual(app.staticTexts["movesCounter"].label,turns)
+            powers.firstMatch.tap(); settle()
+            if !app.staticTexts["winTitle"].exists { XCTAssertEqual(Int(app.staticTexts["movesCounter"].label),Int(turns)!-1) }
+            return
+        }
+        XCTFail("Power formation needs a playable board before victory")
+    }
     func testDeliveryRaceWithRealSteeringAndReward() {
         app.buttons["tabRace"].tap(); attach("v2-06-race-lobby"); app.buttons["startRace"].tap()
-        XCTAssertTrue(app.buttons["raceLane0"].waitForExistence(timeout:5)); app.buttons["raceLane0"].tap()
+        XCTAssertTrue(app.descendants(matching:.any)["raceTrack"].waitForExistence(timeout:5)); app.descendants(matching:.any)["raceTrack"].swipeLeft()
         attach("v2-07-delivery-race")
         XCTAssertTrue(app.staticTexts["raceResult"].waitForExistence(timeout:40)); XCTAssertEqual(app.staticTexts["raceResult"].label,"Delivery complete!")
         attach("v2-10-delivery-complete"); app.buttons["raceDone"].tap()

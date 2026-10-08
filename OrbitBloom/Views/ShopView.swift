@@ -67,16 +67,16 @@ struct SettingsView: View {
                     Text("Progress is saved on this device. You can play every puzzle offline.").font(.footnote).foregroundStyle(.secondary)
                 }
                 Section("How to play") {
-                    Label("Tap connected groups of two or more botanical pieces.", systemImage: "hand.tap")
+                    Label("Swipe neighboring pieces to match three, or tap a connected group.", systemImage: "hand.tap")
                     Label("Meet every resource goal and fill the score bar.", systemImage: "leaf")
                     Label("Match frozen pieces to melt the frost.", systemImage: "snowflake")
-                    Label("Groups of 4 / 6 / 8 / 10 craft bomb / TNT / mega / rainbow tools.", systemImage: "sparkles")
+                    Label("4 in line makes Bomb; L/T makes TNT; a 7-piece cross makes Mega; 5 in line makes Rainbow.", systemImage: "sparkles")
                     Label("Use two stars to restore a garden project.", systemImage: "star")
                 }.font(.subheadline)
                 Section("Privacy & credits") {
                     Text("No accounts, ads, tracking, or analytics. Game progress stays on your device. Purchases are processed by Apple.").font(.subheadline)
                     Button("Open-source licenses & artwork") { showCredits = true }.accessibilityIdentifier("creditsButton")
-                    Text("Orbit Bloom 0.2 · connected garden arcade").font(.caption).foregroundStyle(.secondary)
+                    Text("Orbit Bloom 1.0 · build 3").font(.caption).foregroundStyle(.secondary)
                 }
                 Section {
                     Button("Reset local game progress", role: .destructive) { resetConfirmation = true }
@@ -84,7 +84,7 @@ struct SettingsView: View {
             }.tint(Palette.mint).navigationTitle("Settings").toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { game.save(); dismiss() } } }
                 .onChange(of: game.progress.sound) { _, _ in game.save() }.onChange(of: game.progress.haptics) { _, _ in game.save() }
                 .confirmationDialog("Reset all local game progress?", isPresented: $resetConfirmation, titleVisibility: .visible) {
-                    Button("Reset game", role: .destructive) { game.leave(); game.progress = Progress(); game.ecosystem = Ecosystem(); game.progress.hasSeenIntro = true; game.save(); dismiss() }
+                    Button("Reset game", role: .destructive) { game.leave(); game.progress = Progress(); game.ecosystem = Ecosystem(); game.assistance = Assistance(); game.progress.hasSeenIntro = true; game.save(); dismiss() }
                 }
                 .sheet(isPresented: $showCredits) {
                     NavigationStack {
