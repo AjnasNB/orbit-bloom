@@ -1,44 +1,41 @@
-# Orbit Bloom
+# Orbit Bloom: Garden Arcade
 
-A native iPhone/iPad match-3 garden adventure. Built and run locally on 8 October 2026 using SwiftUI and the MIT-licensed Match3Kit engine. This is a playable first chapter, not an App Store release.
+A native iOS garden arcade with three connected activities: tap-group bloom circuits, a persistent pocket farm, and a rover delivery race. Built for simulator testing and App Store preparation. This is the first playable chapter, not a claim of production completeness.
 
 ## Play
 
-Open `OrbitBloom.xcodeproj` in Xcode, select the **OrbitBloom** scheme and an iPhone simulator, and press **Run**. The scheme enables local StoreKit testing with `OrbitBloom.storekit`; test purchases do not charge money. For gameplay without purchase testing, run `./scripts/run-ios.sh` after booting the **Orbit Bloom QA** simulator.
+Open `OrbitBloom.xcodeproj`, select the **OrbitBloom** scheme and an iPhone simulator, then Run. iOS 17+ is required. The scheme uses `OrbitBloom.storekit` for local Apple purchase testing; test purchases do not charge real money. `scripts/run-ios.sh` installs and runs on the dedicated **Orbit Bloom QA** simulator.
 
-Match three adjacent pieces by tapping two neighbors or swiping. Meet the resource targets, clear any frozen patches, and reach the score target before moves run out. Hints and shuffling are free. Matching four or more pieces at once earns a cross-clearing starlight burst. There are unlimited retries and no timers or lives.
+- **World / Garden:** finish 12 resource puzzles and spend earned stars on six restorations. Tap two or more touching pieces. Groups of 4/6/8/10 craft Bomb/TNT/Mega/Rainbow tools. Blooming groups melt neighboring frost. Free hints and shuffle help recovery.
+- **Farm:** choose roses or apples, tap an empty plot to plant, tap to water, and tap a ripe crop to harvest. Crops grow while the app is closed. Harvests provide coins, compost for crafting, and cargo.
+- **Race:** tap a lane to steer the rover, dodge obstacles, collect coins, and finish a delivery. Harvested cargo adds a bonus.
+- **Lives:** five normal lives, one regenerated every 30 minutes including offline. Puzzle entry spends a life; winning returns one. Purchased extra lives are a separate reserve that does not expire. Farm and Race are always available. Earned coins can refill normal lives.
+- **Shop:** four coin packs, extra lives, and a one-time starter bundle. Intended Indian prices are ₹99, ₹299, ₹499, and ₹999. The app displays actual Apple storefront prices when products are available. Unavailable purchases stay disabled.
 
-Every first level win awards one star and 120 coins. Replays award 30 coins, with no duplicate stars. Spend two stars on each of six ordered garden restorations; restoration lifts fog, warms the scene, and adds completed markers. Spend 80 earned coins on a booster. Complete 12 levels across Moonseed Meadow, Coral Observatory, and Aurora Grove to finish the chapter, then revisit any level.
-
-**Aurora Nights** is an optional, non-consumable cosmetic purchase. The local configuration uses US$2.99; real storefront pricing will come from App Store Connect. Purchases use StoreKit 2 verification, entitlement updates, cancellation/pending states, refunds, and restore. No real App Store product has been registered or published.
+Different looping music plays in each activity, with action sounds, particles, dimensional botanical sprites, a robot companion, and coins flying into the shared balance. Music, sound effects, and haptics have separate settings.
 
 ## Verify
 
 ```sh
 swift test
 xcodebuild -project OrbitBloom.xcodeproj -scheme OrbitBloom \
-  -destination 'platform=iOS Simulator,id=64173F47-C4DC-46B4-82EC-0027675F7780' \
+  -destination 'platform=iOS Simulator,name=Orbit Bloom QA' \
   -derivedDataPath build/DerivedData -parallel-testing-enabled NO \
-  -skip-testing:OrbitBloomTests/PurchaseTests \
-  -skip-testing:OrbitBloomUITests/GameplayUITests/testShopPurchaseAndRestoreUI \
+  -collect-test-diagnostics never -skip-testing:OrbitBloomTests/PurchaseTests \
   test CODE_SIGNING_ALLOWED=NO
 ```
 
-The two exclusions above apply to the installed iOS 26.5 runtime: its StoreKit test service rejects local configuration with `SKInternalErrorDomain Code=3`. Purchase tests remain in the project, but are not reported as passed. Remove the exclusions on a working StoreKit runtime or signed sandbox device. See `docs/TEST_REPORT.md`.
+Purchase tests are separate because the local StoreKit service must load products successfully. See [test evidence](docs/TEST_REPORT.md) for the verified result and limitations. Core tests cover life boundaries, offline growth, crafting, tool areas, 60 connected campaign simulations with carried inventory, and racing. Native tests cover the atomic wallet, transaction idempotency, interrupted puzzles, and bundled media. UI tests actually tap through the chapter, farm, race, relaunch, and shop.
 
-Pure rules and economy tests live in `OrbitBloomTests/Core`. Native StoreKit and interrupted-session tests live in `OrbitBloomTests/iOS`. The passing UI run uses real tile taps, hints, and earned bursts to complete all 12 levels and six restorations, relaunch, and verify pause/resume and free gameplay from the shop. Separate purchase UI tests are present but unverified on this runtime. Evidence and screenshots are under `evidence/`.
+## Sources and release draft
 
-## Project
+- [System list and source comparison](docs/V2_SYSTEMS_AND_SOURCES.md)
+- [Screenshot draft](docs/release-draft/README.md)
+- [App Store status and product catalogue](docs/APP_STORE_PREPARATION.md)
+- [License audit](docs/LICENSE_AUDIT.md)
+- [Audio source manifest](docs/AUDIO_PROVENANCE.json)
+- [Exact generated-art prompts](docs/V2_ARTWORK_PROMPTS.json)
 
-- `OrbitBloom/Core`: deterministic match-3 adapter, campaign, economy, and persistence models.
-- `OrbitBloom/Views`: native garden, puzzle, journey, shop, settings, and accessible piece artwork.
-- `OrbitBloom/GameModel.swift`: interaction, cascades, saving/resuming, synthesized sound, and haptics.
-- `OrbitBloom/PurchaseStore.swift`: StoreKit 2 integration.
-- `vendor/Match3Kit`: pinned MIT engine source, preserved notices.
-- `research/MatchPuzzle`: downloaded MIT reference game, not compiled into Orbit Bloom.
-- `docs/CONCEPT_AND_ROADMAP.md`: four-game product ideas and release scope.
-- `docs/LICENSE_AUDIT.md`: source and asset provenance.
-- `docs/APP_STORE_PREPARATION.md`: concrete remaining release work.
-- `docs/ARTWORK_PROMPT.txt`: exact prompt for the generated garden illustration.
+MIT game code is preserved in `vendor/Match3Kit`; two MIT reference projects are downloaded under `research/`. Selected audio is CC0. New rendered botanical art is generated for this project under the applicable OpenAI terms, not falsely labeled as upstream MIT assets. No proprietary Gardenscapes material is included.
 
-The generated Xcode project is included as an artifact. `ruby scripts/generate_project.rb` can recreate it using the installed `xcodeproj` Ruby gem; end users do not need this step to open or build it. No network or third-party SDK is needed for gameplay. iOS 17 or later is required.
+Gameplay works offline. Progress and purchased consumable balances are device-local; reinstalling can lose that save. Production work still includes physical-device and signed sandbox testing, currency recovery/refund policy, broader accessibility and device coverage, additional content, and release review.

@@ -20,3 +20,6 @@ research/audio/*.zip
 research/audio/*.ogg
 research/audio/*.mp3
 research/audio/*.html
+research/audio/*/*.url
+research/audio/*/Preview.ogg
+evidence/v2-first-attachments/

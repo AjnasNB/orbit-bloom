@@ -32,7 +32,7 @@ public struct Level: Identifiable {
     public let target: Int
     public let goals: [Gem: Int]
     public let frost: Int
-    public var subtitle: String { frost > 0 ? "Collect resources and melt every frozen patch." : "Collect resources to bring your little moon to life." }
+    public var subtitle: String { frost > 0 ? "Bloom beside frozen patches to melt them." : "Collect resources to bring your little moon to life." }
     public static let campaign: [Level] = [
         .init(id: 1, title: "A little life", biome: "Moonseed Meadow", moves: 22, target: 450, goals: [.leaf: 6], frost: 0),
         .init(id: 2, title: "Morning dew", biome: "Moonseed Meadow", moves: 24, target: 700, goals: [.water: 9], frost: 0),
@@ -113,7 +113,7 @@ public final class GameEngine {
         return seen
     }
     public func bestCluster() -> Int? {
-        cells.filter { cluster(at:$0.key).count >= 2 }.max { a,b in
+        cells.sorted { $0.key < $1.key }.filter { cluster(at:$0.key).count >= 2 }.max { a,b in
             func value(_ cell: CellState) -> Int {
                 let group = cluster(at:cell.key)
                 return group.count * (collected[cell.gem,default:0] < level.goals[cell.gem,default:0] ? 5 : 1) + group.intersection(frost).count * 8
@@ -125,7 +125,7 @@ public final class GameEngine {
         let group = cluster(at:cell)
         guard group.count >= 2, !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
         moves -= 1
-        return resolve(initial:Set(group.map(index)))
+        return resolve(initial:Set(group.map(index)), bloomWarmth:true)
     }
     public func activate(_ tool: GardenTool, at cell: Int) -> Turn {
         guard (0..<49).contains(cell), !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
@@ -159,7 +159,7 @@ public final class GameEngine {
         resetBoard()
     }
     public func addMoves(_ count: Int) { moves += max(0, count) }
-    private func resolve(initial: Set<Index>) -> Turn {
+    private func resolve(initial: Set<Index>, bloomWarmth: Bool = false) -> Turn {
         var matches = initial
         var waves: [Cascade] = []
         let charge = matches.count >= 4
@@ -170,6 +170,12 @@ public final class GameEngine {
             for (gem, amount) in tally { collected[gem, default: 0] += amount }
             let cleared = Set(matches.map(key))
             frost.subtract(cleared)
+            if bloomWarmth {
+                let warmed = frost.filter { frozen in cleared.contains { cell in
+                    abs(cell/7-frozen/7) + abs(cell%7-frozen%7) == 1
+                } }
+                frost.subtract(warmed)
+            }
             let points = matches.count * 30 * min(chain, 4)
             score += points
             board.remove(indices: matches, refill: .spill)
@@ -177,7 +183,7 @@ public final class GameEngine {
             matches = board.findAllMatches()
         }
         // Guarantee a stable, playable board, including after a pathological long cascade.
-        if !board.findAllMatches().isEmpty || board.findPossibleSwap() == nil {
+        if !board.findAllMatches().isEmpty || board.findPossibleSwap() == nil || bestCluster() == nil {
             resetBoard()
             waves.append(.init(cleared: [], cells: cells, collected: [:], points: 0))
         }
@@ -191,7 +197,7 @@ public final class GameEngine {
                 if matches.isEmpty { break }
                 board.remove(indices: matches, refill: .regenerate)
             }
-            if board.findAllMatches().isEmpty && board.findPossibleSwap() != nil { return }
+            if board.findAllMatches().isEmpty && board.findPossibleSwap() != nil && bestCluster() != nil { return }
         }
         // A deterministic fallback contains a legal opening move and no pre-existing matches.
         for row in 0..<7 {
@@ -237,6 +243,6 @@ extension GameEngine {
         self.init(level: level, seed: UInt64.random(in: 1...UInt64.max))
         board = Board(grid: snapshot.grid, basic: Set(Gem.allCases), bonuse: [], obstacles: [])
         score = snapshot.score; moves = snapshot.moves; collected = snapshot.collected; frost = snapshot.frost.filter { (0..<49).contains($0) }
-        if !board.findAllMatches().isEmpty || board.findPossibleSwap() == nil { resetBoard() }
+        if !board.findAllMatches().isEmpty || board.findPossibleSwap() == nil || bestCluster() == nil { resetBoard() }
     }
 }

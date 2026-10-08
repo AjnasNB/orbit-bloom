@@ -54,23 +54,25 @@ final class EcosystemTests: XCTestCase {
         }
     }
     func testConnectedCircuitModeCanFinishTheWholeCampaign() {
-        for level in Level.campaign {
-            let game = GameEngine(level:level,seed:UInt64(level.id*101))
+        for attempt in 0..<5 {
             var eco = Ecosystem()
-            var charge = false
-            var turns = 0
-            while !game.won && !game.lost {
-                if charge { _ = game.burst(at:game.frost.first ?? 24); charge = false }
-                if let frozen = game.frost.first, let tool = GardenTool.allCases.first(where:{eco.tools[$0,default:0]>0}) {
-                    eco.tools[tool,default:0] -= 1; _ = game.activate(tool,at:frozen)
+            for level in Level.campaign {
+                let game = GameEngine(level:level,seed:UInt64(level.id*101+attempt))
+                var charge = false
+                var turns = 0
+                while !game.won && !game.lost {
+                    if charge { _ = game.burst(at:game.frost.min() ?? 24); charge = false }
+                    if let frozen = game.frost.min(), let tool = GardenTool.allCases.first(where:{eco.tools[$0,default:0]>0}) {
+                        eco.tools[tool,default:0] -= 1; _ = game.activate(tool,at:frozen)
+                    }
+                    guard !game.won, let key = game.bestCluster() else { break }
+                    let size = game.cluster(at:key).count
+                    let turn = game.harvestCluster(at:key); XCTAssertTrue(turn.accepted); turns += 1
+                    charge = turn.earnedCharge
+                    if size >= 4 { let tool:GardenTool = size >= 10 ? .rainbow : size >= 8 ? .mega : size >= 6 ? .tnt : .bomb; eco.tools[tool,default:0] += 1 }
                 }
-                guard !game.won, let key = game.bestCluster() else { break }
-                let size = game.cluster(at:key).count
-                let turn = game.harvestCluster(at:key); XCTAssertTrue(turn.accepted); turns += 1
-                charge = turn.earnedCharge
-                if size >= 4 { let tool:GardenTool = size >= 10 ? .rainbow : size >= 8 ? .mega : size >= 6 ? .tnt : .bomb; eco.tools[tool,default:0] += 1 }
+                XCTAssertTrue(game.won,"Circuit \(level.id), seed set \(attempt) failed after \(turns) turns; frost \(game.frost.count)")
             }
-            XCTAssertTrue(game.won,"Circuit \(level.id) failed after \(turns) turns")
         }
     }
     func testRaceCollisionsPickupsPauseAndFinishAreDeterministic() {

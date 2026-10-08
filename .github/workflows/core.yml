@@ -1,0 +1,12 @@
+name: Core game rules
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  core:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test deterministic game rules and economy
+        run: swift test

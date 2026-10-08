@@ -87,7 +87,7 @@ import StoreKitTest
     }
     func testPauseResumeToolAndShopFlows() {
         app.buttons["playLevel"].tap(); let before = app.staticTexts["movesCounter"].label
-        app.buttons["toolmega"].tap(); app.buttons["tile24"].tap(); settle(); attach("v2-11-mega-blast")
+        app.buttons["toolbomb"].tap(); app.buttons["tile0"].tap(); settle(); attach("v2-11-bomb-blast")
         XCTAssertEqual(app.staticTexts["movesCounter"].label,before)
         app.buttons["pauseGame"].tap(); XCTAssertTrue(app.buttons["resumeGame"].exists); app.buttons["resumeGame"].tap()
         app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch()
