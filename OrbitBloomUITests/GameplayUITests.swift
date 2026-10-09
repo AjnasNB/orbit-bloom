@@ -138,7 +138,9 @@ import StoreKitTest
         }
         XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
         app.buttons["returnWorld"].tap(); app.buttons["openTasks"].tap()
-        let reward = app.buttons["claim_harvest1"]; XCTAssertTrue(reward.waitForExistence(timeout:5)); reward.tap(); XCTAssertFalse(reward.isEnabled)
+        let reward = app.buttons["claim_harvest1"]; XCTAssertTrue(reward.waitForExistence(timeout:5))
+        attach("product-field-tasks")
+        reward.tap(); XCTAssertFalse(reward.isEnabled)
         attach("v3-15-field-tasks"); app.navigationBars.buttons["Done"].tap(); app.buttons["openFarm"].tap()
         app.buttons["openToolShed"].tap()
         app.buttons["craftbomb"].tap(); attach("v2-05-tool-shed")
@@ -239,7 +241,8 @@ import StoreKitTest
         try XCTSkipIf(app.frame.width < 700, "Run this release layout check on an iPad")
         continueAfterFailure = false
         func capture(_ name: String) {
-            let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+            // Materialize the frame before later controls change the live scene.
+            let shot = XCTAttachment(data: XCUIScreen.main.screenshot().pngRepresentation, uniformTypeIdentifier: "public.png")
             shot.name = name; shot.lifetime = .keepAlways; add(shot)
         }
         func fits(_ element: XCUIElement) {
@@ -257,6 +260,18 @@ import StoreKitTest
         fits(app.buttons["craftrainbow"]); capture("ipad-03-crafting")
         app.buttons["returnWorld"].tap(); app.buttons["openRace"].tap()
         fits(app.buttons["startRace"]); capture("ipad-04-rally-lobby")
+        app.buttons["startRace"].tap()
+        let road = app.descendants(matching: .any)["raceTrack"]
+        fits(road); road.swipeLeft()
+        XCTAssertEqual(road.value as? String, "Lane 1 of 3", "The iPad road must respond to actual swipe steering")
+        XCTAssertEqual(app.buttons["pauseRace"].label, "Pause race")
+        capture("ipad-10-rally-road")
+        fits(app.buttons["pauseRace"]); app.buttons["pauseRace"].tap()
+        app.buttons["leaveRace"].tap()
+        app.buttons["openTasks"].tap()
+        fits(app.buttons["journalPatterns"]); capture("ipad-11-field-tasks")
+        app.navigationBars.buttons["Done"].tap()
+        app.buttons["openRace"].tap()
         app.buttons["returnWorld"].tap(); app.buttons["openShop"].tap()
         app.buttons["explorePacks"].tap()
         fits(app.buttons["buy_com.orbitbloom.coins400"])

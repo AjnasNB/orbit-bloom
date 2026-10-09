@@ -33,7 +33,7 @@
   },
   "purchaseReview": "purchase-review/metadata.json",
   "iPhoneScreenshots": "app-store-screenshots.json",
-  "iPadScreenshots": "build6/ipad/verification.json",
+  "iPadScreenshots": "product-page/manifest.json",
   "archive": {
     "path": "build/OrbitBloom-Build7-AppStore.xcarchive",
     "compilation": "succeeded",
@@ -82,7 +82,7 @@
     "appVersionIncluded": true,
     "submitted": true,
     "submittedItemCount": 7,
-    "submissionID": "9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad"
+    "submissionID": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9"
   },
   "appPricing": {
     "download": "free",
@@ -105,13 +105,13 @@
   "browser": "Chrome; Mac unlocked",
   "gameCenterEnabled": true,
   "reviewSubmission": {
-    "id": "9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad",
-    "submittedAt": "2026-10-09T22:26:00+05:30",
+    "id": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+    "submittedAt": "2026-10-09T22:55:00+05:30",
     "submittedBy": "Ajnas N B",
     "itemCount": 7,
     "status": "Waiting for Review",
-    "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad",
-    "proof": "build7/apple-review-submission.jpg",
+    "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+    "proof": "product-page/proof/apple-review-submission.jpg",
     "build": 7
   },
   "nativeQAVerification": "build7/verification.json",
@@ -126,8 +126,31 @@
       "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/d585e8f9-f825-4020-9661-6421068d7038",
       "proof": "build6/apple-review-submission.jpg",
       "build": 6
+    },
+    {
+      "id": "9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad",
+      "submittedAt": "2026-10-09T22:26:00+05:30",
+      "submittedBy": "Ajnas N B",
+      "itemCount": 7,
+      "status": "Cancelled by publisher to update product-page artwork and screenshot galleries; same tested build 7 resubmitted",
+      "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad",
+      "proof": "build7/apple-review-submission.jpg",
+      "build": 7
     }
   ],
   "securityReview": "../SECURITY_REVIEW.md",
-  "playerCloudService": "Apple GameKit private iCloud saved games; no additional Cloudflare player database"
+  "playerCloudService": "Apple GameKit private iCloud saved games; no additional Cloudflare player database",
+  "productPage": {
+    "manifest": "product-page/manifest.json",
+    "distinctNativeScreenshots": 20,
+    "iphoneCount": 10,
+    "ipadCount": 10,
+    "headerAssetID": "08c00019-689f-87a9-803c-67de0c1e9279",
+    "searchAssetID": "f7800019-689f-87a9-802c-11f4d5819599",
+    "creativeStatus": "Waiting for Review with the app version",
+    "previewProof": [
+      "product-page/proof/header-preview.jpg",
+      "product-page/proof/search-preview.jpg"
+    ]
+  }
 }

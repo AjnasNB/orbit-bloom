@@ -1,0 +1,254 @@
+{
+  "appID": "6820591529",
+  "appBuild": 7,
+  "captureEdits": "None; original native PNGs copied byte-for-byte with original orientation metadata",
+  "iphone": [
+    {
+      "file": "product-page/iphone/01-swipe-and-blast.png",
+      "source": "build6/v3-16-board-power.png",
+      "sourceBuild": 6,
+      "sha256": "8ad549eda470760e17aa49d64a6ddbd340041b4e6cd412bf32ebfb7105d79978"
+    },
+    {
+      "file": "product-page/iphone/02-grow-your-farm.png",
+      "source": "build6/v4-03-farm-terraces.png",
+      "sourceBuild": 6,
+      "sha256": "c0f2d455eca76dc1066bb51f21f9f70dac6293207987941e1d4555ad5717ad37"
+    },
+    {
+      "file": "product-page/iphone/03-race-your-harvest.png",
+      "source": "build6/v2-07-delivery-race.png",
+      "sourceBuild": 6,
+      "sha256": "cfd16b01a02a25ff1a634fb586037388fe5dde28616ba9f73f39d83aaf685a75"
+    },
+    {
+      "file": "product-page/iphone/04-explore-your-island.png",
+      "source": "build6/v4-01-living-island.png",
+      "sourceBuild": 6,
+      "sha256": "b66eef605ef603deb0beeef681b4b66011bcdcb590294d8175f40c1e3de887d9"
+    },
+    {
+      "file": "product-page/iphone/05-craft-garden-powers.png",
+      "source": "build6/v4-04-crafting-shed.png",
+      "sourceBuild": 6,
+      "sha256": "f89b82730608c01ee71f185413e3b6ac7462ba0a26a112814e13efed484477d2"
+    },
+    {
+      "file": "product-page/iphone/06-learn-power-patterns.png",
+      "source": "build6/v5-19-power-patterns.png",
+      "sourceBuild": 6,
+      "sha256": "ddf6e6736048b1479c3a6cf8a09ad9e2a5d0dc4e3db34feb324c9229aecefa41"
+    },
+    {
+      "file": "product-page/iphone/07-earn-field-rewards.png",
+      "source": "product-page/captures/iphone-field-tasks.png",
+      "sourceBuild": 7,
+      "sha256": "b8ba84d505b444f0009994bbd48a0807eb3c67dd2632f8bc97c57d57c854edac"
+    },
+    {
+      "file": "product-page/iphone/08-restore-your-world.png",
+      "source": "build6/v2-09-complete-world.png",
+      "sourceBuild": 6,
+      "sha256": "f1880dc5d8c03fefdf6a043c7e093aeae5ed905657a2f03f015a20886d6da3a0"
+    },
+    {
+      "file": "product-page/iphone/09-lives-and-supplies.png",
+      "source": "build6/v2-12-lives-and-shop.png",
+      "sourceBuild": 6,
+      "sha256": "a96a36d0284ba96041872c9473757f90274e22a869d261e5d75f935d770b3ca9"
+    },
+    {
+      "file": "product-page/iphone/10-player-and-saved-garden.png",
+      "source": "build7/iphone/v7-player-and-saved-garden.png",
+      "sourceBuild": 7,
+      "sha256": "6b44a22e2b392ed8e01d2bbd10e003c49172883a5775a20b22fbb52b3b27f8ac"
+    }
+  ],
+  "ipad": [
+    {
+      "file": "product-page/ipad/01-swipe-and-blast.png",
+      "source": "build7/ipad/ipad-06-puzzle-portrait.png",
+      "sourceBuild": 7,
+      "sha256": "bb2e0942b6ab20fa263a86b87242be982df06f48163e8955f094411c64cb37cc"
+    },
+    {
+      "file": "product-page/ipad/02-grow-your-farm.png",
+      "source": "build7/ipad/ipad-02-farm.png",
+      "sourceBuild": 7,
+      "sha256": "dd22ed3397e498fd282302bb30df9d12946065a8a1918f23bc3cfb3a76b9ec04"
+    },
+    {
+      "file": "product-page/ipad/03-race-your-harvest.png",
+      "source": "product-page/captures/ipad-10-rally-road.png",
+      "sourceBuild": 7,
+      "sha256": "a3ffb122446cd669929da96453c59eddaf80a64260b5d566f606403685749490"
+    },
+    {
+      "file": "product-page/ipad/04-explore-your-island.png",
+      "source": "build7/ipad/ipad-01-world.png",
+      "sourceBuild": 7,
+      "sha256": "fe8a9e47b255a2e5c908f58b74a797b864313939d88c6e8542dc86b10fc100ed"
+    },
+    {
+      "file": "product-page/ipad/05-craft-garden-powers.png",
+      "source": "build7/ipad/ipad-03-crafting.png",
+      "sourceBuild": 7,
+      "sha256": "2e53d8964a25e5c4ee1d7937a31e85254c0f0fd4076d26b056e0fd195682aaaa"
+    },
+    {
+      "file": "product-page/ipad/06-earn-field-rewards.png",
+      "source": "product-page/captures/ipad-11-field-tasks.png",
+      "sourceBuild": 7,
+      "sha256": "9da6aaa251fa0d457b34f620d5695cb49c07856cdb6a222a6dbb480a06471cf0"
+    },
+    {
+      "file": "product-page/ipad/07-optional-supplies.png",
+      "source": "build7/ipad/ipad-05-supplies.png",
+      "sourceBuild": 7,
+      "sha256": "c8ea1c4a8db00e76a099e154133d439db95d3803845de5c2392569d42e194beb"
+    },
+    {
+      "file": "product-page/ipad/08-player-and-saved-garden.png",
+      "source": "build7/ipad/ipad-09-player-and-saved-garden.png",
+      "sourceBuild": 7,
+      "sha256": "5f0534eaefd9dbe6c31a3fce7dce8caed6ff8f4ed0488317b1bcc3f7930b361a"
+    },
+    {
+      "file": "product-page/ipad/09-puzzle-landscape.png",
+      "source": "build7/ipad/ipad-07-puzzle-landscape.png",
+      "sourceBuild": 7,
+      "sha256": "b302b899c1d79f0dc13f4275abef3a3c139803332ba05f669662e51e9832e54e"
+    },
+    {
+      "file": "product-page/ipad/10-world-landscape.png",
+      "source": "build7/ipad/ipad-08-world-landscape.png",
+      "sourceBuild": 7,
+      "sha256": "1d524c3711f134f6721924fce4789ce789c0940880e7ef59373d53f2960ed523"
+    }
+  ],
+  "creativeAssets": [
+    {
+      "placement": "header",
+      "file": "product-page/creative/orbit-bloom-header.png",
+      "pixels": [
+        3840,
+        1646
+      ],
+      "sha256": "629c26569877c0632c597ede854f6947b7c5ac5254a10ed92e1fbfe5629cf3c4",
+      "source": "Built-in imagegen; technical export to Apple dimensions; brand illustration, not a screenshot",
+      "alpha": false,
+      "appleAssetID": "08c00019-689f-87a9-803c-67de0c1e9279",
+      "appleStatus": "Waiting for Review",
+      "availableStoreOS": "iOS/iPadOS 27 and later"
+    },
+    {
+      "placement": "search",
+      "file": "product-page/creative/orbit-bloom-search.png",
+      "pixels": [
+        1920,
+        1280
+      ],
+      "sha256": "becc309787abf681ef1132937b4ff12c171c562a0426acbeaba392785b3bd2da",
+      "source": "Built-in imagegen; technical export to Apple dimensions; brand illustration, not a screenshot",
+      "alpha": false,
+      "appleAssetID": "f7800019-689f-87a9-802c-11f4d5819599",
+      "appleStatus": "Waiting for Review",
+      "availableStoreOS": "iOS/iPadOS 27 and later"
+    }
+  ],
+  "testResults": {
+    "iphone": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+            "deviceName": "Orbit Bloom Store QA",
+            "modelName": "iPhone 17 Pro Max",
+            "osBuildNumber": "23B80",
+            "osVersion": "26.1",
+            "platform": "iOS Simulator"
+          },
+          "expectedFailures": 0,
+          "failedTests": 0,
+          "passedTests": 1,
+          "skippedTests": 0,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "OrbitBloom · Built with macOS 26.5",
+      "expectedFailures": 0,
+      "failedTests": 0,
+      "finishTime": 1791565949.363,
+      "passedTests": 1,
+      "result": "Passed",
+      "skippedTests": 0,
+      "startTime": 1791565893.273,
+      "statistics": [],
+      "testFailures": [],
+      "title": "Test - OrbitBloom",
+      "topInsights": [],
+      "totalTestCount": 1
+    },
+    "ipad": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+            "deviceName": "Orbit Bloom App Store iPad QA",
+            "modelName": "iPad Pro 13-inch (M5)",
+            "osBuildNumber": "23B80",
+            "osVersion": "26.1",
+            "platform": "iOS Simulator"
+          },
+          "expectedFailures": 0,
+          "failedTests": 0,
+          "passedTests": 1,
+          "skippedTests": 0,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "OrbitBloom · Built with macOS 26.5",
+      "expectedFailures": 0,
+      "failedTests": 0,
+      "finishTime": 1791566187.956,
+      "passedTests": 1,
+      "result": "Passed",
+      "skippedTests": 0,
+      "startTime": 1791566135.457,
+      "statistics": [],
+      "testFailures": [],
+      "title": "Test - OrbitBloom",
+      "topInsights": [],
+      "totalTestCount": 1
+    }
+  },
+  "newCaptureAttachments": {
+    "iphone": "evidence/product-page-iphone-attachments/manifest.json",
+    "ipad": "evidence/product-page-ipad-frozen-attachments/manifest.json"
+  },
+  "verifiedOn": "2026-10-09",
+  "appleReview": {
+    "id": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+    "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+    "submittedAt": "2026-10-09T22:55:00+05:30",
+    "status": "Waiting for Review",
+    "itemCount": 7,
+    "proof": "product-page/proof/apple-review-submission.jpg",
+    "creativeAssetsIncludedWithAppVersion": true
+  },
+  "galleryStatus": "Twenty native screenshots processed and persisted in Apple; ten per device family, original upload order verified",
+  "screenshotsNote": "iPad race road is the real paused race view; iPhone race image shows active gameplay. Source build labels are retained.",
+  "metadata": {
+    "promotionalTextCharacters": 159,
+    "keywordsCharacters": 99,
+    "savedAndReloadedInChrome": true
+  }
+}
