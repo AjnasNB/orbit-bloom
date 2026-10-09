@@ -1,136 +1,145 @@
 {
-  "verifiedOn": "2026-10-08",
+  "verifiedOn": "2026-10-09",
   "version": "1.0",
-  "build": 3,
-  "scope": "Passing cases across multiple targeted runs; not one wholly passing combined UI run. See TEST_REPORT.md for failed diagnostics and release limits.",
-  "passingUniqueCount": 40,
+  "build": 4,
+  "scope": "Passing cases across the full run and focused native/campaign reruns. The initial combined run had three test failures; see TEST_REPORT.md for diagnostics and limits.",
+  "passingUniqueCount": 42,
   "passingTests": {
     "OrbitBloomCoreTests.EcosystemTests/testAllToolShapesAndRainbowTargetTheCorrectCells": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testConnectedCircuitModeCanFinishTheWholeCampaign": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testCraftingAndTransactionIdempotency": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testFarmRequiresResourcesAndCanHarvestExactlyOnceAfterOfflineGrowth": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testLivesRegenerateAtThirtyMinuteBoundaryAndPersistOffline": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testPurchasedReserveDoesNotExpireOrGetClampedAndClockRollbackGrantsNothing": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testRaceCollisionsPickupsPauseAndFinishAreDeterministic": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testBoardsStartStableAndAlwaysOfferAValidMove": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testBurstClearsCrossAndFrostWithoutSpendingMove": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testCampaignCanBeCompletedWithNormalMovesAndEarnedBursts": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testInvalidSwapDoesNotSpendMoveOrChangeBoard": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testLossRetryAndFreeShuffle": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testSeedReproducesOpeningAndRefill": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testSessionRoundTripRetainsBoardGoalsMovesAndFrost": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testSwapsCascadeCollectAndLeavePlayableBoard": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testBombTriggersNearbyTNTAndConsumesBothExactlyOnce": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testFixedFormationRules": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testLateExpeditionAndAssistBalancesSurviveSerialization": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testSwipeMakesVisibleBoardPowerAndSaveKeepsIt": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testTenFreeHintsThenCoinsAndTaskRewardsCannotBeClaimedTwice": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testCoinPurchaseCannotOverdrawBalance": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testFirstWinAwardsOneStarAndReplaysNeverDuplicateIt": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testProgressRoundTrip": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testRestorationRequiresStarsAndOrderedProjects": [
-      "evidence/v3-core-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomTests.PurchaseTests/testAppleConsumableCreditsCoinsAndDoesNotDoubleCredit": [
-      "evidence/v3-apple-purchases.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.PurchaseTests/testAppleLivesAndStarterCreditsPersistWithoutDuplicateRestore": [
-      "evidence/v3-apple-purchases.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.PurchaseTests/testCancelledPurchaseDoesNotUnlockAnything": [
-      "evidence/v3-apple-purchases.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.PurchaseTests/testPendingAskToBuyDoesNotUnlockBeforeApproval": [
-      "evidence/v3-apple-purchases.log"
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.PurchaseTests/testPurchaseAndRestoreNonConsumable": [
-      "evidence/v3-apple-purchases.log"
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.PurchaseTests/testRefundRevokesEntitlement": [
-      "evidence/v3-apple-purchases.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.SessionTests/testAudioAndSpritesAreActuallyBundled": [
-      "evidence/v3-release-materials.log",
-      "evidence/v3-swipe-fixed.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.SessionTests/testHintBalancePersistsAndOlderWalletReceivesFreeAssistance": [
-      "evidence/v3-release-materials.log",
-      "evidence/v3-swipe-fixed.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.SessionTests/testInProgressPuzzleResumesAfterModelRecreation": [
-      "evidence/v3-release-materials.log",
-      "evidence/v3-swipe-fixed.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
+    ],
+    "OrbitBloomTests.SessionTests/testPuzzleWaterPersistsBeforeAnimationAndIsNotCreditedTwice": [
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.SessionTests/testWalletTransactionAndLifeAreDurableAndIdempotent": [
-      "evidence/v3-release-materials.log",
-      "evidence/v3-swipe-fixed.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomTests.SessionTests/testWonSessionRecoversRewardAfterInterruptedAnimation": [
-      "evidence/v3-release-materials.log",
-      "evidence/v3-swipe-fixed.log"
+      "evidence/daily-20261009-verified.log",
+      "evidence/daily-20261009-purchases-verified.log"
     ],
     "OrbitBloomUITests.GameplayUITests/testBoardPowerFormationAndAnimatedShuffle": [
-      "evidence/v3-release-materials.log",
-      "evidence/v3-board-power.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomUITests.GameplayUITests/testCompleteConnectedCampaignAndRestoreWorld": [
-      "evidence/v3-swipe-fixed.log"
+      "evidence/daily-20261009-campaign-verified.log"
     ],
     "OrbitBloomUITests.GameplayUITests/testDeliveryRaceWithRealSteeringAndReward": [
-      "evidence/v3-race-verified.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomUITests.GameplayUITests/testFarmHarvestCraftAndSave": [
-      "evidence/v3-release-materials.log",
-      "evidence/v3-swipe-fixed.log"
+      "evidence/daily-20261009-verified.log"
     ],
     "OrbitBloomUITests.GameplayUITests/testPauseResumeToolAndShopFlows": [
-      "evidence/v3-swipe-fixed.log"
+      "evidence/daily-20261009-verified.log"
+    ],
+    "OrbitBloomUITests.GameplayUITests/testPuzzleWaterReachesFarmAndCanPlantAfterRelaunch": [
+      "evidence/daily-20261009-verified.log"
     ]
   },
   "screenshots": [
@@ -140,7 +149,8 @@
         1206,
         2622
       ],
-      "sha256": "42f988ac1c8632c91667dbb7615efe7608380b41b42f4be700305e8c6c1a3820"
+      "sha256": "42f988ac1c8632c91667dbb7615efe7608380b41b42f4be700305e8c6c1a3820",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/02-botanical-circuit.png",
@@ -148,7 +158,8 @@
         1206,
         2622
       ],
-      "sha256": "9783eb97b962f405d257c1d23c929419a32e3aec636d0cf6ed1e174b93642f1d"
+      "sha256": "9783eb97b962f405d257c1d23c929419a32e3aec636d0cf6ed1e174b93642f1d",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/03-victory.png",
@@ -156,7 +167,8 @@
         1206,
         2622
       ],
-      "sha256": "283e0d5b2ef29444de17b478b5b0c964fffecb2ae14274790a1dce0c3d974da2"
+      "sha256": "283e0d5b2ef29444de17b478b5b0c964fffecb2ae14274790a1dce0c3d974da2",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/04-farm.png",
@@ -164,7 +176,8 @@
         1206,
         2622
       ],
-      "sha256": "291812cde3b93ec181c007904266df5211600dc25d2d5e7cc98e307b3f266ed0"
+      "sha256": "291812cde3b93ec181c007904266df5211600dc25d2d5e7cc98e307b3f266ed0",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/05-tool-shed.png",
@@ -172,7 +185,8 @@
         1206,
         2622
       ],
-      "sha256": "9f1febc86aa44a872738a1dde79059838279ad1bf0854ac9f5c586228fada9ae"
+      "sha256": "9f1febc86aa44a872738a1dde79059838279ad1bf0854ac9f5c586228fada9ae",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/06-race-lobby.png",
@@ -180,7 +194,8 @@
         1206,
         2622
       ],
-      "sha256": "1eccce3a2e6d0e5f2823cf3e3881361af467ba47f52ed8b78edfaf9c828f458f"
+      "sha256": "1eccce3a2e6d0e5f2823cf3e3881361af467ba47f52ed8b78edfaf9c828f458f",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/07-delivery-race.png",
@@ -188,7 +203,8 @@
         1206,
         2622
       ],
-      "sha256": "cd22020b6ba1195961455682a8ef347e228f129aba99613562e4ccb42e2cc73e"
+      "sha256": "cd22020b6ba1195961455682a8ef347e228f129aba99613562e4ccb42e2cc73e",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/08-chapter-finale.png",
@@ -196,7 +212,8 @@
         1206,
         2622
       ],
-      "sha256": "73952f3d4f870e8cb2410129bdc074b1893a3716312685aa4eb396e77e3992ba"
+      "sha256": "73952f3d4f870e8cb2410129bdc074b1893a3716312685aa4eb396e77e3992ba",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/09-complete-world.png",
@@ -204,7 +221,8 @@
         1206,
         2622
       ],
-      "sha256": "38d2c3a5353f8cf4b28bc8b6d2dd76707a332e344760d2545ecd26e3e57d2eb8"
+      "sha256": "38d2c3a5353f8cf4b28bc8b6d2dd76707a332e344760d2545ecd26e3e57d2eb8",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/10-delivery-complete.png",
@@ -212,7 +230,8 @@
         1206,
         2622
       ],
-      "sha256": "0fa5c3c9addc61dca5f8543f5e52ee654b8fb9ca7314e928ad6ba9ed11f0094b"
+      "sha256": "0fa5c3c9addc61dca5f8543f5e52ee654b8fb9ca7314e928ad6ba9ed11f0094b",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/11-bomb-blast.png",
@@ -220,7 +239,8 @@
         1206,
         2622
       ],
-      "sha256": "0ac2dadba6d83c4952ae0cd66d212bd4eb9c1730ddb79fcd73dd76b93e8a74b1"
+      "sha256": "0ac2dadba6d83c4952ae0cd66d212bd4eb9c1730ddb79fcd73dd76b93e8a74b1",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/12-lives-and-shop.png",
@@ -228,7 +248,8 @@
         1206,
         2622
       ],
-      "sha256": "77c2af55a7891bcec11574db445065597234c7eab9ff61da7c30a24265bbe9ab"
+      "sha256": "77c2af55a7891bcec11574db445065597234c7eab9ff61da7c30a24265bbe9ab",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/13-coin-packs.png",
@@ -236,7 +257,8 @@
         1206,
         2622
       ],
-      "sha256": "0b6bee2edcd2c2e23f2b1187e8e6ac3c20097270ed8e17a88d1c666d2fb17663"
+      "sha256": "0b6bee2edcd2c2e23f2b1187e8e6ac3c20097270ed8e17a88d1c666d2fb17663",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/14-starter-bundle.png",
@@ -244,7 +266,8 @@
         1206,
         2622
       ],
-      "sha256": "9c791aedbe6c7a71134d4445af5cedaad3b295d5990cdc6233ee72c08d56c228"
+      "sha256": "9c791aedbe6c7a71134d4445af5cedaad3b295d5990cdc6233ee72c08d56c228",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/15-field-tasks.png",
@@ -252,7 +275,8 @@
         1206,
         2622
       ],
-      "sha256": "61fb18992d43e2fbe3ab7b147ba00fbe71db05904c305ce06035642b0ba6e42c"
+      "sha256": "61fb18992d43e2fbe3ab7b147ba00fbe71db05904c305ce06035642b0ba6e42c",
+      "sourceBuild": 3
     },
     {
       "file": "screenshots/16-board-power.png",
@@ -260,7 +284,17 @@
         1206,
         2622
       ],
-      "sha256": "d83c014488875276ffced66036f048ed1e0853a797a49e7a42e9f68e41c70e15"
+      "sha256": "d83c014488875276ffced66036f048ed1e0853a797a49e7a42e9f68e41c70e15",
+      "sourceBuild": 3
+    },
+    {
+      "file": "screenshots/17-water-to-farm.png",
+      "sourceBuild": 4,
+      "pixels": [
+        1320,
+        2868
+      ],
+      "sha256": "023b5f00da733c37638bd6e5330bb29150e5ad3a58d7fa34eb304e95dd16c655"
     }
   ]
 }

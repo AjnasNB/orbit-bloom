@@ -44,3 +44,7 @@ Apple supports consumable products for currency and custom territorial price sch
 ## Version 3 interaction update
 
 On-board powers follow piece identity through swaps and gravity. Formations create powers; blasts recursively trigger adjacent powers once. Shuffles animate and preserve power counts. The first ten hints and three shuffles are free; additional assistance uses earned coins or permanent task rewards. Startup shows a brief loading screen and opens Home automatically. Garden regions page in groups of twenty stages. These are implementation features; final native test status is recorded separately in TEST_REPORT.md.
+
+## Build 4 save correction — 9 October 2026
+
+Puzzle water is credited in the same wallet save as the resolved board, before its animation starts. Interrupting the animation therefore keeps the farm supply; completing or replaying the animation does not credit it twice. Farm resource meters now expose their names and balances together to accessibility. The native interruption regression and the real puzzle → reopen → plant flow are recorded in TEST_REPORT.md.

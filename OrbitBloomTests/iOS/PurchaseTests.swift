@@ -18,6 +18,14 @@ import StoreKitTest
         }
         throw XCTSkip("Installed StoreKit test service cannot load the local product (SKInternalErrorDomain 3 on iOS 26.5). Rerun on a working runtime or signed sandbox device.")
     }
+    func waitForAurora(_ store:PurchaseStore,owned:Bool) async throws {
+        for _ in 0..<50 {
+            await store.refreshEntitlements()
+            if store.ownsAurora == owned { return }
+            try await Task.sleep(for:.milliseconds(100))
+        }
+        XCTAssertEqual(store.ownsAurora,owned,"Apple entitlement updates must arrive within five seconds")
+    }
     func testAppleConsumableCreditsCoinsAndDoesNotDoubleCredit() async throws {
         let store = try await loadedStore()
         let defaults = UserDefaults(suiteName:"orbitbloom.purchase.\(UUID().uuidString)")!
@@ -53,6 +61,7 @@ import StoreKitTest
         XCTAssertTrue(store.ownsAurora)
         let relaunchedStore = PurchaseStore()
         await relaunchedStore.load()
+        try await waitForAurora(relaunchedStore,owned:true)
         XCTAssertTrue(relaunchedStore.ownsAurora, "A new app instance must read the Apple entitlement")
         await relaunchedStore.restore()
         XCTAssertTrue(relaunchedStore.ownsAurora)
@@ -72,11 +81,7 @@ import StoreKitTest
         XCTAssertTrue(store.ownsAurora)
         let transaction = try XCTUnwrap(session.allTransactions().first)
         try session.refundTransaction(identifier: transaction.identifier)
-        for _ in 0..<50 {
-            await store.refreshEntitlements()
-            if !store.ownsAurora { break }
-            try await Task.sleep(for:.milliseconds(100))
-        }
+        try await waitForAurora(store,owned:false)
         XCTAssertFalse(store.ownsAurora)
     }
     func testPendingAskToBuyDoesNotUnlockBeforeApproval() async throws {
@@ -86,12 +91,39 @@ import StoreKitTest
         XCTAssertTrue(store.status?.contains("approval") == true)
         let pending = try XCTUnwrap(session.allTransactions().first)
         try session.approveAskToBuyTransaction(identifier: pending.identifier)
-        await store.refreshEntitlements()
+        try await waitForAurora(store,owned:true)
         XCTAssertTrue(store.ownsAurora)
     }
 }
 
 @MainActor final class SessionTests: XCTestCase {
+    func testPuzzleWaterPersistsBeforeAnimationAndIsNotCreditedTwice() async throws {
+        let suite = "orbitbloom.water.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))
+        defer { defaults.removePersistentDomain(forName:suite) }
+        let model = GameModel(defaults:defaults)
+        model.start(Level.campaign[0])
+        let before = model.ecosystem.water
+        let prediction = try XCTUnwrap(GameEngine(snapshot:try XCTUnwrap(model.engine).snapshot))
+        let turn = prediction.activate(.tnt,at:24)
+        let dew = turn.cascades.reduce(0) { $0 + $1.collected[.water,default:0] }
+        XCTAssertGreaterThan(dew,0,"The actual board must collect water for this interruption regression")
+
+        model.selectTool(.tnt); model.tap(24)
+        XCTAssertTrue(model.busy,"Verify the save before the animation finishes")
+        let interrupted = GameModel(defaults:defaults)
+        XCTAssertEqual(interrupted.ecosystem.water,before+dew)
+        XCTAssertEqual(interrupted.cells.map(\.id),try XCTUnwrap(model.engine).cells.map(\.id))
+        XCTAssertEqual(interrupted.ecosystem.tools[.tnt],1)
+
+        for _ in 0..<100 {
+            if !model.busy { break }
+            try await Task.sleep(for:.milliseconds(50))
+        }
+        XCTAssertFalse(model.busy)
+        XCTAssertEqual(model.ecosystem.water,before+dew,"Finishing animation must not grant water again")
+        XCTAssertEqual(GameModel(defaults:defaults).ecosystem.water,before+dew)
+    }
     func testInProgressPuzzleResumesAfterModelRecreation() async throws {
         let suite = "orbitbloom.test.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))

@@ -87,6 +87,27 @@ import StoreKitTest
         app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch(); app.buttons["tabFarm"].tap(); app.swipeUp()
         XCTAssertTrue(app.staticTexts["farmTotals"].waitForExistence(timeout:5)); XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
     }
+    func testPuzzleWaterReachesFarmAndCanPlantAfterRelaunch() throws {
+        app.buttons["tabFarm"].tap()
+        let water = app.descendants(matching:.any)["farmMeterWater"]
+        XCTAssertTrue(water.waitForExistence(timeout:5))
+        XCTAssertEqual(water.label,"Water: 12")
+        app.buttons["tabWorld"].tap(); app.buttons["playLevel"].tap()
+        app.buttons["tooltnt"].tap(); app.buttons["tile24"].tap(); settle()
+        if app.staticTexts["winTitle"].exists { app.buttons["backToGarden"].tap() }
+        else { app.buttons["pauseGame"].tap(); app.buttons["leaveLevel"].tap() }
+        app.buttons["tabFarm"].tap()
+        let amount = try XCTUnwrap(Int(water.label.replacingOccurrences(of:"Water: ",with:"")))
+        XCTAssertGreaterThan(amount,12,"Collected puzzle dew must be available for planting")
+
+        app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch()
+        XCTAssertTrue(app.buttons["tabFarm"].waitForExistence(timeout:15)); app.buttons["tabFarm"].tap()
+        XCTAssertEqual(water.label,"Water: \(amount)")
+        attach("daily-20261009-water-reward")
+        app.buttons["plot0"].tap()
+        XCTAssertEqual(water.label,"Water: \(amount-2)")
+        XCTAssertTrue(app.buttons["plot0"].label.contains("growing"))
+    }
     func testBoardPowerFormationAndAnimatedShuffle() {
         attach("v3-01-world")
         app.buttons["playLevel"].tap(); attach("v3-02-botanical-circuit")

@@ -46,7 +46,7 @@ struct FarmView: View {
         }
     }
     func meter(_ title:String,_ value:Int,_ symbol:String) -> some View {
-        VStack(spacing:4) { Label("\(value)",systemImage:symbol).font(.headline).foregroundStyle(Palette.gold); Text(title).font(.system(size:10,design:.rounded)).foregroundStyle(Palette.mint) }.frame(maxWidth:.infinity).padding(.vertical,10).background(Palette.deep,in:RoundedRectangle(cornerRadius:14))
+        VStack(spacing:4) { Label("\(value)",systemImage:symbol).font(.headline).foregroundStyle(Palette.gold); Text(title).font(.system(size:10,design:.rounded)).foregroundStyle(Palette.mint) }.frame(maxWidth:.infinity).padding(.vertical,10).background(Palette.deep,in:RoundedRectangle(cornerRadius:14)).accessibilityElement(children:.ignore).accessibilityLabel("\(title): \(value)").accessibilityIdentifier("farmMeter\(title)")
     }
     func plotButton(_ plot:FarmPlot,now:Date) -> some View {
         let ready = plot.ready(at:now)

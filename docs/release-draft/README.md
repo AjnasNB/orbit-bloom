@@ -1,12 +1,12 @@
 # Orbit Bloom release screenshot draft
 
-Version 1.0, build 3. Actual native development screenshots, 1206 × 2622; no fabricated gameplay or resized platform uploads. Sixteen views cover the first game, including farming, racing, tasks, powers, shop and the completed opening world.
+Version 1.0, workspace build 4. Sixteen build 3 captures are native 1206 × 2622. The new build 4 water-to-farm capture is native 1320 × 2868. All seventeen show actual simulator gameplay; none were resized for platform uploads.
 
-App Store Connect currently accepts this native size for its iPhone Dynamic Island medium display class. **Uploads are not complete:** Chrome work stopped when the Mac locked. Other required device classes must be verified before submission. Metadata copy is in [metadata.json](metadata.json); signing and hosting status are in [App Store preparation](../APP_STORE_PREPARATION.md).
+App Store Connect currently accepts this native size for its iPhone Dynamic Island medium display class. **Ten screenshots uploaded on 9 October:** all ten remained after reload and thumbnails rendered in Chrome. Other required device classes must be verified before submission. Metadata copy is in [metadata.json](metadata.json); signing and hosting status are in [App Store preparation](../APP_STORE_PREPARATION.md).
 
 The selected maximum set of ten is listed in [app-store-screenshots.json](app-store-screenshots.json). The full gallery below remains useful for review and testing.
 
-[Verification manifest](verification.json) records the 40 passing unique cases across targeted runs and the dimensions and SHA-256 of all sixteen screenshots. The full execution logs and result bundles remain local under evidence/.
+[Verification manifest](verification.json) records the 42 passing unique cases across targeted runs and the dimensions and SHA-256 of all seventeen screenshots. The full execution logs and result bundles remain local under evidence/.
 
 ### World
 
@@ -71,3 +71,9 @@ The selected maximum set of ten is listed in [app-store-screenshots.json](app-st
 ### Board power
 
 <img src="screenshots/16-board-power.png" width="280" alt="Orbit Bloom Board power">
+
+### Puzzle water survives reopening
+
+Build 4: four collected dewdrops increase farm water from 12 to 16. After reopening, planting a rose spends two water.
+
+<img src="screenshots/17-water-to-farm.png" width="280" alt="Collected puzzle water retained in Farm after reopening">

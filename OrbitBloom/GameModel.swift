@@ -123,7 +123,8 @@ import Match3Kit
         busy = true; hinted = []; hintText = ""; selected = nil
         let currentRun = runID
         if turn.earnedCharge && allowCharge { charged = true }
-        // Persist the resolved board before animation, so an interruption cannot lose a turn.
+        // Save farm water with the resolved board. Animations must not own rewards.
+        ecosystem.water += turn.cascades.reduce(0) { $0 + $1.collected[.water,default:0] }
         save()
         Task {
             if let swapped = turn.swappedCells {
@@ -143,7 +144,6 @@ import Match3Kit
             guard runID == currentRun else { return }
             sync(); busy = false
             if turn.earnedCharge { message = "Starlight burst ready. Tap it to clear a cross!" }
-            ecosystem.water += turn.cascades.reduce(0) { $0 + $1.collected[.water,default:0] }
             if let engine, engine.won {
                 let before = progress.coins
                 firstWin = progress.finish(level: engine.level.id, score: engine.score)

@@ -76,7 +76,7 @@ struct SettingsView: View {
                 Section("Privacy & credits") {
                     Text("No accounts, ads, tracking, or analytics. Game progress stays on your device. Purchases are processed by Apple.").font(.subheadline)
                     Button("Open-source licenses & artwork") { showCredits = true }.accessibilityIdentifier("creditsButton")
-                    Text("Orbit Bloom 1.0 · build 3").font(.caption).foregroundStyle(.secondary)
+                    Text("Orbit Bloom 1.0 · build 4").font(.caption).foregroundStyle(.secondary)
                 }
                 Section {
                     Button("Reset local game progress", role: .destructive) { resetConfirmation = true }

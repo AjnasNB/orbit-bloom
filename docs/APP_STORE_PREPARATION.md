@@ -1,8 +1,10 @@
-# Orbit Bloom App Store preparation — 8 October 2026
+# Orbit Bloom App Store preparation — 9 October 2026
 
 ## Actual Apple records
 
-App: **Orbit Bloom: Garden Arcade**, Apple ID **6820591529**, bundle **com.orbitbloom.game**, SKU **orbit-bloom-ios-001**, publisher **Ajnas N B**, team **4V29K5Q8S9**. Version 1.0 is **Prepare for Submission** with manual release selected. Workspace build number is 3.
+App: **Orbit Bloom: Garden Arcade**, Apple ID **6820591529**, bundle **com.orbitbloom.game**, SKU **orbit-bloom-ios-001**, publisher **Ajnas N B**, team **4V29K5Q8S9**. Version 1.0 is **Prepare for Submission** with manual release selected. Workspace build number is 4.
+
+App Review contact information supplied by the owner was saved on 8 October and verified after reload. The missing-contact errors are cleared. Private review contact details remain in App Store Connect rather than the public repository.
 
 The app record and the six products below exist in App Store Connect. Each product has worldwide availability, India as the base region, the listed draft price, and English (U.S.) display information saved. These are draft configurations, not live products or proof of paid agreement activation.
 
@@ -23,15 +25,15 @@ The obsolete Aurora test product remains in the local test configuration for ent
 - 1,020 campaign stages (12 authored + 1,008 generated), board powers, farm, crafting, swipe-steered delivery, permanent tasks, life regeneration and shared economy.
 - Local StoreKit verification passes six purchase tests on iOS 26.1, including coins, lives, starter grant, idempotency, restore, cancellation, pending approval and refunded entitlement revocation. See TEST_REPORT.md for exact evidence and the distinction from signed sandbox testing.
 - Description, promotional text, keywords and review notes updated in the App Store draft. Full reviewable copy is in release-draft/metadata.json.
-- Native screenshots and a gallery in release-draft/. Upload confirmation and any outstanding device classes must be checked in App Store Connect.
+- Seventeen native screenshots in release-draft/. The selected ten iPhone medium-display screenshots were uploaded in Chrome on 9 October and verified after reload with rendered thumbnails. Other device classes remain to be checked.
 - Privacy required-reason manifest for local saved data; no account, analytics, advertisements, tracking or requested sensitive device permissions.
 - Standalone marketing, privacy and support site in ../site/. Intended fresh host: https://orbitbloom.cognifyr.co/ . **Not yet deployed:** Cloudflare is waiting for the owner's authenticator verification. No existing domain records or sites have been changed.
 
 ## External blockers and remaining submission work
 
 1. **Distribution signing:** the archive attempt reports no signed-in Xcode account / no provisioning profile. An App Store distribution profile was created, but its Chrome download was blocked. The account owner must finish Xcode Settings → Accounts sign-in. Do not bypass browser security or store credentials in Git.
-2. **Chrome access:** the Mac locked during final draft work. The owner must unlock it to resume screenshots and website publishing. Cloudflare additionally needs the owner's authenticator verification.
-3. Upload the final screenshot set, fill verified support/privacy URLs after deployment, and complete categories, age rating and App Privacy answers matching the actual app. Do not claim a feature or accessibility capability that has not been tested.
+2. **Cloudflare access:** the existing Chrome session still awaits the owner's authenticator verification. Chrome access to the App Store draft resumed on 9 October.
+3. Check other required screenshot device classes, fill verified support/privacy URLs after deployment, and complete categories, age rating and App Privacy answers matching the actual app. Do not claim a feature or accessibility capability that has not been tested.
 4. The owner handles any required paid-app agreement, tax and banking submissions. No such legal or financial agreement has been accepted by this project automation.
 5. Archive, validate and upload a signed build to TestFlight, then exercise physical-device and signed sandbox purchase flows. No TestFlight upload, App Review submission or public release has been completed.
 6. Before production release, verify iPad layouts and screenshots, VoiceOver and larger text, older supported iOS versions, audio interruptions, low-network purchase recovery, save recovery and consumable refund policy. Saves currently remain device-local.
