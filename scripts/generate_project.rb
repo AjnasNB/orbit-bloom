@@ -21,7 +21,7 @@ app.build_configurations.each do |config|
   s['INFOPLIST_KEY_CFBundleDisplayName'] = 'Orbit Bloom'
   s['INFOPLIST_KEY_UILaunchScreen_Generation'] = 'YES'
   s['INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone'] = 'UIInterfaceOrientationPortrait'
-  s['INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad'] = 'UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight'
+  s['INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad'] = 'UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight'
   s['INFOPLIST_KEY_ITSAppUsesNonExemptEncryption'] = 'NO'
   s['CODE_SIGN_STYLE'] = 'Automatic'
   s['MARKETING_VERSION'] = '1.0'

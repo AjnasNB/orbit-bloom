@@ -202,9 +202,61 @@ import StoreKitTest
         app.buttons["explorePacks"].tap(); attach("v2-13-coin-packs")
         for product in ["coins400","coins1500","coins3000","coins7000","lives5","starter"] {
             XCTAssertTrue(app.buttons["buy_com.orbitbloom.\(product)"].waitForExistence(timeout:5),"Every pack must be reachable by swiping")
+            attach("app-store-review-\(product)")
             if product != "starter" { app.descendants(matching:.any)["suppliesScene"].swipeLeft() }
         }
         attach("v2-14-starter-bundle")
         app.buttons["returnWorld"].tap(); app.buttons["openFarm"].tap(); XCTAssertTrue(app.buttons["plot0"].waitForExistence(timeout:5))
+    }
+}
+
+// Uses the dedicated iPad release device without resetting its saved progress.
+@MainActor final class IPadReleaseUITests: XCTestCase {
+    func testPortraitAndLandscapeReleaseScreens() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--uitesting", "--keep-progress"]
+        XCUIDevice.shared.orientation = .portrait
+        app.launch()
+        defer { XCUIDevice.shared.orientation = .portrait; app.terminate() }
+        try XCTSkipIf(app.frame.width < 700, "Run this release layout check on an iPad")
+        continueAfterFailure = false
+        func capture(_ name: String) {
+            let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+            shot.name = name; shot.lifetime = .keepAlways; add(shot)
+        }
+        func fits(_ element: XCUIElement) {
+            if !element.exists { XCTAssertTrue(element.waitForExistence(timeout: 15)) }
+            XCTAssertTrue(element.isHittable, "\(element.identifier) must be reachable")
+            XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(element.frame), "\(element.identifier) must fit on screen: \(element.frame)")
+        }
+        fits(app.buttons["playLevel"]); fits(app.buttons["openFarm"])
+        XCTAssertEqual(app.scrollViews.count, 0)
+        capture("ipad-01-world")
+        app.buttons["openFarm"].tap()
+        for key in 0..<6 { fits(app.buttons["plot\(key)"]) }
+        capture("ipad-02-farm")
+        app.descendants(matching: .any)["farmScene"].swipeLeft()
+        fits(app.buttons["craftrainbow"]); capture("ipad-03-crafting")
+        app.buttons["returnWorld"].tap(); app.buttons["openRace"].tap()
+        fits(app.buttons["startRace"]); capture("ipad-04-rally-lobby")
+        app.buttons["returnWorld"].tap(); app.buttons["openShop"].tap()
+        app.buttons["explorePacks"].tap()
+        fits(app.buttons["buy_com.orbitbloom.coins400"])
+        capture("ipad-05-supplies")
+        app.buttons["returnWorld"].tap(); app.buttons["playLevel"].tap()
+        for key in 0..<49 { fits(app.buttons["tile\(key)"]) }
+        fits(app.buttons["pauseGame"]); fits(app.buttons["toolrainbow"])
+        capture("ipad-06-puzzle-portrait")
+        XCUIDevice.shared.orientation = .landscapeLeft
+        let landscape = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in app.frame.width > app.frame.height }, object: app)
+        XCTAssertEqual(XCTWaiter.wait(for: [landscape], timeout: 15), .completed, "The app must actually rotate to landscape")
+        for key in 0..<49 { fits(app.buttons["tile\(key)"]) }
+        fits(app.buttons["pauseGame"]); fits(app.buttons["toolrainbow"])
+        XCTAssertEqual(app.scrollViews.count, 0)
+        capture("ipad-07-puzzle-landscape")
+        app.buttons["pauseGame"].tap(); fits(app.buttons["leaveLevel"])
+        app.buttons["leaveLevel"].tap(); fits(app.buttons["openFarm"])
+        fits(app.buttons["openRace"]); fits(app.buttons["playLevel"])
+        capture("ipad-08-world-landscape")
     }
 }
