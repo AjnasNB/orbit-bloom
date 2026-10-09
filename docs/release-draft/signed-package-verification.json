@@ -1,0 +1,32 @@
+{
+  "appID": "6820591529",
+  "version": "1.0",
+  "build": 5,
+  "bundleID": "com.orbitbloom.game",
+  "ipa": "build/AppStoreExport/OrbitBloom.ipa",
+  "sha256": "cecd4d3a5f759fa8e07f491dbb2dc8d1286d3009046e81e0b210099a9adc53ca",
+  "byteSize": 23599092,
+  "team": "4V29K5Q8S9",
+  "profileName": "Orbit Bloom AppStore",
+  "profileExpires": "2027-04-29 13:58:27",
+  "codeSignatureVerified": true,
+  "iPadOrientations": [
+    "UIInterfaceOrientationPortrait",
+    "UIInterfaceOrientationPortraitUpsideDown",
+    "UIInterfaceOrientationLandscapeLeft",
+    "UIInterfaceOrientationLandscapeRight"
+  ],
+  "encryptionExemption": false,
+  "appleServerValidation": "Transporter delivery accepted; Apple processed the build and TestFlight shows Ready to Submit",
+  "upload": "delivered",
+  "verifiedOn": "2026-10-09",
+  "deliveredLocalTime": "2026-10-09 15:25 Asia/Kolkata",
+  "sourceCommit": "6ee33de",
+  "evidence": {
+    "archive": "evidence/appstore-signed-archive.log",
+    "export": "evidence/appstore-signed-export.log",
+    "deliveredScreenshot": "evidence/appstore-build5-delivered.png"
+  },
+  "appReviewSubmitted": false,
+  "publicReleased": false
+}

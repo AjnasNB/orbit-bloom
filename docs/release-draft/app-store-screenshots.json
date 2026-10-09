@@ -57,7 +57,7 @@
         2752,
         2064
       ],
-      "status": "six native portrait captures prepared; two full-screen landscape captures verified for layout QA; not uploaded while Chrome is disconnected",
+      "status": "all six native portrait captures uploaded and rendered in the iPad 13-inch class; final reload verification pending; two landscape captures remain layout QA evidence",
       "screenshotSourceBuild": 5,
       "screenshots": [
         "ipad/01-world.png",
@@ -71,7 +71,7 @@
         "ipad/07-puzzle-landscape.png",
         "ipad/08-world-landscape.png"
       ],
-      "landscapeEncoding": "2064 \u00d7 2752 native pixels with orientation 8; displayed as 2752 \u00d7 2064; no resizing"
+      "landscapeEncoding": "2064 × 2752 native pixels with orientation 8; displayed as 2752 × 2064; no resizing"
     }
   ],
   "archivedPriorMediumSet": {

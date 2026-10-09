@@ -34,27 +34,65 @@
   "iPhoneScreenshots": "app-store-screenshots.json",
   "iPadScreenshots": "ipad/verification.json",
   "archive": {
-    "path": "build/OrbitBloom-Release-Prepared.xcarchive",
+    "path": "build/OrbitBloom-AppStore.xcarchive",
     "compilation": "succeeded",
-    "signed": false,
-    "uploadable": false
+    "signed": true,
+    "uploadable": true,
+    "exportedIPA": "build/AppStoreExport/OrbitBloom.ipa",
+    "verification": "signed-package-verification.json"
   },
   "distributionProfile": {
     "name": "Orbit Bloom AppStore",
     "portalURL": "https://developer.apple.com/account/resources/profiles/review/554SHJ3J75",
-    "state": "active in Apple portal; not available locally"
+    "state": "installed locally; team/bundle/certificate match verified"
   },
-  "testFlightUploaded": false,
+  "testFlightUploaded": true,
   "appReviewSubmitted": false,
   "publicReleased": false,
   "pending": [
-    "Restore Chrome automation connection and unlock Mac",
-    "Download/install existing distribution profile; obtain authenticated signing/upload access",
-    "Finish lives and starter purchase review records; reload remaining coin records",
-    "Upload actual iPad screenshots",
-    "Verify app pricing/availability and region-specific license requirements",
+    "Unlock Mac to complete build selection and owner testing invitation",
     "Publish privacy answers after explicit action-time confirmation",
-    "Validate/upload signed build and test signed sandbox purchases",
-    "Attach build and all first purchases to version 1.0 before App Review"
-  ]
+    "Record final iPad screenshot and pricing/platform reload verification",
+    "Attach processed build 5 and add version 1.0 to the draft containing all six purchases",
+    "Invite only the owner to Orbit Bloom QA; exercise signed sandbox purchases on a physical device",
+    "Submit the completed iOS app and first purchases together for App Review; manual release remains selected"
+  ],
+  "testFlight": {
+    "buildID": "ab9c0610-2177-4d2f-b4b7-b33ff6b82b52",
+    "processed": true,
+    "status": "Ready to Submit",
+    "internalGroup": "Orbit Bloom QA",
+    "groupID": "20c17cf7-ef9b-43be-9a6a-55530abb5a3f",
+    "groupBuildCount": 1,
+    "testerCount": 0,
+    "automaticDistribution": true,
+    "ownerInvitationSent": false
+  },
+  "appVersionBuildAttached": false,
+  "purchaseSubmission": {
+    "platform": "iOS",
+    "draftItemCount": 6,
+    "productsStatus": "Ready for Review",
+    "appVersionIncluded": false,
+    "submitted": false
+  },
+  "appPricing": {
+    "download": "free",
+    "baseRegion": "India (INR)",
+    "basePriceINR": 0,
+    "paidPurchases": "six optional packs at INR 99–999",
+    "configured": true
+  },
+  "availability": {
+    "configuredRegionCount": 173,
+    "excluded": [
+      "China mainland",
+      "Vietnam"
+    ],
+    "reason": "required game licenses have not been supplied",
+    "automaticFutureRegions": false,
+    "mobileOnly": true,
+    "platformPreferencesReloadVerification": "pending"
+  },
+  "browser": "Chrome reconnected; Mac locked again during final build selection"
 }

@@ -7,42 +7,49 @@
       "appleID": "6820593641",
       "screenshot": "coins400.png",
       "reviewNotes": "No account or login is required. From the island home, tap the coin balance to open Supplies. Swipe left to Seed pouch (400 coins), then tap Buy with Apple. This consumable grants 400 coins after StoreKit verifies the transaction. Coins are saved locally, never expire, and can be spent on garden supplies and game tools. The grant is transaction-idempotent; unfinished transactions are recovered. Spent consumables are not restored. Purchases are optional; coins can also be earned through play.",
-      "status": "screenshot and notes verified after reload; Prepare for Submission"
+      "status": "screenshot and notes verified after navigation/reload; Ready for Review in the same six-item iOS draft submission"
     },
     {
       "productID": "com.orbitbloom.coins1500",
       "appleID": "6820595004",
       "screenshot": "coins1500.png",
       "reviewNotes": "No account or login is required. From the island home, tap the coin balance to open Supplies. Swipe left to Garden chest (1,500 coins), then tap Buy with Apple. This consumable grants 1,500 coins after StoreKit verifies the transaction. Coins are saved locally, never expire, and can be spent on garden supplies and game tools. The grant is transaction-idempotent; unfinished transactions are recovered. Spent consumables are not restored. Purchases are optional; coins can also be earned through play.",
-      "status": "screenshot rendered and notes save completed; final reload verification pending"
+      "status": "screenshot and notes verified after navigation/reload; Ready for Review in the same six-item iOS draft submission"
     },
     {
       "productID": "com.orbitbloom.coins3000",
       "appleID": "6820595079",
       "screenshot": "coins3000.png",
       "reviewNotes": "No account or login is required. From the island home, tap the coin balance to open Supplies. Swipe left to Orchard treasury (3,000 coins), then tap Buy with Apple. This consumable grants 3,000 coins after StoreKit verifies the transaction. Coins are saved locally, never expire, and can be spent on garden supplies and game tools. The grant is transaction-idempotent; unfinished transactions are recovered. Spent consumables are not restored. Purchases are optional; coins can also be earned through play.",
-      "status": "screenshot rendered and notes save completed; final reload verification pending"
+      "status": "screenshot and notes verified after navigation/reload; Ready for Review in the same six-item iOS draft submission"
     },
     {
       "productID": "com.orbitbloom.coins7000",
       "appleID": "6820594918",
       "screenshot": "coins7000.png",
       "reviewNotes": "No account or login is required. From the island home, tap the coin balance to open Supplies. Swipe left to Moon vault (7,000 coins), then tap Buy with Apple. This consumable grants 7,000 coins after StoreKit verifies the transaction. Coins are saved locally, never expire, and can be spent on garden supplies and game tools. The grant is transaction-idempotent; unfinished transactions are recovered. Spent consumables are not restored. Purchases are optional; coins can also be earned through play.",
-      "status": "screenshot rendered and notes save completed; final reload verification pending"
+      "status": "screenshot and notes verified after navigation/reload; Ready for Review in the same six-item iOS draft submission"
     },
     {
       "productID": "com.orbitbloom.lives5",
       "appleID": "6820595083",
       "screenshot": "lives5.png",
       "reviewNotes": "No account or login is required. From the island home, tap the coin balance to open Supplies. Swipe left to Extra lives, then tap Buy with Apple. This consumable grants 5 extra lives after StoreKit verifies the transaction. Purchased lives are stored in a non-expiring reserve and can be used after normal regenerating lives run out. The grant is saved durably and is transaction-idempotent; unfinished transactions are recovered. Spent consumables are not restored. Five normal puzzle lives regenerate one every 30 minutes. Purchases are optional; farming and racing remain available while waiting.",
-      "status": "prepared locally; Apple review screenshot and notes pending Chrome reconnection"
+      "status": "screenshot and notes verified after navigation/reload; Ready for Review in the same six-item iOS draft submission"
     },
     {
       "productID": "com.orbitbloom.starter",
       "appleID": "6820594801",
       "screenshot": "starter.png",
       "reviewNotes": "No account or login is required. From the island home, tap the coin balance to open Supplies. Swipe left to First bloom bundle, then tap Buy with Apple. This non-consumable is available once per Apple account. Its first verified grant adds 600 coins and 3 non-expiring reserve lives. Restore purchases checks bundle ownership; recovery never duplicates a previously credited transaction in the existing local save. Consumable balances and progress are device-local. Purchases are optional. To test restoration, purchase the bundle in the sandbox, relaunch and use Restore purchases in Supplies.",
-      "status": "prepared locally; Apple review screenshot and notes pending Chrome reconnection"
+      "status": "screenshot and notes verified after navigation/reload; Ready for Review in the same six-item iOS draft submission"
     }
-  ]
+  ],
+  "draftSubmission": {
+    "platform": "iOS",
+    "itemCount": 6,
+    "appVersionRequired": true,
+    "appVersionIncluded": false,
+    "submitted": false
+  }
 }
