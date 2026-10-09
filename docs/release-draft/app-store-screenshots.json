@@ -10,7 +10,7 @@
         1320,
         2868
       ],
-      "status": "old set removed from draft and retained in Apple Asset Library; new files selected, upload persistence unverified after Mac lock",
+      "status": "all ten native screenshots uploaded and processed; persisted in Chrome and accepted by Apple review validation",
       "screenshotSourceBuild": 6,
       "priorScreenshots": [
         "screenshots/01-world.png",
@@ -24,8 +24,7 @@
         "screenshots/09-complete-world.png",
         "screenshots/12-lives-and-shop.png"
       ],
-      "screenshots": [],
-      "replacementFilesSelected": [
+      "screenshots": [
         "build6/v4-01-living-island.png",
         "build6/v3-02-botanical-circuit.png",
         "build6/v3-16-board-power.png",
@@ -40,7 +39,7 @@
     },
     {
       "displayClass": "iPhone with Dynamic Island (medium display)",
-      "status": "old set removed from draft and retained in Apple Asset Library; new files selected, upload persistence unverified after Mac lock",
+      "status": "all ten native screenshots uploaded and processed; persisted in Chrome and accepted by Apple review validation",
       "screenshotSourceBuild": 6,
       "sourceDisplayClass": "iPhone with Dynamic Island (large display)",
       "sourceNativePixels": [
@@ -59,8 +58,7 @@
         "screenshots/09-complete-world.png",
         "screenshots/12-lives-and-shop.png"
       ],
-      "screenshots": [],
-      "replacementFilesSelected": [
+      "screenshots": [
         "build6/v4-01-living-island.png",
         "build6/v3-02-botanical-circuit.png",
         "build6/v3-16-board-power.png",
@@ -71,7 +69,9 @@
         "build6/v2-09-complete-world.png",
         "build6/v2-12-lives-and-shop.png",
         "build6/v6-player-and-saved-garden.png"
-      ]
+      ],
+      "directScreenshotCount": 0,
+      "inheritedScreenshotCount": 10
     },
     {
       "displayClass": "iPad Pro 13-inch",
@@ -83,22 +83,26 @@
         2752,
         2064
       ],
-      "status": "all six native portrait captures uploaded and rendered in the iPad 13-inch class; final reload verification pending; two landscape captures remain layout QA evidence",
-      "screenshotSourceBuild": 5,
+      "status": "all nine native screenshots uploaded, persisted and rendered in the iPad 13-inch class; included in accepted review submission",
+      "screenshotSourceBuild": 6,
       "screenshots": [
-        "ipad/01-world.png",
-        "ipad/02-farm.png",
-        "ipad/03-crafting.png",
-        "ipad/04-rally-lobby.png",
-        "ipad/05-supplies.png",
-        "ipad/06-puzzle-portrait.png"
+        "build6/ipad/ipad-01-world.png",
+        "build6/ipad/ipad-02-farm.png",
+        "build6/ipad/ipad-03-crafting.png",
+        "build6/ipad/ipad-04-rally-lobby.png",
+        "build6/ipad/ipad-05-supplies.png",
+        "build6/ipad/ipad-06-puzzle-portrait.png",
+        "build6/ipad/ipad-09-player-and-saved-garden.png",
+        "build6/ipad/ipad-07-puzzle-landscape.png",
+        "build6/ipad/ipad-08-world-landscape.png"
       ],
       "landscapeQA": [
-        "ipad/07-puzzle-landscape.png",
-        "ipad/08-world-landscape.png"
+        "build6/ipad/ipad-07-puzzle-landscape.png",
+        "build6/ipad/ipad-08-world-landscape.png"
       ],
       "landscapeEncoding": "2064 \u00d7 2752 native pixels with orientation 8; displayed as 2752 \u00d7 2064; no resizing",
-      "build6Prepared": "build6/ipad/verification.json"
+      "build6Prepared": "build6/ipad/verification.json",
+      "landscapeDisplayVerified": "Apple image preview displays native landscape puzzle correctly, retaining original rotation metadata"
     }
   ],
   "archivedPriorMediumSet": {
@@ -125,5 +129,14 @@
     "workspaceBuild": 4,
     "screenshotSourceBuild": 3,
     "verifiedOn": "2026-10-09"
-  }
+  },
+  "uploadedDistinctScreenshotCount": 19,
+  "appleReviewValidation": "passed; submitted with app version 1.0 build 6",
+  "evidence": [
+    "evidence/build6-iphone-screenshots-complete.jpg",
+    "evidence/build6-iphone-world-in-apple.jpg",
+    "evidence/build6-ipad-screenshots-verified.jpg",
+    "evidence/build6-ipad-landscape-in-apple.jpg",
+    "build6/apple-review-submission.jpg"
+  ]
 }

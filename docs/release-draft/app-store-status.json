@@ -4,7 +4,7 @@
   "version": "1.0",
   "build": 6,
   "releaseMode": "manual",
-  "versionStatus": "Prepare for Submission",
+  "versionStatus": "Waiting for Review",
   "subtitle": "Swipe, farm & race among stars",
   "primaryCategory": "Games",
   "gameSubcategories": [
@@ -19,8 +19,9 @@
   },
   "appPrivacy": {
     "savedAnswer": "Data Not Collected",
-    "published": false,
-    "pending": "owner confirmation for Apple Publish accuracy agreement"
+    "published": true,
+    "publishedBy": "Ajnas N B",
+    "verification": "Observed published in Chrome; no agreement accepted by the agent"
   },
   "paymentAccount": {
     "freeAppsAgreement": "Active",
@@ -47,38 +48,38 @@
     "state": "regenerated and installed with Game Center and isolated iCloud container",
     "uuid": "8ad71964-4815-45e7-ad15-0187cfa5e7e3"
   },
-  "testFlightUploaded": false,
-  "appReviewSubmitted": false,
+  "testFlightUploaded": true,
+  "appReviewSubmitted": true,
   "publicReleased": false,
   "pending": [
-    "Unlock Mac for Transporter upload and Chrome screenshots/build selection",
-    "Verify or finish replacing ten iPhone screenshots and add build 6 iPad account capture",
-    "Upload and attach build 6; add version 1.0 to six-product iOS review draft",
-    "Publish privacy declaration only after explicit agreement approval",
-    "Invite only owner to internal QA and verify live Apple account/cloud round trip and signed sandbox purchases",
-    "Submit app and first purchases together for App Review; manual public release remains selected"
+    "Apple review outcome; manual public release remains selected",
+    "Owner TestFlight installation: verify live Game Center/iCloud round trip and signed sandbox purchases on hardware",
+    "Broader accessibility, older/smaller device coverage, physical audio/haptics and human difficulty checks before public release"
   ],
   "testFlight": {
-    "buildID": "ab9c0610-2177-4d2f-b4b7-b33ff6b82b52",
+    "buildID": "858d66b4-ee72-4e6c-838a-65aa2450225b",
     "processed": true,
-    "status": "build 5 Ready to Submit; build 6 not uploaded",
+    "status": "build 6 Ready to Submit; assigned to internal QA",
     "internalGroup": "Orbit Bloom QA",
     "groupID": "20c17cf7-ef9b-43be-9a6a-55530abb5a3f",
-    "groupBuildCount": 1,
-    "testerCount": 0,
+    "groupBuildCount": 2,
+    "testerCount": 1,
     "automaticDistribution": true,
-    "ownerInvitationSent": false,
+    "ownerInvitationSent": true,
     "previousBuild": 5,
     "currentBuild": 6,
-    "currentBuildUpload": "pending"
+    "currentBuildUpload": "delivered and processed",
+    "ownerInvitationStatus": "Invited; observed already present, not sent again by agent"
   },
-  "appVersionBuildAttached": false,
+  "appVersionBuildAttached": true,
   "purchaseSubmission": {
     "platform": "iOS",
-    "draftItemCount": 6,
-    "productsStatus": "Ready for Review",
-    "appVersionIncluded": false,
-    "submitted": false
+    "draftItemCount": 0,
+    "productsStatus": "Waiting for Review",
+    "appVersionIncluded": true,
+    "submitted": true,
+    "submittedItemCount": 7,
+    "submissionID": "d585e8f9-f825-4020-9661-6421068d7038"
   },
   "appPricing": {
     "download": "free",
@@ -96,8 +97,17 @@
     "reason": "required game licenses have not been supplied",
     "automaticFutureRegions": false,
     "mobileOnly": true,
-    "platformPreferencesReloadVerification": "pending"
+    "platformPreferencesReloadVerification": "verified in Chrome: Apple Silicon Mac and Apple Vision Pro availability unchecked"
   },
-  "browser": "Mac locked; Chrome/native controls unavailable during screenshot replacement",
-  "gameCenterEnabled": true
+  "browser": "Chrome; Mac unlocked",
+  "gameCenterEnabled": true,
+  "reviewSubmission": {
+    "id": "d585e8f9-f825-4020-9661-6421068d7038",
+    "submittedAt": "2026-10-09T20:42:00+05:30",
+    "submittedBy": "Ajnas N B",
+    "itemCount": 7,
+    "status": "Waiting for Review",
+    "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/d585e8f9-f825-4020-9661-6421068d7038",
+    "proof": "build6/apple-review-submission.jpg"
+  }
 }

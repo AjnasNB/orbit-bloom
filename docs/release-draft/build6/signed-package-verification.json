@@ -21,14 +21,19 @@
   "cloudContainer": "iCloud.com.orbitbloom.game",
   "cloudEnvironment": "Production",
   "encryptionExemption": false,
-  "appleServerValidation": "not yet uploaded; browser/native control blocked by locked Mac",
-  "upload": "pending",
+  "appleServerValidation": "Transporter delivered successfully; Apple finished processing build 6",
+  "upload": "delivered and processed",
   "verifiedOn": "2026-10-09",
   "sourceCommit": "38c08011c25fad52334f14e89ec5b257bd216a96",
   "evidence": {
     "archive": "evidence/build6-final-archive.log",
-    "export": "evidence/build6-export.log"
+    "export": "evidence/build6-export.log",
+    "delivery": "evidence/appstore-build6-delivered.png",
+    "review": "build6/apple-review-submission.jpg"
   },
-  "appReviewSubmitted": false,
-  "publicReleased": false
+  "appReviewSubmitted": true,
+  "publicReleased": false,
+  "deliveredAt": "2026-10-09T20:29:00+05:30",
+  "testFlightBuildID": "858d66b4-ee72-4e6c-838a-65aa2450225b",
+  "submissionID": "d585e8f9-f825-4020-9661-6421068d7038"
 }
