@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		006F5BCD317164A10B88BB8D /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10AE9CE49E5718581DB8694 /* GameEngine.swift */; };
 		07C3F61A8624C44E815A053F /* PurchaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3CCF2B1E51BCB749CA6693 /* PurchaseStore.swift */; };
+		09DC765D8728FB6302F7A944 /* PlayerAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECADB5FA25DFB5338BD76C5 /* PlayerAccountTests.swift */; };
 		0B229E853CF454AF25AC8F72 /* sfx-plant.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 823BB9435ED24CA73FB38855 /* sfx-plant.m4a */; };
 		105C43287F3B8D1A60E7DDAF /* Ecosystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413EC6B0B6C90FF514CCFBE /* Ecosystem.swift */; };
 		14A14FC02D7EDF97E8F28C80 /* music-farm.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1929294D3796A53461B0427C /* music-farm.m4a */; };
@@ -43,6 +44,8 @@
 		9866B4BE75C26B4BC38EF5CD /* bloom1.wav in Resources */ = {isa = PBXBuildFile; fileRef = F7B689504A989B38398C67F6 /* bloom1.wav */; };
 		9DFECBD44C1C313295C6246B /* AudioDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B6A80C0BF3E87102C0FF2 /* AudioDirector.swift */; };
 		A6FF48551CD557866756BBDC /* bloom2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56EE8AF9458CCA9586A4926E /* bloom2.wav */; };
+		B57EC8D7A233DFC5C107F051 /* SavedGarden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE451A197A9807EA465A2C6 /* SavedGarden.swift */; };
+		BFA861E79647E7174F7C415B /* PlayerAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173EA0DDC1CD41AB9DF66AB /* PlayerAccountView.swift */; };
 		BFF5C63F510BC555E9AD5C0F /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95732EBCBE54DC10E4945154 /* GameModel.swift */; };
 		C5FA74A74D41B15D5F24343B /* sfx-harvest.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6F3231B6F57FD87BB0F77599 /* sfx-harvest.m4a */; };
 		CD48FA369DD3E8F9814517C1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD484D22386E7B59E41BA33 /* Theme.swift */; };
@@ -53,6 +56,7 @@
 		F63259A58085814011B599E8 /* music-race.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 695F91AEB8E0F30A70AEB451 /* music-race.m4a */; };
 		FB03C6901EE4F580768BDBBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E98534B51248BDACC60101 /* Foundation.framework */; };
 		FB4CEB62EA6C33EBE1A838BC /* PowerRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FD84092D2CEBFFD3B287D6 /* PowerRules.swift */; };
+		FBD949EC55832423E03B6366 /* PlayerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ACC4D211FA9F003FA07235 /* PlayerAccount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		0413EC6B0B6C90FF514CCFBE /* Ecosystem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Ecosystem.swift; path = OrbitBloom/Core/Ecosystem.swift; sourceTree = SOURCE_ROOT; };
+		0AE451A197A9807EA465A2C6 /* SavedGarden.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SavedGarden.swift; path = OrbitBloom/Core/SavedGarden.swift; sourceTree = SOURCE_ROOT; };
 		0C283184611F2E556F6EC9D3 /* OrbitBloom.storekit */ = {isa = PBXFileReference; includeInIndex = 1; path = OrbitBloom.storekit; sourceTree = "<group>"; };
 		0C5656E8AF37E55803F9EE8A /* sfx-collision.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-collision.m4a"; path = "OrbitBloom/Resources/sfx-collision.m4a"; sourceTree = SOURCE_ROOT; };
 		13E445C7F4F5400621C5D518 /* bloom0.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom0.wav; path = OrbitBloom/Resources/bloom0.wav; sourceTree = SOURCE_ROOT; };
@@ -87,6 +92,7 @@
 		439772A3265131B1AD38CA94 /* PuzzleView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PuzzleView.swift; path = OrbitBloom/Views/PuzzleView.swift; sourceTree = SOURCE_ROOT; };
 		4844DD971AC67260750AD24E /* sfx-water.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-water.m4a"; path = "OrbitBloom/Resources/sfx-water.m4a"; sourceTree = SOURCE_ROOT; };
 		49DFC639A69682F05AB8B576 /* PurchaseTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PurchaseTests.swift; path = OrbitBloomTests/iOS/PurchaseTests.swift; sourceTree = SOURCE_ROOT; };
+		50ACC4D211FA9F003FA07235 /* PlayerAccount.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayerAccount.swift; path = OrbitBloom/PlayerAccount.swift; sourceTree = SOURCE_ROOT; };
 		53324CCE05B8629D25A2AFC2 /* FarmView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FarmView.swift; path = OrbitBloom/Views/FarmView.swift; sourceTree = SOURCE_ROOT; };
 		56EE8AF9458CCA9586A4926E /* bloom2.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom2.wav; path = OrbitBloom/Resources/bloom2.wav; sourceTree = SOURCE_ROOT; };
 		59DA66F1E0B328360AB23474 /* ThirdPartyNotices.txt */ = {isa = PBXFileReference; includeInIndex = 1; name = ThirdPartyNotices.txt; path = OrbitBloom/Resources/ThirdPartyNotices.txt; sourceTree = SOURCE_ROOT; };
@@ -102,8 +108,10 @@
 		9743BD0DDBCD1AF07410A2C9 /* GameplayUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameplayUITests.swift; path = OrbitBloomUITests/GameplayUITests.swift; sourceTree = SOURCE_ROOT; };
 		993C088EA502C27143B609EA /* sfx-cascade.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-cascade.m4a"; path = "OrbitBloom/Resources/sfx-cascade.m4a"; sourceTree = SOURCE_ROOT; };
 		9F9A3204FAE6198B5B5F5A76 /* bloom4.wav */ = {isa = PBXFileReference; includeInIndex = 1; name = bloom4.wav; path = OrbitBloom/Resources/bloom4.wav; sourceTree = SOURCE_ROOT; };
+		A173EA0DDC1CD41AB9DF66AB /* PlayerAccountView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayerAccountView.swift; path = OrbitBloom/Views/PlayerAccountView.swift; sourceTree = SOURCE_ROOT; };
 		A2D4ED27DFBC1C7448A9ED9E /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OrbitBloom/Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		A76C9C1397A1318C914E5C2B /* music-garden.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "music-garden.m4a"; path = "OrbitBloom/Resources/music-garden.m4a"; sourceTree = SOURCE_ROOT; };
+		AECADB5FA25DFB5338BD76C5 /* PlayerAccountTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayerAccountTests.swift; path = OrbitBloomTests/iOS/PlayerAccountTests.swift; sourceTree = SOURCE_ROOT; };
 		B10AE9CE49E5718581DB8694 /* GameEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GameEngine.swift; path = OrbitBloom/Core/GameEngine.swift; sourceTree = SOURCE_ROOT; };
 		B3A671D5EF48022CB319FF12 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = OrbitBloom/Resources/PrivacyInfo.xcprivacy; sourceTree = SOURCE_ROOT; };
 		B44ADD24ACCA512053DF0665 /* sfx-win.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-win.m4a"; path = "OrbitBloom/Resources/sfx-win.m4a"; sourceTree = SOURCE_ROOT; };
@@ -190,6 +198,10 @@
 				887A0DD37C047E4605692120 /* OrbitBloom */,
 				09039B1F061784CB91AEE1BE /* Tests */,
 				0C283184611F2E556F6EC9D3 /* OrbitBloom.storekit */,
+				0AE451A197A9807EA465A2C6 /* SavedGarden.swift */,
+				50ACC4D211FA9F003FA07235 /* PlayerAccount.swift */,
+				A173EA0DDC1CD41AB9DF66AB /* PlayerAccountView.swift */,
+				AECADB5FA25DFB5338BD76C5 /* PlayerAccountTests.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -397,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A0169B2E35A036AB3DEA501 /* PurchaseTests.swift in Sources */,
+				09DC765D8728FB6302F7A944 /* PlayerAccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +440,9 @@
 				45E7C8A57C69D8EB3F4C30EF /* RootView.swift in Sources */,
 				776C9F3EEB9FC76B46CA86A2 /* ShopView.swift in Sources */,
 				CD48FA369DD3E8F9814517C1 /* Theme.swift in Sources */,
+				B57EC8D7A233DFC5C107F051 /* SavedGarden.swift in Sources */,
+				FBD949EC55832423E03B6366 /* PlayerAccount.swift in Sources */,
+				BFA861E79647E7174F7C415B /* PlayerAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,8 +559,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = OrbitBloom/OrbitBloom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4V29K5Q8S9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Orbit Bloom";
@@ -583,8 +600,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = OrbitBloom/OrbitBloom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4V29K5Q8S9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Orbit Bloom";

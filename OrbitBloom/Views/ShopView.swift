@@ -62,12 +62,19 @@ struct ShopView: View {
 
 struct SettingsView: View {
     @EnvironmentObject var game: GameModel
+    @EnvironmentObject var account: PlayerAccount
     @Environment(\.dismiss) var dismiss
     @State private var showCredits = false
     @State private var resetConfirmation = false
     var body: some View {
         NavigationStack {
             Form {
+                Section("Keep your garden") {
+                    NavigationLink { PlayerAccountView() } label: {
+                        Label("Player & saved garden", systemImage: "person.crop.circle")
+                    }.accessibilityIdentifier("playerAccount")
+                    Text(account.status).font(.footnote).foregroundStyle(.secondary)
+                }
                 Section("Your quiet corner") {
                     Toggle("Sound effects", isOn: $game.progress.sound)
                     Toggle("Background music",isOn:$game.ecosystem.music).onChange(of:game.ecosystem.music) { _,_ in game.updateMusic(); game.save() }
@@ -82,17 +89,17 @@ struct SettingsView: View {
                     Label("Use two stars to restore a garden project.", systemImage: "star")
                 }.font(.subheadline)
                 Section("Privacy & credits") {
-                    Text("No accounts, ads, tracking, or analytics. Game progress stays on your device. Purchases are processed by Apple.").font(.subheadline)
+                    Text("No ads, tracking, or analytics. Optional Game Center sign-in and iCloud backup are handled by Apple. Purchases are processed by Apple.").font(.subheadline)
                     Button("Open-source licenses & artwork") { showCredits = true }.accessibilityIdentifier("creditsButton")
-                    Text("Orbit Bloom 1.0 · build 5").font(.caption).foregroundStyle(.secondary)
+                    Text("Orbit Bloom 1.0 · build \(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "6")").font(.caption).foregroundStyle(.secondary)
                 }
                 Section {
                     Button("Reset local game progress", role: .destructive) { resetConfirmation = true }
-                } footer: { Text("Resets local puzzles, coins, farm, lives and projects. Consumable coins and lives are not restorable. Permanent purchases can be restored.") }
+                } footer: { Text("Resets this device's puzzles, coins, farm, lives and projects and pauses cloud backup. Existing cloud gardens are kept. Apple does not restore spent consumable coins and lives.") }
             }.tint(Palette.mint).navigationTitle("Settings").toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { game.save(); dismiss() } } }
                 .onChange(of: game.progress.sound) { _, _ in game.save() }.onChange(of: game.progress.haptics) { _, _ in game.save() }
                 .confirmationDialog("Reset all local game progress?", isPresented: $resetConfirmation, titleVisibility: .visible) {
-                    Button("Reset game", role: .destructive) { game.leave(); game.progress = Progress(); game.ecosystem = Ecosystem(); game.assistance = Assistance(); game.progress.hasSeenIntro = true; game.save(); dismiss() }
+                    Button("Reset game", role: .destructive) { account.setEnabled(false); game.leave(); game.progress = Progress(); game.ecosystem = Ecosystem(); game.assistance = Assistance(); game.progress.hasSeenIntro = true; game.save(); dismiss() }
                 }
                 .sheet(isPresented: $showCredits) {
                     NavigationStack {

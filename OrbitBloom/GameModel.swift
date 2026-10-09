@@ -35,7 +35,10 @@ import Match3Kit
     @Published var paused = false
     @Published var firstWin = false
     private let defaults: UserDefaults
-    private struct Wallet: Codable { var progress: Progress; var ecosystem: Ecosystem; var session: GameEngine.Snapshot?; var charged: Bool?; var assistance: Assistance? = nil }
+    var onSave: (() -> Void)?
+    private(set) var saveGeneration = UUID()
+    private(set) var saveAccount: String?
+    private var creditedOnDevice: Set<String> = []
     private var runID = UUID()
     let testing: Bool
 
@@ -43,28 +46,92 @@ import Match3Kit
         testing = ProcessInfo.processInfo.arguments.contains("--uitesting")
         self.defaults = defaults
         if testing && !ProcessInfo.processInfo.arguments.contains("--keep-progress") {
-            defaults.removeObject(forKey: "orbitBloom.progress.v1")
-            defaults.removeObject(forKey: "orbitBloom.session.v1")
-            defaults.removeObject(forKey:"orbitBloom.wallet.v2")
+            for key in defaults.dictionaryRepresentation().keys where key.hasPrefix("orbitBloom.") {
+                defaults.removeObject(forKey: key)
+            }
         }
-        progress = defaults.data(forKey: "orbitBloom.progress.v1").flatMap { try? JSONDecoder().decode(Progress.self, from: $0) } ?? Progress()
-        let wallet = defaults.data(forKey:"orbitBloom.wallet.v2").flatMap { try? JSONDecoder().decode(Wallet.self,from:$0) }
+        saveAccount = defaults.string(forKey: "orbitBloom.saveAccount")
+        creditedOnDevice = Set(defaults.stringArray(forKey: "orbitBloom.purchaseReceipts") ?? [])
+        progress = saveAccount == nil ? defaults.data(forKey: "orbitBloom.progress.v1").flatMap { try? JSONDecoder().decode(Progress.self, from: $0) } ?? Progress() : Progress()
+        let sources = saveAccount.map { ["orbitBloom.player.\($0)", "orbitBloom.wallet.backup.\($0)"] } ?? ["orbitBloom.wallet.v2", "orbitBloom.wallet.backup"]
+        let wallet = sources.compactMap { key in
+            defaults.data(forKey: key).flatMap { try? JSONDecoder().decode(GardenWallet.self, from: $0) }
+        }.first(where: { $0.isValid })
         if let wallet { progress = wallet.progress; ecosystem = wallet.ecosystem; assistance = wallet.assistance ?? Assistance() }
+        creditedOnDevice.formUnion(ecosystem.creditedTransactions)
         ecosystem.lives.refresh(at:Date())
         // Resume a saved puzzle, including earned/consumed boosters.
-        let snapshot = wallet != nil ? wallet?.session : defaults.data(forKey:"orbitBloom.session.v1").flatMap { try? JSONDecoder().decode(GameEngine.Snapshot.self,from:$0) }
+        let snapshot = wallet != nil ? wallet?.session : saveAccount == nil ? defaults.data(forKey:"orbitBloom.session.v1").flatMap { try? JSONDecoder().decode(GameEngine.Snapshot.self,from:$0) } : nil
         if let snapshot, let restored = GameEngine(snapshot:snapshot) {
             engine = restored; charged = wallet?.charged ?? defaults.bool(forKey: "orbitBloom.charged.v1"); sync()
             if restored.won { firstWin = progress.finish(level: restored.level.id, score: restored.score); ecosystem.lives.rewardWin(); result = true; save() }
             else if restored.lost { result = false; save() }
         }
     }
+    var wallet: GardenWallet {
+        GardenWallet(progress: progress, ecosystem: ecosystem, session: result == nil ? engine?.snapshot : nil,
+                     charged: charged, assistance: assistance)
+    }
     func save() {
-        if let data = try? JSONEncoder().encode(Wallet(progress:progress,ecosystem:ecosystem,session:result == nil ? engine?.snapshot : nil,charged:charged,assistance:assistance)) { defaults.set(data,forKey:"orbitBloom.wallet.v2") }
+        if let data = try? JSONEncoder().encode(wallet) {
+            let source = saveAccount.map { "orbitBloom.player.\($0)" } ?? "orbitBloom.wallet.v2"
+            let backup = saveAccount.map { "orbitBloom.wallet.backup.\($0)" } ?? "orbitBloom.wallet.backup"
+            if let previous = defaults.data(forKey: source),
+               let old = try? JSONDecoder().decode(GardenWallet.self, from: previous), old.isValid {
+                defaults.set(previous, forKey: backup)
+            }
+            defaults.set(data,forKey:"orbitBloom.wallet.v2")
+            if let saveAccount { defaults.set(data, forKey: "orbitBloom.player.\(saveAccount)") }
+        }
+        creditedOnDevice.formUnion(ecosystem.creditedTransactions)
+        defaults.set(Array(creditedOnDevice), forKey: "orbitBloom.purchaseReceipts")
         defaults.set(charged, forKey: "orbitBloom.charged.v1")
         if let data = try? JSONEncoder().encode(progress) { defaults.set(data, forKey: "orbitBloom.progress.v1") }
         if let engine, result == nil, let data = try? JSONEncoder().encode(engine.snapshot) { defaults.set(data, forKey: "orbitBloom.session.v1") }
         else { defaults.removeObject(forKey: "orbitBloom.session.v1") }
+        saveGeneration = UUID()
+        onSave?()
+    }
+    /// First sign-in adopts the guest garden. Later accounts get isolated wallets.
+    func useSaveAccount(_ key: String) {
+        guard saveAccount != key else { return }
+        save()
+        if saveAccount != nil {
+            let sources = ["orbitBloom.player.\(key)", "orbitBloom.wallet.backup.\(key)"]
+            let saved = sources.compactMap { source in
+                defaults.data(forKey: source).flatMap { try? JSONDecoder().decode(GardenWallet.self, from: $0) }
+            }.first(where: { $0.isValid })
+            installWallet(saved ?? GardenWallet())
+        }
+        saveAccount = key; defaults.set(key, forKey: "orbitBloom.saveAccount"); save()
+    }
+    @discardableResult func restoreWallet(_ saved: GardenWallet) -> Bool {
+        guard !busy, !raceActive, saved.canReplace(wallet) else { return false }
+        save() // Retain the previous local checkpoint before replacing the active wallet.
+        if let previous = defaults.data(forKey: "orbitBloom.wallet.v2") {
+            defaults.set(previous, forKey: restoreCheckpointKey)
+        }
+        installWallet(saved); save(); updateMusic(); return true
+    }
+    private var restoreCheckpointKey: String { "orbitBloom.wallet.beforeCloudRestore.\(saveAccount ?? "guest")" }
+    var hasRestoreCheckpoint: Bool { defaults.data(forKey: restoreCheckpointKey) != nil }
+    @discardableResult func undoCloudRestore() -> Bool {
+        guard let data = defaults.data(forKey: restoreCheckpointKey),
+              let saved = try? JSONDecoder().decode(GardenWallet.self, from: data),
+              restoreWallet(saved) else { return false }
+        defaults.removeObject(forKey: restoreCheckpointKey)
+        return true
+    }
+    private func installWallet(_ saved: GardenWallet) {
+        runID = UUID(); raceActive = false; pendingTool = nil; blastKey = nil; busy = false
+        result = nil; paused = false; selected = nil; hinted = []; clearing = []; tab = 0
+        progress = saved.progress; ecosystem = saved.ecosystem; assistance = saved.assistance ?? Assistance()
+        charged = saved.charged ?? false; engine = saved.session.flatMap(GameEngine.init(snapshot:))
+        ecosystem.lives.refresh(at: Date()); sync()
+        if let engine, engine.won {
+            firstWin = progress.finish(level: engine.level.id, score: engine.score)
+            ecosystem.lives.rewardWin(); result = true
+        } else if engine?.lost == true { result = false }
     }
     func start(_ level: Level) {
         guard progress.isUnlocked(level.id) else { showToast("Complete circuit \(progress.nextLevel) to open this place."); return }
@@ -237,7 +304,7 @@ import Match3Kit
     }
     func applyTransaction(productID: String, transactionID: String) -> Bool {
         guard let pack = StorePack.all.first(where:{$0.id == productID}) else { return false }
-        guard !ecosystem.creditedTransactions.contains(transactionID) else { return true }
+        guard !creditedOnDevice.contains(transactionID), !ecosystem.creditedTransactions.contains(transactionID) else { return true }
         guard ecosystem.credit(pack.grant,transaction:transactionID) else { return false }
         progress.coins += pack.grant.coins
         save(); animateCoins(pack.grant.coins); effect("coin"); return true

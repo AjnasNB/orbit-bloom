@@ -10,6 +10,24 @@ import StoreKitTest
         XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
     }
     func attach(_ name:String) { let shot = XCTAttachment(screenshot:app.screenshot()); shot.name = name; shot.lifetime = .keepAlways; add(shot) }
+    func testPlayerAccountGuestSaveAndReturnToGameplay() throws {
+        app.buttons["openFarm"].tap(); app.buttons["plot0"].tap()
+        app.buttons["returnWorld"].tap(); app.buttons["settings"].tap()
+        app.buttons["playerAccount"].tap()
+        XCTAssertTrue(app.buttons["connectGameCenter"].waitForExistence(timeout:5))
+        XCTAssertTrue(app.staticTexts["saveSummary"].label.contains("160 coins"))
+        XCTAssertTrue(app.staticTexts["saveStatus"].label.contains("Saved on this device"))
+        let shot = XCTAttachment(screenshot:XCUIScreen.main.screenshot()); shot.name = "v6-player-and-saved-garden"; shot.lifetime = .keepAlways; add(shot)
+        app.buttons["connectGameCenter"].tap()
+        XCTAssertTrue(app.staticTexts["saveStatus"].label.contains("local save is safe"))
+        XCTAssertTrue(app.navigationBars.buttons["Settings"].exists)
+        app.navigationBars.buttons["Settings"].tap(); app.navigationBars.buttons["Done"].tap()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
+        app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:10))
+        app.buttons["openFarm"].tap()
+        XCTAssertFalse(app.buttons["plot0"].label.contains("Empty"), "The planted crop must survive relaunch after visiting account settings")
+    }
     func target() -> XCUIElement {
         let frozen = app.buttons.matching(NSPredicate(format:"identifier BEGINSWITH 'tile' AND label CONTAINS 'frozen'")).firstMatch
         return frozen.exists ? frozen : app.buttons["tile24"]
@@ -243,7 +261,11 @@ import StoreKitTest
         app.buttons["explorePacks"].tap()
         fits(app.buttons["buy_com.orbitbloom.coins400"])
         capture("ipad-05-supplies")
-        app.buttons["returnWorld"].tap(); app.buttons["playLevel"].tap()
+        app.buttons["returnWorld"].tap(); app.buttons["settings"].tap()
+        app.buttons["playerAccount"].tap(); fits(app.buttons["connectGameCenter"])
+        fits(app.staticTexts["saveSummary"]); capture("ipad-09-player-and-saved-garden")
+        app.navigationBars.buttons["Settings"].tap(); app.navigationBars.buttons["Done"].tap()
+        app.buttons["playLevel"].tap()
         for key in 0..<49 { fits(app.buttons["tile\(key)"]) }
         fits(app.buttons["pauseGame"]); fits(app.buttons["toolrainbow"])
         capture("ipad-06-puzzle-portrait")
