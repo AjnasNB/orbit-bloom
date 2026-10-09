@@ -1,0 +1,142 @@
+{
+  "build": 5,
+  "verifiedOn": "2026-10-09",
+  "deviceName": "Orbit Bloom App Store iPad QA",
+  "iOS": "26.1",
+  "result": "evidence/AppStore-IPadFullScreen.xcresult",
+  "passingTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens",
+  "durationSeconds": 39.289,
+  "saveReset": false,
+  "capture": "full device screen via XCUIScreen; no resizing or synthetic frames",
+  "status": "six portrait App Store captures ready; two correctly oriented full-screen landscape QA captures retained with native orientation metadata; not uploaded while Chrome is disconnected",
+  "screenshots": [
+    {
+      "file": "01-world.png",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "sha256": "b9daec90dd30f7bbbedfd71710f7a911efe90c6bf8b261bb2ff77b58672c70af",
+      "sourceAttachment": "B2973B37-9E4B-458C-B03C-6C5DB4C42537.png",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientation": 1,
+      "displayPixels": [
+        2064,
+        2752
+      ],
+      "intendedForAppStoreUpload": true
+    },
+    {
+      "file": "02-farm.png",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "sha256": "b90eda26e9787df71237d451adb29e151d30bb60f37b192d45695e0204677df9",
+      "sourceAttachment": "0ABEB294-1006-44E7-A248-2C0B96373CAF.png",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientation": 1,
+      "displayPixels": [
+        2064,
+        2752
+      ],
+      "intendedForAppStoreUpload": true
+    },
+    {
+      "file": "03-crafting.png",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "sha256": "9ba53d31e84a6d831351c508b56bd1db5eb0a5fb65efa70febc2aa3ca7a1fd7f",
+      "sourceAttachment": "6E407FD3-5B3E-4F9E-A862-5C0ABE0D18D0.png",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientation": 1,
+      "displayPixels": [
+        2064,
+        2752
+      ],
+      "intendedForAppStoreUpload": true
+    },
+    {
+      "file": "04-rally-lobby.png",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "sha256": "96dfd1bb6417d591b454c1aad8cd8ad362df8b44fa1a006a09e9e73501208719",
+      "sourceAttachment": "A515F55E-C083-4DEB-9584-27234AEAA4E2.png",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientation": 1,
+      "displayPixels": [
+        2064,
+        2752
+      ],
+      "intendedForAppStoreUpload": true
+    },
+    {
+      "file": "05-supplies.png",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "sha256": "3112b0eaf925a8f0f471adca97cd55d5e828d9acc8304f7eda35c1b9b8ea96b1",
+      "sourceAttachment": "093A56A8-7C29-4186-8B07-DCAD10042B27.png",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientation": 1,
+      "displayPixels": [
+        2064,
+        2752
+      ],
+      "intendedForAppStoreUpload": true
+    },
+    {
+      "file": "06-puzzle-portrait.png",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "sha256": "1ea6d86a76eaa7805d3516b50e2a17010a10aae305cf03fbef9e4610a247a4af",
+      "sourceAttachment": "ED49F799-FB26-4225-B97E-966E957B61D0.png",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientation": 1,
+      "displayPixels": [
+        2064,
+        2752
+      ],
+      "intendedForAppStoreUpload": true
+    },
+    {
+      "file": "07-puzzle-landscape.png",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "sha256": "985f5bc039e1e0c4ccb0ecc795d1cdc9edf5a8a02b96860a52ff6b3faff0a08f",
+      "sourceAttachment": "06F2E059-2647-4CB9-A802-F5BB7237B7BB.png",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientation": 8,
+      "displayPixels": [
+        2752,
+        2064
+      ],
+      "intendedForAppStoreUpload": false
+    },
+    {
+      "file": "08-world-landscape.png",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "sha256": "71a4a2f83b94fb80aef737ba377d259970e11d2ca6b99810c1362d657ccf532e",
+      "sourceAttachment": "EBA60046-284F-4884-968E-B542874AB4E2.png",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientation": 8,
+      "displayPixels": [
+        2752,
+        2064
+      ],
+      "intendedForAppStoreUpload": false
+    }
+  ]
+}

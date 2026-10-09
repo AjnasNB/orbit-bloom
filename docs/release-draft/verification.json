@@ -2,83 +2,108 @@
   "verifiedOn": "2026-10-09",
   "version": "1.0",
   "build": 5,
-  "scope": "25 core tests and the final combined 13 native plus 7 UI tests passed with zero failures. All captures are native build 5 screenshots.",
-  "passingUniqueCount": 45,
+  "scope": "25 core tests and the prior combined 13 native plus 7 UI tests passed with zero failures; refreshed core and purchase-screen checks plus one new iPad portrait/landscape release layout test pass. 46 unique cases across these runs, not one combined run.",
+  "passingUniqueCount": 46,
   "passingTests": {
     "OrbitBloomCoreTests.EcosystemTests/testAllToolShapesAndRainbowTargetTheCorrectCells": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testConnectedCircuitModeCanFinishTheWholeCampaign": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testCraftingAndTransactionIdempotency": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testFarmRequiresResourcesAndCanHarvestExactlyOnceAfterOfflineGrowth": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testLivesRegenerateAtThirtyMinuteBoundaryAndPersistOffline": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testPurchasedReserveDoesNotExpireOrGetClampedAndClockRollbackGrantsNothing": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.EcosystemTests/testRaceCollisionsPickupsPauseAndFinishAreDeterministic": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testBoardsStartStableAndAlwaysOfferAValidMove": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testBurstClearsCrossAndFrostWithoutSpendingMove": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testCampaignCanBeCompletedWithNormalMovesAndEarnedBursts": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testInvalidSwapDoesNotSpendMoveOrChangeBoard": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testLossRetryAndFreeShuffle": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testSeedReproducesOpeningAndRefill": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testSessionRoundTripRetainsBoardGoalsMovesAndFrost": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.GameEngineTests/testSwapsCascadeCollectAndLeavePlayableBoard": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testBombTriggersNearbyTNTAndConsumesBothExactlyOnce": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testFixedFormationRules": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testLateExpeditionAndAssistBalancesSurviveSerialization": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testSwipeMakesVisibleBoardPowerAndSaveKeepsIt": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.PowerRulesTests/testTenFreeHintsThenCoinsAndTaskRewardsCannotBeClaimedTwice": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testCoinPurchaseCannotOverdrawBalance": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testFirstWinAwardsOneStarAndReplaysNeverDuplicateIt": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testIslandCoverageTurnBudgetsAndSequentialUnlocks": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testProgressRoundTrip": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomCoreTests.ProgressTests/testRestorationRequiresStarsAndOrderedProjects": [
-      "evidence/v4-map-core-pass.log"
+      "evidence/v4-map-core-pass.log",
+      "evidence/appstore-core-verification.log"
     ],
     "OrbitBloomTests.PurchaseTests/testAppleConsumableCreditsCoinsAndDoesNotDoubleCredit": [
       "evidence/v5-final-native.log"
@@ -135,10 +160,14 @@
       "evidence/v5-final-native.log"
     ],
     "OrbitBloomUITests.GameplayUITests/testPauseResumeToolAndShopFlows": [
-      "evidence/v5-final-native.log"
+      "evidence/v5-final-native.log",
+      "evidence/AppStore-PurchaseReviewRetry.xcresult"
     ],
     "OrbitBloomUITests.GameplayUITests/testPuzzleWaterReachesFarmAndCanPlantAfterRelaunch": [
       "evidence/v5-final-native.log"
+    ],
+    "OrbitBloomUITests.IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens": [
+      "evidence/AppStore-IPadFullScreen.xcresult"
     ]
   },
   "screenshots": [

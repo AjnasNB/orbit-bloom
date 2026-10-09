@@ -1,0 +1,60 @@
+{
+  "checkedOn": "2026-10-09",
+  "appID": "6820591529",
+  "version": "1.0",
+  "build": 5,
+  "releaseMode": "manual",
+  "versionStatus": "Prepare for Submission",
+  "subtitle": "Swipe, farm & race among stars",
+  "primaryCategory": "Games",
+  "gameSubcategories": [
+    "Puzzle",
+    "Simulation"
+  ],
+  "contentRights": "licensed third-party content plus original artwork",
+  "ageRating": {
+    "mostRegions": "13+",
+    "Vietnam": "16+",
+    "Korea": "12+"
+  },
+  "appPrivacy": {
+    "savedAnswer": "Data Not Collected",
+    "published": false,
+    "pending": "owner confirmation for Apple Publish accuracy agreement"
+  },
+  "paymentAccount": {
+    "freeAppsAgreement": "Active",
+    "paidAppsAgreement": "Active",
+    "bankAccount": "Active",
+    "taxForms": "Active",
+    "traderCompliance": "Active",
+    "changed": false
+  },
+  "purchaseReview": "purchase-review/metadata.json",
+  "iPhoneScreenshots": "app-store-screenshots.json",
+  "iPadScreenshots": "ipad/verification.json",
+  "archive": {
+    "path": "build/OrbitBloom-Release-Prepared.xcarchive",
+    "compilation": "succeeded",
+    "signed": false,
+    "uploadable": false
+  },
+  "distributionProfile": {
+    "name": "Orbit Bloom AppStore",
+    "portalURL": "https://developer.apple.com/account/resources/profiles/review/554SHJ3J75",
+    "state": "active in Apple portal; not available locally"
+  },
+  "testFlightUploaded": false,
+  "appReviewSubmitted": false,
+  "publicReleased": false,
+  "pending": [
+    "Restore Chrome automation connection and unlock Mac",
+    "Download/install existing distribution profile; obtain authenticated signing/upload access",
+    "Finish lives and starter purchase review records; reload remaining coin records",
+    "Upload actual iPad screenshots",
+    "Verify app pricing/availability and region-specific license requirements",
+    "Publish privacy answers after explicit action-time confirmation",
+    "Validate/upload signed build and test signed sandbox purchases",
+    "Attach build and all first purchases to version 1.0 before App Review"
+  ]
+}

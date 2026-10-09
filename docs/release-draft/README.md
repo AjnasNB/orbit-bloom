@@ -2,9 +2,9 @@
 
 Version 1.0, workspace build 5. Nineteen refreshed captures show the verified native game at **1320 × 2868**. They come from the final passing Store QA simulator run; none were resized or synthesized for uploads. The previous ten build 3 medium-display captures are archived in screenshots/archive-build3-medium/.
 
-Ten current large-display screenshots are uploaded and retained after reload; the medium-display view inherits that set through Apple’s Using Existing Assets. The selected ten and their upload status are in [app-store-screenshots.json](app-store-screenshots.json). Device classes are tracked independently: large-display captures cannot substitute by claiming different pixel dimensions. [Verification manifest](verification.json) records **45 passing cases**, dimensions, hashes and source attachment names. Logs and result bundles remain local under evidence/.
+Ten current large-display screenshots are uploaded and retained after reload; the medium-display view inherits that set through Apple’s Using Existing Assets. The selected ten and their upload status are in [app-store-screenshots.json](app-store-screenshots.json). Device classes are tracked independently: large-display captures cannot substitute by claiming different pixel dimensions. [Verification manifest](verification.json) records **46 unique passing cases across the recorded runs**, dimensions, hashes and source attachment names. Logs and result bundles remain local under evidence/.
 
-[Metadata](metadata.json) and [App Store preparation](../APP_STORE_PREPARATION.md) track draft copy, hosting and signing. The gallery shows game scenes and bitmap board sprites; the island terrain uses actual SceneKit meshes.
+[Metadata](metadata.json), [current Apple status](app-store-status.json) and [App Store preparation](../APP_STORE_PREPARATION.md) track draft copy, hosting and signing. The gallery shows game scenes and bitmap board sprites; the island terrain uses actual SceneKit meshes.
 
 ### World
 
@@ -83,3 +83,11 @@ Build 5: four collected dewdrops increase farm water from 12 to 16. After reopen
 ### Power pattern journal
 
 <img src="screenshots/19-power-patterns.png" width="280" alt="Bomb, TNT, mega bomb and rainbow formations">
+
+### iPad release captures
+
+The passing iPad Pro 13-inch layout test exports six portrait frames for the store: [world](ipad/01-world.png), [farm](ipad/02-farm.png), [crafting](ipad/03-crafting.png), [rally lobby](ipad/04-rally-lobby.png), [supplies](ipad/05-supplies.png) and [puzzle](ipad/06-puzzle-portrait.png), all at native 2064 × 2752. They await Chrome reconnection for Apple upload. Full-screen [landscape puzzle](ipad/07-puzzle-landscape.png) and [landscape island](ipad/08-world-landscape.png) captures are retained for layout QA, with their original orientation metadata. [iPad manifest](ipad/verification.json) records encoded/displayed dimensions, hashes, exact attachments and the non-resetting test.
+
+### In-app purchase review
+
+[Six actual pack screens](purchase-review/verification.json) and [their reviewer instructions/upload states](purchase-review/metadata.json) are prepared. The four coin screenshots rendered in Apple, and the 400-coin record was verified after reload. Remaining reload checks plus the lives/starter uploads are pending. No product has been submitted or purchased with real money.

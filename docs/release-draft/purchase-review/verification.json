@@ -1,0 +1,80 @@
+{
+  "build": 5,
+  "capturedAt": "2026-10-09",
+  "result": "AppStore-PurchaseReviewRetry.xcresult",
+  "testsPassed": 1,
+  "screenshots": [
+    {
+      "product": "com.orbitbloom.starter",
+      "file": "starter.png",
+      "nativeDimensions": [
+        1320,
+        2868
+      ],
+      "sha256": "11e3f91d4c224bc4b9d7525b31a2bde83907a1b493b2b650f664281753b6693f",
+      "sourceAttachment": "E717FAE9-E327-4772-98C7-DC37F662D952.png",
+      "test": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7"
+    },
+    {
+      "product": "com.orbitbloom.lives5",
+      "file": "lives5.png",
+      "nativeDimensions": [
+        1320,
+        2868
+      ],
+      "sha256": "14647d59234e1b8ffae2f211d25633bf0137aaeb348ba3979ef281f7452c7645",
+      "sourceAttachment": "150F59B3-71C4-44BB-840E-7CB50AE9BD63.png",
+      "test": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7"
+    },
+    {
+      "product": "com.orbitbloom.coins7000",
+      "file": "coins7000.png",
+      "nativeDimensions": [
+        1320,
+        2868
+      ],
+      "sha256": "3a242bc2f9db643483d8c80a4cff66bc90ea922afdea43d7cee7f29c95b78322",
+      "sourceAttachment": "BDADB4AF-152A-474F-88AD-DFF611BCD773.png",
+      "test": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7"
+    },
+    {
+      "product": "com.orbitbloom.coins3000",
+      "file": "coins3000.png",
+      "nativeDimensions": [
+        1320,
+        2868
+      ],
+      "sha256": "de259bff5c88935cc795990807d5033cd6c3e0d266a99ae6ba35e543715f8f39",
+      "sourceAttachment": "476878B7-B060-4B4E-89B4-58A1C2F32894.png",
+      "test": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7"
+    },
+    {
+      "product": "com.orbitbloom.coins1500",
+      "file": "coins1500.png",
+      "nativeDimensions": [
+        1320,
+        2868
+      ],
+      "sha256": "f24bd36b81ec3ab8139120cd58ae3b2f8d3c23142aba034fd052e0c353ff2171",
+      "sourceAttachment": "321D740E-D156-42B9-9A5A-F305E351B366.png",
+      "test": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7"
+    },
+    {
+      "product": "com.orbitbloom.coins400",
+      "file": "coins400.png",
+      "nativeDimensions": [
+        1320,
+        2868
+      ],
+      "sha256": "93f9e0b7105549928a2d0f9d76977712ec73939e46f4c524b9ad898186c83141",
+      "sourceAttachment": "5F0498B6-7B05-4E6D-A597-C7A56A8A849A.png",
+      "test": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7"
+    }
+  ]
+}
