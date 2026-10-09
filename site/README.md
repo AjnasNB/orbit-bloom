@@ -1,9 +1,9 @@
 # Orbit Bloom Cloudflare site
 
-Static standalone game marketing, privacy and support pages. No build framework, analytics or remote scripts. Original app artwork and a reduced-size actual native screenshot are bundled under assets/.
+Live standalone marketing, privacy and support pages: **https://orbit-bloom-game-site.ajnasnb.workers.dev/**. The pages use bundled original artwork, a native game screenshot and local scripts, with no analytics or external JavaScript.
 
-Preview: `python3 -m http.server 4173 --directory site` from the repository root. Desktop and 390×844 layouts were visually checked in Chrome; bundled images loaded and no horizontal overflow was observed. The privacy route was opened through the actual navigation.
+Deploy from the repository root with `wrangler deploy --config wrangler.orbitbloom.jsonc`. This creates/updates only the dedicated `orbit-bloom-game-site` Worker and its static assets. The initial deploy verified that this Worker did not already exist. A new Pages project was attempted, but the account has reached its Pages project limit, so the site uses Workers static assets instead.
 
-Deploy the contents of this directory as a **new Cloudflare Pages project** using Direct Upload. `build/orbit-bloom-site.zip` is a ready upload archive generated from these files. Connect the new `orbitbloom.cognifyr.co` subdomain only after checking that it is unused, then verify HTTPS, support/privacy routes, sitemap and security headers. Do not modify existing projects, apex records or unrelated subdomains.
+Preview with `python3 -m http.server 4173 --directory site`. The live home, privacy and support routes were opened in Chrome on 9 October 2026. Canonical metadata, sitemap and robots use the verified workers.dev host. Recompute the JSON-LD SHA-256 in `_headers` when its inline text changes.
 
-Publishing is currently waiting for the owner's Cloudflare authenticator verification and Mac unlock. URLs in canonical metadata/sitemap are intended deployment addresses, not a claim that hosting is already live. The CSP JSON-LD hash in _headers must be recomputed if the inline structured-data text changes.
+The optional custom host `orbitbloom.cognifyr.co` has not been configured. Existing projects, DNS records, apex hosts and unrelated subdomains remain unchanged. Check that a desired custom hostname is unused before adding it.

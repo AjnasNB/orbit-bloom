@@ -1,25 +1,76 @@
 {
   "appID": "6820591529",
   "version": "1.0",
-  "displayClass": "iPhone with Dynamic Island (medium display)",
-  "nativePixels": [
-    1206,
-    2622
+  "workspaceBuild": 5,
+  "verifiedOn": "2026-10-09",
+  "displayClasses": [
+    {
+      "displayClass": "iPhone with Dynamic Island (large display)",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "status": "uploaded; all ten persisted after reload with rendered thumbnails",
+      "screenshotSourceBuild": 5,
+      "screenshots": [
+        "screenshots/01-world.png",
+        "screenshots/02-botanical-circuit.png",
+        "screenshots/16-board-power.png",
+        "screenshots/04-farm.png",
+        "screenshots/05-tool-shed.png",
+        "screenshots/19-power-patterns.png",
+        "screenshots/07-delivery-race.png",
+        "screenshots/10-delivery-complete.png",
+        "screenshots/09-complete-world.png",
+        "screenshots/12-lives-and-shop.png"
+      ]
+    },
+    {
+      "displayClass": "iPhone with Dynamic Island (medium display)",
+      "status": "Using Existing Assets: inherits all ten current build 5 large-display captures; verified after reload",
+      "screenshotSourceBuild": 5,
+      "sourceDisplayClass": "iPhone with Dynamic Island (large display)",
+      "sourceNativePixels": [
+        1320,
+        2868
+      ],
+      "screenshots": [
+        "screenshots/01-world.png",
+        "screenshots/02-botanical-circuit.png",
+        "screenshots/16-board-power.png",
+        "screenshots/04-farm.png",
+        "screenshots/05-tool-shed.png",
+        "screenshots/19-power-patterns.png",
+        "screenshots/07-delivery-race.png",
+        "screenshots/10-delivery-complete.png",
+        "screenshots/09-complete-world.png",
+        "screenshots/12-lives-and-shop.png"
+      ]
+    }
   ],
-  "status": "uploaded; all ten retained after reload with rendered thumbnails",
-  "screenshots": [
-    "screenshots/01-world.png",
-    "screenshots/02-botanical-circuit.png",
-    "screenshots/16-board-power.png",
-    "screenshots/04-farm.png",
-    "screenshots/05-tool-shed.png",
-    "screenshots/15-field-tasks.png",
-    "screenshots/07-delivery-race.png",
-    "screenshots/10-delivery-complete.png",
-    "screenshots/09-complete-world.png",
-    "screenshots/12-lives-and-shop.png"
-  ],
-  "workspaceBuild": 4,
-  "screenshotSourceBuild": 3,
-  "verifiedOn": "2026-10-09"
+  "archivedPriorMediumSet": {
+    "appID": "6820591529",
+    "version": "1.0",
+    "displayClass": "iPhone with Dynamic Island (medium display)",
+    "nativePixels": [
+      1206,
+      2622
+    ],
+    "status": "removed from the version draft; retained in Apple Asset Library and local archive",
+    "screenshots": [
+      "screenshots/archive-build3-medium/01-world.png",
+      "screenshots/archive-build3-medium/02-botanical-circuit.png",
+      "screenshots/archive-build3-medium/16-board-power.png",
+      "screenshots/archive-build3-medium/04-farm.png",
+      "screenshots/archive-build3-medium/05-tool-shed.png",
+      "screenshots/archive-build3-medium/15-field-tasks.png",
+      "screenshots/archive-build3-medium/07-delivery-race.png",
+      "screenshots/archive-build3-medium/10-delivery-complete.png",
+      "screenshots/archive-build3-medium/09-complete-world.png",
+      "screenshots/archive-build3-medium/12-lives-and-shop.png"
+    ],
+    "workspaceBuild": 4,
+    "screenshotSourceBuild": 3,
+    "verifiedOn": "2026-10-09"
+  }
 }

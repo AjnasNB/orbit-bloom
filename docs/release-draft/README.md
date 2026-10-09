@@ -1,12 +1,10 @@
 # Orbit Bloom release screenshot draft
 
-Version 1.0, workspace build 4. Sixteen build 3 captures are native 1206 × 2622. The new build 4 water-to-farm capture is native 1320 × 2868. All seventeen show actual simulator gameplay; none were resized for platform uploads.
+Version 1.0, workspace build 5. Nineteen refreshed captures show the verified native game at **1320 × 2868**. They come from the final passing Store QA simulator run; none were resized or synthesized for uploads. The previous ten build 3 medium-display captures are archived in screenshots/archive-build3-medium/.
 
-App Store Connect currently accepts this native size for its iPhone Dynamic Island medium display class. **Ten screenshots uploaded on 9 October:** all ten remained after reload and thumbnails rendered in Chrome. Other required device classes must be verified before submission. Metadata copy is in [metadata.json](metadata.json); signing and hosting status are in [App Store preparation](../APP_STORE_PREPARATION.md).
+Ten current large-display screenshots are uploaded and retained after reload; the medium-display view inherits that set through Apple’s Using Existing Assets. The selected ten and their upload status are in [app-store-screenshots.json](app-store-screenshots.json). Device classes are tracked independently: large-display captures cannot substitute by claiming different pixel dimensions. [Verification manifest](verification.json) records **45 passing cases**, dimensions, hashes and source attachment names. Logs and result bundles remain local under evidence/.
 
-The selected maximum set of ten is listed in [app-store-screenshots.json](app-store-screenshots.json). The full gallery below remains useful for review and testing.
-
-[Verification manifest](verification.json) records the 42 passing unique cases across targeted runs and the dimensions and SHA-256 of all seventeen screenshots. The full execution logs and result bundles remain local under evidence/.
+[Metadata](metadata.json) and [App Store preparation](../APP_STORE_PREPARATION.md) track draft copy, hosting and signing. The gallery shows game scenes and bitmap board sprites; the island terrain uses actual SceneKit meshes.
 
 ### World
 
@@ -74,6 +72,14 @@ The selected maximum set of ten is listed in [app-store-screenshots.json](app-st
 
 ### Puzzle water survives reopening
 
-Build 4: four collected dewdrops increase farm water from 12 to 16. After reopening, planting a rose spends two water.
+Build 5: four collected dewdrops increase farm water from 12 to 16. After reopening, planting a rose spends two water.
 
 <img src="screenshots/17-water-to-farm.png" width="280" alt="Collected puzzle water retained in Farm after reopening">
+
+### Locked island
+
+<img src="screenshots/18-locked-island.png" width="280" alt="Next island waits for sequential stage completion">
+
+### Power pattern journal
+
+<img src="screenshots/19-power-patterns.png" width="280" alt="Bomb, TNT, mega bomb and rainbow formations">

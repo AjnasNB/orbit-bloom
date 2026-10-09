@@ -1,3 +1,26 @@
+# Orbit Bloom build 5 verification — 9 October 2026
+
+**45 unique tests pass: 25 core checks and a final combined run of 13 native plus 7 UI tests, with zero failures.** Build 5 introduces a bright SceneKit island, 102 horizontally swiped pages with ten sequential stops each, in-scene Farm/Rally gates, and swipe pages for crafting, field tasks, patterns and supplies. The game pages fit without vertical scrolling or a permanent activity tab bar. Native island meshes animate trees and clouds; board/farm art remains rendered bitmap sprites. The 1,020 stops have unique generated names across twelve biome families, not 1,020 individually authored 3D environments.
+
+| Area | Passing cases | Evidence |
+| --- | ---: | --- |
+| Core rules, power patterns, economy, sequential unlocks and turn budgets | 25 | evidence/v4-map-core-pass.log |
+| Native persistence, locked-stage rejection and media | 7 | evidence/V5-FinalNative.xcresult |
+| Apple local StoreKit purchase, approval, restore and refund flows | 6 | evidence/V5-FinalNative.xcresult |
+| Real UI campaign, island pages, powers, journal, farm/craft, race, all six packs and water recovery | 7 | evidence/V5-FinalNative.xcresult; evidence/v5-final-native.log |
+
+The core solver completes all 1,020 levels and six garden projects in **6,033 legal swaps, zero retries, and no paid items or extra moves**. Sixty additional seeded opening simulations cover five boards for each of the first twelve stages. The actual UI campaign wins the first twelve stages and restores all six projects using real hints, swipes, inventory tools and earned bursts, in 310.039 seconds. This is reachability and regression evidence, not a claim that 1,020 levels were manually played or that human difficulty is calibrated. Turns are now 10–20; the generated later stages use 16–20.
+
+Diagnostic runs found and reproduced three interaction failures. The map's empty terrain initially did not receive swipes; its full content area now does. A stale transparent blast layer remained over the next level after a victory and blocked its hinted tile; blast state now expires independently with an identity guard and clears when entering/leaving a stage. The race road intercepted the finish button; it now stops receiving input after finishing. All affected flows pass in the final combined run. Atlas crop bounds also exclude neighboring art fragments, and light appearance plus grouped shadows keep status text and labels readable.
+
+Tests reset only the separate Store QA simulator (6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7, iOS 26.1). Build 5 was installed over Orbit Bloom QA (64173F47-C4DC-46B4-82EC-0027675F7780, iOS 26.5) without clearing data. Preferences were identical immediately after installation; progress, balances, crops, tools, assistance and saved session were preserved after normal launch. Only natural life-clock refresh and enum dictionary ordering were normalized. See evidence/v5-preview-preservation.txt.
+
+Nineteen actual build 5 screenshots were exported at native 1320 × 2868, with hashes and source attachments in release-draft/verification.json. The previous ten native medium-display captures were archived separately. Ten large-display screenshots persisted after upload/reload in Chrome; the medium class inherits those current images through Apple’s Using Existing Assets view. Current device-class status is in release-draft/app-store-screenshots.json. The website is hosted on the new isolated Cloudflare Worker at https://orbit-bloom-game-site.ajnasnb.workers.dev/; existing sites and DNS are untouched.
+
+The build 5 archive attempt with existing automatic provisioning still reports No Accounts and no profile (evidence/v5-signing-account-check.log); no signed archive or TestFlight upload was produced. No real purchases, agreements, App Review submission or public app release were performed. Physical devices, signed sandbox transactions, VoiceOver, larger text, iPad and older iOS layouts, audio/haptics on hardware, human difficulty and production purchase recovery remain release checks. Historical reports below describe their own builds and must not be read as current screenshot or hosting status.
+
+---
+
 # Orbit Bloom verification — 9 October 2026
 
 **Build 4: 42 unique cases passed across the full run and focused reruns.** Puzzle water now commits with the resolved board before match animations. The regression reproduced a saved balance of 12 rather than 16 before the fix. With the fix, model recreation during animation retains all four dewdrops, animation completion does not duplicate them, and the real UI can reopen Farm at 16 water and plant a rose to reach 14.
