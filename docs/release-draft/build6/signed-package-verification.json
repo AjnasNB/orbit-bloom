@@ -35,5 +35,8 @@
   "publicReleased": false,
   "deliveredAt": "2026-10-09T20:29:00+05:30",
   "testFlightBuildID": "858d66b4-ee72-4e6c-838a-65aa2450225b",
-  "submissionID": "d585e8f9-f825-4020-9661-6421068d7038"
+  "submissionID": "d585e8f9-f825-4020-9661-6421068d7038",
+  "currentReviewStatus": "Cancelled by publisher to replace build 6 with the tested build 7 security patch",
+  "supersededBySubmissionID": "9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad",
+  "supersededByBuild": 7
 }

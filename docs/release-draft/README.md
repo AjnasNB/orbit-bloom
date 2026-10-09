@@ -1,16 +1,16 @@
-# Orbit Bloom release screenshots — build 6
+# Orbit Bloom release screenshots — build 7
 
-Version 1.0, workspace build 6. [Thirty actual iPhone captures](build6/verification.json) and [nine iPad captures](build6/ipad/verification.json) come from passing native UI tests. The phone captures are 1320 × 2868, with seven iPad portraits at 2064 × 2752 and two landscape QA frames with original rotation metadata. No captures were resized or synthesized. **60 unique tests pass** across the recorded runs; live Apple cloud syncing remains a device check.
+Version 1.0, workspace build 7. [Ten fresh native QA captures](build7/verification.json) include one iPhone account page and nine iPad views. The phone capture is 1320 × 2868, with seven iPad portraits at 2064 × 2752 and two landscape QA frames with original rotation metadata. No captures were resized or synthesized. **68 unique tests pass** across the recorded runs; live Apple cloud syncing remains a device check. The existing store galleries retain their authentic build 6 source captures because the depicted interface is unchanged.
 
-**Version 1.0 (6) and all six purchases are Waiting for Review**, submitted on 9 October 2026 at 8:42 PM India time. [Apple confirmation](build6/apple-review-submission.jpg) records all seven items. The store contains ten native iPhone screenshots and nine native iPad screenshots, including saved-garden pages and iPad landscapes. Interrupted iPhone uploads were repaired before Apple validation passed. [Upload status](app-store-screenshots.json), [Apple status](app-store-status.json), [metadata](metadata.json) and [preparation notes](../APP_STORE_PREPARATION.md) record the final package. Build 6 is processed in TestFlight and assigned to internal QA; accept the existing owner invitation to check live cloud saves and sandbox purchases on hardware. Public release remains manual. The gallery below includes unchanged build 5 gameplay views; current captures and hashes are in build6/.
+**Version 1.0 (7) and all six purchases are Waiting for Review**, submitted on 9 October 2026 at 10:26 PM India time. [Apple confirmation](build7/apple-review-submission.jpg) records all seven items. The store contains ten native iPhone screenshots and nine native iPad screenshots, including saved-garden pages and iPad landscapes. Apple validated this gallery again with build 7. [Upload status](app-store-screenshots.json), [Apple status](app-store-status.json), [metadata](metadata.json) and [preparation notes](../APP_STORE_PREPARATION.md) record the package. Build 7 is processed in TestFlight and assigned to internal QA. The owner tester has installed build 6; update to build 7 to check live cloud saves and sandbox purchases on hardware. Public release remains manual. The earlier build 6 review submission was cancelled by the publisher to replace it with the security patch. The gallery below includes historical build 5 gameplay views; fresh QA captures and hashes are in build7/.
 
 ### Player and saved garden
 
-<img src="build6/v6-player-and-saved-garden.png" width="280" alt="Optional Game Center sign-in and saved garden status">
+<img src="build7/iphone/v7-player-and-saved-garden.png" width="280" alt="Build 7 optional Game Center sign-in and saved garden status">
 
 ### iPad player and saved garden
 
-<img src="build6/ipad/ipad-09-player-and-saved-garden.png" width="500" alt="Native iPad saved garden page">
+<img src="build7/ipad/ipad-09-player-and-saved-garden.png" width="500" alt="Build 7 native iPad saved garden page">
 
 ### World
 
@@ -92,8 +92,8 @@ Build 5: four collected dewdrops increase farm water from 12 to 16. After reopen
 
 ### iPad release captures
 
-The store now uses all nine refreshed build 6 iPad captures: seven portraits and two landscapes, including the saved-garden page. Portraits are native 2064 × 2752; landscapes retain their original rotation metadata and display at 2752 × 2064. Apple's preview was checked visually for correct landscape orientation. [Current iPad manifest](build6/ipad/verification.json) records dimensions, hashes and exact test attachments. The older six portrait captures and two landscape QA captures below remain historical build 5 evidence.
+The store uses nine build 6 iPad captures: seven portraits and two landscapes, including the saved-garden page. Portraits are native 2064 × 2752; landscapes retain their original rotation metadata and display at 2752 × 2064. Apple's preview was checked visually for correct landscape orientation. [Store source manifest](build6/ipad/verification.json) and [fresh build 7 QA manifest](build7/verification.json) record dimensions, hashes and exact test attachments. The unchanged store gallery passed review validation with build 7.
 
 ### In-app purchase review
 
-[Six actual pack screens](purchase-review/verification.json) and [review notes](purchase-review/metadata.json) were saved and verified after navigation/reload. All six Apple products show Ready for Review in one iOS draft. The app version must join them before final submission. No product was purchased with real money or submitted for review.
+[Six actual pack screens](purchase-review/verification.json) and [review notes](purchase-review/metadata.json) were saved and verified after navigation/reload. All six Apple products were submitted together with version 1.0 (7) and show **Waiting for Review**. No product was purchased with real money.

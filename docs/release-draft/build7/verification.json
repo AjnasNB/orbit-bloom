@@ -1,0 +1,278 @@
+{
+  "build": 7,
+  "captures": [
+    {
+      "file": "iphone/v7-player-and-saved-garden.png",
+      "sha256": "6b44a22e2b392ed8e01d2bbd10e003c49172883a5775a20b22fbb52b3b27f8ac",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "evidence/build7-account-attachments/F4244879-3316-45E1-844F-1983ADDC5ED9.png",
+      "test": "GameplayUITests/testPlayerAccountGuestSaveAndReturnToGameplay()",
+      "orientationNote": "Native portrait"
+    },
+    {
+      "file": "ipad/ipad-08-world-landscape.png",
+      "sha256": "1d524c3711f134f6721924fce4789ce789c0940880e7ef59373d53f2960ed523",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/1E3DDDC0-B666-48B3-8CA4-37B53BE1989B.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Landscape files retain native orientation metadata; no resizing or rotation was performed"
+    },
+    {
+      "file": "ipad/ipad-07-puzzle-landscape.png",
+      "sha256": "b302b899c1d79f0dc13f4275abef3a3c139803332ba05f669662e51e9832e54e",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/78F5453F-E3B6-4E61-9E82-04F9B170B9B4.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Landscape files retain native orientation metadata; no resizing or rotation was performed"
+    },
+    {
+      "file": "ipad/ipad-06-puzzle-portrait.png",
+      "sha256": "bb2e0942b6ab20fa263a86b87242be982df06f48163e8955f094411c64cb37cc",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/3DBCEEB8-2232-4558-9BCD-04594BC77D5F.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Native portrait"
+    },
+    {
+      "file": "ipad/ipad-09-player-and-saved-garden.png",
+      "sha256": "5f0534eaefd9dbe6c31a3fce7dce8caed6ff8f4ed0488317b1bcc3f7930b361a",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/E0903B2F-D462-45EB-9AEA-17284430FAC6.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Native portrait"
+    },
+    {
+      "file": "ipad/ipad-05-supplies.png",
+      "sha256": "c8ea1c4a8db00e76a099e154133d439db95d3803845de5c2392569d42e194beb",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/9C3DB7F6-C6C8-4EB3-AEE8-87F2BB842828.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Native portrait"
+    },
+    {
+      "file": "ipad/ipad-04-rally-lobby.png",
+      "sha256": "e4c5204befd158802106f06580a3a7dff7b21d54607d4a24918f89e44aefd29b",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/1F5ACDE8-9225-4970-A1E2-D5FF5D3F5E14.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Native portrait"
+    },
+    {
+      "file": "ipad/ipad-03-crafting.png",
+      "sha256": "2e53d8964a25e5c4ee1d7937a31e85254c0f0fd4076d26b056e0fd195682aaaa",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/3622FD1A-BE5B-48E7-BFE4-754CCFD51185.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Native portrait"
+    },
+    {
+      "file": "ipad/ipad-02-farm.png",
+      "sha256": "dd22ed3397e498fd282302bb30df9d12946065a8a1918f23bc3cfb3a76b9ec04",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/915F9D04-F07F-4159-A74A-936F8461FD07.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Native portrait"
+    },
+    {
+      "file": "ipad/ipad-01-world.png",
+      "sha256": "fe8a9e47b255a2e5c908f58b74a797b864313939d88c6e8542dc86b10fc100ed",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "evidence/build7-ipad-attachments/9549AFFB-A6D7-4802-88CA-0498786EE37E.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "orientationNote": "Native portrait"
+    }
+  ],
+  "screenshotsResized": false,
+  "sourceCommit": "f1cdf4da6761b6ce6921c160d61bee83c01a89dd",
+  "uniquePassingTests": 68,
+  "core": 31,
+  "native": 28,
+  "iphoneUI": 8,
+  "ipadUI": 1,
+  "results": {
+    "full": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+            "deviceName": "Orbit Bloom Store QA",
+            "modelName": "iPhone 17 Pro Max",
+            "osBuildNumber": "23B80",
+            "osVersion": "26.1",
+            "platform": "iOS Simulator"
+          },
+          "expectedFailures": 0,
+          "failedTests": 0,
+          "passedTests": 35,
+          "skippedTests": 1,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "OrbitBloom \u00b7 Built with macOS 26.5",
+      "expectedFailures": 0,
+      "failedTests": 0,
+      "finishTime": 1791564071.963,
+      "passedTests": 35,
+      "result": "Passed",
+      "skippedTests": 1,
+      "startTime": 1791563562.406,
+      "statistics": [],
+      "testFailures": [],
+      "title": "Test - OrbitBloom",
+      "topInsights": [],
+      "totalTestCount": 36
+    },
+    "finalRecovery": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+            "deviceName": "Orbit Bloom Store QA",
+            "modelName": "iPhone 17 Pro Max",
+            "osBuildNumber": "23B80",
+            "osVersion": "26.1",
+            "platform": "iOS Simulator"
+          },
+          "expectedFailures": 0,
+          "failedTests": 0,
+          "passedTests": 31,
+          "skippedTests": 0,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "OrbitBloom \u00b7 Built with macOS 26.5",
+      "expectedFailures": 0,
+      "failedTests": 0,
+      "finishTime": 1791564210.827,
+      "passedTests": 31,
+      "result": "Passed",
+      "skippedTests": 0,
+      "startTime": 1791564129.65,
+      "statistics": [],
+      "testFailures": [],
+      "title": "Test - OrbitBloom",
+      "topInsights": [
+        {
+          "category": "Longest Test Runs",
+          "impact": "27% of duration",
+          "text": "1 longest test run with outlier durations exceeding 1.28s (three standard deviations)"
+        }
+      ],
+      "totalTestCount": 31
+    },
+    "ipad": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+            "deviceName": "Orbit Bloom App Store iPad QA",
+            "modelName": "iPad Pro 13-inch (M5)",
+            "osBuildNumber": "23B80",
+            "osVersion": "26.1",
+            "platform": "iOS Simulator"
+          },
+          "expectedFailures": 0,
+          "failedTests": 0,
+          "passedTests": 1,
+          "skippedTests": 0,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "OrbitBloom \u00b7 Built with macOS 26.5",
+      "expectedFailures": 0,
+      "failedTests": 0,
+      "finishTime": 1791564307.412,
+      "passedTests": 1,
+      "result": "Passed",
+      "skippedTests": 0,
+      "startTime": 1791564260.612,
+      "statistics": [],
+      "testFailures": [],
+      "title": "Test - OrbitBloom",
+      "topInsights": [],
+      "totalTestCount": 1
+    },
+    "staleFetch": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+            "deviceName": "Orbit Bloom Store QA",
+            "modelName": "iPhone 17 Pro Max",
+            "osBuildNumber": "23B80",
+            "osVersion": "26.1",
+            "platform": "iOS Simulator"
+          },
+          "expectedFailures": 0,
+          "failedTests": 0,
+          "passedTests": 1,
+          "skippedTests": 0,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "OrbitBloom \u00b7 Built with macOS 26.5",
+      "expectedFailures": 0,
+      "failedTests": 0,
+      "finishTime": 1791564364.027,
+      "passedTests": 1,
+      "result": "Passed",
+      "skippedTests": 0,
+      "startTime": 1791564348.356,
+      "statistics": [],
+      "testFailures": [],
+      "title": "Test - OrbitBloom",
+      "topInsights": [],
+      "totalTestCount": 1
+    }
+  },
+  "previewPreserved": true,
+  "previewEvidence": "evidence/build7-preview-preservation.txt",
+  "cloudLiveRoundTripVerified": false,
+  "signedSandboxPurchaseVerified": false
+}

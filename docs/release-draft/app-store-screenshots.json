@@ -1,7 +1,7 @@
 {
   "appID": "6820591529",
   "version": "1.0",
-  "workspaceBuild": 6,
+  "workspaceBuild": 7,
   "verifiedOn": "2026-10-09",
   "displayClasses": [
     {
@@ -100,7 +100,7 @@
         "build6/ipad/ipad-07-puzzle-landscape.png",
         "build6/ipad/ipad-08-world-landscape.png"
       ],
-      "landscapeEncoding": "2064 \u00d7 2752 native pixels with orientation 8; displayed as 2752 \u00d7 2064; no resizing",
+      "landscapeEncoding": "2064 × 2752 native pixels with orientation 8; displayed as 2752 × 2064; no resizing",
       "build6Prepared": "build6/ipad/verification.json",
       "landscapeDisplayVerified": "Apple image preview displays native landscape puzzle correctly, retaining original rotation metadata"
     }
@@ -131,12 +131,15 @@
     "verifiedOn": "2026-10-09"
   },
   "uploadedDistinctScreenshotCount": 19,
-  "appleReviewValidation": "passed; submitted with app version 1.0 build 6",
+  "appleReviewValidation": "passed; submitted with app version 1.0 build 7",
   "evidence": [
     "evidence/build6-iphone-screenshots-complete.jpg",
     "evidence/build6-iphone-world-in-apple.jpg",
     "evidence/build6-ipad-screenshots-verified.jpg",
     "evidence/build6-ipad-landscape-in-apple.jpg",
-    "build6/apple-review-submission.jpg"
-  ]
+    "build6/apple-review-submission.jpg",
+    "build7/apple-review-submission.jpg"
+  ],
+  "build7QAPrepared": "build7/verification.json",
+  "galleryRetainedReason": "Authentic build 6 captures depict the same interface in build 7; screenshot source build labels are preserved"
 }
