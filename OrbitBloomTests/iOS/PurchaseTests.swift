@@ -97,6 +97,19 @@ import StoreKitTest
 }
 
 @MainActor final class SessionTests: XCTestCase {
+    func testLockedCircuitCannotSpendLifeOrReplaceSession() throws {
+        let suite = "orbitbloom.lock.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))
+        defer { defaults.removePersistentDomain(forName:suite) }
+        let model = GameModel(defaults:defaults)
+        let lives = model.ecosystem.lives.total
+        model.start(Level.campaign[1])
+        XCTAssertNil(model.engine); XCTAssertEqual(model.ecosystem.lives.total,lives)
+        model.start(Level.campaign[0]); let ids = model.cells.map(\.id)
+        model.start(Level.campaign[2])
+        XCTAssertEqual(model.engine?.level.id,1); XCTAssertEqual(model.cells.map(\.id),ids)
+        XCTAssertEqual(model.ecosystem.lives.total,lives-1)
+    }
     func testPuzzleWaterPersistsBeforeAnimationAndIsNotCreditedTwice() async throws {
         let suite = "orbitbloom.water.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))
@@ -129,6 +142,7 @@ import StoreKitTest
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
         defer { defaults.removePersistentDomain(forName: suite) }
         let model = GameModel(defaults: defaults)
+        for level in 1...3 { _ = model.progress.finish(level:level,score:500) }
         model.start(Level.campaign[3])
         model.engine?.shuffle(); model.sync(); model.charged = true; model.save()
         let restored = GameModel(defaults: defaults)

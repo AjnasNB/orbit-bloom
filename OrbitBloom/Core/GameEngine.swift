@@ -35,24 +35,24 @@ public struct Level: Identifiable {
     public var subtitle: String { frost > 0 ? "Bloom beside frozen patches to melt them." : "Collect resources to bring your little moon to life." }
     public static let total = 1020
     public static let campaign: [Level] = opening + (13...total).map { id in
-        let region = (id-13)/20
-        let names = ["Orchid orbit", "Applewood trails", "Dewdrop canyon", "Rose nebula", "Crystal canopy", "Solar orchard"]
+        let region = (id-1)/10
+        let names = GardenRegion.biomes
         let a = Gem.allCases[id%5], b = Gem.allCases[(id+2)%5]
-        return Level(id:id,title:"\(names[region%names.count]) \(id)",biome:"Expedition \(region+1)",moves:32+id%5,target:1500+id%7*150,goals:[a:12+id%7,b:10+id%6],frost:4+id%9)
+        return Level(id:id,title:"\(names[region%names.count]) \(id)",biome:"Expedition \(region+1)",moves:16+id%5,target:1500+id%7*150,goals:[a:12+id%7,b:10+id%6],frost:4+id%9)
     }
     public static let opening: [Level] = [
-        .init(id: 1, title: "A little life", biome: "Moonseed Meadow", moves: 22, target: 450, goals: [.leaf: 6], frost: 0),
-        .init(id: 2, title: "Morning dew", biome: "Moonseed Meadow", moves: 24, target: 700, goals: [.water: 9], frost: 0),
-        .init(id: 3, title: "First flowers", biome: "Moonseed Meadow", moves: 25, target: 900, goals: [.flower: 10, .sun: 8], frost: 0),
-        .init(id: 4, title: "Roots & starlight", biome: "Moonseed Meadow", moves: 26, target: 1100, goals: [.leaf: 12, .crystal: 9], frost: 4),
-        .init(id: 5, title: "A coral sunrise", biome: "Coral Observatory", moves: 27, target: 1300, goals: [.sun: 12, .water: 10], frost: 4),
-        .init(id: 6, title: "The quiet pool", biome: "Coral Observatory", moves: 28, target: 1500, goals: [.water: 15, .flower: 10], frost: 6),
-        .init(id: 7, title: "Cosmic pollinators", biome: "Coral Observatory", moves: 29, target: 1700, goals: [.flower: 16, .leaf: 12], frost: 6),
-        .init(id: 8, title: "Warmth returns", biome: "Coral Observatory", moves: 30, target: 1800, goals: [.sun: 16, .crystal: 12], frost: 8),
-        .init(id: 9, title: "An aurora seed", biome: "Aurora Grove", moves: 30, target: 1900, goals: [.leaf: 16, .crystal: 14], frost: 8),
-        .init(id: 10, title: "Into the blue", biome: "Aurora Grove", moves: 31, target: 2100, goals: [.water: 18, .sun: 14], frost: 10),
-        .init(id: 11, title: "The last frost", biome: "Aurora Grove", moves: 32, target: 2300, goals: [.flower: 18, .leaf: 16], frost: 12),
-        .init(id: 12, title: "A world in bloom", biome: "Aurora Grove", moves: 34, target: 2500, goals: [.flower: 20, .crystal: 18], frost: 12)
+        .init(id: 1, title: "A little life", biome: "Moonseed Meadow", moves: 10, target: 350, goals: [.leaf: 6], frost: 0),
+        .init(id: 2, title: "Morning dew", biome: "Moonseed Meadow", moves: 11, target: 500, goals: [.water: 7], frost: 0),
+        .init(id: 3, title: "First flowers", biome: "Moonseed Meadow", moves: 12, target: 700, goals: [.flower: 8, .sun: 6], frost: 0),
+        .init(id: 4, title: "Roots & starlight", biome: "Moonseed Meadow", moves: 13, target: 800, goals: [.leaf: 10, .crystal: 7], frost: 4),
+        .init(id: 5, title: "A coral sunrise", biome: "Coral Observatory", moves: 14, target: 1000, goals: [.sun: 10, .water: 8], frost: 4),
+        .init(id: 6, title: "The quiet pool", biome: "Coral Observatory", moves: 14, target: 1100, goals: [.water: 12, .flower: 8], frost: 6),
+        .init(id: 7, title: "Cosmic pollinators", biome: "Coral Observatory", moves: 18, target: 1300, goals: [.flower: 13, .leaf: 10], frost: 6),
+        .init(id: 8, title: "Warmth returns", biome: "Coral Observatory", moves: 16, target: 1350, goals: [.sun: 13, .crystal: 10], frost: 8),
+        .init(id: 9, title: "An aurora seed", biome: "Aurora Grove", moves: 19, target: 1400, goals: [.leaf: 13, .crystal: 11], frost: 6),
+        .init(id: 10, title: "Into the blue", biome: "Aurora Grove", moves: 17, target: 1600, goals: [.water: 14, .sun: 11], frost: 8),
+        .init(id: 11, title: "The last frost", biome: "Aurora Grove", moves: 18, target: 1700, goals: [.flower: 14, .leaf: 13], frost: 8),
+        .init(id: 12, title: "A world in bloom", biome: "Aurora Grove", moves: 20, target: 1900, goals: [.flower: 16, .crystal: 14], frost: 8)
     ]
 }
 
@@ -127,7 +127,8 @@ public final class GameEngine {
         cells.sorted { $0.key < $1.key }.filter { cluster(at:$0.key).count >= 2 }.max { a,b in
             func value(_ cell: CellState) -> Int {
                 let group = cluster(at:cell.key)
-                return group.count * (collected[cell.gem,default:0] < level.goals[cell.gem,default:0] ? 5 : 1) + group.intersection(frost).count * 8
+                let warmed = frost.filter { frozen in group.contains { matched in abs(matched/7-frozen/7)+abs(matched%7-frozen%7) <= 1 } }
+                return group.count * (collected[cell.gem,default:0] < level.goals[cell.gem,default:0] ? 5 : 1) + warmed.count * 8
             }
             return value(a) < value(b)
         }?.key

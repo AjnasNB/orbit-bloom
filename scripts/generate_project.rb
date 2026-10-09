@@ -26,7 +26,7 @@ app.build_configurations.each do |config|
   s['CODE_SIGN_STYLE'] = 'Automatic'
   s['MARKETING_VERSION'] = '1.0'
   s['DEVELOPMENT_TEAM'] = '4V29K5Q8S9'
-  s['CURRENT_PROJECT_VERSION'] = '4'
+  s['CURRENT_PROJECT_VERSION'] = '5'
   s['ASSETCATALOG_COMPILER_APPICON_NAME'] = 'AppIcon'
 end
 source_group = project.main_group.new_group('OrbitBloom', 'OrbitBloom')

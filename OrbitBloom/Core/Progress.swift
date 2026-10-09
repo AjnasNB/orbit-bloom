@@ -26,7 +26,8 @@ public struct Progress: Codable, Equatable {
     public var haptics = true
     public var auroraTheme = false
     public init() {}
-    public var nextLevel: Int { min(Level.total, (completed.keys.max() ?? 0) + 1) }
+    public var nextLevel: Int { (1...Level.total).first { completed[$0] == nil } ?? Level.total }
+    public func isUnlocked(_ level: Int) -> Bool { (1...Level.total).contains(level) && level <= nextLevel }
     public var chapterComplete: Bool { (1...12).allSatisfy { completed[$0] != nil } }
     public var gardenComplete: Bool { restored.count == GardenTask.all.count }
     @discardableResult public mutating func finish(level: Int, score: Int) -> Bool {
@@ -47,4 +48,17 @@ public struct Progress: Codable, Equatable {
         guard coins >= 80 else { return false }
         coins -= 80; boosters += 1; return true
     }
+}
+
+/// Ten stops per island page. Every stage has a deterministic place and unlocks in order.
+public struct GardenRegion: Identifiable {
+    public let id: Int
+    public static let stopsPerPage = 10
+    public static let biomes = ["Moonseed meadow", "Coral coast", "Applewood grove", "Dewdrop canyon", "Rose lagoon", "Crystal canopy", "Sunlit orchard", "Cloud conservatory", "Lotus marsh", "Aurora terrace", "Honeybee haven", "Starlight summit"]
+    public static let landmarks = ["Seedling gate", "Flower bridge", "Dew pool", "Orchard bend", "Petal fountain", "Crystal clearing", "Butterfly nook", "Greenhouse steps", "Moonstone arch", "Bloom lookout"]
+    public static let all = (0..<((Level.total + stopsPerPage - 1)/stopsPerPage)).map { GardenRegion(id:$0) }
+    public var title: String { Self.biomes[id % Self.biomes.count] }
+    public var levels: [Level] { Array(Level.campaign.dropFirst(id * Self.stopsPerPage).prefix(Self.stopsPerPage)) }
+    public func placeName(for level: Int) -> String { "\(Self.landmarks[(level-1)%Self.stopsPerPage]) · \(level)" }
+    public func isUnlocked(progress: Progress) -> Bool { id * Self.stopsPerPage + 1 <= progress.nextLevel }
 }

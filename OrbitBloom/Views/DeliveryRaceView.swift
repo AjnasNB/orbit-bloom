@@ -7,8 +7,8 @@ struct DeliveryLobby: View {
             SectionEyebrow(text:"Race / Harvest rally")
             Text("Fresh cargo.\nOpen road.").font(.system(size:36,weight:.heavy,design:.rounded)).foregroundStyle(Palette.cream)
             ZStack {
-                Image("LivingGarden").resizable().scaledToFill().frame(height:260).clipped().opacity(0.5)
-                SpriteView(index:9).frame(height:200).rotationEffect(.degrees(-12)).shadow(color:.black.opacity(0.5),radius:12,y:12)
+                Image("LivingGarden").resizable().scaledToFill().frame(height:200).clipped().opacity(0.5)
+                SpriteView(index:9).frame(height:160).rotationEffect(.degrees(-12)).shadow(color:.black.opacity(0.5),radius:12,y:12)
             }.clipShape(RoundedRectangle(cornerRadius:26))
             Text("Swipe left or right to steer your rover through three lanes. Dodge stone barriers, collect coins, and deliver your harvest in 22 seconds.").font(.system(.body,design:.rounded)).foregroundStyle(Palette.mint)
             HStack { Label("3 shield points",systemImage:"shield.fill"); Spacer(); Label("No life cost",systemImage:"heart.fill") }.font(.caption).foregroundStyle(Palette.gold)
@@ -66,13 +66,14 @@ struct DeliveryRaceView: View {
                     }
                     SpriteView(index:9).frame(width:76,height:104).rotationEffect(.degrees(flash ? 10 : 0)).position(x:laneX(run.lane,width:geo.size.width),y:geo.size.height*0.78).animation(reduceMotion ? nil : .spring(response:0.2),value:run.lane)
                     if flash { Color.red.opacity(0.2).clipShape(RoundedRectangle(cornerRadius:28)).allowsHitTesting(false) }
-                    if paused { Text("Race paused").font(.title2.bold()).foregroundStyle(Palette.cream).padding(24).background(Palette.night,in:Capsule()) }
+                    if paused { Text("Race paused").font(.title2.bold()).foregroundStyle(Palette.cream).padding(24).background(Palette.paper,in:Capsule()) }
                 }.clipped().clipShape(RoundedRectangle(cornerRadius:28)).contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance:20).onEnded { value in
                     guard !run.finished, !paused else { return }
                     run.lane = min(2,max(0,run.lane+(value.translation.width < 0 ? -1 : 1))); game.effect("tap")
                 }).accessibilityElement(children:.contain).accessibilityLabel("Harvest rally road. Swipe to steer.").accessibilityValue("Lane \(run.lane+1) of 3").accessibilityIdentifier("raceTrack")
                 .accessibilityAdjustableAction { direction in if direction == .increment { run.lane = min(2,run.lane+1) } else if direction == .decrement { run.lane = max(0,run.lane-1) } }
+                .allowsHitTesting(!run.finished)
                 .overlay { if run.finished { finish } }
             }.padding(.horizontal,20)
             Label("Swipe the road to steer",systemImage:"hand.draw.fill").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.mint).frame(minHeight:44)
@@ -93,6 +94,6 @@ struct DeliveryRaceView: View {
             Text(run.won ? "Delivery complete!" : "Time for a tune-up").font(.system(size:24,weight:.heavy,design:.rounded)).foregroundStyle(Palette.cream).multilineTextAlignment(.center).accessibilityIdentifier("raceResult")
             Text(run.won ? "Your harvest made it home. Coins are in your wallet." : "Your collected coin reward is safe. Try another route.").font(.subheadline).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
             PrimaryButton(title:"Back to the world",symbol:"globe",id:"raceDone") { game.raceActive = false; game.tab = 0 }
-        }.padding(24).background(Palette.night.opacity(0.97),in:RoundedRectangle(cornerRadius:25)).padding(22)
+        }.padding(24).background(Palette.paper.opacity(0.98),in:RoundedRectangle(cornerRadius:25)).padding(22)
     }
 }

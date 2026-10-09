@@ -67,8 +67,10 @@ import Match3Kit
         else { defaults.removeObject(forKey: "orbitBloom.session.v1") }
     }
     func start(_ level: Level) {
+        guard progress.isUnlocked(level.id) else { showToast("Complete circuit \(progress.nextLevel) to open this place."); return }
         guard ecosystem.lives.spend(at:Date()) else { leave(); tab = 4; showToast("No lives yet. One returns every 30 minutes; farming and racing stay open."); return }
         pendingTool = nil
+        blastKey = nil; blastID = UUID()
         runID = UUID()
         let seed = UInt64(level.id * 101)
         engine = GameEngine(level: level, seed: seed)
@@ -85,17 +87,17 @@ import Match3Kit
         if let tool = pendingTool {
             guard ecosystem.tools[tool,default:0] > 0 else { return }
             ecosystem.tools[tool,default:0] -= 1; pendingTool = nil
-            blastKey = key; blastID = UUID(); effect("blast"); assistance.blasts += 1
+            showBlast(at:key); effect("blast"); assistance.blasts += 1
             play(engine.activate(tool,at:key),allowCharge:false); return
         }
         if burstMode {
             guard charged || progress.boosters > 0 else { return }
             if charged { charged = false } else { progress.boosters -= 1 }
-            burstMode = false; blastKey = key; blastID = UUID(); effect("blast")
+            burstMode = false; showBlast(at:key); effect("blast")
             play(engine.burst(at:key),allowCharge:false); return
         }
         if engine.powers[key] != nil {
-            assistance.blasts += 1; blastKey = key; blastID = UUID(); effect("blast")
+            assistance.blasts += 1; showBlast(at:key); effect("blast")
             play(engine.detonate(at:key),allowCharge:false); return
         }
         let turn = engine.harvestCluster(at:key)
@@ -107,7 +109,7 @@ import Match3Kit
         guard !busy, !paused, result == nil, let engine, max(abs(dx),abs(dy)) >= 16 else { return }
         let other = abs(dx) > abs(dy) ? key + (dx > 0 ? 1 : -1) : key + (dy > 0 ? -7 : 7)
         guard (0..<49).contains(other), abs(other/7-key/7)+abs(other%7-key%7) == 1 else { return }
-        if engine.powers[key] != nil || engine.powers[other] != nil { assistance.blasts += 1; blastKey = other; blastID = UUID(); effect("blast") }
+        if engine.powers[key] != nil || engine.powers[other] != nil { assistance.blasts += 1; showBlast(at:other); effect("blast") }
         let turn = engine.swap(key,other)
         if turn.accepted { pendingTool = nil; burstMode = false; play(turn) }
         else { message = "Slide a neighbor to make 3 in a row. No turn spent."; effect("tap"); feedback(.rigid) }
@@ -164,6 +166,15 @@ import Match3Kit
         hintText = "Slide row \(7-pair.0/7), column \(pair.0%7+1) to row \(7-pair.1/7), column \(pair.1%7+1)."
         message = "Swipe the two glowing pieces."; effect("tap"); save()
     }
+    func showBlast(at key:Int) {
+        blastKey = key; blastID = UUID()
+        let effectID = blastID
+        Task {
+            try? await Task.sleep(for:.milliseconds(UIAccessibility.isReduceMotionEnabled ? 100 : 650))
+            guard blastID == effectID else { return }
+            blastKey = nil
+        }
+    }
     func shuffle() {
         guard !busy, let engine else { return }
         guard assistance.spendShuffle(coins:&progress.coins) else { showToast("Earn shuffles in Field Tasks, or use 15 earned coins."); return }
@@ -181,7 +192,7 @@ import Match3Kit
         burstMode.toggle(); selected = nil
         message = burstMode ? "Tap a piece to clear its row and column." : "Swipe neighbors to match three, or tap a touching group."
     }
-    func leave() { pendingTool = nil; runID = UUID(); engine = nil; result = nil; busy = false; paused = false; save() }
+    func leave() { pendingTool = nil; blastKey = nil; blastID = UUID(); runID = UUID(); engine = nil; result = nil; busy = false; paused = false; save() }
     func gardenAfterWin() { leave(); tab = 0 }
     func restore(_ task: GardenTask) {
         if progress.restore(task.id) { save(); showToast(progress.gardenComplete ? "Your little world is in bloom!" : "\(task.title) · restored!"); feedback(.medium) }

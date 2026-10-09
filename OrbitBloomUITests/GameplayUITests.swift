@@ -47,17 +47,57 @@ import StoreKitTest
             guard values.count == 4 else { return }
             let key = (7-values[0])*7+values[1]-1, other = (7-values[2])*7+values[3]-1
             let turns = Int(app.staticTexts["movesCounter"].label)!
+            if !app.buttons["tile\(key)"].isHittable {
+                attach("highlight-hit-region-failure")
+                print(app.debugDescription)
+            }
             app.buttons["tile\(key)"].press(forDuration:0.1,thenDragTo:app.buttons["tile\(other)"])
             settle()
             if !app.staticTexts["winTitle"].exists { XCTAssertEqual(Int(app.staticTexts["movesCounter"].label),turns-1,"The hinted swipe must swap pieces and spend exactly one turn") }
         }
         XCTFail("Circuit never completed")
     }
+    func testIslandPagesUnlockSequentiallyAndUseInWorldNavigation() throws {
+        XCTAssertEqual(app.scrollViews.count,0,"The game map must fit without website scrolling")
+        XCTAssertTrue(app.buttons["level1"].isEnabled)
+        XCTAssertFalse(app.buttons["level2"].isEnabled)
+        XCTAssertEqual(app.staticTexts["islandRange"].label,"1–10")
+        attach("v4-01-living-island")
+        app.descendants(matching:.any)["gardenMap"].swipeLeft()
+        XCTAssertEqual(app.staticTexts["islandRange"].label,"11–20")
+        XCTAssertFalse(app.buttons["level11"].isEnabled)
+        XCTAssertFalse(app.buttons["playLevel"].exists,"A locked island must not offer a start bypass")
+        attach("v4-02-locked-island")
+        app.buttons["openCurrentIsland"].tap()
+        XCTAssertEqual(app.staticTexts["islandRange"].label,"1–10")
+        app.buttons["playLevel"].tap()
+        XCTAssertEqual(app.staticTexts["movesCounter"].label,"10")
+        XCTAssertEqual(app.scrollViews.count,0,"Puzzle swipes must never scroll the screen")
+        try winCurrentLevel(); app.buttons["backToGarden"].tap()
+        XCTAssertTrue(app.buttons["level2"].isEnabled)
+        XCTAssertFalse(app.buttons["level3"].isEnabled)
+        app.buttons["openTasks"].tap(); app.buttons["journalPatterns"].tap()
+        XCTAssertTrue(app.staticTexts["Patterns make power."].waitForExistence(timeout:5))
+        XCTAssertTrue(app.staticTexts["Mega bomb"].exists)
+        XCTAssertEqual(app.scrollViews.count,0)
+        attach("v5-19-power-patterns"); app.navigationBars.buttons["Done"].tap()
+        app.buttons["openFarm"].tap()
+        XCTAssertTrue(app.buttons["plot5"].isHittable,"All six farm plots fit in the scene")
+        XCTAssertEqual(app.scrollViews.count,0)
+        attach("v4-03-farm-terraces")
+        app.descendants(matching:.any)["farmScene"].swipeLeft()
+        XCTAssertTrue(app.buttons["craftrainbow"].waitForExistence(timeout:5))
+        attach("v4-04-crafting-shed")
+        app.buttons["returnWorld"].tap()
+        XCTAssertTrue(app.buttons["openRace"].isHittable)
+    }
     func testCompleteConnectedCampaignAndRestoreWorld() throws {
         attach("v2-01-world")
         app.buttons["playLevel"].tap(); XCTAssertTrue(app.buttons["tile0"].waitForExistence(timeout:5)); attach("v2-02-botanical-circuit")
         try winCurrentLevel(); attach("v2-03-victory")
-        app.buttons["nextLevel"].tap(); try winCurrentLevel(); app.buttons["backToGarden"].tap()
+        app.buttons["nextLevel"].tap()
+        XCTAssertTrue(app.buttons["tile25"].isHittable,"Advancing must restore board hit regions after the victory overlay")
+        try winCurrentLevel(); app.buttons["backToGarden"].tap()
         app.buttons["restoreProject"].tap()
         app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch()
         XCTAssertTrue(app.staticTexts["1/6 restored"].waitForExistence(timeout:10))
@@ -71,7 +111,7 @@ import StoreKitTest
         attach("v2-09-complete-world")
     }
     func testFarmHarvestCraftAndSave() throws {
-        app.buttons["tabFarm"].tap(); attach("v2-04-farm")
+        app.buttons["openFarm"].tap(); attach("v2-04-farm")
         for id in [0,1] {
             let plot = app.buttons["plot\(id)"]
             plot.tap()
@@ -79,29 +119,29 @@ import StoreKitTest
             XCTAssertTrue(plot.label.contains("ready")); plot.tap()
         }
         XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
-        app.buttons["tabWorld"].tap(); app.swipeUp(); app.buttons["openTasks"].tap()
+        app.buttons["returnWorld"].tap(); app.buttons["openTasks"].tap()
         let reward = app.buttons["claim_harvest1"]; XCTAssertTrue(reward.waitForExistence(timeout:5)); reward.tap(); XCTAssertFalse(reward.isEnabled)
-        attach("v3-15-field-tasks"); app.navigationBars.buttons["Done"].tap(); app.buttons["tabFarm"].tap()
-        app.swipeUp()
+        attach("v3-15-field-tasks"); app.navigationBars.buttons["Done"].tap(); app.buttons["openFarm"].tap()
+        app.buttons["openToolShed"].tap()
         app.buttons["craftbomb"].tap(); attach("v2-05-tool-shed")
-        app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch(); app.buttons["tabFarm"].tap(); app.swipeUp()
+        app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch(); app.buttons["openFarm"].tap()
         XCTAssertTrue(app.staticTexts["farmTotals"].waitForExistence(timeout:5)); XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
     }
     func testPuzzleWaterReachesFarmAndCanPlantAfterRelaunch() throws {
-        app.buttons["tabFarm"].tap()
+        app.buttons["openFarm"].tap()
         let water = app.descendants(matching:.any)["farmMeterWater"]
         XCTAssertTrue(water.waitForExistence(timeout:5))
         XCTAssertEqual(water.label,"Water: 12")
-        app.buttons["tabWorld"].tap(); app.buttons["playLevel"].tap()
+        app.buttons["returnWorld"].tap(); app.buttons["playLevel"].tap()
         app.buttons["tooltnt"].tap(); app.buttons["tile24"].tap(); settle()
         if app.staticTexts["winTitle"].exists { app.buttons["backToGarden"].tap() }
         else { app.buttons["pauseGame"].tap(); app.buttons["leaveLevel"].tap() }
-        app.buttons["tabFarm"].tap()
+        app.buttons["openFarm"].tap()
         let amount = try XCTUnwrap(Int(water.label.replacingOccurrences(of:"Water: ",with:"")))
         XCTAssertGreaterThan(amount,12,"Collected puzzle dew must be available for planting")
 
         app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch()
-        XCTAssertTrue(app.buttons["tabFarm"].waitForExistence(timeout:15)); app.buttons["tabFarm"].tap()
+        XCTAssertTrue(app.buttons["openFarm"].waitForExistence(timeout:15)); app.buttons["openFarm"].tap()
         XCTAssertEqual(water.label,"Water: \(amount)")
         attach("daily-20261009-water-reward")
         app.buttons["plot0"].tap()
@@ -142,7 +182,7 @@ import StoreKitTest
         XCTFail("Power formation needs a playable board before victory")
     }
     func testDeliveryRaceWithRealSteeringAndReward() {
-        app.buttons["tabRace"].tap(); attach("v2-06-race-lobby"); app.buttons["startRace"].tap()
+        app.buttons["openRace"].tap(); attach("v2-06-race-lobby"); app.buttons["startRace"].tap()
         XCTAssertTrue(app.descendants(matching:.any)["raceTrack"].waitForExistence(timeout:5)); app.descendants(matching:.any)["raceTrack"].swipeLeft()
         attach("v2-07-delivery-race")
         XCTAssertTrue(app.staticTexts["raceResult"].waitForExistence(timeout:40)); XCTAssertEqual(app.staticTexts["raceResult"].label,"Delivery complete!")
@@ -156,10 +196,15 @@ import StoreKitTest
         app.buttons["pauseGame"].tap(); XCTAssertTrue(app.buttons["resumeGame"].exists); app.buttons["resumeGame"].tap()
         app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch()
         XCTAssertTrue(app.buttons["tile0"].waitForExistence(timeout:10)); XCTAssertEqual(app.staticTexts["movesCounter"].label,before)
-        app.buttons["pauseGame"].tap(); app.buttons["leaveLevel"].tap(); app.buttons["tabShop"].tap(); attach("v2-12-lives-and-shop")
+        app.buttons["pauseGame"].tap(); app.buttons["leaveLevel"].tap(); app.buttons["openShop"].tap(); attach("v2-12-lives-and-shop")
         XCTAssertTrue(app.staticTexts["lifeTimer"].exists); XCTAssertTrue(app.buttons["refillLives"].isEnabled)
         app.buttons["refillLives"].tap(); XCTAssertFalse(app.buttons["refillLives"].isEnabled)
-        app.swipeUp(); attach("v2-13-coin-packs"); app.swipeUp(); attach("v2-14-starter-bundle")
-        app.buttons["tabFarm"].tap(); XCTAssertTrue(app.buttons["plot0"].waitForExistence(timeout:5))
+        app.buttons["explorePacks"].tap(); attach("v2-13-coin-packs")
+        for product in ["coins400","coins1500","coins3000","coins7000","lives5","starter"] {
+            XCTAssertTrue(app.buttons["buy_com.orbitbloom.\(product)"].waitForExistence(timeout:5),"Every pack must be reachable by swiping")
+            if product != "starter" { app.descendants(matching:.any)["suppliesScene"].swipeLeft() }
+        }
+        attach("v2-14-starter-bundle")
+        app.buttons["returnWorld"].tap(); app.buttons["openFarm"].tap(); XCTAssertTrue(app.buttons["plot0"].waitForExistence(timeout:5))
     }
 }

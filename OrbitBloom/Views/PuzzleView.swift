@@ -24,7 +24,7 @@ struct PuzzleView: View {
                         }
                         Text(game.hintText.isEmpty ? "Swipe for 3 in a row, or tap 2+ touching pieces." : game.hintText).font(.system(size:10,design:.rounded)).foregroundStyle(Palette.gold).frame(height:14).accessibilityIdentifier("hintInstruction")
                 }.padding(.horizontal,20).padding(.bottom,10).frame(maxWidth:550).frame(maxWidth:.infinity)
-                ScrollView {
+                VStack(spacing:0) {
                     VStack(spacing:10) {
                         board
                         Text(game.message).font(.system(size:12,weight:.semibold,design:.rounded)).multilineTextAlignment(.center).foregroundStyle(Palette.mint).frame(minHeight:30)
@@ -37,7 +37,7 @@ struct PuzzleView: View {
                         }
                         Text("4 in line: Bomb · L/T: TNT · 5 in line: Rainbow. Tap a board power-up to blast and chain nearby tools.").font(.system(size:10,design:.rounded)).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
                     }.padding(.horizontal,20).padding(.bottom,20).frame(maxWidth:550).frame(maxWidth:.infinity)
-                }.scrollIndicators(.hidden).scrollDisabled(pieceDragActive).id(game.engine?.level.id)
+                }.id(game.engine?.level.id)
             }.disabled(game.result != nil || game.paused).accessibilityHidden(game.result != nil || game.paused)
             if let won = game.result { resultView(won) }
             if game.paused { pauseView }
@@ -72,9 +72,9 @@ struct PuzzleView: View {
                             if let power = cell.power { SpriteView(index:power.sprite).padding(side*0.04) }
                             else { GemView(gem:cell.gem).padding(side*0.05) }
                             if game.frost.contains(key) { RoundedRectangle(cornerRadius:10).fill(.cyan.opacity(0.24)).overlay(RoundedRectangle(cornerRadius:10).stroke(.cyan.opacity(0.8),lineWidth:2)); Image(systemName:"snowflake").font(.system(size:10)).foregroundStyle(.white).offset(x:side*0.3,y:-side*0.3) }
-                            if game.hinted.contains(key) || game.pendingTool != nil || game.burstMode { RoundedRectangle(cornerRadius:10).stroke(Palette.gold,lineWidth:3) }
-                        }.frame(width:side,height:side).scaleEffect(game.clearing.contains(key) && !reduceMotion ? 0.04 : 1).opacity(game.clearing.contains(key) ? 0 : 1)
-                    }.buttonStyle(.plain).highPriorityGesture(DragGesture(minimumDistance:0).updating($pieceDragActive) { _,active,_ in active = true }.onEnded { value in
+                            if game.hinted.contains(key) || game.pendingTool != nil || game.burstMode { RoundedRectangle(cornerRadius:10).stroke(Palette.gold,lineWidth:3).allowsHitTesting(false).accessibilityHidden(true) }
+                        }.frame(width:side,height:side).contentShape(Rectangle()).scaleEffect(game.clearing.contains(key) && !reduceMotion ? 0.04 : 1).opacity(game.clearing.contains(key) ? 0 : 1)
+                    }.buttonStyle(.plain).contentShape(Rectangle()).highPriorityGesture(DragGesture(minimumDistance:0).updating($pieceDragActive) { _,active,_ in active = true }.onEnded { value in
                         if max(abs(value.translation.width),abs(value.translation.height)) >= 16 { game.swipe(key,dx:value.translation.width,dy:value.translation.height) }
                         else { game.tap(key) }
                     }).disabled(game.busy).accessibilityLabel("\(cell.power?.title ?? cell.gem.name), row \(7-cell.row), column \(cell.column+1)\(game.frost.contains(key) ? ", frozen" : "")").accessibilityHint("Swipe to swap neighbors. Tap a group, board power-up or tool target").accessibilityIdentifier("tile\(key)").position(x:inset+CGFloat(cell.column)*(side+gap)+side/2,y:inset+CGFloat(6-cell.row)*(side+gap)+side/2)
@@ -90,7 +90,7 @@ struct PuzzleView: View {
     }
     func resultView(_ won:Bool) -> some View {
         ZStack {
-            Palette.night.opacity(0.97).ignoresSafeArea()
+            Palette.paper.opacity(0.98).ignoresSafeArea()
             VStack(spacing:20) {
                 GameHUD()
                 Spacer()
@@ -109,7 +109,7 @@ struct PuzzleView: View {
     }
     var pauseView: some View {
         ZStack {
-            Palette.night.opacity(0.97).ignoresSafeArea()
+            Palette.paper.opacity(0.98).ignoresSafeArea()
             VStack(spacing:22) {
                 PipCompanion().frame(height:130)
                 Text("A little breather.").font(.system(size:32,weight:.bold,design:.rounded)).foregroundStyle(Palette.cream)

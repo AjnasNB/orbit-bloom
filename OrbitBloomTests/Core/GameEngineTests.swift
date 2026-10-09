@@ -128,6 +128,24 @@ final class GameEngineTests: XCTestCase {
 }
 
 final class ProgressTests: XCTestCase {
+    func testIslandCoverageTurnBudgetsAndSequentialUnlocks() {
+        XCTAssertEqual(GardenRegion.all.count,102)
+        let stages = GardenRegion.all.flatMap(\.levels)
+        XCTAssertEqual(stages.map(\.id),Array(1...1020))
+        XCTAssertTrue(stages.allSatisfy { (10...20).contains($0.moves) })
+        let places = GardenRegion.all.flatMap { region in region.levels.map { region.placeName(for:$0.id) } }
+        XCTAssertEqual(Set(places).count,1020)
+        var progress = Progress()
+        XCTAssertTrue(progress.isUnlocked(1)); XCTAssertFalse(progress.isUnlocked(2))
+        XCTAssertFalse(GardenRegion.all[1].isUnlocked(progress:progress))
+        _ = progress.finish(level:20,score:500)
+        XCTAssertEqual(progress.nextLevel,1,"A completion beyond a gap cannot unlock a whole island")
+        for stage in 1...10 { _ = progress.finish(level:stage,score:500) }
+        XCTAssertEqual(progress.nextLevel,11)
+        XCTAssertTrue(GardenRegion.all[1].isUnlocked(progress:progress))
+        XCTAssertTrue(progress.isUnlocked(11)); XCTAssertFalse(progress.isUnlocked(12))
+        XCTAssertFalse(progress.isUnlocked(0)); XCTAssertFalse(progress.isUnlocked(1021))
+    }
     func testFirstWinAwardsOneStarAndReplaysNeverDuplicateIt() {
         var progress = Progress()
         XCTAssertTrue(progress.finish(level: 1, score: 500))

@@ -50,7 +50,7 @@ final class EcosystemTests: XCTestCase {
             case .mega: XCTAssertEqual(cleared.count,25)
             case .rainbow: XCTAssertEqual(cleared,Set(gems.filter{$0.gem == selected}.map(\.key)))
             }
-            XCTAssertEqual(game.moves,34)
+            XCTAssertEqual(game.moves,game.level.moves)
         }
     }
     func testConnectedCircuitModeCanFinishTheWholeCampaign() {

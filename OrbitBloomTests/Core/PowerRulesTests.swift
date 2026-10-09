@@ -53,7 +53,7 @@ final class PowerRulesTests:XCTestCase {
         let game = GameEngine(level:Level.campaign[1019],seed:1020)
         let restored = try XCTUnwrap(GameEngine(snapshot:JSONDecoder().decode(GameEngine.Snapshot.self,from:JSONEncoder().encode(game.snapshot))))
         XCTAssertEqual(restored.level.id,1020)
-        var progress = Progress(); XCTAssertTrue(progress.finish(level:1019,score:2000)); XCTAssertEqual(progress.nextLevel,1020)
+        var progress = Progress(); XCTAssertTrue(progress.finish(level:1019,score:2000)); XCTAssertEqual(progress.nextLevel,1,"Missing earlier stages must stay locked")
         var assistance = Assistance(); assistance.freeHints = 0; assistance.claimed = ["harvest3"]
         XCTAssertEqual(try JSONDecoder().decode(Assistance.self,from:JSONEncoder().encode(assistance)),assistance)
     }
