@@ -1,5 +1,12 @@
 import Foundation
 
+// Reject corrupt dates before countdowns convert their intervals to integers.
+// Keep a broad calendar range so offline saves do not depend on today's clock.
+private func validSaveDate(_ date: Date) -> Bool {
+    let seconds = date.timeIntervalSince1970
+    return seconds.isFinite && (0...253_402_300_799).contains(seconds)
+}
+
 /// The same complete wallet is used for local checkpoints and Apple cloud saves.
 /// Optional fields retain compatibility with the first two local save formats.
 public struct GardenWallet: Codable {
@@ -22,20 +29,25 @@ public struct GardenWallet: Codable {
                       ecosystem.raceBest, ecosystem.deliveries, ecosystem.lives.reserve]
         guard counts.allSatisfy({ (0...100_000_000).contains($0) }),
               (0...LifeBank.capacity).contains(ecosystem.lives.hearts),
-              progress.completed.allSatisfy({ (1...Level.total).contains($0.key) && $0.value >= 0 }),
+              progress.completed.allSatisfy({ (1...Level.total).contains($0.key) && (0...100_000_000).contains($0.value) }),
               progress.restored.isSubset(of: Set(GardenTask.all.map(\.id))),
               ecosystem.plots.count == 6, ecosystem.plots.map(\.id) == Array(0..<6),
               ecosystem.tools.values.allSatisfy({ (0...100_000_000).contains($0) }),
               ecosystem.creditedTransactions.allSatisfy({ !$0.isEmpty && $0.count <= 100 }),
               ecosystem.creditedTransactions.count <= 20_000 else { return false }
+        if let nextAt = ecosystem.lives.nextAt, !validSaveDate(nextAt) { return false }
+        guard ecosystem.plots.allSatisfy({ plot in
+            (plot.crop == nil && plot.readyAt == nil) ||
+                (plot.crop != nil && plot.readyAt.map(validSaveDate) == true)
+        }) else { return false }
         if let assistance {
             guard [assistance.freeHints, assistance.shuffles, assistance.blasts].allSatisfy({ (0...100_000_000).contains($0) }),
                   assistance.claimed.isSubset(of: Set(FieldTask.all.map(\.id))) else { return false }
         }
         if let session {
-            guard progress.isUnlocked(session.levelID), session.score >= 0,
+            guard progress.isUnlocked(session.levelID), (0...100_000_000).contains(session.score),
                   session.moves <= Level.campaign[session.levelID - 1].moves,
-                  session.collected.values.allSatisfy({ $0 >= 0 }),
+                  session.collected.values.allSatisfy({ (0...100_000_000).contains($0) }),
                   session.frost.allSatisfy({ (0..<49).contains($0) }),
                   GameEngine(snapshot: session) != nil else { return false }
         }
@@ -63,7 +75,7 @@ public struct SavedGarden: Codable, Identifiable {
         guard data.count <= 1_000_000,
               let save = try? JSONDecoder().decode(Self.self, from: data),
               save.schema == 1, save.playerKey == playerKey, !playerKey.isEmpty,
-              save.savedAt.timeIntervalSince1970.isFinite, save.wallet.isValid else { return nil }
+              validSaveDate(save.savedAt), save.wallet.isValid else { return nil }
         return save
     }
 }

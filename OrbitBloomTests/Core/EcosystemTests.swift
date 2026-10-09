@@ -3,6 +3,16 @@ import XCTest
 
 final class EcosystemTests: XCTestCase {
     let now = Date(timeIntervalSince1970:100_000)
+    func testExtremeLifeClockCannotOverflowAndStillCapsRegeneration() {
+        var lives = LifeBank(); lives.hearts = 0
+        lives.nextAt = Date(timeIntervalSince1970: -1e100)
+        lives.refresh(at: now)
+        XCTAssertEqual(lives.hearts, 5); XCTAssertNil(lives.nextAt)
+        lives.nextAt = Date(timeIntervalSince1970: 1e100)
+        XCTAssertEqual(lives.remaining(at: now), Int.max / 2)
+        lives.nextAt = Date(timeIntervalSince1970: .infinity)
+        XCTAssertEqual(lives.remaining(at: now), 0)
+    }
     func testLivesRegenerateAtThirtyMinuteBoundaryAndPersistOffline() throws {
         var lives = LifeBank()
         for _ in 0..<5 { XCTAssertTrue(lives.spend(at:now)) }

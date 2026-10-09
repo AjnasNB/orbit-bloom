@@ -95,12 +95,15 @@ struct GameCenterLoginView: UIViewControllerRepresentable {
     private var acknowledged: Set<String> = []
     private var failedCheck = false
     private let usesApple: Bool
+    private let currentPlayerMatches: ((String) -> Bool)?
     var connected: Bool { playerKey != nil }
 
     init(game: GameModel, defaults: UserDefaults = .standard,
-         transport: GardenCloudTransport? = nil, deviceID: String? = nil) {
+         transport: GardenCloudTransport? = nil, deviceID: String? = nil,
+         currentPlayerMatches: ((String) -> Bool)? = nil) {
         self.game = game; self.defaults = defaults
         self.transport = transport ?? AppleGardenCloud(); usesApple = transport == nil
+        self.currentPlayerMatches = currentPlayerMatches
         self.deviceID = deviceID ?? UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
         enabled = defaults.bool(forKey: "orbitBloom.cloud.enabled")
         super.init()
@@ -168,12 +171,13 @@ struct GameCenterLoginView: UIViewControllerRepresentable {
     }
     func checkSaves() async {
         guard enabled, let key = playerKey, !working else { return }
-        guard applePlayerMatches(key) else { disconnect(); status = "Game Center account changed. Connect the current player to continue."; return }
+        guard requireCurrentPlayer(key) else { return }
         working = true; readyToWrite = false; failedCheck = false; status = "Checking your iCloud garden…"
         let run = generation
         do {
             let gardens = try await transport.fetch(playerKey: key)
             guard generation == run, playerKey == key, enabled else { return }
+            guard requireCurrentPlayer(key) else { return }
             choices = gardens.filter { !acknowledged.contains($0.id.uuidString) }
             working = false
             if !choices.isEmpty {
@@ -188,12 +192,14 @@ struct GameCenterLoginView: UIViewControllerRepresentable {
         }
     }
     func keepDeviceGarden() async {
-        guard !working, !failedCheck, playerKey != nil else { return }
+        guard enabled, !working, !failedCheck, let key = playerKey,
+              requireCurrentPlayer(key) else { return }
         acknowledge(choices.map(\.id)); choices = []; readyToWrite = true
         await backup()
     }
     func restore(_ garden: CloudGarden) async {
-        guard !working, garden.save.playerKey == playerKey,
+        guard enabled, !working, let key = playerKey, requireCurrentPlayer(key),
+              garden.save.playerKey == key,
               choices.contains(where: { $0.id == garden.id }) else { return }
         guard game.restoreWallet(garden.save.wallet) else {
             status = game.busy || game.raceActive ? "Finish this action before restoring your garden." :
@@ -205,14 +211,15 @@ struct GameCenterLoginView: UIViewControllerRepresentable {
     }
     func backup() async {
         guard enabled, readyToWrite, choices.isEmpty, !working, let key = playerKey else { return }
-        guard applePlayerMatches(key) else { disconnect(); status = "Game Center account changed. Your garden is kept on this device."; return }
-        guard game.saveAccount == key, game.wallet.isValid else { status = "Your local garden needs checking before backup."; return }
+        guard requireCurrentPlayer(key) else { return }
+        guard game.wallet.isValid else { status = "Your local garden needs checking before backup."; return }
         let save = SavedGarden(playerKey: key, wallet: game.wallet)
         let run = generation, localGeneration = game.saveGeneration
         working = true; status = "Backing up your garden…"
         do {
             try await transport.write(save, name: "OrbitBloom-\(key)-\(deviceID)")
             guard generation == run, playerKey == key, enabled else { return }
+            guard requireCurrentPlayer(key) else { return }
             acknowledge([save.id]); lastBackup = Date()
             defaults.set(lastBackup, forKey: "orbitBloom.cloud.date.\(key)")
             working = false; status = "Backed up to iCloud"
@@ -223,9 +230,18 @@ struct GameCenterLoginView: UIViewControllerRepresentable {
         }
     }
     private func applePlayerMatches(_ key: String) -> Bool {
+        if let currentPlayerMatches { return currentPlayerMatches(key) }
         guard usesApple else { return true }
         guard GKLocalPlayer.local.isAuthenticated else { return false }
         return SHA256.hash(data: Data(GKLocalPlayer.local.gamePlayerID.utf8)).map { String(format: "%02x", $0) }.joined() == key
+    }
+    @discardableResult private func requireCurrentPlayer(_ key: String) -> Bool {
+        guard game.saveAccount == key, applePlayerMatches(key) else {
+            disconnect()
+            status = "Game Center account changed. Your garden is kept on this device. Connect the current player to continue."
+            return false
+        }
+        return true
     }
     private func acknowledge(_ ids: [UUID]) {
         guard let playerKey else { return }

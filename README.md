@@ -31,12 +31,13 @@ scripts/test-ios.sh
 - [System list and source comparison](docs/V2_SYSTEMS_AND_SOURCES.md)
 - [Screenshot draft](docs/release-draft/README.md)
 - [App Store status and product catalogue](docs/APP_STORE_PREPARATION.md)
+- [Security review](docs/SECURITY_REVIEW.md)
 - [License audit](docs/LICENSE_AUDIT.md)
 - [Audio source manifest](docs/AUDIO_PROVENANCE.json)
 - [Exact generated-art prompts](docs/V2_ARTWORK_PROMPTS.json)
 
 MIT game code is preserved in `vendor/Match3Kit`; two MIT reference projects are downloaded under `research/`. Selected audio is CC0. New rendered botanical art is generated for this project under the applicable OpenAI terms, not falsely labeled as upstream MIT assets. No proprietary Gardenscapes material is included.
 
-Gameplay works offline. Guest saves remain device-local; deleting the app can lose them. Optional cloud saves require Game Center, iCloud Drive and the same Apple accounts on both devices. Check the last successful backup before switching devices. Build 6 passes 60 unique core/native/UI checks and has a signed export with the correct cloud entitlements. Live cloud round trips on physical devices and signed sandbox purchases remain unverified. Production work still includes currency recovery/refund policy, broader accessibility/device coverage, difficulty tuning and release review.
+Gameplay works offline. Guest saves remain device-local; deleting the app can lose them. Optional cloud saves require Game Center, iCloud Drive and the same Apple accounts on both devices. Check the last successful backup before switching devices. Build 7 passes 68 unique core/native/UI checks and has a signed export with the correct cloud entitlements. It hardens corrupt/legacy saves and account changes during cloud requests. Live cloud round trips on physical devices and signed sandbox purchases remain unverified. Production work still includes currency recovery/refund policy, broader accessibility/device coverage, difficulty tuning and release review.
 
 Marketing, privacy and support pages are live at [the Orbit Bloom site](https://orbit-bloom-game-site.ajnasnb.workers.dev/), hosted on a dedicated Cloudflare Worker. The optional custom subdomain remains unconfigured.

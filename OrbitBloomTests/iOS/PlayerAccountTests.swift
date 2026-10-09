@@ -7,11 +7,15 @@ import XCTest
     var names: [String] = []
     var fetchFails = false
     var writeFails = false
+    var onFetch: ((String) -> Void)?
+    var onWrite: (() -> Void)?
     func fetch(playerKey: String) async throws -> [CloudGarden] {
+        onFetch?(playerKey)
         if fetchFails { throw URLError(.notConnectedToInternet) }
         return gardens.filter { $0.save.playerKey == playerKey }
     }
     func write(_ save: SavedGarden, name: String) async throws {
+        onWrite?()
         if writeFails { throw URLError(.notConnectedToInternet) }
         writes.append(save); names.append(name)
     }
@@ -19,6 +23,73 @@ import XCTest
 
 @MainActor final class PlayerAccountTests: XCTestCase {
     func defaults() -> UserDefaults { UserDefaults(suiteName: "orbitbloom.accounts.\(UUID())")! }
+    func testCorruptLegacyProgressAndPuzzleAreRejectedOnLaunch() throws {
+        let prefs = defaults()
+        var progress = Progress(); progress.coins = Int.max
+        prefs.set(try JSONEncoder().encode(progress), forKey: "orbitBloom.progress.v1")
+        let normal = GameEngine(level: Level.campaign[0], seed: 101).snapshot
+        let corrupt = GameEngine.Snapshot(levelID: normal.levelID, grid: normal.grid, score: Int.max,
+                                         moves: normal.moves, collected: normal.collected,
+                                         frost: normal.frost, specials: normal.specials)
+        prefs.set(try JSONEncoder().encode(corrupt), forKey: "orbitBloom.session.v1")
+        let game = GameModel(defaults: prefs)
+        XCTAssertEqual(game.progress.coins, 160); XCTAssertNil(game.engine)
+        XCTAssertTrue(game.wallet.isValid)
+    }
+    func testAccountChangeDuringFetchDiscardsResultsAndNeverWrites() async {
+        let cloud = MemoryGardenCloud(), game = GameModel(defaults: defaults())
+        var matches = true
+        let account = PlayerAccount(game: game, defaults: defaults(), transport: cloud,
+                                    currentPlayerMatches: { _ in matches })
+        cloud.onFetch = { [weak cloud] key in
+            matches = false
+            var wallet = GardenWallet(); wallet.progress.coins = 777
+            cloud?.gardens = [CloudGarden(save: SavedGarden(playerKey: key, wallet: wallet),
+                                          modified: Date(), deviceName: "Other device")]
+        }
+        account.enabled = true; await account.connect(playerID: "player-a", nickname: "Gardener")
+        XCTAssertFalse(account.connected); XCTAssertFalse(account.working)
+        XCTAssertTrue(account.choices.isEmpty); XCTAssertTrue(cloud.writes.isEmpty)
+        XCTAssertNil(account.lastBackup); XCTAssertEqual(game.progress.coins, 160)
+    }
+    func testAccountChangeDuringWriteNeverClaimsSuccessfulBackup() async {
+        let cloud = MemoryGardenCloud(), prefs = defaults(), game = GameModel(defaults: defaults())
+        var matches = true
+        let account = PlayerAccount(game: game, defaults: prefs, transport: cloud,
+                                    currentPlayerMatches: { _ in matches })
+        cloud.onWrite = { matches = false }
+        account.enabled = true; await account.connect(playerID: "player-a", nickname: "Gardener")
+        XCTAssertFalse(account.connected); XCTAssertFalse(account.working)
+        XCTAssertNil(account.lastBackup)
+        XCTAssertTrue(prefs.dictionaryRepresentation().keys.filter { $0.hasPrefix("orbitBloom.cloud.date.") }.isEmpty)
+        XCTAssertTrue(account.status.contains("account changed"))
+    }
+    func testChangedAccountCannotRestorePreviouslyOfferedGarden() async throws {
+        let cloud = MemoryGardenCloud(), game = GameModel(defaults: defaults())
+        var matches = true
+        let account = PlayerAccount(game: game, defaults: defaults(), transport: cloud,
+                                    currentPlayerMatches: { _ in matches })
+        account.enabled = true; await account.connect(playerID: "player-a", nickname: "Gardener")
+        var wallet = GardenWallet(); wallet.progress.coins = 777
+        let remote = CloudGarden(save: SavedGarden(playerKey: try XCTUnwrap(account.playerKey), wallet: wallet), modified: Date(), deviceName: "iPad")
+        cloud.gardens = [remote]; await account.checkSaves()
+        let writes = cloud.writes.count
+        matches = false; await account.restore(remote)
+        XCTAssertEqual(game.progress.coins, 160); XCTAssertFalse(game.hasRestoreCheckpoint)
+        XCTAssertEqual(cloud.writes.count, writes); XCTAssertFalse(account.connected)
+    }
+    func testPausedCloudCannotRestoreOrAcknowledgeOfferedGarden() async throws {
+        let cloud = MemoryGardenCloud(), game = GameModel(defaults: defaults())
+        let account = PlayerAccount(game: game, defaults: defaults(), transport: cloud)
+        account.enabled = true; await account.connect(playerID: "player-a", nickname: "Gardener")
+        var wallet = GardenWallet(); wallet.progress.coins = 777
+        let remote = CloudGarden(save: SavedGarden(playerKey: try XCTUnwrap(account.playerKey), wallet: wallet), modified: Date(), deviceName: "iPad")
+        cloud.gardens = [remote]; await account.checkSaves()
+        let writes = cloud.writes.count
+        account.setEnabled(false); await account.restore(remote); await account.keepDeviceGarden()
+        XCTAssertEqual(game.progress.coins, 160); XCTAssertFalse(game.hasRestoreCheckpoint)
+        XCTAssertEqual(account.choices.count, 1); XCTAssertEqual(cloud.writes.count, writes)
+    }
     func testLegacyWalletMigrationAndCorruptCheckpointRecovery() throws {
         let prefs = defaults()
         let game = GameModel(defaults: prefs)

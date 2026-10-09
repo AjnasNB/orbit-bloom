@@ -2,6 +2,34 @@ import XCTest
 @testable import OrbitBloomCore
 
 final class SavedGardenTests: XCTestCase {
+    func testMalformedTimersAreRejectedBeforeRestoring() throws {
+        var wallet = GardenWallet()
+        wallet.ecosystem.lives.hearts = 0
+        wallet.ecosystem.lives.nextAt = Date(timeIntervalSince1970: -1e100)
+        XCTAssertFalse(wallet.isValid)
+        wallet.ecosystem.lives.nextAt = nil
+        wallet.ecosystem.plots[0].crop = .apple
+        wallet.ecosystem.plots[0].readyAt = Date(timeIntervalSince1970: 1e100)
+        XCTAssertFalse(wallet.isValid)
+        XCTAssertNil(SavedGarden.decode(try SavedGarden(playerKey: "player-a", wallet: wallet).encoded(), playerKey: "player-a"))
+        wallet.ecosystem.plots[0].readyAt = nil
+        XCTAssertFalse(wallet.isValid, "A planted crop must have a valid timer")
+        wallet.ecosystem.plots[0] = FarmPlot(id: 0)
+        var save = SavedGarden(playerKey: "player-a", wallet: wallet)
+        save.savedAt = Date(timeIntervalSince1970: 1e100)
+        XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-a"))
+    }
+    func testOversizedScoresAndCollectionsAreRejected() {
+        var wallet = GardenWallet()
+        wallet.progress.completed[1] = Int.max
+        XCTAssertFalse(wallet.isValid)
+        wallet.progress.completed = [:]
+        var session = GameEngine(level: Level.campaign[0], seed: 101).snapshot
+        session = .init(levelID: session.levelID, grid: session.grid, score: 0, moves: session.moves,
+                        collected: [.leaf: Int.max], frost: session.frost, specials: session.specials)
+        wallet.session = session
+        XCTAssertFalse(wallet.isValid)
+    }
     func testCompleteWalletSurvivesCloudEncoding() throws {
         var wallet = GardenWallet()
         wallet.progress.finish(level: 1, score: 500)

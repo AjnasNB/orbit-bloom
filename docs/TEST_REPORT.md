@@ -1,3 +1,30 @@
+# Orbit Bloom build 7 verification — 9 October 2026
+
+**68 unique checks pass across the recorded core/native/UI runs: 31 core, 28 native, eight iPhone flows and one iPad layout flow.** The security patch rejects malformed timers and excessive save values, validates legacy progress before migration, and rechecks the current Apple player after cloud requests and before restore. Paused cloud choices cannot restore or acknowledge another garden. Apple remains the sole player cloud service; Cloudflare hosts the static website only. See [security review](SECURITY_REVIEW.md) for scope and limitations.
+
+| Area | Unique passing cases | Evidence |
+| --- | ---: | --- |
+| Core rules, 1,020-stage reachability, wallet schema and extreme clocks | 31 | evidence/build7-core-tests.log; evidence/build7-ios-tests.log |
+| Native account isolation, recovery, stale requests, paused restores and corrupt legacy startup | 15 | evidence/Build7-FinalRecovery.xcresult; focused stale-fetch evidence/Build7-StaleFetch.xcresult |
+| Native sessions, interrupted rewards and bundled media | 7 | evidence/Build7-FinalRecovery.xcresult |
+| Apple local StoreKit purchase, approval, cancellation, restore and refund checks | 6 | evidence/Build7-FinalRecovery.xcresult |
+| iPhone campaign, powers, island, farm/craft, rally, shop, water and saved-garden/relaunch | 8 | evidence/Native-20261009-220205.xcresult; three affected flows refreshed in evidence/Build7-FinalRecovery.xcresult |
+| iPad portrait/landscape controls and saved-garden page | 1 | evidence/Build7-iPad.xcresult; 29.699 seconds |
+
+The full iPhone run passed 35 cases and skipped only the iPad-specific case. After the final legacy validation/button change, all 28 native tests and three affected relaunch flows passed again (31 checks, no failures). The account-change fetch case was strengthened to return an actual 777-coin remote garden, ensuring a stale nonempty result is rejected rather than merely reaching the existing pre-upload check. No test counts are doubled for reruns.
+
+The core solver completes all 1,020 levels and six projects in 6,083 legal swaps, zero retries and no paid items or extra moves. The native UI completes twelve stages and restores six projects in 303.546 seconds. This does not establish human difficulty or mean that 1,020 stages were manually played. Two save-validation regression cases failed against the earlier implementation before the correction; an initial extreme-clock assertion exposed floating-point boundary rounding and was corrected before the final passing run. Failed diagnostic logs are not counted as passing evidence.
+
+Ten new native QA captures (one iPhone account page and nine iPad views) are recorded in [build7/verification.json](release-draft/build7/verification.json). Portraits remain 1320 × 2868 on iPhone and 2064 × 2752 on iPad. The two iPad landscapes retain native orientation metadata and display at 2752 × 2064. No resizing or synthetic UI images were used. The existing 19 App Store screenshots depict the same interface and remain applicable; build 7 changes validation and paused choice availability.
+
+The isolated Cloudflare deployment passes HTTPS/status/header checks on five routes, including the 404. Chrome displays the site with no site CSP failures; observed browser-extension warnings are unrelated. No gameplay database, publisher account API or new DNS was added. Signed release archive/export and exact package signature/Production cloud-entitlement checks pass; [build7 package verification](release-draft/build7/signed-package-verification.json) records the IPA hash.
+
+Only the Store QA simulator receives resetting tests. iPad checks use --keep-progress. The user's preview preferences were backed up for installation without clearing its save. App Review/upload and preview-installation status are recorded in [APP_STORE_PREPARATION.md](APP_STORE_PREPARATION.md).
+
+Live Game Center authentication, an Apple iCloud round trip and signed sandbox purchases remain physical-device TestFlight checks. Memory cloud and local StoreKit tests do not prove those live integrations. Broader accessibility, device coverage, physical audio/haptics, human difficulty and consumable refund/recovery policy remain public-release checks. No real purchases or new legal/financial agreements were performed. Historical reports below apply to their own builds.
+
+---
+
 # Orbit Bloom build 6 verification — 9 October 2026
 
 **60 unique checks pass across the recorded runs: 28 core, 23 native, eight iPhone UI flows and one iPad layout flow.** Build 6 adds optional Game Center authentication and private iCloud saved gardens. Guest play, active puzzle/farm progression, coins, lives, tools, assistance and credited transactions remain in the local wallet. Separate player wallets and device files avoid silently combining balances. A restore that omits a purchase credited locally is rejected. Undo restores the local checkpoint and pauses cloud backup.

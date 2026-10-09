@@ -52,7 +52,8 @@ import Match3Kit
         }
         saveAccount = defaults.string(forKey: "orbitBloom.saveAccount")
         creditedOnDevice = Set(defaults.stringArray(forKey: "orbitBloom.purchaseReceipts") ?? [])
-        progress = saveAccount == nil ? defaults.data(forKey: "orbitBloom.progress.v1").flatMap { try? JSONDecoder().decode(Progress.self, from: $0) } ?? Progress() : Progress()
+        let legacyProgress = saveAccount == nil ? defaults.data(forKey: "orbitBloom.progress.v1").flatMap { try? JSONDecoder().decode(Progress.self, from: $0) } : nil
+        progress = legacyProgress.flatMap { GardenWallet(progress: $0).isValid ? $0 : nil } ?? Progress()
         let sources = saveAccount.map { ["orbitBloom.player.\($0)", "orbitBloom.wallet.backup.\($0)"] } ?? ["orbitBloom.wallet.v2", "orbitBloom.wallet.backup"]
         let wallet = sources.compactMap { key in
             defaults.data(forKey: key).flatMap { try? JSONDecoder().decode(GardenWallet.self, from: $0) }
@@ -62,7 +63,8 @@ import Match3Kit
         ecosystem.lives.refresh(at:Date())
         // Resume a saved puzzle, including earned/consumed boosters.
         let snapshot = wallet != nil ? wallet?.session : saveAccount == nil ? defaults.data(forKey:"orbitBloom.session.v1").flatMap { try? JSONDecoder().decode(GameEngine.Snapshot.self,from:$0) } : nil
-        if let snapshot, let restored = GameEngine(snapshot:snapshot) {
+        if let snapshot, GardenWallet(progress: progress, session: snapshot).isValid,
+           let restored = GameEngine(snapshot:snapshot) {
             engine = restored; charged = wallet?.charged ?? defaults.bool(forKey: "orbitBloom.charged.v1"); sync()
             if restored.won { firstWin = progress.finish(level: restored.level.id, score: restored.score); ecosystem.lives.rewardWin(); result = true; save() }
             else if restored.lost { result = false; save() }

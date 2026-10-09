@@ -50,10 +50,10 @@ struct PlayerAccountView: View {
                                     Text("\(garden.save.wallet.progress.completed.count) stages · \(garden.save.wallet.progress.coins) coins")
                                     Text(garden.modified.formatted(date: .abbreviated, time: .shortened)).font(.caption)
                                 }.frame(maxWidth: .infinity, minHeight: 64, alignment: .leading)
-                            }.buttonStyle(.bordered).disabled(account.working)
+                            }.buttonStyle(.bordered).disabled(account.working || !account.enabled)
                         }
                         Button("Continue this device's garden") { Task { await account.keepDeviceGarden() } }
-                            .frame(minHeight: 44).disabled(account.working).accessibilityIdentifier("keepDeviceGarden")
+                            .frame(minHeight: 44).disabled(account.working || !account.enabled).accessibilityIdentifier("keepDeviceGarden")
                     }
                 }
                 if game.hasRestoreCheckpoint {

@@ -63,4 +63,9 @@ Optional Game Center authentication identifies the player. GameKit saved games u
 
 Apple's official [authentication guide](https://developer.apple.com/documentation/gamekit/authenticating-a-player) and [saved-game guide](https://developer.apple.com/documentation/gamekit/saving-the-player-s-game-data-to-an-icloud-account) informed the integration. The saved-game transport is injected for native failure/restore tests; these passing tests do not establish a live iCloud server round trip. The regenerated signed distribution profile includes Game Center and the isolated container.
 
-The privacy policy and support site were updated and deployed only to the existing Orbit Bloom Worker. Based on Apple's [privacy definitions](https://developer.apple.com/app-store/app-privacy-details/), private Apple-managed saves and on-device account handling do not give the publisher access to collected gameplay data. The Data Not Collected declaration remains unpublished pending the owner's explicit approval of Apple's accuracy/compliance/update agreement.
+The privacy policy and support site were updated and deployed only to the existing Orbit Bloom Worker. Based on Apple's [privacy definitions](https://developer.apple.com/app-store/app-privacy-details/), private Apple-managed saves and on-device account handling do not give the publisher access to collected gameplay data. The owner published the Data Not Collected declaration, verified before the build 6 App Review submission. No new agreement was accepted by the agent.
+
+
+## Build 7 security corrections — 9 October 2026
+
+Private Apple saves remain the sole cloud save system, as requested by the owner. No Cloudflare player database was added. Saved timers, scores and legacy files receive stricter validation; life-clock conversion cannot overflow. Cloud operations recheck the current Apple player after completion and before a restore, and paused backups cannot apply stale choices. The isolated Cloudflare site has additional HTTPS/CSP headers. Scope, evidence and physical-device limitations are in [SECURITY_REVIEW.md](SECURITY_REVIEW.md).

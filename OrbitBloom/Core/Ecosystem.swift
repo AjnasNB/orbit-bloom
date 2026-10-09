@@ -12,7 +12,13 @@ public struct LifeBank: Codable, Equatable {
         guard hearts < Self.capacity else { nextAt = nil; return }
         guard let nextAt else { self.nextAt = now.addingTimeInterval(Self.interval); return }
         guard now >= nextAt else { return }
-        let count = Int(now.timeIntervalSince(nextAt) / Self.interval) + 1
+        let elapsed = now.timeIntervalSince(nextAt)
+        guard elapsed.isFinite else { return }
+        // Only the missing hearts matter, even after an extremely long absence.
+        if elapsed >= Double(Self.capacity - hearts - 1) * Self.interval {
+            hearts = Self.capacity; self.nextAt = nil; return
+        }
+        let count = Int(elapsed / Self.interval) + 1
         hearts = min(Self.capacity, hearts + count)
         self.nextAt = hearts == Self.capacity ? nil : nextAt.addingTimeInterval(Double(count) * Self.interval)
     }
@@ -24,7 +30,12 @@ public struct LifeBank: Codable, Equatable {
     }
     public mutating func rewardWin() { hearts = min(Self.capacity, hearts + 1); if hearts == Self.capacity { nextAt = nil } }
     public mutating func refill() { hearts = Self.capacity; nextAt = nil }
-    public func remaining(at now: Date) -> Int { max(0, Int(ceil((nextAt ?? now).timeIntervalSince(now)))) }
+    public func remaining(at now: Date) -> Int {
+        let seconds = ceil((nextAt ?? now).timeIntervalSince(now))
+        guard seconds.isFinite, seconds > 0 else { return 0 }
+        if seconds >= Double(Int.max / 2) { return Int.max / 2 }
+        return Int(seconds)
+    }
 }
 
 public enum GardenTool: String, CaseIterable, Codable, Identifiable {
