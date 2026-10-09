@@ -11,6 +11,7 @@ Open `OrbitBloom.xcodeproj`, select the **OrbitBloom** scheme and an iPhone simu
 - **Race:** enter through Harvest rally on the island; swipe the road to steer the rover, dodge obstacles, collect coins, and finish a delivery. Harvested cargo adds a bonus.
 - **Lives:** five normal lives, one regenerated every 30 minutes including offline. Puzzle entry spends a life; winning returns one. Purchased extra lives are a separate reserve that does not expire. Farm and Race are always available. Earned coins can refill normal lives.
 - **Supplies:** tap the coin balance and swipe between life supplies and six Apple packs: four coin packs, extra lives, and a one-time starter bundle. Intended Indian prices are ₹99, ₹299, ₹499, and ₹999. The app displays actual Apple storefront prices when products are available. Unavailable purchases stay disabled.
+- **Saved garden:** Settings → Player & saved garden offers optional Game Center sign-in and private iCloud Drive backups. Each player has a separate local wallet and each device writes a separate cloud file. Choose a device/cloud garden explicitly when they differ. Restores protect credited purchases and retain an undo checkpoint. Guest play remains available offline.
 
 The brighter cream-and-sky interface fits its game screens without vertical scrolling or a permanent activity tab bar. The island uses actual original SceneKit meshes and twelve biome families with generated scenery variations; it is not 1,020 hand-built worlds.
 
@@ -36,6 +37,6 @@ scripts/test-ios.sh
 
 MIT game code is preserved in `vendor/Match3Kit`; two MIT reference projects are downloaded under `research/`. Selected audio is CC0. New rendered botanical art is generated for this project under the applicable OpenAI terms, not falsely labeled as upstream MIT assets. No proprietary Gardenscapes material is included.
 
-Gameplay works offline. Progress and purchased consumable balances are device-local; reinstalling can lose that save. Production work still includes physical-device and signed sandbox testing, currency recovery/refund policy, broader accessibility and device coverage, additional content, and release review.
+Gameplay works offline. Guest saves remain device-local; deleting the app can lose them. Optional cloud saves require Game Center, iCloud Drive and the same Apple accounts on both devices. Check the last successful backup before switching devices. Build 6 passes 60 unique core/native/UI checks and has a signed export with the correct cloud entitlements. Live cloud round trips on physical devices and signed sandbox purchases remain unverified. Production work still includes currency recovery/refund policy, broader accessibility/device coverage, difficulty tuning and release review.
 
 Marketing, privacy and support pages are live at [the Orbit Bloom site](https://orbit-bloom-game-site.ajnasnb.workers.dev/), hosted on a dedicated Cloudflare Worker. The optional custom subdomain remains unconfigured.

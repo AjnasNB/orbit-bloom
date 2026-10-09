@@ -1,7 +1,7 @@
 {
   "appID": "6820591529",
   "version": "1.0",
-  "workspaceBuild": 5,
+  "workspaceBuild": 6,
   "verifiedOn": "2026-10-09",
   "displayClasses": [
     {
@@ -10,9 +10,9 @@
         1320,
         2868
       ],
-      "status": "uploaded; all ten persisted after reload with rendered thumbnails",
-      "screenshotSourceBuild": 5,
-      "screenshots": [
+      "status": "old set removed from draft and retained in Apple Asset Library; new files selected, upload persistence unverified after Mac lock",
+      "screenshotSourceBuild": 6,
+      "priorScreenshots": [
         "screenshots/01-world.png",
         "screenshots/02-botanical-circuit.png",
         "screenshots/16-board-power.png",
@@ -23,18 +23,31 @@
         "screenshots/10-delivery-complete.png",
         "screenshots/09-complete-world.png",
         "screenshots/12-lives-and-shop.png"
+      ],
+      "screenshots": [],
+      "replacementFilesSelected": [
+        "build6/v4-01-living-island.png",
+        "build6/v3-02-botanical-circuit.png",
+        "build6/v3-16-board-power.png",
+        "build6/v4-03-farm-terraces.png",
+        "build6/v4-04-crafting-shed.png",
+        "build6/v5-19-power-patterns.png",
+        "build6/v2-07-delivery-race.png",
+        "build6/v2-09-complete-world.png",
+        "build6/v2-12-lives-and-shop.png",
+        "build6/v6-player-and-saved-garden.png"
       ]
     },
     {
       "displayClass": "iPhone with Dynamic Island (medium display)",
-      "status": "Using Existing Assets: inherits all ten current build 5 large-display captures; verified after reload",
-      "screenshotSourceBuild": 5,
+      "status": "old set removed from draft and retained in Apple Asset Library; new files selected, upload persistence unverified after Mac lock",
+      "screenshotSourceBuild": 6,
       "sourceDisplayClass": "iPhone with Dynamic Island (large display)",
       "sourceNativePixels": [
         1320,
         2868
       ],
-      "screenshots": [
+      "priorScreenshots": [
         "screenshots/01-world.png",
         "screenshots/02-botanical-circuit.png",
         "screenshots/16-board-power.png",
@@ -45,6 +58,19 @@
         "screenshots/10-delivery-complete.png",
         "screenshots/09-complete-world.png",
         "screenshots/12-lives-and-shop.png"
+      ],
+      "screenshots": [],
+      "replacementFilesSelected": [
+        "build6/v4-01-living-island.png",
+        "build6/v3-02-botanical-circuit.png",
+        "build6/v3-16-board-power.png",
+        "build6/v4-03-farm-terraces.png",
+        "build6/v4-04-crafting-shed.png",
+        "build6/v5-19-power-patterns.png",
+        "build6/v2-07-delivery-race.png",
+        "build6/v2-09-complete-world.png",
+        "build6/v2-12-lives-and-shop.png",
+        "build6/v6-player-and-saved-garden.png"
       ]
     },
     {
@@ -71,7 +97,8 @@
         "ipad/07-puzzle-landscape.png",
         "ipad/08-world-landscape.png"
       ],
-      "landscapeEncoding": "2064 × 2752 native pixels with orientation 8; displayed as 2752 × 2064; no resizing"
+      "landscapeEncoding": "2064 \u00d7 2752 native pixels with orientation 8; displayed as 2752 \u00d7 2064; no resizing",
+      "build6Prepared": "build6/ipad/verification.json"
     }
   ],
   "archivedPriorMediumSet": {

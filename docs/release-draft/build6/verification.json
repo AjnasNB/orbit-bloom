@@ -1,0 +1,266 @@
+{
+  "build": 6,
+  "device": "Orbit Bloom Store QA",
+  "resultBundle": "evidence/Build6-Verification.xcresult",
+  "screenshots": [
+    {
+      "file": "v3-16-board-power.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "8ad549eda470760e17aa49d64a6ddbd340041b4e6cd412bf32ebfb7105d79978",
+      "sourceTest": "GameplayUITests/testBoardPowerFormationAndAnimatedShuffle()",
+      "sourceAttachment": "3EC7391C-0474-4536-AE7C-70F077EC1C0A.png"
+    },
+    {
+      "file": "v3-02-botanical-circuit.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "a3cd4f33ad62dd700854de51a024f6fa9974397bb1773f328a7f8e8f2b4faaf9",
+      "sourceTest": "GameplayUITests/testBoardPowerFormationAndAnimatedShuffle()",
+      "sourceAttachment": "C8404A59-B401-4EA5-A1E3-778E2A9C339E.png"
+    },
+    {
+      "file": "v3-01-world.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "da47ff761264011df5f6a252db1f4cc79b8830ce2ebb24b9352ee0ae0d76f277",
+      "sourceTest": "GameplayUITests/testBoardPowerFormationAndAnimatedShuffle()",
+      "sourceAttachment": "852F91DA-1C76-4085-8ECD-A0BB725891BB.png"
+    },
+    {
+      "file": "v2-09-complete-world.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "f1880dc5d8c03fefdf6a043c7e093aeae5ed905657a2f03f015a20886d6da3a0",
+      "sourceTest": "GameplayUITests/testCompleteConnectedCampaignAndRestoreWorld()",
+      "sourceAttachment": "E487648B-6D34-4B2E-9037-351EBBD897FB.png"
+    },
+    {
+      "file": "v2-08-chapter-finale.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "b77d3c4f11bb7c3a0537ff5319f5313aece95252b4450c9498140d6453c1c339",
+      "sourceTest": "GameplayUITests/testCompleteConnectedCampaignAndRestoreWorld()",
+      "sourceAttachment": "4A597019-FFC8-4634-9EF3-EBD068130E9C.png"
+    },
+    {
+      "file": "v2-03-victory.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "f3e160c96341ee6f23356c8cbba8ec6df0a83fc1a4c26de803c1c4e63c8a4fe2",
+      "sourceTest": "GameplayUITests/testCompleteConnectedCampaignAndRestoreWorld()",
+      "sourceAttachment": "C63444DC-F1D2-4105-B783-140548C4236D.png"
+    },
+    {
+      "file": "v2-02-botanical-circuit.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "a3cd4f33ad62dd700854de51a024f6fa9974397bb1773f328a7f8e8f2b4faaf9",
+      "sourceTest": "GameplayUITests/testCompleteConnectedCampaignAndRestoreWorld()",
+      "sourceAttachment": "A179B37E-6876-42FE-9390-69DD1BA748E2.png"
+    },
+    {
+      "file": "v2-01-world.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "23d4bba1878cba24f4c49faac9e62b26b60363a34575488686a414bd339a6100",
+      "sourceTest": "GameplayUITests/testCompleteConnectedCampaignAndRestoreWorld()",
+      "sourceAttachment": "80B5C4CE-1063-42AE-8BDD-5927BFCC6AB1.png"
+    },
+    {
+      "file": "v2-10-delivery-complete.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "aeac3705ef20445bc779477f8a0fa6f37d2d409a67ac31f200270d24b368a70f",
+      "sourceTest": "GameplayUITests/testDeliveryRaceWithRealSteeringAndReward()",
+      "sourceAttachment": "79365F94-A02C-478F-A27C-0226BDDBFD12.png"
+    },
+    {
+      "file": "v2-07-delivery-race.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "cfd16b01a02a25ff1a634fb586037388fe5dde28616ba9f73f39d83aaf685a75",
+      "sourceTest": "GameplayUITests/testDeliveryRaceWithRealSteeringAndReward()",
+      "sourceAttachment": "000CE3D8-6853-470C-8A59-A3E5ADB6B529.png"
+    },
+    {
+      "file": "v2-06-race-lobby.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "6b91333562796a855600c8c6f8f1cb3ef9c47e95b63758988ac0c0385a18719b",
+      "sourceTest": "GameplayUITests/testDeliveryRaceWithRealSteeringAndReward()",
+      "sourceAttachment": "D87F2D0F-0902-46D9-82F0-28A0BB8409A9.png"
+    },
+    {
+      "file": "v2-05-tool-shed.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "7d08a0f2fff144eb45af7ed16baa9cc5a3cadc945b96c64b974563235100a37f",
+      "sourceTest": "GameplayUITests/testFarmHarvestCraftAndSave()",
+      "sourceAttachment": "1433877D-9BCD-422D-9F20-D92B7A82AB19.png"
+    },
+    {
+      "file": "v3-15-field-tasks.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "a0a58c074ad2a6cb6115c31d0c9e9819cd571bd38b3b12cf65339a0aea0950aa",
+      "sourceTest": "GameplayUITests/testFarmHarvestCraftAndSave()",
+      "sourceAttachment": "4AB75948-2650-472C-82DB-EA672832B2EB.png"
+    },
+    {
+      "file": "v2-04-farm.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "e71e90e486871a3cef2d12f142aee0e836c40be9b8373025fd7511908f0128b0",
+      "sourceTest": "GameplayUITests/testFarmHarvestCraftAndSave()",
+      "sourceAttachment": "8C2E16BA-2D9F-4365-86CA-56BAA689D872.png"
+    },
+    {
+      "file": "v4-04-crafting-shed.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "f89b82730608c01ee71f185413e3b6ac7462ba0a26a112814e13efed484477d2",
+      "sourceTest": "GameplayUITests/testIslandPagesUnlockSequentiallyAndUseInWorldNavigation()",
+      "sourceAttachment": "33CD76E8-03CD-47E3-9B17-5C2402E2C3E4.png"
+    },
+    {
+      "file": "v4-03-farm-terraces.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "c0f2d455eca76dc1066bb51f21f9f70dac6293207987941e1d4555ad5717ad37",
+      "sourceTest": "GameplayUITests/testIslandPagesUnlockSequentiallyAndUseInWorldNavigation()",
+      "sourceAttachment": "B816FBB9-6A74-4F31-999A-A61D3E922322.png"
+    },
+    {
+      "file": "v5-19-power-patterns.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "ddf6e6736048b1479c3a6cf8a09ad9e2a5d0dc4e3db34feb324c9229aecefa41",
+      "sourceTest": "GameplayUITests/testIslandPagesUnlockSequentiallyAndUseInWorldNavigation()",
+      "sourceAttachment": "5BAA0E9E-5538-485D-9D00-7D05E7F1BF55.png"
+    },
+    {
+      "file": "v4-02-locked-island.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "9476e19f81763e24b01f988117df2ba51a5ef282bfb6448488ee1823f948cd06",
+      "sourceTest": "GameplayUITests/testIslandPagesUnlockSequentiallyAndUseInWorldNavigation()",
+      "sourceAttachment": "BC4DA1D1-BC3E-4A09-923F-64D3159A0541.png"
+    },
+    {
+      "file": "v4-01-living-island.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "b66eef605ef603deb0beeef681b4b66011bcdcb590294d8175f40c1e3de887d9",
+      "sourceTest": "GameplayUITests/testIslandPagesUnlockSequentiallyAndUseInWorldNavigation()",
+      "sourceAttachment": "8DBC880C-111A-4405-8A34-8D62F1AF1538.png"
+    },
+    {
+      "file": "v2-14-starter-bundle.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "451b9578f5382da123c3dcdb99784c7f90f549238cb25cd1fa12fa6f4d3d30dd",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "7F25C13B-260B-4C38-9CC5-E5940D9823E4.png"
+    },
+    {
+      "file": "app-store-review-starter.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "50c1dccc116d008871189a2162e831a2dff90797624cc2e0f8018e7270f8f9a0",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "2365963A-0A3C-491B-8E22-DEF99597BB2A.png"
+    },
+    {
+      "file": "app-store-review-lives5.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "215c81b1d7e7ceddbd0c55e22961f618bf35481458e2a294794eedf7e06c6330",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "3A5DFE9C-AA43-46B6-B541-7C8FFB7363CA.png"
+    },
+    {
+      "file": "app-store-review-coins7000.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "960b8608e6030d43c675bb29ab4debbc572c33654343fa2900c5aaa231479a7f",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "3252A0CA-D944-4938-A5D2-3FE89A203DA4.png"
+    },
+    {
+      "file": "app-store-review-coins3000.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "6c41d9166b9e17a299d4128b57371a08ce9adc9b2947621e8d2eb27a28084cb7",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "28CB9B3E-9CBF-4BA3-8D69-A6375C32BE73.png"
+    },
+    {
+      "file": "app-store-review-coins1500.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "a08d28a48224dc2f15337e618f52fc22c79b02736379d3d71ad3dfd45d2a118e",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "DEA32D24-7DC3-4659-ADA6-CB07996B9A2C.png"
+    },
+    {
+      "file": "app-store-review-coins400.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "d2f88d31e607cc3356a3cde3953748f22f25bbd38893f9dd683ef2e4fbc9a9b9",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "3194E68E-FEAD-469C-A845-9B5051C9ABC7.png"
+    },
+    {
+      "file": "v2-13-coin-packs.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "0acd17431c18066e295e482a2adc67ba1a68dbdbe763c5c99aa25e8abec5861f",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "1FD3D1A2-2D0E-4C16-9409-E60F1EDA77F3.png"
+    },
+    {
+      "file": "v2-12-lives-and-shop.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "a96a36d0284ba96041872c9473757f90274e22a869d261e5d75f935d770b3ca9",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "2B6DD298-BD87-4A18-9684-CF66C921B889.png"
+    },
+    {
+      "file": "v2-11-bomb-blast.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "2710a0b4824a3ee4b1d67dfac8c5642193d92c450f8c59a2df2fa99cd5d072a7",
+      "sourceTest": "GameplayUITests/testPauseResumeToolAndShopFlows()",
+      "sourceAttachment": "4ADE1361-64C8-4C88-B163-4E434B561ABC.png"
+    },
+    {
+      "file": "v6-player-and-saved-garden.png",
+      "width": 1320,
+      "height": 2868,
+      "sha256": "899f2714dbff328e13c13a5c5efcfcd27a8c36587d151fb29bd315cd093fdf81",
+      "sourceTest": "GameplayUITests/testPlayerAccountGuestSaveAndReturnToGameplay()",
+      "sourceAttachment": "D1DD337B-7AF8-43DA-882C-FD7634C43526.png",
+      "resultBundle": "evidence/Build6-AccountScreen.xcresult"
+    }
+  ],
+  "uniquePassingTests": 60,
+  "coverage": {
+    "core": 28,
+    "nativeAccount": 10,
+    "nativeSession": 7,
+    "nativeStoreKit": 6,
+    "iPhoneUI": 8,
+    "iPadUI": 1
+  },
+  "resultBundles": [
+    "evidence/Build6-Verification.xcresult",
+    "evidence/Build6-AccountFinal.xcresult",
+    "evidence/Build6-AccountScreen.xcresult",
+    "evidence/Build6-RecoveryFinal.xcresult",
+    "evidence/Build6-iPadFinal.xcresult"
+  ],
+  "liveAppleCloudTested": false,
+  "signedSandboxPurchasesTested": false
+}

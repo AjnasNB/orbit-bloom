@@ -1,3 +1,32 @@
+# Orbit Bloom build 6 verification — 9 October 2026
+
+**60 unique checks pass across the recorded runs: 28 core, 23 native, eight iPhone UI flows and one iPad layout flow.** Build 6 adds optional Game Center authentication and private iCloud saved gardens. Guest play, active puzzle/farm progression, coins, lives, tools, assistance and credited transactions remain in the local wallet. Separate player wallets and device files avoid silently combining balances. A restore that omits a purchase credited locally is rejected. Undo restores the local checkpoint and pauses cloud backup.
+
+| Area | Unique passing cases | Evidence |
+| --- | ---: | --- |
+| Core gameplay, all-stage solver, economy and saved-garden schema | 28 | evidence/build6-core-tests.log |
+| Native account migration, isolation, cloud choices, undo, corrupt saves, offline failures and Apple callback timeouts | 10 | evidence/Build6-AccountFinal.xcresult; evidence/Build6-RecoveryFinal.xcresult |
+| Native sessions and bundled media | 7 | evidence/Build6-AccountFinal.xcresult |
+| Apple local StoreKit purchase, pending, restore and refund checks | 6 | evidence/Build6-AccountFinal.xcresult |
+| iPhone campaign, powers, island, farm/craft, rally, six packs, puzzle water and account/relaunch | 8 | evidence/Build6-Verification.xcresult; account contrast refreshed in evidence/Build6-AccountScreen.xcresult |
+| iPad portrait/landscape controls and account page | 1 | evidence/Build6-iPadFinal.xcresult; 37.047 seconds |
+
+The native UI campaign again wins twelve stages and restores six projects using real controls, in 290.603 seconds. Account UI testing plants a crop, opens the saved-garden screen, checks the honest guest state, returns to play and relaunches with the crop retained. Real Apple sign-in is deliberately not simulated in UI tests. Memory transport tests exercise save/restore/error behavior; they are not evidence of successful Game Center authentication or a live Apple iCloud round trip. No physical Apple device was connected. Signed sandbox purchases and cross-device cloud syncing remain owner/device checks.
+
+Thirty native iPhone screenshots at 1320 × 2868 and nine native iPad captures are in release-draft/build6/. Seven iPad portraits are 2064 × 2752; two landscape QA images retain orientation 8 metadata and display at 2752 × 2064. Account button/footer contrast was corrected and the account capture refreshed after the UI rerun (24.223 seconds). Capture hashes and exact source attachments are recorded in build6/verification.json and build6/ipad/verification.json. No screenshots were resized or synthesized.
+
+An initial account compilation error was repaired before passing runs. The first iPad assertions passed, but its result bundle stalled during diagnostic collection as disk space ran out; that incomplete bundle is not counted as final evidence. After removing only this project's rebuildable caches, the focused iPad test passed again with diagnostics disabled and a readable result bundle. Existing simulator saves were not erased.
+
+The matching distribution profile was regenerated with Game Center and container iCloud.com.orbitbloom.game. Release archive and export passed. The exported 1.0 (6) IPA passes local signature/profile/bundle checks and contains Production CloudDocuments entitlements and four iPad orientations. See build6/signed-package-verification.json. **Build 6 has not been uploaded, submitted for App Review or publicly released.** Build 5 remains the previously processed TestFlight build. The Mac is locked during remaining Transporter/Chrome work.
+
+The current App Store description/review notes and Game Center checkbox were saved. Privacy/support updates were deployed to the isolated existing Cloudflare Worker and the live privacy page was verified in Chrome. Publishing Apple's privacy declaration still requires the owner's approval of its accuracy/compliance/update agreement. During screenshot replacement, the old large-display images were moved into Apple's Asset Library and ten new native files were selected; persistence of the replacement set could not be verified before control was interrupted. Recheck or complete the upload before submitting. Six older iPad portraits remain the last verified uploaded set.
+
+Build 6 was installed normally over Orbit Bloom QA (64173F47-C4DC-46B4-82EC-0027675F7780), without reset arguments. All preferences were exactly equal after installation. Normal launch retained the full garden wallet after normalizing only natural life-clock metadata and enum dictionary ordering. evidence/build6-preview-preservation.txt records this check. Only the user's preview simulator remains booted; the unused Store QA and iPad QA devices are stopped.
+
+VoiceOver, larger text, smaller iPad and older iOS coverage, physical audio/haptics, human difficulty, consumable refund policy and live cloud/purchase integration remain release limitations. No real purchases or new legal/financial agreements were performed. Historical reports below apply only to their own builds.
+
+---
+
 # Orbit Bloom build 5 verification — 9 October 2026
 
 **46 unique tests pass across the verified runs: 25 core checks, 13 native checks, seven existing UI flows and one new iPad release layout check.** The core suite was refreshed in this store-preparation run with 25 passes; the focused shop flow also passed again with six product screenshots. The prior combined native/UI evidence remains the source for the unchanged model and purchase flows. Build 5 introduces a bright SceneKit island, 102 horizontally swiped pages with ten sequential stops each, in-scene Farm/Rally gates, and swipe pages for crafting, field tasks, patterns and supplies. The game pages fit without vertical scrolling or a permanent activity tab bar. Native island meshes animate trees and clouds; board/farm art remains rendered bitmap sprites. The 1,020 stops have unique generated names across twelve biome families, not 1,020 individually authored 3D environments.

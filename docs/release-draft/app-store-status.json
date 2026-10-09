@@ -2,7 +2,7 @@
   "checkedOn": "2026-10-09",
   "appID": "6820591529",
   "version": "1.0",
-  "build": 5,
+  "build": 6,
   "releaseMode": "manual",
   "versionStatus": "Prepare for Submission",
   "subtitle": "Swipe, farm & race among stars",
@@ -32,41 +32,45 @@
   },
   "purchaseReview": "purchase-review/metadata.json",
   "iPhoneScreenshots": "app-store-screenshots.json",
-  "iPadScreenshots": "ipad/verification.json",
+  "iPadScreenshots": "build6/ipad/verification.json",
   "archive": {
-    "path": "build/OrbitBloom-AppStore.xcarchive",
+    "path": "build/OrbitBloom-Build6-AppStore.xcarchive",
     "compilation": "succeeded",
     "signed": true,
     "uploadable": true,
-    "exportedIPA": "build/AppStoreExport/OrbitBloom.ipa",
-    "verification": "signed-package-verification.json"
+    "exportedIPA": "build/AppStoreExport6/OrbitBloom.ipa",
+    "verification": "build6/signed-package-verification.json"
   },
   "distributionProfile": {
     "name": "Orbit Bloom AppStore",
     "portalURL": "https://developer.apple.com/account/resources/profiles/review/554SHJ3J75",
-    "state": "installed locally; team/bundle/certificate match verified"
+    "state": "regenerated and installed with Game Center and isolated iCloud container",
+    "uuid": "8ad71964-4815-45e7-ad15-0187cfa5e7e3"
   },
-  "testFlightUploaded": true,
+  "testFlightUploaded": false,
   "appReviewSubmitted": false,
   "publicReleased": false,
   "pending": [
-    "Unlock Mac to complete build selection and owner testing invitation",
-    "Publish privacy answers after explicit action-time confirmation",
-    "Record final iPad screenshot and pricing/platform reload verification",
-    "Attach processed build 5 and add version 1.0 to the draft containing all six purchases",
-    "Invite only the owner to Orbit Bloom QA; exercise signed sandbox purchases on a physical device",
-    "Submit the completed iOS app and first purchases together for App Review; manual release remains selected"
+    "Unlock Mac for Transporter upload and Chrome screenshots/build selection",
+    "Verify or finish replacing ten iPhone screenshots and add build 6 iPad account capture",
+    "Upload and attach build 6; add version 1.0 to six-product iOS review draft",
+    "Publish privacy declaration only after explicit agreement approval",
+    "Invite only owner to internal QA and verify live Apple account/cloud round trip and signed sandbox purchases",
+    "Submit app and first purchases together for App Review; manual public release remains selected"
   ],
   "testFlight": {
     "buildID": "ab9c0610-2177-4d2f-b4b7-b33ff6b82b52",
     "processed": true,
-    "status": "Ready to Submit",
+    "status": "build 5 Ready to Submit; build 6 not uploaded",
     "internalGroup": "Orbit Bloom QA",
     "groupID": "20c17cf7-ef9b-43be-9a6a-55530abb5a3f",
     "groupBuildCount": 1,
     "testerCount": 0,
     "automaticDistribution": true,
-    "ownerInvitationSent": false
+    "ownerInvitationSent": false,
+    "previousBuild": 5,
+    "currentBuild": 6,
+    "currentBuildUpload": "pending"
   },
   "appVersionBuildAttached": false,
   "purchaseSubmission": {
@@ -80,7 +84,7 @@
     "download": "free",
     "baseRegion": "India (INR)",
     "basePriceINR": 0,
-    "paidPurchases": "six optional packs at INR 99–999",
+    "paidPurchases": "six optional packs at INR 99\u2013999",
     "configured": true
   },
   "availability": {
@@ -94,5 +98,6 @@
     "mobileOnly": true,
     "platformPreferencesReloadVerification": "pending"
   },
-  "browser": "Chrome reconnected; Mac locked again during final build selection"
+  "browser": "Mac locked; Chrome/native controls unavailable during screenshot replacement",
+  "gameCenterEnabled": true
 }

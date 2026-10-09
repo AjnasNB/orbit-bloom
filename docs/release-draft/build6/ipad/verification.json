@@ -1,0 +1,126 @@
+{
+  "build": 6,
+  "resultBundle": "evidence/Build6-iPadFinal.xcresult",
+  "testPassed": true,
+  "testSeconds": 37.047,
+  "preservesProgress": true,
+  "screenshots": [
+    {
+      "file": "ipad-08-world-landscape.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 8,
+      "displayedPixels": [
+        2752,
+        2064
+      ],
+      "sha256": "588c739ff7773b4242a9817f1ee308e776d755e58f5bfb320cf4599abf20e89b",
+      "sourceAttachment": "35882566-F243-46A8-949E-A7850E825501.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    },
+    {
+      "file": "ipad-07-puzzle-landscape.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 8,
+      "displayedPixels": [
+        2752,
+        2064
+      ],
+      "sha256": "ee47c425e8091a1d319406936202a18560d3e9853992be062371204c808e57cb",
+      "sourceAttachment": "5E3E3BE1-7FB5-4C33-BAAC-5CE30CA9E839.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    },
+    {
+      "file": "ipad-06-puzzle-portrait.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 1,
+      "displayedPixels": [
+        2064,
+        2752
+      ],
+      "sha256": "4b02ddbdc9dc8ead7bf9d123023e446acf07cee6a380f0f624307648c70319bb",
+      "sourceAttachment": "11597801-DF17-42EB-9B29-AB4EB394229E.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    },
+    {
+      "file": "ipad-09-player-and-saved-garden.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 1,
+      "displayedPixels": [
+        2064,
+        2752
+      ],
+      "sha256": "b53a17efea2fe1c5e38c696c7b095b54b27a5be14f7f28d2278b8333823d6c95",
+      "sourceAttachment": "547B52AE-A58A-4314-A8E2-B3AF6ED66DB5.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    },
+    {
+      "file": "ipad-05-supplies.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 1,
+      "displayedPixels": [
+        2064,
+        2752
+      ],
+      "sha256": "b9ecb7d9826317827fab73d4ac855b7f56ba477c0b8cb6554d6da7c232ae4004",
+      "sourceAttachment": "E03D5351-7D6E-4A60-B7C0-BFD90F016EA6.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    },
+    {
+      "file": "ipad-04-rally-lobby.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 1,
+      "displayedPixels": [
+        2064,
+        2752
+      ],
+      "sha256": "b245561a7ebef17974134f4a201c9f96f453be37c7e8cc3a2383eb7e044b14e1",
+      "sourceAttachment": "0E975779-DB25-4B2A-ADC2-610FFDF1E486.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    },
+    {
+      "file": "ipad-03-crafting.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 1,
+      "displayedPixels": [
+        2064,
+        2752
+      ],
+      "sha256": "d928d38acdd92abdd65b15b3db479721699c97704f81c44ff5ba20ed7e7add3a",
+      "sourceAttachment": "2D15DF8D-EC65-44C7-899A-5B34023E449F.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    },
+    {
+      "file": "ipad-02-farm.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 1,
+      "displayedPixels": [
+        2064,
+        2752
+      ],
+      "sha256": "e27e0c8dec7bfff45734891ac4b39af76471208f6e8694961874f7dfb6f65a31",
+      "sourceAttachment": "AA3CF489-3534-4C67-A8AA-BD1FA8871A6A.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    },
+    {
+      "file": "ipad-01-world.png",
+      "width": 2064,
+      "height": 2752,
+      "orientation": 1,
+      "displayedPixels": [
+        2064,
+        2752
+      ],
+      "sha256": "6c6756572bec6c9b28299c8bd2978e2c30defcf6ff539b17b348aa87753814dd",
+      "sourceAttachment": "24802C7A-2AD0-4049-A950-A62D3A7AEE52.png",
+      "sourceTest": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()"
+    }
+  ]
+}

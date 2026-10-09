@@ -1,12 +1,16 @@
 # Orbit Bloom App Store preparation — 9 October 2026
 
-## Actual Apple records
+## Current release status
 
-App: **Orbit Bloom: Garden Arcade**, Apple ID **6820591529**, bundle **com.orbitbloom.game**, SKU **orbit-bloom-ios-001**, publisher **Ajnas N B**, team **4V29K5Q8S9**. Version 1.0 is **Prepare for Submission** with manual release selected. Workspace build number is 5.
+App **Orbit Bloom: Garden Arcade**, Apple ID **6820591529**, bundle **com.orbitbloom.game**, SKU **orbit-bloom-ios-001**, publisher **Ajnas N B**, team **4V29K5Q8S9**. Version 1.0 remains **Prepare for Submission**, with manual release selected. Workspace **build 6** is tested, signed and exported, but **not uploaded or submitted**. Previously uploaded build 5 is processed in TestFlight. Do not submit build 5 as the new account/cloud release.
 
-App Review contact information supplied by the owner was saved on 8 October and verified after reload. The missing-contact errors are cleared. Private review contact details remain in App Store Connect rather than the public repository.
+Build 6 adds optional Game Center sign-in and GameKit saved games in the player's private iCloud Drive container `iCloud.com.orbitbloom.game`. Guest play remains available. Per-player local wallets, per-device cloud files, explicit restore choices, local recovery and undo checkpoints, purchase protection and timeout/error handling are implemented. Sixty unique core/native/UI checks pass. A live Apple cloud round trip and signed sandbox purchases on hardware remain unverified; no physical Apple device is connected. See [test report](TEST_REPORT.md).
 
-The app record and the six products below exist in App Store Connect. Each product has worldwide availability, India as the base region, the listed draft price, and English (U.S.) display information saved. These are draft configurations, not live products or proof of paid agreement activation.
+The matching **Orbit Bloom AppStore** profile was regenerated with Game Center and the isolated iCloud container. Release archive/export and exported package signature checks pass. The IPA has Production CloudDocuments entitlements and four supported iPad orientations. [Build 6 package verification](release-draft/build6/signed-package-verification.json) records the exact hash and source commit. Private certificates/profiles are not committed.
+
+## Purchases and account
+
+The account's Free Apps/Paid Apps agreements, bank, tax and trader compliance already show **Active**; none were changed. App download pricing is **free**, with India as base region. Optional packs display Apple's localized prices.
 
 | Product | Apple ID | Type | India price | Grant |
 | --- | --- | --- | --- | --- |
@@ -17,39 +21,35 @@ The app record and the six products below exist in App Store Connect. Each produ
 | com.orbitbloom.lives5 | 6820595083 | Consumable | ₹99 | 5 non-expiring extra lives |
 | com.orbitbloom.starter | 6820594801 | Non-consumable | ₹99 | One-time 600 coins + 3 extra lives |
 
-The obsolete Aurora test product remains in the local test configuration for entitlement regression tests; it is not the main shop catalogue. The app displays Apple's localized storefront prices rather than hard-coded charge amounts. First purchase submission must accompany a new app version.
+All six products have worldwide availability and English (U.S.) metadata. Six actual native purchase screenshots and reviewer notes were saved and verified. Apple added all six to one iOS draft and shows **Ready for Review**. The app version still needs to join this draft before they can be submitted together. These products are not live or evidence of real payment tests. The obsolete Aurora local test product remains only for entitlement regression coverage.
 
-## Saved store details
+## Draft metadata and site
 
-On 9 October, the subtitle was saved as **Swipe, farm & race among stars**. The primary category is **Games**, with **Puzzle** and **Simulation** subcategories. Content rights identify licensed third-party content (MIT library and CC0 audio) alongside original artwork. The completed age questionnaire assigns **13+** in most regions, **16+** in Vietnam and **12+** in Korea. The recurring Bomb/TNT imagery was included under Apple’s broad weapons/objects definition; no gambling, loot boxes, advertising, social features or mature content were declared.
+Review contact details supplied by the owner were saved and the missing-field errors cleared. Private contacts remain in Apple rather than the public repository. Subtitle **Swipe, farm & race among stars**, category Games, Puzzle/Simulation subcategories, content rights and the age questionnaire are saved. Most regions rate 13+, Vietnam 16+, Korea 12+. App availability is 173 regions, excluding China mainland and Vietnam because required game licenses were not supplied. Future-region auto-add is off. Mac/Vision Pro distribution was opted out; final reload verification remains pending. No licenses were invented.
 
-The App Privacy answers are saved as **Data Not Collected**, with the live policy URL. They remain an **unpublished draft** because Apple’s Publish confirmation includes an agreement that the answers are accurate and will be kept updated. The owner’s action-time confirmation has been requested.
+The App Store description and review notes were updated for build 6's optional accounts/saves and saved. The version's Game Center checkbox is checked. Sign-in is not required for guest review/play. Full draft copy is in [metadata.json](release-draft/metadata.json).
 
-The account’s Free Apps and Paid Apps agreements, bank account, tax forms and Digital Services Act compliance already show **Active**. No banking details, tax submissions or legal agreements were changed.
+The isolated existing Cloudflare Worker serves marketing, privacy and support at https://orbit-bloom-game-site.ajnasnb.workers.dev/ . Privacy/support were updated for Game Center and private iCloud saves and deployed; the live privacy page was verified in Chrome. Existing projects, DNS and sites were untouched. The optional cognifyr.co subdomain remains unconfigured and does not block these live URLs.
 
-All six actual purchase screens were captured by the passing focused native UI run at 1320 × 2868. [Purchase review metadata](release-draft/purchase-review/metadata.json) records exact reviewer notes and status. All six screenshots and notes are saved and verified after navigation/reload. Apple accepted all six into one iOS draft submission and shows **Ready for Review**. The draft cannot be submitted until an app version is added.
+The privacy answers remain **Data Not Collected, unpublished**. Apple defines collection around developer/third-party access and says the publisher is not responsible for Apple's own data collection: [official definitions](https://developer.apple.com/app-store/app-privacy-details/). Publishing the prepared declaration accepts Apple's accuracy/compliance/update agreement. The owner's explicit action-time approval is pending; the final confirmation was not accepted.
 
-App download pricing is now **free**, with India as the base region and optional paid packs above. Availability is configured for **173 countries or regions**. China mainland and Vietnam are excluded because their required game licenses have not been supplied; automatic addition of future regions is off. Apple Silicon Mac and Vision Pro distribution were opted out for this mobile release. Apple’s [app information reference](https://developer.apple.com/help/app-store-connect/reference/app-information/app-information/) documents the regional game-license requirements. No licenses were fabricated or submitted.
+## Screenshots and testing access
 
-The existing matching profile was found in the owner’s Documents folder and installed locally. Release build **1.0 (5)** archived and exported with the installed Apple Distribution identity. Local signature verification passed, and the IPA was delivered through the owner’s signed-in Transporter account at **15:25 Asia/Kolkata on 9 October**. Apple processed it and TestFlight shows **Ready to Submit**. [Signed package verification](release-draft/signed-package-verification.json) records its hash and evidence. The internal **Orbit Bloom QA** group exists with this build and automatic distribution enabled; it currently has zero testers. The owner invitation and release-version build attachment were interrupted when the Mac locked again.
+Thirty build 6 iPhone captures at native 1320 × 2868 and nine iPad captures are prepared with hashes/source attachments in [build6/verification.json](release-draft/build6/verification.json) and [iPad verification](release-draft/build6/ipad/verification.json). Seven iPad portraits are 2064 × 2752; two landscape QA images retain native orientation 8 metadata. No resizing or synthetic UI screenshots were used.
 
-## Prepared content
+During replacement of the ten iPhone screenshots, the prior set was removed from the draft and retained in Apple's Asset Library. Ten new files, including the account page, were selected. Chrome control stopped before persistence could be verified. **Recheck or complete this replacement before submitting.** Six build 5 iPad portraits are the last verified uploaded set; add/refresh the build 6 iPad captures. [Screenshot status](release-draft/app-store-screenshots.json) records the incomplete external step honestly.
 
-- Native SwiftUI game, original icon and dimensional botanical artwork, bundled CC0 music/effects and license notices.
-- Original SceneKit island, 102 swipeable ten-stop pages, sequential unlocks and 10–20 turn budgets across 1,020 campaign stages (12 authored + 1,008 generated), board powers, farm, crafting, swipe-steered delivery, permanent tasks, life regeneration and shared economy.
-- Local StoreKit verification passes six purchase tests on iOS 26.1, including coins, lives, starter grant, idempotency, restore, cancellation, pending approval and refunded entitlement revocation. See TEST_REPORT.md for exact evidence and the distinction from signed sandbox testing.
-- Description, promotional text, keywords and review notes updated in the App Store draft. Full reviewable copy is in release-draft/metadata.json.
-- Nineteen native iPhone build 5 screenshots in release-draft/. Ten large-display captures (1320 × 2868) were uploaded in Chrome on 9 October and verified after reload with rendered thumbnails. The medium-display class inherits those ten current captures. Old medium screenshots remain recoverable in Apple’s Asset Library. Six native iPad portrait screenshots (2064 × 2752) are uploaded and rendered in the 13-inch class; Apple’s confirmation says they cover selected smaller iPad sizes/localizations. Final iPad reload verification remains to be recorded.
-- Privacy required-reason manifest for local saved data; no account, analytics, advertisements, tracking or requested sensitive device permissions.
-- Marketing, privacy and support site is live at https://orbit-bloom-game-site.ajnasnb.workers.dev/ . Dedicated Cloudflare Workers static assets are used because the Pages account has reached its project limit. Home/privacy/support were verified in Chrome. Support, marketing and privacy URLs plus build 5 description/review notes were saved in App Store Connect. No existing projects, domain records or sites were changed. The optional orbitbloom.cognifyr.co custom host remains unconfigured.
+The internal **Orbit Bloom QA** TestFlight group has automatic distribution enabled, one previously processed build and zero testers at the last check. Add only the owner, upload build 6 and verify its distribution. No owner invitation has been confirmed.
 
-## External blockers and remaining submission work
+Build 6 is installed over the user's preview simulator without clearing its save. Preferences matched exactly immediately after installation and the complete garden wallet survived normal launch. Only the preview remains booted; unused Store/iPad QA simulators are stopped.
 
-1. **Mac input:** Chrome reconnected and external saves resumed. The Mac subsequently locked during build selection. Unlocking is needed to complete the release-version build attachment and owner TestFlight invitation. A duplicate profile-download Save panel was dismissed after the existing profile had already been found; no browser security workaround was used.
-2. **Privacy agreement:** publish the prepared declaration only after the owner explicitly approves Apple’s accuracy/compliance/update agreement. The current confirmation is open in Chrome and the question remains pending.
-3. **Final review preparation:** attach processed build 5, record the final iPad screenshot reload check and pricing/platform preferences, and add version 1.0 to the same draft that already contains all six first purchases. App accessibility claims remain unverified and must not be advertised as supported.
-4. **Internal testing and review:** add only the owner to Orbit Bloom QA, record the invitation, and exercise physical-device and signed sandbox purchase flows. **TestFlight upload is completed; App Review submission and public release are not.** Payment account setup is active; do not redo banking or tax work. Manual release remains selected.
-5. **Release QA:** verify smaller iPad and older iOS layouts, VoiceOver and larger text, audio interruptions, low-network purchase recovery, save recovery and consumable refund policy. Saves currently remain device-local. The new iPad release check preserves progress and captures portrait/landscape scenes; TEST_REPORT.md records its actual result.
-6. **Optional custom hostname:** the site already serves through workers.dev. The cognifyr.co subdomain remains unconfigured; it does not block the live marketing, support or privacy pages.
+## Remaining review work
 
-Daily improvement automation is ACTIVE at 10:00 Asia/Kolkata. It continues coding, testing, screenshots and reviewed commits, and can upload tested internal TestFlight builds using the available signing path. It does not submit a public release or perform real purchases.
+1. Unlock the Mac: native automation explicitly reports it is locked. Transporter upload and Chrome draft actions cannot continue until unlocked.
+2. Verify/finish iPhone replacement uploads, refresh iPad screenshots and confirm rendered images.
+3. Upload build 6 through the already signed-in Transporter, wait for processing, attach it to version 1.0 and add that version to the six-product iOS draft.
+4. Publish privacy only after the owner's explicit agreement approval.
+5. Invite only the owner to internal QA and verify live Apple sign-in/cloud backups and signed sandbox purchases on an Apple device.
+6. Resolve actual Apple validation errors and submit app + first purchases together for App Review. Keep manual release selected. **No App Review submission or public release has occurred.**
+
+Broader accessibility, smaller/older device coverage, audio on hardware, consumable refund policy and human difficulty remain release checks. Daily improvement automation remains ACTIVE at 10:00 Asia/Kolkata for coding, tests, screenshots and internal build uploads. It does not accept agreements, perform real purchases or submit public releases.
