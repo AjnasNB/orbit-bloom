@@ -1,3 +1,29 @@
+# Orbit Bloom build 8 verification — 10 October 2026
+
+The field journal now adapts its horizontal pages to available height and larger text. Full instructions and reward/power descriptions wrap, claim actions stay reachable, and a named adjustable page counter supports accessibility. The clipped build 7 iPad help sentence is replaced by complete copy in the native capture. See [focused mobile audit](MOBILE_JOURNAL_AUDIT.md).
+
+**63 unique cases passed today**, with no failing assertions in the final runs:
+
+| Area | Cases | Final evidence |
+| --- | ---: | --- |
+| Core rules, all-stage solver, saved schema and economy | 31 | evidence/build8-core-tests.log |
+| Native player accounts, recovery, sessions/media and local StoreKit | 28 | evidence/Build8-ConnectedNative.xcresult |
+| Every journal reward and power at the first accessibility text size | 1 | evidence/Build8-JournalInitial.xcresult; 47.512 seconds |
+| Actual harvest → claim → craft → relaunch and island/puzzle/power navigation | 2 | evidence/Build8-ConnectedNative.xcresult |
+| iPad portrait/landscape bounds, swipes, wrapped journal help and power pages | 1 | evidence/Build8-iPadCaptured.xcresult; 39.425 seconds |
+
+Six unaffected iPhone flows recorded for build 7 remain applicable and were not rerun today. Together these provide **69 recorded unique cases**, rather than 69 cases run anew for build 8. The current core solver completes all 1,020 stages and six projects in 6,057 legal swaps with one retry and no paid items/extra moves; this is automated reachability evidence, not human difficulty testing or manual play of every stage.
+
+The new large-text UI check performs actual horizontal swipes through all six rewards and four powers. It checks full wrapping, card bounds, non-overlap, hittable controls, both page boundaries, zero scrolling and return to gameplay. Existing farm checks still claim the earned reward, craft a tool and retain the garden on relaunch. The iPad run checks real race steering, 49 puzzle controls in both orientations and the journal's full portrait sentence/landscape formations. VoiceOver speech and its adjustment gesture, extreme text sizes and smaller devices remain unverified.
+
+The first iPad run passed all assertions (50.830 seconds), but Xcode could not persist its result summaries/attachments because disk space was exhausted. It is diagnostic evidence only. After deleting this project's rebuildable caches and stopping the finished Store QA device, the repeated iPad run passed and saved all attachments. No sources, saves, archives, release assets or other projects were deleted. Six selected native journal PNGs were copied byte-for-byte and visually checked; [manifest with hashes and provenance](release-draft/build8/verification.json) distinguishes them from the existing build 7 App Store gallery.
+
+Build 8 was installed over the user's iOS 26.5 preview without a reset. All seven preferences were exactly equal immediately after installation. After normal launch, the full active wallet and session still matched: 280 coins, one completed stage and the stage 2 puzzle. The initial raw session-byte comparison detected JSON key ordering; comparing decoded contents resolved it without ignoring any gameplay value or timer. Enum-key tool dictionaries are compared by key. The full original data container is backed up locally; evidence/build8-preview-preservation.txt records the result. Store QA alone receives resetting tests. iPad uses --keep-progress. Both test devices are stopped; the user's preview and unrelated Rush Drives simulator remain booted.
+
+The signed Release archive/export passed, and the exact IPA signature, identity, four iPad orientations, Production cloud container and disabled debugger access were verified. [Signed package record](release-draft/build8/signed-package-verification.json) pins source a8b1ba9 and its hash. **No TestFlight delivery occurred**: upload export failed to use Apple accounts, and locked-Mac Transporter UI could not be used. Chrome's current review request redirected to sign-in. The submitted build 7 and its public metadata were not changed; their last confirmed Waiting for Review status is recorded below. Live Game Center/iCloud and signed sandbox purchase checks retain the existing hardware limitations. No real purchase, new agreement or public release occurred.
+
+---
+
 # Product-page verification — 9 October 2026, 10:55 PM India time
 
 The refreshed Apple product page contains ten native iPhone and ten native iPad screenshots, plus separate original header/search brand illustrations. All twenty uploads completed and persisted in Chrome, in the intended puzzle/farm/rally-first order. Apple previews show the botanical header and readable “SWIPE. FARM. RACE.” search artwork. Both creative assets are included with the app version and are Waiting for Review. [Manifest, exact hashes and test summaries](release-draft/product-page/manifest.json), [art provenance](release-draft/product-page/IMAGE_PROMPTS.md) and [preview proof](release-draft/product-page/README.md) distinguish real app captures from illustrations.

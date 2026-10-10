@@ -1,0 +1,38 @@
+{
+  "appID": "6820591529",
+  "version": "1.0",
+  "build": 8,
+  "bundleID": "com.orbitbloom.game",
+  "ipa": "build/AppStoreExport8/OrbitBloom.ipa",
+  "sha256": "85dc8b50123ba152e69d883018dd716ba4cc74acb240cf1ee3fab3db5dbf025b",
+  "byteSize": 23799053,
+  "team": "4V29K5Q8S9",
+  "profileName": "Orbit Bloom AppStore",
+  "profileUUID": "8ad71964-4815-45e7-ad15-0187cfa5e7e3",
+  "gameCenter": true,
+  "cloudContainer": "iCloud.com.orbitbloom.game",
+  "cloudEnvironment": "Production",
+  "debuggerAccess": false,
+  "encryptionExemption": false,
+  "iPadOrientations": [
+    "UIInterfaceOrientationPortrait",
+    "UIInterfaceOrientationPortraitUpsideDown",
+    "UIInterfaceOrientationLandscapeLeft",
+    "UIInterfaceOrientationLandscapeRight"
+  ],
+  "verifiedOn": "2026-10-10",
+  "codeSignatureVerified": true,
+  "exportEntitlementsMatchArchive": true,
+  "sourceCommit": "a8b1ba9bacec2da67eb63cb84001e9205300e135",
+  "upload": "not uploaded: Xcode export-to-upload failed to use Apple accounts",
+  "appReviewSubmitted": false,
+  "publicReleased": false,
+  "evidence": {
+    "archive": "evidence/build8-archive.log",
+    "export": "evidence/build8-export.log",
+    "upload": "evidence/build8-upload.log"
+  },
+  "appleServerValidation": "not performed; no delivery",
+  "testFlightBuildID": null,
+  "uploadBlocker": "Existing Apple account authentication unavailable; native Transporter UI inaccessible while Mac is locked. No sign-in or agreement prompt accepted."
+}

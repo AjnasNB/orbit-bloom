@@ -88,7 +88,7 @@
     "download": "free",
     "baseRegion": "India (INR)",
     "basePriceINR": 0,
-    "paidPurchases": "six optional packs at INR 99–999",
+    "paidPurchases": "six optional packs at INR 99\u2013999",
     "configured": true
   },
   "availability": {
@@ -152,5 +152,23 @@
       "product-page/proof/header-preview.jpg",
       "product-page/proof/search-preview.jpg"
     ]
+  },
+  "workspaceBuild": 8,
+  "dailyImprovement": {
+    "date": "2026-10-10",
+    "build": 8,
+    "change": "Adaptive journal reward and power pages with full wrapping, Dynamic Type, Reduce Motion and accessible page adjustment",
+    "sourceCommit": "a8b1ba9bacec2da67eb63cb84001e9205300e135",
+    "verification": "build8/verification.json",
+    "signedPackage": "build8/signed-package-verification.json",
+    "currentPassingCases": 63,
+    "aggregateRecordedUniqueCases": 69,
+    "previewInstalledWithoutReset": true,
+    "uploadStatus": "pending Apple account access; Xcode failed to use accounts; no delivery",
+    "appReviewBuild": 7,
+    "reviewQueueChanged": false,
+    "publicReleased": false,
+    "liveReviewStatusRechecked": false,
+    "reviewStatusCheck": "Chrome redirected to Apple sign-in; existing last-verified 9 October review status retained"
   }
 }

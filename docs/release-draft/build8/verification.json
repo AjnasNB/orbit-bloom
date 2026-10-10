@@ -1,0 +1,124 @@
+{
+  "build": 8,
+  "verifiedOn": "2026-10-10",
+  "scope": "Adaptive field journal; shipping gameplay, wallet and account rules unchanged",
+  "captures": [
+    {
+      "file": "captures/iphone-journal-large-rewards.png",
+      "sha256": "3fd2d2f6135cf5e58e6ac5259a3988294b6c907e3a734261473ff9aca6dceafc",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build8-Journal-Attachments/6697EAC3-2A61-44D4-A52D-D41058107377.png",
+      "test": "GameplayUITests/testJournalLargeTextKeepsEveryRewardAndPowerReachable()",
+      "textSize": "UICTContentSizeCategoryAccessibilityM",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-journal-large-mega.png",
+      "sha256": "ad41f6f807f36e78c9ed5527318c3e482f6e3fe54b5babe09c9393aecf5cb04c",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build8-Journal-Attachments/FEA90B23-DA51-44BE-8A34-74E9B6927EB5.png",
+      "test": "GameplayUITests/testJournalLargeTextKeepsEveryRewardAndPowerReachable()",
+      "textSize": "UICTContentSizeCategoryAccessibilityM",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-journal-rewards.png",
+      "sha256": "cc4eafaf3ab55d20f8b2d59f52a154e27e2b6ea14cfc0877c67dbb46cd8641c6",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build8-Connected-Attachments/281B26E0-B1E0-492F-AC9B-672C410F262F.png",
+      "test": "GameplayUITests/testFarmHarvestCraftAndSave()",
+      "textSize": "default",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-journal-powers.png",
+      "sha256": "a3f60d95d24c1cb72992df116d3a16fc565e4cb7d39320511dbc2cdd2c488785",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build8-Connected-Attachments/7CDE5373-2250-47E1-AD9C-B089D8C2C5B7.png",
+      "test": "GameplayUITests/testIslandPagesUnlockSequentiallyAndUseInWorldNavigation()",
+      "textSize": "default",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/ipad-journal-rewards.png",
+      "sha256": "407964eb579e4155cc6dd1bb45ce5c330e92c05993d5295a3ea207a9611788a3",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build8-iPadCaptured-Attachments/39A8F61A-8181-4AD8-976D-8348FDDA2423.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "textSize": "default",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/ipad-journal-landscape.png",
+      "sha256": "ed71ce1b176cc82548c6ae22cb63feaa4b0468869e4f5f30b625dca3f7318bab",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build8-iPadCaptured-Attachments/D64D2A54-AA6C-42A1-8F23-FAB056C34481.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "textSize": "default",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientationNote": "Native landscape capture; original orientation metadata retained; no resizing"
+    }
+  ],
+  "evidence": {
+    "core": "evidence/build8-core-tests.log",
+    "largeText": "evidence/Build8-JournalInitial.xcresult",
+    "connectedNative": "evidence/Build8-ConnectedNative.xcresult",
+    "iPad": "evidence/Build8-iPadCaptured.xcresult"
+  },
+  "currentPassingCases": 63,
+  "aggregateRecordedUniqueCases": 69,
+  "iPadStatus": "Passed; screenshots and result bundle persisted in final capture run",
+  "appleReviewBuild": 7,
+  "appReviewResubmitted": false,
+  "publicReleased": false,
+  "sourceCommit": "a8b1ba9bacec2da67eb63cb84001e9205300e135",
+  "casesByRun": {
+    "core": 31,
+    "native": 28,
+    "affectedIPhoneUI": 3,
+    "affectedIPadUI": 1
+  },
+  "earlierUnaffectedIPhoneCases": 6,
+  "diagnostics": [
+    "evidence/build8-ipad.log: all assertions passed but disk-full prevented result bundle and capture persistence; excluded from final capture evidence"
+  ],
+  "preview": {
+    "device": "64173F47-C4DC-46B4-82EC-0027675F7780",
+    "build": 8,
+    "os": "26.5",
+    "reset": false,
+    "preferencesEqualImmediatelyAfterInstall": true,
+    "fullWalletAndSessionEqualAfterNormalLaunch": true,
+    "normalization": "JSON dictionary/enum-key ordering only",
+    "coins": 280,
+    "completedStages": 1,
+    "activeLevel": 2,
+    "evidence": "evidence/build8-preview-preservation.txt"
+  },
+  "signedPackage": "signed-package-verification.json",
+  "internalUpload": "pending Apple account access; no successful delivery",
+  "unusedQASimulatorsStopped": true
+}

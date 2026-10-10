@@ -8,6 +8,14 @@ Optional Game Center sign-in and GameKit saved games use the player's private iC
 
 The matching **Orbit Bloom AppStore** profile includes Game Center and the isolated iCloud container. Release archive/export and exported package signature checks pass. The IPA has Production CloudDocuments entitlements, debugger access disabled and four supported iPad orientations. [Build 7 package verification](release-draft/build7/signed-package-verification.json) records the exact hash and source commit. Private certificates/profiles are not committed.
 
+## Daily internal build 8 — 10 October 2026
+
+Build **1.0 (8)** fixes field-journal clipping with adaptive swipe pages, complete wrapping and accessible page adjustment. **63 cases passed in this run: 31 core, 28 native, three affected iPhone flows and one iPad flow.** Including six unchanged iPhone flows recorded for build 7, the applicable recorded coverage totals 69 unique cases; those six were not rerun today. Six actual journal captures, the source commit and save-preserving preview installation are in [build 8 verification](release-draft/build8/verification.json). The user's preview still has 280 coins, one completed stage and the active level 2 puzzle.
+
+Release archive/export and exported signature/Production entitlement checks passed. The [exact build 8 IPA](release-draft/build8/signed-package-verification.json) is ready locally, but **it has not been uploaded to TestFlight**: Xcode's upload export failed to use Apple accounts; Transporter UI was unavailable while the Mac was locked. Chrome redirected the review page to sign-in, so the current review status was not independently rechecked today. No repeated sign-in request, account workaround or new agreement was attempted.
+
+The submitted build 7, its product-page galleries and its last-verified review status above remain the release record. Build 8 screenshots are prepared for its later release metadata; the daily run did not cancel, replace or resubmit the public review.
+
 ## Purchases and account
 
 The account's Free Apps/Paid Apps agreements, bank, tax and trader compliance already show **Active**; none were changed. App download pricing is **free**, with India as base region. Optional packs display Apple's localized prices.

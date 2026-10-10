@@ -69,3 +69,7 @@ The privacy policy and support site were updated and deployed only to the existi
 ## Build 7 security corrections — 9 October 2026
 
 Private Apple saves remain the sole cloud save system, as requested by the owner. No Cloudflare player database was added. Saved timers, scores and legacy files receive stricter validation; life-clock conversion cannot overflow. Cloud operations recheck the current Apple player after completion and before a restore, and paused backups cannot apply stale choices. The isolated Cloudflare site has additional HTTPS/CSP headers. Scope, evidence and physical-device limitations are in [SECURITY_REVIEW.md](SECURITY_REVIEW.md).
+
+## Build 8 journal adaptation — 10 October 2026
+
+The field journal now wraps its complete help, reward and power descriptions. Available height and Dynamic Type determine one to three rewards or one to four formations per horizontal page. Accessibility sizes move the claim action below its description. The selected entry is retained when page capacity changes; “Journal pages” exposes a named adjustable action and page value. Page updates respect Reduce Motion. Assistance prices, claim rules, saved progress and in-world entry points are unchanged. Actual large-text traversal and iPad portrait/landscape evidence are in [the focused audit](MOBILE_JOURNAL_AUDIT.md) and [test report](TEST_REPORT.md).
