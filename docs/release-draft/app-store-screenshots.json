@@ -180,7 +180,7 @@
           7,
           7
         ],
-        "landscapeEncoding": "2064 × 2752 native pixels with orientation 8; displayed as 2752 × 2064; no resizing",
+        "landscapeEncoding": "2064 \u00d7 2752 native pixels with orientation 8; displayed as 2752 \u00d7 2064; no resizing",
         "landscapeQA": [
           "product-page/ipad/09-puzzle-landscape.png",
           "product-page/ipad/10-world-landscape.png"
@@ -281,5 +281,15 @@
   "note": "Matching nativePNGbytes, no resizing. Additional purchase/settings/landscape proof retained locally. Existing branded header/search artwork preserved.",
   "reviewSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
   "reviewStatus": "Waiting for Review",
-  "reviewConfirmation": "build11/proof/apple-review-submission.jpg"
+  "reviewConfirmation": "build11/proof/apple-review-submission.jpg",
+  "latestPreparedGallery": {
+    "build": 13,
+    "selection": "build13/apple-gallery-prepared.json",
+    "manifest": "build13/manifest.json",
+    "phoneCount": 10,
+    "iPadCount": 10,
+    "uploaded": false,
+    "existingBuild11GalleryUnchanged": true,
+    "remaining": "Apple Chrome sign-in, build replacement and matching gallery upload before review resubmission"
+  }
 }

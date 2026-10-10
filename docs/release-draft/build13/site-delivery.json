@@ -1,0 +1,14 @@
+{
+  "worker": "orbit-bloom-game-site",
+  "url": "https://orbit-bloom-game-site.ajnasnb.workers.dev/",
+  "versionID": "8786ad9b-5de6-47ff-a68c-064d97529ab2",
+  "change": "Home hero shows the original build13 cartoon puzzle screenshot. Existing support/privacy/public-event backend unchanged.",
+  "screenshotSha256": "5cf9b209a00a56a978b930cc40b7d4bdd607dce5714275635badbc621edceff4",
+  "evidence": {
+    "deploy": "evidence/build13-site-deploy.log",
+    "security": "evidence/build13-site-security.log",
+    "chrome": "proof/live-cartoon-site.jpg"
+  },
+  "securityRoutesPassed": 5,
+  "playersStored": false
+}

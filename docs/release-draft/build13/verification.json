@@ -88,5 +88,17 @@
     "Simulator gameplay and local StoreKit/account test doubles do not verify physical Apple sign-in, private iCloud round trips, signed sandbox purchases or leaderboard delivery.",
     "Physical VoiceOver speech, hardware audio/haptics/performance, smallest devices and split view are not established here.",
     "Automated reachability is not a human difficulty study."
-  ]
+  ],
+  "deliveryFollowUp": {
+    "signedPackage": "signed-package-verification.json",
+    "additionalIPadRun": "ipad-rooms-summary.json",
+    "additionalCase": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+    "uniqueCaseCountUnchanged": 109,
+    "galleryCount": 31,
+    "appleBuild13Uploaded": true,
+    "appleBuild13ReviewSubmitted": false,
+    "chromeSignInRequired": true,
+    "existingBuild11ReviewUnchanged": true,
+    "siteDelivery": "site-delivery.json"
+  }
 }

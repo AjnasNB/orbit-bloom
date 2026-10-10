@@ -1,8 +1,12 @@
-# Subsequent cartoon artwork revision — build 13
+# Cartoon release delivery — build 13
 
-Build 13 is locally verified: shared cartoon fruit/powers, robot/coin, Lio and rally rover; safe sprite framing; unchanged save and purchase schemas. The [109-case test record](release-draft/build13/verification.json) and [25 native screenshots](release-draft/build13/README.md) prepare this visual revision for a later distribution update. The ordinary preview preserves its current saved game and runs 1.0 (13).
+Build **1.0 (13)** is signed, verified and delivered to Apple. Transporter Verify passed at **21:12** and Deliver passed at **21:14 Asia/Kolkata on 10 October 2026** (minute precision); its status subsequently confirms **the app has finished processing**. [Package verification](release-draft/build13/signed-package-verification.json) pins the exact tested app source and IPA hash, Production Game Center/private iCloud entitlements, disabled debugger access, original privacy manifest and absent test plug-ins.
 
-**Build 13 is not uploaded or submitted.** The existing build-11 Apple submission, binary and uploaded gallery are unchanged. Its status was not freshly rechecked here because the Chrome connection was unavailable. Local screenshots must not be presented as already uploaded product-page assets, and simulator account/purchase tests do not replace physical Apple service checks.
+**Build 13 is uploaded but not yet attached, assigned to internal TestFlight or submitted for App Review.** Chrome restarted and its Apple session expired during delivery. A Chrome sign-in tab is retained for the owner. The authenticated check before restart still showed **build 11 Waiting for Review** with manual public release selected. That submission has not been cancelled or replaced. The final Apple steps are to restore the session, assign build13 to the existing internal group, replace the build and matching gallery, then resubmit all eight items. No public release, real purchase or new agreement occurred.
+
+The [109-case test record](release-draft/build13/verification.json), additional passing all-seven-room iPad run and [31 native screenshots](release-draft/build13/README.md) cover the cartoon revision. [Prepared store copy](release-draft/build13/metadata-prepared.json) and [ten phone/ten iPad gallery selection](release-draft/build13/apple-gallery-prepared.json) are local, not already saved/uploaded product-page assets. The ordinary preview runs 1.0 (13) with its full saved game preserved. Simulator tests do not establish physical Game Center/private iCloud/signed sandbox purchase behavior.
+
+The isolated [Cloudflare site](https://orbit-bloom-game-site.ajnasnb.workers.dev/) now shows the original native cartoon puzzle. Deploy **8786ad9b-5de6-47ff-a68c-064d97529ab2** and all five HTTPS/security routes pass; [site record](release-draft/build13/site-delivery.json) retains proof. No publisher player-save database, existing-project change or DNS change was added.
 
 ---
 

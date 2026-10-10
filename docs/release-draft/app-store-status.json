@@ -135,7 +135,7 @@
     "download": "free",
     "baseRegion": "India (INR)",
     "basePriceINR": 0,
-    "paidPurchases": "six optional packs at INR 99–999",
+    "paidPurchases": "six optional packs at INR 99\u2013999",
     "configured": true
   },
   "availability": {
@@ -272,7 +272,7 @@
     "creativeStatus": "Existing header and search illustrations preserved with submitted app version",
     "subtitle": "Seven games. One living island"
   },
-  "workspaceBuild": 11,
+  "workspaceBuild": 13,
   "dailyImprovement": {
     "date": "2026-10-10",
     "build": 8,
@@ -417,7 +417,7 @@
           "download": "free",
           "baseRegion": "India (INR)",
           "basePriceINR": 0,
-          "paidPurchases": "six optional packs at INR 99–999",
+          "paidPurchases": "six optional packs at INR 99\u2013999",
           "configured": true
         },
         "availability": {
@@ -549,11 +549,12 @@
   },
   "cloudflare": {
     "site": "https://orbit-bloom-game-site.ajnasnb.workers.dev",
-    "version": "1fe5fe66-69a0-4b46-a680-70fadf7a12d7",
+    "version": "8786ad9b-5de6-47ff-a68c-064d97529ab2",
     "scope": "Isolated game site and public UTC event clock",
     "playerSaveDatabase": false,
     "purchaseDataStored": false,
-    "verification": "Five HTTPS/security-route checks and actual native public-clock acceptance; separate from the 107 cases"
+    "verification": "Five HTTPS/security-route checks and visual Chrome home check passed after build13 native screenshot update; event clock unchanged",
+    "deliveryRecord": "build13/site-delivery.json"
   },
   "hardwareVerification": {
     "gameCenterAuthentication": false,
@@ -561,5 +562,25 @@
     "signedAppleSandboxPurchases": false,
     "gameCenterLeaderboardSubmission": false,
     "note": "Unverified on physical hardware. Local StoreKit and transport doubles are not Apple sandbox-server tests. TestFlight build assignment alone is not a test."
-  }
+  },
+  "latestCartoonDelivery": {
+    "build": 13,
+    "sourceCommit": "d6780355d5350b42c2225e427a1cbcef3787ba7c",
+    "verifiedOn": "2026-10-10",
+    "signedPackage": "build13/signed-package-verification.json",
+    "verification": "build13/verification.json",
+    "nativeGallery": "build13/manifest.json",
+    "uniquePassingCases": 109,
+    "nativeCaptureCount": 31,
+    "appleValidation": "Transporter Verify succeeded 21:12 Asia/Kolkata",
+    "appleDelivery": "Transporter Deliver succeeded 21:14 Asia/Kolkata",
+    "appleProcessing": "Finished, confirmed by Transporter",
+    "internalTestFlightAssigned": false,
+    "appReviewSubmitted": false,
+    "productPageGalleryUpdated": false,
+    "publicReleased": false,
+    "existingBuild11SubmissionUnchanged": true,
+    "remaining": "Sign back in to Apple in retained Chrome tab to assign TestFlight, replace build/screenshots and resubmit."
+  },
+  "lastAuthenticatedRecheck": "2026-10-10, before Chrome restarted this delivery run; version1.0 build11 Waiting for Review and manual release selected"
 }

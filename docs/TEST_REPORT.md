@@ -1,3 +1,13 @@
+# Build 13 release delivery follow-up — 10 October 2026
+
+The same tested app source was archived for device Release, exported with the existing App Store profile, verified for code signature/Production private iCloud/Game Center/privacy reasons and no test plug-ins, then validated and delivered by Transporter. Apple processing finished according to Transporter. See [package verification](release-draft/build13/signed-package-verification.json). This does not prove a physical Apple account/cloud/sandbox round trip.
+
+`evidence/Build13-iPadRooms.xcresult` passes `SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()` on the separate iPad QA simulator: all seven entrances/exits, retained room choice and no puzzle-life cost for the six other rooms. It is an existing phone case rerun on another device; **109 unique passing cases remains the count**. Six additional original native room PNGs extend the gallery to 31. The iPad QA device is shut down after the capture work; the owner's preview save remains intact.
+
+Cloudflare's home screenshot now matches build13. Five public HTTPS/security-header routes pass in `evidence/build13-site-security.log`; [deploy proof](release-draft/build13/site-delivery.json) distinguishes this website update from the Apple product page. Apple gallery/review replacement waits for the expired Chrome Apple session to be signed in. The existing build11 review was not cancelled.
+
+---
+
 # Orbit Bloom build 13 verification — 10 October 2026
 
 The fruit, leaf, dew, rose, diamond, powers, gardening robot, coin, Lio and rally rover now share a rounded 3D cartoon style with the existing garden. Original transparent PNGs replace the detailed realistic renders. [Style findings](CARTOON_STYLE_REFINEMENT.md) and [full prompts](CARTOON_ARTWORK_PROMPTS.json) describe the changes. Navigation, difficulty, economy, account handling and save schemas are preserved.

@@ -350,6 +350,115 @@
       "capture": "xcrun simctl io screenshot; ordinary build 13 with no QA flags",
       "timestamp": "2026-10-10T15:23:45.812902+00:00",
       "deviceId": "64173F47-C4DC-46B4-82EC-0027675F7780"
+    },
+    {
+      "path": "screenshots/ipad-05-farm.png",
+      "sha256": "e5da1532cc503dec1fd18f87c6a4b47c1cab6e377bd4f0d32fe03e5030df778d",
+      "width": 2064,
+      "height": 2752,
+      "build": 13,
+      "note": "Settled capture replaces the transient all-doors test attachment. The original diagnostic is retained in evidence/build13-ipad-farm-transient.png.",
+      "captureMethod": "xcrun simctl io screenshot to a fresh temporary file, copied byte-for-byte into release gallery",
+      "capturedUTC": "2026-10-10T15:52:32.118129+00:00",
+      "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "captureContext": "CUA opened Farm on separate iPad QA, planted plot1 through real input, observed toast disappearance, relaunched with --uitesting --keep-progress and verified seeds/water/crop persisted. Native capture shows a harvest-ready cartoon rose with no toast.",
+      "relatedTestBundle": "evidence/Build13-iPadRooms.xcresult",
+      "relatedTestIdentifier": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()"
+    },
+    {
+      "path": "screenshots/ipad-06-rally.png",
+      "sha256": "052e40bfa7881b08d0a8dad80c5c93f1bb838ad00b70ed2c820f5a0fe7aee018",
+      "width": 2064,
+      "height": 2752,
+      "build": 13,
+      "resultBundle": "evidence/Build13-iPadRooms.xcresult",
+      "testIdentifier": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "D6B51A93-0F34-48F5-8FE7-C1D6B9A119FB.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build11-seven-rooms-rally_0_45347DA7-3E75-400D-ACE2-A317425736CB.png",
+        "timestamp": 1791646839.204
+      },
+      "note": "Original app screenshot from passing iPad all-seven-doors case; older attachment-name prefix is retained test naming."
+    },
+    {
+      "path": "screenshots/ipad-07-canal.png",
+      "sha256": "9d3375101501e6807405754f4ef216d4c4feb052a4efaec2c3b327bc9f3f6a04",
+      "width": 2064,
+      "height": 2752,
+      "build": 13,
+      "resultBundle": "evidence/Build13-iPadRooms.xcresult",
+      "testIdentifier": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "4551DF71-0211-4376-A540-EB73CBA660E4.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build11-seven-rooms-canal_0_8B5D5E02-95FB-4219-A1C4-4E1C56796BB3.png",
+        "timestamp": 1791646856.585
+      },
+      "note": "Original app screenshot from passing iPad all-seven-doors case; older attachment-name prefix is retained test naming."
+    },
+    {
+      "path": "screenshots/ipad-08-fireflies.png",
+      "sha256": "55a15f36801d2c7de53077c1019a8e36de34b64a5136c22af4251ae013789f57",
+      "width": 2064,
+      "height": 2752,
+      "build": 13,
+      "resultBundle": "evidence/Build13-iPadRooms.xcresult",
+      "testIdentifier": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "1FB9EA3B-8852-4635-AABB-262A214A42DF.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build11-seven-rooms-fireflies_0_538A976C-BB0E-41E5-BBD2-6FF4A603FA5E.png",
+        "timestamp": 1791646869.976
+      },
+      "note": "Original app screenshot from passing iPad all-seven-doors case; older attachment-name prefix is retained test naming."
+    },
+    {
+      "path": "screenshots/ipad-09-windmill.png",
+      "sha256": "ce09cc82dd8a27a770442bd1a938c15c0234105e861621b205992e9afb4ea8f4",
+      "width": 2064,
+      "height": 2752,
+      "build": 13,
+      "resultBundle": "evidence/Build13-iPadRooms.xcresult",
+      "testIdentifier": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "C2AEEFC6-8DD9-4651-99E2-7E22D0CC8D89.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build11-seven-rooms-windmill_0_B677028C-6B3E-450E-BE53-99D8EFB67463.png",
+        "timestamp": 1791646884.891
+      },
+      "note": "Original app screenshot from passing iPad all-seven-doors case; older attachment-name prefix is retained test naming."
+    },
+    {
+      "path": "screenshots/ipad-10-observatory.png",
+      "sha256": "108706e3359051e5f534aa90010542cd5f1c9a7abb8de5e074c32a0d068503f2",
+      "width": 2064,
+      "height": 2752,
+      "build": 13,
+      "resultBundle": "evidence/Build13-iPadRooms.xcresult",
+      "testIdentifier": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "C525CD52-074F-4CC0-AF53-BD1E2C7EEFA4.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build11-seven-rooms-observatory_0_B20DFCB6-2DFA-44FF-BFCD-70AF97305777.png",
+        "timestamp": 1791646896.704
+      },
+      "note": "Original app screenshot from passing iPad all-seven-doors case; older attachment-name prefix is retained test naming."
     }
   ]
 }

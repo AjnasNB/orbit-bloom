@@ -1,0 +1,30 @@
+{
+  "build": 13,
+  "status": "Prepared locally; not uploaded to the App Store product page",
+  "iPhone": [
+    "phone-02-cartoon-puzzle.png",
+    "phone-06-farm.png",
+    "phone-09-cartoon-rover.png",
+    "phone-01-connected-garden.png",
+    "phone-17-canal-weave.png",
+    "phone-18-firefly-trail.png",
+    "phone-19-windmill-works.png",
+    "phone-20-moon-observatory.png",
+    "phone-03-board-power.png",
+    "phone-11-lives-and-shop.png"
+  ],
+  "iPad": [
+    "ipad-04-puzzle-portrait.png",
+    "ipad-05-farm.png",
+    "ipad-06-rally.png",
+    "ipad-01-garden-portrait.png",
+    "ipad-07-canal.png",
+    "ipad-08-fireflies.png",
+    "ipad-09-windmill.png",
+    "ipad-10-observatory.png",
+    "ipad-03-puzzle-landscape.png",
+    "ipad-02-garden-landscape.png"
+  ],
+  "sourceManifest": "manifest.json",
+  "note": "Ten original native PNGs per gallery. iPad landscape retains native EXIF orientation. No resizing or synthetic screenshot UI. Farm uses a settled native capture with no planting toast."
+}
