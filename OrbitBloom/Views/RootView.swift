@@ -23,7 +23,7 @@ struct RootView: View {
             else if game.engine != nil { PuzzleView().id(game.engine?.level.id) }
             else {
                 VStack(spacing:0) {
-                    GameHUD()
+                    if game.tab != 0 && game.tab != 1 { GameHUD() }
                     if game.tab == 2 || game.tab == 3 {
                         RoomExitHeader(kind:game.tab == 2 ? .farm : .rally) { game.tab = 0; game.effect("tap") }
                             .frame(maxWidth:650)
@@ -42,7 +42,7 @@ struct RootView: View {
                             initialRoom:selectedHubRoom,onChoose:chooseRoom,onExit:{ game.tab = 0 })
                         default: GardenView()
                         }
-                    }.id(game.tab).transition(.opacity).frame(maxWidth:650).frame(maxWidth:.infinity,maxHeight:.infinity)
+                    }.id(game.tab).transition(.opacity).frame(maxWidth:game.tab == 0 || game.tab == 1 ? .infinity : 650).frame(maxWidth:.infinity,maxHeight:.infinity)
                 }.accessibilityHidden(loading)
                     .animation(reduceMotion ? nil : .easeInOut(duration:0.2),value:game.tab)
             }
@@ -117,91 +117,144 @@ struct GardenView: View {
     var region: GardenRegion { GardenRegion.all[page] }
     var nextTask: GardenTask? { GardenTask.all.first { !game.progress.restored.contains($0.id) } }
     var body: some View {
-        VStack(spacing:8) {
-            HStack(alignment:.center) {
-                VStack(alignment:.leading,spacing:3) {
-                    Text(game.progress.gardenComplete ? "A world in bloom." : region.title).font(.system(size:27,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
-                    Text("Island \(page+1) of \(GardenRegion.all.count) · \(game.progress.restored.count)/6 restored").font(.system(size:12,weight:.semibold,design:.rounded)).foregroundStyle(Palette.mint)
-                }
-                Spacer(minLength:4)
-                Button { game.showTasks = true; game.effect("tap") } label: { Image(systemName:"book.closed.fill").font(.system(size:23)).foregroundStyle(Palette.night).frame(width:48,height:48).background(Palette.paper,in:Circle()).shadow(color:Palette.mint.opacity(0.15),radius:0,y:4) }.accessibilityLabel("Field tasks and power patterns").accessibilityIdentifier("openTasks")
-            }.padding(.horizontal,22)
-            GardenMapScene(page:page,selected:chosen) { level in chosen = level }
-                .contentShape(Rectangle())
-                .simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
-                    guard abs(value.translation.width) > abs(value.translation.height) else { return }
-                    let target = min(GardenRegion.all.count-1,max(0,page+(value.translation.width < 0 ? 1 : -1)))
-                    withAnimation(reduceMotion ? nil : .spring(response:0.4,dampingFraction:0.85)) { page = target }
-                    let first = target*GardenRegion.stopsPerPage+1
-                    chosen = game.progress.isUnlocked(first) ? min(game.progress.nextLevel,first+9) : first
-                    game.effect("tap")
-                }).accessibilityElement(children:.contain).accessibilityIdentifier("gardenMap")
-                .accessibilityAction(named:"Next island") { page = min(GardenRegion.all.count-1,page+1); chosen = page*10+1 }
-                .accessibilityAction(named:"Previous island") { page = max(0,page-1); chosen = min(game.progress.nextLevel,page*10+1) }
-            ActivityRoomEntrances().padding(.horizontal,22)
-            HStack(spacing:8) {
-                Button { game.tab = 5; game.effect("tap") } label: {
-                    Label("Explore 7 rooms",systemImage:"door.left.hand.open").font(.system(.subheadline,design:.rounded,weight:.heavy))
-                        .frame(maxWidth:.infinity,minHeight:46).foregroundStyle(Palette.night).background(Palette.paper,in:Capsule())
-                }.buttonStyle(PressStyle()).accessibilityIdentifier("openIslandHub")
-                Button { game.showWorldEvents = true } label: { Image(systemName:"globe.europe.africa.fill").frame(width:46,height:46).foregroundStyle(Palette.night).background(Palette.sunlight,in:Circle()) }.accessibilityLabel("Worldwide timed events").accessibilityIdentifier("openWorldEvents")
-                Button { game.showRoomRecords = true } label: { Image(systemName:"trophy.fill").frame(width:46,height:46).foregroundStyle(Palette.night).background(Palette.paper,in:Circle()) }.accessibilityLabel("Room records and Game Center leaderboard").accessibilityIdentifier("openRoomRecords")
-            }.padding(.horizontal,22)
-            VStack(spacing:8) {
-                Text("Swipe across the island to explore").font(.system(size:11,weight:.semibold,design:.rounded)).foregroundStyle(Palette.mint)
-                if game.progress.isUnlocked(chosen) {
-                    DifficultyBadge(level:Level.campaign[chosen-1]).accessibilityIdentifier("selectedDifficulty")
-                    PrimaryButton(title:"Bloom circuits",subtitle:"Level \(chosen) · \(Level.campaign[chosen-1].moves) \(Level.campaign[chosen-1].moves == 1 ? "turn" : "turns")",symbol:"leaf.fill",id:"playLevel") { game.start(Level.campaign[chosen-1]) }
-                } else {
-                    Text("Finish level \(game.progress.nextLevel) to open this island").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.mint).frame(minHeight:60).frame(maxWidth:.infinity).background(Palette.paper,in:RoundedRectangle(cornerRadius:22))
-                    Button("Return to your open island") { openCurrent() }.font(.subheadline.bold()).foregroundStyle(Palette.night).frame(minHeight:44).accessibilityIdentifier("openCurrentIsland")
-                }
-                if let task = nextTask {
-                    HStack(spacing:10) {
-                        Image(systemName:task.icon).font(.title2).foregroundStyle(Palette.mint)
-                        VStack(alignment:.leading,spacing:3) { Text(task.title).font(.system(size:13,weight:.bold,design:.rounded)); Text("\(game.progress.restored.count)/6 restored").font(.caption).foregroundStyle(Palette.mint) }
-                        Spacer(minLength:4)
-                        Button { game.restore(task); game.effect("craft") } label: { Label("2",systemImage:"star.fill").font(.headline).padding(12).background(Palette.sunlight,in:Capsule()) }.accessibilityLabel("Restore \(task.title) for 2 stars").accessibilityIdentifier("restoreProject")
-                    }.foregroundStyle(Palette.night).padding(12).background(Palette.paper,in:RoundedRectangle(cornerRadius:20))
-                } else { Text("6/6 restored").font(.caption.bold()).foregroundStyle(Palette.mint) }
-            }.padding(.horizontal,22).padding(.bottom,8)
+        GeometryReader { geometry in
+            let wide = geometry.size.width > geometry.size.height
+            ZStack {
+                GardenMapScene(page:page,selected:chosen,topInset:wide ? 154 : 142,bottomInset:wide ? 172 : 210) { chosen = $0 }
+                    .contentShape(Rectangle())
+                    .simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
+                        guard abs(value.translation.width) > abs(value.translation.height) else { return }
+                        turnPage(value.translation.width < 0 ? 1 : -1)
+                    }).accessibilityElement(children:.contain).accessibilityIdentifier("gardenMap")
+                    .accessibilityAction(named:"Next island") { turnPage(1) }
+                    .accessibilityAction(named:"Previous island") { turnPage(-1) }
+                VStack(spacing:8) {
+                    GameHUD().background(Palette.paper.opacity(0.96),in:Capsule()).padding(.horizontal,12)
+                    HStack(alignment:.top,spacing:8) {
+                        VStack(alignment:.leading,spacing:3) {
+                            Text("AURORA ATOLL").font(.system(size:10,weight:.black,design:.rounded)).tracking(2)
+                            Text(region.title).font(.system(size:22,weight:.heavy,design:.rounded)).lineLimit(1).minimumScaleFactor(0.8)
+                            Text("District \(page+1)/\(GardenRegion.all.count) · Swipe to explore").font(.system(size:11,weight:.bold,design:.rounded))
+                        }.foregroundStyle(Palette.night).padding(.horizontal,14).padding(.vertical,8).background(Palette.paper.opacity(0.94),in:RoundedRectangle(cornerRadius:18))
+                        Spacer(minLength:0)
+                        mapButton("Field tasks and power patterns",symbol:"book.closed.fill",id:"openTasks") { game.showTasks = true }
+                    }.padding(.horizontal,16)
+                    Spacer(minLength:0)
+                    gardenDock(wide:wide)
+                }.padding(.top,4).padding(.bottom,8)
+            }.frame(maxWidth:.infinity,maxHeight:.infinity)
         }.onAppear { openCurrent() }.onChange(of:game.progress.nextLevel) { _,_ in openCurrent() }
     }
-    func openCurrent() { page = (game.progress.nextLevel-1)/10; chosen = game.progress.nextLevel }
+    private func gardenDock(wide:Bool)->some View {
+        VStack(spacing:8) {
+            HStack(spacing:8) {
+                if let task=nextTask {
+                    Button { game.restore(task); game.effect("craft") } label: {
+                        Label("\(task.title) · 2 ★",systemImage:task.icon).font(.system(size:11,weight:.heavy,design:.rounded)).lineLimit(1)
+                            .foregroundStyle(Palette.night).padding(.horizontal,12).frame(minHeight:44).background(Palette.paper,in:Capsule())
+                    }.buttonStyle(PressStyle()).accessibilityLabel("Restore \(task.title) for 2 stars").accessibilityIdentifier("restoreProject")
+                }
+                Spacer(minLength:0)
+                Label("\(game.progress.stars)",systemImage:"star.fill").font(.system(size:14,weight:.black,design:.rounded)).foregroundStyle(Palette.gold)
+                    .padding(.horizontal,12).frame(height:44).background(Palette.paper,in:Capsule()).accessibilityLabel("\(game.progress.stars) restoration stars")
+            }
+            HStack(spacing:8) {
+                roomDoor("Farm",symbol:"leaf.fill",id:"openFarm",label:"Enter Farm room. Plant & harvest. No life cost.") { game.tab = 2 }
+                roomDoor("Rally",symbol:"car.fill",id:"openRace",label:"Enter Rally room. Drive & deliver. No life cost.") { game.tab = 3 }
+                roomDoor("7 rooms",symbol:"door.left.hand.open",id:"openIslandHub",label:"Explore all seven game rooms") { game.tab = 5 }
+                mapButton("Worldwide timed events",symbol:"globe.europe.africa.fill",id:"openWorldEvents") { game.showWorldEvents = true }
+                mapButton("Room records and Game Center leaderboard",symbol:"trophy.fill",id:"openRoomRecords") { game.showRoomRecords = true }
+            }
+            if game.progress.isUnlocked(chosen) {
+                HStack(spacing:8) {
+                    VStack(alignment:.leading,spacing:4) {
+                        Text("LEVEL \(chosen)").font(.system(size:12,weight:.black,design:.rounded)).foregroundStyle(Palette.night)
+                        DifficultyBadge(level:Level.campaign[chosen-1]).accessibilityIdentifier("selectedDifficulty")
+                    }.frame(minWidth:102)
+                    PrimaryButton(title:"Play",subtitle:"\(Level.campaign[chosen-1].moves) \(Level.campaign[chosen-1].moves == 1 ? "turn" : "turns")",symbol:"leaf.fill",id:"playLevel") { game.start(Level.campaign[chosen-1]) }
+                }
+            } else {
+                Button { openCurrent() } label: {
+                    VStack(spacing:3) {
+                        Text("District locked · complete level \(game.progress.nextLevel)").font(.system(size:12,weight:.heavy,design:.rounded))
+                        Label("Return to your open district",systemImage:"arrow.uturn.backward").font(.system(size:13,weight:.bold,design:.rounded))
+                    }.frame(maxWidth:.infinity,minHeight:60).foregroundStyle(Palette.night).background(Palette.sunlight,in:RoundedRectangle(cornerRadius:18))
+                }.buttonStyle(PressStyle()).accessibilityIdentifier("openCurrentIsland")
+            }
+        }.padding(10).frame(maxWidth:wide ? 660 : 600).background(Palette.sky.opacity(0.93),in:RoundedRectangle(cornerRadius:26))
+            .overlay(RoundedRectangle(cornerRadius:26).stroke(.white.opacity(0.8),lineWidth:2)).padding(.horizontal,12)
+    }
+    private func roomDoor(_ title:String,symbol:String,id:String,label:String,action:@escaping()->Void)->some View {
+        Button { action(); game.effect("tap") } label: {
+            VStack(spacing:2) { Image(systemName:symbol).font(.system(size:17,weight:.heavy)); Text(title).font(.system(size:11,weight:.heavy,design:.rounded)).lineLimit(1) }
+                .foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:48).background(Palette.paper,in:RoundedRectangle(cornerRadius:14))
+        }.buttonStyle(PressStyle()).accessibilityLabel(label).accessibilityHint("Opens a separate room with a clear exit back to the island").accessibilityIdentifier(id)
+    }
+    private func mapButton(_ label:String,symbol:String,id:String,action:@escaping()->Void)->some View {
+        Button { action(); game.effect("tap") } label: {
+            Image(systemName:symbol).font(.system(size:20,weight:.bold)).foregroundStyle(Palette.night).frame(width:48,height:48)
+                .background(Palette.paper,in:RoundedRectangle(cornerRadius:16))
+        }.buttonStyle(PressStyle()).accessibilityLabel(label).accessibilityIdentifier(id)
+    }
+    private func turnPage(_ step:Int) {
+        let target=min(GardenRegion.all.count-1,max(0,page+step))
+        guard target != page else { return }
+        withAnimation(reduceMotion ? nil : .easeInOut(duration:0.35)) { page=target }
+        let first=target*10+1
+        chosen=game.progress.isUnlocked(first) ? min(game.progress.nextLevel,first+9) : first
+        game.effect("tap")
+    }
+    func openCurrent() { page=(game.progress.nextLevel-1)/10; chosen=game.progress.nextLevel }
 }
 
 struct GardenMapScene: View {
     @EnvironmentObject var game:GameModel
-    let page:Int
-    let selected:Int
+    let page:Int,selected:Int
+    let topInset:CGFloat,bottomInset:CGFloat
     let select:(Int)->Void
-    let xs:[CGFloat] = [0.26,0.62,0.82,0.50,0.21,0.64,0.82,0.50,0.20,0.62]
-    func point(_ stop:Int,_ size:CGSize)->CGPoint { CGPoint(x:size.width*xs[stop],y:size.height*(0.89-CGFloat(stop)*0.083)) }
+    private let xs:[CGFloat]=[0.29,0.65,0.80,0.50,0.22,0.60,0.80,0.48,0.22,0.62]
+    private func point(_ stop:Int,_ size:CGSize)->CGPoint {
+        let height=max(220,size.height-topInset-bottomInset)
+        if size.width > size.height {
+            let column=stop < 5 ? stop : 9-stop
+            return CGPoint(x:size.width*(0.18+CGFloat(column)*0.16),y:topInset+height*(stop < 5 ? 0.78 : 0.20))
+        }
+        return CGPoint(x:size.width*xs[stop],y:topInset+height*(0.92-CGFloat(stop)*0.092))
+    }
     var body:some View {
         GeometryReader { geo in
             ZStack {
-                LivingIslandView(variant:page,restored:game.progress.restored.count).allowsHitTesting(false).accessibilityHidden(true)
+                LivingIslandView(variant:page,restored:game.progress.restored.count).ignoresSafeArea().allowsHitTesting(false).accessibilityHidden(true)
                 Canvas { context,size in
-                    var path = Path(); path.move(to:point(0,size))
-                    for stop in 1..<10 { let a = point(stop-1,size), b = point(stop,size); path.addCurve(to:b,control1:CGPoint(x:a.x,y:(a.y+b.y)/2),control2:CGPoint(x:b.x,y:(a.y+b.y)/2)) }
-                    context.stroke(path,with:.color(.white.opacity(0.85)),style:StrokeStyle(lineWidth:11,lineCap:.round))
-                    context.stroke(path,with:.color(Palette.gold.opacity(0.6)),style:StrokeStyle(lineWidth:3,lineCap:.round,dash:[2,9]))
-                }.allowsHitTesting(false)
+                    var path=Path()
+                    let start=point(0,size),end=point(9,size)
+                    path.move(to:CGPoint(x:start.x,y:size.height+40)); path.addLine(to:start)
+                    for stop in 1..<10 {
+                        let a=point(stop-1,size),b=point(stop,size)
+                        path.addCurve(to:b,control1:CGPoint(x:a.x,y:(a.y+b.y)/2),control2:CGPoint(x:b.x,y:(a.y+b.y)/2))
+                    }
+                    path.addLine(to:CGPoint(x:end.x,y:-40))
+                    context.stroke(path,with:.color(Color(hex:0x709960).opacity(0.5)),style:StrokeStyle(lineWidth:30,lineCap:.round))
+                    context.stroke(path,with:.color(Color(hex:0xFFF0C8)),style:StrokeStyle(lineWidth:23,lineCap:.round))
+                    context.stroke(path,with:.color(Color(hex:0xCEA878).opacity(0.7)),style:StrokeStyle(lineWidth:2,lineCap:.round,dash:[1,9]))
+                }.allowsHitTesting(false).accessibilityHidden(true)
                 ForEach(GardenRegion.all[page].levels) { level in
-                    let unlocked = game.progress.isUnlocked(level.id)
-                    let completed = game.progress.completed[level.id] != nil
+                    let unlocked=game.progress.isUnlocked(level.id),completed=game.progress.completed[level.id] != nil
                     Button { select(level.id); game.effect("tap") } label: {
                         ZStack {
-                            Circle().fill(Color(hex:0x719965)).offset(y:5)
-                            Circle().fill(LinearGradient(colors:unlocked ? [Palette.paper,Color(hex:0xFFE0A0)] : [Color(hex:0xD8E2D3),Color(hex:0x9EBAAA)],startPoint:.topLeading,endPoint:.bottomTrailing)).overlay(Circle().stroke(.white.opacity(0.95),lineWidth:selected == level.id ? 4 : 2))
-                            if !unlocked { Image(systemName:"lock.fill").font(.system(size:15,weight:.bold)).foregroundStyle(Palette.mint) }
-                            else { Text("\(level.id)").font(.system(size:level.id > 99 ? 13 : 17,weight:.black,design:.rounded)).foregroundStyle(Palette.night) }
-                            if completed { Image(systemName:"star.fill").font(.system(size:13)).foregroundStyle(Palette.gold).offset(x:17,y:-17) }
-                            if selected == level.id && unlocked { Image(systemName:"arrowtriangle.down.fill").font(.system(size:16)).foregroundStyle(Palette.coral).offset(y:-33) }
-                        }.frame(width:46,height:46).shadow(color:Palette.night.opacity(0.18),radius:2,y:3)
-                    }.buttonStyle(PressStyle()).disabled(!unlocked).position(point((level.id-1)%10,geo.size)).accessibilityLabel("Level \(level.id), \(level.difficulty.title), \(GardenRegion.all[page].placeName(for:level.id)), \(completed ? "completed" : unlocked ? "open" : "locked")").accessibilityIdentifier("level\(level.id)")
+                            Circle().fill(unlocked ? Color(hex:0xCF892A) : Color(hex:0x758B7D)).offset(y:5)
+                            Circle().fill(LinearGradient(colors:unlocked ? [Color(hex:0xFFF7DC),Color(hex:0xFFCF69)] : [Color(hex:0xE8EEE1),Color(hex:0xADC7B2)],startPoint:.topLeading,endPoint:.bottomTrailing))
+                                .overlay(Circle().stroke(.white,lineWidth:selected == level.id ? 4 : 2))
+                            if !unlocked { Image(systemName:"lock.fill").font(.system(size:18,weight:.bold)).foregroundStyle(Palette.mint) }
+                            else { Text("\(level.id)").font(.system(size:level.id > 99 ? 15 : 21,weight:.black,design:.rounded)).foregroundStyle(Color(hex:0x7B4816)) }
+                            if completed { Image(systemName:"star.fill").font(.system(size:17)).foregroundStyle(Palette.gold).offset(x:20,y:-20) }
+                            if selected == level.id && unlocked { Image(systemName:"arrowtriangle.down.fill").font(.system(size:18)).foregroundStyle(Color(hex:0xD2556D)).offset(y:-36) }
+                        }.frame(width:54,height:54).compositingGroup().shadow(color:Palette.night.opacity(0.25),radius:3,y:4)
+                    }.buttonStyle(PressStyle()).disabled(!unlocked).position(point((level.id-1)%10,geo.size))
+                        .accessibilityLabel("Level \(level.id), \(level.difficulty.title), \(GardenRegion.all[page].placeName(for:level.id)), \(completed ? "completed" : unlocked ? "open" : "locked")").accessibilityIdentifier("level\(level.id)")
                 }
-                VStack { HStack { Text("\(GardenRegion.all[page].levels.first!.id)–\(GardenRegion.all[page].levels.last!.id)").font(.system(size:11,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night).padding(9).background(Palette.paper.opacity(0.9),in:Capsule()).accessibilityIdentifier("islandRange"); Spacer() }; Spacer() }.padding(.horizontal,22).padding(.top,8).allowsHitTesting(false)
+                Text("\(GardenRegion.all[page].levels.first!.id)–\(GardenRegion.all[page].levels.last!.id)").font(.system(size:11,weight:.black,design:.rounded))
+                    .foregroundStyle(Palette.night).padding(10).background(Palette.paper,in:Capsule()).position(x:48,y:topInset+20).accessibilityIdentifier("islandRange")
             }
         }
     }
@@ -333,73 +386,98 @@ struct CoinFlightView: View {
     }
 }
 
-// Original live 3D scenery; the numbered controls above it remain native and accessible.
+// A continuous original garden. Only this district and its two neighbors are built,
+// keeping the 102-page campaign bounded instead of loading 1,020 scenery groups.
+final class GardenSceneView: SCNView {
+    var gardenCamera:SCNCamera?
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard bounds.width > 0,bounds.height > 0 else { return }
+        gardenCamera?.orthographicScale=max(9.4,10.5*Double(bounds.height/bounds.width)/2)
+    }
+}
 struct LivingIslandView: UIViewRepresentable {
-    let variant:Int
-    let restored:Int
+    let variant:Int,restored:Int
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    func makeUIView(context:Context)->SCNView {
-        let view = SCNView()
-        view.backgroundColor = .clear
-        view.antialiasingMode = .multisampling4X
-        view.preferredFramesPerSecond = 30
-        view.allowsCameraControl = false
-        view.isUserInteractionEnabled = false
-        view.autoenablesDefaultLighting = false
+    func makeUIView(context:Context)->GardenSceneView {
+        let view=GardenSceneView(); view.backgroundColor=UIColor(red:0.72,green:0.86,blue:0.62,alpha:1)
+        view.antialiasingMode = .multisampling4X; view.preferredFramesPerSecond=30
+        view.allowsCameraControl=false; view.isUserInteractionEnabled=false
+        view.isAccessibilityElement=false; view.accessibilityElementsHidden=true; view.autoenablesDefaultLighting=false
         return view
     }
-    func updateUIView(_ view:SCNView,context:Context) {
-        let key = "\(variant)-\(restored)-\(reduceMotion)"
+    func updateUIView(_ view:GardenSceneView,context:Context) {
+        let key="\(variant)-\(restored)-\(reduceMotion)"
         guard view.accessibilityIdentifier != key else { return }
-        view.accessibilityIdentifier = key
-        view.scene = makeScene()
-        view.isPlaying = !reduceMotion
+        view.accessibilityIdentifier=key; view.scene=scene(); view.isPlaying=false
+        view.gardenCamera=view.scene?.rootNode.childNode(withName:"gardenCamera",recursively:false)?.camera
+        view.setNeedsLayout()
     }
-    func makeScene()->SCNScene {
-        let scene = SCNScene()
-        let camera = SCNNode(); camera.camera = SCNCamera(); camera.camera?.usesOrthographicProjection = true; camera.camera?.orthographicScale = 5.6
-        camera.position = SCNVector3(0,12,9); camera.look(at:SCNVector3(0,0,0)); scene.rootNode.addChildNode(camera)
-        let sun = SCNNode(); sun.light = SCNLight(); sun.light?.type = .directional; sun.light?.intensity = 1100; sun.position = SCNVector3(-5,10,5); sun.look(at:SCNVector3Zero); scene.rootNode.addChildNode(sun)
-        let ambient = SCNNode(); ambient.light = SCNLight(); ambient.light?.type = .ambient; ambient.light?.intensity = 650; ambient.light?.color = UIColor(red:0.89,green:0.96,blue:1,alpha:1); scene.rootNode.addChildNode(ambient)
-        let greens:[UInt32] = [0xB4D993,0xD4DE9B,0x9CCEA0,0xA8D9CB,0xB9D8AD,0xB8CFE1,0xD5DEA0,0xCEE2BF,0xAAD3B0,0xC6CAE1,0xCADB92,0xBDCFE6]
-        let soil = node(SCNBox(width:7.5,height:0.9,length:9.4,chamferRadius:1.1),0xB8A282,SCNVector3(0,-0.55,0)); scene.rootNode.addChildNode(soil)
-        scene.rootNode.addChildNode(node(SCNBox(width:7.6,height:0.3,length:9.5,chamferRadius:1),greens[variant%12],SCNVector3(0,0,0)))
-        for i in 0..<14 {
-            let side:Float = i%2 == 0 ? -1 : 1
-            let z = Float(i/2)*1.22-3.7
-            let x = side*(2.7+Float((i+variant)%3)*0.16)
-            let tree = SCNNode(); tree.position = SCNVector3(x,0.2,z)
-            tree.addChildNode(node(SCNCylinder(radius:0.10,height:0.60),0xAC815D,SCNVector3(0,0.3,0)))
-            let crown = node(SCNSphere(radius:0.39+Double((i+variant)%3)*0.08),i%3 == 0 ? 0xEEB7BA : 0x79AE83,SCNVector3(0,0.8,0))
-            crown.scale = SCNVector3(1,1.18,1); tree.addChildNode(crown)
-            if !reduceMotion { crown.runAction(.repeatForever(.sequence([.rotateBy(x:0,y:0,z:0.035,duration:2.2),.rotateBy(x:0,y:0,z:-0.035,duration:2.2)]))) }
-            scene.rootNode.addChildNode(tree)
-        }
-        // Glass greenhouse and a small pond anchor the scenery to familiar garden places.
-        let house = node(SCNBox(width:1,height:0.75,length:1.1,chamferRadius:0.09),0xF6ECD0,SCNVector3(-2.1,0.48,-3.15)); scene.rootNode.addChildNode(house)
-        let roof = node(SCNPyramid(width:1.3,height:0.65,length:1.35),restored > 0 ? 0x8DC4BD : 0xD3B49A,SCNVector3(-2.1,1.15,-3.15)); scene.rootNode.addChildNode(roof)
-        let pond = node(SCNCylinder(radius:0.8,height:0.07),0x78C5DA,SCNVector3(1.95,0.2,-3.35)); pond.scale = SCNVector3(1,1,1.4); scene.rootNode.addChildNode(pond)
-        for i in 0..<9 {
-            let x = Float((i*19+variant*7)%61)/10-3
-            let z = Float((i*11+variant*3)%70)/10-3.5
-            let flower = SCNNode(); flower.position = SCNVector3(x,0.25,z)
-            flower.addChildNode(node(SCNCylinder(radius:0.035,height:0.25),0x6C9871,SCNVector3(0,0.12,0)))
-            for petal in 0..<5 {
-                let a = Float(petal)*Float.pi*2/5
-                let leaf = node(SCNSphere(radius:0.13),i%2 == 0 ? 0xF3D176 : 0xECA9BE,SCNVector3(cos(a)*0.12,0.29,sin(a)*0.12)); leaf.scale.y = 0.4; flower.addChildNode(leaf)
-            }
-            scene.rootNode.addChildNode(flower)
-        }
-        for i in 0..<4 {
-            let cloud = SCNNode(); cloud.position = SCNVector3(i%2 == 0 ? -3.5 : 3.5,2.2,Float(i)*2.8-4.5)
-            for puff in 0..<3 { let n = node(SCNSphere(radius:0.48),0xFFFFFF,SCNVector3(Float(puff)*0.42,Float(puff%2)*0.12,0)); n.opacity = 0.78; cloud.addChildNode(n) }
-            if !reduceMotion { cloud.runAction(.repeatForever(.sequence([.moveBy(x:0.3,y:0,z:0,duration:5),.moveBy(x:-0.3,y:0,z:0,duration:5)]))) }
-            scene.rootNode.addChildNode(cloud)
+    static func dismantleUIView(_ view:GardenSceneView,coordinator:()) { view.isPlaying=false; view.gardenCamera=nil; view.scene=nil }
+    private func scene()->SCNScene {
+        let scene=SCNScene(),root=scene.rootNode
+        let camera=SCNNode(); camera.name="gardenCamera"; camera.camera=SCNCamera(); camera.camera?.usesOrthographicProjection=true
+        camera.camera?.orthographicScale=9.4; camera.position=SCNVector3(0,22,16); camera.look(at:SCNVector3(0,0,0)); root.addChildNode(camera)
+        let sun=SCNNode(); sun.light=SCNLight(); sun.light?.type = .directional; sun.light?.intensity=1150
+        sun.light?.castsShadow=true; sun.light?.shadowRadius=5; sun.light?.shadowColor=UIColor.black.withAlphaComponent(0.16)
+        sun.position=SCNVector3(-8,18,8); sun.look(at:SCNVector3Zero); root.addChildNode(sun)
+        let ambient=SCNNode(); ambient.light=SCNLight(); ambient.light?.type = .ambient; ambient.light?.intensity=550; root.addChildNode(ambient)
+        root.addChildNode(mesh(SCNBox(width:55,height:0.3,length:65,chamferRadius:0),0xB9DC9E,SCNVector3(0,-0.2,0)))
+        // River and a walking promenade continue through all streamed districts.
+        root.addChildNode(mesh(SCNBox(width:2.1,height:0.10,length:65,chamferRadius:0.06),0x6ABBCB,SCNVector3(4.4,0.01,0)))
+        root.addChildNode(mesh(SCNBox(width:0.55,height:0.12,length:65,chamferRadius:0.03),0xEFE4BA,SCNVector3(5.85,0.02,0)))
+        for offset in -1...1 {
+            let district=variant+offset
+            guard district >= 0,district < GardenRegion.all.count else { continue }
+            let group=SCNNode(); group.position.z=Float(offset)*18; root.addChildNode(group)
+            districtScenery(group,index:district)
         }
         return scene
     }
-    func node(_ geometry:SCNGeometry,_ hex:UInt32,_ position:SCNVector3)->SCNNode {
-        let material = SCNMaterial(); material.diffuse.contents = UIColor(red:CGFloat((hex>>16)&255)/255,green:CGFloat((hex>>8)&255)/255,blue:CGFloat(hex&255)/255,alpha:1); material.roughness.contents = 0.8; material.lightingModel = .physicallyBased; geometry.materials = [material]
-        let n = SCNNode(geometry:geometry); n.position = position; return n
+    private func districtScenery(_ group:SCNNode,index:Int) {
+        for i in 0..<18 {
+            let side:Float=i%2 == 0 ? -1 : 1
+            let tree=SCNNode(); tree.position=SCNVector3(side*(3.2+Float((i+index)%3)*0.6),0,Float(i/2)*1.9-8)
+            tree.addChildNode(mesh(SCNCylinder(radius:0.12,height:0.95),0xA9794C,SCNVector3(0,0.5,0)))
+            let colors:[UInt32]=[0x71AB62,0x7FBB6F,0x98C878,0xEDABB9]
+            for puff in 0..<3 {
+                let crown=mesh(SCNSphere(radius:0.52),colors[(i+index)%4],SCNVector3(Float(puff-1)*0.25,1.1+Float(puff%2)*0.3,0))
+                crown.scale=SCNVector3(1,1.15,1); tree.addChildNode(crown)
+            }
+            if i%4 == 0 { for fruit in 0..<3 { tree.addChildNode(mesh(SCNSphere(radius:0.12),0xE76C58,SCNVector3(Float(fruit-1)*0.32,1.3,0.48))) } }
+            group.addChildNode(tree)
+        }
+        // Each neighboring district retains its seeded landmark and flower beds.
+        let house=SCNNode(); house.position=SCNVector3(-3.2,0,-5.5)
+        house.addChildNode(mesh(SCNBox(width:2.1,height:1.4,length:1.7,chamferRadius:0.12),0xFFF4D8,SCNVector3(0,0.8,0)))
+        house.addChildNode(mesh(SCNPyramid(width:2.6,height:1,length:2.2),index%2 == 0 ? 0xD97D68 : 0x6AA796,SCNVector3(0,1.55,0)))
+        house.addChildNode(mesh(SCNBox(width:0.45,height:0.8,length:0.08,chamferRadius:0.08),0x966443,SCNVector3(0,0.5,0.88)))
+        for side:Float in [-1,1] { house.addChildNode(mesh(SCNBox(width:0.42,height:0.45,length:0.07,chamferRadius:0.05),0x7FC8DD,SCNVector3(side*0.68,1,0.89))) }
+        group.addChildNode(house)
+        let pool=mesh(SCNCylinder(radius:1.05,height:0.22),0xF1DCAF,SCNVector3(2.3,0.18,-2.5)); group.addChildNode(pool)
+        group.addChildNode(mesh(SCNCylinder(radius:0.85,height:0.24),0x69C3D0,SCNVector3(2.3,0.24,-2.5)))
+        group.addChildNode(mesh(SCNCylinder(radius:0.13,height:0.85),0xEEE8CC,SCNVector3(2.3,0.68,-2.5)))
+        group.addChildNode(mesh(SCNSphere(radius:0.33),restored > 0 ? 0xF1C460 : 0xB8C7A5,SCNVector3(2.3,1.15,-2.5)))
+        // Bridge, trimmed hedges and garden beds give the map an inhabited scale.
+        group.addChildNode(mesh(SCNBox(width:3.4,height:0.2,length:1.3,chamferRadius:0.10),0xDDAD76,SCNVector3(4.4,0.15,4)))
+        for z:Float in [3.3,4.7] { group.addChildNode(mesh(SCNBox(width:3.4,height:0.25,length:0.10,chamferRadius:0.04),0xFFF1CD,SCNVector3(4.4,0.5,z))) }
+        for i in 0..<8 {
+            let x:Float=i%2 == 0 ? -2.8 : 2.6,z=Float(i/2)*2.7-1
+            group.addChildNode(mesh(SCNBox(width:1.2,height:0.28,length:0.62,chamferRadius:0.17),0x578F61,SCNVector3(x,0.16,z)))
+            for flower in 0..<4 {
+                let bloom=SCNNode(); bloom.position=SCNVector3(x+Float(flower)*0.26-0.4,0.32,z)
+                bloom.addChildNode(mesh(SCNCylinder(radius:0.025,height:0.25),0x50894D,SCNVector3(0,0.10,0)))
+                for petal in 0..<5 {
+                    let angle=Float(petal)*Float.pi*2/5
+                    let leaf=mesh(SCNSphere(radius:0.11),i%2 == 0 ? 0xF7CE63 : 0xE782AC,SCNVector3(cos(angle)*0.10,0.27,sin(angle)*0.10)); leaf.scale.y=0.4; bloom.addChildNode(leaf)
+                }
+                bloom.addChildNode(mesh(SCNSphere(radius:0.055),0xFFEAA1,SCNVector3(0,0.30,0))); group.addChildNode(bloom)
+            }
+        }
+    }
+    private func mesh(_ geometry:SCNGeometry,_ hex:UInt32,_ position:SCNVector3)->SCNNode {
+        let material=SCNMaterial(); material.diffuse.contents=UIColor(red:CGFloat((hex>>16)&255)/255,green:CGFloat((hex>>8)&255)/255,blue:CGFloat(hex&255)/255,alpha:1)
+        material.roughness.contents=0.85; material.lightingModel = .physicallyBased; geometry.materials=[material]
+        let node=SCNNode(geometry:geometry); node.position=position; return node
     }
 }

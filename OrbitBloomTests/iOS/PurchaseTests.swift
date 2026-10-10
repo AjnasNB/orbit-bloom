@@ -1,6 +1,7 @@
 import XCTest
 import StoreKit
 import StoreKitTest
+import UIKit
 @testable import OrbitBloom
 
 @MainActor final class PurchaseTests: XCTestCase {
@@ -97,6 +98,40 @@ import StoreKitTest
 }
 
 @MainActor final class SessionTests: XCTestCase {
+    func testAnimatedShuffleBlocksMovingTargetsAndSavesOneSpentShuffle() async throws {
+        try XCTSkipIf(UIAccessibility.isReduceMotionEnabled,"This case checks the animated input window")
+        let suite = "orbitbloom.shuffle.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))
+        defer { defaults.removePersistentDomain(forName:suite) }
+        let model = GameModel(defaults:defaults)
+        model.start(Level.campaign[0])
+        let moves=model.moves,coins=model.progress.coins,lives=model.ecosystem.lives.total
+        let shuffles=model.assistance.shuffles
+        model.shuffle()
+        XCTAssertTrue(model.busy)
+        let arrangement=model.cells.map(\.id)
+        model.tap(24); model.swipe(24,dx:32,dy:0); model.shuffle()
+        XCTAssertEqual(model.cells.map(\.id),arrangement)
+        XCTAssertEqual(model.moves,moves)
+        XCTAssertEqual(model.assistance.shuffles,shuffles-1)
+        XCTAssertEqual(model.progress.coins,coins); XCTAssertEqual(model.ecosystem.lives.total,lives)
+        let recovered=GameModel(defaults:defaults)
+        XCTAssertEqual(recovered.cells.map(\.id),arrangement)
+        XCTAssertEqual(recovered.assistance.shuffles,shuffles-1)
+        for _ in 0..<30 {
+            if !model.busy { break }
+            try await Task.sleep(for:.milliseconds(50))
+        }
+        XCTAssertFalse(model.busy)
+        let move=try XCTUnwrap(model.engine?.bestMove())
+        model.swipe(move.0,dx:CGFloat(move.1%7-move.0%7)*32,dy:CGFloat(move.0/7-move.1/7)*32)
+        XCTAssertEqual(model.engine?.moves,moves-1,"The completed shuffle must reopen actual gameplay")
+        for _ in 0..<100 {
+            if !model.busy { break }
+            try await Task.sleep(for:.milliseconds(50))
+        }
+        XCTAssertFalse(model.busy)
+    }
     func testAbandonKeepsExactlyTheStartedLifeSpentAndSurvivesRelaunch() throws {
         let suite = "orbitbloom.abandon.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))

@@ -15,6 +15,46 @@ import StoreKitTest
         XCTAssertTrue(app.buttons["confirmAbandon"].waitForExistence(timeout:5))
         app.buttons["confirmAbandon"].tap()
     }
+    func testFullGardenViewportAndLargePuzzleKeepControlsReachable() throws {
+        let map=app.descendants(matching:.any)["gardenMap"].firstMatch
+        XCTAssertGreaterThanOrEqual(map.frame.width,app.frame.width*0.95)
+        XCTAssertGreaterThanOrEqual(map.frame.height,app.frame.height*0.85)
+        let controls=["openTasks","openFarm","openRace","openIslandHub","openWorldEvents","openRoomRecords","restoreProject","playLevel"]
+        for id in controls {
+            let button=app.buttons[id]
+            XCTAssertTrue(button.isHittable,id)
+            XCTAssertTrue(app.frame.insetBy(dx:-1,dy:-1).contains(button.frame),id)
+            XCTAssertGreaterThanOrEqual(button.frame.height+0.000001,44,id)
+        }
+        XCTAssertFalse(app.buttons["openFarm"].frame.intersects(app.buttons["openRace"].frame))
+        attach("build12-01-connected-garden")
+        map.swipeLeft()
+        XCTAssertEqual(app.staticTexts["islandRange"].label,"11–20")
+        XCTAssertFalse(app.buttons["level11"].isEnabled)
+        XCTAssertFalse(app.buttons["playLevel"].exists)
+        attach("build12-02-next-district-locked")
+        app.buttons["openCurrentIsland"].tap(); app.buttons["playLevel"].tap()
+        let board=app.descendants(matching:.any)["puzzleBoard"].firstMatch
+        XCTAssertGreaterThanOrEqual(board.frame.width,app.frame.width*0.90)
+        let tools=["hintButton","shuffleButton","burstButton","toolbomb","tooltnt","toolmega","toolrainbow","pauseGame","backFromPuzzle"]
+        for id in tools {
+            let button=app.buttons[id]
+            XCTAssertTrue(button.isHittable,id)
+            XCTAssertTrue(app.frame.insetBy(dx:-1,dy:-1).contains(button.frame),id)
+            XCTAssertGreaterThanOrEqual(button.frame.height+0.000001,44,id)
+        }
+        for key in 0..<49 {
+            let tile=app.buttons["tile\(key)"]
+            XCTAssertTrue(tile.isHittable)
+            XCTAssertGreaterThanOrEqual(tile.frame.width+0.000001,44)
+        }
+        XCTAssertEqual(app.scrollViews.count,0)
+        attach("build12-03-large-puzzle")
+        try winCurrentLevel(); app.buttons["backToGarden"].tap()
+        XCTAssertTrue(app.buttons["level2"].isEnabled)
+        XCTAssertFalse(app.buttons["level3"].isEnabled)
+        attach("build12-04-first-clear-connected-garden")
+    }
     func testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress() throws {
         func fits(_ element:XCUIElement) {
             XCTAssertTrue(element.waitForExistence(timeout:10))
@@ -345,13 +385,14 @@ import StoreKitTest
                 }
                 if group.count >= 4 && group.count < smallest { candidate = key; smallest = group.count }
             }
-            guard let key = candidate else { app.buttons["shuffleButton"].tap(); continue }
+            guard let key = candidate else { app.buttons["shuffleButton"].tap(); settle(); continue }
             app.buttons["tile\(key)"].tap(); settle()
             if app.staticTexts["winTitle"].exists { app.buttons["nextLevel"].tap(); continue }
             XCTAssertGreaterThan(powers.count,0,"A real formation must create a power on the board")
             attach("v3-16-board-power")
             let count = powers.count, turns = app.staticTexts["movesCounter"].label
             app.buttons["shuffleButton"].tap()
+            settle()
             XCTAssertEqual(powers.count,count,"Shuffling must preserve on-board powers")
             XCTAssertEqual(app.staticTexts["movesCounter"].label,turns)
             powers.firstMatch.tap(); settle()
@@ -391,6 +432,54 @@ import StoreKitTest
 
 // Uses the dedicated iPad release device without resetting its saved progress.
 @MainActor final class IPadReleaseUITests: XCTestCase {
+    func testFullGardenAndPuzzleRailsFitBothOrientations() throws {
+        let app=XCUIApplication(); app.launchArguments=["--uitesting","--keep-progress"]
+        XCUIDevice.shared.orientation = .portrait; app.launch()
+        defer { XCUIDevice.shared.orientation = .portrait; app.terminate() }
+        try XCTSkipIf(app.frame.width < 700,"Run on iPad")
+        continueAfterFailure=false
+        // Keep-progress QA can resume an attempt after an interrupted layout run.
+        // Return through the real abandon flow rather than resetting its save.
+        let back=app.buttons["backFromPuzzle"]
+        if back.exists {
+            back.tap()
+            XCTAssertTrue(app.buttons["confirmAbandon"].waitForExistence(timeout:5))
+            app.buttons["confirmAbandon"].tap()
+        }
+        func fits(_ id:String) {
+            let control=app.buttons[id]
+            XCTAssertTrue(control.exists || control.waitForExistence(timeout:15)); XCTAssertTrue(control.isHittable,id)
+            XCTAssertTrue(app.frame.insetBy(dx:-1,dy:-1).contains(control.frame),"\(id): \(control.frame)")
+            XCTAssertGreaterThanOrEqual(control.frame.height+0.000001,44)
+        }
+        func capture(_ name:String) {
+            let shot=XCTAttachment(data:XCUIScreen.main.screenshot().pngRepresentation,uniformTypeIdentifier:"public.png")
+            shot.name=name; shot.lifetime = .keepAlways; add(shot)
+        }
+        fits("playLevel"); fits("openFarm"); fits("openRace"); capture("build12-ipad-01-garden-portrait")
+        let map=app.descendants(matching:.any)["gardenMap"].firstMatch
+        XCTAssertGreaterThanOrEqual(map.frame.width,app.frame.width*0.95)
+        XCUIDevice.shared.orientation = .landscapeLeft
+        XCTAssertTrue(app.wait(for:.runningForeground,timeout:5))
+        let rotated=XCTNSPredicateExpectation(predicate:NSPredicate { _,_ in app.frame.width > app.frame.height },object:app)
+        XCTAssertEqual(XCTWaiter.wait(for:[rotated],timeout:15),.completed)
+        fits("playLevel"); fits("openFarm"); fits("openRace"); capture("build12-ipad-02-garden-landscape")
+        app.buttons["playLevel"].tap()
+        for id in ["toolbomb","tooltnt","toolmega","toolrainbow","hintButton","shuffleButton","burstButton","pauseGame","backFromPuzzle"] { fits(id) }
+        let board=app.descendants(matching:.any)["puzzleBoard"].firstMatch
+        XCTAssertGreaterThan(board.frame.width,600,"The landscape board must exceed the former 650-point total-column layout")
+        for key in 0..<49 { fits("tile\(key)") }
+        capture("build12-ipad-03-puzzle-landscape")
+        XCUIDevice.shared.orientation = .portrait
+        let portrait=XCTNSPredicateExpectation(predicate:NSPredicate { _,_ in app.frame.height > app.frame.width },object:app)
+        XCTAssertEqual(XCTWaiter.wait(for:[portrait],timeout:15),.completed)
+        for id in ["toolbomb","toolrainbow","hintButton","pauseGame"] { fits(id) }
+        for key in 0..<49 { fits("tile\(key)") }
+        capture("build12-ipad-04-puzzle-portrait")
+        app.buttons["backFromPuzzle"].tap(); fits("cancelAbandon"); app.buttons["cancelAbandon"].tap()
+        fits("backFromPuzzle"); app.buttons["backFromPuzzle"].tap(); fits("confirmAbandon"); app.buttons["confirmAbandon"].tap(); fits("playLevel")
+        XCTAssertEqual(app.scrollViews.count,0)
+    }
     func testPortraitAndLandscapeReleaseScreens() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--uitesting", "--keep-progress"]

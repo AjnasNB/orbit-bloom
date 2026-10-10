@@ -267,8 +267,20 @@ import Match3Kit
         guard !engine.level.isOneShot else { showToast("This one-shot formation stays fixed. A hint can help."); return }
         guard assistance.spendShuffle(coins:&progress.coins) else { showToast("Earn shuffles in Field Tasks, or use 15 earned coins."); return }
         hinted = []; hintText = ""; effect("cascade")
-        withAnimation(UIAccessibility.isReduceMotionEnabled ? nil : .spring(response:0.55,dampingFraction:0.7)) { engine.shuffle(); sync() }
+        let animated = !UIAccessibility.isReduceMotionEnabled
+        busy = animated
+        withAnimation(animated ? .easeInOut(duration:0.45) : nil) { engine.shuffle(); sync() }
         message = "A fresh arrangement. Tools and turns are kept."; save()
+        // A moving piece's visual location differs from its final hit target.
+        // Keep input closed through this finite animation and save its final board now.
+        if animated {
+            let currentRun = runID
+            Task {
+                try? await Task.sleep(for:.milliseconds(500))
+                guard runID == currentRun else { return }
+                busy = false
+            }
+        }
     }
     func claim(_ task:FieldTask) {
         guard task.claim(progress:progress,ecosystem:&ecosystem,assistance:&assistance) else { return }
