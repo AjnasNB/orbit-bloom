@@ -1,0 +1,254 @@
+{
+  "appID": "6820591529",
+  "version": "1.0",
+  "build": 10,
+  "sourceCommit": "fac4c21fdc615a6c647959c8b171aea7bb05cd56",
+  "verifiedOn": "2026-10-10",
+  "change": "Separate labeled Farm/Rally entrances, original 3D room maps, width-fitting camera and prominent Island exits",
+  "captures": [
+    {
+      "file": "captures/iphone-large-farm-room.png",
+      "sha256": "b6a707139c7a10cd5770cfd469ab27266903f7ee1f9352e2b921a004e5330147",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build10-RoomsAccessible-Attachments/F46C4C8E-2513-40C1-A01F-831641AFEB5A.png",
+      "test": "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "debugFixture": "--uitesting; real planting/steering/exit/relaunch; resets only Store QA",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-large-rally-room.png",
+      "sha256": "230dd4ade2bdae1448af36d47d818c9b763e712a5cfbdc7584659580fe19ce7b",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build10-RoomsAccessible-Attachments/425B19F6-95A1-4D9D-A959-893412476834.png",
+      "test": "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "debugFixture": "--uitesting; real planting/steering/exit/relaunch; resets only Store QA",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-large-room-entrances.png",
+      "sha256": "21ffc51767dab21d996b75cf2e643c5c8800f1a3f90da314b7031c9c3acfb1ea",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build10-RoomsAccessible-Attachments/4218EDF9-7B88-4A4A-9153-443AE1DD3525.png",
+      "test": "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "debugFixture": "--uitesting; real planting/steering/exit/relaunch; resets only Store QA",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-rally-exit.png",
+      "sha256": "2ef07d37a31b9278b60845096174e555591a905fdeb8c2b7e967a452ccbdb9ff",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build10-RoomsAccessible-Attachments/E719B288-1E29-4C54-AD95-00AE34A1FE9B.png",
+      "test": "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "debugFixture": "--uitesting; real planting/steering/exit/relaunch; resets only Store QA",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-rally-room.png",
+      "sha256": "3191825f564ace79a122211d451248d4cbf7f83c9a24ea5119b28b61ce69927f",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build10-RoomsAccessible-Attachments/C80C8CA4-C4A3-42D9-8B9B-7465C7F11294.png",
+      "test": "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "debugFixture": "--uitesting; real planting/steering/exit/relaunch; resets only Store QA",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-farm-room.png",
+      "sha256": "21fe06d15aabfb7687561d532b30181f23105525a6dc8530cd8d0668d9abb5ab",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build10-RoomsAccessible-Attachments/35D84679-EEFE-437D-AB07-04633E64F3A6.png",
+      "test": "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "debugFixture": "--uitesting; real planting/steering/exit/relaunch; resets only Store QA",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/iphone-room-entrances.png",
+      "sha256": "241cd590851d77c6d428843ab519731568885dc89b269bdb434b756fa693e5e3",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build10-RoomsAccessible-Attachments/F3F4A219-806D-4225-B556-2E2E4C1DFB68.png",
+      "test": "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "debugFixture": "--uitesting; real planting/steering/exit/relaunch; resets only Store QA",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/ipad-rally-road.png",
+      "sha256": "2485bae8aa9720a9334b87ec8f0b3374033db71c592a71cc622de43c8e7b0778",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build10-iPadFinal-Attachments/93A90710-1AB0-41B7-8B8A-28AD012FA430.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "debugFixture": "--uitesting --keep-progress; no reset",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/ipad-rally-landscape.png",
+      "sha256": "c671dfb8e622f4be1cc645a8c5542e873e664eec9dc35a08b3beb7aae23b28cf",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build10-iPadFinal-Attachments/EB4465CC-1E27-44C2-B01A-1E89B8943AC9.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "debugFixture": "--uitesting --keep-progress; no reset",
+      "orientationNote": "Native landscape; original orientation metadata retained; no resizing"
+    },
+    {
+      "file": "captures/ipad-rally-room.png",
+      "sha256": "66e13e6994cf2257e6c829f6f7a3fab38ad79e2ba9f005f3a359a8ecd4557df0",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build10-iPadFinal-Attachments/FAD77185-67AF-4985-956C-447E8B894BFC.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "debugFixture": "--uitesting --keep-progress; no reset",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/ipad-farm-landscape.png",
+      "sha256": "cc5bbd4657ea4df48b6ad280425e5c8bd02d7b977c0d2d420239fcfd020c5312",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build10-iPadFinal-Attachments/AC0054D4-43D6-4FEC-8859-4ADCE71528BC.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "debugFixture": "--uitesting --keep-progress; no reset",
+      "orientationNote": "Native landscape; original orientation metadata retained; no resizing"
+    },
+    {
+      "file": "captures/ipad-farm-room.png",
+      "sha256": "aa686581c7662d4ea6940d0ab45c3269cfb207bb7ee5885269c084690b3df74b",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build10-iPadFinal-Attachments/6CB2D7FC-71D3-4A55-80BB-E0A00B537303.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "debugFixture": "--uitesting --keep-progress; no reset",
+      "orientationNote": "Native portrait; no resizing"
+    },
+    {
+      "file": "captures/ipad-room-entrances.png",
+      "sha256": "ed99c3ed60b91e8e8fe46ccb57d35f904845c461e19a32fc1f8edeedbf8f8acf",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build10-iPadFinal-Attachments/D2493C1F-65AB-4D6A-85AE-DD18DF576529.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "debugFixture": "--uitesting --keep-progress; no reset",
+      "orientationNote": "Native portrait; no resizing"
+    }
+  ],
+  "currentPassingCases": 77,
+  "casesByRun": {
+    "core": 34,
+    "native": 30,
+    "iPhoneUI": 12,
+    "iPadUI": 1
+  },
+  "evidence": {
+    "core": "evidence/build10-core.log",
+    "nativeAndPhone": "evidence/Build10-FinalPhone.xcresult",
+    "finalVisualRoomCheck": "evidence/Build10-RoomsFinal.xcresult",
+    "finalLargeFarmCheck": "evidence/Build10-RoomsAccessible.xcresult",
+    "iPad": "evidence/Build10-iPadFinal.xcresult"
+  },
+  "targetedReruns": {
+    "additionalUniqueCases": 0,
+    "reason": "Camera/continuous-road refinement and added large-text Farm non-overlap assertions; final affected flows rerun after full 42-case phone regression."
+  },
+  "allStageSolver": {
+    "levels": 1020,
+    "gardenProjects": 6,
+    "legalSwaps": 6556,
+    "retries": 25,
+    "paidItems": 0,
+    "extraMoves": 0,
+    "humanDifficultyMeasured": false
+  },
+  "diagnostics": [
+    "Initial room UI run identified an accessibility container wrapping the entrance buttons. Button semantics corrected; all final tests pass.",
+    "Visual review corrected text-shadow duplication, a hidden road surface and cropped diorama sides; final captures use refined meshes/camera."
+  ],
+  "preview": {
+    "build": 10,
+    "device": "64173F47-C4DC-46B4-82EC-0027675F7780",
+    "previewOS": "26.5",
+    "reset": false,
+    "preferencesEqualImmediatelyAfterInstall": true,
+    "preferenceCount": 7,
+    "fullLocalContainerBackup": "build/build10-preview-save-before",
+    "normalLaunchArguments": [],
+    "fullWalletAndSessionPreserved": true,
+    "coins": 280,
+    "completedStages": 1,
+    "activeLevel": 2,
+    "activeRulesVersion": 1,
+    "moves": 11,
+    "freeHints": 7,
+    "normalization": "JSON dictionary and enum-key ordering only; no gameplay value or timer ignored.",
+    "previewBuild": 10,
+    "screenshot": {
+      "file": "proof/preview-preserved.png",
+      "sha256": "d668ef3648418ba28bb942c5c6045e4e55065a9a683b1442267f2d51025f75b8",
+      "encodedDimensions": [
+        1206,
+        2622
+      ],
+      "source": "simctl after normal launch; no QA flags or resizing"
+    }
+  },
+  "signedPackage": "signed-package-verification.json",
+  "appleReviewBuild": 7,
+  "appReviewResubmitted": false,
+  "publicReleased": false,
+  "reviewStatusRechecked": false,
+  "internalUpload": "pending existing Apple account authentication; no build 10 delivery or repeat sign-in request",
+  "unusedQASimulatorsStopped": true,
+  "unrelatedSimulatorsChangedByThisTask": false,
+  "limits": [
+    "Physical VoiceOver speech",
+    "Extreme text sizes and smaller phones",
+    "Hardware battery/frame-rate/audio/haptics",
+    "Live Apple Game Center/private iCloud round trip",
+    "Signed sandbox purchases",
+    "Human difficulty assessment"
+  ]
+}

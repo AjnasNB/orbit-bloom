@@ -1,0 +1,38 @@
+{
+  "build": 10,
+  "version": "1.0",
+  "bundleID": "com.orbitbloom.game",
+  "team": "4V29K5Q8S9",
+  "profileUUID": "8ad71964-4815-45e7-ad15-0187cfa5e7e3",
+  "profileName": "Orbit Bloom AppStore",
+  "ipa": "build/AppStoreExport10/OrbitBloom.ipa",
+  "sha256": "1e773c7a00dd739d3c3688c510213bfc397c8c5ad223e2009916b688a42f7e8c",
+  "byteSize": 23893766,
+  "gameCenter": true,
+  "cloudContainer": "iCloud.com.orbitbloom.game",
+  "cloudEnvironment": "Production",
+  "debuggerAccess": false,
+  "encryptionExemption": false,
+  "iPadOrientations": [
+    "UIInterfaceOrientationPortrait",
+    "UIInterfaceOrientationPortraitUpsideDown",
+    "UIInterfaceOrientationLandscapeLeft",
+    "UIInterfaceOrientationLandscapeRight"
+  ],
+  "codeSignatureVerified": true,
+  "exportEntitlementsMatchArchive": true,
+  "debugStageSelectionFixtureAbsent": true,
+  "verifiedOn": "2026-10-10",
+  "appID": "6820591529",
+  "upload": "not uploaded; existing Apple account authentication blocker retained, no repeat upload attempt",
+  "appReviewSubmitted": false,
+  "publicReleased": false,
+  "appleServerValidation": "not performed; no delivery",
+  "testFlightBuildID": null,
+  "evidence": {
+    "archive": "evidence/build10-archive-final.log",
+    "export": "evidence/build10-export-final.log",
+    "signature": "evidence/build10-signature-final.txt"
+  },
+  "sourceCommit": "fac4c21fdc615a6c647959c8b171aea7bb05cd56"
+}

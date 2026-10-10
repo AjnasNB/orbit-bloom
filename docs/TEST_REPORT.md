@@ -1,3 +1,30 @@
+# Orbit Bloom build 10 verification — 10 October 2026
+
+Farm and Harvest Rally now have distinct labeled entrances, original 3D room maps and prominent exits naming the Island destination. Farm keeps six numbered plots and its tool shed; Rally previews the existing garage-to-orchard-to-finish course. Camera framing fits the diorama's width and height, card shadows no longer duplicate text, and plot status has stronger contrast. [Focused mobile UX audit](ACTIVITY_ROOMS_UX_AUDIT.md).
+
+**77 unique cases passed**, with no failures or skips in final evidence:
+
+| Area | Cases | Evidence |
+| --- | ---: | --- |
+| Core rules, economy, difficulty, save compatibility and all-stage solver | 34 | evidence/build10-core.log |
+| Native account/recovery, sessions/lives and local StoreKit | 30 | evidence/Build10-FinalPhone.xcresult |
+| Full iPhone gameplay/navigation and room entry/exit/save/accessibility | 12 | evidence/Build10-FinalPhone.xcresult; final affected room reruns below |
+| iPad room/puzzle controls, both orientations and actual swipe steering | 1 | evidence/Build10-iPadFinal.xcresult |
+
+The broad phone result records 42 passes, zero failures and zero skips; twelve UI cases take 581.842 seconds, including twelve opening-stage victories and six garden restorations. After the final camera/continuous-road refinement, the affected room and iPad cases passed again. The final expanded room case takes 71.312 seconds and additionally checks non-overlapping large-text Farm plots; the final iPad case takes 50.672 seconds and rotates both room maps. These reruns add no unique cases. [Compact summaries and capture provenance](release-draft/build10/verification.json) pin source `fac4c21`.
+
+Core automation completes all 1,020 stages and six projects in 6,556 legal swaps and 25 retries without paid items or extra moves. The native suite rechecks optional accounts, offline/timeout/stale-account cloud behavior, local recovery, legacy saves, exactly-once life/wallet transactions and local StoreKit purchase/cancellation/approval/restore/refund behavior. Rules and cloud/payment architecture were not changed by this visual/navigation task. Solver reachability does not establish human difficulty or manual play of every stage.
+
+The new room flow uses actual taps to plant, leave/re-enter and craft, relaunches with retained progress, performs actual road swipes and exits a paused rally. Normal and accessibility-medium entrances, room exits, Start rally and all six Farm plots are reachable; enlarged Farm plots do not overlap. There is no vertical scrolling in the checked Home/Rally pages. Thirteen selected native phone/iPad PNGs retain original pixels/orientation; a separate normal-preview proof shows the user's retained puzzle. Initial diagnostics found an accessibility wrapper hiding button traits; the wrapper was removed and final checks pass. Screenshot review drove the shadow, road and camera corrections.
+
+Before installing build 10, the full personal preview container was backed up. All seven preferences match exactly immediately after installation. After normal launch, the complete decoded wallet, board and legacy progress still match, normalizing only JSON dictionary/enum-key ordering: 280 coins, one completed stage, active level 2 with eleven moves, seven free hints and all inventory. No timer/gameplay value was ignored. Only Store QA receives reset fixtures; iPad uses keep-progress. Store/iPad QA are stopped and the personal preview runs build 10. Completed compilation caches and duplicate extracted captures were removed to relieve temporary disk pressure; source, saves, signed archives/IPAs and original result bundles were retained. Unrelated simulators were untouched.
+
+Final Release archive/export and exact exported signature checks pass. [Signed package record](release-draft/build10/signed-package-verification.json) pins source and IPA hash, Production Game Center/private iCloud entitlements, disabled debugger access, all four iPad orientations and absence of the Debug stage-selection fixture. Build 10 is prepared locally, **not uploaded to TestFlight**. Existing Apple account authentication remains the known blocker; no repeated sign-in request or upload attempt occurred. Build 7's submitted review/galleries were not changed or freshly rechecked. [Local build 10 metadata draft](release-draft/build10/metadata.json) accurately describes the new rooms and One shot rules, without replacing the submitted build-7 copy.
+
+Physical VoiceOver speech, extreme text sizes/smaller phones, hardware performance/audio/haptics, live Apple cloud round trips, signed sandbox purchases and human difficulty remain outside simulator verification. No public release, real purchase or agreement occurred.
+
+---
+
 # Orbit Bloom build 9 verification — 10 October 2026
 
 Build 9 adds visible puzzle Back navigation with separate abandon/restart confirmations, labeled difficulty and a campaign that tightens across later bands. Twenty One shot stages begin at 30 and recur every 50 stages: one move, hints available and a free winning swipe. Existing active sessions retain their exact previous goals and turn budgets. [Rules and focused mobile UX review](DIFFICULTY_AND_EXIT.md).

@@ -22,6 +22,12 @@ Build **1.0 (9)** adds confirmed abandon/restart navigation, visible Simple/Hard
 
 Signed Release archive/export, exact package signature and Production cloud entitlement checks passed. [Build 9 package record](release-draft/build9/signed-package-verification.json) pins source `fe8a7d9`. Build 9 is prepared locally, **not delivered to TestFlight**. The existing Apple account authentication blocker was not re-prompted or retried. This gameplay task did not access or change the submitted build 7, its twenty-image Apple galleries or review queue, and did not freshly recheck its review status. No privacy/payment architecture or product price changed; no public release, new agreement or real purchase occurred.
 
+## Activity-room build 10 — 10 October 2026
+
+Build **1.0 (10)** separates Farm and Harvest Rally into labeled entrances with original 3D room maps, clear Island exits and a width-fitting camera. **77 unique cases passed**: 34 core, 30 native, twelve iPhone UI and one iPad UI. Final targeted reruns cover camera/road refinements, both iPad orientations and non-overlapping large-text Farm plots. [Build 10 verification](release-draft/build10/verification.json) pins source `fac4c21`, thirteen native captures, compact result summaries and the full save comparison. The personal preview is installed without reset: 280 coins, completed level 1, active level 2 with eleven moves and seven free hints remain intact.
+
+The final signed Release archive/export and exact package signature/Production cloud checks passed. [Package record](release-draft/build10/signed-package-verification.json) identifies the matching IPA. Build 10 is prepared locally, **not delivered to TestFlight**; the existing Apple account authentication blocker remains without a repeat sign-in request or upload attempt. This task did not modify build 7's submitted Apple galleries or review queue, and did not freshly recheck its review status. Purchases, privacy architecture and product pricing keep their established configuration.
+
 ## Purchases and account
 
 The account's Free Apps/Paid Apps agreements, bank, tax and trader compliance already show **Active**; none were changed. App download pricing is **free**, with India as base region. Optional packs display Apple's localized prices.
