@@ -176,38 +176,102 @@ struct GardenMapScene: View {
 struct FieldJournalView: View {
     @EnvironmentObject var game:GameModel
     @Environment(\.dismiss) var dismiss
-    @State private var page = 0
+    @Environment(\.dynamicTypeSize) private var textSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // Retain the selected entry when rotation or text size changes page capacity.
+    @State private var selectedEntry = 0
+
     var body:some View {
         NavigationStack {
-            VStack(alignment:.leading,spacing:16) {
-                Text(page < 2 ? "Good things grow together." : "Patterns make power.").font(.system(size:29,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
-                Text(page < 2 ? "Permanent milestones. Your first ten hints are free. More hints cost 3 coins; a shuffle costs 15." : "Make a formation to grow its power inside the board. Tap it to blast and chain nearby powers.").font(.subheadline).foregroundStyle(Palette.mint)
-                if page < 2 {
-                    ForEach(Array(FieldTask.all.dropFirst(page*3).prefix(3))) { task in
-                        let value = task.value(progress:game.progress,ecosystem:game.ecosystem,assistance:game.assistance)
-                        let claimed = game.assistance.claimed.contains(task.id)
-                        HStack(spacing:12) {
-                            SpriteView(index:task.tool.sprite).frame(width:55,height:64)
-                            VStack(alignment:.leading,spacing:5) { Text(task.title).font(.headline).foregroundStyle(Palette.night); Text("\(min(value,task.target))/\(task.target) · \(task.tool.title)" + (task.hints > 0 ? " + \(task.hints) hints" : "") + (task.shuffles > 0 ? " + \(task.shuffles) shuffles" : "")).font(.caption).foregroundStyle(Palette.mint) }
-                            Spacer(minLength:0)
-                            Button(claimed ? "Claimed" : value >= task.target ? "Claim" : "Growing") { game.claim(task) }.font(.caption.bold()).foregroundStyle(Palette.night).frame(minWidth:55,minHeight:44).disabled(claimed || value < task.target).accessibilityIdentifier("claim_\(task.id)")
-                        }.padding(14).background(Palette.paper,in:RoundedRectangle(cornerRadius:22))
+            GeometryReader { geometry in
+                let cramped = geometry.size.height < 650 || textSize >= .xxLarge
+                let oneAtATime = geometry.size.height < 500 || textSize.isAccessibilitySize
+                let tasksPerPage = oneAtATime ? 1 : cramped ? 2 : 3
+                let powersPerPage = oneAtATime ? 1 : cramped ? 2 : 4
+                let taskCount = FieldTask.all.count
+                let starts = Array(stride(from:0,to:taskCount,by:tasksPerPage)) + Array(stride(from:taskCount,to:taskCount+GardenTool.allCases.count,by:powersPerPage))
+                let position = starts.lastIndex(where: { $0 <= selectedEntry }) ?? 0
+                let start = starts[position]
+                let rewards = start < taskCount
+                VStack(alignment:.leading,spacing:12) {
+                    if !textSize.isAccessibilitySize {
+                        Text(rewards ? "Good things grow together." : "Patterns make power.")
+                            .font(.system(.title2,design:.rounded,weight:.heavy)).foregroundStyle(Palette.night)
+                            .fixedSize(horizontal:false,vertical:true)
                     }
-                } else {
-                    ForEach(Array(GardenTool.allCases.enumerated()),id:\.offset) { item in
-                        HStack(spacing:14) {
-                            PatternDiagram(tool:item.element).frame(width:77,height:77)
-                            VStack(alignment:.leading,spacing:4) { Text(item.element.title).font(.headline).foregroundStyle(Palette.night); Text(["4 in a line, or a 4-piece circuit", "L or T of 5, or a 6-piece circuit", "A 7-piece cross, or an 8-piece circuit", "5 in a line, or a 10-piece circuit"][item.offset]).font(.caption).foregroundStyle(Palette.mint); Text(item.element.detail).font(.caption2).foregroundStyle(Palette.muted) }
+                    Text(rewards ? "Permanent milestones. Your first ten hints are free. More hints cost 3 coins; a shuffle costs 15." : "Make a formation to grow its power inside the board. Tap it to blast and chain nearby powers.")
+                        .font(.subheadline).foregroundStyle(Palette.mint).fixedSize(horizontal:false,vertical:true)
+                        .accessibilityIdentifier("journalInstructions")
+                    if rewards {
+                        ForEach(Array(FieldTask.all.dropFirst(start).prefix(tasksPerPage))) { task in
+                            taskCard(task)
+                        }
+                    } else {
+                        ForEach(Array(GardenTool.allCases.enumerated()).dropFirst(start-taskCount).prefix(powersPerPage),id:\.offset) { item in
+                            HStack(alignment:.top,spacing:14) {
+                                PatternDiagram(tool:item.element).frame(width:77,height:77)
+                                VStack(alignment:.leading,spacing:4) {
+                                    Text(item.element.title).font(.headline).foregroundStyle(Palette.night)
+                                    Text(["4 in a line, or a 4-piece circuit", "L or T of 5, or a 6-piece circuit", "A 7-piece cross, or an 8-piece circuit", "5 in a line, or a 10-piece circuit"][item.offset]).font(.caption).foregroundStyle(Palette.mint)
+                                    Text(item.element.detail).font(.caption2).foregroundStyle(Palette.muted)
+                                }.fixedSize(horizontal:false,vertical:true)
+                            }.accessibilityElement(children:.combine).accessibilityIdentifier("journalPower_\(item.element.rawValue)")
                         }
                     }
-                }
-                Spacer(minLength:4)
-                Button(page < 2 ? "Power patterns" : "Field rewards") { page = page < 2 ? 2 : 0 }.font(.headline).foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:44).accessibilityIdentifier("journalPatterns")
-                Text("Swipe pages · \(page+1) of 3").font(.caption.bold()).foregroundStyle(Palette.mint).frame(maxWidth:.infinity)
-            }.padding(24).frame(maxWidth:.infinity,maxHeight:.infinity,alignment:.topLeading).background(Palette.sky).contentShape(Rectangle())
-            .gesture(DragGesture(minimumDistance:35).onEnded { value in if abs(value.translation.width) > abs(value.translation.height) { withAnimation { page = min(2,max(0,page+(value.translation.width < 0 ? 1 : -1))) } } })
-            .navigationTitle("Field journal").toolbar { ToolbarItem(placement:.confirmationAction) { Button("Done") { dismiss() } } }
+                    Spacer(minLength:4)
+                    Button(rewards ? "Power patterns" : "Field rewards") {
+                        withAnimation(reduceMotion ? nil : .easeInOut(duration:0.2)) { selectedEntry = rewards ? taskCount : 0 }
+                    }.font(.headline).foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:44).accessibilityIdentifier("journalPatterns")
+                    Text("Swipe pages · \(position+1) of \(starts.count)").font(.caption.bold()).foregroundStyle(Palette.mint).frame(maxWidth:.infinity)
+                        .accessibilityIdentifier("journalPageCount").accessibilityLabel("Journal pages")
+                        .accessibilityValue("Page \(position+1) of \(starts.count)")
+                        .accessibilityAdjustableAction { direction in
+                            switch direction {
+                            case .increment: turnPage(1,position:position,starts:starts)
+                            case .decrement: turnPage(-1,position:position,starts:starts)
+                            @unknown default: break
+                            }
+                        }
+                }.padding(.horizontal,20).padding(.vertical,16).frame(maxWidth:.infinity,maxHeight:.infinity,alignment:.topLeading)
+                    .background(Palette.sky).contentShape(Rectangle())
+                    .simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
+                        guard abs(value.translation.width) > abs(value.translation.height) else { return }
+                        turnPage(value.translation.width < 0 ? 1 : -1,position:position,starts:starts)
+                    }).accessibilityElement(children:.contain).accessibilityIdentifier("journalPages")
+            }
+            .navigationTitle("Field journal").navigationBarTitleDisplayMode(.inline)
+            .toolbar { ToolbarItem(placement:.confirmationAction) { Button("Done") { dismiss() } } }
         }
+    }
+
+    private func turnPage(_ offset:Int,position:Int,starts:[Int]) {
+        let next = min(starts.count-1,max(0,position+offset))
+        guard next != position else { return }
+        withAnimation(reduceMotion ? nil : .easeInOut(duration:0.2)) { selectedEntry = starts[next] }
+    }
+
+    private func taskCard(_ task:FieldTask) -> some View {
+        let value = task.value(progress:game.progress,ecosystem:game.ecosystem,assistance:game.assistance)
+        let claimed = game.assistance.claimed.contains(task.id)
+        let reward = "\(min(value,task.target))/\(task.target) · \(task.tool.title)" + (task.hints > 0 ? " + \(task.hints) hints" : "") + (task.shuffles > 0 ? " + \(task.shuffles) shuffles" : "")
+        return VStack(alignment:.leading,spacing:8) {
+            HStack(alignment:.center,spacing:12) {
+                SpriteView(index:task.tool.sprite).frame(width:55,height:64)
+                VStack(alignment:.leading,spacing:5) {
+                    Text(task.title).font(.headline).foregroundStyle(Palette.night)
+                    Text(reward).font(.caption).foregroundStyle(Palette.mint)
+                }.fixedSize(horizontal:false,vertical:true).frame(maxWidth:.infinity,alignment:.leading)
+                if !textSize.isAccessibilitySize { claimButton(task,value:value,claimed:claimed) }
+            }
+            if textSize.isAccessibilitySize { claimButton(task,value:value,claimed:claimed).frame(maxWidth:.infinity,alignment:.trailing) }
+        }.padding(14).background(Palette.paper,in:RoundedRectangle(cornerRadius:22)).accessibilityElement(children:.contain).accessibilityIdentifier("journalTask_\(task.id)")
+    }
+
+    private func claimButton(_ task:FieldTask,value:Int,claimed:Bool) -> some View {
+        Button(claimed ? "Claimed" : value >= task.target ? "Claim" : "Growing") { game.claim(task) }
+            .font(.caption.bold()).foregroundStyle(Palette.night).frame(minWidth:55,minHeight:44)
+            .disabled(claimed || value < task.target).accessibilityIdentifier("claim_\(task.id)")
+            .accessibilityLabel("\(claimed ? "Claimed" : value >= task.target ? "Claim" : "Growing") reward for \(task.title)")
     }
 }
 struct PatternDiagram:View {

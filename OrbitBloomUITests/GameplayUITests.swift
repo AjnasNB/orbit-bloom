@@ -10,6 +10,40 @@ import StoreKitTest
         XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
     }
     func attach(_ name:String) { let shot = XCTAttachment(screenshot:app.screenshot()); shot.name = name; shot.lifetime = .keepAlways; add(shot) }
+    func testJournalLargeTextKeepsEveryRewardAndPowerReachable() throws {
+        app.terminate()
+        app.launchArguments = ["--uitesting", "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityM"]
+        app.launch()
+        XCTAssertTrue(app.buttons["openTasks"].waitForExistence(timeout:15))
+        app.buttons["openTasks"].tap()
+        let journal = app.descendants(matching:.any)["journalPages"].firstMatch
+        let instructions = app.staticTexts["journalInstructions"]
+        XCTAssertTrue(instructions.waitForExistence(timeout:5))
+        XCTAssertGreaterThan(instructions.frame.height,80,"Accessibility text must wrap, not shrink into a clipped line")
+        let entries = ["journalTask_harvest1","journalTask_harvest3","journalTask_delivery1","journalTask_delivery3","journalTask_circuit3","journalTask_blast3","journalPower_bomb","journalPower_tnt","journalPower_mega","journalPower_rainbow"]
+        for (index,id) in entries.enumerated() {
+            let entry = app.descendants(matching:.any)[id].firstMatch
+            XCTAssertTrue(entry.waitForExistence(timeout:5),"Every journal entry must be reachable by a real swipe")
+            XCTAssertTrue(app.frame.insetBy(dx:-1,dy:-1).contains(entry.frame),"Large text must fit: \(entry.frame)")
+            XCTAssertLessThanOrEqual(instructions.frame.maxY,entry.frame.minY+1)
+            XCTAssertLessThanOrEqual(entry.frame.maxY,app.buttons["journalPatterns"].frame.minY+1,"Cards must not overlap page controls")
+            XCTAssertTrue(app.buttons["journalPatterns"].isHittable)
+            XCTAssertEqual(app.scrollViews.count,0,"The journal pages must fit without vertical scrolling")
+            if index == 0 || index == 8 { attach("build8-journal-large-\(index)") }
+            if index < entries.count-1 { journal.swipeLeft() }
+        }
+        let pageCounter = app.descendants(matching:.any)["journalPageCount"].firstMatch
+        let lastPage = pageCounter.value as? String
+        XCTAssertEqual(lastPage,"Page 10 of 10")
+        journal.swipeLeft()
+        XCTAssertEqual(pageCounter.value as? String,lastPage,"Swiping past the last page must stay there")
+        app.buttons["journalPatterns"].tap()
+        XCTAssertTrue(app.buttons["claim_harvest1"].exists)
+        journal.swipeRight()
+        XCTAssertTrue(app.buttons["claim_harvest1"].exists,"Swiping before the first page must stay there")
+        app.navigationBars.buttons["Done"].tap()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
+    }
     func testPlayerAccountGuestSaveAndReturnToGameplay() throws {
         app.buttons["openFarm"].tap(); app.buttons["plot0"].tap()
         app.buttons["returnWorld"].tap(); app.buttons["settings"].tap()
@@ -96,7 +130,9 @@ import StoreKitTest
         XCTAssertFalse(app.buttons["level3"].isEnabled)
         app.buttons["openTasks"].tap(); app.buttons["journalPatterns"].tap()
         XCTAssertTrue(app.staticTexts["Patterns make power."].waitForExistence(timeout:5))
-        XCTAssertTrue(app.staticTexts["Mega bomb"].exists)
+        let mega = app.descendants(matching:.any)["journalPower_mega"].firstMatch
+        if !mega.exists { app.descendants(matching:.any)["journalPages"].firstMatch.swipeLeft() }
+        XCTAssertTrue(mega.waitForExistence(timeout:5))
         XCTAssertEqual(app.scrollViews.count,0)
         attach("v5-19-power-patterns"); app.navigationBars.buttons["Done"].tap()
         app.buttons["openFarm"].tap()
@@ -269,6 +305,9 @@ import StoreKitTest
         fits(app.buttons["pauseRace"]); app.buttons["pauseRace"].tap()
         app.buttons["leaveRace"].tap()
         app.buttons["openTasks"].tap()
+        let instructions = app.staticTexts["journalInstructions"]
+        fits(instructions)
+        XCTAssertGreaterThan(instructions.frame.height,24,"The full help sentence must wrap in the iPad sheet")
         fits(app.buttons["journalPatterns"]); capture("ipad-11-field-tasks")
         app.navigationBars.buttons["Done"].tap()
         app.buttons["openRace"].tap()
@@ -295,5 +334,15 @@ import StoreKitTest
         app.buttons["leaveLevel"].tap(); fits(app.buttons["openFarm"])
         fits(app.buttons["openRace"]); fits(app.buttons["playLevel"])
         capture("ipad-08-world-landscape")
+        app.buttons["openTasks"].tap()
+        fits(app.staticTexts["journalInstructions"]); fits(app.buttons["journalPatterns"])
+        app.buttons["journalPatterns"].tap()
+        let journal = app.descendants(matching:.any)["journalPages"].firstMatch
+        if !app.descendants(matching:.any)["journalPower_mega"].firstMatch.exists { journal.swipeLeft() }
+        fits(app.descendants(matching:.any)["journalPower_mega"].firstMatch)
+        fits(app.descendants(matching:.any)["journalPower_rainbow"].firstMatch)
+        XCTAssertEqual(app.scrollViews.count,0)
+        capture("build8-ipad-journal-landscape")
+        app.navigationBars.buttons["Done"].tap()
     }
 }
