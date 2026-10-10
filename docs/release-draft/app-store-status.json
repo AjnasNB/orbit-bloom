@@ -1,11 +1,11 @@
 {
-  "checkedOn": "2026-10-09",
+  "checkedOn": "2026-10-10",
   "appID": "6820591529",
   "version": "1.0",
-  "build": 7,
+  "build": 11,
   "releaseMode": "manual",
   "versionStatus": "Waiting for Review",
-  "subtitle": "Swipe, farm & race among stars",
+  "subtitle": "Seven games. One living island",
   "primaryCategory": "Games",
   "gameSubcategories": [
     "Puzzle",
@@ -32,15 +32,20 @@
     "changed": false
   },
   "purchaseReview": "purchase-review/metadata.json",
-  "iPhoneScreenshots": "app-store-screenshots.json",
-  "iPadScreenshots": "product-page/manifest.json",
+  "iPhoneScreenshots": "build11/manifest.json",
+  "iPadScreenshots": "build11/manifest.json",
   "archive": {
-    "path": "build/OrbitBloom-Build7-AppStore.xcarchive",
+    "path": "build/OrbitBloom-Build11-AppStore.xcarchive",
     "compilation": "succeeded",
     "signed": true,
     "uploadable": true,
-    "exportedIPA": "build/AppStoreExport7/OrbitBloom.ipa",
-    "verification": "build7/signed-package-verification.json"
+    "exportedIPA": "build/AppStoreExport11/OrbitBloom.ipa",
+    "verification": "build11/signed-package-verification.json",
+    "appleValidation": "Transporter Verify succeeded, 2026-10-10 15:54 Asia/Kolkata",
+    "appleDelivery": "Transporter Deliver succeeded, 2026-10-10 16:29 Asia/Kolkata",
+    "timestampPrecision": "minute",
+    "appleProcessing": "complete",
+    "sourceCommit": "8b26cbdbe0827c571aca7725842a5a973d0c7dea"
   },
   "distributionProfile": {
     "name": "Orbit Bloom AppStore",
@@ -52,37 +57,79 @@
   "appReviewSubmitted": true,
   "publicReleased": false,
   "pending": [
-    "Apple review outcome; manual public release remains selected",
-    "Owner TestFlight update to build 7: verify live Game Center/iCloud round trip and signed sandbox purchases on hardware",
-    "Broader accessibility, older/smaller device coverage, physical audio/haptics and human difficulty checks before public release"
+    "Apple review outcome for eight submitted items; manual public release remains selected",
+    "Owner TestFlight update to build 11 and hardware verification of Game Center sign-in, private iCloud backup/restore, signed Apple sandbox purchases and Atoll Skills ranking",
+    "Physical VoiceOver/focus/timing, performance/audio/haptics, older/smaller devices, split-screen and human difficulty before public release"
   ],
   "testFlight": {
-    "buildID": "1c228e3d-b614-4ffd-b3fd-52970c1a8a07",
+    "buildID": "eefcb52c-0e76-4c8e-bed5-0d19a2d9f157",
     "processed": true,
-    "status": "build 7 Ready to Submit; assigned to internal QA",
+    "status": "Build 11 processing complete; assigned to internal Orbit Bloom QA",
     "internalGroup": "Orbit Bloom QA",
     "groupID": "20c17cf7-ef9b-43be-9a6a-55530abb5a3f",
-    "groupBuildCount": 3,
     "testerCount": 1,
-    "automaticDistribution": true,
-    "ownerInvitationSent": true,
-    "previousBuild": 6,
-    "currentBuild": 7,
+    "currentBuild": 11,
     "currentBuildUpload": "delivered and processed",
-    "ownerInvitationStatus": "Installed 1.0 (6); existing invitation not sent again by agent",
-    "ownerInstalledBuild": 6,
-    "ownerDevice": "iPhone 17 Pro",
-    "ownerOS": "iOS 26.6.1"
+    "whatToTestSaved": true,
+    "ownerInstallationOfBuild11Verified": false,
+    "lastObservedOwnerInstallation": {
+      "checkedOn": "2026-10-09",
+      "build": 6,
+      "device": "iPhone 17 Pro",
+      "os": "iOS 26.6.1",
+      "note": "Historical observation; assignment of build 11 does not prove it is installed or that Apple services were tested."
+    }
   },
   "appVersionBuildAttached": true,
   "purchaseSubmission": {
     "platform": "iOS",
     "draftItemCount": 0,
     "productsStatus": "Waiting for Review",
+    "productCount": 6,
     "appVersionIncluded": true,
+    "leaderboardIncluded": true,
     "submitted": true,
-    "submittedItemCount": 7,
-    "submissionID": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9"
+    "submittedItemCount": 8,
+    "submissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+    "pricesChanged": false,
+    "products": [
+      {
+        "id": "com.orbitbloom.coins400",
+        "appleID": "6820593641",
+        "priceINR": 99,
+        "status": "Waiting for Review"
+      },
+      {
+        "id": "com.orbitbloom.coins1500",
+        "appleID": "6820595004",
+        "priceINR": 299,
+        "status": "Waiting for Review"
+      },
+      {
+        "id": "com.orbitbloom.coins3000",
+        "appleID": "6820595079",
+        "priceINR": 499,
+        "status": "Waiting for Review"
+      },
+      {
+        "id": "com.orbitbloom.coins7000",
+        "appleID": "6820594918",
+        "priceINR": 999,
+        "status": "Waiting for Review"
+      },
+      {
+        "id": "com.orbitbloom.lives5",
+        "appleID": "6820595083",
+        "priceINR": 99,
+        "status": "Waiting for Review"
+      },
+      {
+        "id": "com.orbitbloom.starter",
+        "appleID": "6820594801",
+        "priceINR": 99,
+        "status": "Waiting for Review"
+      }
+    ]
   },
   "appPricing": {
     "download": "free",
@@ -102,20 +149,74 @@
     "mobileOnly": true,
     "platformPreferencesReloadVerification": "verified in Chrome: Apple Silicon Mac and Apple Vision Pro availability unchecked"
   },
-  "browser": "Chrome; Mac unlocked",
+  "browser": "Chrome; final eight-item submission confirmed",
   "gameCenterEnabled": true,
   "reviewSubmission": {
-    "id": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
-    "submittedAt": "2026-10-09T22:55:00+05:30",
+    "id": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+    "submittedAt": "2026-10-10T16:47:00+05:30",
+    "timestampPrecision": "minute",
     "submittedBy": "Ajnas N B",
-    "itemCount": 7,
+    "itemCount": 8,
     "status": "Waiting for Review",
-    "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
-    "proof": "product-page/proof/apple-review-submission.jpg",
-    "build": 7
+    "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/83b00d39-0873-4771-8bc9-5d94d4be04b4",
+    "build": 11,
+    "confirmation": "Observed by the root agent in App Store Connect through Chrome after submission succeeded",
+    "items": [
+      {
+        "type": "appVersion",
+        "name": "Orbit Bloom: Garden Arcade",
+        "version": "1.0",
+        "build": 11,
+        "status": "Waiting for Review"
+      },
+      {
+        "type": "leaderboard",
+        "name": "Atoll Skills",
+        "identifier": "com.orbitbloom.atollskills",
+        "id": "1645f43b-b600-4b0c-b695-33750851e1ad",
+        "status": "Waiting for Review"
+      },
+      {
+        "type": "inAppPurchase",
+        "identifier": "com.orbitbloom.coins400",
+        "appleID": "6820593641",
+        "status": "Waiting for Review"
+      },
+      {
+        "type": "inAppPurchase",
+        "identifier": "com.orbitbloom.coins1500",
+        "appleID": "6820595004",
+        "status": "Waiting for Review"
+      },
+      {
+        "type": "inAppPurchase",
+        "identifier": "com.orbitbloom.coins3000",
+        "appleID": "6820595079",
+        "status": "Waiting for Review"
+      },
+      {
+        "type": "inAppPurchase",
+        "identifier": "com.orbitbloom.coins7000",
+        "appleID": "6820594918",
+        "status": "Waiting for Review"
+      },
+      {
+        "type": "inAppPurchase",
+        "identifier": "com.orbitbloom.lives5",
+        "appleID": "6820595083",
+        "status": "Waiting for Review"
+      },
+      {
+        "type": "inAppPurchase",
+        "identifier": "com.orbitbloom.starter",
+        "appleID": "6820594801",
+        "status": "Waiting for Review"
+      }
+    ],
+    "proof": "build11/proof/apple-review-submission.jpg"
   },
-  "nativeQAVerification": "build7/verification.json",
-  "uniquePassingTests": 68,
+  "nativeQAVerification": "build11/verification.json",
+  "uniquePassingTests": 107,
   "previousReviewSubmissions": [
     {
       "id": "d585e8f9-f825-4020-9661-6421068d7038",
@@ -136,24 +237,42 @@
       "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad",
       "proof": "build7/apple-review-submission.jpg",
       "build": 7
+    },
+    {
+      "id": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+      "submittedAt": "2026-10-09T22:55:00+05:30",
+      "submittedBy": "Ajnas N B",
+      "itemCount": 7,
+      "status": "Removed by publisher to replace build 7 with the tested build 11",
+      "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+      "proof": "product-page/proof/apple-review-submission.jpg",
+      "build": 7,
+      "previousStatus": "Waiting for Review",
+      "removedOn": "2026-10-10",
+      "replacementSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+      "replacementBuild": 11,
+      "appleRejected": false
     }
   ],
   "securityReview": "../SECURITY_REVIEW.md",
   "playerCloudService": "Apple GameKit private iCloud saved games; no additional Cloudflare player database",
   "productPage": {
-    "manifest": "product-page/manifest.json",
+    "manifest": "build11/manifest.json",
     "distinctNativeScreenshots": 20,
     "iphoneCount": 10,
     "ipadCount": 10,
+    "sourceBuild": 11,
+    "uploadsProcessed": true,
+    "savedAndVerified": true,
+    "status": "Submitted with build 11; Waiting for Review",
+    "separateProofCount": 20,
+    "note": "All twenty gallery images are actual native build-11 captures. iPad slot 09 uses settled Field Tasks; the mid-transition shop frame is excluded. Earlier creative assets/galleries remain historical in product-page/ and historicalAppStoreStates.",
     "headerAssetID": "08c00019-689f-87a9-803c-67de0c1e9279",
     "searchAssetID": "f7800019-689f-87a9-802c-11f4d5819599",
-    "creativeStatus": "Waiting for Review with the app version",
-    "previewProof": [
-      "product-page/proof/header-preview.jpg",
-      "product-page/proof/search-preview.jpg"
-    ]
+    "creativeStatus": "Existing header and search illustrations preserved with submitted app version",
+    "subtitle": "Seven games. One living island"
   },
-  "workspaceBuild": 10,
+  "workspaceBuild": 11,
   "dailyImprovement": {
     "date": "2026-10-10",
     "build": 8,
@@ -204,5 +323,243 @@
     "reviewQueueChanged": false,
     "publicReleased": false,
     "liveReviewStatusRechecked": false
+  },
+  "historicalAppStoreStates": [
+    {
+      "snapshot": "Former build-7 release record, before the 10 October publisher replacement",
+      "record": {
+        "checkedOn": "2026-10-09",
+        "appID": "6820591529",
+        "version": "1.0",
+        "build": 7,
+        "releaseMode": "manual",
+        "versionStatus": "Waiting for Review",
+        "subtitle": "Swipe, farm & race among stars",
+        "primaryCategory": "Games",
+        "gameSubcategories": [
+          "Puzzle",
+          "Simulation"
+        ],
+        "contentRights": "licensed third-party content plus original artwork",
+        "ageRating": {
+          "mostRegions": "13+",
+          "Vietnam": "16+",
+          "Korea": "12+"
+        },
+        "appPrivacy": {
+          "savedAnswer": "Data Not Collected",
+          "published": true,
+          "publishedBy": "Ajnas N B",
+          "verification": "Observed published in Chrome; no agreement accepted by the agent"
+        },
+        "paymentAccount": {
+          "freeAppsAgreement": "Active",
+          "paidAppsAgreement": "Active",
+          "bankAccount": "Active",
+          "taxForms": "Active",
+          "traderCompliance": "Active",
+          "changed": false
+        },
+        "purchaseReview": "purchase-review/metadata.json",
+        "iPhoneScreenshots": "app-store-screenshots.json",
+        "iPadScreenshots": "product-page/manifest.json",
+        "archive": {
+          "path": "build/OrbitBloom-Build7-AppStore.xcarchive",
+          "compilation": "succeeded",
+          "signed": true,
+          "uploadable": true,
+          "exportedIPA": "build/AppStoreExport7/OrbitBloom.ipa",
+          "verification": "build7/signed-package-verification.json"
+        },
+        "distributionProfile": {
+          "name": "Orbit Bloom AppStore",
+          "portalURL": "https://developer.apple.com/account/resources/profiles/review/554SHJ3J75",
+          "state": "regenerated and installed with Game Center and isolated iCloud container",
+          "uuid": "8ad71964-4815-45e7-ad15-0187cfa5e7e3"
+        },
+        "testFlightUploaded": true,
+        "appReviewSubmitted": true,
+        "publicReleased": false,
+        "pending": [
+          "Apple review outcome; manual public release remains selected",
+          "Owner TestFlight update to build 7: verify live Game Center/iCloud round trip and signed sandbox purchases on hardware",
+          "Broader accessibility, older/smaller device coverage, physical audio/haptics and human difficulty checks before public release"
+        ],
+        "testFlight": {
+          "buildID": "1c228e3d-b614-4ffd-b3fd-52970c1a8a07",
+          "processed": true,
+          "status": "build 7 Ready to Submit; assigned to internal QA",
+          "internalGroup": "Orbit Bloom QA",
+          "groupID": "20c17cf7-ef9b-43be-9a6a-55530abb5a3f",
+          "groupBuildCount": 3,
+          "testerCount": 1,
+          "automaticDistribution": true,
+          "ownerInvitationSent": true,
+          "previousBuild": 6,
+          "currentBuild": 7,
+          "currentBuildUpload": "delivered and processed",
+          "ownerInvitationStatus": "Installed 1.0 (6); existing invitation not sent again by agent",
+          "ownerInstalledBuild": 6,
+          "ownerDevice": "iPhone 17 Pro",
+          "ownerOS": "iOS 26.6.1"
+        },
+        "appVersionBuildAttached": true,
+        "purchaseSubmission": {
+          "platform": "iOS",
+          "draftItemCount": 0,
+          "productsStatus": "Waiting for Review",
+          "appVersionIncluded": true,
+          "submitted": true,
+          "submittedItemCount": 7,
+          "submissionID": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9"
+        },
+        "appPricing": {
+          "download": "free",
+          "baseRegion": "India (INR)",
+          "basePriceINR": 0,
+          "paidPurchases": "six optional packs at INR 99–999",
+          "configured": true
+        },
+        "availability": {
+          "configuredRegionCount": 173,
+          "excluded": [
+            "China mainland",
+            "Vietnam"
+          ],
+          "reason": "required game licenses have not been supplied",
+          "automaticFutureRegions": false,
+          "mobileOnly": true,
+          "platformPreferencesReloadVerification": "verified in Chrome: Apple Silicon Mac and Apple Vision Pro availability unchecked"
+        },
+        "browser": "Chrome; Mac unlocked",
+        "gameCenterEnabled": true,
+        "reviewSubmission": {
+          "id": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+          "submittedAt": "2026-10-09T22:55:00+05:30",
+          "submittedBy": "Ajnas N B",
+          "itemCount": 7,
+          "status": "Waiting for Review",
+          "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+          "proof": "product-page/proof/apple-review-submission.jpg",
+          "build": 7
+        },
+        "nativeQAVerification": "build7/verification.json",
+        "uniquePassingTests": 68,
+        "previousReviewSubmissions": [
+          {
+            "id": "d585e8f9-f825-4020-9661-6421068d7038",
+            "submittedAt": "2026-10-09T20:42:00+05:30",
+            "submittedBy": "Ajnas N B",
+            "itemCount": 7,
+            "status": "Cancelled by publisher to replace build 6 with the tested build 7 security patch",
+            "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/d585e8f9-f825-4020-9661-6421068d7038",
+            "proof": "build6/apple-review-submission.jpg",
+            "build": 6
+          },
+          {
+            "id": "9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad",
+            "submittedAt": "2026-10-09T22:26:00+05:30",
+            "submittedBy": "Ajnas N B",
+            "itemCount": 7,
+            "status": "Cancelled by publisher to update product-page artwork and screenshot galleries; same tested build 7 resubmitted",
+            "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/9b8a89b7-74a5-4b1c-9275-e0680e6bb9ad",
+            "proof": "build7/apple-review-submission.jpg",
+            "build": 7
+          }
+        ],
+        "securityReview": "../SECURITY_REVIEW.md",
+        "playerCloudService": "Apple GameKit private iCloud saved games; no additional Cloudflare player database",
+        "productPage": {
+          "manifest": "product-page/manifest.json",
+          "distinctNativeScreenshots": 20,
+          "iphoneCount": 10,
+          "ipadCount": 10,
+          "headerAssetID": "08c00019-689f-87a9-803c-67de0c1e9279",
+          "searchAssetID": "f7800019-689f-87a9-802c-11f4d5819599",
+          "creativeStatus": "Waiting for Review with the app version",
+          "previewProof": [
+            "product-page/proof/header-preview.jpg",
+            "product-page/proof/search-preview.jpg"
+          ]
+        },
+        "workspaceBuild": 10
+      },
+      "subsequentDisposition": "Build-7 submission removed by the publisher to replace it with build 11; not an Apple rejection."
+    }
+  ],
+  "checkedAtLocal": "2026-10-10 16:47 Asia/Kolkata",
+  "timestampPrecision": "minute",
+  "sourceCommit": "8b26cbdbe0827c571aca7725842a5a973d0c7dea",
+  "signedSourceHashCount": 44,
+  "uniquePassingTestCounts": {
+    "core": 49,
+    "native": 47,
+    "iPhoneUI": 9,
+    "iPadUI": 2
+  },
+  "testCountingRule": "Union of unique test identifiers with recorded passing runs; reruns count once and failed diagnostic bundles retain their original outcomes.",
+  "leaderboard": {
+    "name": "Atoll Skills",
+    "identifier": "com.orbitbloom.atollskills",
+    "id": "1645f43b-b600-4b0c-b695-33750851e1ad",
+    "status": "Waiting for Review",
+    "includedInSubmission": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+    "hardwareSubmissionVerified": false
+  },
+  "historicalBuildUpdateKeys": {
+    "dailyImprovement": "Historical build-8 run; preserves its then-current account/upload blocker and build-7 review facts",
+    "latestGameplayUpdate": "Historical build-9 run; preserves its then-current account/upload blocker and build-7 review facts",
+    "latestRoomsUpdate": "Historical build-10 run; preserves its then-current account/upload blocker and build-7 review facts"
+  },
+  "latestSevenRoomsUpdate": {
+    "date": "2026-10-10",
+    "build": 11,
+    "change": "Seven separate Aurora Atoll rooms, Lio story, four skill games, illustrated Rally rover, shared progression, trusted UTC events and optional Atoll Skills ranking",
+    "sourceCommit": "8b26cbdbe0827c571aca7725842a5a973d0c7dea",
+    "verification": "build11/verification.json",
+    "signedPackage": "build11/signed-package-verification.json",
+    "uniquePassingCases": 107,
+    "counts": {
+      "core": 49,
+      "native": 47,
+      "iPhoneUI": 9,
+      "iPadUI": 2
+    },
+    "previewInstalledWithoutReset": true,
+    "fullWalletAndSessionPreserved": true,
+    "publicSave": {
+      "coins": 280,
+      "completed": 1,
+      "activeLevel": 2,
+      "rulesVersion": 1,
+      "moves": 11,
+      "freeHints": 7,
+      "lives": 5
+    },
+    "previewReports": [
+      "build11/preview-after-install.json",
+      "build11/preview-after-launch.json"
+    ],
+    "uploadStatus": "delivered and processing complete",
+    "appReviewBuild": 11,
+    "reviewQueueChanged": true,
+    "reviewSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+    "reviewStatus": "Waiting for Review",
+    "publicReleased": false
+  },
+  "cloudflare": {
+    "site": "https://orbit-bloom-game-site.ajnasnb.workers.dev",
+    "version": "1fe5fe66-69a0-4b46-a680-70fadf7a12d7",
+    "scope": "Isolated game site and public UTC event clock",
+    "playerSaveDatabase": false,
+    "purchaseDataStored": false,
+    "verification": "Five HTTPS/security-route checks and actual native public-clock acceptance; separate from the 107 cases"
+  },
+  "hardwareVerification": {
+    "gameCenterAuthentication": false,
+    "privateICloudRoundTrip": false,
+    "signedAppleSandboxPurchases": false,
+    "gameCenterLeaderboardSubmission": false,
+    "note": "Unverified on physical hardware. Local StoreKit and transport doubles are not Apple sandbox-server tests. TestFlight build assignment alone is not a test."
   }
 }

@@ -1,0 +1,51 @@
+{
+  "devicesAndConfigurations": [
+    {
+      "device": {
+        "architecture": "arm64",
+        "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName": "Orbit Bloom Store QA",
+        "modelName": "iPhone 17 Pro Max",
+        "osBuildNumber": "23B80",
+        "osVersion": "26.1",
+        "platform": "iOS Simulator"
+      },
+      "expectedFailures": 0,
+      "failedTests": 1,
+      "passedTests": 49,
+      "skippedTests": 0,
+      "testPlanConfiguration": {
+        "configurationId": "1",
+        "configurationName": "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription": "OrbitBloom \u00b7 Built with macOS 26.5",
+  "expectedFailures": 0,
+  "failedTests": 1,
+  "finishTime": 1791627323.03,
+  "passedTests": 49,
+  "result": "Failed",
+  "skippedTests": 0,
+  "startTime": 1791626989.45,
+  "statistics": [],
+  "testFailures": [
+    {
+      "failureText": "XCTAssertEqual failed: (\"XCTWaiterResult(rawValue: 2)\") is not equal to (\"XCTWaiterResult(rawValue: 1)\")",
+      "targetName": "OrbitBloomUITests",
+      "testIdentifier": 50,
+      "testIdentifierString": "SevenRoomsUITests/testMaximumAccessibilityTextKeepsSevenRoomControlsEventsAndRecordsInBounds()",
+      "testIdentifierURL": "test://com.apple.xcode/OrbitBloom/OrbitBloomUITests/SevenRoomsUITests/testMaximumAccessibilityTextKeepsSevenRoomControlsEventsAndRecordsInBounds",
+      "testName": "testMaximumAccessibilityTextKeepsSevenRoomControlsEventsAndRecordsInBounds()"
+    }
+  ],
+  "title": "Test - OrbitBloom",
+  "topInsights": [
+    {
+      "category": "Longest Test Runs",
+      "impact": "17% of duration",
+      "text": "1 longest test run with outlier durations exceeding 0.74s (three standard deviations)"
+    }
+  ],
+  "totalTestCount": 50
+}

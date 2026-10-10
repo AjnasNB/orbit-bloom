@@ -1,0 +1,649 @@
+{
+  "appID": "6820591529",
+  "appBuild": 11,
+  "captureEdits": "None; native PNG bytes and orientation metadata preserved",
+  "iphone": [
+    {
+      "file": "iphone/01-lio-and-aurora-atoll.png",
+      "sourceBuild": 11,
+      "sha256": "f41c8cc64c8ddff876e2488142656e74f6a7026a6da5a815317565991e402eca",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/71803E06-DC7B-4409-947D-93F3A03293B4.png",
+      "attachmentName": "build11-keeper-world_0_320D5EBF-B56C-4FB6-8128-E2D41C0B64AA.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "iphone/02-bloom-circuits.png",
+      "sourceBuild": 11,
+      "sha256": "1c214cb2d4a133dee4c165521ffe056f81e0daa845635a0e667e02a9fe6d6951",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-FinalPhone-Attachments/6B08822F-DA3E-4403-9CCB-05E043534345.png",
+      "attachmentName": "v3-02-botanical-circuit_0_FF22F784-D69C-4B63-99B1-76505084B62E.png",
+      "test": "GameplayUITests/testBoardPowerFormationAndAnimatedShuffle()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+      "debugFixture": "--uitesting; real gameplay on Store QA; no synthetic UI or resizing"
+    },
+    {
+      "file": "iphone/03-farm-terraces.png",
+      "sourceBuild": 11,
+      "sha256": "d7ce16ce8d7c184b1fe3c3d37762f042a500ecd00213369c8e5061c27109fca6",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-FinalPhone-Attachments/D0EAAB48-8EE2-40A5-9120-16F63C89C335.png",
+      "attachmentName": "build11-seven-rooms-farm_0_0416BA24-530A-4746-99BE-F08ABFCFF4F2.png",
+      "test": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+      "debugFixture": "--uitesting; real gameplay on Store QA; no synthetic UI or resizing"
+    },
+    {
+      "file": "iphone/04-harvest-rally.png",
+      "sourceBuild": 11,
+      "sha256": "4ea0ad2c5cd62ecbf136fab73f0fa9ae87da39f6aa74f92b0a016293f926bc6d",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-FinalPhone-Attachments/E95DB64F-D50F-4699-8479-42A5866C1258.png",
+      "attachmentName": "build11-rally-new-rover_0_BB9892D9-CD6A-4578-B737-33B0D2AF134B.png",
+      "test": "SevenRoomsUITests/testRallyIgnoresVerticalSwipesPausesResumesAndBanksRealPickups()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+      "debugFixture": "--uitesting; real gameplay on Store QA; no synthetic UI or resizing"
+    },
+    {
+      "file": "iphone/05-canal-weave.png",
+      "sourceBuild": 11,
+      "sha256": "d1c2290dbe8710dc35c3b82be6ce72b0edef49748f208e72b63639f74938b5ca",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-FinalPhone-Attachments/786A73CE-8C78-483A-BCF8-BBE7CD224F12.png",
+      "attachmentName": "build11-seven-rooms-canal_0_599AC7FA-7089-4475-AEFD-F942A330EFCA.png",
+      "test": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+      "debugFixture": "--uitesting; real gameplay on Store QA; no synthetic UI or resizing"
+    },
+    {
+      "file": "iphone/06-firefly-trail.png",
+      "sourceBuild": 11,
+      "sha256": "8566fc16a5df8a65a950850294efc980397192e0e877b292845d5158b9d8079a",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-FinalPhone-Attachments/15860458-E29B-4D4E-AC11-7C3142A559DB.png",
+      "attachmentName": "build11-seven-rooms-fireflies_0_5C057654-BD18-4BFA-93AF-0FAD207D0BAD.png",
+      "test": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+      "debugFixture": "--uitesting; real gameplay on Store QA; no synthetic UI or resizing"
+    },
+    {
+      "file": "iphone/07-windmill-works.png",
+      "sourceBuild": 11,
+      "sha256": "777c2de34ef89a6a33f3a349c2325a1f0fdd12629b8200633b9608ff05bcb4cd",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-FinalPhone-Attachments/ED650382-3B95-48E8-AF91-802FCFE44036.png",
+      "attachmentName": "build11-seven-rooms-windmill_0_10E463EB-FCA2-4D15-8A08-16B38C0710CC.png",
+      "test": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+      "debugFixture": "--uitesting; real gameplay on Store QA; no synthetic UI or resizing"
+    },
+    {
+      "file": "iphone/08-moon-observatory.png",
+      "sourceBuild": 11,
+      "sha256": "2974043beaddd3345c98cd3448f80fd8637264f16ee7f94b50bb0cf1e7c80c3c",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-FinalPhone-Attachments/1616D330-424C-4A7C-85C1-3BFE3C7FED86.png",
+      "attachmentName": "build11-seven-rooms-observatory_0_F64630B9-EEF5-4ABA-8DF7-11484B5F5946.png",
+      "test": "SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+      "debugFixture": "--uitesting; real gameplay on Store QA; no synthetic UI or resizing"
+    },
+    {
+      "file": "iphone/09-world-events.png",
+      "sourceBuild": 11,
+      "sha256": "eff7cb643339f91c4d6ab71b7011b0000f91c01b7b19b557e29ecaa31645170e",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/6E652DD6-7EB0-4201-BFB7-DA0765A986A0.png",
+      "attachmentName": "build11-world-event-1_0_B30CD248-CDE5-45E9-95C8-8FFC4CD0858F.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "iphone/10-seven-room-doors.png",
+      "sourceBuild": 11,
+      "sha256": "e6ddee0199585d232fed041fd83f05cd695bff28267198f199f99f152eb7234e",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/8089375B-C456-477B-AA9A-E8C2602E595C.png",
+      "attachmentName": "build11-room-doors-3_0_DEA054AE-8AB5-42B1-8F09-0DB37CEFA15A.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    }
+  ],
+  "ipad": [
+    {
+      "file": "ipad/01-lio-and-aurora-atoll.png",
+      "sourceBuild": 11,
+      "sha256": "9610e351e3b184153070bc96fb09be893099f9de31003e35c940340ca27b7463",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/95598959-812C-4B97-A9C6-C2053BFDD472.png",
+      "attachmentName": "build11-ipad-portrait-keeper-world_0_847911CA-ECE7-4FD6-A100-7EA45D64C0F0.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/02-bloom-circuits.png",
+      "sourceBuild": 11,
+      "sha256": "bd7c7d293e6985ea09dd24414bc5d16fd76710c6e74818f18a2dee69e64d6d4b",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadReleaseVerified-Attachments/B582306C-A43A-4814-8F09-5389421BB5E0.png",
+      "attachmentName": "ipad-06-puzzle-portrait_0_2EE34F60-61BD-4D77-9E42-8A6A154CBEFD.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/03-farm-terraces.png",
+      "sourceBuild": 11,
+      "sha256": "d98d1633c5f8048ec715a83905dc4bc65dc1161030d9d2b2c322d771ef4000cd",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/D2ACF060-CA3C-48FF-9D6E-D4839CE9B404.png",
+      "attachmentName": "build11-ipad-portrait-farm_0_9B506A27-0E8D-460D-97E0-B9C58E90B3EE.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/04-harvest-rally.png",
+      "sourceBuild": 11,
+      "sha256": "99222582b66f3cf55a766c40c491d92781f09d32097a8dd4d98a1abc72c52eb4",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadReleaseVerified-Attachments/CF6B21E5-164F-4732-A04D-2ABE19A5FEEA.png",
+      "attachmentName": "ipad-10-rally-road_0_DB8788B0-E3B3-4326-BA5D-45972AD50CCC.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/05-canal-weave.png",
+      "sourceBuild": 11,
+      "sha256": "6b293d51832bdf45a1803f97bd9215d5a063af576941f21eb6aad82f952c423e",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/64AE9DA7-00E1-449C-9FCE-57B8A2CD3721.png",
+      "attachmentName": "build11-ipad-portrait-canal_0_1A2426E0-58C1-4BDC-B476-6EFA465B9D7F.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/06-firefly-trail.png",
+      "sourceBuild": 11,
+      "sha256": "66ee6ed9a9b90c849b971aa2c6332513bd7dfc1b7f3db7979d9935bf4535b081",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/8EC73EA8-EFEB-4C16-9E72-EA14CE3771A5.png",
+      "attachmentName": "build11-ipad-portrait-fireflies_0_5B1D70E1-A1B4-49FF-915C-98DCC21BB187.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/07-windmill-works.png",
+      "sourceBuild": 11,
+      "sha256": "a0c2dcb6f1074f167cf0cf66e300f8bba584510f3cfbf671da78e7cd33b264c2",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/3F58C02A-C9AF-47CF-8F99-7B9F3E404E0B.png",
+      "attachmentName": "build11-ipad-portrait-windmill_0_BD7B0DE2-4ECE-4B97-A696-4906104C356D.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/08-moon-observatory.png",
+      "sourceBuild": 11,
+      "sha256": "0aa752cb4ef723d57b962c15549f3a0959eefb23b93c12ac132d465cccf9c098",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/56D2AF41-0C5E-4830-B0F4-5839A442E685.png",
+      "attachmentName": "build11-ipad-portrait-observatory_0_D8088631-5063-4B00-BE39-3B16558BF1EF.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/09-field-tasks-and-powers.png",
+      "sourceBuild": 11,
+      "sha256": "cc5528412f900b091c8bf9f12d0d439cd435273543f79517b1e0a7a388c70788",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadReleaseVerified-Attachments/FDDA7447-1AEA-46DA-BFC4-6BA8D2E5904B.png",
+      "attachmentName": "ipad-11-field-tasks_0_F1C598D2-7973-4A5C-A70D-2C9073088C91.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "ipad/10-player-saved-garden.png",
+      "sourceBuild": 11,
+      "sha256": "1834b3d8b536b11763ef703a7832082ac5625fda0adfa34126e3bdef91619e9f",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadReleaseVerified-Attachments/DFD58D6D-3A3C-4575-96A6-11A28C17861F.png",
+      "attachmentName": "ipad-09-player-and-saved-garden_0_B404E7C1-16AA-49D0-83B1-0C36166909F8.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    }
+  ],
+  "appleUploaded": true,
+  "proof": [
+    {
+      "file": "proof/apple-rankings-info.png",
+      "sourceBuild": 11,
+      "sha256": "b8504a623d2c85b3b0b6e97124ff93d8de83662ce33003807808e72b90a4468f",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/0546E978-A386-46C2-A80C-F7FFE5D09923.png",
+      "attachmentName": "build11-apple-rankings-info_0_D61D0382-5A9D-46B8-A84E-134B2EF19EE6.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/room-record.png",
+      "sourceBuild": 11,
+      "sha256": "7a9d898f28f017f2245258406e4cfc7aa39ab9f659a7fd617c989c0c16be9901",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/C0CAAAB6-0A39-46A5-A1B6-CCF92C68A60E.png",
+      "attachmentName": "build11-room-record-1_0_12F36A72-519F-418F-8A7F-0E01E8EC7536.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/player-saved-garden.png",
+      "sourceBuild": 11,
+      "sha256": "6cc5bbb59ba95d96355bfeda75f7f7f78cc72c324504b053c19fd6335e71769c",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/C07C5883-0DEA-4082-B116-A6CEC8503F7F.png",
+      "attachmentName": "build11-player-saved-garden_0_E4039433-4E89-4581-AD84-648F1A165B36.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/supplies-and-lives.png",
+      "sourceBuild": 11,
+      "sha256": "b0fb1d1329829c03636b1533645e1fd70c238afee4cb5739eb31b390d38c6483",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/C56E35A3-601F-4921-905E-02BCD0317103.png",
+      "attachmentName": "build11-supplies-and-lives_0_73E9EA83-42F5-41B0-8199-AF7AE3DCC553.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/supply-coins400.png",
+      "sourceBuild": 11,
+      "sha256": "e91ae71f39a66f7f00b47eaa382370483d2a8dee750b6439ce93cd0524f6bd6f",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/BC0DB30D-ED9D-4850-A0C2-830E8DCD9568.png",
+      "attachmentName": "build11-supply-coins400_0_9760F0BF-F507-402C-9B9C-54236CA77D05.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/supply-coins1500.png",
+      "sourceBuild": 11,
+      "sha256": "77c65cd3c907efc7aafced7386fb17b3494065b02bef93bfc9d638b4af3e2a6c",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/06F22D46-055D-467A-A513-B35B8DDBAC0E.png",
+      "attachmentName": "build11-supply-coins1500_0_5EA63008-8412-48A3-8770-58EB27ADD545.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/supply-coins3000.png",
+      "sourceBuild": 11,
+      "sha256": "70dad42785ad7a1823491f95f0d2c513ffc4269f300ed872861c3c2fc9a211b2",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/D58F1CD3-E52A-4571-B82B-C75E75008980.png",
+      "attachmentName": "build11-supply-coins3000_0_F22BF6DD-7F66-4354-9D99-C7CB35BFA26B.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/supply-coins7000.png",
+      "sourceBuild": 11,
+      "sha256": "84df2fab5dc2aabf7d98b69fdcdd54bc45f3fbc05d1dd2aca2c9d7f557eb20f6",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/E81ABC18-E0C1-4AC7-9852-2CF899CFC0CB.png",
+      "attachmentName": "build11-supply-coins7000_0_C762C00A-4986-49EB-9D99-FF331C4C1F4F.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/supply-lives5.png",
+      "sourceBuild": 11,
+      "sha256": "6f885fc363dd2a9ee86e108e5f07246851e2a5e2e187e79f09b25250e5ee7c73",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/099F5728-AAE9-4853-8C68-362CF41C3004.png",
+      "attachmentName": "build11-supply-lives5_0_3C9E8962-590B-4A01-9638-53B2320E1544.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/supply-starter.png",
+      "sourceBuild": 11,
+      "sha256": "7e922bb662dc2b25ca290b14dc225e783fe35386b112ead2f9f639fab01386a5",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build11-NormalGalleryFinal-Attachments/D4B28B97-BA91-430D-A1B7-D92F8E6611EB.png",
+      "attachmentName": "build11-supply-starter_0_024520E9-6577-4F2A-855B-2C45D6476EC8.png",
+      "test": "SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+      "debugFixture": "--uitesting; real read-only native tour; no purchases or synthetic UI"
+    },
+    {
+      "file": "proof/ipad-landscape-keeper-world.png",
+      "sourceBuild": 11,
+      "sha256": "3ad0f6924014534df6b12954ca7bd7873b815b29f1044ccc672bc4916df46a55",
+      "encodedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/980E82B6-383C-441D-AA24-7569C74B22B1.png",
+      "attachmentName": "build11-ipad-landscape-keeper-world_0_D169C574-0C4D-452E-8EE1-396F823E041B.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/ipad-landscape-farm.png",
+      "sourceBuild": 11,
+      "sha256": "7a0737fe726ac795f9359228f8cdd2fd79e35d896e72e27cb867bfbd08564fd0",
+      "encodedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/A812FFC9-6539-44E5-92A4-C99499D78B6E.png",
+      "attachmentName": "build11-ipad-landscape-farm_0_07485A0C-A811-4095-B8FC-39D952F62D48.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/ipad-landscape-rally.png",
+      "sourceBuild": 11,
+      "sha256": "3cec42cfc815da9ddfb54954e34ca2be03588b3987babbca941ecf5723eaf148",
+      "encodedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/93C5CB7A-48AD-4BDB-AA3C-4A3F52D7D6D5.png",
+      "attachmentName": "build11-ipad-landscape-rally_0_F3C33C63-440D-46DA-AAF8-788B8A9D208D.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/ipad-landscape-canal.png",
+      "sourceBuild": 11,
+      "sha256": "5bec95591ad710f48dd9da98597eb7b2f7d3da964f2a0cdfa82f9dabadefe137",
+      "encodedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/55D86F08-886E-4CD2-8391-B635F1FAC41D.png",
+      "attachmentName": "build11-ipad-landscape-canal_0_46214198-4C58-47CD-B0F3-64E4FDA2B3C1.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/ipad-landscape-fireflies.png",
+      "sourceBuild": 11,
+      "sha256": "e9bf4fc0de537945649183850d6477daa48560ac1f7c4df8e83cabb454b9e745",
+      "encodedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/6AF106E8-506C-4E1F-96D2-35F22B5BDDF3.png",
+      "attachmentName": "build11-ipad-landscape-fireflies_0_A36CD06D-F778-4DD3-9D87-1F58DDC6B667.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/ipad-landscape-windmill.png",
+      "sourceBuild": 11,
+      "sha256": "a6647a8ed70f6599df7e132bfbc34c1ed71e72521be48ef71c6f44313f8d7307",
+      "encodedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/2AB397E9-98F4-4F4D-82B3-A039E30ABDB7.png",
+      "attachmentName": "build11-ipad-landscape-windmill_0_F4945388-44DD-4059-96FF-33676D233EAD.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/ipad-landscape-observatory.png",
+      "sourceBuild": 11,
+      "sha256": "ecc918496e59b8d3d008904ea570cedf31b8ba7568866f277f92a58406ea29eb",
+      "encodedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceAttachment": "build/Build11-iPadRoomsVerified-Attachments/2F620BC6-1234-4CE1-8C3D-302A141FF87A.png",
+      "attachmentName": "build11-ipad-landscape-observatory_0_1E2A40B2-D82F-4D44-A6AD-B7C9F52AC3B4.png",
+      "test": "SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/ipad-landscape-puzzle.png",
+      "sourceBuild": 11,
+      "sha256": "1548cd7ae7764a5b179bad444c3cfa00fed4078441c2f5dae284eaa3942f7147",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadReleaseVerified-Attachments/0788D96B-EB6A-4AAE-968D-2E319C49BE3F.png",
+      "attachmentName": "ipad-07-puzzle-landscape_0_EB22952E-E009-4312-8E75-6B49210FF6ED.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/ipad-field-tasks.png",
+      "sourceBuild": 11,
+      "sha256": "cc5528412f900b091c8bf9f12d0d439cd435273543f79517b1e0a7a388c70788",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadReleaseVerified-Attachments/FDDA7447-1AEA-46DA-BFC4-6BA8D2E5904B.png",
+      "attachmentName": "ipad-11-field-tasks_0_F1C598D2-7973-4A5C-A70D-2C9073088C91.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing"
+    },
+    {
+      "file": "proof/preview-save-preserved.png",
+      "sourceBuild": 11,
+      "sha256": "37e2353b03a389825b65b236ff5a84080eb741a4d676d9979182bc47494b6c48",
+      "encodedDimensions": [
+        1206,
+        2622
+      ],
+      "device": "64173F47-C4DC-46B4-82EC-0027675F7780",
+      "capture": "Normal preview after in-place install and launch; no QA flags or reset; simctl native screenshot",
+      "verification": [
+        "preview-after-install.json",
+        "preview-after-launch.json"
+      ]
+    }
+  ],
+  "provenanceNote": "Original result bundles are retained at workspace-relative evidence paths. Temporary attachment export directories may be removed to recover QA disk space; re-export from the named result bundle recovers the identical source bytes. The selected release PNGs retain their original bytes, dimensions and orientation metadata.",
+  "excludedCaptures": [
+    {
+      "file": "ipad/09-supplies-and-lives.png",
+      "sourceBuild": 11,
+      "sha256": "cb4b99f44e85b307edd19dd59d16207feee15f01f4bb025559e286609e106ee3",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build11-iPadReleaseVerified-Attachments/14E4FB7B-0A5E-46B6-B843-2547A32C37B3.png",
+      "attachmentName": "ipad-05-supplies_0_5A4DEFE6-3A0F-44EE-8EFE-1AD99D183A18.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+      "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing",
+      "note": "Excluded from Apple gallery: mid-transition screenshot. Retained diagnostic only."
+    }
+  ],
+  "visualQA": "All10 iPad gallery captures and phone Windmill reviewed. Replaced mid-transition shop screenshot with settled permanent field tasks. Settled phone supplies and Apple-priced packs retained as separate proof.",
+  "appleGalleryProcessing": "All20 processed in App Store Connect10October2026; iPhone large display10, iPad13-inch10; mediumiPhone inheritslarge",
+  "appleReviewConfirmation": {
+    "file": "proof/apple-review-submission.jpg",
+    "type": "App Store Connect browser confirmation",
+    "mimeType": "image/jpeg",
+    "dimensions": [
+      720,
+      465
+    ],
+    "sha256": "bfd0d97fd0eda7194758108528c3643a46f1d38979852c4456597b20fe6cf874",
+    "capture": "Actual Chrome screenshot bytes, cropped at capture to app identity, Waiting for Review, Items Submitted (8), Atoll Skills and iOS App 1.0 (11). No pixel edits.",
+    "submissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+    "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/83b00d39-0873-4771-8bc9-5d94d4be04b4",
+    "observedLocal": "2026-10-10 16:47 Asia/Kolkata",
+    "datePrecision": "minute"
+  },
+  "appleReviewSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4"
+}

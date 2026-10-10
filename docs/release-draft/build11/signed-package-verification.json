@@ -1,0 +1,122 @@
+{
+  "version": "1.0",
+  "build": 11,
+  "appID": "6820591529",
+  "ipa": "build/AppStoreExport11/OrbitBloom.ipa",
+  "sha256": "8a74c00d39070e27e5238359ee57454889f8865c8e904c45898309abd17c1c1b",
+  "byteSize": 27677382,
+  "profileUUID": "8ad71964-4815-45e7-ad15-0187cfa5e7e3",
+  "profileName": "Orbit Bloom AppStore",
+  "gameCenter": true,
+  "cloudContainer": "iCloud.com.orbitbloom.game",
+  "cloudEnvironment": "Production",
+  "debuggerAccess": false,
+  "iPadOrientations": [
+    "UIInterfaceOrientationPortrait",
+    "UIInterfaceOrientationPortraitUpsideDown",
+    "UIInterfaceOrientationLandscapeLeft",
+    "UIInterfaceOrientationLandscapeRight"
+  ],
+  "codeSignatureVerified": true,
+  "privacyManifestMatchesSource": true,
+  "requiredAPIs": [
+    {
+      "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+      "NSPrivacyAccessedAPITypeReasons": [
+        "CA92.1"
+      ]
+    },
+    {
+      "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
+      "NSPrivacyAccessedAPITypeReasons": [
+        "35F9.1"
+      ]
+    }
+  ],
+  "debugStageSelectionFixtureAbsent": true,
+  "verifiedOn": "2026-10-10",
+  "upload": "Delivered successfully 10 October 2026 16:29 India time",
+  "appReviewSubmitted": true,
+  "publicReleased": false,
+  "evidence": {
+    "archive": "evidence/build11-archive.log",
+    "export": "evidence/build11-export.log",
+    "signature": "evidence/build11-signature.txt",
+    "reviewConfirmation": "docs/release-draft/build11/proof/apple-review-submission.jpg"
+  },
+  "appleServerValidation": "Transporter Verify succeeded, observed 10 October 2026 15:54 India time",
+  "sourceFiles": {
+    "OrbitBloom/AudioDirector.swift": "eb3725ee001371e5dacd24467452d8b0f327acb0a6761436dc59400471785094",
+    "OrbitBloom/Core/Ecosystem.swift": "6b1b9223dda0180cfd348089f9a59e1314f96de665c5e64c1bc2a6a6824a6e57",
+    "OrbitBloom/Core/GameEngine.swift": "496b8a965213003c854ce58efebef0192cfe3cf411edb69b6f65d00f9bc23dd6",
+    "OrbitBloom/Core/IslandActivities.swift": "ecccfcd26be1cdf19b041dc88e1534dab1f20f38924b779f53ccc0cd01b4cc8e",
+    "OrbitBloom/Core/IslandJourney.swift": "eb0c2eec98703629b3f7c05ed5c4fd780c8d5a82d17c00314fc3a5127d882661",
+    "OrbitBloom/Core/PowerRules.swift": "7fe2aad72ab204d21abf323baa3a80a43402ba92ec7a6a00fadd742e82ba7645",
+    "OrbitBloom/Core/Progress.swift": "1a8c1a9f67972e944ddba6748d739de5791c68718ea4aa9391dec4fef62a9dca",
+    "OrbitBloom/Core/SavedGarden.swift": "9e91238c45eac46f26a0fc8a64084435dd9a2ffbdfef5ee0a3e62eac7ca0b36d",
+    "OrbitBloom/GameModel.swift": "b2f56339817068f802685ff69db4e6dfae7250ed6ceb01554d012503babe2192",
+    "OrbitBloom/OrbitBloom.entitlements": "f534203fbd88f1c0c595420e7379f1d92c2e5b2918d24812e26c01f6e4aaf45d",
+    "OrbitBloom/OrbitBloomApp.swift": "2a948245458e173c04c9292b984fb5b25b834e2743a43d7c5a543570b57259d8",
+    "OrbitBloom/PlayerAccount.swift": "126d695cf99dea5a18d16b94ed6e89193565c64b00d9598326c2e2780460e77a",
+    "OrbitBloom/PurchaseStore.swift": "0a1a5b628ea9ec7d7d0e239304bb522856e42f0fe4f9188ecca9635a4c4c204a",
+    "OrbitBloom/Resources/Assets.xcassets/AccentColor.colorset/Contents.json": "0a4c90ea4a9ee4ba5c7c9bc38d58d9fceedf8042126b0495d57d7dd7a887263e",
+    "OrbitBloom/Resources/Assets.xcassets/AppIcon.appiconset/Contents.json": "52006062e723208b465f22bc8e898b4a93fbaa3c3560868b565d67146b875796",
+    "OrbitBloom/Resources/Assets.xcassets/AppIcon.appiconset/icon.png": "9afc9ff6410a530af20f97f604b12a0bcac56f5d7e9d481ed01e53a94ca04d48",
+    "OrbitBloom/Resources/Assets.xcassets/BloomLogo.imageset/Contents.json": "2aadfbd34feb6fe0a47e774277a8c3b88e00e975619aeb94c488573f77fbe8bd",
+    "OrbitBloom/Resources/Assets.xcassets/BloomLogo.imageset/image.png": "32ff3c017a5efe6d6dbe325ac4da83a35df11aba76343c3e6d6cc25726449956",
+    "OrbitBloom/Resources/Assets.xcassets/BotanicalAtlas.imageset/Contents.json": "2aadfbd34feb6fe0a47e774277a8c3b88e00e975619aeb94c488573f77fbe8bd",
+    "OrbitBloom/Resources/Assets.xcassets/BotanicalAtlas.imageset/image.png": "64180c56d1d30c772d98dfff7e61d876de7f8ad32fccb1e889a08b12299028ea",
+    "OrbitBloom/Resources/Assets.xcassets/Contents.json": "10e3b5dc202f1cd9fad1f688c8fc9fe9e9669bf3f8295e67d216b10fd99b6f49",
+    "OrbitBloom/Resources/Assets.xcassets/KeeperLio.imageset/Contents.json": "e9595ed5f45b29305e927d045eb19ea082fc77b32d78efc159d3b3eff3b9b39f",
+    "OrbitBloom/Resources/Assets.xcassets/KeeperLio.imageset/KeeperLio.png": "0286e02d15f00295024af4c4d1e920c4df576d0742e991be201613f0df48ffde",
+    "OrbitBloom/Resources/Assets.xcassets/LivingGarden.imageset/Contents.json": "2aadfbd34feb6fe0a47e774277a8c3b88e00e975619aeb94c488573f77fbe8bd",
+    "OrbitBloom/Resources/Assets.xcassets/LivingGarden.imageset/image.png": "7451f2f7889c4086bf78967f3ff663e685eabe40c9c6362e301c9352e67e20e4",
+    "OrbitBloom/Resources/Assets.xcassets/MoonGarden.imageset/Contents.json": "d4509bec15a21623a86649da7b59b5a0687a405e226a73c1be5920359aaf71ed",
+    "OrbitBloom/Resources/Assets.xcassets/MoonGarden.imageset/garden.png": "55f4327a6595c14d4a3c30f57d50c0f62b9f36cfbf0de544684183c272dd7700",
+    "OrbitBloom/Resources/Assets.xcassets/RallyRover.imageset/Contents.json": "19f2c8c9c33f87c864883be2429219d10fd972821f7712666194ac4886fc2c0a",
+    "OrbitBloom/Resources/Assets.xcassets/RallyRover.imageset/RallyRover.png": "8106c5a6668d42598b61d7fcc0e3ab24ec577be9cdea8dc69772d705a1d972e8",
+    "OrbitBloom/Resources/PrivacyInfo.xcprivacy": "f953ba99994eddf8fe1c7d1723ca44a2da3df5ac96b05f09f375fa3d76f465cc",
+    "OrbitBloom/Views/ActivityRoomView.swift": "1619bf6c203a4cbb1bd2dceed56749330df86bb95aebedb1f08336c0232bc54b",
+    "OrbitBloom/Views/DeliveryRaceView.swift": "49ad2bc79beefc735e238408214b75e1820c555614b7786e436583f525d19d05",
+    "OrbitBloom/Views/FarmView.swift": "f0a7f1ba53a6941c7a0cc4c4f18e713cab4a6d7e10bfe236fb594d2176f31b50",
+    "OrbitBloom/Views/GemView.swift": "b4d4a805fe1c6ad20dd118a7281f2bfc0a283d41c64f53fdc032b2bddb969034",
+    "OrbitBloom/Views/IslandActivityView.swift": "db464a89c7a96cc97617079bf421d2023106d21c9f0dc047943e069d012afea6",
+    "OrbitBloom/Views/IslandHubView.swift": "c49d1b300d566739a4d7ae18f4146116015df558f7fbf86f48be108380c752e0",
+    "OrbitBloom/Views/PlayerAccountView.swift": "56f702ab25674eb40e4635469dd6471273feb5118338e5977e01134c94c10f4a",
+    "OrbitBloom/Views/PuzzleView.swift": "fff2b0a44a52b359daf0b741409c487f53a13e8c40bf4b08dcfbd632f2c433d2",
+    "OrbitBloom/Views/RoomRecordsView.swift": "06989a9022a0650919f7a74d558882d0ff9046f3d8ad22ebd6fb3e660807142c",
+    "OrbitBloom/Views/RootView.swift": "25a1f10a57e5d9e3c20e6bb7f5be9d6022a55a62f59c03182e1b76cf53988ff9",
+    "OrbitBloom/Views/ShopView.swift": "18cbd3faf19edf3ede1b3a8f6f9a93ced29dc846e9394ce8e9348454bb39e858",
+    "OrbitBloom/Views/Theme.swift": "21d70ee93c8af05536bec4e1965f878176e4f5bde588951c8208c02c0da3172c",
+    "OrbitBloom/Views/WorldEventsView.swift": "2082fab3c1a8f6e2019ca2c44bcbbfac640420bec6e933b973b8cdc65410916f",
+    "OrbitBloom/WorldEventClock.swift": "4bc0a5e51aeeaa56bb1f11cb6adfe7efc843594ac1beac0794e78b7dbd5d3440"
+  },
+  "sourceCommit": "8b26cbdbe0827c571aca7725842a5a973d0c7dea",
+  "appleProcessing": "Complete; build11 Ready to Submit, observed10October2026 16:34India",
+  "appleBuildID": "eefcb52c-0e76-4c8e-bed5-0d19a2d9f157",
+  "internalTestFlight": {
+    "group": "Orbit Bloom QA",
+    "groupID": "20c17cf7-ef9b-43be-9a6a-55530abb5a3f",
+    "testerCount": 1,
+    "whatToTestSaved": true,
+    "build": 11,
+    "assigned": true
+  },
+  "appReviewStatus": "Waiting for Review",
+  "reviewSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+  "reviewSubmissionURL": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/83b00d39-0873-4771-8bc9-5d94d4be04b4",
+  "submittedLocal": "2026-10-10 16:47 Asia/Kolkata",
+  "submissionTimePrecision": "minute",
+  "reviewItemCount": 8,
+  "publicReleaseMode": "MANUAL",
+  "reviewItems": [
+    "iOS App 1.0 (11)",
+    "Atoll Skills",
+    "5 Extra Lives",
+    "First Bloom Bundle",
+    "7000 Bloom Coins",
+    "400 Bloom Coins",
+    "1500 Bloom Coins",
+    "3000 Bloom Coins"
+  ]
+}

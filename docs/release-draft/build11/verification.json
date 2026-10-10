@@ -1,0 +1,879 @@
+{
+  "schemaVersion": 1,
+  "appID": "6820591529",
+  "bundleID": "com.orbitbloom.game",
+  "version": "1.0",
+  "build": 11,
+  "verifiedOn": "2026-10-10",
+  "statusSnapshotLocal": "2026-10-10 16:47 Asia/Kolkata",
+  "pathBase": "workspace root; README links and release-local report links are explicitly relative to this directory",
+  "change": "Seven distinct Aurora Atoll rooms connected by Lio's story, four new skill games, shared progression, original illustrated rover, trusted UTC events and optional Game Center skill records.",
+  "appSource": {
+    "commit": "8b26cbdbe0827c571aca7725842a5a973d0c7dea",
+    "fixedDuringFinalQA": true,
+    "signedSourceHashCount": 44,
+    "allSignedSourceHashesMatchCurrentFiles": true,
+    "hashRecord": "docs/release-draft/build11/signed-package-verification.json",
+    "hashRecordSHA256": "f04d857f21e4218198abdbea9c457c7b3f776926358b0d52c0c1d42a9a003ece",
+    "note": "The 44-file record pins app code, assets, entitlements and privacy manifest. UI assertions were refined during reruns; failed diagnostic outcomes remain recorded."
+  },
+  "package": {
+    "status": "passed",
+    "ipa": "build/AppStoreExport11/OrbitBloom.ipa",
+    "sha256": "8a74c00d39070e27e5238359ee57454889f8865c8e904c45898309abd17c1c1b",
+    "byteSize": 27677382,
+    "archive": "build/OrbitBloom-Build11-AppStore.xcarchive",
+    "signatureVerified": true,
+    "productionGameCenter": true,
+    "privateCloudContainer": "iCloud.com.orbitbloom.game",
+    "cloudEnvironment": "Production",
+    "debuggerAccess": false,
+    "iPadOrientations": [
+      "UIInterfaceOrientationPortrait",
+      "UIInterfaceOrientationPortraitUpsideDown",
+      "UIInterfaceOrientationLandscapeLeft",
+      "UIInterfaceOrientationLandscapeRight"
+    ],
+    "privacyManifestMatchesSource": true,
+    "requiredAPIs": [
+      {
+        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+        "NSPrivacyAccessedAPITypeReasons": [
+          "CA92.1"
+        ]
+      },
+      {
+        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
+        "NSPrivacyAccessedAPITypeReasons": [
+          "35F9.1"
+        ]
+      }
+    ],
+    "debugStageSelectionFixtureAbsent": true,
+    "evidence": {
+      "archive": "evidence/build11-archive.log",
+      "export": "evidence/build11-export.log",
+      "signature": "evidence/build11-signature.txt"
+    }
+  },
+  "qa": {
+    "status": "passedAcrossRecordedRuns",
+    "uniquePassingCases": 107,
+    "countingRule": "Union of unique test identifiers with a recorded passing run; reruns count once. A passing target or case does not relabel a mixed or diagnostic result bundle successful.",
+    "counts": {
+      "core": 49,
+      "native": 47,
+      "iPhoneUI": 9,
+      "iPadUI": 2
+    },
+    "core": {
+      "status": "passed",
+      "uniqueCases": 49,
+      "failures": 0,
+      "durationSeconds": 25.824,
+      "log": "evidence/build11-core-final.log",
+      "logSHA256": "c386b849047cf25b6cb6ccdaa141798192eb0b04d5ba82f81b0a62a4ff1acab5",
+      "cases": [
+        {
+          "test": "OrbitBloomCoreTests.EcosystemTests/testAllToolShapesAndRainbowTargetTheCorrectCells()",
+          "durationSeconds": 0.011
+        },
+        {
+          "test": "OrbitBloomCoreTests.EcosystemTests/testConnectedCircuitModeCanFinishTheWholeCampaign()",
+          "durationSeconds": 0.544
+        },
+        {
+          "test": "OrbitBloomCoreTests.EcosystemTests/testCraftingAndTransactionIdempotency()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.EcosystemTests/testExtremeLifeClockCannotOverflowAndStillCapsRegeneration()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.EcosystemTests/testFarmRequiresResourcesAndCanHarvestExactlyOnceAfterOfflineGrowth()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomCoreTests.EcosystemTests/testLivesRegenerateAtThirtyMinuteBoundaryAndPersistOffline()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.EcosystemTests/testPurchasedReserveDoesNotExpireOrGetClampedAndClockRollbackGrantsNothing()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.EcosystemTests/testRaceCollisionsPickupsPauseAndFinishAreDeterministic()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testBoardsStartStableAndAlwaysOfferAValidMove()",
+          "durationSeconds": 0.125
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testBurstClearsCrossAndFrostWithoutSpendingMove()",
+          "durationSeconds": 0.002
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testCampaignCanBeCompletedWithNormalMovesAndEarnedBursts()",
+          "durationSeconds": 24.285
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testInvalidSwapDoesNotSpendMoveOrChangeBoard()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testLossRetryAndFreeShuffle()",
+          "durationSeconds": 0.023
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testOneShotBoardsHaveAFreeWinningSwipeAcrossEveryVariant()",
+          "durationSeconds": 0.211
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testSeedReproducesOpeningAndRefill()",
+          "durationSeconds": 0.041
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testSessionRoundTripRetainsBoardGoalsMovesAndFrost()",
+          "durationSeconds": 0.009
+        },
+        {
+          "test": "OrbitBloomCoreTests.GameEngineTests/testSwapsCascadeCollectAndLeavePlayableBoard()",
+          "durationSeconds": 0.025
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testActivityLevelsClampUntrustedValuesBeforeBuildingBoardsOrScores()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testAllObservatoryBoardsAreSolvableBySlidingWithinTheirBudgets()",
+          "durationSeconds": 0.167
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testCanalLimitsTurnsAndIgnoresOutOfBoundsInputs()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testEveryCanalLayoutHasAFreeSolutionWithinItsMoveBudget()",
+          "durationSeconds": 0.328
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testFireflyMistakesHaveFiniteRecoveryAndNoInvalidInputPenalty()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testFireflySequencesAdvanceOnlyAfterCorrectAnswersAndSurviveInterruptedPlayback()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testFourRoomsHaveStableSaveIdentifiersAndDifferentMechanics()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testObservatoryOnlyMovesAdjacentStarsInTheSwipeDirectionAndEnforcesBudget()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testWindmillTimeoutMissesAndInvalidClockInputsCannotGrantPower()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandActivitiesTests/testWindmillTimingWindowsAllowEveryDifficultyToFinishWithoutPurchases()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandJourneyTests/testAllJourneyDataSurvivesLocalAndCloudAndOldSchemasCannotEraseIt()",
+          "durationSeconds": 0.002
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandJourneyTests/testEventsCountCorrectRoomAndClaimOnlyOnceDuringActiveWindow()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandJourneyTests/testFirstClearsAdvanceInOrderAndCannotBeCreditedTwice()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandJourneyTests/testRallyTrafficIncreasesWithTierAndEveryTierIsPlayable()",
+          "durationSeconds": 0.004
+        },
+        {
+          "test": "OrbitBloomCoreTests.IslandJourneyTests/testWorldwideScheduleUsesExactStartEndAndAutomaticGaps()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.PowerRulesTests/testBombTriggersNearbyTNTAndConsumesBothExactlyOnce()",
+          "durationSeconds": 0.004
+        },
+        {
+          "test": "OrbitBloomCoreTests.PowerRulesTests/testFixedFormationRules()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.PowerRulesTests/testLateExpeditionAndAssistBalancesSurviveSerialization()",
+          "durationSeconds": 0.003
+        },
+        {
+          "test": "OrbitBloomCoreTests.PowerRulesTests/testSwipeMakesVisibleBoardPowerAndSaveKeepsIt()",
+          "durationSeconds": 0.008
+        },
+        {
+          "test": "OrbitBloomCoreTests.PowerRulesTests/testTenFreeHintsThenCoinsAndTaskRewardsCannotBeClaimedTwice()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.ProgressTests/testCoinPurchaseCannotOverdrawBalance()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.ProgressTests/testDifficultyRhythmTightensAcrossTheCampaign()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.ProgressTests/testFirstWinAwardsOneStarAndReplaysNeverDuplicateIt()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.ProgressTests/testIslandCoverageTurnBudgetsAndSequentialUnlocks()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomCoreTests.ProgressTests/testProgressRoundTrip()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.ProgressTests/testRestorationRequiresStarsAndOrderedProjects()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.SavedGardenTests/testCompleteWalletSurvivesCloudEncoding()",
+          "durationSeconds": 0.008
+        },
+        {
+          "test": "OrbitBloomCoreTests.SavedGardenTests/testDifficultyUpdatePreservesLegacySessionsAndRejectsFutureRules()",
+          "durationSeconds": 0.013
+        },
+        {
+          "test": "OrbitBloomCoreTests.SavedGardenTests/testForeignCorruptAndFutureSavesAreRejected()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomCoreTests.SavedGardenTests/testMalformedTimersAreRejectedBeforeRestoring()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomCoreTests.SavedGardenTests/testOversizedScoresAndCollectionsAreRejected()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomCoreTests.SavedGardenTests/testRestoreCannotRemovePaidReceiptsOrSumResources()",
+          "durationSeconds": 0.0
+        }
+      ]
+    },
+    "native": {
+      "status": "passed",
+      "uniqueCases": 47,
+      "failures": 0,
+      "durationSeconds": 5.361,
+      "resultBundle": "evidence/Build11-NativeRooms4.xcresult",
+      "log": "evidence/build11-native-rooms4.log",
+      "logSHA256": "9fe42408b39bb3bd310d5262237346f8b0f6b2a9f562d6e850d969f157dd278f",
+      "suiteCounts": {
+        "IslandJourneyNativeTests": 7,
+        "PlayerAccountTests": 15,
+        "PurchaseTests": 6,
+        "SessionTests": 9,
+        "WorldEventClockTests": 10
+      },
+      "bundleNote": "Native unit target passed all 47 cases. The same bundle's separate UI target had two passes and one failure; that UI failure later passed in FinalPhone.",
+      "cases": [
+        {
+          "test": "OrbitBloomTests.IslandJourneyNativeTests/testAllFourRealActivityWinsGrantEachFirstClearExactlyOnce()",
+          "durationSeconds": 0.311
+        },
+        {
+          "test": "OrbitBloomTests.IslandJourneyNativeTests/testAppleRestoreKeepsOfferedBackupDuringActivityAndExplainsTheBlock()",
+          "durationSeconds": 0.044
+        },
+        {
+          "test": "OrbitBloomTests.IslandJourneyNativeTests/testCompletedJourneyAndResourcesSurviveLocalRelaunchAndCloudEncoding()",
+          "durationSeconds": 0.366
+        },
+        {
+          "test": "OrbitBloomTests.IslandJourneyNativeTests/testFirstAppleAccountAdoptsGuestJourneyAndOtherPlayersStayIsolated()",
+          "durationSeconds": 0.211
+        },
+        {
+          "test": "OrbitBloomTests.IslandJourneyNativeTests/testLocalRestoreCannotReplaceAnActiveRoomAndWorksAfterExit()",
+          "durationSeconds": 0.029
+        },
+        {
+          "test": "OrbitBloomTests.IslandJourneyNativeTests/testNextChallengeAdvancesOnlyAfterWinningAndInvalidResultsMintNothing()",
+          "durationSeconds": 0.264
+        },
+        {
+          "test": "OrbitBloomTests.IslandJourneyNativeTests/testOldWalletWithoutJourneyKeepsPuzzleFarmPurchasesAndProgress()",
+          "durationSeconds": 0.037
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testAccountChangeDuringFetchDiscardsResultsAndNeverWrites()",
+          "durationSeconds": 0.042
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testAccountChangeDuringWriteNeverClaimsSuccessfulBackup()",
+          "durationSeconds": 0.004
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testAccountSwitchPreservesSeparateGardensAndPurchaseIdempotency()",
+          "durationSeconds": 0.03
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testAppleCallbackCompletesOnceEvenIfDeliveredTwice()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testAppleCallbackTimeoutIgnoresLateReply()",
+          "durationSeconds": 0.011
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testChangedAccountCannotRestorePreviouslyOfferedGarden()",
+          "durationSeconds": 0.006
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testCorruptAccountSaveAndUndoNeverExposeAnotherPlayersWallet()",
+          "durationSeconds": 0.016
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testCorruptLegacyProgressAndPuzzleAreRejectedOnLaunch()",
+          "durationSeconds": 0.003
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testFailedUploadShowsPendingAndRetryDoesNotDuplicateRewards()",
+          "durationSeconds": 0.017
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testLegacyWalletMigrationAndCorruptCheckpointRecovery()",
+          "durationSeconds": 0.003
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testMissingPurchaseBackupCannotReplaceDeviceWallet()",
+          "durationSeconds": 0.04
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testNewPlayerBacksUpFullWalletAndDistinctDeviceFile()",
+          "durationSeconds": 0.006
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testOfflineFetchNeverOverwritesUnknownCloudGarden()",
+          "durationSeconds": 0.005
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testOtherDeviceNeedsChoiceAndRestoreRetainsPuzzleAndCheckpoint()",
+          "durationSeconds": 0.095
+        },
+        {
+          "test": "OrbitBloomTests.PlayerAccountTests/testPausedCloudCannotRestoreOrAcknowledgeOfferedGarden()",
+          "durationSeconds": 0.017
+        },
+        {
+          "test": "OrbitBloomTests.PurchaseTests/testAppleConsumableCreditsCoinsAndDoesNotDoubleCredit()",
+          "durationSeconds": 0.339
+        },
+        {
+          "test": "OrbitBloomTests.PurchaseTests/testAppleLivesAndStarterCreditsPersistWithoutDuplicateRestore()",
+          "durationSeconds": 0.42
+        },
+        {
+          "test": "OrbitBloomTests.PurchaseTests/testCancelledPurchaseDoesNotUnlockAnything()",
+          "durationSeconds": 0.163
+        },
+        {
+          "test": "OrbitBloomTests.PurchaseTests/testPendingAskToBuyDoesNotUnlockBeforeApproval()",
+          "durationSeconds": 0.715
+        },
+        {
+          "test": "OrbitBloomTests.PurchaseTests/testPurchaseAndRestoreNonConsumable()",
+          "durationSeconds": 0.255
+        },
+        {
+          "test": "OrbitBloomTests.PurchaseTests/testRefundRevokesEntitlement()",
+          "durationSeconds": 0.727
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testAbandonKeepsExactlyTheStartedLifeSpentAndSurvivesRelaunch()",
+          "durationSeconds": 0.015
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testAudioAndSpritesAreActuallyBundled()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testHintBalancePersistsAndOlderWalletReceivesFreeAssistance()",
+          "durationSeconds": 0.171
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testInProgressPuzzleResumesAfterModelRecreation()",
+          "durationSeconds": 0.02
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testLockedCircuitCannotSpendLifeOrReplaceSession()",
+          "durationSeconds": 0.004
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testOneShotBlockedAssistanceKeepsEveryInventoryBalance()",
+          "durationSeconds": 0.003
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testPuzzleWaterPersistsBeforeAnimationAndIsNotCreditedTwice()",
+          "durationSeconds": 0.917
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testWalletTransactionAndLifeAreDurableAndIdempotent()",
+          "durationSeconds": 0.03
+        },
+        {
+          "test": "OrbitBloomTests.SessionTests/testWonSessionRecoversRewardAfterInterruptedAnimation()",
+          "durationSeconds": 0.015
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testAnchorExpiresAtExactlyFifteenMinutesAndRejectsUptimeRollbackOrNonfiniteReadings()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testAnInvalidMonotonicAnchorIsNeverAccepted()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testFailedRefreshKeepsOnlyTheOriginalAnchorUntilItsOriginalExpiry()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testFirstOfflineRefreshLeavesAllEventsUntrustedAndExplainsOfflinePlay()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testInvalidRefreshCannotReplaceAValidAnchorOrExtendItsLifetime()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testOverlappingRefreshesIssueOneRequestAndLaterRefreshCanRenewTheAnchor()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testOversizedAndNonfiniteOrOutOfRangeServerTimeAreRejected()",
+          "durationSeconds": 0.002
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testRedirectsAlternatePathsAndNon200ResponsesCannotSupplyClockAnchors()",
+          "durationSeconds": 0.001
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testServerUTCAnchorAdvancesOnlyWithMonotonicUptimeAndRequestContainsNoPlayerData()",
+          "durationSeconds": 0.0
+        },
+        {
+          "test": "OrbitBloomTests.WorldEventClockTests/testUnsupportedSchemaScheduleAndMalformedPayloadCannotCreateTrustedTime()",
+          "durationSeconds": 0.001
+        }
+      ]
+    },
+    "iPhoneUI": [
+      {
+        "test": "OrbitBloomUITests.GameplayUITests/testBackCancelAbandonAndRestartChargeExactlyOneLifePerAttempt()",
+        "status": "passed",
+        "durationSeconds": 22.636,
+        "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+        "log": "evidence/build11-final-phone.log"
+      },
+      {
+        "test": "OrbitBloomUITests.GameplayUITests/testBoardPowerFormationAndAnimatedShuffle()",
+        "status": "passed",
+        "durationSeconds": 15.605,
+        "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+        "log": "evidence/build11-final-phone.log"
+      },
+      {
+        "test": "OrbitBloomUITests.GameplayUITests/testOneShotDifficultyUsesARealWinningSwipeAndReturnsTheLife()",
+        "status": "passed",
+        "durationSeconds": 17.965,
+        "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+        "log": "evidence/build11-final-phone.log"
+      },
+      {
+        "test": "OrbitBloomUITests.GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+        "status": "passed",
+        "durationSeconds": 60.469,
+        "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+        "log": "evidence/build11-final-phone.log"
+      },
+      {
+        "test": "OrbitBloomUITests.SevenRoomsUITests/testAllSevenDoorsHaveDistinctRoomsAndClearExits()",
+        "status": "passed",
+        "durationSeconds": 65.45,
+        "resultBundle": "evidence/Build11-NormalGallery.xcresult",
+        "log": "evidence/build11-normal-gallery.log"
+      },
+      {
+        "test": "OrbitBloomUITests.SevenRoomsUITests/testFourNewRoomsWinThroughRealInputSaveRewardsAndAdvanceAfterRelaunch()",
+        "status": "passed",
+        "durationSeconds": 103.084,
+        "resultBundle": "evidence/Build11-RoomReturnFinal.xcresult",
+        "log": "evidence/build11-room-return-final.log"
+      },
+      {
+        "test": "OrbitBloomUITests.SevenRoomsUITests/testMaximumAccessibilityTextKeepsSevenRoomControlsEventsAndRecordsInBounds()",
+        "status": "passed",
+        "durationSeconds": 262.032,
+        "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+        "log": "evidence/build11-final-phone.log"
+      },
+      {
+        "test": "OrbitBloomUITests.SevenRoomsUITests/testRallyIgnoresVerticalSwipesPausesResumesAndBanksRealPickups()",
+        "status": "passed",
+        "durationSeconds": 50.879,
+        "resultBundle": "evidence/Build11-FinalPhone.xcresult",
+        "log": "evidence/build11-final-phone.log"
+      },
+      {
+        "test": "OrbitBloomUITests.SevenRoomsUITests/testNormalStoryEventsRecordsAndSavedGardenReleaseViews()",
+        "status": "passed",
+        "durationSeconds": 140.331,
+        "resultBundle": "evidence/Build11-NormalGalleryFinal.xcresult",
+        "log": "evidence/build11-normal-gallery-final.log"
+      }
+    ],
+    "iPadUI": [
+      {
+        "test": "OrbitBloomUITests.SevenRoomsIPadUITests/testSevenRoomLayoutFitsPortraitAndLandscapeWithoutChangingRewards()",
+        "status": "passed",
+        "durationSeconds": 210.94,
+        "resultBundle": "evidence/Build11-iPadRoomsVerified.xcresult",
+        "log": "evidence/build11-ipad-rooms-verified.log"
+      },
+      {
+        "test": "OrbitBloomUITests.IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+        "status": "passed",
+        "durationSeconds": 52.812,
+        "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+        "log": "evidence/build11-ipad-release-verified.log"
+      }
+    ],
+    "coverageLimits": "Core reachability, test doubles and local StoreKit are distinct from manual difficulty assessment, physical accessibility and live Apple services. No fake winning-state shortcut is counted as room play evidence.",
+    "devices": [
+      {
+        "name": "Orbit Bloom Store QA",
+        "id": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "model": "iPhone 17 Pro Max",
+        "os": "iOS 26.1",
+        "kind": "simulator",
+        "resetFixturesAllowed": true
+      },
+      {
+        "name": "Orbit Bloom App Store iPad QA",
+        "id": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "model": "iPad Pro 13-inch (M5)",
+        "os": "iOS 26.1",
+        "kind": "simulator",
+        "launchArguments": [
+          "--uitesting",
+          "--keep-progress"
+        ],
+        "resetFixturesAllowed": false
+      }
+    ]
+  },
+  "campaignSolver": {
+    "levels": 1020,
+    "gardenProjects": 6,
+    "legalSwaps": 6578,
+    "retries": 23,
+    "paidItems": 0,
+    "extraMoves": 0,
+    "manualPlayOfAllStages": false,
+    "humanDifficultyMeasured": false,
+    "evidence": "evidence/build11-core-final.log"
+  },
+  "diagnostics": [
+    {
+      "bundle": "evidence/Build11-NativeRooms4.xcresult",
+      "originalStatus": "failed",
+      "nativePasses": 47,
+      "uiPasses": 2,
+      "uiFailures": 1,
+      "resolution": "Maximum-text event-state discovery failed; accessibility containers were corrected and the case passed in FinalPhone."
+    },
+    {
+      "bundle": "evidence/Build11-FinalPhone.xcresult",
+      "originalStatus": "failed",
+      "uiPasses": 7,
+      "uiFailures": 1,
+      "resolution": "Four-room play completed, but a final query expected project content while the retained room page was selected; corrected paging assertion passed in RoomReturnFinal."
+    },
+    {
+      "bundle": "evidence/Build11-RoomReturnFinal.xcresult",
+      "originalStatus": "failed",
+      "uiPasses": 1,
+      "uiFailures": 1,
+      "resolution": "The strengthened door test expected Farm/Rally exits to go to the directory despite their Island labels; the corrected exit/retained-selection case passed in NormalGallery."
+    },
+    {
+      "bundle": "evidence/Build11-NormalGallery.xcresult",
+      "originalStatus": "failed",
+      "uiPasses": 1,
+      "uiFailures": 1,
+      "resolution": "The capture case failed on floating-point 43.99999999999994 versus 44; a test-only 1e-6 tolerance keeps the 44-point target requirement. NormalGalleryFinal passed."
+    },
+    {
+      "bundle": "evidence/Build11-iPadFinal.xcresult",
+      "originalStatus": "unknownIncomplete",
+      "counted": false,
+      "resolution": "An earlier run was interrupted by disk exhaustion. The retained bundle has an Info.plist but reports result unknown and zero recorded cases; raw interruption logs are diagnostic only. Both counted iPad cases use fresh retained zero-failure verified bundles.",
+      "totalTestCount": 0
+    },
+    {
+      "logs": [
+        "evidence/build11-native-rooms2.log",
+        "evidence/build11-native-rooms3.log"
+      ],
+      "counted": false,
+      "resolution": "Early swipe/button and compressed accessibility-target diagnostics remain historical. Redundant early result bundles and temporary exports were removed for disk space; final selected evidence is retained."
+    }
+  ],
+  "screenshots": {
+    "status": "verifiedAndSubmittedToApple",
+    "manifest": "docs/release-draft/build11/manifest.json",
+    "manifestSHA256": "ddea247cc758da0c1a4e27c30693f7044ee2d8dd5168ae4df06973e964283ac4",
+    "appStoreGalleryCount": 20,
+    "iPhoneCount": 10,
+    "iPadCount": 10,
+    "separateProofCount": 20,
+    "all40SelectedHashesAndEncodedDimensionsVerified": true,
+    "allReferencedOriginalResultBundlesRetained": true,
+    "captureEdits": "None; native PNG bytes and orientation metadata preserved",
+    "provenanceNote": "Original result bundles are retained at workspace-relative evidence paths. Temporary attachment export directories may be removed to recover QA disk space; re-export from the named result bundle recovers the identical source bytes. The selected release PNGs retain their original bytes, dimensions and orientation metadata.",
+    "visualQA": "All10 iPad gallery captures and phone Windmill reviewed. Replaced mid-transition shop screenshot with settled permanent field tasks. Settled phone supplies and Apple-priced packs retained as separate proof.",
+    "excludedCaptures": [
+      {
+        "file": "ipad/09-supplies-and-lives.png",
+        "sourceBuild": 11,
+        "sha256": "cb4b99f44e85b307edd19dd59d16207feee15f01f4bb025559e286609e106ee3",
+        "encodedDimensions": [
+          2064,
+          2752
+        ],
+        "sourceAttachment": "build/Build11-iPadReleaseVerified-Attachments/14E4FB7B-0A5E-46B6-B843-2547A32C37B3.png",
+        "attachmentName": "ipad-05-supplies_0_5A4DEFE6-3A0F-44EE-8EFE-1AD99D183A18.png",
+        "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+        "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "resultBundle": "evidence/Build11-iPadReleaseVerified.xcresult",
+        "debugFixture": "--uitesting --keep-progress; real native UI; no synthetic images, purchases or resizing",
+        "note": "Excluded from Apple gallery: mid-transition screenshot. Retained diagnostic only."
+      }
+    ],
+    "appleGalleryUpload": {
+      "status": "processedAndSaved",
+      "uploaded": true,
+      "appBuild": 11,
+      "galleryCount": 20,
+      "iPhoneCount": 10,
+      "iPadCount": 10,
+      "mediumIPhoneUsesExistingLargeAssets": true,
+      "reviewSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4"
+    },
+    "note": "Gallery and proof are separate selections. iPad gallery slot 09 uses settled Field Tasks; the mid-transition shop frame is excluded. Native landscape proof retains original orientation metadata and encoded dimensions.",
+    "appleUploaded": true,
+    "appleReviewConfirmation": {
+      "file": "proof/apple-review-submission.jpg",
+      "type": "App Store Connect browser confirmation",
+      "mimeType": "image/jpeg",
+      "dimensions": [
+        720,
+        465
+      ],
+      "sha256": "bfd0d97fd0eda7194758108528c3643a46f1d38979852c4456597b20fe6cf874",
+      "capture": "Actual Chrome screenshot bytes, cropped at capture to app identity, Waiting for Review, Items Submitted (8), Atoll Skills and iOS App 1.0 (11). No pixel edits.",
+      "submissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+      "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/83b00d39-0873-4771-8bc9-5d94d4be04b4",
+      "observedLocal": "2026-10-10 16:47 Asia/Kolkata",
+      "datePrecision": "minute"
+    }
+  },
+  "previewSavePreservation": {
+    "status": "passed",
+    "device": "64173F47-C4DC-46B4-82EC-0027675F7780",
+    "os": "iOS 26.5",
+    "installation": "ordinary in-place install",
+    "launchArguments": [],
+    "resetPerformed": false,
+    "allSevenTypedPreferencesAndPlistBytesIdenticalAfterInstall": true,
+    "fullDecodedWalletPuzzleFarmInventoryReceiptsSettingsPreservedAfterLaunch": true,
+    "timersAndEveryGameplayFieldCompared": true,
+    "changedSavedGamePreferenceCount": 0,
+    "newEmptyJourneyDefaultsAccepted": 1,
+    "allowedSerializationNormalization": [
+      "JSON dictionary key order",
+      "Swift enum-key dictionary array order: collected, specials, tools"
+    ],
+    "otherArraysKeptInExactOrder": true,
+    "nonGameplaySystemPreferenceChangeCount": 1,
+    "systemPreferenceNote": "Only StoreKit check metadata changed; no gameplay value or timer was ignored.",
+    "publicSave": {
+      "coins": 280,
+      "completed": 1,
+      "activeLevel": 2,
+      "rulesVersion": 1,
+      "moves": 11,
+      "freeHints": 7,
+      "lives": 5
+    },
+    "reports": [
+      {
+        "file": "docs/release-draft/build11/preview-after-install.json",
+        "sha256": "5ae6601cab84fec1656afe9b9675c0cc4eb3418c8f8adb1759026195ef6fc81d"
+      },
+      {
+        "file": "docs/release-draft/build11/preview-after-launch.json",
+        "sha256": "91977c6950854ec54de7669c810acfffed2fcc45d62bf7c628e0fc5f9f3da7a7"
+      }
+    ],
+    "proof": "docs/release-draft/build11/proof/preview-save-preserved.png",
+    "privacy": "Public records contain only QA counts; raw preferences, receipts, player IDs and account tokens are not included."
+  },
+  "simulators": {
+    "storeQA": "shutdown",
+    "iPadQA": "shutdown",
+    "userPreview": "booted",
+    "previewSavePreserved": true,
+    "unrelatedRushDrives": "preserved",
+    "basis": "Root confirmed the final QA shutdown and ordinary preview install/launch; no device was erased."
+  },
+  "cloudflare": {
+    "status": "deployed",
+    "site": "https://orbit-bloom-game-site.ajnasnb.workers.dev",
+    "version": "1fe5fe66-69a0-4b46-a680-70fadf7a12d7",
+    "evidence": "evidence/build11-site-final-deploy.log",
+    "securityRouteChecks": 5,
+    "countedIn107": false,
+    "realPublicClockAcceptedByNativeApp": true,
+    "playerSavesStored": false,
+    "purchaseDataStored": false,
+    "scope": "Isolated static game website and public UTC event-clock endpoint; player saves remain with Apple/local storage."
+  },
+  "apple": {
+    "validation": {
+      "status": "succeeded",
+      "service": "Transporter Verify",
+      "observedLocal": "2026-10-10 15:54 Asia/Kolkata",
+      "precision": "minute",
+      "evidenceRecord": "docs/release-draft/build11/signed-package-verification.json"
+    },
+    "delivery": {
+      "status": "succeeded",
+      "service": "Transporter Deliver",
+      "observedLocal": "2026-10-10 16:29 Asia/Kolkata",
+      "precision": "minute",
+      "evidenceRecord": "docs/release-draft/build11/signed-package-verification.json"
+    },
+    "processing": {
+      "status": "complete",
+      "observedLocal": "2026-10-10 16:34 Asia/Kolkata",
+      "buildID": "eefcb52c-0e76-4c8e-bed5-0d19a2d9f157",
+      "portalState": "Ready to Submit"
+    },
+    "buildSelection": {
+      "status": "selectedAndSaved",
+      "build": 11,
+      "version": "1.0"
+    },
+    "reviewSubmission": {
+      "status": "Waiting for Review",
+      "submitted": true,
+      "submissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+      "url": "https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/83b00d39-0873-4771-8bc9-5d94d4be04b4",
+      "submittedLocal": "2026-10-10 16:47 Asia/Kolkata",
+      "precision": "minute",
+      "itemCount": 8,
+      "items": [
+        "iOS App 1.0 (11)",
+        "Atoll Skills",
+        "5 Extra Lives",
+        "First Bloom Bundle",
+        "7000 Bloom Coins",
+        "400 Bloom Coins",
+        "1500 Bloom Coins",
+        "3000 Bloom Coins"
+      ],
+      "evidence": "docs/release-draft/build11/proof/apple-review-submission.jpg"
+    },
+    "publicRelease": {
+      "status": "notReleased",
+      "released": false,
+      "mode": "MANUAL",
+      "appleApprovalPending": true
+    },
+    "note": "Validation, delivery, processing, internal TestFlight assignment, version selection, metadata/gallery save and actual App Review submission are separately confirmed. All eight items are Waiting for Review. Apple approval and public release remain pending; release is manual.",
+    "internalTestFlight": {
+      "status": "assigned",
+      "group": "Orbit Bloom QA",
+      "testers": 1,
+      "whatToTest": "Saved testing instructions cover all7games, accessibility, save persistence and unverified hardware Apple services; no new tester invited.",
+      "build": 11,
+      "groupID": "20c17cf7-ef9b-43be-9a6a-55530abb5a3f",
+      "whatToTestSaved": true
+    },
+    "productPage": {
+      "status": "savedAndSubmitted",
+      "galleryImages": 20,
+      "iphone": 10,
+      "ipad": 10,
+      "descriptionLength": 3542,
+      "reviewNotesLength": 3979,
+      "subtitle": "Seven games. One living island",
+      "reviewSubmissionPending": false,
+      "reviewSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4"
+    },
+    "previousSubmission": {
+      "submissionID": "a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+      "build": 7,
+      "status": "Removed",
+      "reason": "Canceled by developer to replace with verified build 11; not an Apple rejection."
+    },
+    "leaderboard": {
+      "name": "Atoll Skills",
+      "identifier": "com.orbitbloom.atollskills",
+      "uuid": "1645f43b-b600-4b0c-b695-33750851e1ad",
+      "format": "Integer",
+      "selection": "Best Score",
+      "sort": "High to Low",
+      "minimum": 0,
+      "maximum": 80000,
+      "hidden": false,
+      "localization": "English (U.S.)",
+      "status": "Waiting for Review",
+      "hardwareSubmissionVerified": false
+    }
+  },
+  "physicalDeviceChecks": {
+    "status": "notPerformed",
+    "gameCenterAuthentication": "notVerifiedOnHardware",
+    "privateICloudRoundTrip": "notVerifiedOnHardware",
+    "signedAppleSandboxPurchases": "notVerifiedOnHardware",
+    "gameCenterLeaderboardSubmission": "notVerifiedOnHardware",
+    "voiceOverSpeechFocusAndTiming": "notVerifiedOnHardware",
+    "audioHapticsAndPerformance": "notVerifiedOnHardware",
+    "smallerPhonesIPadsAndSplitScreen": "notVerified",
+    "humanDifficultyAndPacing": "notMeasured",
+    "note": "Local StoreKit configuration and account/clock transport doubles are not Apple sandbox-server or physical-device evidence. Bounded client ranking scores are not authoritative anti-cheat."
+  },
+  "relatedDocuments": [
+    "docs/TEST_REPORT.md",
+    "docs/SECURITY_REVIEW.md",
+    "docs/SEVEN_ROOMS_DESIGN.md",
+    "docs/SEVEN_ROOMS_UX_AUDIT.md",
+    "docs/V2_SYSTEMS_AND_SOURCES.md",
+    "docs/release-draft/build11/ART_DIRECTION.md",
+    "docs/release-draft/build11/metadata.md"
+  ]
+}

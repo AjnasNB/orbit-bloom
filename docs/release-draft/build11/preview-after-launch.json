@@ -1,0 +1,36 @@
+{
+  "phase": "after-launch",
+  "baselinePreferenceCount": 7,
+  "observedPreferenceCount": 7,
+  "beforePublicSave": {
+    "coins": 280,
+    "completed": 1,
+    "activeLevel": 2,
+    "rulesVersion": 1,
+    "moves": 11,
+    "freeHints": 7,
+    "lives": 5
+  },
+  "afterPublicSave": {
+    "coins": 280,
+    "completed": 1,
+    "activeLevel": 2,
+    "rulesVersion": 1,
+    "moves": 11,
+    "freeHints": 7,
+    "lives": 5
+  },
+  "passed": true,
+  "savedGamePreferenceKeysUnchanged": true,
+  "fullDecodedWalletPuzzleFarmInventoryReceiptsSettingsPreserved": true,
+  "changedSavedGamePreferenceCount": 0,
+  "newEmptyJourneyDefaultsAccepted": 1,
+  "allowedSerializationNormalization": [
+    "JSON dictionary key order",
+    "Swift enum-key dictionary array order: collected, specials, tools"
+  ],
+  "timersAndEveryGameplayFieldCompared": true,
+  "otherArraysKeptInExactOrder": true,
+  "nonGameplaySystemPreferenceChangeCount": 1,
+  "note": "Only a newly added empty journey is permitted. The normal StoreKit check timestamp is system metadata, not game progress."
+}

@@ -1,8 +1,9 @@
 {
   "appID": "6820591529",
   "version": "1.0",
-  "workspaceBuild": 7,
-  "verifiedOn": "2026-10-09",
+  "workspaceBuild": 11,
+  "verifiedOn": "2026-10-10",
+  "manifest": "build11/manifest.json",
   "displayClasses": [
     {
       "displayClass": "iPhone with Dynamic Island (large display)",
@@ -10,181 +11,275 @@
         1320,
         2868
       ],
-      "status": "Ten native screenshots uploaded, processed and persisted; Apple review submission validation passed",
+      "status": "Ten native build 11 images uploaded, processed, saved and submitted for App Review",
       "screenshots": [
-        "product-page/iphone/01-swipe-and-blast.png",
-        "product-page/iphone/02-grow-your-farm.png",
-        "product-page/iphone/03-race-your-harvest.png",
-        "product-page/iphone/04-explore-your-island.png",
-        "product-page/iphone/05-craft-garden-powers.png",
-        "product-page/iphone/06-learn-power-patterns.png",
-        "product-page/iphone/07-earn-field-rewards.png",
-        "product-page/iphone/08-restore-your-world.png",
-        "product-page/iphone/09-lives-and-supplies.png",
-        "product-page/iphone/10-player-and-saved-garden.png"
+        "build11/iphone/01-lio-and-aurora-atoll.png",
+        "build11/iphone/02-bloom-circuits.png",
+        "build11/iphone/03-farm-terraces.png",
+        "build11/iphone/04-harvest-rally.png",
+        "build11/iphone/05-canal-weave.png",
+        "build11/iphone/06-firefly-trail.png",
+        "build11/iphone/07-windmill-works.png",
+        "build11/iphone/08-moon-observatory.png",
+        "build11/iphone/09-world-events.png",
+        "build11/iphone/10-seven-room-doors.png"
       ],
       "sourceBuilds": [
-        6,
-        6,
-        6,
-        6,
-        6,
-        6,
-        7,
-        6,
-        6,
-        7
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
       ]
     },
     {
       "displayClass": "iPhone with Dynamic Island (medium display)",
-      "status": "Using Existing Assets; inherits all ten large-display screenshots",
-      "sourceDisplayClass": "iPhone with Dynamic Island (large display)",
+      "status": "Using Existing Assets from large display",
       "directScreenshotCount": 0,
       "inheritedScreenshotCount": 10,
       "screenshots": [
-        "product-page/iphone/01-swipe-and-blast.png",
-        "product-page/iphone/02-grow-your-farm.png",
-        "product-page/iphone/03-race-your-harvest.png",
-        "product-page/iphone/04-explore-your-island.png",
-        "product-page/iphone/05-craft-garden-powers.png",
-        "product-page/iphone/06-learn-power-patterns.png",
-        "product-page/iphone/07-earn-field-rewards.png",
-        "product-page/iphone/08-restore-your-world.png",
-        "product-page/iphone/09-lives-and-supplies.png",
-        "product-page/iphone/10-player-and-saved-garden.png"
+        "build11/iphone/01-lio-and-aurora-atoll.png",
+        "build11/iphone/02-bloom-circuits.png",
+        "build11/iphone/03-farm-terraces.png",
+        "build11/iphone/04-harvest-rally.png",
+        "build11/iphone/05-canal-weave.png",
+        "build11/iphone/06-firefly-trail.png",
+        "build11/iphone/07-windmill-works.png",
+        "build11/iphone/08-moon-observatory.png",
+        "build11/iphone/09-world-events.png",
+        "build11/iphone/10-seven-room-doors.png"
       ]
     },
     {
-      "displayClass": "iPad 13-inch",
+      "displayClass": "iPad13-inch",
       "nativePortraitPixels": [
         2064,
         2752
       ],
-      "nativeLandscapePixels": [
-        2752,
-        2064
-      ],
-      "status": "Ten native screenshots uploaded, processed and persisted; Apple review submission validation passed",
+      "status": "Ten native build 11 images uploaded, processed, saved and submitted for App Review",
       "screenshots": [
-        "product-page/ipad/01-swipe-and-blast.png",
-        "product-page/ipad/02-grow-your-farm.png",
-        "product-page/ipad/03-race-your-harvest.png",
-        "product-page/ipad/04-explore-your-island.png",
-        "product-page/ipad/05-craft-garden-powers.png",
-        "product-page/ipad/06-earn-field-rewards.png",
-        "product-page/ipad/07-optional-supplies.png",
-        "product-page/ipad/08-player-and-saved-garden.png",
-        "product-page/ipad/09-puzzle-landscape.png",
-        "product-page/ipad/10-world-landscape.png"
+        "build11/ipad/01-lio-and-aurora-atoll.png",
+        "build11/ipad/02-bloom-circuits.png",
+        "build11/ipad/03-farm-terraces.png",
+        "build11/ipad/04-harvest-rally.png",
+        "build11/ipad/05-canal-weave.png",
+        "build11/ipad/06-firefly-trail.png",
+        "build11/ipad/07-windmill-works.png",
+        "build11/ipad/08-moon-observatory.png",
+        "build11/ipad/09-field-tasks-and-powers.png",
+        "build11/ipad/10-player-saved-garden.png"
       ],
       "sourceBuilds": [
-        7,
-        7,
-        7,
-        7,
-        7,
-        7,
-        7,
-        7,
-        7,
-        7
-      ],
-      "landscapeEncoding": "2064 × 2752 native pixels with orientation 8; displayed as 2752 × 2064; no resizing",
-      "landscapeQA": [
-        "product-page/ipad/09-puzzle-landscape.png",
-        "product-page/ipad/10-world-landscape.png"
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
       ]
     }
   ],
-  "archivedPriorMediumSet": {
+  "previousGalleryRecord": {
     "appID": "6820591529",
     "version": "1.0",
-    "displayClass": "iPhone with Dynamic Island (medium display)",
-    "nativePixels": [
-      1206,
-      2622
+    "workspaceBuild": 7,
+    "verifiedOn": "2026-10-09",
+    "displayClasses": [
+      {
+        "displayClass": "iPhone with Dynamic Island (large display)",
+        "nativePixels": [
+          1320,
+          2868
+        ],
+        "status": "Ten native screenshots uploaded, processed and persisted; Apple review submission validation passed",
+        "screenshots": [
+          "product-page/iphone/01-swipe-and-blast.png",
+          "product-page/iphone/02-grow-your-farm.png",
+          "product-page/iphone/03-race-your-harvest.png",
+          "product-page/iphone/04-explore-your-island.png",
+          "product-page/iphone/05-craft-garden-powers.png",
+          "product-page/iphone/06-learn-power-patterns.png",
+          "product-page/iphone/07-earn-field-rewards.png",
+          "product-page/iphone/08-restore-your-world.png",
+          "product-page/iphone/09-lives-and-supplies.png",
+          "product-page/iphone/10-player-and-saved-garden.png"
+        ],
+        "sourceBuilds": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7,
+          6,
+          6,
+          7
+        ]
+      },
+      {
+        "displayClass": "iPhone with Dynamic Island (medium display)",
+        "status": "Using Existing Assets; inherits all ten large-display screenshots",
+        "sourceDisplayClass": "iPhone with Dynamic Island (large display)",
+        "directScreenshotCount": 0,
+        "inheritedScreenshotCount": 10,
+        "screenshots": [
+          "product-page/iphone/01-swipe-and-blast.png",
+          "product-page/iphone/02-grow-your-farm.png",
+          "product-page/iphone/03-race-your-harvest.png",
+          "product-page/iphone/04-explore-your-island.png",
+          "product-page/iphone/05-craft-garden-powers.png",
+          "product-page/iphone/06-learn-power-patterns.png",
+          "product-page/iphone/07-earn-field-rewards.png",
+          "product-page/iphone/08-restore-your-world.png",
+          "product-page/iphone/09-lives-and-supplies.png",
+          "product-page/iphone/10-player-and-saved-garden.png"
+        ]
+      },
+      {
+        "displayClass": "iPad 13-inch",
+        "nativePortraitPixels": [
+          2064,
+          2752
+        ],
+        "nativeLandscapePixels": [
+          2752,
+          2064
+        ],
+        "status": "Ten native screenshots uploaded, processed and persisted; Apple review submission validation passed",
+        "screenshots": [
+          "product-page/ipad/01-swipe-and-blast.png",
+          "product-page/ipad/02-grow-your-farm.png",
+          "product-page/ipad/03-race-your-harvest.png",
+          "product-page/ipad/04-explore-your-island.png",
+          "product-page/ipad/05-craft-garden-powers.png",
+          "product-page/ipad/06-earn-field-rewards.png",
+          "product-page/ipad/07-optional-supplies.png",
+          "product-page/ipad/08-player-and-saved-garden.png",
+          "product-page/ipad/09-puzzle-landscape.png",
+          "product-page/ipad/10-world-landscape.png"
+        ],
+        "sourceBuilds": [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        "landscapeEncoding": "2064 × 2752 native pixels with orientation 8; displayed as 2752 × 2064; no resizing",
+        "landscapeQA": [
+          "product-page/ipad/09-puzzle-landscape.png",
+          "product-page/ipad/10-world-landscape.png"
+        ]
+      }
     ],
-    "status": "removed from the version draft; retained in Apple Asset Library and local archive",
-    "screenshots": [
-      "screenshots/archive-build3-medium/01-world.png",
-      "screenshots/archive-build3-medium/02-botanical-circuit.png",
-      "screenshots/archive-build3-medium/16-board-power.png",
-      "screenshots/archive-build3-medium/04-farm.png",
-      "screenshots/archive-build3-medium/05-tool-shed.png",
-      "screenshots/archive-build3-medium/15-field-tasks.png",
-      "screenshots/archive-build3-medium/07-delivery-race.png",
-      "screenshots/archive-build3-medium/10-delivery-complete.png",
-      "screenshots/archive-build3-medium/09-complete-world.png",
-      "screenshots/archive-build3-medium/12-lives-and-shop.png"
-    ],
-    "workspaceBuild": 4,
-    "screenshotSourceBuild": 3,
-    "verifiedOn": "2026-10-09"
-  },
-  "uploadedDistinctScreenshotCount": 20,
-  "appleReviewValidation": "passed; submitted with version 1.0 (7) in a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
-  "evidence": [
-    "evidence/build6-iphone-screenshots-complete.jpg",
-    "evidence/build6-iphone-world-in-apple.jpg",
-    "evidence/build6-ipad-screenshots-verified.jpg",
-    "evidence/build6-ipad-landscape-in-apple.jpg",
-    "build6/apple-review-submission.jpg",
-    "build7/apple-review-submission.jpg",
-    "product-page/proof/iphone-gallery.jpg",
-    "product-page/proof/ipad-gallery.jpg",
-    "product-page/proof/apple-review-submission.jpg"
-  ],
-  "build7QAPrepared": "build7/verification.json",
-  "galleryRetainedReason": "Original source build labels are retained; build 6 phone captures show the same gameplay interface in build 7. New build 7 phone task/account and iPad views complete the galleries.",
-  "archivedBuild6Gallery": [
-    {
-      "displayClass": "iPhone with Dynamic Island (large display)",
-      "screenshots": [
-        "build6/v4-01-living-island.png",
-        "build6/v3-02-botanical-circuit.png",
-        "build6/v3-16-board-power.png",
-        "build6/v4-03-farm-terraces.png",
-        "build6/v4-04-crafting-shed.png",
-        "build6/v5-19-power-patterns.png",
-        "build6/v2-07-delivery-race.png",
-        "build6/v2-09-complete-world.png",
-        "build6/v2-12-lives-and-shop.png",
-        "build6/v6-player-and-saved-garden.png"
-      ],
-      "status": "Removed only from product page; retained in Apple Asset Library and local sources"
-    },
-    {
+    "archivedPriorMediumSet": {
+      "appID": "6820591529",
+      "version": "1.0",
       "displayClass": "iPhone with Dynamic Island (medium display)",
-      "screenshots": [
-        "build6/v4-01-living-island.png",
-        "build6/v3-02-botanical-circuit.png",
-        "build6/v3-16-board-power.png",
-        "build6/v4-03-farm-terraces.png",
-        "build6/v4-04-crafting-shed.png",
-        "build6/v5-19-power-patterns.png",
-        "build6/v2-07-delivery-race.png",
-        "build6/v2-09-complete-world.png",
-        "build6/v2-12-lives-and-shop.png",
-        "build6/v6-player-and-saved-garden.png"
+      "nativePixels": [
+        1206,
+        2622
       ],
-      "status": "Removed only from product page; retained in Apple Asset Library and local sources"
+      "status": "removed from the version draft; retained in Apple Asset Library and local archive",
+      "screenshots": [
+        "screenshots/archive-build3-medium/01-world.png",
+        "screenshots/archive-build3-medium/02-botanical-circuit.png",
+        "screenshots/archive-build3-medium/16-board-power.png",
+        "screenshots/archive-build3-medium/04-farm.png",
+        "screenshots/archive-build3-medium/05-tool-shed.png",
+        "screenshots/archive-build3-medium/15-field-tasks.png",
+        "screenshots/archive-build3-medium/07-delivery-race.png",
+        "screenshots/archive-build3-medium/10-delivery-complete.png",
+        "screenshots/archive-build3-medium/09-complete-world.png",
+        "screenshots/archive-build3-medium/12-lives-and-shop.png"
+      ],
+      "workspaceBuild": 4,
+      "screenshotSourceBuild": 3,
+      "verifiedOn": "2026-10-09"
     },
-    {
-      "displayClass": "iPad Pro 13-inch",
-      "screenshots": [
-        "build6/ipad/ipad-01-world.png",
-        "build6/ipad/ipad-02-farm.png",
-        "build6/ipad/ipad-03-crafting.png",
-        "build6/ipad/ipad-04-rally-lobby.png",
-        "build6/ipad/ipad-05-supplies.png",
-        "build6/ipad/ipad-06-puzzle-portrait.png",
-        "build6/ipad/ipad-09-player-and-saved-garden.png",
-        "build6/ipad/ipad-07-puzzle-landscape.png",
-        "build6/ipad/ipad-08-world-landscape.png"
-      ],
-      "status": "Removed only from product page; retained in Apple Asset Library and local sources"
-    }
-  ],
-  "currentManifest": "product-page/manifest.json"
+    "uploadedDistinctScreenshotCount": 20,
+    "appleReviewValidation": "passed; submitted with version 1.0 (7) in a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9",
+    "evidence": [
+      "evidence/build6-iphone-screenshots-complete.jpg",
+      "evidence/build6-iphone-world-in-apple.jpg",
+      "evidence/build6-ipad-screenshots-verified.jpg",
+      "evidence/build6-ipad-landscape-in-apple.jpg",
+      "build6/apple-review-submission.jpg",
+      "build7/apple-review-submission.jpg",
+      "product-page/proof/iphone-gallery.jpg",
+      "product-page/proof/ipad-gallery.jpg",
+      "product-page/proof/apple-review-submission.jpg"
+    ],
+    "build7QAPrepared": "build7/verification.json",
+    "galleryRetainedReason": "Original source build labels are retained; build 6 phone captures show the same gameplay interface in build 7. New build 7 phone task/account and iPad views complete the galleries.",
+    "archivedBuild6Gallery": [
+      {
+        "displayClass": "iPhone with Dynamic Island (large display)",
+        "screenshots": [
+          "build6/v4-01-living-island.png",
+          "build6/v3-02-botanical-circuit.png",
+          "build6/v3-16-board-power.png",
+          "build6/v4-03-farm-terraces.png",
+          "build6/v4-04-crafting-shed.png",
+          "build6/v5-19-power-patterns.png",
+          "build6/v2-07-delivery-race.png",
+          "build6/v2-09-complete-world.png",
+          "build6/v2-12-lives-and-shop.png",
+          "build6/v6-player-and-saved-garden.png"
+        ],
+        "status": "Removed only from product page; retained in Apple Asset Library and local sources"
+      },
+      {
+        "displayClass": "iPhone with Dynamic Island (medium display)",
+        "screenshots": [
+          "build6/v4-01-living-island.png",
+          "build6/v3-02-botanical-circuit.png",
+          "build6/v3-16-board-power.png",
+          "build6/v4-03-farm-terraces.png",
+          "build6/v4-04-crafting-shed.png",
+          "build6/v5-19-power-patterns.png",
+          "build6/v2-07-delivery-race.png",
+          "build6/v2-09-complete-world.png",
+          "build6/v2-12-lives-and-shop.png",
+          "build6/v6-player-and-saved-garden.png"
+        ],
+        "status": "Removed only from product page; retained in Apple Asset Library and local sources"
+      },
+      {
+        "displayClass": "iPad Pro 13-inch",
+        "screenshots": [
+          "build6/ipad/ipad-01-world.png",
+          "build6/ipad/ipad-02-farm.png",
+          "build6/ipad/ipad-03-crafting.png",
+          "build6/ipad/ipad-04-rally-lobby.png",
+          "build6/ipad/ipad-05-supplies.png",
+          "build6/ipad/ipad-06-puzzle-portrait.png",
+          "build6/ipad/ipad-09-player-and-saved-garden.png",
+          "build6/ipad/ipad-07-puzzle-landscape.png",
+          "build6/ipad/ipad-08-world-landscape.png"
+        ],
+        "status": "Removed only from product page; retained in Apple Asset Library and local sources"
+      }
+    ],
+    "currentManifest": "product-page/manifest.json"
+  },
+  "note": "Matching nativePNGbytes, no resizing. Additional purchase/settings/landscape proof retained locally. Existing branded header/search artwork preserved.",
+  "reviewSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+  "reviewStatus": "Waiting for Review",
+  "reviewConfirmation": "build11/proof/apple-review-submission.jpg"
 }

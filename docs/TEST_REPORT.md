@@ -1,3 +1,59 @@
+# Orbit Bloom build 11 verification and submission — 10 October 2026
+
+Build 11 connects seven named rooms through Lio's Aurora Atoll story, original 3D room miniatures, four new skill games, an illustrated delivery rover, shared UTC events and optional Game Center skill records. Completed skill results feed the garden with stars, coins and water. Large-text pages separate story/project, event details and records; returning from a new skill room retains its selected directory page. [Seven-room UX audit](SEVEN_ROOMS_UX_AUDIT.md).
+
+**107 unique cases have a recorded passing run:** 49 core, 47 native, nine iPhone UI and two iPad UI cases. This is a union across runs, with reruns counted once. The corrected seven-door case, normal read-only captures and both fresh valid iPad bundles now pass. Native galleries have been exported and QA simulators shut down. Apple build 11 was submitted on **10 October 2026 at 16:47 India time** and is **Waiting for Review**; twenty matching native gallery screenshots processed successfully. Earlier diagnostic bundles below retain their recorded failures or incomplete status.
+
+The new review submission is **83b00d39-0873-4771-8bc9-5d94d4be04b4**, containing eight items: version 1.0 build 11, all six in-app purchase packs and the Atoll Skills leaderboard. Build 11 is assigned to internal TestFlight QA with one existing tester. These are confirmed delivery/review states; Apple's approval and public availability are still pending.
+
+| Area | Unique recorded passes | Evidence / current limit |
+| --- | ---: | --- |
+| Core rules, procedural rooms, journey/events, economy, save compatibility and campaign solver | 49 | `evidence/build11-core-final.log`: zero failures, 25.824 seconds |
+| Native journey/account/recovery, sessions/lives, local StoreKit and trusted-clock behavior | 47 | `evidence/Build11-NativeRooms4.xcresult`: zero native unit failures; its separate UI portion failed |
+| iPhone gameplay, seven-room progression, largest text, event/record pages, Rally and normal read-only gallery | 9 | Union of Build11-FinalPhone, Build11-RoomReturnFinal, Build11-NormalGallery and Build11-NormalGalleryFinal result bundles; each test name counted once |
+| iPad seven-room portrait/landscape tour and release captures | 2 | `evidence/Build11-iPadRoomsVerified.xcresult` and `evidence/Build11-iPadReleaseVerified.xcresult`; both fresh valid bundles have zero failures |
+
+The nine unique phone cases are recorded individually so the union does not conceal failed diagnostic runs:
+
+| Phone case | Passing evidence | Duration |
+| --- | --- | ---: |
+| Back/cancel/abandon/restart charges exactly one life per attempt | Build11-FinalPhone | 22.636 s |
+| Board power formation and animated shuffle | Build11-FinalPhone | 15.605 s |
+| One shot real winning swipe and returned life | Build11-FinalPhone | 17.965 s |
+| Separate Farm/Rally maps, clear exits and saved progress | Build11-FinalPhone | 60.469 s |
+| All seven distinct room doors and clear exits, with retained selection after the intended exit path | Build11-NormalGallery | 65.450 s; corrected strengthened assertion passed |
+| Four new rooms win through real input, save rewards and advance after relaunch | Build11-RoomReturnFinal | 103.084 s |
+| Maximum accessibility text, room controls, nine event pages and eleven record pages | Build11-FinalPhone | 262.032 s |
+| Rally ignores vertical steering, pauses/resumes and banks actual pickups | Build11-FinalPhone | 50.879 s |
+| Normal story/room doors, online events, records, saved-garden and read-only supplies gallery | Build11-NormalGalleryFinal | 140.331 s |
+
+Both unique iPad cases have fresh retained passing evidence:
+
+| iPad case | Passing evidence | Duration |
+| --- | --- | ---: |
+| Seven-room layout fits portrait/landscape without changing rewards | Build11-iPadRoomsVerified | 210.940 s |
+| Portrait/landscape release screens and native captures | Build11-iPadReleaseVerified | 52.812 s |
+
+Core automation completes all 1,020 campaign stages and six projects in **6,578 legal swaps and 23 retries**, without paid items or extra moves. This is automated reachability and rule evidence, not manual play of every level or proof of human difficulty. The native 47-case total consists of seven journey, fifteen account, six purchase, nine session and ten world-clock cases. Local StoreKit and account/clock test doubles do not establish a live Apple account, cloud round trip, signed sandbox purchase or worldwide leaderboard submission.
+
+The four-room passing UI run solves actual pipe rotations, repeats lantern signals, times charges and moves star tiles. It explicitly saves each result, checks +25 coins per new clear, unchanged puzzle lives, return to the chosen room without replaying the welcome, next-challenge progression after relaunch and four earned stars. The maximum-text passing case verifies the keeper/project pages, room exits/controls, paged help, event details and records with their child identifiers preserved. The Rally case separates control assertions from a fresh controlled drive and checks a real pickup plus banked reward. The normal capture case records the keeper, four room-door pages, three real online event pages, five record pages, Apple Saved Garden and all six shop packs without buying anything or changing coins/lives. No fake winning-state shortcut is counted as this play evidence.
+
+Diagnostic history remains visible:
+
+- NativeRooms2/3 exposed swipe/button activation and compressed activity targets; NativeRooms4 retained 47 unit passes and two UI passes but failed later at maximum-text event-state discovery. Explicit accessibility containers were added to the event/record roots, and FinalPhone's maximum-text case subsequently passed.
+- Build11-FinalPhone ran eight UI tests: seven passed and the four-win case failed after completing its play path because the compiled final assertion queried `hubRestoration` while the retained room page was selected. The corrected case pages back to inspect restoration and passes in RoomReturnFinal. The failed first bundle is not relabeled successful.
+- Build11-RoomReturnFinal ran two UI tests: the four-win case passed, but a newly strengthened all-seven-door test incorrectly expected Farm/Rally exits to go directly to the directory. Those labeled exits intentionally return to the Island. The corrected test reopens the directory and verifies retained selection; it passes in Build11-NormalGallery at 65.450 seconds. The earlier failed bundle stays failed.
+- Build11-NormalGallery's second, read-only capture case failed only on a floating-point target-height comparison: `43.99999999999994 >= 44`. A test-only `1e-6` epsilon resolves the rounding residue without changing app code or materially lowering the 44-point requirement. Build11-NormalGalleryFinal reruns that one case and passes in 140.331 seconds, with zero failures. Its first bundle is not relabeled successful.
+- The interrupted `Build11-iPadFinal.xcresult` now has `Info.plist` and is readable by `xcresulttool`. Its current summary is `result: unknown`, `totalTestCount: 0`, `passedTests: 0`, `failedTests: 0`. The raw disk-full log includes an earlier release-screen pass line at 57.216 seconds, but the bundle records no cases: classify it as incomplete/unknown, with no counted passes or final screenshot provenance. It is not currently an unreadable corrupt bundle. The fresh Build11-iPadReleaseVerified rerun passes in 52.812 seconds with a valid retained bundle; the case is counted once, using the fresh evidence.
+
+The isolated Cloudflare website and public event clock are deployed at `https://orbit-bloom-game-site.ajnasnb.workers.dev`, latest version **1fe5fe66-69a0-4b46-a680-70fadf7a12d7** (`evidence/build11-site-final-deploy.log`). The updated homepage and genuine build-11 preview asset uploaded successfully. Root confirmed five HTTPS/security-route checks and the native app accepted the real public clock for its normal event pages. These deployment checks are separate from the 107 counted test cases; no player save or purchase data is stored by this event endpoint.
+
+Disk pressure interrupted iPad boot/test preparation. Scoped cleanup removed only regenerable build-11 duplicate attachment/export-verification folders and redundant early NativeRooms2/3 failed result bundles. Their raw diagnostic logs remain; NativeRooms4, FinalPhone, RoomReturnFinal, NormalGallery, NormalGalleryFinal and both fresh verified iPad bundles are retained. No player save, source or signed package was deleted. The fresh iPad runs now supply the two counted passes and valid native capture evidence.
+
+Root confirmed native gallery export and QA simulator shutdown after the passing iPad reruns, followed by the matching twenty-screen Apple gallery, internal TestFlight assignment and eight-item review submission. Signed-package, capture and preview-preservation details are maintained in the build-11 release record. Physical VoiceOver/focus/timing, smaller hardware/split-screen, performance/audio/haptics, real-player Apple cloud/ranking/sandbox and human difficulty remain separate checks; publisher sign-in or an accepted review submission does not prove those player-service paths. The user's preview save must remain preserved; resetting test fixtures belong only on the isolated Store QA device.
+
+---
+
 # Orbit Bloom build 10 verification — 10 October 2026
 
 Farm and Harvest Rally now have distinct labeled entrances, original 3D room maps and prominent exits naming the Island destination. Farm keeps six numbered plots and its tool shed; Rally previews the existing garage-to-orchard-to-finish course. Camera framing fits the diorama's width and height, card shadows no longer duplicate text, and plot status has stronger contrast. [Focused mobile UX audit](ACTIVITY_ROOMS_UX_AUDIT.md).
