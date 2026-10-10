@@ -1,0 +1,42 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName" : "Orbit Bloom Store QA",
+        "modelName" : "iPhone 17 Pro Max",
+        "osBuildNumber" : "23B80",
+        "osVersion" : "26.1",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 0,
+      "passedTests" : 1,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "OrbitBloom · Built with macOS 26.5",
+  "expectedFailures" : 0,
+  "failedTests" : 0,
+  "finishTime" : 1791615033.876,
+  "passedTests" : 1,
+  "result" : "Passed",
+  "skippedTests" : 0,
+  "startTime" : 1791614984.55,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+
+  ],
+  "title" : "Test - OrbitBloom",
+  "topInsights" : [
+
+  ],
+  "totalTestCount" : 1
+}

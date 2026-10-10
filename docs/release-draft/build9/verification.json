@@ -1,0 +1,172 @@
+{
+  "build": 9,
+  "verifiedOn": "2026-10-10",
+  "scope": "Confirmed abandon/restart, escalating labeled campaign, twenty one-move challenges and versioned legacy/cloud saves",
+  "sourceCommit": "fe8a7d9183c1f83abef2c7dcbeb4d6110cfb8a2a",
+  "captures": [
+    {
+      "file": "captures/iphone-abandon-confirmation.png",
+      "sha256": "bc39858f74177c79a39d6413d9817107e22273000e52025540d1c051a0eadfaa",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build9-Phone-Attachments/0192AAC6-ED31-47CF-829F-8B33F13D0056.png",
+      "test": "GameplayUITests/testBackCancelAbandonAndRestartChargeExactlyOneLifePerAttempt()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "orientationNote": "Native portrait; no resizing",
+      "debugFixture": "Normal resetting Store QA test"
+    },
+    {
+      "file": "captures/iphone-one-shot-victory.png",
+      "sha256": "422cb5ee2f6e14ec9395fe504f8cd05833fd3d73b6ffb11f2d9fb864b34110c4",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build9-OneShot-Attachments/FDFF3EAB-4DE5-42DB-8CF3-9C974BDC72F7.png",
+      "test": "GameplayUITests/testOneShotDifficultyUsesARealWinningSwipeAndReturnsTheLife()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "orientationNote": "Native portrait; no resizing",
+      "debugFixture": "--uitesting --ui-stage 30 seeds prior progression; real swipe and victory"
+    },
+    {
+      "file": "captures/iphone-one-shot-puzzle.png",
+      "sha256": "c733fd7351e485bf6391586fdc9a9616873427bfdb7c9295bbae316aee216745",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build9-OneShot-Attachments/A43A1F27-5167-4BF6-A341-2973558C3C5C.png",
+      "test": "GameplayUITests/testOneShotDifficultyUsesARealWinningSwipeAndReturnsTheLife()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "orientationNote": "Native portrait; no resizing",
+      "debugFixture": "--uitesting --ui-stage 30 seeds prior progression; real swipe and victory"
+    },
+    {
+      "file": "captures/iphone-one-shot-island.png",
+      "sha256": "4d7a96cd22d54f7da78bdbd4b0adaa6b428ce156b37081e5e31191a592a83b19",
+      "encodedDimensions": [
+        1320,
+        2868
+      ],
+      "sourceAttachment": "build/Build9-OneShot-Attachments/05BDD24E-B256-40F4-8E48-8FF5E4332333.png",
+      "test": "GameplayUITests/testOneShotDifficultyUsesARealWinningSwipeAndReturnsTheLife()",
+      "device": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "orientationNote": "Native portrait; no resizing",
+      "debugFixture": "--uitesting --ui-stage 30 seeds prior progression; real swipe and victory"
+    },
+    {
+      "file": "captures/ipad-abandon-confirmation.png",
+      "sha256": "a5ce88874a8a1896fd381b4bf1739aedabad577151e7ac364446e28f3e31be1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build9-iPad-Attachments/EC363E97-3F83-49B3-97D7-412731CCB2E6.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientationNote": "Native landscape; original orientation metadata retained; no resizing",
+      "debugFixture": "--uitesting --keep-progress; no reset"
+    },
+    {
+      "file": "captures/ipad-puzzle-landscape.png",
+      "sha256": "bab4dab25a20a1419cf3c1723a0c3e0ac9d7c1f05ca618684799536bb21c3a03",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build9-iPad-Attachments/5C7EA673-3737-49FF-8501-F156F1E80DB2.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientationNote": "Native landscape; original orientation metadata retained; no resizing",
+      "debugFixture": "--uitesting --keep-progress; no reset"
+    },
+    {
+      "file": "captures/ipad-puzzle-portrait.png",
+      "sha256": "0b3103d9824ca46c4d27d7aad4f4df397c280eda4aec016c7a7c4db492978de5",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "sourceAttachment": "build/Build9-iPad-Attachments/9283435F-3BA2-474F-8392-6C3762F03449.png",
+      "test": "IPadReleaseUITests/testPortraitAndLandscapeReleaseScreens()",
+      "device": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "orientationNote": "Native portrait; no resizing",
+      "debugFixture": "--uitesting --keep-progress; no reset"
+    }
+  ],
+  "evidence": {
+    "core": "evidence/build9-core-final.log",
+    "nativeAndPhone": "evidence/Build9-FinalPhone.xcresult",
+    "finalOneShotCopy": "evidence/Build9-OneShotFinal.xcresult",
+    "iPad": "evidence/Build9-iPad.xcresult"
+  },
+  "currentPassingCases": 76,
+  "casesByRun": {
+    "core": 34,
+    "native": 30,
+    "iPhoneUI": 11,
+    "iPadUI": 1
+  },
+  "oneShotCopyRerun": {
+    "cases": 1,
+    "additionalUniqueCases": 0,
+    "reason": "Correct singular turn labels after visual review"
+  },
+  "allStageSolver": {
+    "levels": 1020,
+    "gardenProjects": 6,
+    "legalSwaps": 6421,
+    "retries": 15,
+    "paidItems": 0,
+    "extraMoves": 0,
+    "humanDifficultyMeasured": false
+  },
+  "oneShotVariants": {
+    "challenges": 20,
+    "firstLevel": 30,
+    "interval": 50,
+    "lastLevel": 980,
+    "colors": 5,
+    "rotations": 4,
+    "seedsPerVariant": 3,
+    "moves": 1,
+    "freeWinningSwipeVerified": true
+  },
+  "diagnostics": [
+    "Initial One shot UI solved the level but its life-balance query matched both result and underlying HUD. The assertion now verifies the balance after returning to the island; all final runs passed. Initial failed run excluded from final evidence."
+  ],
+  "preview": {
+    "coins": 280,
+    "completedStages": 1,
+    "activeLevel": 2,
+    "activeRulesVersion": 1,
+    "fullWalletAndSessionPreserved": true,
+    "normalization": "JSON dictionary / enum-key ordering only; missing legacy rulesVersion becomes 1. No gameplay values or timers ignored.",
+    "previewBuild": 9,
+    "previewOS": "26.5",
+    "reset": false,
+    "device": "64173F47-C4DC-46B4-82EC-0027675F7780",
+    "preferencesEqualImmediatelyAfterInstall": true,
+    "evidence": "evidence/build9-preview-preservation.txt",
+    "fullLocalContainerBackup": "build/build9-preview-save-before",
+    "screenshot": {
+      "file": "proof/preview-preserved.png",
+      "sha256": "352ebed5f90e31c74a3041849174848863bb42cc69b468ba166047bd7a816369",
+      "encodedDimensions": [
+        1206,
+        2622
+      ],
+      "source": "simctl native capture after normal launch; no QA flags or resizing"
+    }
+  },
+  "signedPackage": "signed-package-verification.json",
+  "internalUpload": "pending existing Apple account authentication; no build 9 delivery or repeat sign-in request",
+  "appleReviewBuild": 7,
+  "appReviewResubmitted": false,
+  "publicReleased": false,
+  "reviewStatusRechecked": false,
+  "unusedQASimulatorsStopped": true,
+  "unrelatedSimulatorsChangedByThisTask": false
+}

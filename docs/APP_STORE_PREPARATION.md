@@ -16,6 +16,12 @@ Release archive/export and exported signature/Production entitlement checks pass
 
 The submitted build 7, its product-page galleries and its last-verified review status above remain the release record. Build 8 screenshots are prepared for its later release metadata; the daily run did not cancel, replace or resubmit the public review.
 
+## Gameplay build 9 — 10 October 2026
+
+Build **1.0 (9)** adds confirmed abandon/restart navigation, visible Simple/Hard/Super hard labels, tighter later campaign bands and twenty one-move One shot challenges. Active legacy puzzles retain their original rules; new active rules use a schema-2 cloud envelope. **76 unique core/native/iPhone/iPad tests passed in this task**, with an affected One shot rerun after a singular-copy correction. [Build 9 verification](release-draft/build9/verification.json) records seven native release captures, a separate preview proof and compact result summaries. The preview is installed without reset and still has the full 280-coin garden and active level 2 puzzle.
+
+Signed Release archive/export, exact package signature and Production cloud entitlement checks passed. [Build 9 package record](release-draft/build9/signed-package-verification.json) pins source `fe8a7d9`. Build 9 is prepared locally, **not delivered to TestFlight**. The existing Apple account authentication blocker was not re-prompted or retried. This gameplay task did not access or change the submitted build 7, its twenty-image Apple galleries or review queue, and did not freshly recheck its review status. No privacy/payment architecture or product price changed; no public release, new agreement or real purchase occurred.
+
 ## Purchases and account
 
 The account's Free Apps/Paid Apps agreements, bank, tax and trader compliance already show **Active**; none were changed. App download pricing is **free**, with India as base region. Optional packs display Apple's localized prices.

@@ -1,0 +1,39 @@
+{
+  "appID": "6820591529",
+  "version": "1.0",
+  "build": 9,
+  "bundleID": "com.orbitbloom.game",
+  "ipa": "build/AppStoreExport9/OrbitBloom.ipa",
+  "sha256": "445f355849a575b4d8bb221daa6ad1a4745d38b366fa96ee0af47d62eca15ae2",
+  "byteSize": 23830374,
+  "team": "4V29K5Q8S9",
+  "profileName": "Orbit Bloom AppStore",
+  "profileUUID": "8ad71964-4815-45e7-ad15-0187cfa5e7e3",
+  "gameCenter": true,
+  "cloudContainer": "iCloud.com.orbitbloom.game",
+  "cloudEnvironment": "Production",
+  "debuggerAccess": false,
+  "encryptionExemption": false,
+  "iPadOrientations": [
+    "UIInterfaceOrientationPortrait",
+    "UIInterfaceOrientationPortraitUpsideDown",
+    "UIInterfaceOrientationLandscapeLeft",
+    "UIInterfaceOrientationLandscapeRight"
+  ],
+  "verifiedOn": "2026-10-10",
+  "codeSignatureVerified": true,
+  "exportEntitlementsMatchArchive": true,
+  "debugStageSelectionFixtureAbsent": true,
+  "sourceCommit": "fe8a7d9183c1f83abef2c7dcbeb4d6110cfb8a2a",
+  "upload": "not uploaded; existing Apple account authentication blocker retained, no repeat upload attempt",
+  "appReviewSubmitted": false,
+  "publicReleased": false,
+  "evidence": {
+    "archive": "evidence/build9-archive.log",
+    "export": "evidence/build9-export.log",
+    "signature": "evidence/build9-signature-verification.txt"
+  },
+  "appleServerValidation": "not performed; no delivery",
+  "testFlightBuildID": null,
+  "uploadBlocker": "Existing Apple account access remains unresolved from build 8; no new sign-in prompt requested or agreement accepted."
+}

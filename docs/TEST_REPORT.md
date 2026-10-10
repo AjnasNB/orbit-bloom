@@ -1,3 +1,32 @@
+# Orbit Bloom build 9 verification — 10 October 2026
+
+Build 9 adds visible puzzle Back navigation with separate abandon/restart confirmations, labeled difficulty and a campaign that tightens across later bands. Twenty One shot stages begin at 30 and recur every 50 stages: one move, hints available and a free winning swipe. Existing active sessions retain their exact previous goals and turn budgets. [Rules and focused mobile UX review](DIFFICULTY_AND_EXIT.md).
+
+**76 unique cases passed today**, with no failures in the final runs:
+
+| Area | Cases | Final evidence |
+| --- | ---: | --- |
+| Core rules, all-stage solver, difficulty variants, legacy/future saves and economy | 34 | evidence/build9-core-final.log |
+| Native account/recovery, session/life accounting, blocked assistance and local StoreKit | 30 | evidence/Build9-FinalPhone.xcresult |
+| All iPhone flows, including real One shot swipe and cancel/abandon/restart/relaunch | 11 | evidence/Build9-FinalPhone.xcresult |
+| iPad portrait/landscape bounds, 49 tiles, road steering and abandon confirmation | 1 | evidence/Build9-iPad.xcresult |
+
+The complete phone result bundle records 41 passed and zero skipped/failed tests; its eleven UI cases take 554.064 seconds, including twelve actual opening-stage victories and six earned garden restorations. The One shot case was rerun after correcting “1 turns” to “1 turn”; its final native captures use that rerun, without double-counting it. [Compact result summaries and capture provenance](release-draft/build9/verification.json).
+
+Core checks complete all 1,020 stages and six projects in 6,421 legal swaps, 15 retries and no paid tools or extra moves. All twenty One shot combinations (five colors × four rotations) pass at three seeds each, with no initial matches, a free winning swipe and unchanged inventory under blocked assistance. An invalid swap preserves the move; a legal wrong move can lose. Difficulty checks compare the same stage rhythm across later bands. These establish automated reachability and rule behavior, not human difficulty or manual play of every stage.
+
+The exit tests verify start spends exactly one life, cancel/pause keeps the same board and balance, abandon clears the session without another debit, and relaunch retains the world. Restart only spends the next life after confirmation. One shot wins return the spent life, unlock the next Simple stage and preserve unavailable tools. The stage-30 UI setup uses a Debug-only progression fixture; it does not claim to have played the preceding 29 stages. The signed Release executable was checked to exclude this fixture.
+
+Save checks preserve older snapshots with their legacy budgets, reject unknown rule versions and reject a schema-1 cloud envelope falsely containing new rules. Active version-2 puzzles use cloud schema 2 so older clients cannot reinterpret them. Existing Apple account isolation, purchase protections, timeout, offline and paused-restore tests pass. GameKit/private iCloud remains the sole cloud service.
+
+An initial One shot UI run solved the puzzle but its life-balance assertion matched both the result and underlying HUD. It now checks the balance after returning to the island; the final full run and affected rerun pass. That failed diagnostic run is excluded from final evidence. Seven selected native iPhone/iPad PNGs and a separate preview proof were visually checked and retain exact original pixels/orientation. They are prepared for build 9 and were not substituted into build 7's submitted Apple galleries.
+
+The user's preview data container was backed up before installation. All seven preferences were exactly equal immediately afterward; after normal launch the full wallet and active board remain equal: 280 coins, one completed stage and level 2. Only absent legacy rules markers become version 1; dictionary/enum-key ordering is normalized without dropping any gameplay value or timer. The preview was temporarily stopped to reduce disk pressure, then reopened with build 9. Only finished project compilation caches and duplicate extracted verification folders were removed; signed archives/IPAs, sources, saves and result bundles were retained. Store/iPad QA are stopped and unrelated simulators were not changed by this task.
+
+Release archive/export and exact exported signature checks pass; [package verification](release-draft/build9/signed-package-verification.json) pins source `fe8a7d9` and the IPA hash. Production Game Center/iCloud entitlements, disabled debugger access and four iPad orientations were verified. Build 9 has **not been uploaded to TestFlight**; the existing Apple account blocker was not repeatedly prompted or retried. Build 7's submitted review and product-page metadata were not changed or freshly rechecked. Live Apple cloud, signed sandbox purchases, physical audio/haptics, broader accessibility/smaller devices and human difficulty retain their existing verification limits. No real purchase, agreement or public release occurred.
+
+---
+
 # Orbit Bloom build 8 verification — 10 October 2026
 
 The field journal now adapts its horizontal pages to available height and larger text. Full instructions and reward/power descriptions wrap, claim actions stay reachable, and a named adjustable page counter supports accessibility. The clipped build 7 iPad help sentence is replaced by complete copy in the native capture. See [focused mobile audit](MOBILE_JOURNAL_AUDIT.md).

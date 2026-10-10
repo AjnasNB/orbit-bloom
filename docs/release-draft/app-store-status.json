@@ -153,7 +153,7 @@
       "product-page/proof/search-preview.jpg"
     ]
   },
-  "workspaceBuild": 8,
+  "workspaceBuild": 9,
   "dailyImprovement": {
     "date": "2026-10-10",
     "build": 8,
@@ -170,5 +170,21 @@
     "publicReleased": false,
     "liveReviewStatusRechecked": false,
     "reviewStatusCheck": "Chrome redirected to Apple sign-in; existing last-verified 9 October review status retained"
+  },
+  "latestGameplayUpdate": {
+    "date": "2026-10-10",
+    "build": 9,
+    "change": "Confirmed abandon/restart, escalating labeled campaign, twenty one-move challenges and versioned legacy/cloud saves",
+    "sourceCommit": "fe8a7d9183c1f83abef2c7dcbeb4d6110cfb8a2a",
+    "verification": "build9/verification.json",
+    "signedPackage": "build9/signed-package-verification.json",
+    "currentPassingCases": 76,
+    "previewInstalledWithoutReset": true,
+    "legacyActivePuzzlePreserved": true,
+    "uploadStatus": "pending existing Apple account authentication; no build 9 delivery or repeat sign-in request",
+    "appReviewBuild": 7,
+    "reviewQueueChanged": false,
+    "publicReleased": false,
+    "liveReviewStatusRechecked": false
   }
 }
