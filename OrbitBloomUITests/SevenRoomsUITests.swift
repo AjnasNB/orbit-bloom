@@ -65,6 +65,7 @@ import UIKit
     func testAllSevenDoorsHaveDistinctRoomsAndClearExits() {
         app.buttons["openIslandHub"].tap()
         XCTAssertTrue(element("keeperStory").waitForExistence(timeout: 5), "A fresh launch must introduce the keeper before the room directory")
+        capture("cartoon-keeper-story")
         enter("bloom")
         XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout: 5))
         app.buttons["playLevel"].tap()

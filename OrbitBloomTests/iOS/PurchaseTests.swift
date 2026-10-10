@@ -4,6 +4,37 @@ import StoreKitTest
 import UIKit
 @testable import OrbitBloom
 
+@MainActor final class SpriteAssetTests: XCTestCase {
+    func testCartoonAtlasHasTwelveVisibleSpritesWithTransparentGutters() throws {
+        XCTAssertEqual(BotanicalSprites.images.count,12)
+        for (index,image) in BotanicalSprites.images.enumerated() {
+            let sprite = try XCTUnwrap(image.cgImage,"Missing sprite \(index)")
+            XCTAssertGreaterThanOrEqual(sprite.width,256)
+            XCTAssertGreaterThanOrEqual(sprite.height,256)
+            let side=64
+            var pixels=[UInt8](repeating:0,count:side*side*4)
+            try pixels.withUnsafeMutableBytes { bytes in
+                let context = try XCTUnwrap(CGContext(data:bytes.baseAddress,width:side,height:side,
+                    bitsPerComponent:8,bytesPerRow:side*4,space:CGColorSpaceCreateDeviceRGB(),
+                    bitmapInfo:CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue))
+                context.draw(sprite,in:CGRect(x:0,y:0,width:side,height:side))
+            }
+            let visible=(0..<side*side).filter { pixels[$0*4+3] > 16 }
+            XCTAssertGreaterThan(visible.count,side*side/5,"Sprite \(index) must be visible")
+            for key in visible {
+                XCTAssertTrue(key%side > 0 && key%side < side-1 && key/side > 0 && key/side < side-1,
+                    "Sprite \(index) crosses its gutter and could bleed into another tool")
+            }
+        }
+        for name in ["KeeperLio","RallyRover"] {
+            let image=try XCTUnwrap(UIImage(named:name)?.cgImage,"Missing \(name)")
+            XCTAssertGreaterThanOrEqual(image.width,512)
+            XCTAssertTrue([CGImageAlphaInfo.last,.first,.premultipliedLast,.premultipliedFirst].contains(image.alphaInfo),
+                "\(name) must retain transparency")
+        }
+    }
+}
+
 @MainActor final class PurchaseTests: XCTestCase {
     var session: SKTestSession!
     override func setUpWithError() throws {

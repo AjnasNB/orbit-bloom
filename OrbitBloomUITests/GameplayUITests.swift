@@ -9,7 +9,12 @@ import StoreKitTest
         app.launch()
         XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
     }
-    func attach(_ name:String) { let shot = XCTAttachment(screenshot:app.screenshot()); shot.name = name; shot.lifetime = .keepAlways; add(shot) }
+    func attach(_ name:String) {
+        // Capture after the 200-ms room crossfade, rather than blending two destinations.
+        Thread.sleep(forTimeInterval:0.5)
+        let shot = XCTAttachment(screenshot:app.screenshot())
+        shot.name = name; shot.lifetime = .keepAlways; add(shot)
+    }
     func confirmLeave() {
         app.buttons["leaveLevel"].tap()
         XCTAssertTrue(app.buttons["confirmAbandon"].waitForExistence(timeout:5))

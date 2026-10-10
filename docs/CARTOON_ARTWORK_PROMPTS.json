@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-10",
+  "tool": "built-in ImageGen",
+  "style": "Rounded 3D cartoon; transparent PNG assets. No commercial game artwork reused.",
+  "assets": [
+    {
+      "path": "OrbitBloom/Resources/Assets.xcassets/BotanicalAtlas.imageset/image.png",
+      "prompt": "Use case: stylized-concept. Asset type: production transparent sprite atlas for Orbit Bloom, an original cheerful cartoon garden adventure game. Create ONE landscape 4:3 sprite sheet, exactly FOUR equal columns by THREE equal rows, one distinct isolated object perfectly centered in each equal rectangular cell with at least 12% transparent margin on every side. All cells same size. No grid lines, labels, words, backdrop, ground or cast shadow. Read left-to-right, top-to-bottom: row1 a chunky curled lime-green leaf with one bold central vein and short stem; a plump sky-blue dewdrop with one big white gleam; a squat glossy cherry-red apple with chunky brown stem and one green leaf; a round coral-pink rose with FIVE large rounded spiral petals and two little green leaves. Row2 a squat faceted violet diamond with a wide chunky top; a navy-blue spherical cartoon bomb with gold collar, curved short fuse and simple orange star spark; three thick bright-red rounded dynamite sticks bound by one cream ribbon with a little fuse, NO lettering; a large golden-orange spherical mega bomb with broad copper bands and a simple star spark. Row3 a smooth jewel-like rainbow sphere with six broad saturated colored segments and a large cartoon highlight; a compact mint-and-cream toy garden rover TOP-DOWN with four chunky dark wheels and a small crate of cartoon fruit in back; a friendly cream-and-mint round gardening robot with TWO BIG amber eyes, tiny wheels and a green sprout on its head; a thick cheerful bright gold coin with one big green leaf emblem. Style: lively premium 3D CARTOON animation, smooth painted toy surfaces, generously rounded and slightly exaggerated forms, simple clean broad highlights, soft mint-green/coral/turquoise/violet/gold palette, consistent upper-left lighting and front-facing three-quarter orthographic view except explicitly top-down rover. Make shapes immediately readable at 40px. No photorealism, pores, fruit speckles, realistic leaf veins, metal scratches, microtexture, detailed flower petals or hard realism. Original artwork; no known game characters or logos. Transparent alpha background, NO checkerboard painted into the image. Keep objects fully within their cells; all twelve must appear exactly once and never overlap.",
+      "refinementFile": "CARTOON_ATLAS_REFINEMENT.json",
+      "sha256": "c69ad46fd3ea1ca58efd6d75ba05544bcfa25f3f0ee13aafad9d9ac03b0e53f4",
+      "encodedDimensions": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "path": "OrbitBloom/Resources/Assets.xcassets/KeeperLio.imageset/KeeperLio.png",
+      "prompt": "Use case: style-transfer. Asset type: transparent original game character portrait. Image 1 is the EDIT TARGET, Keeper Lio. Image 2 is the STYLE REFERENCE, Orbit Bloom's new chunky cartoon game sprites. Redraw Lio as a cheerful rounded 3D CARTOON character in the SAME smooth, colourful painted-toy animation style as image2. Keep this same original youthful keeper identity, tousled dark brown hair, warm brown eyes, friendly smile, mint-teal keeper jacket, cream shirt, brass goggles on his head, copper gardening wrench in one hand, magical seed with two leaves in the other hand, belt garden tools. Keep the existing waist-up framing and both hands completely visible. Simplify all surfaces strongly: big readable smooth shapes, oversized expressive eyes, soft warm cheeks, broad highlights, simplified locks of hair, broad rounded fabric forms; no freckles, skin pores, individual hairs, fabric weave, metal scratches, realistic material textures, gritty lighting or photorealism. The character belongs in a playful miniature pastel 3D garden world. No new objects or scene. Genuine transparent alpha background, no ground shadow, no text or logos. Preserve outfit and story cues; change the rendering style to cartoon.",
+      "references": [
+        "Original KeeperLio",
+        "New cartoon BotanicalAtlas"
+      ],
+      "sha256": "fb53e08fc8556f149a1201494f3348c443934c373fe0f2b8276902ae2a7762be",
+      "encodedDimensions": [
+        1145,
+        1374
+      ]
+    },
+    {
+      "path": "OrbitBloom/Resources/Assets.xcassets/RallyRover.imageset/RallyRover.png",
+      "prompt": "Use case: style-transfer. Asset type: transparent TOP-DOWN racing sprite. Image1 is EDIT TARGET, Orbit Bloom's original garden delivery rover. Image2 is STYLE REFERENCE, chunky cartoon game sprites. Redraw the rover as a compact fun rounded 3D CARTOON painted toy vehicle matching image2: smooth mint-and-cream body, FOUR big rounded dark tires with very simple broad grooves, two big amber headlights, green leaf emblem, a short mint windshield and one small rear crate containing ONE bright red cartoon apple and TWO chunky coral cartoon flowers. Preserve the TOP-DOWN orthographic viewpoint, vertical orientation with FRONT pointing UP, symmetrical wheels, complete silhouette, clear direction of travel. Keep original garden delivery identity. Broad bold highlights, simple smooth geometry, vivid colours, pleasantly exaggerated large wheels, cute proportions; no metallic realism, microtextures, grain, scratches, realistic foliage or intricate mechanical parts. Centered full vehicle with a generous transparent margin on all four sides. Genuine alpha transparency; no ground, scene, text, logos or cast shadow.",
+      "references": [
+        "Original RallyRover",
+        "New cartoon BotanicalAtlas"
+      ],
+      "sha256": "201b7fa136e2dc67cf4a5fcdcb487a0151d653ba8518997778fa77993f279708",
+      "encodedDimensions": [
+        1144,
+        1375
+      ]
+    }
+  ]
+}

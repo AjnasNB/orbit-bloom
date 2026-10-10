@@ -1,0 +1,8 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-10",
+  "asset": "OrbitBloom/Resources/Assets.xcassets/BotanicalAtlas.imageset/image.png",
+  "initialPromptFile": "CARTOON_ARTWORK_PROMPTS.json",
+  "revisionPrompt": "Use case: precise-object-edit. EDIT this transparent 4-column by 3-row sprite atlas. Fix ONLY the PURPLE DIAMOND in row TWO column ONE: make that entire diamond about 15% smaller, centered within its original cell, so its right point and every other edge has a generous genuinely transparent margin, at least 24 pixels away from the cell edges. Keep its same chunky cartoon faceted shape, purple colour and highlights. Preserve ALL OTHER ELEVEN objects pixel-consistently as closely as possible, unchanged subjects, locations, sizes and style, including leaf/dewdrop/apple/rose, bomb/TNT/mega, rainbow/rover/robot/coin. Preserve the exact existing image aspect ratio, 4x3 arrangement and transparent alpha background; do not add new objects, words, grid lines, shadows or backdrop. The diamond must no longer touch or spill over the invisible right boundary of the first column.",
+  "selectionNote": "Selected the first diamond gutter repair, with a closer native cell crop to match the other pieces. The later enlargement candidate was rejected for edge bleed."
+}

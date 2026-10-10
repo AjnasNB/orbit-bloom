@@ -100,3 +100,5 @@ Rhythm Garden — congusbongus
 https://opengameart.org/content/rhythm-garden — CC0 1.0
 Files transcoded to AAC for native playback. See docs/AUDIO_PROVENANCE.json.
 Botanical sprites, LivingGarden and BloomLogo were generated for this project with OpenAI ImageGen on 8 October 2026. They are original rendered images, not real-time 3D meshes. Applicable OpenAI terms apply. Prompts and provenance are included in docs/V2_ARTWORK_PROMPTS.json.
+
+The current BotanicalAtlas, KeeperLio and RallyRover were restyled as original rounded cartoon artwork with built-in OpenAI ImageGen on 10 October 2026. Their transparent PNGs replace the earlier detailed renders. These are generated images, not third-party MIT artwork or real-time 3D meshes. Prompts and revision provenance are included in docs/CARTOON_ARTWORK_PROMPTS.json. No commercial game's artwork or characters were imported.

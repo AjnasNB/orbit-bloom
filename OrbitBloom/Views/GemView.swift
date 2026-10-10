@@ -4,19 +4,19 @@ import UIKit
 enum BotanicalSprites {
     static let images: [UIImage] = {
         guard let sheet = UIImage(named:"BotanicalAtlas")?.cgImage else { return [] }
-        // The original artwork is packed with uneven gutters, rather than exact square cells.
-        // Crop each sprite's actual bounds so neighboring leaves/wheels cannot bleed into tools.
-        let bounds:[CGRect] = [
-            CGRect(x:26,y:25,width:323,height:322), CGRect(x:423,y:18,width:244,height:330),
-            CGRect(x:743,y:12,width:307,height:336), CGRect(x:1077,y:20,width:369,height:329),
-            CGRect(x:24,y:378,width:355,height:307), CGRect(x:407,y:347,width:313,height:353),
-            CGRect(x:742,y:350,width:321,height:347), CGRect(x:1102,y:345,width:346,height:351),
-            CGRect(x:37,y:704,width:336,height:339), CGRect(x:401,y:704,width:297,height:342),
-            CGRect(x:764,y:699,width:282,height:362), CGRect(x:1098,y:709,width:316,height:337)
-        ]
-        let sx = CGFloat(sheet.width)/1448, sy = CGFloat(sheet.height)/1086
-        return bounds.compactMap { rect in
-            sheet.cropping(to:CGRect(x:rect.minX*sx,y:rect.minY*sy,width:rect.width*sx,height:rect.height*sy)).map { UIImage(cgImage:$0) }
+        // Cartoon atlas: four columns, three rows, with transparent gutters in every cell.
+        // Preserve the existing index contract used by gems, tools, Pip and the wallet.
+        return (0..<12).compactMap { index in
+            let x = (index % 4) * sheet.width / 4
+            let y = (index / 4) * sheet.height / 3
+            let right = (index % 4 + 1) * sheet.width / 4
+            let bottom = (index / 4 + 1) * sheet.height / 3
+            var bounds = CGRect(x:x,y:y,width:right-x,height:bottom-y)
+            // The diamond's wider safety gutter needs a closer crop to match the other pieces.
+            if index == Gem.crystal.rawValue {
+                bounds = bounds.insetBy(dx:bounds.width*0.11,dy:bounds.height*0.11).integral
+            }
+            return sheet.cropping(to:bounds).map { UIImage(cgImage:$0) }
         }
     }()
 }
