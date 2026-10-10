@@ -7,6 +7,13 @@ import Match3Kit
     @Published var progress: Progress
     @Published var ecosystem = Ecosystem()
     @Published var assistance = Assistance()
+    @Published var journey = IslandJourney()
+    @Published var activity: IslandActivityKind?
+    @Published private(set) var activityLevel = 1
+    private var activityRewarded = false
+    let eventClock = WorldEventClock()
+    @Published var showWorldEvents = false
+    @Published var showRoomRecords = false
     @Published var showTasks = false
     @Published var pendingTool: GardenTool?
     @Published var raceActive = false
@@ -58,7 +65,7 @@ import Match3Kit
         let wallet = sources.compactMap { key in
             defaults.data(forKey: key).flatMap { try? JSONDecoder().decode(GardenWallet.self, from: $0) }
         }.first(where: { $0.isValid })
-        if let wallet { progress = wallet.progress; ecosystem = wallet.ecosystem; assistance = wallet.assistance ?? Assistance() }
+        if let wallet { progress = wallet.progress; ecosystem = wallet.ecosystem; assistance = wallet.assistance ?? Assistance(); journey = wallet.journey ?? IslandJourney() }
         #if DEBUG
         // Explicit, resetting Store QA fixture. Never runs in Release or with keep-progress.
         if testing && !ProcessInfo.processInfo.arguments.contains("--keep-progress"),
@@ -81,7 +88,7 @@ import Match3Kit
     }
     var wallet: GardenWallet {
         GardenWallet(progress: progress, ecosystem: ecosystem, session: result == nil ? engine?.snapshot : nil,
-                     charged: charged, assistance: assistance)
+                     charged: charged, assistance: assistance, journey: journey)
     }
     func save() {
         if let data = try? JSONEncoder().encode(wallet) {
@@ -117,7 +124,7 @@ import Match3Kit
         saveAccount = key; defaults.set(key, forKey: "orbitBloom.saveAccount"); save()
     }
     @discardableResult func restoreWallet(_ saved: GardenWallet) -> Bool {
-        guard !busy, !raceActive, saved.canReplace(wallet) else { return false }
+        guard !busy, !raceActive, activity == nil, saved.canReplace(wallet) else { return false }
         save() // Retain the previous local checkpoint before replacing the active wallet.
         if let previous = defaults.data(forKey: "orbitBloom.wallet.v2") {
             defaults.set(previous, forKey: restoreCheckpointKey)
@@ -134,9 +141,9 @@ import Match3Kit
         return true
     }
     private func installWallet(_ saved: GardenWallet) {
-        runID = UUID(); raceActive = false; pendingTool = nil; blastKey = nil; busy = false
+        runID = UUID(); raceActive = false; activity = nil; activityRewarded = false; pendingTool = nil; blastKey = nil; busy = false
         result = nil; paused = false; selected = nil; hinted = []; clearing = []; tab = 0
-        progress = saved.progress; ecosystem = saved.ecosystem; assistance = saved.assistance ?? Assistance()
+        progress = saved.progress; ecosystem = saved.ecosystem; assistance = saved.assistance ?? Assistance(); journey = saved.journey ?? IslandJourney()
         charged = saved.charged ?? false; engine = saved.session.flatMap(GameEngine.init(snapshot:))
         ecosystem.lives.refresh(at: Date()); sync()
         if let engine, engine.won {
@@ -228,6 +235,7 @@ import Match3Kit
             if let engine, engine.won {
                 let before = progress.coins
                 firstWin = progress.finish(level: engine.level.id, score: engine.score)
+                if firstWin { recordWorldEvent(room:"bloom") }
                 ecosystem.lives.rewardWin(); animateCoins(progress.coins-before); effect("win")
                 result = true; feedback(.medium)
             } else if engine?.lost == true { result = false }
@@ -303,7 +311,7 @@ import Match3Kit
     func awardCoins(_ amount: Int) { progress.coins += max(0,amount); animateCoins(amount); effect("coin"); save() }
     func farmAction(_ id: Int, crop: Crop) {
         let now = Date()
-        if let amount = ecosystem.harvest(id,at:now) { awardCoins(amount); effect("harvest"); showToast("Harvested! +\(amount) coins · +1 compost · +1 cargo") }
+        if let amount = ecosystem.harvest(id,at:now) { recordWorldEvent(room:"farm"); awardCoins(amount); effect("harvest"); showToast("Harvested! +\(amount) coins · +1 compost · +1 cargo") }
         else if ecosystem.plots[id].crop == nil {
             if ecosystem.plant(id,crop:crop,at:now) { effect("plant"); showToast("\(crop.title) planted. Tap to water and grow faster.") }
             else { showToast("Planting needs 1 seed and 2 water. Garden puzzles collect water.") }
@@ -331,11 +339,38 @@ import Match3Kit
     func completeDelivery(_ run: DeliveryRun) {
         guard run.finished else { return }
         if run.won {
+            recordWorldEvent(room:"rally")
             ecosystem.deliveries += 1; ecosystem.raceBest = max(ecosystem.raceBest,run.distance)
             if ecosystem.produce > 0 { ecosystem.produce -= 1; awardCoins(run.reward+40) }
             else { awardCoins(run.reward) }
             effect("win")
         } else { awardCoins(run.reward) }
         save()
+    }
+
+    func enterActivity(_ kind: IslandActivityKind) {
+        guard engine == nil, !raceActive else { return }
+        activity = kind; activityLevel = min(1000, journey.levels[kind.rawValue, default:0] + 1)
+        activityRewarded = false; tab = 6; effect("tap"); updateMusic()
+    }
+    func exitActivity() { activity = nil; activityRewarded = false; tab = 5; save(); updateMusic() }
+    func completeActivity(_ score: Int) {
+        guard let activity, !activityRewarded,
+              journey.complete(room:activity.rawValue, level:activityLevel, score:score) else { return }
+        activityRewarded = true
+        progress.stars = min(100_000_000, progress.stars + 1)
+        ecosystem.water = min(100_000_000, ecosystem.water + 2)
+        recordWorldEvent(room:activity.rawValue)
+        awardCoins(25); effect("win"); feedback(.medium)
+        showToast("Lio's project fund: +1 star · +25 coins · +2 water. Saved."); save()
+    }
+    func recordWorldEvent(room:String) {
+        guard let date = eventClock.now else { return }
+        journey.record(room:room, at:date)
+    }
+    func claimWorldEvent(_ event:WorldEvent) {
+        guard let date = eventClock.now, journey.claim(event,at:date) else { return }
+        ecosystem.tools[event.tool, default:0] += 1; save(); effect("craft")
+        showToast("\(event.title): \(event.tool.title) added to the tool shed.")
     }
 }

@@ -122,24 +122,27 @@ public struct StorePack: Identifiable {
 }
 
 public struct DeliveryRun {
+    public let difficulty: Int
+    public var obstacleCount: Int { 10 + difficulty * 2 }
     public var lane = 1
     public private(set) var elapsed: Double = 0
     public private(set) var health = 3
     public private(set) var collected = 0
     public private(set) var passed: Set<Int> = []
     public let duration: Double = 22
-    public init() {}
+    public init(difficulty: Int = 0) { self.difficulty = min(4,max(0,difficulty)) }
     public var finished: Bool { elapsed >= duration || health <= 0 }
     public var won: Bool { elapsed >= duration && health > 0 }
     public var distance: Int { min(440, Int(elapsed * 20)) }
     public var reward: Int { won ? 60 + collected * 10 : collected * 5 }
-    public func obstacleLane(_ index: Int) -> Int { [1,2,1,0,2,1,2,0,1,2][index % 10] }
+    public func obstacleLane(_ index: Int) -> Int { [1,2,1,0,2,1,2,0,1,2][(max(0,index)%10+difficulty*3) % 10] }
+    public func crossingTime(_ index: Int) -> Double { duration / Double(obstacleCount + 1) * Double(min(obstacleCount-1,max(0,index)) + 1) }
     public mutating func tick(_ delta: Double) -> (hit: Bool, pickup: Bool) {
-        guard !finished else { return (false,false) }
+        guard !finished, delta.isFinite, delta > 0 else { return (false,false) }
         elapsed = min(duration, elapsed + max(0,min(0.25,delta)))
         var hit = false, pickup = false
-        for id in 0..<10 {
-            let crossing = Double(id) * 2 + 2
+        for id in 0..<obstacleCount {
+            let crossing = crossingTime(id)
             if elapsed >= crossing && !passed.contains(id) {
                 passed.insert(id)
                 if lane == obstacleLane(id) { health -= 1; hit = true }

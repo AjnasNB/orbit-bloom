@@ -13,7 +13,7 @@ import SwiftUI
     var body: some Scene {
         WindowGroup {
             RootView().environmentObject(game).environmentObject(purchases).environmentObject(account).preferredColorScheme(.light)
-                .onChange(of: scenePhase) { _, value in if value != .active { game.save(); AudioDirector.shared.suspend() } else { game.refreshClock(); game.updateMusic(); account.resume() } }
+                .onChange(of: scenePhase) { _, value in if value != .active { game.save(); AudioDirector.shared.suspend() } else { game.refreshClock(); game.updateMusic(); account.resume(); Task { await game.eventClock.refresh() } } }
         }
     }
 }

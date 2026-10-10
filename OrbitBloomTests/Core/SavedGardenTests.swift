@@ -81,7 +81,7 @@ final class SavedGardenTests: XCTestCase {
         var save = SavedGarden(playerKey: "player-a", wallet: GardenWallet())
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-b"))
         XCTAssertNil(SavedGarden.decode(Data("broken".utf8), playerKey: "player-a"))
-        save.schema = 3
+        save.schema = 4
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-a"))
         save.schema = 1; save.wallet.progress.coins = -10
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-a"))

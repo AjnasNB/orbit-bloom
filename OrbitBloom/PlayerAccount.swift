@@ -202,7 +202,7 @@ struct GameCenterLoginView: UIViewControllerRepresentable {
               garden.save.playerKey == key,
               choices.contains(where: { $0.id == garden.id }) else { return }
         guard game.restoreWallet(garden.save.wallet) else {
-            status = game.busy || game.raceActive ? "Finish this action before restoring your garden." :
+            status = game.busy || game.raceActive || game.activity != nil ? "Finish this action before restoring your garden." :
                 "This backup is missing a purchase credited here. Keep this device's garden to protect your items."
             return
         }

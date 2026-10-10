@@ -1,8 +1,11 @@
 {
   "name": "orbit-bloom-game-site",
+  "main": "workers/orbit-events.mjs",
   "compatibility_date": "2026-10-09",
   "workers_dev": true,
   "assets": {
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
     "directory": "./site",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"

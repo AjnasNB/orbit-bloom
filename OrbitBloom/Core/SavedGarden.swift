@@ -15,15 +15,18 @@ public struct GardenWallet: Codable {
     public var session: GameEngine.Snapshot?
     public var charged: Bool?
     public var assistance: Assistance?
+    public var journey: IslandJourney?
 
     public init(progress: Progress = Progress(), ecosystem: Ecosystem = Ecosystem(),
                 session: GameEngine.Snapshot? = nil, charged: Bool? = false,
-                assistance: Assistance? = Assistance()) {
+                assistance: Assistance? = Assistance(), journey: IslandJourney? = nil) {
         self.progress = progress; self.ecosystem = ecosystem; self.session = session
         self.charged = charged; self.assistance = assistance
+        self.journey = journey
     }
 
     public var isValid: Bool {
+        guard journey?.isValid != false else { return false }
         let counts = [progress.stars, progress.coins, progress.boosters, ecosystem.seeds,
                       ecosystem.water, ecosystem.compost, ecosystem.produce, ecosystem.harvested,
                       ecosystem.raceBest, ecosystem.deliveries, ecosystem.lives.reserve]
@@ -70,13 +73,14 @@ public struct SavedGarden: Codable, Identifiable {
     public init(id: UUID = UUID(), playerKey: String, savedAt: Date = Date(), wallet: GardenWallet) {
         self.id = id; self.playerKey = playerKey; self.savedAt = savedAt; self.wallet = wallet
         // Old clients must reject new active rules rather than reinterpret their goals.
-        self.schema = wallet.session?.rulesVersion == 2 ? 2 : 1
+        self.schema = wallet.journey != nil ? 3 : wallet.session?.rulesVersion == 2 ? 2 : 1
     }
     public func encoded() throws -> Data { try JSONEncoder().encode(self) }
     public static func decode(_ data: Data, playerKey: String) -> SavedGarden? {
         guard data.count <= 1_000_000,
               let save = try? JSONDecoder().decode(Self.self, from: data),
-              (1...2).contains(save.schema), !(save.schema == 1 && save.wallet.session?.rulesVersion == 2),
+              (1...3).contains(save.schema), !(save.schema == 1 && save.wallet.session?.rulesVersion == 2),
+              !(save.schema < 3 && save.wallet.journey != nil),
               save.playerKey == playerKey, !playerKey.isEmpty,
               validSaveDate(save.savedAt), save.wallet.isValid else { return nil }
         return save

@@ -6,11 +6,20 @@ struct RootView: View {
     @EnvironmentObject var purchases: PurchaseStore
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var loading = true
+    @State private var selectedHubRoom: IslandRoom?
     private let clock = Timer.publish(every:1,on:.main,in:.common).autoconnect()
     var body: some View {
         ZStack {
             SpaceBackdrop()
             if game.raceActive { DeliveryRaceView() }
+            else if let activity = game.activity {
+                VStack(spacing:0) {
+                    GameHUD()
+                    IslandActivityView(kind:activity,level:game.activityLevel,onComplete: { score in
+                        game.completeActivity(score); game.exitActivity()
+                    },onExit:game.exitActivity)
+                }.frame(maxWidth:650).frame(maxWidth:.infinity)
+            }
             else if game.engine != nil { PuzzleView().id(game.engine?.level.id) }
             else {
                 VStack(spacing:0) {
@@ -18,7 +27,7 @@ struct RootView: View {
                     if game.tab == 2 || game.tab == 3 {
                         RoomExitHeader(kind:game.tab == 2 ? .farm : .rally) { game.tab = 0; game.effect("tap") }
                             .frame(maxWidth:650)
-                    } else if game.tab != 0 && game.tab != 1 {
+                    } else if game.tab != 0 && game.tab != 1 && game.tab != 5 {
                         Button { game.tab = 0; game.effect("tap") } label: {
                             Label("Back to your island",systemImage:"arrow.uturn.backward").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:44,alignment:.leading)
                         }.padding(.horizontal,24).accessibilityIdentifier("returnWorld")
@@ -28,6 +37,9 @@ struct RootView: View {
                         case 2: FarmView()
                         case 3: DeliveryLobby()
                         case 4: ShopView()
+                        case 5: IslandHubView(stars:game.progress.stars,completedProjects:game.progress.restored.count,
+                            activityLevels:game.journey.levels.mapValues { min(1000,$0+1) }.merging(["bloom":game.progress.nextLevel]) { _,new in new },
+                            initialRoom:selectedHubRoom,onChoose:chooseRoom,onExit:{ game.tab = 0 })
                         default: GardenView()
                         }
                     }.id(game.tab).transition(.opacity).frame(maxWidth:650).frame(maxWidth:.infinity,maxHeight:.infinity)
@@ -42,12 +54,31 @@ struct RootView: View {
         }
         .sheet(isPresented:$game.showSettings) { SettingsView() }
         .sheet(isPresented:$game.showTasks) { FieldJournalView() }
+        .sheet(isPresented:$game.showWorldEvents) { WorldEventsView(clock:game.eventClock,onChoose:chooseRoom) }
+        .sheet(isPresented:$game.showRoomRecords) { RoomRecordsView() }
         .task { try? await Task.sleep(for:.milliseconds(game.testing ? 120 : 1000)); game.progress.hasSeenIntro = true; game.save(); withAnimation(.easeOut(duration:0.35)) { loading = false } }
         .onAppear { purchases.game = game; game.updateMusic(); Task { await purchases.recoverUnfinished() } }
+        .task {
+            while !Task.isCancelled {
+                await game.eventClock.refresh()
+                try? await Task.sleep(for:.seconds(600))
+            }
+        }
         .onChange(of:game.tab) { _,_ in game.updateMusic() }
         .onChange(of:game.engine != nil) { _,_ in game.updateMusic() }
         .onChange(of:game.raceActive) { _,_ in game.updateMusic() }
         .onReceive(clock) { _ in game.refreshClock() }
+    }
+    private func chooseRoom(_ room:IslandRoom) {
+        game.showWorldEvents = false
+        selectedHubRoom = room
+        switch room {
+        case .bloom: game.tab = 0
+        case .farm: game.tab = 2
+        case .rally: game.tab = 3
+        default: if let kind = IslandActivityKind(rawValue:room.rawValue) { game.enterActivity(kind) }
+        }
+        game.effect("tap")
     }
     var loadingScreen: some View {
         ZStack {
@@ -71,9 +102,9 @@ struct GameHUD: View {
             Image("BloomLogo").resizable().frame(width:38,height:38).clipShape(RoundedRectangle(cornerRadius:11)).accessibilityHidden(true)
             VStack(alignment:.leading,spacing:1) { Text("ORBIT").tracking(2); Text("BLOOM").tracking(1.5) }.font(.system(size:12,weight:.black,design:.rounded)).foregroundStyle(Palette.cream).accessibilityLabel("Orbit Bloom")
             Spacer(minLength:2)
-            Button { game.tab = 4 } label: { HStack(spacing:4) { Image(systemName:"heart.fill").foregroundStyle(Palette.coral); Text("\(game.ecosystem.lives.total)").foregroundStyle(Palette.cream) }.font(.system(size:15,weight:.bold,design:.rounded)).frame(minWidth:48,minHeight:44) }.accessibilityLabel("\(game.ecosystem.lives.total) lives. Open refill shop").accessibilityIdentifier("lifeBalance")
-            Button { game.tab = 4; game.effect("tap") } label: { HStack(spacing:3) { SpriteView(index:11).frame(width:24,height:24); Text(game.progress.coins.formatted()).monospacedDigit().contentTransition(.numericText()).font(.system(size:15,weight:.bold,design:.rounded)).foregroundStyle(Palette.night) }.frame(minHeight:44) }.accessibilityLabel("Coins, \(game.progress.coins). Open supplies").accessibilityIdentifier("openShop")
-            Button { game.showSettings = true } label: { Image(systemName:"gearshape.fill").foregroundStyle(Palette.muted).frame(width:44,height:44) }.accessibilityLabel("Settings").accessibilityIdentifier("settings")
+            Button { game.tab = 4 } label: { HStack(spacing:4) { Image(systemName:"heart.fill").foregroundStyle(Palette.coral); Text("\(game.ecosystem.lives.total)").foregroundStyle(Palette.cream) }.font(.system(size:15,weight:.bold,design:.rounded)).frame(minWidth:48,minHeight:44) }.accessibilityLabel("\(game.ecosystem.lives.total) lives. Open refill shop").accessibilityIdentifier("lifeBalance").disabled(game.activity != nil || game.engine != nil)
+            Button { game.tab = 4; game.effect("tap") } label: { HStack(spacing:3) { SpriteView(index:11).frame(width:24,height:24); Text(game.progress.coins.formatted()).monospacedDigit().contentTransition(.numericText()).font(.system(size:15,weight:.bold,design:.rounded)).foregroundStyle(Palette.night) }.frame(minHeight:44) }.accessibilityLabel("Coins, \(game.progress.coins). Open supplies").accessibilityIdentifier("openShop").disabled(game.activity != nil || game.engine != nil)
+            Button { game.showSettings = true } label: { Image(systemName:"gearshape.fill").font(.system(size:20,weight:.bold)).foregroundStyle(Palette.muted).frame(width:44,height:44) }.accessibilityLabel("Settings").accessibilityIdentifier("settings")
         }.padding(.horizontal,18).padding(.vertical,6)
     }
 }
@@ -108,6 +139,14 @@ struct GardenView: View {
                 .accessibilityAction(named:"Next island") { page = min(GardenRegion.all.count-1,page+1); chosen = page*10+1 }
                 .accessibilityAction(named:"Previous island") { page = max(0,page-1); chosen = min(game.progress.nextLevel,page*10+1) }
             ActivityRoomEntrances().padding(.horizontal,22)
+            HStack(spacing:8) {
+                Button { game.tab = 5; game.effect("tap") } label: {
+                    Label("Explore 7 rooms",systemImage:"door.left.hand.open").font(.system(.subheadline,design:.rounded,weight:.heavy))
+                        .frame(maxWidth:.infinity,minHeight:46).foregroundStyle(Palette.night).background(Palette.paper,in:Capsule())
+                }.buttonStyle(PressStyle()).accessibilityIdentifier("openIslandHub")
+                Button { game.showWorldEvents = true } label: { Image(systemName:"globe.europe.africa.fill").frame(width:46,height:46).foregroundStyle(Palette.night).background(Palette.sunlight,in:Circle()) }.accessibilityLabel("Worldwide timed events").accessibilityIdentifier("openWorldEvents")
+                Button { game.showRoomRecords = true } label: { Image(systemName:"trophy.fill").frame(width:46,height:46).foregroundStyle(Palette.night).background(Palette.paper,in:Circle()) }.accessibilityLabel("Room records and Game Center leaderboard").accessibilityIdentifier("openRoomRecords")
+            }.padding(.horizontal,22)
             VStack(spacing:8) {
                 Text("Swipe across the island to explore").font(.system(size:11,weight:.semibold,design:.rounded)).foregroundStyle(Palette.mint)
                 if game.progress.isUnlocked(chosen) {
