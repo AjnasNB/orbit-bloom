@@ -4,6 +4,7 @@ import SceneKit
 struct RootView: View {
     @EnvironmentObject var game: GameModel
     @EnvironmentObject var purchases: PurchaseStore
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var loading = true
     private let clock = Timer.publish(every:1,on:.main,in:.common).autoconnect()
     var body: some View {
@@ -14,7 +15,10 @@ struct RootView: View {
             else {
                 VStack(spacing:0) {
                     GameHUD()
-                    if game.tab != 0 && game.tab != 1 {
+                    if game.tab == 2 || game.tab == 3 {
+                        RoomExitHeader(kind:game.tab == 2 ? .farm : .rally) { game.tab = 0; game.effect("tap") }
+                            .frame(maxWidth:650)
+                    } else if game.tab != 0 && game.tab != 1 {
                         Button { game.tab = 0; game.effect("tap") } label: {
                             Label("Back to your island",systemImage:"arrow.uturn.backward").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:44,alignment:.leading)
                         }.padding(.horizontal,24).accessibilityIdentifier("returnWorld")
@@ -26,8 +30,9 @@ struct RootView: View {
                         case 4: ShopView()
                         default: GardenView()
                         }
-                    }.frame(maxWidth:650).frame(maxWidth:.infinity,maxHeight:.infinity)
+                    }.id(game.tab).transition(.opacity).frame(maxWidth:650).frame(maxWidth:.infinity,maxHeight:.infinity)
                 }.accessibilityHidden(loading)
+                    .animation(reduceMotion ? nil : .easeInOut(duration:0.2),value:game.tab)
             }
             if loading { loadingScreen.transition(.opacity) }
             if let flight = game.coinFlight { CoinFlightView(amount:game.lastCoinAward).id(flight).allowsHitTesting(false) }
@@ -91,13 +96,6 @@ struct GardenView: View {
                 Button { game.showTasks = true; game.effect("tap") } label: { Image(systemName:"book.closed.fill").font(.system(size:23)).foregroundStyle(Palette.night).frame(width:48,height:48).background(Palette.paper,in:Circle()).shadow(color:Palette.mint.opacity(0.15),radius:0,y:4) }.accessibilityLabel("Field tasks and power patterns").accessibilityIdentifier("openTasks")
             }.padding(.horizontal,22)
             GardenMapScene(page:page,selected:chosen) { level in chosen = level }
-                .overlay(alignment:.bottom) {
-                    HStack {
-                        sceneGate("Farm & craft",sprite:3,id:"openFarm") { game.tab = 2 }
-                        Spacer()
-                        sceneGate("Harvest rally",sprite:9,id:"openRace") { game.tab = 3 }
-                    }.padding(.horizontal,28).padding(.bottom,4)
-                }
                 .contentShape(Rectangle())
                 .simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
                     guard abs(value.translation.width) > abs(value.translation.height) else { return }
@@ -109,6 +107,7 @@ struct GardenView: View {
                 }).accessibilityElement(children:.contain).accessibilityIdentifier("gardenMap")
                 .accessibilityAction(named:"Next island") { page = min(GardenRegion.all.count-1,page+1); chosen = page*10+1 }
                 .accessibilityAction(named:"Previous island") { page = max(0,page-1); chosen = min(game.progress.nextLevel,page*10+1) }
+            ActivityRoomEntrances().padding(.horizontal,22)
             VStack(spacing:8) {
                 Text("Swipe across the island to explore").font(.system(size:11,weight:.semibold,design:.rounded)).foregroundStyle(Palette.mint)
                 if game.progress.isUnlocked(chosen) {
@@ -130,11 +129,6 @@ struct GardenView: View {
         }.onAppear { openCurrent() }.onChange(of:game.progress.nextLevel) { _,_ in openCurrent() }
     }
     func openCurrent() { page = (game.progress.nextLevel-1)/10; chosen = game.progress.nextLevel }
-    func sceneGate(_ title:String,sprite:Int,id:String,action:@escaping ()->Void) -> some View {
-        Button { action(); game.effect("tap") } label: {
-            VStack(spacing:0) { SpriteView(index:sprite).frame(width:65,height:64).shadow(color:Palette.night.opacity(0.25),radius:2,y:5); Text(title).font(.system(size:12,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night).padding(.horizontal,10).padding(.vertical,7).background(Palette.paper,in:Capsule()).compositingGroup().shadow(color:Palette.mint.opacity(0.2),radius:0,y:3) }
-        }.buttonStyle(PressStyle()).accessibilityIdentifier(id)
-    }
 }
 
 struct GardenMapScene: View {
@@ -142,8 +136,8 @@ struct GardenMapScene: View {
     let page:Int
     let selected:Int
     let select:(Int)->Void
-    let xs:[CGFloat] = [0.33,0.64,0.74,0.44,0.23,0.56,0.79,0.49,0.22,0.57]
-    func point(_ stop:Int,_ size:CGSize)->CGPoint { CGPoint(x:size.width*xs[stop],y:size.height*(0.79-CGFloat(stop)*0.068)) }
+    let xs:[CGFloat] = [0.26,0.62,0.82,0.50,0.21,0.64,0.82,0.50,0.20,0.62]
+    func point(_ stop:Int,_ size:CGSize)->CGPoint { CGPoint(x:size.width*xs[stop],y:size.height*(0.89-CGFloat(stop)*0.083)) }
     var body:some View {
         GeometryReader { geo in
             ZStack {

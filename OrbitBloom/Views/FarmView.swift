@@ -9,8 +9,8 @@ struct FarmView: View {
             VStack(spacing:10) {
                 HStack(alignment:.center) {
                     VStack(alignment:.leading,spacing:4) {
-                        Text(page == 0 ? "Your living terraces" : "The tool shed").font(.system(size:27,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
-                        Text(page == 0 ? "Plant, water, harvest. Swipe for the shed." : "Harvest compost. Craft powers for the board.").font(.system(size:12,design:.rounded)).foregroundStyle(Palette.mint)
+                        Text(page == 0 ? "Farm room" : "The tool shed").font(.system(size:27,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
+                        Text(page == 0 ? "Terrace map · 6 plots. Plant, water, harvest." : "Inside Farm room · craft powers with compost.").font(.system(size:12,design:.rounded)).foregroundStyle(Palette.mint)
                     }
                     Spacer(); PipCompanion().frame(width:56,height:70)
                 }
@@ -23,8 +23,15 @@ struct FarmView: View {
                             }.accessibilityIdentifier("crop\(crop.rawValue)")
                         }
                     }
-                    LazyVGrid(columns:[GridItem(.flexible()),GridItem(.flexible())],spacing:10) {
-                        ForEach(game.ecosystem.plots) { plot in plotButton(plot,now:timeline.date) }
+                    GeometryReader { geometry in
+                        ZStack {
+                            ActivityRoomScene(kind:.farm,detailed:true).allowsHitTesting(false).accessibilityHidden(true)
+                            ForEach(game.ecosystem.plots) { plot in
+                                plotButton(plot,now:timeline.date)
+                                    .frame(width:min(174,geometry.size.width*0.42))
+                                    .position(x:geometry.size.width*(plot.id%2 == 0 ? 0.27 : 0.73),y:geometry.size.height*(0.17+CGFloat(plot.id/2)*0.33))
+                            }
+                        }.accessibilityElement(children:.contain).accessibilityLabel("Farm room terrace map. Six numbered plots.").accessibilityIdentifier("farmRoomMap")
                     }.frame(maxHeight:.infinity)
                     Text("Plant: 1 seed + 2 water. Tap a growing crop to water.").font(.system(size:11,design:.rounded)).foregroundStyle(Palette.mint)
                     Button { withAnimation { page = 1 }; game.effect("tap") } label: { Label("Enter the tool shed",systemImage:"house.lodge.fill").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:48).background(Palette.paper,in:Capsule()) }.accessibilityIdentifier("openToolShed")
@@ -57,18 +64,18 @@ struct FarmView: View {
         let ready = plot.ready(at:now)
         let remaining = max(0,Int(ceil((plot.readyAt ?? now).timeIntervalSince(now))))
         return Button { game.farmAction(plot.id,crop:selected) } label: {
-            VStack(spacing:6) {
+            VStack(spacing:4) {
                 ZStack {
-                    RoundedRectangle(cornerRadius:22).fill(LinearGradient(colors:[Color(hex:0x77593B),Color(hex:0x3D3527)],startPoint:.topLeading,endPoint:.bottomTrailing)).frame(height:65).rotation3DEffect(.degrees(20),axis:(x:1,y:0,z:0)).overlay(RoundedRectangle(cornerRadius:22).stroke(Color(hex:0xA28254),lineWidth:3))
-                    ForEach(0..<4) { row in Capsule().fill(.black.opacity(0.2)).frame(height:4).offset(y:CGFloat(row*16-24)) }
+                    RoundedRectangle(cornerRadius:18).fill(LinearGradient(colors:[Color(hex:0x77593B),Color(hex:0x3D3527)],startPoint:.topLeading,endPoint:.bottomTrailing)).frame(height:52).rotation3DEffect(.degrees(25),axis:(x:1,y:0,z:0)).overlay(RoundedRectangle(cornerRadius:18).stroke(Color(hex:0xA28254),lineWidth:3)).shadow(color:Palette.night.opacity(0.25),radius:2,y:6)
+                    ForEach(0..<3) { row in Capsule().fill(.black.opacity(0.2)).frame(height:3).offset(y:CGFloat(row*14-14)) }
                     if let crop = plot.crop {
-                        SpriteView(index:ready || remaining < Int(crop.duration/2) ? crop.sprite : 0).frame(width:ready ? 67 : 48,height:64).offset(y:-6).shadow(color:Palette.gold.opacity(ready ? 0.4 : 0),radius:12)
+                        SpriteView(index:ready || remaining < Int(crop.duration/2) ? crop.sprite : 0).frame(width:ready ? 56 : 44,height:52).offset(y:-7).shadow(color:Palette.gold.opacity(ready ? 0.4 : 0),radius:12)
                     } else { Image(systemName:"plus").font(.system(size:28,weight:.light)).foregroundStyle(.white.opacity(0.8)) }
                     if ready { Image(systemName:"sparkles").foregroundStyle(Palette.gold).offset(x:47,y:-35) }
                 }
-                Text(plot.crop == nil ? "Plant here" : ready ? "Harvest!" : "Growing · \(remaining)s").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(ready ? Palette.gold : Palette.cream)
-                Text(plot.crop == nil ? "Plot \(plot.id+1)" : ready ? "+coins · +compost" : "Tap to water").font(.system(size:10,design:.rounded)).foregroundStyle(Palette.mint)
-            }.padding(8).background(Palette.paper.opacity(0.85),in:RoundedRectangle(cornerRadius:22))
+                Text(plot.crop == nil ? "Plant here" : ready ? "Harvest!" : "Growing · \(remaining)s").font(.system(size:13,weight:.bold,design:.rounded)).foregroundStyle(ready ? Color(hex:0x426735) : Palette.night)
+                Text("Plot \(plot.id+1) · \(plot.crop == nil ? "1 seed" : ready ? "+compost" : "tap to water")").font(.system(size:10,weight:.semibold,design:.rounded)).foregroundStyle(Palette.mint)
+            }.padding(6).background(Palette.paper.opacity(0.86),in:RoundedRectangle(cornerRadius:18))
         }.buttonStyle(PressStyle()).accessibilityLabel("Plot \(plot.id+1), \(plot.crop == nil ? "empty, plant" : ready ? "ready, harvest" : "growing, water")").accessibilityIdentifier("plot\(plot.id)")
     }
 }

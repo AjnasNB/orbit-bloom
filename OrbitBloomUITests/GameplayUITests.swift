@@ -15,6 +15,68 @@ import StoreKitTest
         XCTAssertTrue(app.buttons["confirmAbandon"].waitForExistence(timeout:5))
         app.buttons["confirmAbandon"].tap()
     }
+    func testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress() throws {
+        func fits(_ element:XCUIElement) {
+            XCTAssertTrue(element.waitForExistence(timeout:10))
+            XCTAssertTrue(element.isHittable)
+            XCTAssertTrue(app.frame.insetBy(dx:-1,dy:-1).contains(element.frame),"Room control must fit: \(element.frame)")
+            XCTAssertGreaterThanOrEqual(element.frame.height,44)
+        }
+        let farm=app.buttons["openFarm"], rally=app.buttons["openRace"]
+        fits(farm); fits(rally)
+        XCTAssertTrue(farm.label.contains("Farm room")); XCTAssertTrue(rally.label.contains("Rally room"))
+        XCTAssertFalse(farm.frame.intersects(rally.frame),"Each room needs a distinct entrance")
+        attach("build10-room-entrances")
+        farm.tap()
+        let terraceMap=app.descendants(matching:.any)["farmRoomMap"].firstMatch
+        XCTAssertTrue(terraceMap.waitForExistence(timeout:5))
+        XCTAssertFalse(app.descendants(matching:.any)["rallyRoomMap"].firstMatch.exists)
+        for key in 0..<6 { fits(app.buttons["plot\(key)"]) }
+        app.buttons["plot0"].tap()
+        XCTAssertFalse(app.buttons["plot0"].label.contains("empty"))
+        fits(app.buttons["returnWorld"]); XCTAssertTrue(app.buttons["returnWorld"].label.contains("Exit Farm room"))
+        let plantingMessage=app.staticTexts["Coral rose planted. Tap to water and grow faster."]
+        let toastCleared=XCTNSPredicateExpectation(predicate:NSPredicate { _,_ in !plantingMessage.exists },object:app)
+        XCTAssertEqual(XCTWaiter.wait(for:[toastCleared],timeout:5),.completed)
+        attach("build10-farm-room-map")
+        app.buttons["returnWorld"].tap(); fits(rally); rally.tap()
+        let route=app.descendants(matching:.any)["rallyRoomMap"].firstMatch
+        XCTAssertTrue(route.waitForExistence(timeout:5)); XCTAssertTrue(route.label.contains("Garage"))
+        XCTAssertFalse(terraceMap.exists)
+        fits(app.buttons["startRace"]); fits(app.buttons["returnWorld"])
+        XCTAssertTrue(app.buttons["returnWorld"].label.contains("Exit Rally room"))
+        attach("build10-rally-room-map")
+        app.buttons["startRace"].tap()
+        let road=app.descendants(matching:.any)["raceTrack"].firstMatch
+        XCTAssertTrue(road.waitForExistence(timeout:5)); road.swipeLeft()
+        XCTAssertEqual(road.value as? String,"Lane 1 of 3")
+        app.buttons["pauseRace"].tap(); fits(app.buttons["leaveRace"])
+        XCTAssertTrue(app.buttons["leaveRace"].label.contains("Exit rally room"))
+        attach("build10-rally-exit")
+        app.buttons["leaveRace"].tap(); fits(farm); farm.tap()
+        XCTAssertFalse(app.buttons["plot0"].label.contains("empty"),"Leaving a room must retain its planted crop")
+        app.buttons["openToolShed"].tap(); fits(app.buttons["craftrainbow"])
+        app.buttons["returnWorld"].tap()
+        app.terminate(); app.launchArguments=["--uitesting","--keep-progress"]; app.launch()
+        fits(farm); farm.tap(); XCTAssertFalse(app.buttons["plot0"].label.contains("empty"))
+        app.buttons["returnWorld"].tap()
+        app.terminate(); app.launchArguments=["--uitesting","-UIPreferredContentSizeCategoryName","UICTContentSizeCategoryAccessibilityM"]; app.launch()
+        fits(farm); fits(rally); XCTAssertFalse(farm.frame.intersects(rally.frame))
+        XCTAssertEqual(app.scrollViews.count,0)
+        attach("build10-large-room-entrances")
+        rally.tap(); fits(app.buttons["returnWorld"]); fits(app.buttons["startRace"])
+        XCTAssertTrue(route.exists); XCTAssertEqual(app.scrollViews.count,0)
+        attach("build10-large-rally-room")
+        app.buttons["returnWorld"].tap(); fits(farm); farm.tap()
+        let largePlots=(0..<6).map { app.buttons["plot\($0)"] }
+        for plot in largePlots { fits(plot) }
+        for row in 0..<2 {
+            XCTAssertFalse(largePlots[row*2].frame.intersects(largePlots[row*2+2].frame),"Large-text terrace controls must not overlap")
+            XCTAssertFalse(largePlots[row*2+1].frame.intersects(largePlots[row*2+3].frame),"Large-text terrace controls must not overlap")
+        }
+        fits(app.buttons["openToolShed"]); fits(app.buttons["returnWorld"])
+        attach("build10-large-farm-room")
+    }
     func testBackCancelAbandonAndRestartChargeExactlyOneLifePerAttempt() throws {
         XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("5 lives"))
         app.buttons["playLevel"].tap()
@@ -353,10 +415,30 @@ import StoreKitTest
         app.buttons["openFarm"].tap()
         for key in 0..<6 { fits(app.buttons["plot\(key)"]) }
         capture("ipad-02-farm")
+        XCTAssertTrue(app.descendants(matching:.any)["farmRoomMap"].firstMatch.exists)
+        fits(app.buttons["returnWorld"])
+        XCUIDevice.shared.orientation = .landscapeLeft
+        let farmLandscape = XCTNSPredicateExpectation(predicate:NSPredicate { _,_ in app.frame.width > app.frame.height },object:app)
+        XCTAssertEqual(XCTWaiter.wait(for:[farmLandscape],timeout:15),.completed)
+        for key in 0..<6 { fits(app.buttons["plot\(key)"]) }
+        fits(app.buttons["returnWorld"]); capture("build10-ipad-farm-landscape")
+        XCUIDevice.shared.orientation = .portrait
+        let farmPortrait = XCTNSPredicateExpectation(predicate:NSPredicate { _,_ in app.frame.height > app.frame.width },object:app)
+        XCTAssertEqual(XCTWaiter.wait(for:[farmPortrait],timeout:15),.completed)
         app.descendants(matching: .any)["farmScene"].swipeLeft()
         fits(app.buttons["craftrainbow"]); capture("ipad-03-crafting")
         app.buttons["returnWorld"].tap(); app.buttons["openRace"].tap()
+        XCTAssertTrue(app.descendants(matching:.any)["rallyRoomMap"].firstMatch.exists)
         fits(app.buttons["startRace"]); capture("ipad-04-rally-lobby")
+        XCUIDevice.shared.orientation = .landscapeLeft
+        let rallyLandscape = XCTNSPredicateExpectation(predicate:NSPredicate { _,_ in app.frame.width > app.frame.height },object:app)
+        XCTAssertEqual(XCTWaiter.wait(for:[rallyLandscape],timeout:15),.completed)
+        fits(app.buttons["returnWorld"]); fits(app.buttons["startRace"])
+        fits(app.descendants(matching:.any)["rallyRoomMap"].firstMatch)
+        capture("build10-ipad-rally-landscape")
+        XCUIDevice.shared.orientation = .portrait
+        let rallyPortrait = XCTNSPredicateExpectation(predicate:NSPredicate { _,_ in app.frame.height > app.frame.width },object:app)
+        XCTAssertEqual(XCTWaiter.wait(for:[rallyPortrait],timeout:15),.completed)
         app.buttons["startRace"].tap()
         let road = app.descendants(matching: .any)["raceTrack"]
         fits(road); road.swipeLeft()

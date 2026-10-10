@@ -45,6 +45,7 @@
 		9DFECBD44C1C313295C6246B /* AudioDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B6A80C0BF3E87102C0FF2 /* AudioDirector.swift */; };
 		A6FF48551CD557866756BBDC /* bloom2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56EE8AF9458CCA9586A4926E /* bloom2.wav */; };
 		B57EC8D7A233DFC5C107F051 /* SavedGarden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE451A197A9807EA465A2C6 /* SavedGarden.swift */; };
+		BD8692F76DECB8F5E17229B5 /* ActivityRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB81B15434B44065200856FE /* ActivityRoomView.swift */; };
 		BFA861E79647E7174F7C415B /* PlayerAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A173EA0DDC1CD41AB9DF66AB /* PlayerAccountView.swift */; };
 		BFF5C63F510BC555E9AD5C0F /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95732EBCBE54DC10E4945154 /* GameModel.swift */; };
 		C5FA74A74D41B15D5F24343B /* sfx-harvest.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6F3231B6F57FD87BB0F77599 /* sfx-harvest.m4a */; };
@@ -117,6 +118,7 @@
 		B44ADD24ACCA512053DF0665 /* sfx-win.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-win.m4a"; path = "OrbitBloom/Resources/sfx-win.m4a"; sourceTree = SOURCE_ROOT; };
 		BAC3543C7D85344755F63E2F /* GemView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GemView.swift; path = OrbitBloom/Views/GemView.swift; sourceTree = SOURCE_ROOT; };
 		CA689053443B0C9CC57AC968 /* sfx-tap.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-tap.m4a"; path = "OrbitBloom/Resources/sfx-tap.m4a"; sourceTree = SOURCE_ROOT; };
+		CB81B15434B44065200856FE /* ActivityRoomView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActivityRoomView.swift; path = OrbitBloom/Views/ActivityRoomView.swift; sourceTree = SOURCE_ROOT; };
 		D505DF14BDE2580B50F67CCE /* OrbitBloomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrbitBloomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B21E3FD0AD5B4473F16852 /* music-puzzle.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "music-puzzle.m4a"; path = "OrbitBloom/Resources/music-puzzle.m4a"; sourceTree = SOURCE_ROOT; };
 		DB2D62D752CADD81E27AA22E /* sfx-craft.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-craft.m4a"; path = "OrbitBloom/Resources/sfx-craft.m4a"; sourceTree = SOURCE_ROOT; };
@@ -185,6 +187,7 @@
 				E97FDF9E881AF382E1C39A69 /* ShopView.swift */,
 				5DD484D22386E7B59E41BA33 /* Theme.swift */,
 				ABA309327FBA0D2E1D6BB9E9 /* Resources */,
+				CB81B15434B44065200856FE /* ActivityRoomView.swift */,
 			);
 			name = OrbitBloom;
 			path = OrbitBloom;
@@ -443,6 +446,7 @@
 				B57EC8D7A233DFC5C107F051 /* SavedGarden.swift in Sources */,
 				FBD949EC55832423E03B6366 /* PlayerAccount.swift in Sources */,
 				BFA861E79647E7174F7C415B /* PlayerAccountView.swift in Sources */,
+				BD8692F76DECB8F5E17229B5 /* ActivityRoomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +565,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = OrbitBloom/OrbitBloom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 4V29K5Q8S9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Orbit Bloom";
@@ -602,7 +606,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = OrbitBloom/OrbitBloom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 4V29K5Q8S9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Orbit Bloom";

@@ -1,5 +1,7 @@
 # Orbit Bloom: connected garden arcade
 
+Build 10 separates the Farm and Harvest Rally into clearly labeled rooms with original SceneKit maps and visible Island exits. Farm's six interactive plots, shed, harvesting and cargo remain connected to the existing puzzle and rally economy. Rally has a garage/orchard route preview for its existing 440-metre course. The two room doors explain their purpose and no-life-cost entry, and stack for accessibility text. [Focused UX audit](ACTIVITY_ROOMS_UX_AUDIT.md) records the evidence, implementation and verification limits. Existing sequential campaign unlocks and life-aware puzzle exit rules remain in force.
+
 This revision follows the user's requested change from a single swap puzzle to a connected collection of activities. No claim is made that these mechanics have never existed elsewhere. The distinctive direction is the shared plant → harvest → craft → clear → deliver loop.
 
 ## System list and implementation specification

@@ -26,7 +26,7 @@ app.build_configurations.each do |config|
   s['CODE_SIGN_STYLE'] = 'Automatic'
   s['MARKETING_VERSION'] = '1.0'
   s['DEVELOPMENT_TEAM'] = '4V29K5Q8S9'
-  s['CURRENT_PROJECT_VERSION'] = '9'
+  s['CURRENT_PROJECT_VERSION'] = '10'
   s['CODE_SIGN_ENTITLEMENTS'] = 'OrbitBloom/OrbitBloom.entitlements'
   s['ASSETCATALOG_COMPILER_APPICON_NAME'] = 'AppIcon'
 end

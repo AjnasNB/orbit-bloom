@@ -2,20 +2,18 @@ import SwiftUI
 
 struct DeliveryLobby: View {
     @EnvironmentObject var game: GameModel
+    @Environment(\.dynamicTypeSize) private var textSize
     var body: some View {
-        VStack(alignment:.leading,spacing:20) {
-            SectionEyebrow(text:"Race / Harvest rally")
-            Text("Fresh cargo.\nOpen road.").font(.system(size:36,weight:.heavy,design:.rounded)).foregroundStyle(Palette.cream)
-            ZStack {
-                Image("LivingGarden").resizable().scaledToFill().frame(height:200).clipped().opacity(0.5)
-                SpriteView(index:9).frame(height:160).rotationEffect(.degrees(-12)).shadow(color:.black.opacity(0.5),radius:12,y:12)
-            }.clipShape(RoundedRectangle(cornerRadius:26))
-            Text("Swipe left or right to steer your rover through three lanes. Dodge stone barriers, collect coins, and deliver your harvest in 22 seconds.").font(.system(.body,design:.rounded)).foregroundStyle(Palette.mint)
+        VStack(alignment:.leading,spacing:12) {
+            SectionEyebrow(text:"Rally room")
+            Text("Harvest rally").font(.system(size:27,weight:.heavy,design:.rounded)).foregroundStyle(Palette.cream)
+            RallyRoomMap().frame(maxHeight:.infinity).layoutPriority(1)
+            Text("Swipe the road to steer. Dodge barriers, collect coins and deliver in 22 seconds.").font(.system(.subheadline,design:.rounded)).foregroundStyle(Palette.mint).fixedSize(horizontal:false,vertical:true)
             HStack { Label("3 shield points",systemImage:"shield.fill"); Spacer(); Label("No life cost",systemImage:"heart.fill") }.font(.caption).foregroundStyle(Palette.gold)
             Text(game.ecosystem.produce > 0 ? "\(game.ecosystem.produce) cargo ready · +40 delivery bonus" : "No cargo? You can still race for coins. Farm a harvest for a delivery bonus.").font(.system(.subheadline,design:.rounded)).foregroundStyle(Palette.cream)
-            PrimaryButton(title:"Start harvest rally",subtitle:"440 m",symbol:"flag.checkered",id:"startRace") { game.raceActive = true; game.effect("tap") }
+            PrimaryButton(title:"Start rally",subtitle:textSize.isAccessibilitySize ? nil : "440 m",symbol:"flag.checkered",id:"startRace") { game.raceActive = true; game.effect("tap") }
             Text("Best: \(game.ecosystem.raceBest) m · Deliveries: \(game.ecosystem.deliveries)").font(.caption).foregroundStyle(Palette.muted)
-        }.padding(24)
+        }.padding(.horizontal,22).padding(.bottom,12)
     }
 }
 
@@ -77,7 +75,7 @@ struct DeliveryRaceView: View {
                 .overlay { if run.finished { finish } }
             }.padding(.horizontal,20)
             Label("Swipe the road to steer",systemImage:"hand.draw.fill").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.mint).frame(minHeight:44)
-            Button("Return to world") { game.raceActive = false; game.tab = 0 }.font(.system(.caption,design:.rounded,weight:.bold)).foregroundStyle(Palette.mint).frame(minHeight:44).accessibilityIdentifier("leaveRace")
+            Button { game.raceActive = false; game.tab = 0 } label: { Label("Exit rally room · Island",systemImage:"xmark.circle.fill").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:48).background(Palette.paper,in:Capsule()) }.padding(.horizontal,22).accessibilityIdentifier("leaveRace")
         }
         .onReceive(timer) { _ in
             guard !paused, scenePhase == .active, !run.finished else { return }
