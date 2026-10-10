@@ -2,6 +2,8 @@
 
 A native iOS arcade with seven connected games and one saved island. Meet Lio, a keeper apprentice rebuilding Aurora Atoll after the Great Eclipse. Play Bloom Circuits, Farm Terraces, Harvest Rally, Canal Weave, Firefly Trail, Windmill Works and Moon Observatory. Build 11 is submitted for App Review; Apple approval and manual public release are pending.
 
+[Public GitHub repository](https://github.com/AjnasNB/orbit-bloom) · [Build 11 review, screenshots and verification](docs/release-draft/build11/README.md)
+
 ## Play
 
 Open `OrbitBloom.xcodeproj`, select the **OrbitBloom** scheme and an iPhone simulator, then Run. iOS 17+ is required. The scheme uses `OrbitBloom.storekit` for local Apple purchase testing; test purchases do not charge real money. `scripts/run-ios.sh` installs and runs on the dedicated **Orbit Bloom QA** simulator.

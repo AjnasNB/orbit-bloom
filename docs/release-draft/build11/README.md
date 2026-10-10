@@ -36,3 +36,5 @@ The isolated [Cloudflare site](https://orbit-bloom-game-site.ajnasnb.workers.dev
 Physical Game Center sign-in, private iCloud round trips, signed Apple sandbox purchases and leaderboard submission remain unverified on hardware. Local StoreKit and account/clock test doubles do not prove those services. Physical VoiceOver focus/timing, performance, audio/haptics, smaller devices/split-screen and human pacing also need hardware checks. Client-bounded rankings are not authoritative anti-cheat.
 
 The previous build 7 submission was canceled and appears Removed because build 11 replaced it. This was a developer action, not an Apple rejection. Purchase products and Indian prices (₹99–₹999) are unchanged and also Waiting for Review.
+
+The [public GitHub repository](https://github.com/AjnasNB/orbit-bloom) is visible without signing in, with the app and release evidence on main. [Actual public/main confirmation](proof/github-public-main.jpg) shows the release evidence commit; verification.json records the scoped credential-pattern check and its limits.

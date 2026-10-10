@@ -875,5 +875,26 @@
     "docs/V2_SYSTEMS_AND_SOURCES.md",
     "docs/release-draft/build11/ART_DIRECTION.md",
     "docs/release-draft/build11/metadata.md"
-  ]
+  ],
+  "repository": {
+    "url": "https://github.com/AjnasNB/orbit-bloom",
+    "visibility": "PUBLIC",
+    "defaultBranch": "main",
+    "appSourceCommit": "8b26cbdbe0827c571aca7725842a5a973d0c7dea",
+    "releaseEvidenceCommit": "fb7301214a000c79f174a5fdf199a0c068d39780",
+    "verified": "GitHub CLI returned PUBLIC/main and Chrome displayed the repository anonymously with a Public badge.",
+    "credentialsCheck": "476 tracked paths scanned for private-key and common GitHub/AWS/Cloudflare token patterns; no matching tokens, tracked credential file types or credential-like historical paths. This scoped check is not a guarantee against all possible secrets.",
+    "changeAuthorization": "User explicitly requested the GitHub repository be public.",
+    "proof": {
+      "file": "docs/release-draft/build11/proof/github-public-main.jpg",
+      "mimeType": "image/jpeg",
+      "dimensions": [
+        910,
+        185
+      ],
+      "sha256": "a091033a95fd179b48e4cfe0d5603a2d96d2ac935650d769c49c93d46a9a9df8",
+      "capture": "Actual Chrome public repository screenshot at capture crop; shows Public badge, main and release evidence commit fb73012. No pixel edits.",
+      "capturedAfterReleaseEvidencePush": true
+    }
+  }
 }
