@@ -24,6 +24,16 @@ public final class SeededGenerator: Generator<Gem> {
     }
 }
 
+public enum LevelDifficulty: String, CaseIterable {
+    case simple, hard, superHard, oneShot
+    public var title: String {
+        switch self { case .simple: return "Simple"; case .hard: return "Hard"; case .superHard: return "Super hard"; case .oneShot: return "One shot" }
+    }
+    public var symbol: String {
+        switch self { case .simple: return "leaf.fill"; case .hard: return "flame.fill"; case .superHard: return "flame.circle.fill"; case .oneShot: return "bolt.fill" }
+    }
+}
+
 public struct Level: Identifiable {
     public let id: Int
     public let title: String
@@ -32,13 +42,45 @@ public struct Level: Identifiable {
     public let target: Int
     public let goals: [Gem: Int]
     public let frost: Int
-    public var subtitle: String { frost > 0 ? "Bloom beside frozen patches to melt them." : "Collect resources to bring your little moon to life." }
+    public var rulesVersion = 2
+    public var difficulty: LevelDifficulty {
+        if rulesVersion == 2 && id >= 30 && (id-30)%50 == 0 { return .oneShot }
+        if id <= 6 { return .simple }
+        if id <= 8 { return .hard }
+        if id <= 12 { return .superHard }
+        let stop = (id-1)%10
+        return stop < 5 ? .simple : stop < 8 ? .hard : .superHard
+    }
+    public var isOneShot: Bool { difficulty == .oneShot }
+    public var subtitle: String { isOneShot ? "Ultra super hard: one move, all goals. No tools or shuffle; hints work." : frost > 0 ? "Bloom beside frozen patches to melt them." : "Collect resources to bring your little moon to life." }
     public static let total = 1020
     public static let campaign: [Level] = opening + (13...total).map { id in
         let region = (id-1)/10
         let names = GardenRegion.biomes
         let a = Gem.allCases[id%5], b = Gem.allCases[(id+2)%5]
-        return Level(id:id,title:"\(names[region%names.count]) \(id)",biome:"Expedition \(region+1)",moves:16+id%5,target:1500+id%7*150,goals:[a:12+id%7,b:10+id%6],frost:4+id%9)
+        if id >= 30 && (id-30)%50 == 0 {
+            return Level(id:id,title:"Perfect bloom \(id)",biome:"Expedition \(region+1)",moves:1,target:150,goals:[Gem.allCases[((id-30)/50)%5]:5],frost:8)
+        }
+        // Recovery stops between challenges; each 200-stage band tightens the same rhythm.
+        let band = min(4,(id-13)/200), variation = id%3
+        let stop = (id-1)%10, tier = stop < 5 ? 0 : stop < 8 ? 1 : 2
+        return Level(id:id,title:"\(names[region%names.count]) \(id)",biome:"Expedition \(region+1)",moves:20-tier*2-variation-band,target:1400+tier*350+band*150+variation*100,goals:[a:12+tier*3+band+variation,b:9+tier*3+band+variation],frost:4+tier*3+band+variation)
+    }
+    // Saves made before this revision retain their original goals and turn budgets.
+    public static let legacyCampaign: [Level] = opening.map { original in
+        var level = original; level.rulesVersion = 1; return level
+    } + (13...total).map { id in
+        let region = (id-1)/10, names = GardenRegion.biomes
+        let a = Gem.allCases[id%5], b = Gem.allCases[(id+2)%5]
+        return Level(id:id,title:"\(names[region%names.count]) \(id)",biome:"Expedition \(region+1)",moves:16+id%5,target:1500+id%7*150,goals:[a:12+id%7,b:10+id%6],frost:4+id%9,rulesVersion:1)
+    }
+    public static func savedLevel(id:Int,rulesVersion:Int?) -> Level? {
+        guard (1...total).contains(id) else { return nil }
+        switch rulesVersion ?? 1 {
+        case 1: return legacyCampaign[id-1]
+        case 2: return campaign[id-1]
+        default: return nil
+        }
     }
     public static let opening: [Level] = [
         .init(id: 1, title: "A little life", biome: "Moonseed Meadow", moves: 10, target: 350, goals: [.leaf: 6], frost: 0),
@@ -107,6 +149,7 @@ public final class GameEngine {
         resetBoard()
         // Spread frost deterministically across the board, with no repeated cells.
         frost = Set((0..<level.frost).map { ($0 * 11 + 16) % 49 })
+        if level.isOneShot { prepareOneShot() }
     }
     private func key(_ index: Index) -> Int { index.row * 7 + index.column }
     private func index(_ key: Int) -> Index { Index(column: key % 7, row: key / 7) }
@@ -154,7 +197,7 @@ public final class GameEngine {
         }.map(\.key))
     }
     public func activate(_ tool: GardenTool, at cell: Int) -> Turn {
-        guard (0..<49).contains(cell), !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
+        guard !level.isOneShot, (0..<49).contains(cell), !won, !lost else { return .init(accepted:false,cascades:[],earnedCharge:false) }
         return resolve(initial:Set(blastArea(tool,at:cell).map(index)))
     }
     public func detonate(at cell:Int) -> Turn {
@@ -181,12 +224,13 @@ public final class GameEngine {
         turn.swappedCells = swapped; return turn
     }
     public func burst(at key: Int) -> Turn {
-        guard (0..<49).contains(key), !won, !lost else { return Turn(accepted: false, cascades: [], earnedCharge: false) }
+        guard !level.isOneShot, (0..<49).contains(key), !won, !lost else { return Turn(accepted: false, cascades: [], earnedCharge: false) }
         let row = key / 7, column = key % 7
         let indices = Set(board.grid.allIndices().filter { $0.row == row || $0.column == column })
         return resolve(initial: indices)
     }
     public func shuffle() {
+        guard !level.isOneShot else { return }
         // Rearrange actual identities, preserving all pieces and power-ups.
         for _ in 0..<150 {
             let order = Array(0..<49).shuffled()
@@ -195,7 +239,26 @@ public final class GameEngine {
         }
         resetBoard(preservePowers:true)
     }
-    public func addMoves(_ count: Int) { moves += max(0, count) }
+    public func addMoves(_ count: Int) { if !level.isOneShot { moves += max(0, count) } }
+    private func prepareOneShot() {
+        let rotation = ((level.id-30)/50)%4
+        func rotated(_ key:Int) -> Index {
+            var column = key%7, row = key/7
+            for _ in 0..<rotation { (column,row) = (6-row,column) }
+            return Index(column:column,row:row)
+        }
+        let color = ((level.id-30)/50)%5
+        for row in 0..<7 {
+            for column in 0..<7 {
+                _ = board.spawn(filling:Gem.allCases[(row*2+column+color)%5],at:rotated(row*7+column))
+            }
+        }
+        // One interrupted five-piece line and its neighboring donor. Rotate the puzzle
+        // between challenges; the correct real swipe is guaranteed without paid items.
+        for key in [22,23,25,26,17] { _ = board.spawn(filling:Gem.allCases[color],at:rotated(key)) }
+        _ = board.spawn(filling:Gem.allCases[(color+1)%5],at:rotated(24))
+        frost = Set([21,22,23,24,25,26,27,17].map { key(rotated($0)) })
+    }
     private func resolve(initial: Set<Index>, bloomWarmth: Bool = false) -> Turn {
         var matches = initial
         var waves: [Cascade] = []
@@ -290,10 +353,11 @@ extension GameEngine {
         public let collected: [Gem: Int]
         public let frost: Set<Int>
         public var specials: [UUID:GardenTool]? = nil
+        public var rulesVersion: Int? = nil
     }
-    public var snapshot: Snapshot { .init(levelID: level.id, grid: board.grid, score: score, moves: moves, collected: collected, frost: frost, specials:specials) }
+    public var snapshot: Snapshot { .init(levelID: level.id, grid: board.grid, score: score, moves: moves, collected: collected, frost: frost, specials:specials,rulesVersion:level.rulesVersion) }
     public convenience init?(snapshot: Snapshot) {
-        guard let level = Level.campaign.first(where: { $0.id == snapshot.levelID }), snapshot.grid.size == Size(columns: 7, rows: 7), snapshot.grid.columns.count == 7, snapshot.grid.columns.allSatisfy({ $0.count == 7 }), snapshot.moves >= 0 else { return nil }
+        guard let level = Level.savedLevel(id:snapshot.levelID,rulesVersion:snapshot.rulesVersion), snapshot.grid.size == Size(columns: 7, rows: 7), snapshot.grid.columns.count == 7, snapshot.grid.columns.allSatisfy({ $0.count == 7 }), snapshot.moves >= 0 else { return nil }
         self.init(level: level, seed: UInt64.random(in: 1...UInt64.max))
         board = Board(grid: snapshot.grid, basic: Set(Gem.allCases), bonuse: [], obstacles: [])
         specials = snapshot.specials ?? [:]

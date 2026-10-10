@@ -3,6 +3,33 @@ import Match3Kit
 @testable import OrbitBloomCore
 
 final class GameEngineTests: XCTestCase {
+    func testOneShotBoardsHaveAFreeWinningSwipeAcrossEveryVariant() throws {
+        let stages = Level.campaign.filter(\.isOneShot)
+        XCTAssertEqual(stages.count,20)
+        XCTAssertEqual(Set(stages.flatMap { $0.goals.keys }).count,5)
+        for level in stages {
+            for seed in [UInt64(1),42,999] {
+                let game = GameEngine(level:level,seed:seed)
+                XCTAssertTrue(game.board.findAllMatches().isEmpty)
+                XCTAssertEqual(game.moves,1); XCTAssertEqual(game.frost.count,8)
+                let before = game.cells.map(\.id)
+                XCTAssertFalse(game.swap(0,48).accepted)
+                XCTAssertEqual(game.moves,1)
+                XCTAssertFalse(game.activate(.rainbow,at:24).accepted)
+                XCTAssertFalse(game.burst(at:24).accepted)
+                game.shuffle(); game.addMoves(10)
+                XCTAssertEqual(game.cells.map(\.id),before); XCTAssertEqual(game.moves,1)
+                let move = try XCTUnwrap(game.bestMove())
+                XCTAssertTrue(game.swap(move.0,move.1).accepted)
+                XCTAssertTrue(game.won,"One-shot \(level.id) must have a free winning swipe")
+                XCTAssertEqual(game.moves,0)
+                XCTAssertFalse(game.swap(move.1,move.0).accepted)
+            }
+        }
+        let missed = GameEngine(level:stages[0],seed:1)
+        XCTAssertTrue(missed.harvestCluster(at:22).accepted)
+        XCTAssertTrue(missed.lost,"A legal move that misses the goals spends the one shot")
+    }
     func testBoardsStartStableAndAlwaysOfferAValidMove() {
         for seed in 1...100 {
             let game = GameEngine(level: Level.campaign[3], seed: UInt64(seed))
@@ -132,7 +159,7 @@ final class ProgressTests: XCTestCase {
         XCTAssertEqual(GardenRegion.all.count,102)
         let stages = GardenRegion.all.flatMap(\.levels)
         XCTAssertEqual(stages.map(\.id),Array(1...1020))
-        XCTAssertTrue(stages.allSatisfy { (10...20).contains($0.moves) })
+        XCTAssertTrue(stages.allSatisfy { $0.isOneShot ? $0.moves == 1 : (10...20).contains($0.moves) })
         let places = GardenRegion.all.flatMap { region in region.levels.map { region.placeName(for:$0.id) } }
         XCTAssertEqual(Set(places).count,1020)
         var progress = Progress()
@@ -145,6 +172,21 @@ final class ProgressTests: XCTestCase {
         XCTAssertTrue(GardenRegion.all[1].isUnlocked(progress:progress))
         XCTAssertTrue(progress.isUnlocked(11)); XCTAssertFalse(progress.isUnlocked(12))
         XCTAssertFalse(progress.isUnlocked(0)); XCTAssertFalse(progress.isUnlocked(1021))
+    }
+    func testDifficultyRhythmTightensAcrossTheCampaign() {
+        XCTAssertEqual(Level.campaign[0].difficulty,.simple)
+        XCTAssertEqual(Level.campaign[6].difficulty,.hard)
+        XCTAssertEqual(Level.campaign[8].difficulty,.superHard)
+        XCTAssertEqual(Level.campaign[29].difficulty,.oneShot)
+        XCTAssertEqual(Level.campaign[79].difficulty,.oneShot)
+        for firstID in 13...22 {
+            let early = Level.campaign[firstID-1], late = Level.campaign[firstID+600-1]
+            XCTAssertEqual(early.difficulty,late.difficulty)
+            XCTAssertLessThan(late.moves,early.moves)
+            XCTAssertGreaterThan(late.frost,early.frost)
+            XCTAssertGreaterThan(late.target,early.target)
+            for gem in early.goals.keys { XCTAssertGreaterThan(late.goals[gem]!,early.goals[gem]!) }
+        }
     }
     func testFirstWinAwardsOneStarAndReplaysNeverDuplicateIt() {
         var progress = Progress()

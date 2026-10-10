@@ -7,12 +7,12 @@ This revision follows the user's requested change from a single swap puzzle to a
 | System | Behavior for this build |
 | --- | --- |
 | World | Original SceneKit island; 102 horizontal pages × 10 sequential stops; in-scene farm/race gates and a field journal |
-| Bloom circuits | Swipe real neighboring pieces or tap botanical groups; resource goals, frost, 10–20 turns, 1,020 stages (12 authored + 1,008 generated) |
+| Bloom circuits | Swipe real neighboring pieces or tap botanical groups; resource goals and frost, 10–20 turns on normal stages plus twenty one-move challenges; 1,020 stages (12 opening + 1,008 generated) |
 | Tools | Bomb: 3×3 area; TNT: row and column; mega bomb: 5×5 area; rainbow: every piece matching the selected color |
 | Farming | Six persistent plots, rose/apple selection, plant/water/grow/harvest, offline elapsed growth, produce and compost |
 | Crafting | Harvest compost creates garden tools; puzzle dew refills farming water |
 | Delivery race | Swipe-steered three-lane rover, obstacles, pickups, health, finish, cargo delivery and coin reward |
-| Lives | Five regenerating puzzle lives; one every 1,800 seconds, including while closed; wins return the spent life; extra purchased lives never expire |
+| Lives | Five regenerating puzzle lives; one every 1,800 seconds, including while closed; start spends one, abandon keeps it spent without another charge, wins return it; purchased extra lives never expire |
 | Economy | Shared earned/purchased coins; refill with coins; consumable coin and extra-life packs; duplicate verified transactions cannot grant twice |
 | Pricing draft | ₹99/₹299/₹499/₹999 coin packs, ₹99 extra-life pack, one-time ₹99 starter bundle with a transparent bonus. Live prices always come from StoreKit |
 | Feedback | Dimensional alpha sprites, particles, tool blasts, coin travel into the balance, button/harvest/collision/finish sounds, looping mode music, mute settings |
@@ -73,3 +73,9 @@ Private Apple saves remain the sole cloud save system, as requested by the owner
 ## Build 8 journal adaptation — 10 October 2026
 
 The field journal now wraps its complete help, reward and power descriptions. Available height and Dynamic Type determine one to three rewards or one to four formations per horizontal page. Accessibility sizes move the claim action below its description. The selected entry is retained when page capacity changes; “Journal pages” exposes a named adjustable action and page value. Page updates respect Reduce Motion. Assistance prices, claim rules, saved progress and in-world entry points are unchanged. Actual large-text traversal and iPad portrait/landscape evidence are in [the focused audit](MOBILE_JOURNAL_AUDIT.md) and [test report](TEST_REPORT.md).
+
+## Build 9 exit and difficulty — 10 October 2026
+
+A visible Back arrow and Pause both offer a confirmation before abandoning; cancel preserves the board. Restart explains that it spends another life. Abandon clears only the current puzzle and keeps its initial life spent, without a second debit. World, farm, currency and purchases remain saved.
+
+Simple, Hard and Super hard stages are visibly labeled and mixed across each later ten-stop page. Normal generated budgets tighten in 200-stage bands, remaining within 10–20 moves while goals and frost increase. Twenty One shot stages begin at 30 and recur every 50 stages: one move, hints allowed, no tools/bursts/shuffles, with a guaranteed free winning swipe across five colors and four rotations. Legacy active sessions retain their exact previous rules. New active rules use a versioned snapshot and schema-2 cloud envelope so old clients cannot reinterpret them. [Rules and focused UX audit](DIFFICULTY_AND_EXIT.md) describe the behavior and verification limits.

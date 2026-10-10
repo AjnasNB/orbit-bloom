@@ -2,6 +2,34 @@ import XCTest
 @testable import OrbitBloomCore
 
 final class SavedGardenTests: XCTestCase {
+    func testDifficultyUpdatePreservesLegacySessionsAndRejectsFutureRules() throws {
+        let old = GameEngine(level:Level.legacyCampaign[79],seed:8080)
+        var snapshot = old.snapshot; snapshot.rulesVersion = nil
+        let restored = try XCTUnwrap(GameEngine(snapshot:snapshot))
+        XCTAssertEqual(restored.level.rulesVersion,1)
+        XCTAssertEqual(restored.level.moves,16)
+        XCTAssertEqual(restored.level.goals,old.level.goals)
+        XCTAssertEqual(restored.cells.map(\.id),old.cells.map(\.id))
+        XCTAssertFalse(restored.level.isOneShot)
+        var wallet = GardenWallet()
+        for id in 1..<80 { _ = wallet.progress.finish(level:id,score:500) }
+        wallet.session = snapshot
+        XCTAssertTrue(wallet.isValid,"An old 16-turn save must survive the new one-turn stage definition")
+        XCTAssertNotNil(SavedGarden.decode(try SavedGarden(playerKey:"player",wallet:wallet).encoded(),playerKey:"player"))
+        wallet.session = GameEngine(level:Level.campaign[79],seed:8080).snapshot
+        XCTAssertTrue(wallet.isValid)
+        var newCloud = SavedGarden(playerKey:"player",wallet:wallet)
+        XCTAssertEqual(newCloud.schema,2)
+        XCTAssertNotNil(SavedGarden.decode(try newCloud.encoded(),playerKey:"player"))
+        newCloud.schema = 1
+        XCTAssertNil(SavedGarden.decode(try newCloud.encoded(),playerKey:"player"),"New active rules cannot masquerade as an older cloud format")
+        let current = try XCTUnwrap(GameEngine(snapshot:try XCTUnwrap(wallet.session)))
+        XCTAssertTrue(current.level.isOneShot); XCTAssertEqual(current.moves,1)
+        snapshot.rulesVersion = 999; wallet.session = snapshot
+        XCTAssertFalse(wallet.isValid); XCTAssertNil(GameEngine(snapshot:snapshot))
+        snapshot.rulesVersion = 2; wallet.session = snapshot
+        XCTAssertFalse(wallet.isValid,"Changing a legacy marker cannot grant excess turns to a one-shot stage")
+    }
     func testMalformedTimersAreRejectedBeforeRestoring() throws {
         var wallet = GardenWallet()
         wallet.ecosystem.lives.hearts = 0
@@ -53,7 +81,7 @@ final class SavedGardenTests: XCTestCase {
         var save = SavedGarden(playerKey: "player-a", wallet: GardenWallet())
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-b"))
         XCTAssertNil(SavedGarden.decode(Data("broken".utf8), playerKey: "player-a"))
-        save.schema = 2
+        save.schema = 3
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-a"))
         save.schema = 1; save.wallet.progress.coins = -10
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-a"))

@@ -10,6 +10,67 @@ import StoreKitTest
         XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
     }
     func attach(_ name:String) { let shot = XCTAttachment(screenshot:app.screenshot()); shot.name = name; shot.lifetime = .keepAlways; add(shot) }
+    func confirmLeave() {
+        app.buttons["leaveLevel"].tap()
+        XCTAssertTrue(app.buttons["confirmAbandon"].waitForExistence(timeout:5))
+        app.buttons["confirmAbandon"].tap()
+    }
+    func testBackCancelAbandonAndRestartChargeExactlyOneLifePerAttempt() throws {
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("5 lives"))
+        app.buttons["playLevel"].tap()
+        XCTAssertTrue(app.buttons["backFromPuzzle"].waitForExistence(timeout:5))
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("4 lives"))
+        let moves = app.staticTexts["movesCounter"].label
+        app.buttons["backFromPuzzle"].tap()
+        XCTAssertTrue(app.buttons["confirmAbandon"].waitForExistence(timeout:5))
+        XCTAssertTrue(app.staticTexts["abandonExplanation"].label.contains("charge another"))
+        attach("build9-abandon-confirmation")
+        app.buttons["cancelAbandon"].tap()
+        XCTAssertEqual(app.staticTexts["movesCounter"].label,moves)
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("4 lives"))
+        app.buttons["pauseGame"].tap(); confirmLeave()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("4 lives"))
+        app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:10))
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("4 lives"))
+        app.buttons["playLevel"].tap(); app.buttons["pauseGame"].tap()
+        app.buttons["restartLevel"].tap()
+        XCTAssertTrue(app.buttons["confirmRestart"].waitForExistence(timeout:5))
+        app.buttons["cancelAbandon"].tap()
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("3 lives"))
+        app.buttons["pauseGame"].tap(); app.buttons["restartLevel"].tap()
+        app.buttons["confirmRestart"].tap()
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("2 lives"))
+        app.buttons["backFromPuzzle"].tap(); app.buttons["confirmAbandon"].tap()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("2 lives"))
+    }
+    func testOneShotDifficultyUsesARealWinningSwipeAndReturnsTheLife() throws {
+        app.terminate(); app.launchArguments = ["--uitesting","--ui-stage","30"]; app.launch()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
+        let badge = app.descendants(matching:.any)["selectedDifficulty"].firstMatch
+        XCTAssertTrue(badge.label.contains("One shot"))
+        attach("build9-one-shot-island")
+        app.buttons["playLevel"].tap()
+        XCTAssertEqual(app.staticTexts["movesCounter"].label,"1")
+        XCTAssertTrue(app.descendants(matching:.any)["puzzleDifficulty"].firstMatch.label.contains("ultra super hard"))
+        XCTAssertFalse(app.buttons["burstButton"].isEnabled)
+        XCTAssertFalse(app.buttons["shuffleButton"].isEnabled)
+        XCTAssertFalse(app.buttons["toolrainbow"].isEnabled)
+        attach("build9-one-shot-puzzle")
+        try winCurrentLevel()
+        attach("build9-one-shot-victory")
+        app.buttons["backToGarden"].tap()
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("5 lives"))
+        XCTAssertTrue(app.buttons["level31"].isEnabled)
+        XCTAssertTrue(app.descendants(matching:.any)["selectedDifficulty"].firstMatch.label.contains("Simple"))
+        app.descendants(matching:.any)["gardenMap"].firstMatch.swipeRight()
+        app.buttons["level29"].tap()
+        XCTAssertTrue(app.descendants(matching:.any)["selectedDifficulty"].firstMatch.label.contains("Super hard"))
+        app.buttons["level28"].tap()
+        XCTAssertTrue(app.descendants(matching:.any)["selectedDifficulty"].firstMatch.label.contains("Hard"))
+    }
     func testJournalLargeTextKeepsEveryRewardAndPowerReachable() throws {
         app.terminate()
         app.launchArguments = ["--uitesting", "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityM"]
@@ -191,7 +252,7 @@ import StoreKitTest
         app.buttons["returnWorld"].tap(); app.buttons["playLevel"].tap()
         app.buttons["tooltnt"].tap(); app.buttons["tile24"].tap(); settle()
         if app.staticTexts["winTitle"].exists { app.buttons["backToGarden"].tap() }
-        else { app.buttons["pauseGame"].tap(); app.buttons["leaveLevel"].tap() }
+        else { app.buttons["pauseGame"].tap(); confirmLeave() }
         app.buttons["openFarm"].tap()
         let amount = try XCTUnwrap(Int(water.label.replacingOccurrences(of:"Water: ",with:"")))
         XCTAssertGreaterThan(amount,12,"Collected puzzle dew must be available for planting")
@@ -252,7 +313,7 @@ import StoreKitTest
         app.buttons["pauseGame"].tap(); XCTAssertTrue(app.buttons["resumeGame"].exists); app.buttons["resumeGame"].tap()
         app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch()
         XCTAssertTrue(app.buttons["tile0"].waitForExistence(timeout:10)); XCTAssertEqual(app.staticTexts["movesCounter"].label,before)
-        app.buttons["pauseGame"].tap(); app.buttons["leaveLevel"].tap(); app.buttons["openShop"].tap(); attach("v2-12-lives-and-shop")
+        app.buttons["pauseGame"].tap(); confirmLeave(); app.buttons["openShop"].tap(); attach("v2-12-lives-and-shop")
         XCTAssertTrue(app.staticTexts["lifeTimer"].exists); XCTAssertTrue(app.buttons["refillLives"].isEnabled)
         app.buttons["refillLives"].tap(); XCTAssertFalse(app.buttons["refillLives"].isEnabled)
         app.buttons["explorePacks"].tap(); attach("v2-13-coin-packs")
@@ -331,7 +392,9 @@ import StoreKitTest
         XCTAssertEqual(app.scrollViews.count, 0)
         capture("ipad-07-puzzle-landscape")
         app.buttons["pauseGame"].tap(); fits(app.buttons["leaveLevel"])
-        app.buttons["leaveLevel"].tap(); fits(app.buttons["openFarm"])
+        app.buttons["leaveLevel"].tap(); fits(app.buttons["confirmAbandon"])
+        capture("build9-ipad-abandon-confirmation")
+        app.buttons["confirmAbandon"].tap(); fits(app.buttons["openFarm"])
         fits(app.buttons["openRace"]); fits(app.buttons["playLevel"])
         capture("ipad-08-world-landscape")
         app.buttons["openTasks"].tap()

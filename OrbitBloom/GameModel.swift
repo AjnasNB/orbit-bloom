@@ -59,6 +59,15 @@ import Match3Kit
             defaults.data(forKey: key).flatMap { try? JSONDecoder().decode(GardenWallet.self, from: $0) }
         }.first(where: { $0.isValid })
         if let wallet { progress = wallet.progress; ecosystem = wallet.ecosystem; assistance = wallet.assistance ?? Assistance() }
+        #if DEBUG
+        // Explicit, resetting Store QA fixture. Never runs in Release or with keep-progress.
+        if testing && !ProcessInfo.processInfo.arguments.contains("--keep-progress"),
+           let option = ProcessInfo.processInfo.arguments.firstIndex(of:"--ui-stage"),
+           ProcessInfo.processInfo.arguments.indices.contains(option+1),
+           let stage = Int(ProcessInfo.processInfo.arguments[option+1]), (1...Level.total).contains(stage) {
+            for id in 1..<stage { _ = progress.finish(level:id,score:500) }
+        }
+        #endif
         creditedOnDevice.formUnion(ecosystem.creditedTransactions)
         ecosystem.lives.refresh(at:Date())
         // Resume a saved puzzle, including earned/consumed boosters.
@@ -144,7 +153,7 @@ import Match3Kit
         let seed = UInt64(level.id * 101)
         engine = GameEngine(level: level, seed: seed)
         selected = nil; hinted = []; clearing = []; result = nil; busy = false; paused = false
-        charged = false; burstMode = false; hintText = ""; message = "Swipe neighbors to match three, or tap a touching group."
+        charged = false; burstMode = false; hintText = ""; message = level.isOneShot ? "One move to clear every goal. Hints work; tools and shuffle rest." : "Swipe neighbors to match three, or tap a touching group."
         sync(); save()
     }
     func sync() {
@@ -185,6 +194,7 @@ import Match3Kit
     }
     func selectTool(_ tool: GardenTool) {
         guard !busy else { return }
+        guard engine?.level.isOneShot != true else { showToast("One-shot circuits use one move. Your tools stay in your supplies."); return }
         guard ecosystem.tools[tool,default:0] > 0 else { showToast("Harvest compost in Farm to craft this tool."); return }
         pendingTool = pendingTool == tool ? nil : tool; burstMode = false
         message = pendingTool == nil ? "Swipe neighbors or tap a touching group." : tool.detail + ". Tap a target."; effect("tap")
@@ -246,6 +256,7 @@ import Match3Kit
     }
     func shuffle() {
         guard !busy, let engine else { return }
+        guard !engine.level.isOneShot else { showToast("This one-shot formation stays fixed. A hint can help."); return }
         guard assistance.spendShuffle(coins:&progress.coins) else { showToast("Earn shuffles in Field Tasks, or use 15 earned coins."); return }
         hinted = []; hintText = ""; effect("cascade")
         withAnimation(UIAccessibility.isReduceMotionEnabled ? nil : .spring(response:0.55,dampingFraction:0.7)) { engine.shuffle(); sync() }
@@ -257,11 +268,17 @@ import Match3Kit
     }
     func toggleBurst() {
         guard !busy else { return }
+        guard engine?.level.isOneShot != true else { showToast("One-shot circuits use one move. Your bursts are kept."); return }
         guard charged || progress.boosters > 0 else { showToast("Get a burst in the shop for 80 earned coins."); return }
         burstMode.toggle(); selected = nil
         message = burstMode ? "Tap a piece to clear its row and column." : "Swipe neighbors to match three, or tap a touching group."
     }
-    func leave() { pendingTool = nil; blastKey = nil; blastID = UUID(); runID = UUID(); engine = nil; result = nil; busy = false; paused = false; save() }
+    func leave() { pendingTool = nil; blastKey = nil; blastID = UUID(); runID = UUID(); engine = nil; result = nil; busy = false; paused = false; charged = false; burstMode = false; hinted = []; clearing = []; hintText = ""; save() }
+    func abandonCircuit() {
+        guard engine != nil else { return }
+        // A life was already committed by start(). Leaving never charges a second one.
+        leave(); tab = 0; showToast("Circuit left. The attempt's life stays spent; your world is saved.")
+    }
     func gardenAfterWin() { leave(); tab = 0 }
     func restore(_ task: GardenTask) {
         if progress.restore(task.id) { save(); showToast(progress.gardenComplete ? "Your little world is in bloom!" : "\(task.title) · restored!"); feedback(.medium) }

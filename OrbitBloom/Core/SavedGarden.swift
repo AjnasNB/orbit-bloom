@@ -46,7 +46,7 @@ public struct GardenWallet: Codable {
         }
         if let session {
             guard progress.isUnlocked(session.levelID), (0...100_000_000).contains(session.score),
-                  session.moves <= Level.campaign[session.levelID - 1].moves,
+                  let level = Level.savedLevel(id:session.levelID,rulesVersion:session.rulesVersion), session.moves <= level.moves,
                   session.collected.values.allSatisfy({ (0...100_000_000).contains($0) }),
                   session.frost.allSatisfy({ (0..<49).contains($0) }),
                   GameEngine(snapshot: session) != nil else { return false }
@@ -69,12 +69,15 @@ public struct SavedGarden: Codable, Identifiable {
     public var wallet: GardenWallet
     public init(id: UUID = UUID(), playerKey: String, savedAt: Date = Date(), wallet: GardenWallet) {
         self.id = id; self.playerKey = playerKey; self.savedAt = savedAt; self.wallet = wallet
+        // Old clients must reject new active rules rather than reinterpret their goals.
+        self.schema = wallet.session?.rulesVersion == 2 ? 2 : 1
     }
     public func encoded() throws -> Data { try JSONEncoder().encode(self) }
     public static func decode(_ data: Data, playerKey: String) -> SavedGarden? {
         guard data.count <= 1_000_000,
               let save = try? JSONDecoder().decode(Self.self, from: data),
-              save.schema == 1, save.playerKey == playerKey, !playerKey.isEmpty,
+              (1...2).contains(save.schema), !(save.schema == 1 && save.wallet.session?.rulesVersion == 2),
+              save.playerKey == playerKey, !playerKey.isEmpty,
               validSaveDate(save.savedAt), save.wallet.isValid else { return nil }
         return save
     }

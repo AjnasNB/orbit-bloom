@@ -112,7 +112,8 @@ struct GardenView: View {
             VStack(spacing:8) {
                 Text("Swipe across the island to explore").font(.system(size:11,weight:.semibold,design:.rounded)).foregroundStyle(Palette.mint)
                 if game.progress.isUnlocked(chosen) {
-                    PrimaryButton(title:"Bloom circuits",subtitle:"Level \(chosen) · \(Level.campaign[chosen-1].moves) turns",symbol:"leaf.fill",id:"playLevel") { game.start(Level.campaign[chosen-1]) }
+                    DifficultyBadge(level:Level.campaign[chosen-1]).accessibilityIdentifier("selectedDifficulty")
+                    PrimaryButton(title:"Bloom circuits",subtitle:"Level \(chosen) · \(Level.campaign[chosen-1].moves) \(Level.campaign[chosen-1].moves == 1 ? "turn" : "turns")",symbol:"leaf.fill",id:"playLevel") { game.start(Level.campaign[chosen-1]) }
                 } else {
                     Text("Finish level \(game.progress.nextLevel) to open this island").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.mint).frame(minHeight:60).frame(maxWidth:.infinity).background(Palette.paper,in:RoundedRectangle(cornerRadius:22))
                     Button("Return to your open island") { openCurrent() }.font(.subheadline.bold()).foregroundStyle(Palette.night).frame(minHeight:44).accessibilityIdentifier("openCurrentIsland")
@@ -165,7 +166,7 @@ struct GardenMapScene: View {
                             if completed { Image(systemName:"star.fill").font(.system(size:13)).foregroundStyle(Palette.gold).offset(x:17,y:-17) }
                             if selected == level.id && unlocked { Image(systemName:"arrowtriangle.down.fill").font(.system(size:16)).foregroundStyle(Palette.coral).offset(y:-33) }
                         }.frame(width:46,height:46).shadow(color:Palette.night.opacity(0.18),radius:2,y:3)
-                    }.buttonStyle(PressStyle()).disabled(!unlocked).position(point((level.id-1)%10,geo.size)).accessibilityLabel("Level \(level.id), \(GardenRegion.all[page].placeName(for:level.id)), \(completed ? "completed" : unlocked ? "open" : "locked")").accessibilityIdentifier("level\(level.id)")
+                    }.buttonStyle(PressStyle()).disabled(!unlocked).position(point((level.id-1)%10,geo.size)).accessibilityLabel("Level \(level.id), \(level.difficulty.title), \(GardenRegion.all[page].placeName(for:level.id)), \(completed ? "completed" : unlocked ? "open" : "locked")").accessibilityIdentifier("level\(level.id)")
                 }
                 VStack { HStack { Text("\(GardenRegion.all[page].levels.first!.id)–\(GardenRegion.all[page].levels.last!.id)").font(.system(size:11,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night).padding(9).background(Palette.paper.opacity(0.9),in:Capsule()).accessibilityIdentifier("islandRange"); Spacer() }; Spacer() }.padding(.horizontal,22).padding(.top,8).allowsHitTesting(false)
             }

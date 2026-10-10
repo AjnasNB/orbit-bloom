@@ -97,6 +97,39 @@ import StoreKitTest
 }
 
 @MainActor final class SessionTests: XCTestCase {
+    func testAbandonKeepsExactlyTheStartedLifeSpentAndSurvivesRelaunch() throws {
+        let suite = "orbitbloom.abandon.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))
+        defer { defaults.removePersistentDomain(forName:suite) }
+        let model = GameModel(defaults:defaults), coins = model.progress.coins
+        model.start(Level.campaign[0]); let board = model.cells.map(\.id)
+        XCTAssertEqual(model.ecosystem.lives.total,4)
+        model.paused = true; model.paused = false
+        XCTAssertEqual(model.cells.map(\.id),board); XCTAssertEqual(model.ecosystem.lives.total,4)
+        model.tab = 4; model.abandonCircuit(); model.abandonCircuit()
+        XCTAssertNil(model.engine); XCTAssertEqual(model.tab,0)
+        XCTAssertEqual(model.ecosystem.lives.total,4,"Leaving must not charge a second life")
+        XCTAssertEqual(model.progress.coins,coins)
+        let restored = GameModel(defaults:defaults)
+        XCTAssertNil(restored.engine); XCTAssertEqual(restored.ecosystem.lives.total,4)
+        restored.start(Level.campaign[0]); XCTAssertEqual(restored.ecosystem.lives.total,3)
+        restored.start(Level.campaign[0]); XCTAssertEqual(restored.ecosystem.lives.total,2,"Restarting starts another paid-in-life attempt")
+        restored.abandonCircuit(); XCTAssertEqual(restored.ecosystem.lives.total,2)
+    }
+    func testOneShotBlockedAssistanceKeepsEveryInventoryBalance() throws {
+        let suite = "orbitbloom.oneshot.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))
+        defer { defaults.removePersistentDomain(forName:suite) }
+        let model = GameModel(defaults:defaults)
+        for id in 1..<30 { _ = model.progress.finish(level:id,score:500) }
+        model.start(Level.campaign[29])
+        let tools = model.ecosystem.tools, boosters = model.progress.boosters, assistance = model.assistance, coins = model.progress.coins
+        model.selectTool(.tnt); model.toggleBurst(); model.shuffle()
+        XCTAssertNil(model.pendingTool); XCTAssertFalse(model.burstMode)
+        XCTAssertEqual(model.ecosystem.tools,tools); XCTAssertEqual(model.progress.boosters,boosters)
+        XCTAssertEqual(model.assistance,assistance); XCTAssertEqual(model.progress.coins,coins)
+        XCTAssertEqual(model.moves,1)
+    }
     func testLockedCircuitCannotSpendLifeOrReplaceSession() throws {
         let suite = "orbitbloom.lock.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName:suite))

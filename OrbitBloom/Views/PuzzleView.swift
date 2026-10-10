@@ -4,23 +4,33 @@ struct PuzzleView: View {
     @EnvironmentObject var game: GameModel
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @GestureState private var pieceDragActive = false
+    private enum ExitChoice { case abandon, restart }
+    @State private var exitChoice: ExitChoice?
+    var oneShot: Bool { game.engine?.level.isOneShot == true }
     var body: some View {
         ZStack {
             VStack(spacing:0) {
                 GameHUD()
                 VStack(spacing:10) {
                         HStack {
-                            Button { game.paused = true; game.effect("tap") } label: { Image(systemName:"pause.fill").frame(width:44,height:44).background(Palette.deep,in:Circle()) }.foregroundStyle(Palette.cream).accessibilityLabel("Pause garden").accessibilityIdentifier("pauseGame")
+                            HStack(spacing:4) {
+                                Button { requestExit(.abandon) } label: { Image(systemName:"arrow.uturn.backward").frame(width:44,height:44).background(Palette.deep,in:Circle()) }.accessibilityLabel("Back to island").accessibilityHint("Confirm abandoning this attempt and its spent life").accessibilityIdentifier("backFromPuzzle")
+                                Button { game.paused = true; game.effect("tap") } label: { Image(systemName:"pause.fill").frame(width:44,height:44).background(Palette.deep,in:Circle()) }.accessibilityLabel("Pause garden").accessibilityIdentifier("pauseGame")
+                            }.foregroundStyle(Palette.cream).disabled(game.busy)
                             Spacer()
-                            VStack(spacing:4) { SectionEyebrow(text:"Bloom circuit \(game.engine?.level.id ?? 1)"); Text(game.engine?.level.title ?? "Garden").font(.system(.headline,design:.rounded)).foregroundStyle(Palette.cream) }
+                            VStack(spacing:4) {
+                                SectionEyebrow(text:"Bloom circuit \(game.engine?.level.id ?? 1)")
+                                Text(game.engine?.level.title ?? "Garden").font(.system(.headline,design:.rounded)).foregroundStyle(Palette.cream)
+                                if let level = game.engine?.level { DifficultyBadge(level:level).accessibilityIdentifier("puzzleDifficulty") }
+                            }
                             Spacer()
-                            VStack(spacing:2) { Text("\(game.moves)").font(.system(size:28,weight:.black,design:.rounded)).foregroundStyle(Palette.gold).accessibilityIdentifier("movesCounter"); Text("TURNS").font(.system(size:8,weight:.bold)).tracking(2).foregroundStyle(Palette.mint) }.frame(width:44)
+                            VStack(spacing:2) { Text("\(game.moves)").font(.system(size:28,weight:.black,design:.rounded)).foregroundStyle(Palette.gold).accessibilityIdentifier("movesCounter"); Text(game.moves == 1 ? "TURN" : "TURNS").font(.system(size:8,weight:.bold)).tracking(2).foregroundStyle(Palette.mint) }.frame(width:44)
                         }
                         goals
                         HStack(spacing:12) {
                             utility(game.assistance.freeHints > 0 ? "Hint · \(game.assistance.freeHints) free" : "Hint · 3 coins","lightbulb.fill",id:"hintButton") { game.hint() }
-                            utility(game.charged ? "Burst ready" : "Cross burst","sparkles",id:"burstButton") { game.toggleBurst() }.accessibilityLabel(game.charged ? "Ready! Cross burst" : "Cross burst")
-                            utility(game.assistance.shuffles > 0 ? "Shuffle · \(game.assistance.shuffles)" : "Shuffle · 15","shuffle",id:"shuffleButton") { game.shuffle() }
+                            utility(game.charged ? "Burst ready" : "Cross burst","sparkles",id:"burstButton") { game.toggleBurst() }.accessibilityLabel(game.charged ? "Ready! Cross burst" : "Cross burst").disabled(oneShot)
+                            utility(game.assistance.shuffles > 0 ? "Shuffle · \(game.assistance.shuffles)" : "Shuffle · 15","shuffle",id:"shuffleButton") { game.shuffle() }.disabled(oneShot)
                         }
                         Text(game.hintText.isEmpty ? "Swipe for 3 in a row, or tap 2+ touching pieces." : game.hintText).font(.system(size:10,design:.rounded)).foregroundStyle(Palette.gold).frame(height:14).accessibilityIdentifier("hintInstruction")
                 }.padding(.horizontal,20).padding(.bottom,10).frame(maxWidth:550).frame(maxWidth:.infinity)
@@ -32,15 +42,16 @@ struct PuzzleView: View {
                             ForEach(GardenTool.allCases) { tool in
                                 Button { game.selectTool(tool) } label: {
                                     VStack(spacing:4) { SpriteView(index:tool.sprite).frame(height:36); Text(tool.title).font(.system(size:10,weight:.bold,design:.rounded)); Text("×\(game.ecosystem.tools[tool,default:0])").font(.system(size:11,weight:.bold,design:.rounded)).foregroundStyle(Palette.gold) }.foregroundStyle(Palette.cream).frame(maxWidth:.infinity).padding(.vertical,6).background(game.pendingTool == tool ? Palette.mint.opacity(0.25) : Palette.deep,in:RoundedRectangle(cornerRadius:17)).overlay(RoundedRectangle(cornerRadius:17).stroke(game.pendingTool == tool ? Palette.gold : .clear,lineWidth:2))
-                                }.disabled(game.busy).accessibilityLabel("\(tool.title), \(game.ecosystem.tools[tool,default:0]) available. \(tool.detail)").accessibilityIdentifier("tool\(tool.rawValue)")
+                    }.disabled(game.busy || oneShot).accessibilityLabel("\(tool.title), \(game.ecosystem.tools[tool,default:0]) available. \(tool.detail)\(oneShot ? ". Kept in supplies during one-shot circuits" : "")").accessibilityIdentifier("tool\(tool.rawValue)")
                             }
                         }
-                        Text("4 in line: Bomb · L/T: TNT · 5 in line: Rainbow. Tap a board power-up to blast and chain nearby tools.").font(.system(size:10,design:.rounded)).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
+                        Text(oneShot ? "Ultra super hard · one move. Tools, bursts and shuffle stay in your supplies. Hints work." : "4 in line: Bomb · L/T: TNT · 5 in line: Rainbow. Tap a board power-up to blast and chain nearby tools.").font(.system(size:10,design:.rounded)).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
                     }.padding(.horizontal,20).padding(.bottom,20).frame(maxWidth:550).frame(maxWidth:.infinity)
                 }.id(game.engine?.level.id)
             }.disabled(game.result != nil || game.paused).accessibilityHidden(game.result != nil || game.paused)
             if let won = game.result { resultView(won) }
-            if game.paused { pauseView }
+            if game.paused && exitChoice == nil { pauseView }
+            if let choice = exitChoice { exitConfirmation(choice) }
         }
     }
     var goals: some View {
@@ -115,10 +126,40 @@ struct PuzzleView: View {
                 Text("A little breather.").font(.system(size:32,weight:.bold,design:.rounded)).foregroundStyle(Palette.cream)
                 Text("Swipe neighbors for 3 in a row, or tap 2+ touching pieces. 4 in line makes a Bomb, L/T makes TNT, a 7-piece cross makes Mega, and 5 in line makes Rainbow. Tap power-ups to chain blasts.").font(.body).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
                 PrimaryButton(title:"Keep growing",id:"resumeGame") { game.paused = false }
-                Button("Restart · spend another life") { if let level = game.engine?.level { game.start(level) } }.foregroundStyle(Palette.gold).frame(minHeight:44).accessibilityIdentifier("restartLevel")
-                Button("Leave circuit · keep world progress") { game.leave() }.foregroundStyle(Palette.muted).frame(minHeight:44).accessibilityIdentifier("leaveLevel")
+                Button("Restart · spend another life") { requestExit(.restart) }.foregroundStyle(Palette.gold).frame(minHeight:44).accessibilityIdentifier("restartLevel")
+                Button("Back to island · abandon attempt") { requestExit(.abandon) }.foregroundStyle(Palette.muted).frame(minHeight:44).accessibilityIdentifier("leaveLevel")
+                Text("Pausing keeps your puzzle. Abandoning keeps this attempt's life spent.").font(.caption).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
             }.padding(28).frame(maxWidth:500)
         }.accessibilityElement(children:.contain)
+    }
+    private func requestExit(_ choice:ExitChoice) {
+        guard !game.busy, game.result == nil else { return }
+        game.paused = true; exitChoice = choice; game.effect("tap")
+    }
+    private func exitConfirmation(_ choice:ExitChoice) -> some View {
+        ZStack {
+            Palette.paper.opacity(0.98).ignoresSafeArea()
+            VStack(spacing:22) {
+                Image(systemName:"heart.fill").font(.system(size:60)).foregroundStyle(Palette.coral).accessibilityHidden(true)
+                Text(choice == .abandon ? "Leave this circuit?" : "Restart this circuit?").font(.system(.title,design:.rounded,weight:.heavy)).foregroundStyle(Palette.night).multilineTextAlignment(.center)
+                Text(choice == .abandon ? "This attempt used one life. Leaving won't return it or charge another. Your completed levels, crops, coins and purchases stay saved." : "This attempt's life stays spent. Restarting spends one more life and resets this puzzle. Your world progress stays saved.").font(.body).foregroundStyle(Palette.mint).multilineTextAlignment(.center).fixedSize(horizontal:false,vertical:true).accessibilityIdentifier("abandonExplanation")
+                PrimaryButton(title:choice == .abandon ? "Abandon · lose 1 life" : "Restart · 1 more life",symbol:"arrow.uturn.backward",id:choice == .abandon ? "confirmAbandon" : "confirmRestart") {
+                    exitChoice = nil
+                    if choice == .abandon { game.abandonCircuit() }
+                    else if let level = game.engine?.level { game.start(level) }
+                }
+                Button("Keep playing") { exitChoice = nil; game.paused = false }.font(.headline).foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:44).accessibilityIdentifier("cancelAbandon")
+            }.padding(28).frame(maxWidth:500)
+        }.accessibilityElement(children:.contain)
+    }
+}
+
+struct DifficultyBadge: View {
+    let level: Level
+    var tint: Color { switch level.difficulty { case .simple: return Palette.mint; case .hard: return Palette.gold; case .superHard: return Palette.coral; case .oneShot: return Color(hex:0x685291) } }
+    var body: some View {
+        Label(level.difficulty.title,systemImage:level.difficulty.symbol).font(.system(size:11,weight:.heavy,design:.rounded)).foregroundStyle(tint).padding(.horizontal,10).padding(.vertical,4).background(Palette.paper,in:Capsule())
+            .accessibilityElement(children:.ignore).accessibilityLabel("\(level.difficulty.title)\(level.isOneShot ? ", ultra super hard, one move, hints allowed" : " difficulty")")
     }
 }
 
