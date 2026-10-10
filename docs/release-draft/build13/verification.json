@@ -1,0 +1,92 @@
+{
+  "build": 13,
+  "sourceCommit": "d6780355d5350b42c2225e427a1cbcef3787ba7c",
+  "verifiedAtUTC": "2026-10-10T15:27:40.335675+00:00",
+  "kind": "Local native simulator verification; not an Apple distribution upload",
+  "uniquePassingCases": 109,
+  "cases": {
+    "core": 49,
+    "native": 49,
+    "phoneUI": 10,
+    "iPadUI": 1
+  },
+  "core": {
+    "log": "evidence/build13-core.log",
+    "failed": 0,
+    "durationSeconds": 24.549,
+    "campaignLevels": 1020,
+    "gardenProjects": 6,
+    "legalSwaps": 6427,
+    "retries": 10,
+    "paidItemsOrExtraMoves": false
+  },
+  "finalResults": [
+    {
+      "bundle": "evidence/Build13-PhoneVerified.xcresult",
+      "passed": 57,
+      "failed": 0,
+      "skipped": 0,
+      "includes": "49 native + eight phone UI cases"
+    },
+    {
+      "bundle": "evidence/Build13-SevenRooms.xcresult",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "includes": "All seven doors/exits; four real skill wins, reward persistence and next challenges"
+    },
+    {
+      "bundle": "evidence/Build13-PhoneGallery.xcresult",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "includes": "Repeated Farm/Shop cases after capture settling; reruns count once"
+    },
+    {
+      "bundle": "evidence/Build13-iPad.xcresult",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "includes": "Garden/board, all tiles, tools and exits in portrait and landscape"
+    }
+  ],
+  "diagnostics": [
+    {
+      "bundle": "evidence/Build13-Phone.xcresult",
+      "passed": 56,
+      "failed": 1,
+      "skipped": 0,
+      "reason": "Initial diamond touches cell edge; repair and closer native crop pass in PhoneVerified. Retained failed diagnostic is not relabeled passed."
+    }
+  ],
+  "screenshots": {
+    "count": 25,
+    "manifest": "manifest.json",
+    "nativeBytesPreserved": true,
+    "iPadCapture": "Screen.main PNG; original orientation retained",
+    "excluded": "Early Farm/Shop pictures taken during room fade, replaced from PhoneGallery"
+  },
+  "preview": {
+    "device": "64173F47-C4DC-46B4-82EC-0027675F7780",
+    "version": "1.0 (13)",
+    "reset": false,
+    "qaArguments": false,
+    "fullContainerBackup": "Private ignored build/build13-preview-save-before",
+    "afterInstall": "preview-after-install.json",
+    "afterLaunch": "preview-after-launch.json",
+    "allSavedGameFieldsPreserved": true
+  },
+  "apple": {
+    "existingSubmittedBuild": 11,
+    "submissionModified": false,
+    "build13Uploaded": false,
+    "build13Submitted": false,
+    "reviewStatusFreshlyRechecked": false,
+    "note": "Chrome connection was unavailable for an incidental review recheck. No fresh Apple status or replacement submission is claimed."
+  },
+  "limits": [
+    "Simulator gameplay and local StoreKit/account test doubles do not verify physical Apple sign-in, private iCloud round trips, signed sandbox purchases or leaderboard delivery.",
+    "Physical VoiceOver speech, hardware audio/haptics/performance, smallest devices and split view are not established here.",
+    "Automated reachability is not a human difficulty study."
+  ]
+}

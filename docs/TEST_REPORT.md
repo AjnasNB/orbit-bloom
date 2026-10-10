@@ -1,3 +1,28 @@
+# Orbit Bloom build 13 verification — 10 October 2026
+
+The fruit, leaf, dew, rose, diamond, powers, gardening robot, coin, Lio and rally rover now share a rounded 3D cartoon style with the existing garden. Original transparent PNGs replace the detailed realistic renders. [Style findings](CARTOON_STYLE_REFINEMENT.md) and [full prompts](CARTOON_ARTWORK_PROMPTS.json) describe the changes. Navigation, difficulty, economy, account handling and save schemas are preserved.
+
+**109 unique cases passed: 49 core, 49 native, ten phone UI and one iPad UI.** Final relevant bundles have no failures or skips. Farm/Shop recapture reruns count once. [Verification](release-draft/build13/verification.json) pins source and records the failed initial crop check.
+
+| Area | Evidence |
+| --- | --- |
+| Rules, powers, economy, save compatibility and campaign | `evidence/build13-core.log`: 49 passes in 24.549 seconds. All 1,020 stages and six projects complete in 6,427 legal swaps and ten retries, without paid items or extra moves. This is automated reachability, not human difficulty evidence. |
+| Native assets, sessions, local purchases, accounts, journey and clock | `evidence/Build13-PhoneVerified.xcresult`: 49 native passes, including all twelve visible sprite crops with transparent gutters and character/rover alpha. Local StoreKit checks cover credits, duplicate protection, cancellation, pending purchases and refund behaviour. |
+| Actual phone play | PhoneVerified adds eight UI passes for swipes, first clear/locks, board powers and shuffle, One shot, life accounting/abandon/restart, harvest/craft/relaunch, rally steering/completion and supply packs. |
+| Seven connected rooms | `evidence/Build13-SevenRooms.xcresult`: two passes, including every entrance/exit and real wins in Canal, Firefly, Windmill and Observatory. Four first clears retain +100 coins, four stars, water and next-challenge progression after relaunch. |
+| Settled capture rerun | `evidence/Build13-PhoneGallery.xcresult`: two repeated cases pass after the capture helper waits beyond the 200-ms room fade. Early blended Farm/Shop pictures are replaced; screenshots retain original bytes. |
+| Adaptive iPad | `evidence/Build13-iPad.xcresult`: one pass in 50.065 seconds, checking map/board, all 49 tiles, booster rails, exits and 44-point controls through portrait/landscape. Full Screen.main PNG capture retains native orientation. |
+
+The initial Phone bundle records 56 passes and one failed diamond crop guard. That result stays failed. The atlas gutter repair and closer diamond crop resolve the issue; PhoneVerified passes all 57 native/phone cases. Artwork iterations rejected for size/edge issues are excluded from the app. [Twenty-five native screenshots](release-draft/build13/README.md) cover map, cartoon board/powers, Farm/tool shed, Rally, story, four skill rooms, supplies, exits, One shot, both iPad orientations and the ordinary preview.
+
+The complete preview container was backed up privately. All seven preferences and plist bytes match after in-place installation. After ordinary launch, the full decoded wallet, puzzle, farm, inventory, receipts, settings and timers still match; only the normal StoreKit system check timestamp changed. The preview preserves **280 coins, one completed stage, active level 2/rules 1, ten moves, seven free hints and five lives**. No reset or QA launch flags were used there. Its build-13 window is brought forward; Store and iPad QA are shut down, and unrelated simulator work is preserved.
+
+Low disk space was handled by removing regenerable caches on stopped owned simulators, the completed package build cache and duplicate exported attachments. Full app-container backups, source, earlier signed packages, raw test results/logs and selected original PNGs remain. The static UX scan is retained at `evidence/build13-ux-scan.txt`; decorative-image and accessibility-notification signals are triaged in the style note. Physical Apple account/cloud/ranking/signed sandbox checks, hardware performance/audio/haptics, VoiceOver speech and smallest-device/split-view layouts remain separate verification.
+
+Build 13 is tested locally and committed to source; **it has not been uploaded to TestFlight or submitted to Apple**. The existing build-11 submission and its product gallery were not modified. Chrome was unavailable for an incidental review recheck, so no fresh Apple server status is claimed. No real purchase or agreement occurred.
+
+---
+
 # Orbit Bloom build 12 verification — 10 October 2026
 
 The garden now fills the viewport with original continuous 3D scenery, neighboring districts, a river, promenade and a route extending beyond the screen. Floating controls retain clear Farm, Rally and seven-room entrances. Puzzle pieces occupy more space on warm tiles over an azure courtyard; iPad landscape separates goals/turns and boosters into side rails. [UX findings and reference research](GARDEN_UI_REDESIGN.md).

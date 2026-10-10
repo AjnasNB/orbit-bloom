@@ -1,3 +1,11 @@
+# Subsequent cartoon artwork revision — build 13
+
+Build 13 is locally verified: shared cartoon fruit/powers, robot/coin, Lio and rally rover; safe sprite framing; unchanged save and purchase schemas. The [109-case test record](release-draft/build13/verification.json) and [25 native screenshots](release-draft/build13/README.md) prepare this visual revision for a later distribution update. The ordinary preview preserves its current saved game and runs 1.0 (13).
+
+**Build 13 is not uploaded or submitted.** The existing build-11 Apple submission, binary and uploaded gallery are unchanged. Its status was not freshly rechecked here because the Chrome connection was unavailable. Local screenshots must not be presented as already uploaded product-page assets, and simulator account/purchase tests do not replace physical Apple service checks.
+
+---
+
 # Orbit Bloom App Store preparation — 10 October 2026
 
 ## Subsequent UI revision — build 12
