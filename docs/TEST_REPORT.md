@@ -1,3 +1,32 @@
+# Orbit Bloom build 12 verification — 10 October 2026
+
+The garden now fills the viewport with original continuous 3D scenery, neighboring districts, a river, promenade and a route extending beyond the screen. Floating controls retain clear Farm, Rally and seven-room entrances. Puzzle pieces occupy more space on warm tiles over an azure courtyard; iPad landscape separates goals/turns and boosters into side rails. [UX findings and reference research](GARDEN_UI_REDESIGN.md).
+
+**103 unique cases have recorded passes: 49 core, 48 native, five phone UI and one iPad UI.** Reruns count once. These are the affected checks for this revision, not all seven-room tests from build 11. [Build-12 verification](release-draft/build12/verification.json) pins source and native capture provenance. Final relevant runs have no failures or skips.
+
+| Area | Cases | Evidence |
+| --- | ---: | --- |
+| Core rules, progression, economy, save compatibility, all-stage solver | 49 | `evidence/build12-core.log`: 24.016 seconds, zero failures |
+| Native sessions/lives, purchase/account/journey/clock tests, including moving-shuffle input/save regression | 48 | `evidence/Build12-PhoneFinal.xcresult`: 8.301 seconds, zero unit failures |
+| Full garden/board targets, real first-clear swipe and sequential locks, powers/shuffle, One shot, abandonment/restart, separate rooms and saves | 5 | PhoneFinal records all five passes. `Build12-ExitVerified.xcresult` rechecks the later enlarged Keep playing label and life accounting. |
+| iPad map and board, all 49 tiles in both orientations, goal/booster rails, reachable exits and no scrolling | 1 | `evidence/Build12-iPadGallery.xcresult`: final range spacing and full-screen native captures; zero failures |
+
+The phone map is checked against 95% of viewport width and 85% of viewport height. Its board occupies at least 90% of screen width, with all tiles and tools reachable; checked targets are at least 44 points. A real first win unlocks level 2 and keeps level 3 locked. Swiping to district 2 cannot bypass progression. iPad landscape board width exceeds 600 points, and all tiles and controls remain in bounds through rotation. The solver completes all 1,020 stages and six projects in 6,439 legal swaps and 15 retries, with no paid items or extra moves; this does not establish human difficulty.
+
+Shuffle now saves its final arrangement and one inventory debit immediately, locks input for a finite 450-ms animation plus a small settling allowance, and uses a run token to avoid reopening a replaced attempt. The native regression rejects taps, swaps and a repeated shuffle during movement, restores the saved arrangement, then verifies gameplay reopens. The real UI power test forms a board power, shuffles while keeping powers/turns and detonates the resulting power after readiness.
+
+Diagnostics are retained separately. Phone's first run exposed accessibility identifier propagation (three failures); the next run exposed a tap during shuffle movement (one failure). PhoneFinal then passes all 53 native/phone cases. The first iPad run reported a 24.5-point Keep playing target, followed by a disk-full result-packaging error. Its next keep-progress run correctly resumed that interrupted puzzle and failed a home-only test setup; setup now returns through real abandonment rather than resetting data. iPadConfirmed passes, but its app-scoped landscape captures were cropped. Final iPadGallery uses Screen.main PNG capture, preserves native orientation, verifies the adjusted badge spacing and supplies the selected full-screen images. No failed diagnostic run is relabeled successful or counted as a pass.
+
+[Eleven native screenshots](release-draft/build12/README.md) show phone map, locked district, board, first clear, board power, final abandonment, both iPad orientations and the ordinary preserved preview. Original bytes and orientation metadata remain intact. The selected screenshots were visually inspected; old cropped landscape exports are excluded.
+
+The complete private preview container was backed up before installation. All seven preference values and plist bytes match after in-place installation. After ordinary launch, the full decoded wallet, puzzle, farm, tools, receipts and settings still match; no timer or gameplay value was ignored. The fresh baseline is **280 coins, one completed stage, active level 2/rules 1 with ten moves, seven free hints and five lives**. This preserves the user's current ten-move save rather than substituting the eleven-move historical build-11 snapshot. No QA launch/reset flags were used on the preview. Store and iPad QA are shut down; the preview runs build 12. Unrelated simulator work was preserved.
+
+Disk cleanup was confined to regenerable caches on the two stopped QA devices, the completed Swift package cache and duplicate exported attachments. Original test results/logs, selected screenshots, signed packages and preview backups were retained. Smaller devices, split view, hardware performance/audio/haptics, VoiceOver speech and live Apple cloud/ranking/sandbox checks remain outside this simulator evidence. Local test doubles do not prove physical Apple service paths.
+
+Chrome confirms **version 1.0 build 11 and its eight submitted items remain Waiting for Review**. Build 12 is installed locally and pushed to source; it is **not uploaded to TestFlight or submitted**. The submitted build-11 binary, gallery and metadata were not replaced. No public release, real purchase or agreement occurred.
+
+---
+
 # Orbit Bloom build 11 verification and submission — 10 October 2026
 
 Build 11 connects seven named rooms through Lio's Aurora Atoll story, original 3D room miniatures, four new skill games, an illustrated delivery rover, shared UTC events and optional Game Center skill records. Completed skill results feed the garden with stars, coins and water. Large-text pages separate story/project, event details and records; returning from a new skill room retains its selected directory page. [Seven-room UX audit](SEVEN_ROOMS_UX_AUDIT.md).

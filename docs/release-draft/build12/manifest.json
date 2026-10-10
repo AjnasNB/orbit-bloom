@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "build": 12,
+  "originalNativePixels": true,
+  "screenshots": [
+    {
+      "path": "screenshots/ipad-01-garden-portrait.png",
+      "sha256": "21cee9c2db332b4aa3154771fd8372320fa39ec2e7623c29d001beb0c15640aa",
+      "width": 2064,
+      "height": 2752,
+      "sourceResultBundle": "evidence/Build12-iPadGallery.xcresult",
+      "testIdentifier": "IPadReleaseUITests/testFullGardenAndPuzzleRailsFitBothOrientations()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "403B0A47-962F-4F04-A485-4CE8916DD168.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build12-ipad-01-garden-portrait_0_E955343B-B8C6-4B01-973A-97F2B3E04467.png",
+        "timestamp": 1791639382.561
+      },
+      "nativeOrientation": 1,
+      "displayWidth": 2064,
+      "displayHeight": 2752
+    },
+    {
+      "path": "screenshots/ipad-02-garden-landscape.png",
+      "sha256": "417edb92a28b579b3a57249889a355fccb977e9ffe76e09a45abac032cb84dd9",
+      "width": 2064,
+      "height": 2752,
+      "sourceResultBundle": "evidence/Build12-iPadGallery.xcresult",
+      "testIdentifier": "IPadReleaseUITests/testFullGardenAndPuzzleRailsFitBothOrientations()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "6231F631-94EE-4658-99AC-02F6EE676D1A.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build12-ipad-02-garden-landscape_0_47B0FF6E-A3B3-43B5-8782-91C68E2FB5A5.png",
+        "timestamp": 1791639385.605
+      },
+      "nativeOrientation": 8,
+      "displayWidth": 2752,
+      "displayHeight": 2064
+    },
+    {
+      "path": "screenshots/ipad-03-puzzle-landscape.png",
+      "sha256": "6aa5cfdce68f6ed64f2bd03004ef1b4c056d6d195861bc01660db89886df57d6",
+      "width": 2064,
+      "height": 2752,
+      "sourceResultBundle": "evidence/Build12-iPadGallery.xcresult",
+      "testIdentifier": "IPadReleaseUITests/testFullGardenAndPuzzleRailsFitBothOrientations()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "BA901DF4-D480-4C3F-BA17-4FF934E48FE6.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build12-ipad-03-puzzle-landscape_0_FB4BFD63-C8F7-45E7-B819-A0DE1EA007A8.png",
+        "timestamp": 1791639400.41
+      },
+      "nativeOrientation": 8,
+      "displayWidth": 2752,
+      "displayHeight": 2064
+    },
+    {
+      "path": "screenshots/ipad-04-puzzle-portrait.png",
+      "sha256": "aad804c6c86a5c84f25d22eedcf6534f45e0b2ac064bec8506b57145cf924421",
+      "width": 2064,
+      "height": 2752,
+      "sourceResultBundle": "evidence/Build12-iPadGallery.xcresult",
+      "testIdentifier": "IPadReleaseUITests/testFullGardenAndPuzzleRailsFitBothOrientations()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+        "deviceName": "Orbit Bloom App Store iPad QA",
+        "exportedFileName": "8A0BA253-54F1-4108-9350-31997195EDBB.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build12-ipad-04-puzzle-portrait_0_CC86E7DB-4F9E-40B6-8688-243BE37A8395.png",
+        "timestamp": 1791639413.631
+      },
+      "nativeOrientation": 1,
+      "displayWidth": 2064,
+      "displayHeight": 2752
+    },
+    {
+      "path": "screenshots/phone-01-connected-garden.png",
+      "sha256": "537b18c5a44d5b76f60ff369f2b376dc82593d0a1aa46a3def4d32146c537092",
+      "width": 1320,
+      "height": 2868,
+      "sourceResultBundle": "evidence/Build12-PhoneFinal.xcresult",
+      "testIdentifier": "GameplayUITests/testFullGardenViewportAndLargePuzzleKeepControlsReachable()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName": "Orbit Bloom Store QA",
+        "exportedFileName": "6893DE15-E9FF-4E88-8669-25BA035CFE21.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build12-01-connected-garden_0_D22D6F83-78E2-4BBC-8240-9936D98F456A.png",
+        "timestamp": 1791638358.053
+      },
+      "nativeOrientation": 1,
+      "displayWidth": 1320,
+      "displayHeight": 2868
+    },
+    {
+      "path": "screenshots/phone-02-locked-district.png",
+      "sha256": "5a1fd3d3795db9ad4713dd042128d15bf8814aadb163c0ef81b39d70cdb71ce1",
+      "width": 1320,
+      "height": 2868,
+      "sourceResultBundle": "evidence/Build12-PhoneFinal.xcresult",
+      "testIdentifier": "GameplayUITests/testFullGardenViewportAndLargePuzzleKeepControlsReachable()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName": "Orbit Bloom Store QA",
+        "exportedFileName": "3484493D-300E-4A41-BBBD-71545C9B3026.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build12-02-next-district-locked_0_B07BB617-45CE-4636-9156-C0AE7F025ABD.png",
+        "timestamp": 1791638359.047
+      },
+      "nativeOrientation": 1,
+      "displayWidth": 1320,
+      "displayHeight": 2868
+    },
+    {
+      "path": "screenshots/phone-03-large-puzzle.png",
+      "sha256": "270837b12c118f2c9bc6767a8b2ea2746019b20da6070778f21778abfd74a468",
+      "width": 1320,
+      "height": 2868,
+      "sourceResultBundle": "evidence/Build12-PhoneFinal.xcresult",
+      "testIdentifier": "GameplayUITests/testFullGardenViewportAndLargePuzzleKeepControlsReachable()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName": "Orbit Bloom Store QA",
+        "exportedFileName": "D296EE4F-D3F8-42FF-86EF-622D542060C1.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build12-03-large-puzzle_0_14B1A15F-70AE-411A-9B0F-3F73CEB60E16.png",
+        "timestamp": 1791638368.345
+      },
+      "nativeOrientation": 1,
+      "displayWidth": 1320,
+      "displayHeight": 2868
+    },
+    {
+      "path": "screenshots/phone-04-first-clear.png",
+      "sha256": "d7387a1880825256d304a148b2aaab8c78b2bcd515b89f9fada00a30ad7ee27d",
+      "width": 1320,
+      "height": 2868,
+      "sourceResultBundle": "evidence/Build12-PhoneFinal.xcresult",
+      "testIdentifier": "GameplayUITests/testFullGardenViewportAndLargePuzzleKeepControlsReachable()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName": "Orbit Bloom Store QA",
+        "exportedFileName": "C72019AF-14F0-44CF-A5D2-3BE5D0D6C69E.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build12-04-first-clear-connected-garden_0_5C2DC99C-353D-4900-872C-ECBF11D6B327.png",
+        "timestamp": 1791638378.074
+      },
+      "nativeOrientation": 1,
+      "displayWidth": 1320,
+      "displayHeight": 2868
+    },
+    {
+      "path": "screenshots/phone-05-board-power.png",
+      "sha256": "f062f91e3b3cfb0d23db48ed23a390d55d306a662d88e9c8abff04dd5087e6fe",
+      "width": 1320,
+      "height": 2868,
+      "sourceResultBundle": "evidence/Build12-PhoneFinal.xcresult",
+      "testIdentifier": "GameplayUITests/testBoardPowerFormationAndAnimatedShuffle()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName": "Orbit Bloom Store QA",
+        "exportedFileName": "64E9C65E-5E35-4FE7-AF3E-7ADB03C3ED99.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "v3-16-board-power_0_9100BA2B-14F1-46F0-8DEE-8A6A127622E7.png",
+        "timestamp": 1791638347.539
+      },
+      "nativeOrientation": 1,
+      "displayWidth": 1320,
+      "displayHeight": 2868
+    },
+    {
+      "path": "screenshots/phone-06-exit-confirmation.png",
+      "sha256": "aa1d87b3bcd9dc1ac4c105ce25c8e467ccb9a7a7464fd0c780e0c71b1fc04c0a",
+      "width": 1320,
+      "height": 2868,
+      "sourceResultBundle": "evidence/Build12-ExitVerified.xcresult",
+      "testIdentifier": "GameplayUITests/testBackCancelAbandonAndRestartChargeExactlyOneLifePerAttempt()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName": "Orbit Bloom Store QA",
+        "exportedFileName": "F9649955-C069-419C-9DEB-3BB181B0AE32.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "build9-abandon-confirmation_0_88DF9B8F-64CA-4F3C-8C49-360B8FB3CDDB.png",
+        "timestamp": 1791639237.084
+      },
+      "nativeOrientation": 1,
+      "displayWidth": 1320,
+      "displayHeight": 2868
+    },
+    {
+      "path": "screenshots/preview-preserved-puzzle.png",
+      "sha256": "67c9f70cdd4a16f59c590edcef3714f5b379cf96f67e2854a6a46736c8a32603",
+      "width": 1206,
+      "height": 2622,
+      "source": "xcrun simctl io preview screenshot after ordinary build-12 launch",
+      "qaReset": false,
+      "nativeOrientation": 1,
+      "displayWidth": 1206,
+      "displayHeight": 2622
+    }
+  ],
+  "encodedOrientationRetained": true
+}

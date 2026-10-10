@@ -1,5 +1,12 @@
 # Orbit Bloom App Store preparation — 10 October 2026
 
+## Subsequent UI revision — build 12
+
+Build 12 expands the connected garden and adaptive puzzle board, fixes shuffle input during movement and enlarges the Keep playing target. It has 103 unique recorded passing affected checks and [eleven native captures](release-draft/build12/README.md). The ordinary preview runs build 12 with all saved game state preserved, including the current level-2 ten-move session. [Verification](release-draft/build12/verification.json) distinguishes final evidence from failed diagnostics.
+
+**Build 12 is local and not uploaded/submitted.** Chrome rechecked the existing build-11 submission: all eight items are Waiting for Review. Its binary, twenty screenshots and store copy remain unchanged. The build-11 details below describe that submission and its historical preview update, not the new build-12 simulator revision.
+
+
 ## Current release status — build 11
 
 App **Orbit Bloom: Garden Arcade**, Apple ID **6820591529**, bundle **com.orbitbloom.game**, SKU **orbit-bloom-ios-001**, publisher **Ajnas N B**, team **4V29K5Q8S9**. Version **1.0 (11)** was submitted on **10 October 2026 at 4:47 PM India time (+05:30; minute precision)**. Apple confirms **Waiting for Review for all eight items**: the app version, **Atoll Skills** leaderboard and all six existing purchase packs. [Submission 83b00d39-0873-4771-8bc9-5d94d4be04b4](https://appstoreconnect.apple.com/apps/6820591529/distribution/reviewsubmissions/details/83b00d39-0873-4771-8bc9-5d94d4be04b4) is the current review record. [Actual Apple confirmation](release-draft/build11/proof/apple-review-submission.jpg) shows the submitted build and status. **Manual public release remains selected; the app is not live.** The publisher removed build 7's submission `a7ca5b7d-24f9-4b4a-8dba-9ecf44398ec9` to replace it with tested build 11. This was not an Apple rejection.

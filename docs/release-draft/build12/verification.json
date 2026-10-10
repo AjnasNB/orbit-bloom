@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0",
+  "build": 12,
+  "verifiedOn": "2026-10-10",
+  "sourceCommit": "b0fb97f5ca9091aa27668df58ab879e614af493c",
+  "sourceHashRecord": "app-source-hashes.json",
+  "appSourceHashCount": 44,
+  "qa": {
+    "uniquePassingCases": 103,
+    "core": 49,
+    "native": 48,
+    "phoneUI": 5,
+    "ipadUI": 1,
+    "note": "Reruns are counted once. The final Keep playing target is separately rechecked on phone; the final wide map spacing and full-screen captures are checked in iPadGallery. Models were unchanged after PhoneFinal.",
+    "coreLog": "evidence/build12-core.log",
+    "phoneResult": "evidence/Build12-PhoneFinal.xcresult",
+    "exitResult": "evidence/Build12-ExitVerified.xcresult",
+    "ipadResult": "evidence/Build12-iPadGallery.xcresult",
+    "allFinalRelevantRunsZeroFailures": true
+  },
+  "campaignSolver": {
+    "levels": 1020,
+    "projects": 6,
+    "legalSwaps": 6439,
+    "retries": 15,
+    "paidItems": 0,
+    "extraMoves": 0,
+    "humanDifficultyValidated": false
+  },
+  "screenshots": {
+    "manifest": "manifest.json",
+    "nativeCaptureCount": 11,
+    "sha256": "69e8ca310eefdb8757cd4b6306921824cca929abe2b0256b6b8df33f23a5036e",
+    "originalBytesAndOrientation": true,
+    "croppedAppScreenshotLandscapeSelectionsReplaced": true
+  },
+  "previewSavePreservation": {
+    "afterInstall": "preview-after-install.json",
+    "afterLaunch": "preview-after-launch.json",
+    "resetFlagsUsed": false,
+    "completePrivateContainerBackupRetainedLocally": true
+  },
+  "simulators": {
+    "preview": {
+      "udid": "64173F47-C4DC-46B4-82EC-0027675F7780",
+      "state": "Booted",
+      "build": 12
+    },
+    "storeQA": {
+      "udid": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "state": "Shutdown"
+    },
+    "ipadQA": {
+      "udid": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "state": "Shutdown"
+    },
+    "unrelatedDevicesModified": false
+  },
+  "apple": {
+    "freshChromeObservation": "2026-10-10: version 1.0 (11), eight submitted items, all Waiting for Review",
+    "reviewBuild": 11,
+    "status": "Waiting for Review",
+    "reviewSubmissionID": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+    "build12Uploaded": false,
+    "build12Submitted": false,
+    "publicReleased": false,
+    "submittedBuild11GalleryChanged": false
+  },
+  "diagnostics": [
+    {
+      "bundle": "evidence/Build12-Phone.xcresult",
+      "passes": 49,
+      "failures": 3,
+      "reason": "Board container identifier propagated to tile controls; corrected with an explicit accessibility container."
+    },
+    {
+      "bundle": "evidence/Build12-PhoneVerified.xcresult",
+      "passes": 51,
+      "failures": 1,
+      "reason": "Real power tap during shuffle movement missed its target. Fixed finite animation/input lock and wait for readiness."
+    },
+    {
+      "bundle": "evidence/Build12-iPadFinal.xcresult",
+      "reason": "Keep playing target was 24.5 points; corrected to 48. Raw log also records disk-full CAS packaging failure. No counted passing case from this bundle."
+    },
+    {
+      "bundle": "evidence/Build12-iPadVerified.xcresult",
+      "reason": "Keep-progress resumed the preceding interrupted attempt. Test setup now exits it through real abandonment, preserving progress."
+    },
+    {
+      "bundle": "evidence/Build12-iPadConfirmed.xcresult",
+      "passes": 1,
+      "countedAgain": false,
+      "reason": "Layout passed, but app-scoped landscape screenshot crop was unsuitable. Replaced with Screen.main native PNG captures in iPadGallery."
+    }
+  ],
+  "physicalChecksNotClaimed": [
+    "hardware Game Center and private iCloud round trip",
+    "signed Apple sandbox purchases and leaderboard submission",
+    "VoiceOver speech/focus",
+    "smallest phone and iPad split view",
+    "hardware frame rate, audio and haptics"
+  ],
+  "repository": {
+    "url": "https://github.com/AjnasNB/orbit-bloom",
+    "branch": "main",
+    "visibility": "PUBLIC"
+  }
+}
