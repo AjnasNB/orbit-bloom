@@ -121,6 +121,12 @@ public struct StorePack: Identifiable {
     ]
 }
 
+public struct RallyTraffic: Equatable {
+    public let id: Int
+    public let barrierLane: Int
+    public var coinLane: Int { (barrierLane + 1) % 3 }
+}
+
 public struct DeliveryRun {
     public let difficulty: Int
     public var obstacleCount: Int { 10 + difficulty * 2 }
@@ -135,6 +141,11 @@ public struct DeliveryRun {
     public var won: Bool { elapsed >= duration && health > 0 }
     public var distance: Int { min(440, Int(elapsed * 20)) }
     public var reward: Int { won ? 60 + collected * 10 : collected * 5 }
+    /// Use the same unprocessed crossing as collisions and pickups, including while paused.
+    public var nextTraffic: RallyTraffic? {
+        guard !finished, let id = (0..<obstacleCount).first(where: { !passed.contains($0) }) else { return nil }
+        return RallyTraffic(id: id, barrierLane: obstacleLane(id))
+    }
     public func obstacleLane(_ index: Int) -> Int { [1,2,1,0,2,1,2,0,1,2][(max(0,index)%10+difficulty*3) % 10] }
     public func crossingTime(_ index: Int) -> Double { duration / Double(obstacleCount + 1) * Double(min(obstacleCount-1,max(0,index)) + 1) }
     public mutating func tick(_ delta: Double) -> (hit: Bool, pickup: Bool) {

@@ -93,4 +93,33 @@ final class EcosystemTests: XCTestCase {
         for _ in 0..<1000 { _ = crash.tick(0.05) }
         XCTAssertTrue(crash.finished); XCTAssertFalse(crash.won); XCTAssertEqual(crash.health,0)
     }
+    func testTrafficGuideLeadsToEveryRealPickupAcrossAllDifficultyTiers() {
+        for difficulty in 0...4 {
+            var run = DeliveryRun(difficulty: difficulty)
+            var seen: Set<Int> = []
+            for _ in 0..<500 where !run.finished {
+                if let traffic = run.nextTraffic {
+                    seen.insert(traffic.id)
+                    run.lane = traffic.coinLane
+                    XCTAssertNotEqual(traffic.coinLane, traffic.barrierLane)
+                    let before = run.nextTraffic
+                    _ = run.tick(.nan); _ = run.tick(0); _ = run.tick(-1)
+                    XCTAssertEqual(run.nextTraffic, before, "No elapsed time must leave the preview stable")
+                }
+                let event = run.tick(0.05)
+                XCTAssertFalse(event.hit, "Following the displayed coin lane must avoid the real barrier")
+                XCTAssertEqual(run.collected, run.passed.count, "Every displayed pickup must be a real pickup")
+            }
+            XCTAssertTrue(run.won); XCTAssertEqual(run.health, 3)
+            XCTAssertEqual(seen.count, run.obstacleCount)
+            XCTAssertEqual(run.collected, run.obstacleCount)
+            XCTAssertNil(run.nextTraffic, "Finished races must not show a stale barrier")
+        }
+        var crashed = DeliveryRun()
+        for _ in 0..<500 where !crashed.finished {
+            if let traffic = crashed.nextTraffic { crashed.lane = traffic.barrierLane }
+            _ = crashed.tick(0.05)
+        }
+        XCTAssertEqual(crashed.health, 0); XCTAssertNil(crashed.nextTraffic)
+    }
 }

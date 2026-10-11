@@ -44,15 +44,19 @@ struct ActivityRoomEntrances: View {
 }
 
 struct RoomExitHeader: View {
+    @Environment(\.dynamicTypeSize) private var textSize
     let kind:ActivityRoomKind
     let action:()->Void
     var body:some View {
         Button(action:action) {
             HStack(spacing:10) {
                 Image(systemName:"xmark.circle.fill").font(.system(size:23)).accessibilityHidden(true)
-                Text("Exit \(kind.title)").font(.system(.subheadline,design:.rounded,weight:.bold))
+                Text(textSize.isAccessibilitySize ? "Exit \(kind == .farm ? "Farm" : "Rally")" : "Exit \(kind.title)")
+                    .font(.system(.subheadline,design:.rounded,weight:.bold))
                 Spacer(minLength:4)
-                Label("Island",systemImage:"globe").font(.system(.caption,design:.rounded,weight:.bold))
+                if !textSize.isAccessibilitySize {
+                    Label("Island",systemImage:"globe").font(.system(.caption,design:.rounded,weight:.bold))
+                }
             }.foregroundStyle(Palette.night).padding(.horizontal,14).frame(minHeight:48)
                 .background(Palette.paper,in:Capsule()).overlay(Capsule().stroke(kind.accent.opacity(0.2),lineWidth:1))
         }.buttonStyle(PressStyle()).padding(.horizontal,22).padding(.bottom,8)
@@ -61,6 +65,7 @@ struct RoomExitHeader: View {
 }
 
 struct RallyRoomMap: View {
+    var compact = false
     var body:some View {
         GeometryReader { geometry in
             ZStack {
@@ -69,9 +74,11 @@ struct RallyRoomMap: View {
                     HStack { Text("ROUTE PREVIEW · 440 m").font(.system(size:10,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night).padding(9).background(Palette.paper.opacity(0.95),in:Capsule()); Spacer() }
                     Spacer()
                 }.padding(10)
-                marker("Garage",symbol:"house.fill",detail:"START").position(x:geometry.size.width*0.24,y:geometry.size.height*0.69)
-                marker("Orchard bend",symbol:"leaf.fill",detail:"PICKUPS").position(x:geometry.size.width*0.57,y:geometry.size.height*0.48)
-                marker("Moonseed gate",symbol:"flag.checkered",detail:"FINISH").position(x:geometry.size.width*0.75,y:geometry.size.height*0.22)
+                if !compact {
+                    marker("Garage",symbol:"house.fill",detail:"START").position(x:geometry.size.width*0.24,y:geometry.size.height*0.69)
+                    marker("Orchard bend",symbol:"leaf.fill",detail:"PICKUPS").position(x:geometry.size.width*0.57,y:geometry.size.height*0.48)
+                    marker("Moonseed gate",symbol:"flag.checkered",detail:"FINISH").position(x:geometry.size.width*0.75,y:geometry.size.height*0.22)
+                }
             }.accessibilityElement(children:.combine).accessibilityLabel("Rally room route map: start at the Garage, pass the Orchard bend, finish at Moonseed gate. One 440-metre course.").accessibilityIdentifier("rallyRoomMap")
         }
     }

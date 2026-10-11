@@ -23,6 +23,29 @@ import XCTest
         return try XCTUnwrap(UserDefaults(suiteName: name))
     }
 
+    func testFollowingRallyTrafficGuideBanksRewardAndPreservesOtherProgress() throws {
+        let defaults = try preferences()
+        let game = GameModel(defaults: defaults)
+        let startingCoins = game.progress.coins
+        let startingLives = game.ecosystem.lives
+        let startingJourney = game.journey
+        var run = DeliveryRun(difficulty: 4)
+        for _ in 0..<500 where !run.finished {
+            if let traffic = run.nextTraffic { run.lane = traffic.coinLane }
+            _ = run.tick(0.05)
+        }
+        XCTAssertTrue(run.won); XCTAssertEqual(run.collected, 18)
+        game.completeDelivery(run)
+        let restored = GameModel(defaults: defaults)
+        XCTAssertEqual(restored.progress.coins, startingCoins + 60 + 18 * 10 + 40)
+        XCTAssertEqual(restored.ecosystem.produce, 0)
+        XCTAssertEqual(restored.ecosystem.deliveries, 1)
+        XCTAssertEqual(restored.ecosystem.raceBest, 440)
+        XCTAssertEqual(restored.ecosystem.lives, startingLives)
+        XCTAssertEqual(restored.journey.levels, startingJourney.levels)
+        XCTAssertEqual(restored.journey.bestScores, startingJourney.bestScores)
+    }
+
     /// Drive each real engine through legal input, then pass its winning score to the model.
     private func winningScore(_ kind: IslandActivityKind, level: Int) throws -> Int {
         switch kind {

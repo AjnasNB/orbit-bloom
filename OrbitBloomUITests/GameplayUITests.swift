@@ -12,7 +12,8 @@ import StoreKitTest
     func attach(_ name:String) {
         // Capture after the 200-ms room crossfade, rather than blending two destinations.
         Thread.sleep(forTimeInterval:0.5)
-        let shot = XCTAttachment(screenshot:app.screenshot())
+        // The full simulator screen keeps iPad landscape captures uncropped.
+        let shot = XCTAttachment(screenshot:XCUIScreen.main.screenshot())
         shot.name = name; shot.lifetime = .keepAlways; add(shot)
     }
     func confirmLeave() {
@@ -94,7 +95,7 @@ import StoreKitTest
         app.buttons["startRace"].tap()
         let road=app.descendants(matching:.any)["raceTrack"].firstMatch
         XCTAssertTrue(road.waitForExistence(timeout:5)); road.swipeLeft()
-        XCTAssertEqual(road.value as? String,"Lane 1 of 3")
+        XCTAssertTrue((road.value as? String)?.hasPrefix("Lane 1 of 3, left.") == true)
         app.buttons["pauseRace"].tap(); fits(app.buttons["leaveRace"])
         XCTAssertTrue(app.buttons["leaveRace"].label.contains("Exit rally room"))
         attach("build10-rally-exit")
@@ -103,16 +104,21 @@ import StoreKitTest
         app.buttons["openToolShed"].tap(); fits(app.buttons["craftrainbow"])
         app.buttons["returnWorld"].tap()
         app.terminate(); app.launchArguments=["--uitesting","--keep-progress"]; app.launch()
-        fits(farm); farm.tap(); XCTAssertFalse(app.buttons["plot0"].label.contains("empty"))
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
+        let savedFarm = app.buttons["openFarm"]
+        fits(savedFarm); savedFarm.tap(); XCTAssertFalse(app.buttons["plot0"].label.contains("empty"))
         app.buttons["returnWorld"].tap()
         app.terminate(); app.launchArguments=["--uitesting","-UIPreferredContentSizeCategoryName","UICTContentSizeCategoryAccessibilityM"]; app.launch()
-        fits(farm); fits(rally); XCTAssertFalse(farm.frame.intersects(rally.frame))
+        // Resolve controls against the fresh launch, after its home screen is ready.
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
+        let largeFarm = app.buttons["openFarm"], largeRally = app.buttons["openRace"]
+        fits(largeFarm); fits(largeRally); XCTAssertFalse(largeFarm.frame.intersects(largeRally.frame))
         XCTAssertEqual(app.scrollViews.count,0)
         attach("build10-large-room-entrances")
-        rally.tap(); fits(app.buttons["returnWorld"]); fits(app.buttons["startRace"])
+        largeRally.tap(); fits(app.buttons["returnWorld"]); fits(app.buttons["startRace"])
         XCTAssertTrue(route.exists); XCTAssertEqual(app.scrollViews.count,0)
         attach("build10-large-rally-room")
-        app.buttons["returnWorld"].tap(); fits(farm); farm.tap()
+        app.buttons["returnWorld"].tap(); fits(largeFarm); largeFarm.tap()
         let largePlots=(0..<6).map { app.buttons["plot\($0)"] }
         for plot in largePlots { fits(plot) }
         for row in 0..<2 {
@@ -406,11 +412,83 @@ import StoreKitTest
         }
         XCTFail("Power formation needs a playable board before victory")
     }
+    func testRallyTrafficGuideUpdatesAndPauseKeepsRouteStable() {
+        XCUIDevice.shared.orientation = .portrait
+        app.buttons["openRace"].tap(); app.buttons["startRace"].tap()
+        let road = app.descendants(matching: .any)["raceTrack"].firstMatch
+        let guide = app.descendants(matching: .any)["raceTrafficGuide"].firstMatch
+        XCTAssertTrue(road.waitForExistence(timeout: 5))
+        app.buttons["pauseRace"].tap()
+        XCTAssertTrue(app.buttons["resumeRace"].waitForExistence(timeout: 5))
+        XCTAssertTrue(guide.isHittable)
+        let preview = guide.value as? String
+        XCTAssertTrue(preview?.contains("Next barrier: lane") == true)
+        XCTAssertTrue(preview?.contains("Coin: lane") == true)
+        XCTAssertTrue((road.value as? String)?.contains(preview ?? "missing preview") == true)
+        let distance = app.staticTexts["raceDistance"].label
+        let shield = app.descendants(matching: .any)["raceShield"].firstMatch.label
+        road.swipeLeft(); Thread.sleep(forTimeInterval: 1)
+        XCTAssertEqual(guide.value as? String, preview)
+        XCTAssertEqual(app.staticTexts["raceDistance"].label, distance)
+        XCTAssertEqual(app.descendants(matching: .any)["raceShield"].firstMatch.label, shield)
+        XCTAssertTrue((road.value as? String)?.hasPrefix("Lane 2 of 3, center.") == true)
+        attach("build14-rally-traffic-paused")
+        app.buttons["resumeRace"].tap(); road.swipeLeft()
+        XCTAssertTrue((road.value as? String)?.hasPrefix("Lane 1 of 3, left.") == true)
+        road.swipeUp()
+        XCTAssertTrue((road.value as? String)?.hasPrefix("Lane 1 of 3, left.") == true)
+        let changed = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in (guide.value as? String) != preview }, object: guide)
+        XCTAssertEqual(XCTWaiter.wait(for: [changed], timeout: 8), .completed)
+        XCTAssertTrue((road.value as? String)?.contains(guide.value as? String ?? "missing preview") == true)
+        attach("build14-rally-traffic-driving")
+        app.buttons["pauseRace"].tap()
+        if app.frame.width > 600 {
+            XCUIDevice.shared.orientation = .landscapeLeft
+            XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(guide.frame))
+            XCTAssertGreaterThan(road.frame.height, 100)
+            attach("build14-ipad-rally-traffic-landscape")
+            XCUIDevice.shared.orientation = .portrait
+        }
+        app.buttons["leaveRace"].tap()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("5 lives"))
+    }
+    func testRallyTrafficGuideAndControlsFitAccessibilityTextSize() {
+        app.terminate()
+        app.launchArguments = ["--uitesting", "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL"]
+        app.launch()
+        XCTAssertTrue(app.buttons["openRace"].waitForExistence(timeout: 15))
+        app.buttons["openRace"].tap()
+        XCTAssertTrue(app.buttons["startRace"].isHittable)
+        XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(app.buttons["startRace"].frame))
+        attach("build14-rally-lobby-accessibility-text")
+        app.buttons["startRace"].tap()
+        let road = app.descendants(matching: .any)["raceTrack"].firstMatch
+        let guide = app.descendants(matching: .any)["raceTrafficGuide"].firstMatch
+        XCTAssertTrue(road.waitForExistence(timeout: 5))
+        app.buttons["pauseRace"].tap()
+        for element in [guide, app.buttons["pauseRace"], app.buttons["resumeRace"], app.buttons["leaveRace"]] {
+            XCTAssertTrue(element.isHittable)
+            XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(element.frame))
+        }
+        XCTAssertGreaterThan(road.frame.height, 100)
+        XCTAssertFalse(app.buttons["resumeRace"].frame.intersects(guide.frame))
+        XCTAssertEqual(app.scrollViews.count, 0)
+        attach("build14-rally-traffic-accessibility-text")
+        app.buttons["leaveRace"].tap()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout: 5))
+    }
     func testDeliveryRaceWithRealSteeringAndReward() {
         app.buttons["openRace"].tap(); attach("v2-06-race-lobby"); app.buttons["startRace"].tap()
-        XCTAssertTrue(app.descendants(matching:.any)["raceTrack"].waitForExistence(timeout:5)); app.descendants(matching:.any)["raceTrack"].swipeLeft()
+        // Steer immediately. The gesture already waits for the road; an extra AX poll
+        // consumes live race time and can hit the first barrier before the test steers.
+        let road = app.descendants(matching:.any)["raceTrack"].firstMatch
+        road.swipeLeft()
+        XCTAssertTrue((road.value as? String)?.hasPrefix("Lane 1 of 3, left.") == true)
         attach("v2-07-delivery-race")
         XCTAssertTrue(app.staticTexts["raceResult"].waitForExistence(timeout:40)); XCTAssertEqual(app.staticTexts["raceResult"].label,"Delivery complete!")
+        XCTAssertFalse(app.descendants(matching: .any)["raceCollectedCoins"].firstMatch.label.hasPrefix("0 coins"))
+        XCTAssertEqual(app.descendants(matching: .any)["raceTrafficGuide"].firstMatch.value as? String, "No more barriers.")
         attach("v2-10-delivery-complete"); app.buttons["raceDone"].tap()
         XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
     }
@@ -437,6 +515,58 @@ import StoreKitTest
 
 // Uses the dedicated iPad release device without resetting its saved progress.
 @MainActor final class IPadReleaseUITests: XCTestCase {
+    func testRallyTrafficGuideFitsBothOrientationsAndAccessibilityTextWithoutReset() throws {
+        let app = XCUIApplication()
+        continueAfterFailure = false
+        defer { XCUIDevice.shared.orientation = .portrait; app.terminate() }
+        func element(_ id: String) -> XCUIElement { app.descendants(matching: .any)[id].firstMatch }
+        func capture(_ name: String) {
+            let shot = XCTAttachment(data: XCUIScreen.main.screenshot().pngRepresentation, uniformTypeIdentifier: "public.png")
+            shot.name = name; shot.lifetime = .keepAlways; add(shot)
+        }
+        for largeText in [false, true] {
+            XCUIDevice.shared.orientation = .portrait
+            app.launchArguments = ["--uitesting", "--keep-progress"]
+            if largeText { app.launchArguments += ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL"] }
+            app.launch()
+            try XCTSkipIf(app.frame.width < 700, "Run on the dedicated iPad QA device")
+            if app.buttons["backFromPuzzle"].exists {
+                app.buttons["backFromPuzzle"].tap()
+                XCTAssertTrue(app.buttons["confirmAbandon"].waitForExistence(timeout: 5))
+                app.buttons["confirmAbandon"].tap()
+            }
+            XCTAssertTrue(app.buttons["openRace"].waitForExistence(timeout: 15))
+            let coinsBefore = app.buttons["openShop"].label
+            app.buttons["openRace"].tap()
+            XCTAssertTrue(app.buttons["startRace"].isHittable)
+            XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(app.buttons["startRace"].frame))
+            app.buttons["startRace"].tap(); app.buttons["pauseRace"].tap()
+            XCTAssertTrue(app.buttons["resumeRace"].waitForExistence(timeout: 5))
+            let guide = element("raceTrafficGuide"), road = element("raceTrack")
+            let preview = guide.value as? String
+            XCTAssertTrue(preview?.contains("Next barrier: lane") == true)
+            let distance = app.staticTexts["raceDistance"].label
+            for landscape in [false, true] {
+                XCUIDevice.shared.orientation = landscape ? .landscapeLeft : .portrait
+                let rotated = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in (app.frame.width > app.frame.height) == landscape }, object: app)
+                XCTAssertEqual(XCTWaiter.wait(for: [rotated], timeout: 15), .completed)
+                for control in [guide, app.buttons["pauseRace"], app.buttons["resumeRace"], app.buttons["leaveRace"]] {
+                    XCTAssertTrue(control.isHittable)
+                    XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(control.frame))
+                }
+                XCTAssertGreaterThan(road.frame.height, 100)
+                XCTAssertFalse(app.buttons["resumeRace"].frame.intersects(guide.frame))
+                XCTAssertEqual(app.staticTexts["raceDistance"].label, distance)
+                XCTAssertEqual(guide.value as? String, preview)
+                XCTAssertEqual(app.scrollViews.count, 0)
+                capture("build14-ipad-rally-\(largeText ? "accessibility" : "normal")-\(landscape ? "landscape" : "portrait")")
+            }
+            app.buttons["leaveRace"].tap()
+            XCTAssertTrue(app.buttons["openRace"].waitForExistence(timeout: 5))
+            XCTAssertEqual(app.buttons["openShop"].label, coinsBefore)
+            app.terminate()
+        }
+    }
     func testFullGardenAndPuzzleRailsFitBothOrientations() throws {
         let app=XCUIApplication(); app.launchArguments=["--uitesting","--keep-progress"]
         XCUIDevice.shared.orientation = .portrait; app.launch()
@@ -536,7 +666,7 @@ import StoreKitTest
         app.buttons["startRace"].tap()
         let road = app.descendants(matching: .any)["raceTrack"]
         fits(road); road.swipeLeft()
-        XCTAssertEqual(road.value as? String, "Lane 1 of 3", "The iPad road must respond to actual swipe steering")
+        XCTAssertTrue((road.value as? String)?.hasPrefix("Lane 1 of 3, left.") == true, "The iPad road must respond to actual swipe steering")
         XCTAssertEqual(app.buttons["pauseRace"].label, "Pause race")
         capture("ipad-10-rally-road")
         fits(app.buttons["pauseRace"]); app.buttons["pauseRace"].tap()

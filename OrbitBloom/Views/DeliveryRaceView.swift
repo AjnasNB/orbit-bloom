@@ -7,19 +7,35 @@ struct DeliveryLobby: View {
         VStack(alignment: .leading, spacing: 12) {
             SectionEyebrow(text: "Rally room")
             Text("Harvest rally").font(.system(size: 27, weight: .heavy, design: .rounded)).foregroundStyle(Palette.cream)
-            RallyRoomMap().frame(maxHeight: .infinity).layoutPriority(1)
-            Text("Bring the harvest home.").font(.system(.headline, design: .rounded, weight: .bold)).foregroundStyle(Palette.cream)
-            Text("Swipe left or right on the road to change lanes. Collect gold coins and avoid the striped barriers.")
+            RallyRoomMap(compact: textSize.isAccessibilitySize).frame(maxHeight: .infinity).layoutPriority(1)
+            if !textSize.isAccessibilitySize {
+                Text("Bring the harvest home.").font(.system(.headline, design: .rounded, weight: .bold)).foregroundStyle(Palette.cream)
+            }
+            Text(textSize.isAccessibilitySize ? "Swipe to steer. Follow the lane guide." : "Swipe left or right on the road to change lanes. The lane guide shows the next barrier and coin.")
                 .font(.system(.subheadline, design: .rounded)).foregroundStyle(Palette.mint).fixedSize(horizontal: false, vertical: true)
-            HStack { Label("3 shield points", systemImage: "shield.fill"); Spacer(minLength: 4); Label("No life cost", systemImage: "heart.fill") }
-                .font(.system(.caption, design: .rounded, weight: .semibold)).foregroundStyle(Palette.gold)
-            Text(game.ecosystem.produce > 0 ? "\(game.ecosystem.produce) cargo ready · +40 delivery bonus" : "No cargo? Race for coins, then harvest your farm for a delivery bonus.")
+                .accessibilityLabel("Swipe left or right on the road to change lanes. The lane guide shows the next barrier and coin. Collect gold coins and avoid the striped barriers.")
+            Group {
+                if textSize.isAccessibilitySize {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Label("3 shield points", systemImage: "shield.fill")
+                        Label("No life cost", systemImage: "heart.fill")
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    HStack { Label("3 shield points", systemImage: "shield.fill"); Spacer(minLength: 4); Label("No life cost", systemImage: "heart.fill") }
+                }
+            }.font(.system(.caption, design: .rounded, weight: .semibold)).foregroundStyle(Palette.gold)
+            Text(game.ecosystem.produce > 0 ? "\(game.ecosystem.produce) cargo · +40 bonus" : "No cargo? Race for coins.")
                 .font(.system(.subheadline, design: .rounded)).foregroundStyle(Palette.cream).fixedSize(horizontal: false, vertical: true)
             PrimaryButton(title: "Start rally", subtitle: textSize.isAccessibilitySize ? nil : "440 m · 22 sec", symbol: "flag.checkered", id: "startRace") {
                 game.raceActive = true; game.effect("tap")
             }
-            Text("Best: \(game.ecosystem.raceBest) m · Deliveries: \(game.ecosystem.deliveries)").font(.caption).foregroundStyle(Palette.muted)
-            Text("Route tier \(min(4,game.ecosystem.deliveries/3)+1) · tighter traffic every 3 deliveries").font(.caption.bold()).foregroundStyle(Palette.mint).accessibilityIdentifier("rallyDifficulty")
+            if !textSize.isAccessibilitySize {
+                Text("Best: \(game.ecosystem.raceBest) m · Deliveries: \(game.ecosystem.deliveries)").font(.caption).foregroundStyle(Palette.muted)
+            }
+            Text(textSize.isAccessibilitySize ? "Route tier \(min(4,game.ecosystem.deliveries/3)+1)" : "Route tier \(min(4,game.ecosystem.deliveries/3)+1) · tighter traffic every 3 deliveries")
+                .font(.caption.bold()).foregroundStyle(Palette.mint)
+                .accessibilityLabel("Route tier \(min(4,game.ecosystem.deliveries/3)+1). Tighter traffic every 3 deliveries. Best \(game.ecosystem.raceBest) meters. \(game.ecosystem.deliveries) deliveries.")
+                .accessibilityIdentifier("rallyDifficulty")
         }.padding(.horizontal, 22).padding(.bottom, 12)
     }
 }
@@ -28,6 +44,7 @@ struct DeliveryRaceView: View {
     @EnvironmentObject var game: GameModel
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var textSize
     @State private var run = DeliveryRun()
     @State private var paused = false
     @State private var rewarded = false
@@ -47,7 +64,7 @@ struct DeliveryRaceView: View {
                     })
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Harvest rally road. Swipe left or right to steer.")
-                    .accessibilityValue("Lane \(run.lane + 1) of 3")
+                    .accessibilityValue("Lane \(run.lane + 1) of 3, \(laneName(run.lane)). \(trafficGuidance)")
                     .accessibilityHint("Avoid striped barriers and collect coins. VoiceOver users can adjust the lane up or down.")
                     .accessibilityIdentifier("raceTrack")
                     .accessibilityAdjustableAction { direction in
@@ -64,14 +81,19 @@ struct DeliveryRaceView: View {
                         else if paused { pauseCard }
                     }
             }.padding(.horizontal, 20)
-            Label(paused ? "Paused · your shield is safe" : "Swipe left or right to steer", systemImage: paused ? "pause.circle.fill" : "hand.draw.fill")
-                .font(.system(.subheadline, design: .rounded, weight: .bold)).foregroundStyle(Palette.mint).frame(minHeight: 34)
-                .accessibilityIdentifier("raceSteeringHelp")
+            VStack(spacing: 6) {
+                trafficGuide
+                Label(paused ? "Paused · your shield is safe" : "Swipe left or right to steer", systemImage: paused ? "pause.circle.fill" : "hand.draw.fill")
+                    .font(.system(.subheadline, design: .rounded, weight: .bold)).foregroundStyle(Palette.mint).frame(minHeight: 34)
+                    .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+                    .accessibilityIdentifier("raceSteeringHelp")
+            }.padding(.horizontal, 22)
             Button { game.raceActive = false; game.tab = 0 } label: {
-                Label("Exit rally room · Island", systemImage: "xmark.circle.fill")
+                Label(textSize.isAccessibilitySize ? "Exit rally" : "Exit rally room · Island", systemImage: "xmark.circle.fill")
                     .font(.system(.subheadline, design: .rounded, weight: .bold)).foregroundStyle(Palette.night)
                     .frame(maxWidth: .infinity, minHeight: 48).background(Palette.paper, in: Capsule())
             }.buttonStyle(PressStyle()).padding(.horizontal, 22).padding(.bottom, 8)
+                .accessibilityLabel("Exit rally room · Island")
                 .accessibilityHint("No life is spent. Coins are banked when the rally ends.").accessibilityIdentifier("leaveRace")
         }
         .overlayPreferenceValue(RallyFlightAnchors.self) { anchors in
@@ -88,8 +110,14 @@ struct DeliveryRaceView: View {
             guard !Task.isCancelled, coinFlightID == flightID else { return }
             coinFlightID = nil
         }
-        .onAppear { if !prepared { run = DeliveryRun(difficulty:game.ecosystem.deliveries/3); prepared = true } }
+        .onAppear {
+            if !prepared { run = DeliveryRun(difficulty:game.ecosystem.deliveries/3); prepared = true }
+            announceTraffic()
+        }
         .onChange(of: scenePhase) { _, phase in if phase != .active && !run.finished { paused = true } }
+        .onChange(of: run.nextTraffic?.id) { _, _ in announceTraffic() }
+        .onChange(of: paused) { _, isPaused in if !isPaused { announceTraffic() } }
+        .onReceive(NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)) { _ in announceTraffic() }
         .onReceive(timer) { _ in
             guard !paused, scenePhase == .active, !run.finished else { return }
             let event = run.tick(0.05)
@@ -100,6 +128,42 @@ struct DeliveryRaceView: View {
             if event.pickup { pickupLane = run.lane; coinFlightID = UUID(); game.effect("coin"); game.feedback(.light) }
             if run.finished && !rewarded { rewarded = true; game.completeDelivery(run) }
         }
+    }
+
+    private func laneName(_ lane: Int) -> String { ["left", "center", "right"][lane] }
+    private var trafficGuidance: String {
+        guard let traffic = run.nextTraffic else { return "No more barriers." }
+        return "Next barrier: lane \(traffic.barrierLane + 1), \(laneName(traffic.barrierLane)). Coin: lane \(traffic.coinLane + 1), \(laneName(traffic.coinLane))."
+    }
+    private func announceTraffic() {
+        guard UIAccessibility.isVoiceOverRunning, scenePhase == .active, !paused, let traffic = run.nextTraffic else { return }
+        UIAccessibility.post(notification: .announcement, argument: "\(laneName(traffic.barrierLane)) barrier. \(laneName(traffic.coinLane)) coin.")
+    }
+    private var trafficGuide: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(run.nextTraffic == nil ? "Clear road" : "Next traffic")
+                .font(.system(.caption, design: .rounded, weight: .bold)).foregroundStyle(Palette.mint)
+            HStack(spacing: 8) {
+            ForEach(0..<3) { lane in
+                let blocked = run.nextTraffic?.barrierLane == lane
+                let coin = run.nextTraffic?.coinLane == lane
+                VStack(spacing: 4) {
+                    Text("\(lane + 1) · \(laneName(lane).capitalized)")
+                        .font(.system(.caption, design: .rounded, weight: .bold))
+                    Label(blocked ? "Barrier" : coin ? "Coin" : "Clear", systemImage: blocked ? "exclamationmark.triangle.fill" : coin ? "star.circle.fill" : "checkmark")
+                        .font(.system(.caption, design: .rounded, weight: .semibold))
+                }.foregroundStyle(Palette.night).frame(maxWidth: .infinity, minHeight: 48)
+                    .padding(.vertical, 4)
+                    .background(blocked ? Palette.coral.opacity(0.22) : coin ? Palette.sunlight : Palette.paper, in: RoundedRectangle(cornerRadius: 14))
+                    .overlay(RoundedRectangle(cornerRadius: 14).stroke(run.lane == lane ? Palette.night : .clear, lineWidth: 2))
+                    .accessibilityIdentifier("raceLaneGuide\(lane)")
+            }
+            }
+        // Keep this three-lane diagram legible in the playable arena; VoiceOver
+        // exposes the complete numbered-lane summary on both the guide and road.
+        }.dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+            .accessibilityElement(children: .ignore).accessibilityLabel("Next traffic")
+            .accessibilityValue(trafficGuidance).accessibilityIdentifier("raceTrafficGuide")
     }
 
     private var raceHeader: some View {
@@ -131,7 +195,8 @@ struct DeliveryRaceView: View {
                     .accessibilityElement(children: .ignore).accessibilityLabel("\(run.collected) coins collected in this rally").accessibilityIdentifier("raceCollectedCoins")
                     .anchorPreference(key: RallyFlightAnchors.self, value: .bounds) { ["coins": $0] }
             }
-        }.foregroundStyle(Palette.night).padding(.horizontal, 22).padding(.top, 8)
+        }.dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+            .foregroundStyle(Palette.night).padding(.horizontal, 22).padding(.top, 8)
     }
 
     private func road(size: CGSize) -> some View {
@@ -139,7 +204,7 @@ struct DeliveryRaceView: View {
             RallyRoadSurface(elapsed: reduceMotion ? 0 : run.elapsed)
             RoundedRectangle(cornerRadius: 12).fill(Color.white.opacity(0.08)).frame(width: size.width * 0.76 / 3 - 8)
                 .position(x: laneX(run.lane, width: size.width), y: size.height / 2).animation(reduceMotion ? nil : .easeOut(duration: 0.18), value: run.lane)
-            ForEach(0..<run.obstacleCount) { id in
+            ForEach(0..<run.obstacleCount, id: \.self) { id in
                 let crossing = run.crossingTime(id)
                 let y = size.height * 0.78 + CGFloat((run.elapsed - crossing) * 110)
                 if y > -70 && y < size.height + 70 && !run.passed.contains(id) {
@@ -163,10 +228,22 @@ struct DeliveryRaceView: View {
 
     private var pauseCard: some View {
         VStack(spacing: 12) {
-            Image(systemName: "pause.circle.fill").font(.system(size: 36)).foregroundStyle(Palette.night).accessibilityHidden(true)
-            Text("Rally paused").font(.system(.title2, design: .rounded, weight: .heavy))
-            Text("Take your time. The road waits for you.").font(.system(.subheadline, design: .rounded)).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
-            PrimaryButton(title: "Resume rally", symbol: "play.fill", id: "resumeRace") { paused = false; game.effect("tap") }
+            if !textSize.isAccessibilitySize {
+                Image(systemName: "pause.circle.fill").font(.system(size: 36)).foregroundStyle(Palette.night).accessibilityHidden(true)
+            }
+            Text(textSize.isAccessibilitySize ? "Paused" : "Rally paused").font(.system(.title2, design: .rounded, weight: .heavy))
+            if !textSize.isAccessibilitySize {
+                Text("Take your time. The road waits for you.").font(.system(.subheadline, design: .rounded)).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
+            }
+            if textSize.isAccessibilitySize {
+                Button { paused = false; game.effect("tap") } label: {
+                    Text("Resume").font(.system(.headline, design: .rounded, weight: .bold))
+                        .foregroundStyle(Palette.night).frame(maxWidth: .infinity, minHeight: 48)
+                        .padding(.vertical, 8).background(Palette.sunlight, in: Capsule())
+                }.buttonStyle(PressStyle()).accessibilityLabel("Resume rally").accessibilityIdentifier("resumeRace")
+            } else {
+                PrimaryButton(title: "Resume rally", symbol: "play.fill", id: "resumeRace") { paused = false; game.effect("tap") }
+            }
         }.foregroundStyle(Palette.night).padding(22).background(Palette.paper.opacity(0.98), in: RoundedRectangle(cornerRadius: 25)).padding(22)
     }
 
