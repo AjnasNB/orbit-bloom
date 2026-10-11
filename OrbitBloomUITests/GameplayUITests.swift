@@ -357,6 +357,65 @@ import StoreKitTest
         app.terminate(); app.launchArguments = ["--uitesting","--keep-progress"]; app.launch(); app.buttons["openFarm"].tap()
         XCTAssertTrue(app.staticTexts["farmTotals"].waitForExistence(timeout:5)); XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
     }
+    func testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn() throws {
+        let entrance = app.buttons["openFarm"]
+        let ready = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in entrance.isHittable }, object: app)
+        XCTAssertEqual(XCTWaiter.wait(for: [ready], timeout: 10), .completed)
+        // Let the initial native island/layout settle before synthesizing the tap.
+        Thread.sleep(forTimeInterval: 0.5)
+        app.buttons["openFarm"].tap()
+        let map = app.descendants(matching: .any)["farmRoomMap"].firstMatch
+        XCTAssertTrue(map.waitForExistence(timeout: 5))
+        XCTAssertGreaterThan(map.frame.height, app.frame.height * 0.25)
+        attach("build15-farm-empty-field")
+        app.buttons["cropapple"].tap(); app.buttons["plot0"].tap()
+        XCTAssertTrue((app.buttons["plot0"].value as? String)?.contains("Moon apple. sprout") == true)
+        app.buttons["croprose"].tap(); app.buttons["plot1"].tap()
+        XCTAssertTrue((app.buttons["plot1"].value as? String)?.contains("Coral rose. sprout") == true)
+        attach("build15-farm-sprouts")
+        for _ in 0..<2 { app.buttons["plot0"].tap() }
+        app.buttons["plot1"].tap()
+        XCTAssertTrue((app.buttons["plot0"].value as? String)?.contains("Moon apple") == true, "Watering must retain the planted species even with roses selected")
+        attach("build15-farm-growing-orchard")
+        app.buttons["returnWorld"].tap(); app.terminate()
+        app.launchArguments = ["--uitesting", "--keep-progress"]; app.launch()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout: 15))
+        app.buttons["openFarm"].tap()
+        let mature = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+            self.app.buttons["plot0"].label.contains("ready") && self.app.buttons["plot1"].label.contains("ready")
+        }, object: app)
+        XCTAssertEqual(XCTWaiter.wait(for: [mature], timeout: 35), .completed)
+        XCTAssertTrue((app.buttons["plot0"].value as? String)?.contains("Moon apple. ripe") == true)
+        XCTAssertTrue((app.buttons["plot1"].value as? String)?.contains("Coral rose. ripe") == true)
+        attach("build15-farm-ripe-apples-and-roses")
+        app.buttons["plot0"].tap(); app.buttons["plot1"].tap()
+        XCTAssertTrue(app.buttons["plot0"].label.contains("empty")); XCTAssertTrue(app.buttons["plot1"].label.contains("empty"))
+        XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
+        XCTAssertTrue(app.buttons["openShop"].label.contains("245"), "Actual apple and rose harvests bank 50 + 35 coins")
+        attach("build15-farm-harvested-field")
+        app.terminate(); app.launch()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.buttons["openShop"].label.contains("245"))
+        app.buttons["openFarm"].tap()
+        XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 2"))
+    }
+    func testLivingFarmMaximumTextKeepsSixPatchesAndShedReachable() throws {
+        app.terminate(); app.launchArguments = ["--uitesting", "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL"]; app.launch()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout: 15)); app.buttons["openFarm"].tap()
+        var patches: [XCUIElement] = []
+        for id in 0..<6 {
+            let button = app.buttons["plot\(id)"]
+            XCTAssertTrue(button.waitForExistence(timeout: 5)); XCTAssertTrue(button.isHittable)
+            XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(button.frame))
+            XCTAssertGreaterThanOrEqual(button.frame.height, 44); patches.append(button)
+        }
+        for left in 0..<6 { for right in (left + 1)..<6 { XCTAssertFalse(patches[left].frame.intersects(patches[right].frame)) } }
+        for id in ["returnWorld", "openToolShed", "cropapple", "croprose"] {
+            XCTAssertTrue(app.buttons[id].isHittable); XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(app.buttons[id].frame))
+        }
+        XCTAssertEqual(app.scrollViews.count, 0)
+        attach("build15-farm-maximum-text")
+    }
     func testPuzzleWaterReachesFarmAndCanPlantAfterRelaunch() throws {
         app.buttons["openFarm"].tap()
         let water = app.descendants(matching:.any)["farmMeterWater"]
@@ -515,6 +574,28 @@ import StoreKitTest
 
 // Uses the dedicated iPad release device without resetting its saved progress.
 @MainActor final class IPadReleaseUITests: XCTestCase {
+    func testLivingFarmFitsBothOrientationsWithAllSixWorldTargets() throws {
+        let app = XCUIApplication(); app.launchArguments = ["--uitesting", "--keep-progress"]; app.launch()
+        defer { XCUIDevice.shared.orientation = .portrait }
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout: 15)); app.buttons["openFarm"].tap()
+        let water = app.descendants(matching: .any)["farmMeterWater"].firstMatch
+        XCTAssertTrue(water.waitForExistence(timeout: 5)); let originalWater = water.label
+        for (orientation, name) in [(UIDeviceOrientation.portrait, "portrait"), (.landscapeLeft, "landscape")] {
+            XCUIDevice.shared.orientation = orientation
+            Thread.sleep(forTimeInterval: 1)
+            for id in 0..<6 {
+                let target = app.buttons["plot\(id)"]
+                XCTAssertTrue(target.waitForExistence(timeout: 5)); XCTAssertTrue(target.isHittable)
+                XCTAssertTrue(app.frame.insetBy(dx: -1, dy: -1).contains(target.frame)); XCTAssertGreaterThanOrEqual(target.frame.height, 44)
+            }
+            XCTAssertTrue(app.buttons["openToolShed"].isHittable); XCTAssertTrue(app.buttons["returnWorld"].isHittable)
+            XCTAssertEqual(water.label, originalWater); XCTAssertEqual(app.scrollViews.count, 0)
+            let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot()); shot.name = "build15-farm-ipad-\(name)"; shot.lifetime = .keepAlways; add(shot)
+        }
+        app.buttons["openToolShed"].tap(); XCTAssertTrue(app.buttons["craftrainbow"].waitForExistence(timeout: 5))
+        app.buttons["backToTerraces"].tap(); XCTAssertTrue(app.buttons["plot5"].waitForExistence(timeout: 5))
+        XCTAssertEqual(water.label, originalWater)
+    }
     func testRallyTrafficGuideFitsBothOrientationsAndAccessibilityTextWithoutReset() throws {
         let app = XCUIApplication()
         continueAfterFailure = false

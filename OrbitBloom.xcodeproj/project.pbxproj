@@ -59,6 +59,7 @@
 		C5FA74A74D41B15D5F24343B /* sfx-harvest.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6F3231B6F57FD87BB0F77599 /* sfx-harvest.m4a */; };
 		CD48FA369DD3E8F9814517C1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD484D22386E7B59E41BA33 /* Theme.swift */; };
 		D3EBCE32A42E23811252A550 /* SevenRoomsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D5C471676EFB92E988F396 /* SevenRoomsUITests.swift */; };
+		D712024ABD19983F1F76365C /* FarmFieldScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD557A2D4F81B818861FE0F /* FarmFieldScene.swift */; };
 		D75A059C2435BE54ACDCD6E8 /* sfx-match.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 18DD57C9ADE8FAD761787820 /* sfx-match.m4a */; };
 		D7A1CBD80C07310AB68B0B19 /* sfx-craft.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DB2D62D752CADD81E27AA22E /* sfx-craft.m4a */; };
 		E6158992356C6A54CB2D892D /* Match3Kit in Frameworks */ = {isa = PBXBuildFile; productRef = 4A6B4BC599173FEADC4B677D /* Match3Kit */; };
@@ -137,6 +138,7 @@
 		B44ADD24ACCA512053DF0665 /* sfx-win.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-win.m4a"; path = "OrbitBloom/Resources/sfx-win.m4a"; sourceTree = SOURCE_ROOT; };
 		BAC3543C7D85344755F63E2F /* GemView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GemView.swift; path = OrbitBloom/Views/GemView.swift; sourceTree = SOURCE_ROOT; };
 		CA689053443B0C9CC57AC968 /* sfx-tap.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "sfx-tap.m4a"; path = "OrbitBloom/Resources/sfx-tap.m4a"; sourceTree = SOURCE_ROOT; };
+		CAD557A2D4F81B818861FE0F /* FarmFieldScene.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FarmFieldScene.swift; path = OrbitBloom/Views/FarmFieldScene.swift; sourceTree = SOURCE_ROOT; };
 		CB81B15434B44065200856FE /* ActivityRoomView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActivityRoomView.swift; path = OrbitBloom/Views/ActivityRoomView.swift; sourceTree = SOURCE_ROOT; };
 		D505DF14BDE2580B50F67CCE /* OrbitBloomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrbitBloomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B21E3FD0AD5B4473F16852 /* music-puzzle.m4a */ = {isa = PBXFileReference; includeInIndex = 1; name = "music-puzzle.m4a"; path = "OrbitBloom/Resources/music-puzzle.m4a"; sourceTree = SOURCE_ROOT; };
@@ -208,6 +210,7 @@
 				5DD484D22386E7B59E41BA33 /* Theme.swift */,
 				ABA309327FBA0D2E1D6BB9E9 /* Resources */,
 				CB81B15434B44065200856FE /* ActivityRoomView.swift */,
+				CAD557A2D4F81B818861FE0F /* FarmFieldScene.swift */,
 			);
 			name = OrbitBloom;
 			path = OrbitBloom;
@@ -487,6 +490,7 @@
 				5E6AA1DFBC69FB56DD029B24 /* IslandActivityView.swift in Sources */,
 				6B78559DF65443939C4359DC /* RoomRecordsView.swift in Sources */,
 				F089889F3EDFD4398BD17328 /* WorldEventsView.swift in Sources */,
+				D712024ABD19983F1F76365C /* FarmFieldScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,7 +609,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = OrbitBloom/OrbitBloom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 4V29K5Q8S9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Orbit Bloom";
@@ -646,7 +650,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_ENTITLEMENTS = OrbitBloom/OrbitBloom.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 4V29K5Q8S9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Orbit Bloom";

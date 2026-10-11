@@ -60,7 +60,26 @@ public struct FarmPlot: Codable, Equatable, Identifiable {
     public var crop: Crop?
     public var readyAt: Date?
     public func ready(at now: Date) -> Bool { crop != nil && (readyAt ?? .distantFuture) <= now }
+    /// Derived from the existing saved deadline: watering advances the visible plant too.
+    public func growth(at now: Date) -> Double {
+        guard let crop, let readyAt else { return 0 }
+        let remaining = readyAt.timeIntervalSince(now)
+        guard remaining.isFinite else { return 0 }
+        return min(1, max(0, 1 - remaining / crop.duration))
+    }
+    public func stage(at now: Date) -> FarmGrowthStage {
+        guard crop != nil else { return .empty }
+        let progress = growth(at: now)
+        if ready(at: now) { return .ripe }
+        if progress >= 0.7 { return .flowering }
+        if progress >= 0.3 { return .leafy }
+        return .sprout
+    }
     public init(id: Int) { self.id = id }
+}
+
+public enum FarmGrowthStage: String {
+    case empty, sprout, leafy, flowering, ripe
 }
 
 public struct Ecosystem: Codable, Equatable {

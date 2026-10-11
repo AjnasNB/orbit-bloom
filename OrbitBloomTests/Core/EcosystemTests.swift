@@ -42,6 +42,27 @@ final class EcosystemTests: XCTestCase {
         XCTAssertEqual(restored.plots[0].readyAt,now.addingTimeInterval(35))
         restored.water = 0; XCTAssertFalse(restored.plant(1,crop:.rose,at:now))
     }
+    func testFarmGrowthStagesUseTheSavedDeadlineAndWateringForBothCrops() throws {
+        for crop in Crop.allCases {
+            var eco = Ecosystem()
+            XCTAssertEqual(eco.plots[0].stage(at: now), .empty)
+            XCTAssertTrue(eco.plant(0, crop: crop, at: now))
+            XCTAssertEqual(eco.plots[0].stage(at: now), .sprout)
+            XCTAssertEqual(eco.plots[0].growth(at: now), 0)
+            XCTAssertEqual(eco.plots[0].stage(at: now.addingTimeInterval(crop.duration * 0.4)), .leafy)
+            XCTAssertEqual(eco.plots[0].stage(at: now.addingTimeInterval(crop.duration * 0.8)), .flowering)
+            XCTAssertEqual(eco.plots[0].stage(at: now.addingTimeInterval(crop.duration)), .ripe)
+            XCTAssertEqual(eco.plots[0].growth(at: now.addingTimeInterval(-500)), 0)
+            let decoded = try JSONDecoder().decode(Ecosystem.self, from: JSONEncoder().encode(eco))
+            XCTAssertEqual(decoded.plots[0].growth(at: now.addingTimeInterval(7)), eco.plots[0].growth(at: now.addingTimeInterval(7)))
+            XCTAssertTrue(eco.waterPlot(0, at: now))
+            XCTAssertEqual(eco.plots[0].growth(at: now), 10 / crop.duration, accuracy: 0.000001)
+            XCTAssertEqual(eco.harvest(0, at: now.addingTimeInterval(crop.duration)), crop.coins)
+            XCTAssertEqual(eco.plots[0].stage(at: now), .empty)
+            XCTAssertEqual(eco.plots[0].growth(at: now), 0)
+            XCTAssertNil(eco.harvest(0, at: now.addingTimeInterval(crop.duration)))
+        }
+    }
     func testCraftingAndTransactionIdempotency() {
         var eco = Ecosystem(); XCTAssertFalse(eco.craft(.rainbow)); eco.compost = 6
         XCTAssertTrue(eco.craft(.rainbow)); XCTAssertEqual(eco.tools[.rainbow],2); XCTAssertEqual(eco.compost,0)

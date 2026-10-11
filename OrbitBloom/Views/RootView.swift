@@ -42,7 +42,7 @@ struct RootView: View {
                             initialRoom:selectedHubRoom,onChoose:chooseRoom,onExit:{ game.tab = 0 })
                         default: GardenView()
                         }
-                    }.id(game.tab).transition(.opacity).frame(maxWidth:game.tab == 0 || game.tab == 1 ? .infinity : 650).frame(maxWidth:.infinity,maxHeight:.infinity)
+                    }.id(game.tab).transition(.opacity).frame(maxWidth:game.tab == 0 || game.tab == 1 || game.tab == 2 ? .infinity : 650).frame(maxWidth:.infinity,maxHeight:.infinity)
                 }.accessibilityHidden(loading)
                     .animation(reduceMotion ? nil : .easeInOut(duration:0.2),value:game.tab)
             }

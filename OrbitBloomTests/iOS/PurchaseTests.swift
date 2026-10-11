@@ -5,6 +5,25 @@ import UIKit
 @testable import OrbitBloom
 
 @MainActor final class SpriteAssetTests: XCTestCase {
+    func testFarmFieldRendersTheActualSavedSpeciesAndGrowthStage() throws {
+        let now = Date(timeIntervalSince1970: 100_000)
+        var eco = Ecosystem()
+        XCTAssertTrue(eco.plant(0, crop: .apple, at: now))
+        XCTAssertTrue(eco.plant(1, crop: .rose, at: now))
+        let field = FarmFieldWorld()
+        field.update(plots: eco.plots, now: now, interaction: nil, reducedMotion: true)
+        XCTAssertNotNil(field.scene.rootNode.childNode(withName: "crop-0-apple-sprout", recursively: false))
+        XCTAssertNotNil(field.scene.rootNode.childNode(withName: "crop-1-rose-sprout", recursively: false))
+        field.update(plots: eco.plots, now: now.addingTimeInterval(46), interaction: nil, reducedMotion: true)
+        let apple = try XCTUnwrap(field.scene.rootNode.childNode(withName: "crop-0-apple-ripe", recursively: false))
+        XCTAssertEqual(apple.childNodes.filter { $0.name == "ripe-apple" }.count, 7)
+        XCTAssertNotNil(field.scene.rootNode.childNode(withName: "crop-1-rose-ripe", recursively: false))
+        XCTAssertEqual(eco.harvest(0, at: now.addingTimeInterval(46)), 50)
+        field.update(plots: eco.plots, now: now.addingTimeInterval(46), interaction: nil, reducedMotion: true)
+        XCTAssertNil(field.scene.rootNode.childNode(withName: "crop-0-apple-ripe", recursively: false))
+        XCTAssertNotNil(field.scene.rootNode.childNode(withName: "crop-1-rose-ripe", recursively: false))
+        XCTAssertEqual(eco.harvested, 1)
+    }
     func testCartoonAtlasHasTwelveVisibleSpritesWithTransparentGutters() throws {
         XCTAssertEqual(BotanicalSprites.images.count,12)
         for (index,image) in BotanicalSprites.images.enumerated() {
