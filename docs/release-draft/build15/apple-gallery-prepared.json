@@ -1,0 +1,147 @@
+{
+  "build": 15,
+  "status": "Prepared locally for next public review update, not saved to Apple. Existing build-11 review/gallery is unchanged.",
+  "iPhone": [
+    {
+      "file": "screenshots/phone-07-living-leaf-puzzle.png",
+      "capturedBuild": 15,
+      "manifest": "manifest.json",
+      "reason": "Final new leaf on the real large-text board",
+      "sha256": "e262391aa310f0eda8d07ba5eeee1407e0be5f82e49e4fa8f5dd4d92354865d0"
+    },
+    {
+      "file": "screenshots/phone-04-ripe-orchard-and-roses.png",
+      "capturedBuild": 15,
+      "manifest": "manifest.json",
+      "reason": "Replaces the old card farm with actual saved apple trees and rose bushes",
+      "sha256": "08243988f2ec2c4474afc97f2994c9eb33065f16b0a99a2e3ffc494579cb2672"
+    },
+    {
+      "file": "../build14/screenshots/phone-02-next-traffic.png",
+      "capturedBuild": 14,
+      "manifest": "../build14/manifest.json",
+      "sha256": "a7c383f9917145e9726059797dbc5e3515cf524285a4f0673d0f555efc72c5e7"
+    },
+    {
+      "file": "../build13/screenshots/phone-01-connected-garden.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "47007dfddb9c396f5d4796aa3971738fe272693ec90b867178c114271ee70b7b",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-17-canal-weave.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "49c75f088cf0c0a0659c7b864a101c089fb6c8e0dea1da1627b7fd17381494e5",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-18-firefly-trail.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "213c76c5dd44a3ed34d208a4b1dcc66e1fe5e4007a9c2e9d827071aba28e936a",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-19-windmill-works.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "674d36cf6869a896d2916344512dbce1ec2166047e3d7a27a97bba41de25e508",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-20-moon-observatory.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "f325bb7fea6331aab8d90d49920136030b4fb4ea6c29e83062901d057d2232aa",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-03-board-power.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "b18b8c287c3cfafe62a8bc75cb14246bdc6244978dbfebdb95c38d57cba94108",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-11-lives-and-shop.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "cfe6ca5c56511a7083da34e14f64363b68cf105d71914fb3806d8f71bd4a56b4",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    }
+  ],
+  "iPad": [
+    {
+      "file": "../build13/screenshots/ipad-04-puzzle-portrait.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "ab32a60389624b6a444c659b542a98eb07b85d0e29add4f4a799c8d7cd68d0ae",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "screenshots/ipad-01-portrait.png",
+      "capturedBuild": 15,
+      "manifest": "manifest.json",
+      "reason": "New living field with the preserved iPad QA rose crop",
+      "sha256": "483cf5dbc8b7cdc69e101b8d0a30e9ad643d53a7e58cf0359d5590175c6ae272"
+    },
+    {
+      "file": "../build14/screenshots/ipad-01-rally-portrait.png",
+      "capturedBuild": 14,
+      "manifest": "../build14/manifest.json",
+      "sha256": "e3242fa9068707534a829afa3a0000978db2e7ee5ac36b481fd8da4f88341a58"
+    },
+    {
+      "file": "../build13/screenshots/ipad-01-garden-portrait.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "524d62db82db9dc9cd636b4fd3133a000d4d9fbc95e10e0422527982dba15564",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-07-canal.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "9d3375101501e6807405754f4ef216d4c4feb052a4efaec2c3b327bc9f3f6a04",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-08-fireflies.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "55a15f36801d2c7de53077c1019a8e36de34b64a5136c22af4251ae013789f57",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-09-windmill.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "ce09cc82dd8a27a770442bd1a938c15c0234105e861621b205992e9afb4ea8f4",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-10-observatory.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "108706e3359051e5f534aa90010542cd5f1c9a7abb8de5e074c32a0d068503f2",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-03-puzzle-landscape.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "a2838743498591a941137bd124e5781902f2f191bd8b34954d38a8263c8e220c",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-02-garden-landscape.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "144029f17529cb46d4a8d89b89b1d33d7dcc86d59ec52b7bfd5438445b8fcdb8",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    }
+  ],
+  "note": "Ten original images per proposed device gallery. Each retains nine unchanged build-13 images and replaces its Rally slot with one build-14 capture. Actual captured build and provenance are explicit; build-11 submitted gallery remains unchanged."
+}

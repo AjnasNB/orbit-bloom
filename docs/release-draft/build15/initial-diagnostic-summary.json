@@ -1,0 +1,53 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+        "deviceName" : "Orbit Bloom Store QA",
+        "modelName" : "iPhone 17 Pro Max",
+        "osBuildNumber" : "23B80",
+        "osVersion" : "26.1",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 1,
+      "passedTests" : 52,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "OrbitBloom · Built with macOS 26.5",
+  "expectedFailures" : 0,
+  "failedTests" : 1,
+  "finishTime" : 1791723316.501,
+  "passedTests" : 52,
+  "result" : "Failed",
+  "skippedTests" : 0,
+  "startTime" : 1791723197.178,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+    {
+      "failureText" : "XCTAssertGreaterThanOrEqual failed: (\"31.33331298828125\") is less than (\"44.0\")",
+      "targetName" : "OrbitBloomUITests",
+      "testIdentifier" : 53,
+      "testIdentifierString" : "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "testIdentifierURL" : "test://com.apple.xcode/OrbitBloom/OrbitBloomUITests/GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress",
+      "testName" : "testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()"
+    }
+  ],
+  "title" : "Test - OrbitBloom",
+  "topInsights" : [
+    {
+      "category" : "Longest Test Runs",
+      "impact" : "21% of duration",
+      "text" : "1 longest test run with outlier durations exceeding 1.31s (three standard deviations)"
+    }
+  ],
+  "totalTestCount" : 53
+}

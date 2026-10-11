@@ -1,0 +1,16 @@
+{
+  "generator": "Built-in OpenAI image generation",
+  "generatedAt": "2026-10-11",
+  "prompt": "Use case: stylized-concept. Asset type: an original transparent PNG leaf sprite for Orbit Bloom, a polished 3D cartoon iOS garden game. Create ONE botanically recognizable fresh apple-tree leaf. Broad ovate-lanceolate silhouette, pointed tip, small naturally serrated edge, slim brown-green petiole, a gently curved midrib with clearly readable branching secondary veins. The entire leaf and thin stem are in frame with a generous transparent margin on every side. Leaf tilted diagonally from lower-left stem toward upper-right pointed tip, mostly front-facing, shallow dimensional curl. Lively forest green with sunlit yellow-green upper ridges, deeper green folded underside, soft waxy highlights, rounded stylized 3D rendering consistent with a friendly miniature garden, not a photograph. Must visibly read as a living plant leaf at 40 pixels. Keep its edges crisp, don't use a rolled-up stem, swollen candy shape, balloon leaf, tube or toy jelly. No other objects, no pot, no base, no hard cast ground shadow, no text, no borders, no watermark. Background genuinely transparent. Render at large square sprite size.",
+  "transparentBackground": true,
+  "referencedImages": [],
+  "originalOutput": "/Users/ajnasnb/.codex/generated_images/01a11b5b-a39f-7f50-bd8a-54736d327ef5/exec-f4e39d08-9961-4603-8246-4e8f6d3784e9.png",
+  "appAsset": "OrbitBloom/Resources/Assets.xcassets/LivingLeaf.imageset/image.png",
+  "sha256": "7ad8a87927663df314f014feeb4da71995f06a4c94ef438dbaae50d308e8474a",
+  "dimensions": [
+    1280,
+    1280
+  ],
+  "postProcessing": "None. Original transparent PNG copied unchanged into asset catalog.",
+  "spriteContract": "Overrides only Gem.leaf rawValue 0. The other eleven atlas indices remain unchanged."
+}

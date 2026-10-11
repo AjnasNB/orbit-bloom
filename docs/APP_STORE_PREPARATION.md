@@ -1,3 +1,13 @@
+# Latest internal preparation — build 15, 11 October 2026
+
+Build **1.0 (15)** replaces the farm cards with a native living field and distinct apple-tree/rose-bush growth, offline harvests and a recognizable leaf shared with the puzzle. [Delivery evidence](release-draft/build15/README.md) records source `3896b3f`, 108 unique affected passing cases, eleven original screenshots and the preserved ordinary preview save. The signed App Store archive/export passes local signature, Production private iCloud/Game Center, privacy and no-test-plug-in checks.
+
+**Build 15 is not uploaded.** Both Xcode upload attempts report `Failed to Use Accounts`; the Mac is locked for native control, and the user has been asked to unlock it. Continue with the existing signed archive/account once available. No Apple server validation or internal-group assignment is claimed for build 15. [Next metadata](release-draft/build15/metadata-prepared.json) and [ten-per-device galleries](release-draft/build15/apple-gallery-prepared.json) are local preparations, not saved product-page changes.
+
+Chrome rechecked on 11 October: public version **1.0/build 11 remains Waiting for Review**, with manual release and the existing gallery. Processed builds **13 and 14** are assigned to **Orbit Bloom QA**, with one invite each. No hardware installation is proved by assignment. The account/payment setup, six purchase products and public review remain unchanged; no purchase or agreement was performed.
+
+---
+
 # Latest internal delivery — build 14, 11 October 2026
 
 Build **1.0 (14)** improves Rally's numbered next-barrier/coin guidance, road accessibility and VoiceOver announcements, frozen pause preview and maximum-text lobby/pause controls. **106 unique affected cases have passing runs**; the phone bundle's room-relaunch failure passed after fresh-query setup in a separate rerun. [Verification and original screenshots](release-draft/build14/README.md) preserve failures and final-source provenance.

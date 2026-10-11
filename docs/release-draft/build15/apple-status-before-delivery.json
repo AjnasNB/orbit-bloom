@@ -1,0 +1,29 @@
+{
+  "method": "Read-only Chrome UI through cua_repl",
+  "appID": "6820591529",
+  "publicVersion": "1.0",
+  "publicBuild": 11,
+  "publicReviewStatus": "Waiting for Review",
+  "releaseMode": "Manual",
+  "internalBuilds": {
+    "14": {
+      "status": "Ready to Submit",
+      "group": "Orbit Bloom QA",
+      "invites": 1,
+      "installs": "not reported"
+    },
+    "13": {
+      "status": "Ready to Submit",
+      "group": "Orbit Bloom QA",
+      "invites": 1,
+      "installs": "not reported"
+    }
+  },
+  "publicReviewChanged": false,
+  "metadataSaved": false,
+  "noRealPurchase": true,
+  "noAgreementAccepted": true,
+  "recordWrittenAtUTC": "2026-10-11T13:12:57.820883+00:00",
+  "checkedOn": "2026-10-11",
+  "observationTimestampPrecision": "date; record write time is not claimed to be the exact browser observation time"
+}

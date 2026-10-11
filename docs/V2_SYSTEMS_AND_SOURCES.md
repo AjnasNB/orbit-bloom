@@ -1,5 +1,7 @@
 # Orbit Bloom: connected garden arcade
 
+Build 15 makes Farm a continuous native SceneKit field with saved apple-tree and rose-bush growth, actual ripening/harvests, camera-aligned patch controls and a new botanical leaf shared with the puzzle. The six existing plot deadlines, costs, rewards, offline growth, crafting and save schema remain compatible. [Farm redesign](FARM_FIELD_REDESIGN.md) and [delivery evidence](release-draft/build15/README.md) record 108 unique affected passing cases, eleven native captures and the personal preview update with complete save checks. Signed archive/export passed; upload is blocked by Xcode `Failed to Use Accounts` while the Mac is locked. Chrome confirms build 11 still Waiting for Review and builds 13/14 in the internal group; public review is unchanged.
+
 Build 14 adds a numbered next-barrier/coin guide using the actual Rally crossing, VoiceOver road summaries and active announcements, and readable large-text lobby/pause controls. All five traffic tiers and the real reward/save path have regressions. [Build-14 evidence](release-draft/build14/README.md) records 106 unique affected passing cases and the successful Apple upload; processing/group assignment are pending verification. The existing build-11 public review is unchanged.
 
 Build 13 is a locally verified cartoon-art update. The shared fruit, leaf, dew, rose, diamond, powers, robot and coin atlas now matches the playful 3D garden; Lio and the rally rover use the same smooth illustrated material style. Sprite indices and save schemas are preserved. [Style refinement](CARTOON_STYLE_REFINEMENT.md) and [the test report](TEST_REPORT.md) record the artwork, crop guard and real gameplay checks. The existing build-11 Apple submission was not replaced by this local update.
@@ -15,7 +17,7 @@ This revision follows the user's requested change from a single swap puzzle to a
 | World and character | Lio restores Aurora Atoll; original SceneKit island, 102 horizontal pages × 10 sequential campaign stops, six ordered restoration projects, labeled Farm/Rally doors, seven-room directory and field journal |
 | Bloom circuits | Swipe real neighboring pieces or tap botanical groups; resource goals and frost, 10–20 turns on normal stages plus twenty one-move challenges; 1,020 stages (12 opening + 1,008 generated) |
 | Tools | Bomb: 3×3 area; TNT: row and column; mega bomb: 5×5 area; rainbow: every piece matching the selected color |
-| Farming | Six persistent plots, rose/apple selection, plant/water/grow/harvest, offline elapsed growth, produce and compost |
+| Farming | Native 3D orchard/rose field, six persistent soil beds, camera-aligned actions, species-specific shoots/leaves/blossoms/ripe crop, plant/water/offline grow/harvest, produce and compost |
 | Crafting | Harvest compost creates garden tools; puzzle dew refills farming water |
 | Delivery race | Illustrated rover, horizontal swipe steering, three lanes, visible shield/time/distance, animated pickups, 22-second/440-metre route and cargo bonus; five traffic tiers increase every three successful deliveries; numbered next-barrier/coin guide and VoiceOver cues; pause freezes guidance |
 | Canal Weave | Turn pipe ports clockwise to connect the west inlet at top-left to the east outlet at bottom-right within a move budget |

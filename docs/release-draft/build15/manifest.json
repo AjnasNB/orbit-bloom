@@ -1,0 +1,224 @@
+[
+  {
+    "file": "screenshots/phone-05-harvested-field.png",
+    "sha256": "84c8d74a6a8a8559e9024acd4aa023174b3dec5a6f387c02e50ef70f1c02989f",
+    "width": 1320,
+    "height": 2868,
+    "displayPixels": [
+      1320,
+      2868
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom Store QA",
+    "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+    "test": "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmGrowthFinal.xcresult",
+    "attachment": "59247DCE-98BC-4255-A2B6-D862300F38E8.png",
+    "timestamp": 1791724600.832,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/phone-04-ripe-orchard-and-roses.png",
+    "sha256": "08243988f2ec2c4474afc97f2994c9eb33065f16b0a99a2e3ffc494579cb2672",
+    "width": 1320,
+    "height": 2868,
+    "displayPixels": [
+      1320,
+      2868
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom Store QA",
+    "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+    "test": "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmGrowthFinal.xcresult",
+    "attachment": "9D8ED2CA-7E82-46C2-A993-96A09D9FEE28.png",
+    "timestamp": 1791724598.851,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/phone-03-growing-orchard.png",
+    "sha256": "321f603cd6a0951380a1146f77e637dcd72d57382e10bda4aeb335e3c19383dc",
+    "width": 1320,
+    "height": 2868,
+    "displayPixels": [
+      1320,
+      2868
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom Store QA",
+    "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+    "test": "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmGrowthFinal.xcresult",
+    "attachment": "33604BCD-3E8F-4EE2-AEDA-F4742D147E08.png",
+    "timestamp": 1791724575.974,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/phone-02-sprouts.png",
+    "sha256": "f3b725f21ad99b120b8dc9ad65c611716a74504253c3a5fdfc2654a104c74935",
+    "width": 1320,
+    "height": 2868,
+    "displayPixels": [
+      1320,
+      2868
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom Store QA",
+    "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+    "test": "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmGrowthFinal.xcresult",
+    "attachment": "3E9C14F0-B023-434B-90DF-F9D8450221B2.png",
+    "timestamp": 1791724573.594,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/phone-01-empty-field.png",
+    "sha256": "573c714ded222c7d0e56f8e90df056d05da8c5eb2ec2d5d18fb9c3ee9b8dba74",
+    "width": 1320,
+    "height": 2868,
+    "displayPixels": [
+      1320,
+      2868
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom Store QA",
+    "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+    "test": "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmGrowthFinal.xcresult",
+    "attachment": "1544887C-C54D-42A4-AC78-DF5F9BA54E1D.png",
+    "timestamp": 1791724570.795,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/phone-08-tool-shed.png",
+    "sha256": "1b608ec486aca8d8f07e9df42a6d8ef756bf46a7ee2315f24f9389dfeeb57448",
+    "width": 1320,
+    "height": 2868,
+    "displayPixels": [
+      1320,
+      2868
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom Store QA",
+    "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+    "test": "GameplayUITests/testFarmHarvestCraftAndSave()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmFinalPhone.xcresult",
+    "attachment": "1615F906-F45D-4D6B-9B49-9BD78C4ABA2E.png",
+    "timestamp": 1791724279.217,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/phone-07-living-leaf-puzzle.png",
+    "sha256": "e262391aa310f0eda8d07ba5eeee1407e0be5f82e49e4fa8f5dd4d92354865d0",
+    "width": 1320,
+    "height": 2868,
+    "displayPixels": [
+      1320,
+      2868
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom Store QA",
+    "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+    "test": "GameplayUITests/testFullGardenViewportAndLargePuzzleKeepControlsReachable()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmFinalPhone.xcresult",
+    "attachment": "F08B968B-BE48-4173-A60C-4F466A828BEF.png",
+    "timestamp": 1791724308.525,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/phone-06-maximum-text.png",
+    "sha256": "b098b65a6a6677b26e43940b0f03ab9dfbae574d03aca929015b9856f704cca6",
+    "width": 1320,
+    "height": 2868,
+    "displayPixels": [
+      1320,
+      2868
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom Store QA",
+    "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+    "test": "GameplayUITests/testLivingFarmMaximumTextKeepsSixPatchesAndShedReachable()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmFinalPhone.xcresult",
+    "attachment": "BE96E2E1-F495-41D3-943B-A0EE07BAF1DB.png",
+    "timestamp": 1791724355.814,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/ipad-02-landscape.png",
+    "sha256": "02649c9e60cc21231bc144b1a1d5d1e84dffd685ab1af781c4814e3421d61cc0",
+    "width": 2064,
+    "height": 2752,
+    "displayPixels": [
+      2752,
+      2064
+    ],
+    "orientationMetadata": 8,
+    "orientation": "landscape",
+    "device": "Orbit Bloom App Store iPad QA",
+    "deviceID": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+    "test": "IPadReleaseUITests/testLivingFarmFitsBothOrientationsWithAllSixWorldTargets()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmFinalIPad.xcresult",
+    "attachment": "1014788E-68AB-4092-B5F8-4F7C5B97AF51.png",
+    "timestamp": 1791724722.442,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/ipad-01-portrait.png",
+    "sha256": "483cf5dbc8b7cdc69e101b8d0a30e9ad643d53a7e58cf0359d5590175c6ae272",
+    "width": 2064,
+    "height": 2752,
+    "displayPixels": [
+      2064,
+      2752
+    ],
+    "orientationMetadata": 1,
+    "orientation": "portrait",
+    "device": "Orbit Bloom App Store iPad QA",
+    "deviceID": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+    "test": "IPadReleaseUITests/testLivingFarmFitsBothOrientationsWithAllSixWorldTargets()",
+    "testPassed": true,
+    "bundle": "evidence/Build15-FarmFinalIPad.xcresult",
+    "attachment": "182AEB47-CD7F-476F-BCD3-EA7FED10A171.png",
+    "timestamp": 1791724711.461,
+    "transformations": []
+  },
+  {
+    "file": "screenshots/preview-build15-preserved.png",
+    "sha256": "3973d08f1763c2a19e8e101f86ba7c69fda5bef41137a58b1e7be551a96841e3",
+    "width": 1206,
+    "height": 2622,
+    "displayPixels": [
+      1206,
+      2622
+    ],
+    "orientation": "portrait",
+    "orientationMetadata": 1,
+    "device": "Orbit Bloom QA personal preview",
+    "deviceID": "64173F47-C4DC-46B4-82EC-0027675F7780",
+    "source": "simctl io screenshot after ordinary build-15 launch",
+    "testFlags": [],
+    "reset": false,
+    "saveChecks": [
+      "preview-after-install.json",
+      "preview-after-launch.json"
+    ],
+    "transformations": []
+  }
+]

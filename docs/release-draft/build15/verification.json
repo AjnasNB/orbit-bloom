@@ -1,0 +1,160 @@
+{
+  "build": 15,
+  "version": "1.0",
+  "sourceCommit": "3896b3fd13c58b5ce6a6f2a60ad812f3321cb848",
+  "verifiedAtUTC": "2026-10-11T13:21:22.145136+00:00",
+  "kind": "Living 3D farm and recognizable leaf",
+  "uniquePassingCases": 108,
+  "caseCounts": {
+    "core": 51,
+    "native": 51,
+    "phoneUI": 5,
+    "iPadUI": 1
+  },
+  "countingRule": "Union of unique passing cases on final app source, reruns counted once. Main final phone bundle records 55 passes and one entrance-tap failure; that same farming flow passes in a separate final-source rerun. Failed bundles remain failed. Earlier leaf-renderer runs are diagnostic only.",
+  "core": {
+    "log": "evidence/build15-core.log",
+    "passed": 51,
+    "failed": 0,
+    "durationSeconds": 66.946,
+    "campaign": {
+      "stages": 1020,
+      "gardenProjects": 6,
+      "legalSwaps": 6415,
+      "retries": 15,
+      "paidItemsUsed": false,
+      "extraMovesUsed": false,
+      "interpretation": "Automated reachability, not human difficulty"
+    },
+    "newRegression": "Both saved crop deadlines, growth stages, bounds, watering, coding round trip and one-time harvest reset"
+  },
+  "finalAppResults": [
+    {
+      "bundle": "evidence/Build15-FarmFinalPhone.xcresult",
+      "summary": "phone-summary.json",
+      "result": "Failed",
+      "nativePasses": 51,
+      "phoneUIPasses": 4,
+      "phoneUIFailures": 1,
+      "failedCase": "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+      "resolution": "Wait for a hittable entrance and initial layout to settle; real flow passes in the following rerun. No app code changed for this test setup repair."
+    },
+    {
+      "bundle": "evidence/Build15-FarmGrowthFinal.xcresult",
+      "summary": "growth-final-summary.json",
+      "result": "Passed",
+      "phoneUIPasses": 1,
+      "failures": 0
+    },
+    {
+      "bundle": "evidence/Build15-FarmFinalIPad.xcresult",
+      "summary": "ipad-summary.json",
+      "result": "Passed",
+      "iPadUIPasses": 1,
+      "failures": 0,
+      "launch": "--uitesting --keep-progress; QA only"
+    }
+  ],
+  "phonePassingCases": [
+    "GameplayUITests/testFarmHarvestCraftAndSave()",
+    "GameplayUITests/testFullGardenViewportAndLargePuzzleKeepControlsReachable()",
+    "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+    "GameplayUITests/testLivingFarmMaximumTextKeepsSixPatchesAndShedReachable()",
+    "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()"
+  ],
+  "iPadPassingCase": "IPadReleaseUITests/testLivingFarmFitsBothOrientationsWithAllSixWorldTargets()",
+  "nativeNewRegression": "SpriteAssetTests/testFarmFieldRendersTheActualSavedSpeciesAndGrowthStage(): real saved apple and rose species, sprouts and ripe geometry, seven apples, and harvest only removes its own tree. Shared twelve-sprite visibility/alpha guard also passes.",
+  "diagnostics": [
+    {
+      "bundle": "evidence/Build15-FarmFirst.xcresult",
+      "summary": "initial-diagnostic-summary.json",
+      "reason": "Visible empty plot capsule was 31.3 points tall. Corrected label minimum height before its background. Final 44-point/bounds checks pass."
+    },
+    {
+      "bundle": "evidence/Build15-FarmPhone.xcresult",
+      "summary": "earlier-leaf-phone-summary.json",
+      "result": "Passed",
+      "reason": "Earlier edge-on procedural leaf renderer; replaced by the new camera-facing leaf sprite after visual inspection."
+    },
+    {
+      "bundle": "evidence/Build15-FarmIPad.xcresult",
+      "summary": "earlier-leaf-ipad-summary.json",
+      "result": "Passed",
+      "reason": "Earlier leaf renderer; final iPad rerun recorded separately."
+    }
+  ],
+  "sourceHashes": {
+    "app": "app-source-hashes.json",
+    "appFileCount": 69,
+    "tests": "test-source-hashes.json",
+    "testFileCount": 12
+  },
+  "screenshots": {
+    "manifest": "manifest.json",
+    "nativeCaptures": 11,
+    "phone": 8,
+    "iPad": 2,
+    "ordinaryPreview": 1,
+    "proposedAppleGallery": "apple-gallery-prepared.json",
+    "productPageSaved": false
+  },
+  "preview": {
+    "ordinaryBuildInstalled": 15,
+    "reset": false,
+    "testFlagsUsed": false,
+    "fullContainerBackupRetainedPrivately": true,
+    "afterInstall": "preview-after-install.json",
+    "afterLaunch": "preview-after-launch.json",
+    "preserved": {
+      "coins": 520,
+      "completed": 3,
+      "activeLevel": null,
+      "rulesVersion": null,
+      "moves": null,
+      "freeHints": 6,
+      "lives": 5
+    },
+    "baselinePreferenceCount": 6,
+    "installedAppInfoAndExecutableMatchOrdinaryBuild": true,
+    "testPluginsAbsent": true,
+    "dataContainerPathReResolvedAfterUpgrade": true,
+    "comparisonHelper": "docs/release-draft/build14/preview-save-check.py",
+    "comparisonHelperSHA256": "9c20eb2e71a9b7b27a8c3d76f415bea891b30ff77137e4fece35d85e09c80b35",
+    "normalStoreKitCheckTimeChanged": true,
+    "storeAndIPadQAStopped": true,
+    "originalToLaunch": "preview-original-to-launch.json"
+  },
+  "apple": {
+    "signedPackage": "signed-package-verification.json",
+    "archive": true,
+    "export": true,
+    "upload": false,
+    "processingCompleteVerified": false,
+    "internalGroupAssignmentVerified": false,
+    "metadata": "metadata-prepared.json",
+    "metadataSavedToApple": false,
+    "publicReviewChanged": false,
+    "publicRelease": false,
+    "realPurchase": false,
+    "agreementAccepted": false,
+    "lastRecordedPublicReview": {
+      "build": 11,
+      "date": "2026-10-11",
+      "status": "Waiting for Review",
+      "recheckedToday": true
+    },
+    "readOnlyChromeProof": "apple-status-before-delivery.json",
+    "uploadEvidence": [
+      "evidence/build15-upload.log",
+      "evidence/build15-upload-existing-profile.log"
+    ],
+    "uploadBlocker": "Xcode exportArchive destination=upload reports Failed to Use Accounts with and without provisioning refresh. Native UI tool reports Mac locked. No build-15 Apple server validation, processing or group assignment is claimed. User asked to unlock the Mac; signing/export remains verified."
+  },
+  "limits": [
+    "Physical Game Center/private iCloud/signed sandbox/ranking round trip",
+    "Hardware VoiceOver speech/focus, audio/haptics and SceneKit performance",
+    "Smallest phones, split view and full uncapped accessibility text",
+    "Mac locked prevents foreground preview control; ordinary native preview launch/save and QA screenshots still verified"
+  ],
+  "otherWorkPreserved": true
+}

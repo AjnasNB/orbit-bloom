@@ -1,5 +1,5 @@
 {
-  "checkedOn": "2026-10-10",
+  "checkedOn": "2026-10-11",
   "appID": "6820591529",
   "version": "1.0",
   "build": 11,
@@ -575,14 +575,15 @@
     "appleValidation": "Transporter Verify succeeded 21:12 Asia/Kolkata",
     "appleDelivery": "Transporter Deliver succeeded 21:14 Asia/Kolkata",
     "appleProcessing": "Finished, confirmed by Transporter",
-    "internalTestFlightAssigned": false,
+    "internalTestFlightAssigned": true,
     "appReviewSubmitted": false,
     "productPageGalleryUpdated": false,
     "publicReleased": false,
     "existingBuild11SubmissionUnchanged": true,
-    "remaining": "Sign back in to Apple in retained Chrome tab to assign TestFlight, replace build/screenshots and resubmit."
+    "remaining": "Build 13 is assigned to Orbit Bloom QA, confirmed in Chrome. The public review is still build 11. Build 15 is prepared separately; no review replacement occurred.",
+    "assignmentRecheckedOn": "2026-10-11"
   },
-  "lastAuthenticatedRecheck": "2026-10-10, before Chrome restarted this delivery run; version1.0 build11 Waiting for Review and manual release selected",
+  "lastAuthenticatedRecheck": "2026-10-11: read-only Chrome confirms version 1.0 build 11 Waiting for Review and manual release. Native control later reports Mac locked.",
   "latestRallyDelivery": {
     "build": 14,
     "sourceCommit": "c2aa27aeb753b4af1918c046beecf3fca639802b",
@@ -594,12 +595,37 @@
     "nativeCaptureCount": 11,
     "appleUpload": "Xcode export destination=upload succeeded 2026-10-11 11:12:46 Asia/Kolkata",
     "appleProcessingAtUploadCompletion": "Processing",
-    "processingCompleteVerified": false,
-    "internalTestFlightAssignmentVerified": false,
+    "processingCompleteVerified": true,
+    "internalTestFlightAssignmentVerified": true,
     "appReviewSubmitted": false,
     "productPageGalleryUpdated": false,
     "existingBuild11SubmissionUnchanged": true,
     "publicReleased": false,
-    "remaining": "Confirm processing and internal group in Chrome when browser control/account is available; physical Apple/VoiceOver checks remain. No daily review replacement."
-  }
+    "remaining": "Build 14 is processed and assigned, confirmed in Chrome. Hardware Apple/VoiceOver checks remain. Build 15 is separately prepared; its upload awaits available Xcode accounts/Mac unlock.",
+    "assignmentRecheckedOn": "2026-10-11",
+    "internalGroup": "Orbit Bloom QA"
+  },
+  "reviewVerification": "Chrome read-only: version 1.0 Waiting for Review, build 11, manual release. No review/gallery change.",
+  "latestInternalPreparation": {
+    "build": 15,
+    "sourceCommit": "3896b3fd13c58b5ce6a6f2a60ad812f3321cb848",
+    "localTests": "build15/verification.json",
+    "signedExport": "build15/signed-package-verification.json",
+    "previewInstalled": true,
+    "ownerSavePreserved": true,
+    "uploaded": false,
+    "reason": "Failed to Use Accounts. Mac locked; user asked to unlock for Apple upload.",
+    "metadataSavedToApple": false,
+    "publicReviewChanged": false
+  },
+  "previousInternalDeliveryRechecked": {
+    "build": 14,
+    "checkedOn": "2026-10-11",
+    "status": "Ready to Submit",
+    "group": "Orbit Bloom QA",
+    "invites": 1,
+    "note": "Chrome confirms processing and group assignment; no hardware installation is claimed."
+  },
+  "reviewLastCheckedOn": "2026-10-11",
+  "reviewStatusRecordWrittenAtUTC": "2026-10-11T13:23:35.249182+00:00"
 }

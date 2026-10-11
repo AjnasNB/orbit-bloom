@@ -1,0 +1,28 @@
+{
+  "phase": "after-install",
+  "baselinePreferenceCount": 6,
+  "observedPreferenceCount": 6,
+  "beforePublicSave": {
+    "coins": 520,
+    "completed": 3,
+    "activeLevel": null,
+    "rulesVersion": null,
+    "moves": null,
+    "freeHints": 6,
+    "lives": 5
+  },
+  "afterPublicSave": {
+    "coins": 520,
+    "completed": 3,
+    "activeLevel": null,
+    "rulesVersion": null,
+    "moves": null,
+    "freeHints": 6,
+    "lives": 5
+  },
+  "passed": true,
+  "allPreferencesByteForByte": true,
+  "preferenceKeysUnchanged": true,
+  "plistFileBytesIdentical": true,
+  "note": "Data preference bytes and all baseline typed values are checked; plist container encoding is separately reported."
+}

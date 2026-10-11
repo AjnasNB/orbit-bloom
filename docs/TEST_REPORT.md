@@ -1,3 +1,21 @@
+# Orbit Bloom build 15 verification — 11 October 2026
+
+Farm now renders saved apple trees and rose bushes through shoots, leaves, blossom and harvest stages in a continuous native 3D field. The same new veined leaf is used in the puzzle. World-aligned 48-point patch actions replace the card layout, with watering/harvest feedback and Reduce Motion support. [UX findings](FARM_FIELD_REDESIGN.md) record the anatomy/readability changes and dense-field font caps.
+
+**108 unique affected cases have passing runs: 51 core, 51 native, five phone UI and one iPad UI.** [Build-15 verification](release-draft/build15/verification.json) pins source `3896b3f`, 69 app/resource/project hashes and twelve test hashes. Core completes all 1,020 campaign stages and six projects in 6,415 legal swaps and 15 retries, without paid items or extra moves. This is automated reachability, not human difficulty evidence.
+
+`Build15-FarmFinalPhone.xcresult` records 51 native and four phone UI passes plus one missed farm entrance-tap failure. That same real crop/offline/harvest/relaunch case passes in `Build15-FarmGrowthFinal.xcresult` after its initial layout/hittability wait. `Build15-FarmFinalIPad.xcresult` passes portrait/landscape and shed/return controls using keep-progress. The first 31-point control failure and intermediate procedural-leaf results remain diagnostic; no failed bundle is relabeled. Reruns count once.
+
+The new flow plants apple and rose, waters the actual saved species, returns offline with both mature, harvests once each, verifies 245 coins/two harvests and keeps them through relaunch. Native regressions inspect saved crop geometry and the twelve visible/transparent sprite contract. Existing harvest/craft/save, room exits, maximum phone text and real puzzle checks also pass. [Eleven original screenshots](release-draft/build15/README.md) retain raw pixels, orientation metadata, passing-case provenance and hashes without crop/resize/overlays.
+
+The ordinary build 15 is installed in place with the full personal save preserved: 520 coins, three completed levels, six hints and five lives. The full private container backup remains. All six typed preferences and plist bytes match after install; ordinary launch retains every decoded gameplay value, wallet, farm, inventory, receipts, settings and timer, with only StoreKit's system check timestamp changing. No reset or test flags were used. The installed ordinary executable matches and contains no test plug-ins. The relocated simulator data path was re-resolved before comparisons.
+
+Archive, export and local signature/Production Apple-service/privacy checks pass. **Apple upload is blocked:** both Xcode upload attempts report `Failed to Use Accounts`; native control reports the Mac is locked. Build 15 has not reached Apple. Chrome rechecked that build 11 remains Waiting for Review with manual release, and that processed builds 13/14 are in Orbit Bloom QA. The public review and product-page images are unchanged; new metadata/ten-per-device galleries are prepared locally. No real purchase, public release or agreement occurred.
+
+Hardware Apple services, VoiceOver, sound/haptics/performance, smallest phones and split view remain unverified. Store/iPad QA are stopped; the personal preview is running, with unrelated simulator work preserved. The user has been asked to unlock the Mac for foreground preview and upload.
+
+---
+
 # Orbit Bloom build 14 verification — 11 October 2026
 
 Harvest Rally now shows the next actual barrier and coin in three numbered lane tiles and the road's accessibility value. Active play provides brief VoiceOver lane announcements. Pause freezes the road and guide. The maximum-text lobby uses shorter copy, stacked safety labels, a compact original 3D route and visible Start/exit controls; the pause action stays readable. [UX findings](RALLY_TRAFFIC_UX_AUDIT.md) record the dense-HUD font cap and hardware limits.
