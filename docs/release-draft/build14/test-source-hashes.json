@@ -1,0 +1,18 @@
+{
+  "build": 14,
+  "sourceFiles": {
+    "OrbitBloomTests/Core/EcosystemTests.swift": "191c10069ce6c7ad8c18c079876eca48ec021933a9241981f01ee2113da20d36",
+    "OrbitBloomTests/Core/GameEngineTests.swift": "552c7173927904704e82c15ee2995bc52b02919a2e2836322c46f0b7f9f56e0a",
+    "OrbitBloomTests/Core/IslandActivitiesTests.swift": "e905e3a6918c1fd57b42312b29cdc291b99f70eaa6c32654ffa4a4a01c9ac403",
+    "OrbitBloomTests/Core/IslandJourneyTests.swift": "2221fc6d9c9609cb356da55cc1b21471193484e1c227d7bc2088c31035bbce44",
+    "OrbitBloomTests/Core/PowerRulesTests.swift": "4c3c140c4c453729fe614c81203cbf8c8c6d959b82ce0793adfae91531093852",
+    "OrbitBloomTests/Core/SavedGardenTests.swift": "ea8f7607fe54b5480e0edbb0e868ce3ddc8932afa2e064bab97e818111faa35b",
+    "OrbitBloomTests/iOS/IslandJourneyNativeTests.swift": "578ea1e03a1f986ba829b6eda00ab134b3190fc8f6b01ad3fa9f559179a76d47",
+    "OrbitBloomTests/iOS/PlayerAccountTests.swift": "08c0e5aa75ae8b9b024b38b7f861395db8d8a5220d695ace9752b8b98a029f1b",
+    "OrbitBloomTests/iOS/PurchaseTests.swift": "78047095f365d9ac995cd9e0a5073105f6f448d12dac12b40b23c2e31ade0aa5",
+    "OrbitBloomTests/iOS/WorldEventClockTests.swift": "382aabbf5afdfbd021d1d6706eadd22c564482135656c63ed676563ae95a9a28",
+    "OrbitBloomUITests/GameplayUITests.swift": "7eee442d39d1525f02b95ece6bd15e33f8bc9ae84ef086a5bc7a8518af81f6e4",
+    "OrbitBloomUITests/SevenRoomsUITests.swift": "cd0259b717acd9f8255b534541e974143a9142d9cc76c4d694abb93f562d9154"
+  },
+  "sourceCommit": "c2aa27aeb753b4af1918c046beecf3fca639802b"
+}

@@ -1,3 +1,14 @@
+# Latest internal delivery — build 14, 11 October 2026
+
+Build **1.0 (14)** improves Rally's numbered next-barrier/coin guidance, road accessibility and VoiceOver announcements, frozen pause preview and maximum-text lobby/pause controls. **106 unique affected cases have passing runs**; the phone bundle's room-relaunch failure passed after fresh-query setup in a separate rerun. [Verification and original screenshots](release-draft/build14/README.md) preserve failures and final-source provenance.
+
+The tested source `c2aa27a` is archived, signed and exported. **Xcode's existing account uploaded it successfully at 11:12:46 AM India time.** Apple accepted the package and began processing; completion and internal **Orbit Bloom QA** assignment are not yet verified. [Package proof](release-draft/build14/signed-package-verification.json) records the exact uploaded IPA, Production private iCloud/Game Center, debugger disabled, unchanged privacy reasons and no test plug-ins. Upload re-signing changes only executable signature bytes compared with the local export.
+
+The latest [metadata/What to Test](release-draft/build14/metadata-prepared.json) and [ten-per-device gallery plan](release-draft/build14/apple-gallery-prepared.json) are prepared locally, **not saved to Apple**. Each proposed gallery retains nine unchanged build-13 native images and replaces Rally with a fresh build-14 capture. The [eleven new native images](release-draft/build14/manifest.json) also include pause, rewards, both iPad orientations and maximum-text checks. Chrome review/gallery/group verification was unavailable after the interrupted session; no new Apple server review status is claimed.
+
+The existing **build-11 submission**, six IAPs and leaderboard were last observed Waiting for Review on 10 October. Daily work did not remove, replace, resubmit or publicly release that submission. Prices/privacy/payment architecture remain unchanged. The ordinary owner preview is updated with all saved data preserved: **520 coins, three completed stages, six hints and five lives**. Physical Apple account/cloud/sandbox/ranking and VoiceOver timing still need hardware verification. No real purchase or legal/financial agreement occurred.
+---
+
 # Cartoon release delivery — build 13
 
 Build **1.0 (13)** is signed, verified and delivered to Apple. Transporter Verify passed at **21:12** and Deliver passed at **21:14 Asia/Kolkata on 10 October 2026** (minute precision); its status subsequently confirms **the app has finished processing**. [Package verification](release-draft/build13/signed-package-verification.json) pins the exact tested app source and IPA hash, Production Game Center/private iCloud entitlements, disabled debugger access, original privacy manifest and absent test plug-ins.

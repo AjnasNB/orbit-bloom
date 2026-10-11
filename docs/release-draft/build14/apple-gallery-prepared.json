@@ -1,0 +1,145 @@
+{
+  "build": 14,
+  "status": "Prepared locally; not uploaded/saved to the Apple product page",
+  "iPhone": [
+    {
+      "file": "../build13/screenshots/phone-02-cartoon-puzzle.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "5cf9b209a00a56a978b930cc40b7d4bdd607dce5714275635badbc621edceff4",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-06-farm.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "af204ca264741be2d885966c277fbc5395d3b04574265be3d0bbce6ad6e8216e",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "screenshots/phone-02-next-traffic.png",
+      "capturedBuild": 14,
+      "manifest": "manifest.json"
+    },
+    {
+      "file": "../build13/screenshots/phone-01-connected-garden.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "47007dfddb9c396f5d4796aa3971738fe272693ec90b867178c114271ee70b7b",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-17-canal-weave.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "49c75f088cf0c0a0659c7b864a101c089fb6c8e0dea1da1627b7fd17381494e5",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-18-firefly-trail.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "213c76c5dd44a3ed34d208a4b1dcc66e1fe5e4007a9c2e9d827071aba28e936a",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-19-windmill-works.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "674d36cf6869a896d2916344512dbce1ec2166047e3d7a27a97bba41de25e508",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-20-moon-observatory.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "f325bb7fea6331aab8d90d49920136030b4fb4ea6c29e83062901d057d2232aa",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-03-board-power.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "b18b8c287c3cfafe62a8bc75cb14246bdc6244978dbfebdb95c38d57cba94108",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/phone-11-lives-and-shop.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "cfe6ca5c56511a7083da34e14f64363b68cf105d71914fb3806d8f71bd4a56b4",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    }
+  ],
+  "iPad": [
+    {
+      "file": "../build13/screenshots/ipad-04-puzzle-portrait.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "ab32a60389624b6a444c659b542a98eb07b85d0e29add4f4a799c8d7cd68d0ae",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-05-farm.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "e5da1532cc503dec1fd18f87c6a4b47c1cab6e377bd4f0d32fe03e5030df778d",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "screenshots/ipad-01-rally-portrait.png",
+      "capturedBuild": 14,
+      "manifest": "manifest.json"
+    },
+    {
+      "file": "../build13/screenshots/ipad-01-garden-portrait.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "524d62db82db9dc9cd636b4fd3133a000d4d9fbc95e10e0422527982dba15564",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-07-canal.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "9d3375101501e6807405754f4ef216d4c4feb052a4efaec2c3b327bc9f3f6a04",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-08-fireflies.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "55a15f36801d2c7de53077c1019a8e36de34b64a5136c22af4251ae013789f57",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-09-windmill.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "ce09cc82dd8a27a770442bd1a938c15c0234105e861621b205992e9afb4ea8f4",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-10-observatory.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "108706e3359051e5f534aa90010542cd5f1c9a7abb8de5e074c32a0d068503f2",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-03-puzzle-landscape.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "a2838743498591a941137bd124e5781902f2f191bd8b34954d38a8263c8e220c",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    },
+    {
+      "file": "../build13/screenshots/ipad-02-garden-landscape.png",
+      "capturedBuild": 13,
+      "manifest": "../build13/manifest.json",
+      "sha256": "144029f17529cb46d4a8d89b89b1d33d7dcc86d59ec52b7bfd5438445b8fcdb8",
+      "reason": "Unchanged room/artwork flow; retained original screenshot"
+    }
+  ],
+  "note": "Ten original images per proposed device gallery. Each retains nine unchanged build-13 images and replaces its Rally slot with one build-14 capture. Actual captured build and provenance are explicit; build-11 submitted gallery remains unchanged."
+}

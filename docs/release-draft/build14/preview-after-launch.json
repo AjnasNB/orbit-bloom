@@ -1,0 +1,37 @@
+{
+  "phase": "after-launch",
+  "baselinePreferenceCount": 6,
+  "observedPreferenceCount": 6,
+  "beforePublicSave": {
+    "coins": 520,
+    "completed": 3,
+    "activeLevel": null,
+    "rulesVersion": null,
+    "moves": null,
+    "freeHints": 6,
+    "lives": 5
+  },
+  "afterPublicSave": {
+    "coins": 520,
+    "completed": 3,
+    "activeLevel": null,
+    "rulesVersion": null,
+    "moves": null,
+    "freeHints": 6,
+    "lives": 5
+  },
+  "passed": true,
+  "savedGamePreferenceKeysUnchanged": true,
+  "fullDecodedWalletPuzzleFarmInventoryReceiptsSettingsPreserved": true,
+  "changedSavedGamePreferenceCount": 0,
+  "newEmptyJourneyDefaultsAccepted": 0,
+  "recoveryBackupAdvancedToExactPreviousPrimary": true,
+  "allowedSerializationNormalization": [
+    "JSON dictionary key order",
+    "Swift enum-key dictionary array order: collected, specials, tools"
+  ],
+  "timersAndEveryGameplayFieldCompared": true,
+  "otherArraysKeptInExactOrder": true,
+  "nonGameplaySystemPreferenceChangeCount": 1,
+  "note": "Primary playable state is compared in full. A normal recovery-slot rotation must match the preceding primary wallet exactly; a newly added empty journey may be accepted. StoreKit check time is system metadata."
+}

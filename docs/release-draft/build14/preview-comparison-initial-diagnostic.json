@@ -1,0 +1,6 @@
+{
+  "phase": "after-install",
+  "passed": false,
+  "failure": "Save comparison input could not be safely validated; inspect the private files locally.",
+  "reason": "Historical build-11 comparison expected seven preferences including an active session; current owner save has six after completed stages. No actual value or plist byte differed."
+}

@@ -1,5 +1,7 @@
 # Orbit Bloom: connected garden arcade
 
+Build 14 adds a numbered next-barrier/coin guide using the actual Rally crossing, VoiceOver road summaries and active announcements, and readable large-text lobby/pause controls. All five traffic tiers and the real reward/save path have regressions. [Build-14 evidence](release-draft/build14/README.md) records 106 unique affected passing cases and the successful Apple upload; processing/group assignment are pending verification. The existing build-11 public review is unchanged.
+
 Build 13 is a locally verified cartoon-art update. The shared fruit, leaf, dew, rose, diamond, powers, robot and coin atlas now matches the playful 3D garden; Lio and the rally rover use the same smooth illustrated material style. Sprite indices and save schemas are preserved. [Style refinement](CARTOON_STYLE_REFINEMENT.md) and [the test report](TEST_REPORT.md) record the artwork, crop guard and real gameplay checks. The existing build-11 Apple submission was not replaced by this local update.
 
 Build 11 connects seven playable rooms through Lio, a keeper apprentice restoring Aurora Atoll after the Great Eclipse. The existing island remains his visible garden domain; Explore 7 rooms opens a separate swipe directory with labeled destinations, distinct original 3D miniatures and clear exits. Four new skill activities join Bloom Circuits, Farm Terraces and Harvest Rally. Public server time anchors optional events on shared UTC schedules, while Apple remains the sole player cloud-save service. [The seven-room design](SEVEN_ROOMS_DESIGN.md) records the story, interaction choices and verification limits. [Build 11 metadata](release-draft/build11/metadata.md) is a local App Store draft, not evidence of submission.
@@ -15,7 +17,7 @@ This revision follows the user's requested change from a single swap puzzle to a
 | Tools | Bomb: 3×3 area; TNT: row and column; mega bomb: 5×5 area; rainbow: every piece matching the selected color |
 | Farming | Six persistent plots, rose/apple selection, plant/water/grow/harvest, offline elapsed growth, produce and compost |
 | Crafting | Harvest compost creates garden tools; puzzle dew refills farming water |
-| Delivery race | Illustrated rover, horizontal swipe steering, three lanes, visible shield/time/distance, animated pickups, 22-second/440-metre route and cargo bonus; five traffic tiers increase every three successful deliveries |
+| Delivery race | Illustrated rover, horizontal swipe steering, three lanes, visible shield/time/distance, animated pickups, 22-second/440-metre route and cargo bonus; five traffic tiers increase every three successful deliveries; numbered next-barrier/coin guide and VoiceOver cues; pause freezes guidance |
 | Canal Weave | Turn pipe ports clockwise to connect the west inlet at top-left to the east outlet at bottom-right within a move budget |
 | Firefly Trail | Observe numbered lanterns and repeat their sequence across rounds; mistakes end the attempt, with no life cost |
 | Windmill Works | Charge inside a visible timing wedge before the timer/miss budget ends; VoiceOver guided timing supports accessible play |

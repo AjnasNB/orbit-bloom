@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "comparison": "Original owner save before first install versus save after ordinary launch/background and simulator-plugin cleanup",
+  "allPlayableProgressFieldsPreserved": true,
+  "coinsLevelsHintsLivesFarmInventoryReceiptsJourneyAndTimersCompared": true,
+  "originalAndObservedPublicSave": {
+    "coins": 520,
+    "completed": 3,
+    "activeLevel": null,
+    "rulesVersion": null,
+    "moves": null,
+    "freeHints": 6,
+    "lives": 5
+  },
+  "exactWholeWalletMatchExceptCompletedAttemptChargedFlag": true,
+  "completedAttemptChargeNormalization": {
+    "original": true,
+    "observed": false,
+    "bothWalletsHaveNoActivePuzzle": true,
+    "sourceBehavior": "GameModel init restores charged only with an active snapshot; start clears charged for each new attempt; a normal background save persists that state."
+  },
+  "recoveryBackupMatchesPreviousPrimaryWallet": true,
+  "noInventoryLoss": true,
+  "normalSwiftDictionarySerializationOrderIgnored": true,
+  "normalStoreKitCheckTimestampChanged": true,
+  "note": "Whole preference bytes are not claimed identical across these normal autosaves. Strict final install/launch comparison uses a separate immediate checkpoint and accepts no game-field changes."
+}

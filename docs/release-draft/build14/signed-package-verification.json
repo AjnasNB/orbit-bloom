@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "build": 14,
+  "appID": "6820591529",
+  "ipa": "build/AppStoreExport14/OrbitBloom.ipa",
+  "sha256": "44b4516ea34c1c2420e8c61f1042dd17e8cad1e511e242d25059adf43c56be33",
+  "byteSize": 26868245,
+  "profileUUID": "8ad71964-4815-45e7-ad15-0187cfa5e7e3",
+  "profileName": "Orbit Bloom AppStore",
+  "gameCenter": true,
+  "cloudContainer": "iCloud.com.orbitbloom.game",
+  "cloudEnvironment": "Production",
+  "debuggerAccess": false,
+  "codeSignatureVerified": true,
+  "privacyManifestMatchesSource": true,
+  "requiredAPIs": [
+    {
+      "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+      "NSPrivacyAccessedAPITypeReasons": [
+        "CA92.1"
+      ]
+    },
+    {
+      "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
+      "NSPrivacyAccessedAPITypeReasons": [
+        "35F9.1"
+      ]
+    }
+  ],
+  "testPluginsAbsent": true,
+  "iPadOrientations": [
+    "UIInterfaceOrientationPortrait",
+    "UIInterfaceOrientationPortraitUpsideDown",
+    "UIInterfaceOrientationLandscapeLeft",
+    "UIInterfaceOrientationLandscapeRight"
+  ],
+  "evidence": {
+    "archive": "evidence/build14-archive.log",
+    "export": "evidence/build14-export.log",
+    "signature": "evidence/build14-signature.txt"
+  },
+  "appleServerValidation": true,
+  "uploaded": true,
+  "publicReviewChanged": false,
+  "appleProcessingAtUploadCompletion": "Processing",
+  "internalGroupAssignmentVerified": false,
+  "processingCompleteVerified": false,
+  "uploadEvidence": "evidence/build14-upload.log",
+  "uploadedPackage": {
+    "path": "build/AppStoreUploaded14/OrbitBloom.ipa",
+    "sha256": "42831b917bf4aea47272c4f4e5118af0af7acf0ca8a815ef55a9840756eac43c",
+    "byteSize": 26868243,
+    "signatureVerified": true,
+    "appResourceFilesIdenticalToLocalExport": true,
+    "comparedAppFileCount": 30,
+    "executableBytesIdenticalOutsideCodeSignature": true,
+    "codeSignatureRegion": {
+      "offset": 2161248,
+      "size": 24240
+    },
+    "note": "Destination=upload signs again and repackages the same archive. Only executable code-signature bytes differ; all other executable bytes and app resources match the local export. Apple accepted the package and began processing. Processing completion and internal-group assignment have not been rechecked."
+  },
+  "sourceCommit": "c2aa27aeb753b4af1918c046beecf3fca639802b",
+  "sourceHashes": "app-source-hashes.json",
+  "sourceHashCount": 66
+}

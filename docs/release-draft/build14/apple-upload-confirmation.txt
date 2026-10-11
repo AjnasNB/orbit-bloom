@@ -1,0 +1,8 @@
+Build 1.0 (14), bundle com.orbitbloom.game
+Public confirmation lines extracted from evidence/build14-upload.log.
+Processing completion and internal-group assignment are not verified.
+
+2026-10-11 11:12:45.438 xcodebuild[10155:113196] Progress 96%: Uploaded package is processing.
+2026-10-11 11:12:46.578 xcodebuild[10155:113196] Progress 96%: Upload succeeded.
+Uploaded OrbitBloom
+** EXPORT SUCCEEDED **

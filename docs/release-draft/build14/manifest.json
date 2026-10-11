@@ -1,0 +1,236 @@
+{
+  "build": 14,
+  "sourceCommit": "c2aa27aeb753b4af1918c046beecf3fca639802b",
+  "note": "Ten native QA screenshots and one ordinary preview. Original bytes preserved, no resize/crop/overlays. Phone captures are from passing cases in a bundle with one room-relaunch failure; that case was corrected and passed in its separate rerun. Landscape orientation metadata retained.",
+  "screenshots": [
+    {
+      "file": "screenshots/phone-01-rally-lobby.png",
+      "build": 14,
+      "caption": "Rally room and Start",
+      "sha256": "5eeb7b486b03f8ca9187378443c7ccd0fe5f303cf8494657ee054c48701a5a51",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-DeliveryPhoneFinalAttachments/2F2003AE-6829-404A-BE3E-C600B3212C60.png",
+      "sourceSuggestedName": "v2-06-race-lobby_0_2A2D067D-9A39-494F-84D1-2AD22BDB1EA7.png",
+      "sourceResultBundle": "evidence/Build14-DeliveryPhone.xcresult",
+      "sourceResultBundleOutcome": "Failed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "GameplayUITests/testDeliveryRaceWithRealSteeringAndReward()",
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "captureTimestampUTC": "2026-10-11T05:30:56.356000+00:00"
+    },
+    {
+      "file": "screenshots/phone-02-next-traffic.png",
+      "build": 14,
+      "caption": "Actual driving and next lane guide",
+      "sha256": "a7c383f9917145e9726059797dbc5e3515cf524285a4f0673d0f555efc72c5e7",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-DeliveryPhoneFinalAttachments/38E5A8F2-6D54-4427-8543-286028F7231E.png",
+      "sourceSuggestedName": "build14-rally-traffic-driving_0_832E68FE-F6FA-41B5-996C-6DBBC65787EF.png",
+      "sourceResultBundle": "evidence/Build14-DeliveryPhone.xcresult",
+      "sourceResultBundleOutcome": "Failed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "GameplayUITests/testRallyTrafficGuideUpdatesAndPauseKeepsRouteStable()",
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "captureTimestampUTC": "2026-10-11T05:31:52.745000+00:00"
+    },
+    {
+      "file": "screenshots/phone-03-paused-rally.png",
+      "build": 14,
+      "caption": "Paused route with frozen guide",
+      "sha256": "9f545f9f5ca15b9bf4c75d4bce9e310c585d19f569fe59e3e2e4e25a4cea8ab0",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-DeliveryPhoneFinalAttachments/6398EF7C-2F22-4D36-9FD3-30E45F052EE6.png",
+      "sourceSuggestedName": "build14-rally-traffic-paused_0_1B9E0CFB-8121-40F0-8613-2C2140C4AF13.png",
+      "sourceResultBundle": "evidence/Build14-DeliveryPhone.xcresult",
+      "sourceResultBundleOutcome": "Failed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "GameplayUITests/testRallyTrafficGuideUpdatesAndPauseKeepsRouteStable()",
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "captureTimestampUTC": "2026-10-11T05:31:49.581000+00:00"
+    },
+    {
+      "file": "screenshots/phone-04-delivery-result.png",
+      "build": 14,
+      "caption": "Real delivery result and reward",
+      "sha256": "f61075340d50bf2cc3701cf9ee54fa0dcbad3ced25a8b261baaec7163c694690",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-DeliveryPhoneFinalAttachments/1C9CE205-BEA4-48A2-8E9A-51368449F3EA.png",
+      "sourceSuggestedName": "v2-10-delivery-complete_0_4A54FE10-0074-4D3F-9686-375B791E7A23.png",
+      "sourceResultBundle": "evidence/Build14-DeliveryPhone.xcresult",
+      "sourceResultBundleOutcome": "Failed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "GameplayUITests/testDeliveryRaceWithRealSteeringAndReward()",
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "captureTimestampUTC": "2026-10-11T05:31:20.763000+00:00"
+    },
+    {
+      "file": "screenshots/phone-05-accessibility-lobby.png",
+      "build": 14,
+      "caption": "Maximum accessibility text: room and Start",
+      "sha256": "bfd74c811009967f5368ce6ef290c76d5979230850284823952a9a0cd76ed5ed",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-DeliveryPhoneFinalAttachments/5336A7DC-059E-48A9-AF31-FB427A54B2DB.png",
+      "sourceSuggestedName": "build14-rally-lobby-accessibility-text_0_F29FFA5E-6B64-4B44-B862-C1220B827974.png",
+      "sourceResultBundle": "evidence/Build14-DeliveryPhone.xcresult",
+      "sourceResultBundleOutcome": "Failed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "GameplayUITests/testRallyTrafficGuideAndControlsFitAccessibilityTextSize()",
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "captureTimestampUTC": "2026-10-11T05:31:34.825000+00:00"
+    },
+    {
+      "file": "screenshots/phone-06-accessibility-road.png",
+      "build": 14,
+      "caption": "Maximum accessibility text: pause, exit and traffic",
+      "sha256": "561b331bba68481bb5978f701d8d997ca37b922293aaef11ce1e0793095ecbc1",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-DeliveryPhoneFinalAttachments/D630EB86-703A-49E4-9301-BCFBFFE5FB9A.png",
+      "sourceSuggestedName": "build14-rally-traffic-accessibility-text_0_3532EA7B-73A3-4045-B5E2-F2E348B3C8DE.png",
+      "sourceResultBundle": "evidence/Build14-DeliveryPhone.xcresult",
+      "sourceResultBundleOutcome": "Failed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "GameplayUITests/testRallyTrafficGuideAndControlsFitAccessibilityTextSize()",
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "captureTimestampUTC": "2026-10-11T05:31:37.531000+00:00"
+    },
+    {
+      "file": "screenshots/ipad-01-rally-portrait.png",
+      "build": 14,
+      "caption": "Normal portrait",
+      "sha256": "e3242fa9068707534a829afa3a0000978db2e7ee5ac36b481fd8da4f88341a58",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-iPadFinalAttachments/4CFEA2B4-4660-49EB-A4B8-EB95E132EA7A.png",
+      "sourceSuggestedName": "build14-ipad-rally-normal-portrait_0_0E82B0F9-22F1-4188-A384-FB4AFDFBA2F3.png",
+      "sourceResultBundle": "evidence/Build14-iPadFinal.xcresult",
+      "sourceResultBundleOutcome": "Passed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "IPadReleaseUITests/testRallyTrafficGuideFitsBothOrientationsAndAccessibilityTextWithoutReset()",
+      "deviceID": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "deviceName": "Orbit Bloom App Store iPad QA",
+      "captureTimestampUTC": "2026-10-11T05:38:58.657000+00:00"
+    },
+    {
+      "file": "screenshots/ipad-02-rally-landscape.png",
+      "build": 14,
+      "caption": "Normal landscape",
+      "sha256": "673ea48eec8aa7e7fd41c9144cd5e27cf63df2be51f557fa7aac52f473f97746",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "orientation": 8,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-iPadFinalAttachments/C2745857-3222-421D-A6CC-4F63A143FF1E.png",
+      "sourceSuggestedName": "build14-ipad-rally-normal-landscape_0_8A30326F-A5C7-46E0-9DAD-0A9D11A3A01B.png",
+      "sourceResultBundle": "evidence/Build14-iPadFinal.xcresult",
+      "sourceResultBundleOutcome": "Passed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "IPadReleaseUITests/testRallyTrafficGuideFitsBothOrientationsAndAccessibilityTextWithoutReset()",
+      "deviceID": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "deviceName": "Orbit Bloom App Store iPad QA",
+      "captureTimestampUTC": "2026-10-11T05:39:00.580000+00:00"
+    },
+    {
+      "file": "screenshots/ipad-03-accessibility-portrait.png",
+      "build": 14,
+      "caption": "Maximum accessibility text: portrait",
+      "sha256": "bbc21566e0bd0cad52e561783f7cbcb6bb6e0909a77f67b5b430ff028ec07d2e",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-iPadFinalAttachments/98FEC2B6-EA46-4162-B9D1-148742B7C419.png",
+      "sourceSuggestedName": "build14-ipad-rally-accessibility-portrait_0_9E4DF40D-FD71-469A-AD77-F988ED440EF5.png",
+      "sourceResultBundle": "evidence/Build14-iPadFinal.xcresult",
+      "sourceResultBundleOutcome": "Passed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "IPadReleaseUITests/testRallyTrafficGuideFitsBothOrientationsAndAccessibilityTextWithoutReset()",
+      "deviceID": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "deviceName": "Orbit Bloom App Store iPad QA",
+      "captureTimestampUTC": "2026-10-11T05:39:11.948000+00:00"
+    },
+    {
+      "file": "screenshots/ipad-04-accessibility-landscape.png",
+      "build": 14,
+      "caption": "Maximum accessibility text: landscape",
+      "sha256": "189cc5a859f6fed133b085e33541cbd72aa12d44a2a2dfec862b6068c7e0b847",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "orientation": 8,
+      "originalBytesPreserved": true,
+      "sourceAttachment": "build/Build14-iPadFinalAttachments/F8462CA9-1498-4305-AC99-4929B98C285D.png",
+      "sourceSuggestedName": "build14-ipad-rally-accessibility-landscape_0_FEC1E9FD-DE7A-451F-AE53-98568E563311.png",
+      "sourceResultBundle": "evidence/Build14-iPadFinal.xcresult",
+      "sourceResultBundleOutcome": "Passed",
+      "individualTestOutcome": "Passed",
+      "testIdentifier": "IPadReleaseUITests/testRallyTrafficGuideFitsBothOrientationsAndAccessibilityTextWithoutReset()",
+      "deviceID": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "deviceName": "Orbit Bloom App Store iPad QA",
+      "captureTimestampUTC": "2026-10-11T05:39:13.581000+00:00"
+    },
+    {
+      "file": "screenshots/preview-build14-preserved.png",
+      "build": 14,
+      "caption": "Ordinary preview launch; owner save preserved",
+      "sha256": "376d5cd78b27fdfc327c778fe10465955fa920d1a6ec4eec41c678b9eadb7d94",
+      "nativePixels": [
+        1206,
+        2622
+      ],
+      "orientation": 1,
+      "originalBytesPreserved": true,
+      "source": "simctl native PNG capture after ordinary in-place install; no launch flags",
+      "deviceID": "64173F47-C4DC-46B4-82EC-0027675F7780",
+      "deviceName": "Orbit Bloom QA",
+      "proof": [
+        "preview-after-install.json",
+        "preview-after-launch.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "build": 14,
+  "version": "1.0",
+  "sourceCommit": "c2aa27aeb753b4af1918c046beecf3fca639802b",
+  "verifiedAtUTC": "2026-10-11T05:47:42.262796+00:00",
+  "kind": "Focused Rally traffic and accessibility improvement",
+  "uniquePassingCases": 106,
+  "caseCounts": {
+    "core": 50,
+    "native": 50,
+    "phoneUI": 5,
+    "iPadUI": 1
+  },
+  "countingRule": "Union of unique cases with recorded passing runs on the final app source. Reruns count once; the main phone bundle has one failed case, repaired and passed separately. This is not a claim that every bundle passed. Unchanged seven-room UI cases were not all rerun today.",
+  "core": {
+    "log": "evidence/build14-core.log",
+    "passed": 50,
+    "failed": 0,
+    "durationSeconds": 34.916,
+    "campaign": {
+      "stages": 1020,
+      "gardenProjects": 6,
+      "legalSwaps": 6561,
+      "retries": 22,
+      "paidItemsUsed": false,
+      "extraMovesUsed": false,
+      "interpretation": "Automated reachability, not human difficulty or reaction-time evidence"
+    },
+    "newRegression": "Follow nextTraffic coin lane through all crossings in all five traffic tiers; preview stable when no crossing resolves; absent after finish/crash."
+  },
+  "finalAppResults": [
+    {
+      "bundle": "evidence/Build14-DeliveryPhone.xcresult",
+      "summary": "phone-summary.json",
+      "result": "Failed",
+      "nativePasses": 50,
+      "phoneUIPasses": 4,
+      "phoneUIFailures": 1,
+      "failedCase": "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()",
+      "resolution": "Fresh home wait and re-resolved entrance queries after relaunch; passed in separate bundle below. Original failed bundle retained."
+    },
+    {
+      "bundle": "evidence/Build14-RoomRelaunch.xcresult",
+      "summary": "room-relaunch-summary.json",
+      "result": "Passed",
+      "phoneUIPasses": 1,
+      "failures": 0
+    },
+    {
+      "bundle": "evidence/Build14-iPadFinal.xcresult",
+      "summary": "ipad-summary.json",
+      "result": "Passed",
+      "iPadUIPasses": 1,
+      "failures": 0,
+      "launch": "--uitesting --keep-progress; QA device only"
+    }
+  ],
+  "phonePassingCases": [
+    "GameplayUITests/testDeliveryRaceWithRealSteeringAndReward()",
+    "GameplayUITests/testRallyTrafficGuideAndControlsFitAccessibilityTextSize()",
+    "GameplayUITests/testRallyTrafficGuideUpdatesAndPauseKeepsRouteStable()",
+    "SevenRoomsUITests/testRallyIgnoresVerticalSwipesPausesResumesAndBanksRealPickups()",
+    "GameplayUITests/testSeparateActivityRoomMapsHaveClearEntrancesExitsAndSavedProgress()"
+  ],
+  "iPadPassingCase": "IPadReleaseUITests/testRallyTrafficGuideFitsBothOrientationsAndAccessibilityTextWithoutReset()",
+  "nativeNewRegression": "IslandJourneyNativeTests/testFollowingRallyTrafficGuideBanksRewardAndPreservesOtherProgress(): tier five, 18 pickups, complete reward plus farm cargo saved once; lives and skill progress retained after relaunch.",
+  "diagnostics": [
+    {
+      "bundle": "evidence/Build14-Phone.xcresult",
+      "summary": "phone-initial-diagnostic-summary.json",
+      "reason": "Maximum text size pushed Start offscreen. Shortened/stacked lobby and compact route fix; final case passes."
+    },
+    {
+      "bundle": "evidence/Build14-PhoneVerified.xcresult",
+      "summary": "phone-steering-diagnostic-summary.json",
+      "reason": "Race test waited through first crossing before swiping. Removed extra polling delay; real swipe/reward case passes."
+    },
+    {
+      "bundle": "evidence/Build14-DeliveryPhone.xcresult",
+      "reason": "Room-relaunch entrance check failed intermittently. Corrected fresh-query setup passed; failed result not relabeled."
+    },
+    {
+      "report": "preview-comparison-initial-diagnostic.json",
+      "reason": "Historical checker expected active-session preference. Current owner save has completed stages and six preferences. Updated checker to actual baseline; every typed value and plist byte matches."
+    }
+  ],
+  "sourceHashes": {
+    "app": "app-source-hashes.json",
+    "appFileCount": 66,
+    "tests": "test-source-hashes.json",
+    "testFileCount": 12
+  },
+  "screenshots": {
+    "manifest": "manifest.json",
+    "nativeCaptures": 11,
+    "phone": 6,
+    "iPad": 4,
+    "ordinaryPreview": 1,
+    "proposedAppleGallery": "apple-gallery-prepared.json",
+    "productPageSaved": false
+  },
+  "preview": {
+    "device": "64173F47-C4DC-46B4-82EC-0027675F7780",
+    "ordinaryBuildInstalled": 14,
+    "reset": false,
+    "testFlagsUsed": false,
+    "fullContainerBackupRetainedPrivately": true,
+    "afterInstall": "preview-after-install.json",
+    "afterLaunch": "preview-after-launch.json",
+    "preserved": {
+      "coins": 520,
+      "completedStages": 3,
+      "activePuzzle": false,
+      "freeHints": 6,
+      "lives": 5
+    },
+    "baselinePreferenceCount": 6,
+    "comparisonHelper": "docs/release-draft/build14/preview-save-check.py",
+    "comparisonHelperSHA256": "9c20eb2e71a9b7b27a8c3d76f415bea891b30ff77137e4fece35d85e09c80b35",
+    "installedVersionVerified": "1.0 (14)",
+    "installedAppInfoMatchesOrdinaryBuild": true,
+    "installedExecutableMatchesOrdinaryBuild": true,
+    "testPluginsAbsent": true,
+    "staleSimulatorOnlyTestPluginQuarantinedPrivately": true,
+    "deviceSaveAfterInstallPassed": true,
+    "deviceSaveAfterLaunchPassed": true,
+    "storeAndIPadQAStopped": true,
+    "finalInstallCheckpoint": "private full container after normal background save; original pre-update container retained separately",
+    "originalSaveReconciliation": "preview-original-save-reconciliation.json",
+    "normalizationDiagnostics": [
+      "preview-after-install-normalization-diagnostic.json",
+      "preview-after-launch-normalization-diagnostic.json"
+    ],
+    "recoveryBackupRule": "Only an exact copy of the preceding full primary wallet is accepted; every current primary field must match",
+    "normalCompletedAttemptChargeFlagCleared": true,
+    "negativeComparisonGuards": {
+      "lostPrimaryCoinsRejected": true,
+      "alteredRecoveryCoinsRejected": true
+    }
+  },
+  "apple": {
+    "signedPackage": "signed-package-verification.json",
+    "archive": true,
+    "export": true,
+    "upload": true,
+    "uploadCompletedAt": "2026-10-11T11:12:46+05:30",
+    "uploadLog": "evidence/build14-upload.log",
+    "processingAtUploadCompletion": "Processing",
+    "processingCompleteVerified": false,
+    "internalGroupAssignmentVerified": false,
+    "metadata": "metadata-prepared.json",
+    "metadataSavedToApple": false,
+    "publicReviewChanged": false,
+    "publicRelease": false,
+    "realPurchase": false,
+    "agreementAccepted": false,
+    "lastRecordedPublicReview": {
+      "build": 11,
+      "date": "2026-10-10",
+      "status": "Waiting for Review",
+      "recheckedToday": false
+    },
+    "browserLimit": "Native/browser control unavailable after interrupted session; no fresh Chrome account/review/group/gallery verification claimed. Existing Xcode credentials delivered the upload successfully."
+  },
+  "limits": [
+    "Physical VoiceOver speech/focus/timing, high-tier reaction usability",
+    "Real Game Center sign-in and private iCloud backup/restore",
+    "Signed Apple sandbox purchases and leaderboard submission",
+    "Smallest phones, split-view, hardware performance/audio/haptics",
+    "Maximum accessibility-text result screen not exercised in this focused pass"
+  ],
+  "otherWorkPreserved": true
+}
