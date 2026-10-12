@@ -19,6 +19,7 @@ import Match3Kit
     @Published var raceActive = false
     @Published var coinFlight: UUID?
     @Published var lastCoinAward = 0
+    @Published private(set) var harvestingPlots: Set<Int> = []
     @Published var blastKey: Int?
     @Published var blastID = UUID()
     @Published var tab = 0
@@ -322,8 +323,18 @@ import Match3Kit
     }
     func awardCoins(_ amount: Int) { progress.coins += max(0,amount); animateCoins(amount); effect("coin"); save() }
     func farmAction(_ id: Int, crop: Crop) {
+        guard ecosystem.plots.indices.contains(id), !harvestingPlots.contains(id) else { return }
         let now = Date()
-        if let amount = ecosystem.harvest(id,at:now) { recordWorldEvent(room:"farm"); awardCoins(amount); effect("harvest"); showToast("Harvested! +\(amount) coins · +1 compost · +1 cargo") }
+        if let amount = ecosystem.harvest(id,at:now) {
+            // Keep a second tap from becoming a planting charge while this
+            // patch's harvest is still traveling to the basket. Other beds work.
+            harvestingPlots.insert(id)
+            Task { [weak self] in
+                try? await Task.sleep(for: .milliseconds(1100))
+                self?.harvestingPlots.remove(id)
+            }
+            recordWorldEvent(room:"farm"); awardCoins(amount); effect("harvest"); showToast("Harvested! +\(amount) coins · +1 compost · +1 cargo")
+        }
         else if ecosystem.plots[id].crop == nil {
             if ecosystem.plant(id,crop:crop,at:now) { effect("plant"); showToast("\(crop.title) planted. Tap to water and grow faster.") }
             else { showToast("Planting needs 1 seed and 2 water. Garden puzzles collect water.") }

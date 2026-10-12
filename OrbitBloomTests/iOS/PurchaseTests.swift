@@ -148,6 +148,61 @@ import UIKit
 }
 
 @MainActor final class SessionTests: XCTestCase {
+    func testRepeatedHarvestCannotReplantOrSpendTheSavedResources() async throws {
+        let name = "farm-harvest-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: name))
+        defer { defaults.removePersistentDomain(forName: name) }
+        let game = GameModel(defaults: defaults)
+        XCTAssertTrue(game.ecosystem.plant(0, crop: .rose, at: Date().addingTimeInterval(-31)))
+        let coins = game.progress.coins
+        let seeds = game.ecosystem.seeds
+        let water = game.ecosystem.water
+        game.farmAction(0, crop: .rose)
+        let harvested = game.wallet
+        func sameHarvest(_ wallet: GardenWallet) {
+            XCTAssertEqual(wallet.progress, harvested.progress)
+            XCTAssertEqual(wallet.ecosystem, harvested.ecosystem)
+            XCTAssertEqual(wallet.assistance, harvested.assistance)
+            XCTAssertEqual(wallet.journey, harvested.journey)
+            XCTAssertEqual(wallet.charged, harvested.charged)
+            XCTAssertNil(wallet.session)
+        }
+        game.farmAction(0, crop: .rose)
+        XCTAssertNil(game.ecosystem.plots[0].crop, "A repeated harvest must leave the soil empty")
+        XCTAssertEqual(game.ecosystem.seeds, seeds + 1)
+        XCTAssertEqual(game.ecosystem.water, water, "A repeated tap must not silently spend planting water")
+        XCTAssertEqual(game.progress.coins, coins + Crop.rose.coins)
+        sameHarvest(game.wallet)
+        let restored = GameModel(defaults: defaults)
+        sameHarvest(restored.wallet)
+        XCTAssertTrue(restored.harvestingPlots.isEmpty, "Animation state must never enter the saved wallet")
+    }
+    func testHarvestProtectionIsPerPatchAndAllowsDeliberateReplanting() async throws {
+        let name = "farm-harvest-flow-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: name))
+        defer { defaults.removePersistentDomain(forName: name) }
+        let game = GameModel(defaults: defaults)
+        let coins = game.progress.coins
+        XCTAssertTrue(game.ecosystem.plant(0, crop: .apple, at: Date().addingTimeInterval(-46)))
+        XCTAssertTrue(game.ecosystem.plant(1, crop: .rose, at: Date().addingTimeInterval(-31)))
+        game.farmAction(0, crop: .apple); game.farmAction(1, crop: .rose)
+        XCTAssertEqual(game.ecosystem.harvested, 2)
+        XCTAssertEqual(game.progress.coins, coins + Crop.apple.coins + Crop.rose.coins)
+        game.farmAction(2, crop: .apple); game.farmAction(2, crop: .apple)
+        XCTAssertEqual(game.ecosystem.plots[2].crop, .apple)
+        XCTAssertEqual(game.ecosystem.water, 5, "Other patches can plant and water during a harvest")
+        let water = game.ecosystem.water
+        let seeds = game.ecosystem.seeds
+        game.farmAction(-1, crop: .rose); game.farmAction(6, crop: .rose)
+        game.farmAction(0, crop: .rose)
+        XCTAssertEqual(game.ecosystem.water, water); XCTAssertEqual(game.ecosystem.seeds, seeds)
+        try await Task.sleep(for: .milliseconds(1250))
+        XCTAssertTrue(game.harvestingPlots.isEmpty)
+        game.farmAction(0, crop: .rose)
+        XCTAssertEqual(game.ecosystem.plots[0].crop, .rose)
+        XCTAssertEqual(game.ecosystem.water, water - 2); XCTAssertEqual(game.ecosystem.seeds, seeds - 1)
+        XCTAssertEqual(GameModel(defaults: defaults).ecosystem, game.ecosystem)
+    }
     func testAnimatedShuffleBlocksMovingTargetsAndSavesOneSpentShuffle() async throws {
         try XCTSkipIf(UIAccessibility.isReduceMotionEnabled,"This case checks the animated input window")
         let suite = "orbitbloom.shuffle.\(UUID().uuidString)"

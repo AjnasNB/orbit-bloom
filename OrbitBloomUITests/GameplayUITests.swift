@@ -416,6 +416,39 @@ import StoreKitTest
         XCTAssertEqual(app.scrollViews.count, 0)
         attach("build15-farm-maximum-text")
     }
+    func testFarmDoubleTapHarvestKeepsResourcesAndAllowsNextPlant() throws {
+        let entrance = app.buttons["openFarm"]
+        XCTAssertTrue(entrance.waitForExistence(timeout: 10))
+        Thread.sleep(forTimeInterval: 0.5); entrance.tap()
+        let plot = app.buttons["plot0"]
+        XCTAssertTrue(plot.waitForExistence(timeout: 5)); plot.tap()
+        for _ in 0..<3 { if !plot.label.contains("ready") { plot.tap() } }
+        XCTAssertTrue(plot.label.contains("ready"))
+        let water = app.descendants(matching: .any)["farmMeterWater"].firstMatch
+        let originalWater = water.label
+        attach("build16-farm-before-harvest")
+        plot.doubleTap()
+        let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        shot.name = "build16-farm-double-tap-collected"; shot.lifetime = .keepAlways; add(shot)
+        XCTAssertTrue(plot.label.contains("empty"), "A double harvest tap must not plant a new rose")
+        XCTAssertEqual(water.label, originalWater)
+        XCTAssertEqual(app.descendants(matching: .any)["farmMeterSeeds"].firstMatch.label, "Seeds: 8")
+        XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 1"))
+        XCTAssertTrue(app.buttons["openShop"].label.contains("195"))
+        let plantReady = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in plot.isEnabled && plot.label.contains("plant") }, object: app)
+        XCTAssertEqual(XCTWaiter.wait(for: [plantReady], timeout: 5), .completed)
+        app.buttons["cropapple"].tap(); plot.tap()
+        XCTAssertTrue((plot.value as? String)?.contains("Moon apple") == true)
+        attach("build16-farm-deliberate-replant")
+        app.terminate(); app.launchArguments = ["--uitesting", "--keep-progress"]; app.launch()
+        XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.buttons["openShop"].label.contains("195"))
+        app.buttons["openFarm"].tap()
+        XCTAssertTrue(plot.waitForExistence(timeout: 5))
+        XCTAssertTrue((plot.value as? String)?.contains("Moon apple") == true)
+        XCTAssertEqual(app.descendants(matching: .any)["farmMeterSeeds"].firstMatch.label, "Seeds: 7")
+        XCTAssertTrue(app.staticTexts["farmTotals"].label.contains("Harvested: 1"))
+    }
     func testPuzzleWaterReachesFarmAndCanPlantAfterRelaunch() throws {
         app.buttons["openFarm"].tap()
         let water = app.descendants(matching:.any)["farmMeterWater"]

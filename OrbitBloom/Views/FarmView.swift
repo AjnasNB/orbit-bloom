@@ -71,7 +71,8 @@ struct FarmView: View {
     func plotButton(_ plot: FarmPlot, now: Date) -> some View {
         let ready = plot.ready(at: now)
         let remaining = max(0, Int(ceil((plot.readyAt ?? now).timeIntervalSince(now))))
-        let title = plot.crop == nil ? "Plant" : ready ? "Harvest" : "Water"
+        let harvesting = game.harvestingPlots.contains(plot.id)
+        let title = harvesting ? "Harvested" : plot.crop == nil ? "Plant" : ready ? "Harvest" : "Water"
         let state = plot.stage(at: now)
         return Button {
             let previous = plot
@@ -86,7 +87,7 @@ struct FarmView: View {
             }
         } label: {
             VStack(spacing: 2) {
-                Label("\(plot.id + 1) · \(title)", systemImage: plot.crop == nil ? "plus" : ready ? "basket.fill" : "drop.fill")
+                Label("\(plot.id + 1) · \(title)", systemImage: harvesting ? "checkmark" : plot.crop == nil ? "plus" : ready ? "basket.fill" : "drop.fill")
                     .font(.system(.caption, design: .rounded, weight: .heavy))
                 if plot.crop != nil && !ready {
                     Text("\(state == .sprout ? "Sprouting" : state == .leafy ? "Leafing" : "Blooming") · \(remaining)s")
@@ -94,12 +95,12 @@ struct FarmView: View {
                 }
             }.foregroundStyle(Palette.night).padding(.horizontal, 9).padding(.vertical, 7)
                 .frame(maxWidth: .infinity, minHeight: 48).contentShape(Rectangle())
-                .background(ready ? Palette.sunlight : Palette.paper.opacity(0.96), in: Capsule())
+                .background(ready || harvesting ? Palette.sunlight : Palette.paper.opacity(0.96), in: Capsule())
                 .shadow(color: Palette.night.opacity(0.15), radius: 3, y: 3)
                 .frame(maxWidth: .infinity, minHeight: 48)
-        }.buttonStyle(PressStyle()).dynamicTypeSize(...DynamicTypeSize.xxxLarge)
-            .accessibilityLabel("Plot \(plot.id + 1), \(plot.crop == nil ? "empty, plant" : ready ? "ready, harvest" : "growing, water")")
-            .accessibilityValue(plot.crop.map { "\($0.title). \(state.rawValue). \(ready ? "Ready to harvest" : "\(remaining) seconds until harvest")" } ?? "Choose a crop, then plant with 1 seed and 2 water")
+        }.buttonStyle(PressStyle()).disabled(harvesting).dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+            .accessibilityLabel("Plot \(plot.id + 1), \(harvesting ? "empty, harvest collected" : plot.crop == nil ? "empty, plant" : ready ? "ready, harvest" : "growing, water")")
+            .accessibilityValue(harvesting ? "Harvest collected. This patch will be ready to plant in a moment." : plot.crop.map { "\($0.title). \(state.rawValue). \(ready ? "Ready to harvest" : "\(remaining) seconds until harvest")" } ?? "Choose a crop, then plant with 1 seed and 2 water")
             .accessibilityIdentifier("plot\(plot.id)")
     }
 
