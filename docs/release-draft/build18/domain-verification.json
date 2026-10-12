@@ -1,0 +1,48 @@
+{
+  "host": "orbitbloom.cognifyr.co",
+  "publicResolver": "1.1.1.1",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "TLSVerified": true,
+      "securityHeaders": true
+    },
+    {
+      "path": "/privacy/",
+      "status": 200,
+      "TLSVerified": true,
+      "securityHeaders": true
+    },
+    {
+      "path": "/support/",
+      "status": 200,
+      "TLSVerified": true,
+      "securityHeaders": true
+    },
+    {
+      "path": "/style.css",
+      "status": 200,
+      "TLSVerified": true,
+      "securityHeaders": true
+    },
+    {
+      "path": "/missing-security-check/",
+      "status": 404,
+      "TLSVerified": true,
+      "securityHeaders": true
+    },
+    {
+      "path": "/api/events",
+      "status": 200,
+      "TLSVerified": true,
+      "securityHeaders": true
+    }
+  ],
+  "localRouter": "DNS propagation complete; custom hostname opens in Chrome and standard system HTTPS requests succeed",
+  "deployment": "2385ccf3-1f21-49ee-bf6a-1c1d92739b80",
+  "chromeVerified": true,
+  "systemHTTPSVerified": true,
+  "canonicalVerified": true,
+  "otherDNSChanged": false
+}

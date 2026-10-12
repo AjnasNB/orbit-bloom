@@ -3,6 +3,7 @@
   "main": "workers/orbit-events.mjs",
   "compatibility_date": "2026-10-09",
   "workers_dev": true,
+  "routes": [{ "pattern": "orbitbloom.cognifyr.co", "custom_domain": true }],
   "assets": {
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"],

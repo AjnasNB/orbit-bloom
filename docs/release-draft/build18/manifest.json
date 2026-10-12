@@ -1,0 +1,358 @@
+[
+  {
+    "file": "captures/iphone-puzzle.png",
+    "sha256": "fe10afc866cd1b7e5fac0a3f1d130ae60a75b6ff9aca42d24a07a70debc12338",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Phone-UI.xcresult",
+    "test": "GameplayUITests/testHardOpeningHasLargeTilesLayeredObstaclesAndEarnedNextKit()",
+    "attachmentName": "build17-puzzle-hard-ice-rope-mud_0_6EBE264E-D19C-4722-B9AB-DFC4213C2BAD.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-farm.png",
+    "sha256": "5d38e946d9ede22b9df4f108618581b572b8c4ecafd3e8893dacd5fd699c3bbb",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Phone-UI.xcresult",
+    "test": "GameplayUITests/testFarmFieldsSwipeIndependentlyAndPersistOfflineHarvests()",
+    "attachmentName": "build17-farm-ripe-orchard_0_8AEDE30B-34CF-4665-9759-14693580D398.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-rally.png",
+    "sha256": "b2d838425fec18094445f296053bb6add6b071e6e7ec5f78022eb4e477fe2b86",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Phone-UI.xcresult",
+    "test": "GameplayUITests/testRallyTrafficGuideUpdatesAndPauseKeepsRouteStable()",
+    "attachmentName": "build14-rally-traffic-driving_0_90BD99FC-EB3E-4843-8FC8-457E993A3827.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-loadout.png",
+    "sha256": "a037944918b3d575fd178f2539f2f15bac0117a43c612df8ad8c5e2c644638e7",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Phone-UI.xcresult",
+    "test": "GameplayUITests/testLoadoutCancelCapAndStartedPowersAreRealBoardPieces()",
+    "attachmentName": "build17-prelevel-powers_0_1A267AC0-67A1-4B60-ABB0-1D88B14EC571.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-restored.png",
+    "sha256": "a41b1632291cd1a1b8ec6e727d76041d3f135babc527e0c8d9c47ad7baa1f47d",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Phone-UI.xcresult",
+    "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+    "attachmentName": "build18-five-games-restored-one-garden_0_B45B4121-C9A6-4CC6-BF69-61B0A2AD132C.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-maximum-text.png",
+    "sha256": "a0f259f6b66a22e3355841ca4c5cdafd42c2dd5b454e41cdcf65111abb5b1214",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Phone-UI.xcresult",
+    "test": "SevenRoomsUITests/testMaximumTextKeepsActivityIconsSeatsAndHelpUsable()",
+    "attachmentName": "build17-island-maximum-text_0_A96BDCB6-2CB4-42CD-B1F0-5ADD36D91562.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-island-portrait.png",
+    "sha256": "eaa3525568bbff9c330c9a0e884d24ad6d2e9d997f4006bdd3852f2b314045bd",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-island-portrait_0_405B1D81-2CD2-4665-AAC4-27097AF54256.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-farm-portrait.png",
+    "sha256": "175294bc3a5c8d24e98a04caee699fa7e1b22ace569c957e40ab48a3d6837844",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-farm-portrait_0_073F9E02-584B-4D2E-80AB-B677B52DA68C.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-rally-lobby-portrait.png",
+    "sha256": "9cfeea1f781d40baca12d80cb337522475cf4d801766b60d4189bcfa50522293",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-rally-lobby-portrait_0_E99B95FA-05DB-463F-AA3D-FEA0F3193C6B.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-rally-road-portrait.png",
+    "sha256": "7292d08df490de61996e38a06d0222515127561bffc6555bd2d03aea6e047be3",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-rally-road-portrait_0_0116AF92-E704-4D32-9D28-988315D69506.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-canal-portrait.png",
+    "sha256": "f068bcca40973dd07874604a4470adce34e8edbc399ada3ad7aa592c8e19ce1d",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-canal-portrait_0_3866AFF5-0644-4E54-A27C-4D2EF98B268C.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-fireflies-portrait.png",
+    "sha256": "d69231593576f061a89ceff8f95acaa9bc817b2adb8ba7fa07405fa7d9a2995e",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-fireflies-portrait_0_FA9C71B6-D92C-494C-8767-AFABDCFDB45F.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-windmill-portrait.png",
+    "sha256": "34198cb6cf5ab37af38598196f1e0ed2ad3a11b5741dda84d5bc73333312dd38",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-windmill-portrait_0_0E2A1120-7AD2-4244-8ECE-A1B7FC8091BA.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-observatory-portrait.png",
+    "sha256": "9a11b475f822aced233b7403d26105a880c392337b6cc4ecbc43fa3968b280b2",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-observatory-portrait_0_595C036B-D195-4339-B31A-5CAA4CE13B7E.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-shuttle-portrait.png",
+    "sha256": "c795de8b5557c62ef320462fe7ef9dce199cee2dca89087f04dfe1ff73b68beb",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-shuttle-portrait_0_7BA76F3E-4921-4028-9B51-C878550C95E8.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-loadout-portrait.png",
+    "sha256": "ecf80c6fb09b99de6dc66d1ea96222faceb4641b9a32ad6bc962889bfbfe68d2",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-loadout-portrait_0_0834B61B-AA7E-4B42-A791-79E8A1B5D727.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-puzzle-portrait.png",
+    "sha256": "942e3a54d394df6ca4d931e3d9238c8bcea7bc8cd0cef4ff68934dd724eaab15",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-puzzle-portrait_0_E0F262E3-4F6D-455C-A55D-BB73BF5B12E3.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-island-landscape.png",
+    "sha256": "cd9e550d0aa355fd65ecf2827ec034cc4835848b4c65f38364dcd27bac360438",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-island-landscape_0_3EBCA8A4-CD87-4B74-9477-A931CEC46E53.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-farm-landscape.png",
+    "sha256": "993a7148f673f597c81d07a0751fc95b1fcd6cbe55348aa42f59ca32e605a6f1",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-farm-landscape_0_E558402F-69CE-4C64-BF92-1BDDEC1168F2.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-rally-lobby-landscape.png",
+    "sha256": "6609fe98bfc9a498a7b015ba567fa857dc1fd87971b7fb504c0a20b2515c9f79",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-rally-lobby-landscape_0_BC06E296-E024-4CBE-8DC5-7A4387E2B792.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-rally-road-landscape.png",
+    "sha256": "61026d76584fdecc3f5912a9c8e823306c7ddecaffa3f56a1925e8adbef6a549",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-rally-road-landscape_0_B3319206-44A6-4F13-94A7-011E1C22A882.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-canal-landscape.png",
+    "sha256": "e33b66c66cb75bbec31825e1d7748a9191bbc74fbc981fcbbcfadb4cbda28ae8",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-canal-landscape_0_9820451A-436A-4319-8D24-046B3E43CC3A.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-fireflies-landscape.png",
+    "sha256": "fb23ce885a49f83df54c36948cbd04124f70e4835e7140191f9b40dc32075b80",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-fireflies-landscape_0_1FBA8766-5E6A-4144-889B-78057FEDAABA.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-windmill-landscape.png",
+    "sha256": "14ce6daca6467614e4b595ec8a30f712d18b70d99f22191866eb163177027176",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-windmill-landscape_0_7C002FE5-C2C5-475F-A18A-8CFF27D18E82.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-observatory-landscape.png",
+    "sha256": "fed62823fde6ddb19e6f4a47769a53a628c6d016dcb339575cd151c3fa7cd993",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-observatory-landscape_0_3BB9748A-4BCF-4582-B5EA-43D89B895570.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-shuttle-landscape.png",
+    "sha256": "da3175282e11944679ae28913d16a6f67030c44e914915cc5cac982eb00b30dd",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-shuttle-landscape_0_AAD5F840-34E5-4ECB-8E8D-B556DD58238F.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-loadout-landscape.png",
+    "sha256": "6a0595083c7bc9253426671ffe857acc6438821e67a9d0b25c052ef4ffe85ebc",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-loadout-landscape_0_AC619DA7-F317-4CAC-953B-E95185101BC5.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/ipad-puzzle-landscape.png",
+    "sha256": "99cce2fde6c2d2d699a9a2bfd432322a776fc06dabb80de99b0e39bd271d37e2",
+    "width": 2064,
+    "height": 2752,
+    "bundle": "evidence/Build18-iPad-UI.xcresult",
+    "test": "IPadReleaseUITests/testEightActivitiesFarmAndPuzzleFitBothTabletOrientations()",
+    "attachmentName": "build17-ipad-puzzle-landscape_0_5EEA77F0-13CE-4C2A-9EE0-E485262A0F3C.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-world.png",
+    "sha256": "b4d499b8572bd539b60ebfe212128eab0b3d856091dda711e5263054cd14f9d0",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Final-Polish.xcresult",
+    "test": "SevenRoomsUITests/testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory()",
+    "attachmentName": "build18-island-equal-activities_0_EE07F2E3-9DE1-4364-A3A8-400B09D2AB40.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-story.png",
+    "sha256": "280a884f3ce9e4ecffab6a4564e62bedb310af8cfd470b20bc2fef7ab61bbd76",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Final-Polish.xcresult",
+    "test": "SevenRoomsUITests/testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory()",
+    "attachmentName": "build18-connected-story_0_7E7E1709-380C-4D79-9DAB-0B15B9FDA581.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-canal.png",
+    "sha256": "d9b1b456bf70c14f550e873bbe0b8973faf3a7d72336850ef2f49f062df83d17",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Final-Polish.xcresult",
+    "test": "SevenRoomsUITests/testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory()",
+    "attachmentName": "build17-canal-game_0_DA84A14A-F679-4B24-8AFD-69C39B4AAE1B.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-fireflies.png",
+    "sha256": "1ba787eca704db0b3eb2d8f3f664f6ae56ba0b05397908bea58fd86c39d20d63",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Final-Polish.xcresult",
+    "test": "SevenRoomsUITests/testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory()",
+    "attachmentName": "build17-fireflies-game_0_F55D7F5F-3F43-4FF8-8353-F844EF7093AD.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-windmill.png",
+    "sha256": "ad23ecd46589b8388c4a2350c64442588654c6699dbbb1935866b503e41ee54b",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Final-Polish.xcresult",
+    "test": "SevenRoomsUITests/testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory()",
+    "attachmentName": "build17-windmill-game_0_5EA4FE04-668F-4851-80C9-25AEE14B4B30.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-observatory.png",
+    "sha256": "a39ad510106b1cea360b80724bbd961255ed12acc7f53c64e98ff6432acfe91e",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Final-Polish.xcresult",
+    "test": "SevenRoomsUITests/testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory()",
+    "attachmentName": "build17-observatory-game_0_EB9A7FDB-F5AB-4C3B-8878-E648044AA89C.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/iphone-shuttle.png",
+    "sha256": "3b309d91ec069748c5cbc5a6e04e764c927b50cb27a47c03991d0ddfc025d8de",
+    "width": 1320,
+    "height": 2868,
+    "bundle": "evidence/Build18-Final-Polish.xcresult",
+    "test": "SevenRoomsUITests/testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory()",
+    "attachmentName": "build17-shuttle-game_0_1B54EF40-2DC6-45A5-A7BA-881EFE3C0889.png",
+    "nativeUnmodified": true
+  },
+  {
+    "file": "captures/preview-preserved.png",
+    "sha256": "67a66356998b5d28988cd45211b7cebd9dab08751d5d8074740bb66511ede58f",
+    "bundle": "Ordinary owner preview, normal launch, no reset/test flags",
+    "nativeUnmodified": true
+  }
+]

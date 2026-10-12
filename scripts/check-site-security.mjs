@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 
 // Public static-site checks only; no player identifiers or credentials are sent.
-const origin = 'https://orbit-bloom-game-site.ajnasnb.workers.dev';
+const origin = process.argv[2] ?? 'https://orbitbloom.cognifyr.co';
 for (const path of ['/', '/privacy/', '/support/', '/style.css', '/missing-security-check/']) {
   const response = await fetch(origin + path);
   assert.equal(response.status, path.startsWith('/missing') ? 404 : 200, path);

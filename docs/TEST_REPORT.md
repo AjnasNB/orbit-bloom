@@ -1,3 +1,13 @@
+# Latest delivery — build 18, 12 October 2026
+
+Build **1.0 (18)** makes all eight home activities equally prominent, adds named progress badges, shared garden supplies/restoration counters and eight swipeable Lio story pages. [Delivery record](release-draft/build18/README.md) covers **135 unique passing core/native/phone/iPad cases**, a final successful 61-case polish rerun, 36 original native images and the complete preserved preview save. Source **eef0460** is on public main; the normal owner preview runs 18 with 555 coins and its active level-4 board intact.
+
+The website is live on **https://orbitbloom.cognifyr.co/** through the isolated Cloudflare Worker. Support/marketing URLs were saved and reloaded in Apple. Canonical/SEO, privacy/support and public clock/security routes pass; no other DNS/project or player-save backend changed.
+
+**Public release is still pending.** The existing build-11 submission remains Waiting for Review. Apple received the routine status inquiry as **case 102994340844**. Build 18 is locally signed/exported and its final package is loaded in Transporter, but Xcode reports **Failed to Use Accounts** and native delivery control is unavailable. The owner was asked to click DELIVER on Orbit Bloom 1.0 (18). New copy and ten-per-device galleries remain prepared locally until successful delivery and processing. The older review submission was not cancelled; no approval, real purchase, legal acceptance or public release is claimed.
+
+---
+
 # Build 17 — 12 October 2026
 
 **134 unique affected cases have passing records:** 60 core, 59 native, fourteen phone UI and one iPad portrait/landscape tour. [Detailed provenance, reruns and limits](release-draft/build17/verification.json) retain unsuccessful diagnostics. The complete campaign solver used 6,125 legal swaps and 24 retries across 1,020 stages without purchases or extra moves; all 1,000 Shuttle layouts are solvable. All five skill games and a complete Rally route were played through real UI input.

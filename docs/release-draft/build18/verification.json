@@ -1,0 +1,41 @@
+{
+  "sourceCommit": "eef0460cfd43874b1c09cba6945aa6a0fb477f75",
+  "uniquePassingCases": 135,
+  "core": 60,
+  "native": 60,
+  "phoneUI": 14,
+  "tabletUI": 1,
+  "finalPolishRun": "60 native cases rerun plus the real eight-activity/story tour after the story-index contrast fix. Other successful captures precede only that cosmetic index backing change.",
+  "runs": [
+    {
+      "name": "Native final",
+      "bundle": "evidence/Build18-Final-Polish.xcresult",
+      "passed": 61,
+      "failed": 0
+    },
+    {
+      "name": "Phone gameplay",
+      "bundle": "evidence/Build18-Phone-UI.xcresult",
+      "passed": 14,
+      "failed": 0
+    },
+    {
+      "name": "iPad portrait/landscape",
+      "bundle": "evidence/Build18-iPad-UI.xcresult",
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "coreLog": "evidence/build18-core.log",
+  "campaign": "All 1020 levels; 6125 legal swaps, 24 retries; no paid items or extra moves",
+  "limits": [
+    "Physical Game Center authentication, private iCloud synchronization, signed sandbox purchases and real VoiceOver timing remain hardware checks.",
+    "Local signature verification is separate from Apple server validation."
+  ],
+  "failedDiagnostics": [
+    "Build18-Native.xcresult: overlong view expression at an invalid frame overload",
+    "Build18-Native-Final.xcresult: invalid fixed/flexible frame argument corrected",
+    "Build18-Native-Delivered.xcresult: test compared Codable wallet directly; corrected to compare full components"
+  ],
+  "allFinalChecksPassed": true
+}

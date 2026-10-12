@@ -1,0 +1,17 @@
+{
+  "build": 18,
+  "fullWalletPreserved": true,
+  "preferencesUnchangedImmediatelyAfterInstall": true,
+  "comparison": "Every game preference, board identity, timer, inventory and receipt retained. Only Swift enum-key dictionary pair ordering (including legacy session mirror) and exact prior-primary backup rotation are accepted.",
+  "backupRotations": 1,
+  "coins": 555,
+  "completed": 3,
+  "freeHints": 6,
+  "lives": {
+    "hearts": 5,
+    "reserve": 0
+  },
+  "activeLevel": 4,
+  "activeRules": 2,
+  "activeMoves": 9
+}
