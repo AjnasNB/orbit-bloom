@@ -1,0 +1,7 @@
+{
+  "url": "https://orbit-bloom-game-site.ajnasnb.workers.dev/",
+  "worker": "orbit-bloom-game-site",
+  "deployment": "651367f7-33c3-4d47-9a9e-f4b293dcb802",
+  "scope": "Existing isolated game Worker/static assets; no DNS, other project, player-save or payment-service change",
+  "securityRoutes": 5
+}

@@ -1,0 +1,30 @@
+{
+  "status": "Prepared locally; not uploaded or assigned to Apple",
+  "build": 17,
+  "iPhone": [
+    "iphone-world.png",
+    "iphone-puzzle.png",
+    "iphone-farm.png",
+    "iphone-rally.png",
+    "iphone-shuttle.png",
+    "iphone-fireflies.png",
+    "iphone-canal.png",
+    "iphone-windmill.png",
+    "iphone-observatory.png",
+    "iphone-loadout.png"
+  ],
+  "iPad": [
+    "ipad-island-portrait.png",
+    "ipad-puzzle-portrait.png",
+    "ipad-farm-portrait.png",
+    "ipad-rally-road-portrait.png",
+    "ipad-shuttle-portrait.png",
+    "ipad-fireflies-portrait.png",
+    "ipad-canal-portrait.png",
+    "ipad-windmill-portrait.png",
+    "ipad-observatory-portrait.png",
+    "ipad-loadout-portrait.png"
+  ],
+  "originalNativePNGs": true,
+  "countPerDevice": 10
+}

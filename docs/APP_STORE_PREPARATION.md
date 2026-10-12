@@ -1,3 +1,13 @@
+# Latest preparation — build 17, 12 October 2026
+
+Build **1.0 (17)** adds eight direct activity icons, harder layered puzzles and a capped pre-level win kit, three saved farm fields, full-screen Rally hazards, visible Firefly answers and 1,000 two-deck Shuttle seating challenges. [Delivery record](release-draft/build17/README.md) covers 134 unique passing cases and original phone/iPad galleries. Source `a5a2dbc` is signed/exported with Production private iCloud/Game Center and no test plug-ins.
+
+**Build 17 is not uploaded or submitted:** the new Xcode attempt reports **Failed to Use Accounts**, and native Transporter automation is unavailable after reconnect. [Prepared metadata](release-draft/build17/metadata-prepared.json) and [ten-per-device gallery plan](release-draft/build17/apple-gallery-prepared.json) remain local. Chrome rechecked today: **build 11 and all eight items are Waiting for Review**, with manual release. That queue and its matching metadata/screenshots remain intact. No approval, public release, real purchase or new agreement is claimed.
+
+The ordinary preview runs 17 with the latest full save preserved: **555 coins, three completed levels, six hints, five lives and active rules-2 level 4 with nine moves**. Its active board retains original rules; new attempts use rules 3. The isolated Cloudflare development site is updated and verified. The next external step is delivery through a working Apple upload account, processing, internal group assignment and review replacement with the matching build/gallery.
+
+---
+
 # Latest internal preparation — build 16, 12 October 2026
 
 Build **1.0 (16)** fixes repeated harvest taps silently spending a seed and two water to replant. Collection briefly protects only that patch and shows Harvested; other patches remain active. [Verification and captures](release-draft/build16/README.md) record 109 unique passing affected cases, nine original screenshots and the complete preserved ordinary preview save. Source `3b70e92` is archived, signed and exported with Production Game Center/private iCloud, matching privacy manifest and no test plug-ins.

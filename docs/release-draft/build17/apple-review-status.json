@@ -1,0 +1,18 @@
+{
+  "observedOn": "2026-10-12",
+  "appId": "6820591529",
+  "submissionId": "83b00d39-0873-4771-8bc9-5d94d4be04b4",
+  "submittedBuild": 11,
+  "state": "Waiting for Review",
+  "items": 8,
+  "purchases": 6,
+  "leaderboards": 1,
+  "allItemsWaitingForReview": true,
+  "release": "Manual",
+  "newBuild17Uploaded": false,
+  "newBuild17Submitted": false,
+  "currentMetadataChanged": false,
+  "currentScreenshotsChanged": false,
+  "uploadBlocker": "Xcode Failed to Use Accounts; native Transporter computer control unavailable",
+  "proof": "proof/apple-existing-review.jpg"
+}

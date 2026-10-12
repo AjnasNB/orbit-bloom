@@ -9,3 +9,5 @@ Preview with `python3 -m http.server 4173 --directory site`. The live home, priv
 The optional custom host `orbitbloom.cognifyr.co` has not been configured. Existing projects, DNS records, apex hosts and unrelated subdomains remain unchanged. Check that a desired custom hostname is unused before adding it.
 
 10 October 2026: the home hero uses the original native build13 cartoon puzzle screenshot `assets/game-v13.png`. Deployment `8786ad9b-5de6-47ff-a68c-064d97529ab2` passed the five-route HTTPS/security check and visual verification in Chrome. No event-clock or privacy/support logic changed.
+
+12 October 2026: deployment `651367f7-33c3-4d47-9a9e-f4b293dcb802` presents eight development activities, three farm fields and tier-3-to-5 Rally, with an original native build-17 puzzle image. Chrome confirms the new page; all five HTTPS/security routes pass. App Store availability remains pending and is not represented as live.

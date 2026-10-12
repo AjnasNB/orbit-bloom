@@ -4,6 +4,6 @@
   Strict-Transport-Security: max-age=31536000
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self' 'sha256-B1pC+DJZrHZqRvLu1kMScQiHIoDZ+3N5wefnaroR0GY='; connect-src 'none'; object-src 'none'; form-action 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self' 'sha256-CWj1AmnndCMyFrGDw4/pO4khNG88HZWYou81/TwT90E='; connect-src 'none'; object-src 'none'; form-action 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 /assets/*
   Cache-Control: public, max-age=86400

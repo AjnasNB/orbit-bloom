@@ -1,3 +1,9 @@
+# Build 17 extension — 12 October 2026
+
+The eight direct icons, rules-3 layered hard campaign, capped win kit, three independently saved fields and original two-deck seating activity are documented in [gameplay/UX](BUILD17_GAMEPLAY_AND_UX.md). [Original apple provenance](BUILD17_ARTWORK_PROMPT.md) records the unchanged tool-generated asset; hazards, sickle, blockers and shaded travellers are native drawings. The previous world-event clock and Apple payment/cloud architecture remain. [Build-17 delivery](release-draft/build17/README.md) records tested saves, screenshots and actual external release limitations.
+
+---
+
 # Orbit Bloom: connected garden arcade
 
 Build 16 protects a harvested patch for 1.1 seconds so a double tap cannot silently replant it and spend seeds/water. The action shows Harvested while collection completes; other beds remain usable, and normal planting returns afterward. Protection is transient, with no save schema change. [Build-16 evidence](release-draft/build16/README.md) records the old failing reproduction, 109 passing affected cases, native captures and the preserved ordinary preview. Signed export passes; the existing Xcode account-access error still blocks upload. Public review remains unchanged and was not rechecked today.

@@ -1,0 +1,38 @@
+{
+  "sourceCommit": "a5a2dbc57fecbf6b7524de2dea7d6f26417a1773",
+  "appVersion": "1.0 (17)",
+  "uniquePassingCases": 134,
+  "core": 60,
+  "native": 59,
+  "phoneUI": 14,
+  "iPadUI": 1,
+  "campaign": {
+    "stages": 1020,
+    "legalSwaps": 6125,
+    "retries": 24,
+    "paidItems": 0,
+    "extraMoves": 0
+  },
+  "shuttle": {
+    "solvableSeededLayouts": 1000
+  },
+  "nativeResults": "evidence/Build17-Native-Delivered.xcresult",
+  "phoneResults": [
+    "evidence/Build17-Phone-Delivery.xcresult",
+    "evidence/Build17-Visual-Delivery.xcresult",
+    "evidence/Build17-Single-Phone-Captures.xcresult"
+  ],
+  "iPadResults": "evidence/Build17-iPad-Delivery.xcresult",
+  "coreLog": "evidence/build17-core-delivery-run.log",
+  "phoneRerunNotes": "The 14-case phone run passed 13; farm natural-growth waiting was corrected and passed in the final four-case visual run. A prior coin assertion was corrected for grouped accessibility numbers. These reruns do not add unique tests.",
+  "artifactLimitations": "Some mixed/multi-case result summaries lost detail during disk exhaustion. Complete passing test logs and original bundles remain; final single-case photo and iPad bundles have readable reports.",
+  "interruptedBuilds": "Core dSYM writing and first ordinary preview linking failed for lack of disk. The current core executable completed all 60 tests; the ordinary preview rebuild and signed archive/export succeeded.",
+  "preview": "preview-preservation.json",
+  "signedPackage": "signed-package-verification.json",
+  "hardwareRemaining": [
+    "Game Center sign-in",
+    "cross-device private iCloud restore",
+    "signed Apple sandbox purchases",
+    "physical VoiceOver and device performance"
+  ]
+}

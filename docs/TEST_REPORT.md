@@ -1,3 +1,13 @@
+# Build 17 — 12 October 2026
+
+**134 unique affected cases have passing records:** 60 core, 59 native, fourteen phone UI and one iPad portrait/landscape tour. [Detailed provenance, reruns and limits](release-draft/build17/verification.json) retain unsuccessful diagnostics. The complete campaign solver used 6,125 legal swaps and 24 retries across 1,020 stages without purchases or extra moves; all 1,000 Shuttle layouts are solvable. All five skill games and a complete Rally route were played through real UI input.
+
+Farm checks preserve three fields, species/deadlines and harvest rewards after relaunch. The final wait follows the third field's actual deadline; grouped accessibility coin numbers are compared numerically. Loadout, legacy saves, cloud isolation and six-product StoreKit behavior pass. Signature/export checks and the full ordinary-preview wallet comparison pass. Initial core dSYM writing and ordinary linking were interrupted by disk exhaustion; the current core executable completed all 60 cases and the ordinary rebuild succeeded. Some multi-case result summaries lost detail; complete passing logs and original bundles remain, with readable final single-case and iPad reports.
+
+Build 17 is local, signed and installed, **not uploaded/submitted**. Apple account upload and native Transporter control remain blocked. Hardware sign-in/iCloud/sandbox checks are outstanding; no real purchase occurred.
+
+---
+
 # Build 16 — harvest input protection, 12 October 2026
 
 A confirmed farming bug let a second immediate Harvest action replant the cleared bed and spend one seed/two water. The old-source native reproduction fails one case with five assertions and shows that the unwanted crop survives a model relaunch. The fix protects only the harvested patch for 1.1 seconds and shows Harvested with a checkmark while collection finishes; other beds stay active, and deliberate planting resumes afterward. Animation state is not saved. Invalid patch IDs are ignored safely.
