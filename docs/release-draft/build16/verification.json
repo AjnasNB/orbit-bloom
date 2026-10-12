@@ -1,0 +1,149 @@
+{
+  "build": 16,
+  "version": "1.0",
+  "sourceCommit": "3b70e9264b9b191c50e7362af958a5b3e6a4641e",
+  "verifiedAtUTC": "2026-10-12T04:47:55.967641+00:00",
+  "improvement": "Prevent a repeated harvest tap from becoming an unwanted planting charge",
+  "uniquePassingCases": 109,
+  "caseCounts": {
+    "core": 51,
+    "native": 53,
+    "phoneUI": 4,
+    "iPadUI": 1
+  },
+  "countingRule": "Unique cases in final-source passing runs; reruns count once. Historical failing reproduction and test-compilation diagnostic are excluded. This is a focused farm pass, not every UI case in the repository.",
+  "core": {
+    "log": "evidence/build16-core.log",
+    "passed": 51,
+    "failed": 0,
+    "durationSeconds": 26.294,
+    "campaign": {
+      "stages": 1020,
+      "gardenProjects": 6,
+      "legalSwaps": 6470,
+      "retries": 18,
+      "paidItemsUsed": false,
+      "extraMovesUsed": false,
+      "interpretation": "Automated reachability, not human difficulty"
+    }
+  },
+  "finalResults": [
+    {
+      "bundle": "evidence/Build16-HarvestPhone.xcresult",
+      "summary": "phone-summary.json",
+      "result": "Passed",
+      "nativePasses": 53,
+      "phoneUIPasses": 4,
+      "failures": 0
+    },
+    {
+      "bundle": "evidence/Build16-HarvestIPad.xcresult",
+      "summary": "ipad-summary.json",
+      "result": "Passed",
+      "iPadUIPasses": 1,
+      "failures": 0,
+      "launch": "--uitesting --keep-progress on the separate iPad QA; no reset"
+    }
+  ],
+  "newNativeCases": [
+    "SessionTests/testRepeatedHarvestCannotReplantOrSpendTheSavedResources()",
+    "SessionTests/testHarvestProtectionIsPerPatchAndAllowsDeliberateReplanting()"
+  ],
+  "phoneCases": [
+    "GameplayUITests/testFarmDoubleTapHarvestKeepsResourcesAndAllowsNextPlant()",
+    "GameplayUITests/testFarmHarvestCraftAndSave()",
+    "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+    "GameplayUITests/testLivingFarmMaximumTextKeepsSixPatchesAndShedReachable()"
+  ],
+  "iPadCase": "IPadReleaseUITests/testLivingFarmFitsBothOrientationsWithAllSixWorldTargets()",
+  "reproduction": {
+    "bundle": "evidence/Build16-HarvestReproductionVerified.xcresult",
+    "summary": "reproduction-summary.json",
+    "appSource": "af631cb19a49a3831cbf92c4c518050d09d48a1d",
+    "result": "Failed",
+    "failedCases": 1,
+    "failedAssertions": 5,
+    "observed": "Second immediate harvest action replanted a rose and spent one seed plus two water; unwanted state survived model recreation."
+  },
+  "diagnostics": [
+    {
+      "bundle": "evidence/Build16-HarvestReproduction.xcresult",
+      "log": "evidence/build16-harvest-reproduction.log",
+      "kind": "Test compile failure",
+      "reason": "GardenWallet is Codable, not Equatable. Corrected test to compare every applicable wallet field; the verified reproduction then exposed the actual game bug."
+    }
+  ],
+  "sourceHashes": {
+    "app": "app-source-hashes.json",
+    "appFileCount": 69,
+    "tests": "test-source-hashes.json",
+    "testFileCount": 12
+  },
+  "screenshots": {
+    "manifest": "manifest.json",
+    "originalPNGCount": 9,
+    "phone": 6,
+    "iPad": 2,
+    "ordinaryPreview": 1,
+    "transformations": [],
+    "proposedPublicGallery": "apple-gallery-prepared.json",
+    "savedToApple": false
+  },
+  "preview": {
+    "buildInstalled": 16,
+    "ordinaryBuild": true,
+    "testFlags": [],
+    "reset": false,
+    "fullPrivateContainerBackupRetained": true,
+    "afterInstall": "preview-after-install.json",
+    "afterLaunch": "preview-after-launch.json",
+    "sixTypedPreferencesAndPlistBytesPreservedOnInstall": true,
+    "fullDecodedGameplayPreservedAfterLaunch": true,
+    "installedInfoAndExecutableMatchOrdinaryBuild": true,
+    "testPluginsAbsent": true,
+    "preserved": {
+      "coins": 520,
+      "completed": 3,
+      "activeLevel": null,
+      "rulesVersion": null,
+      "moves": null,
+      "freeHints": 6,
+      "lives": 5
+    },
+    "onlySystemChange": "StoreKit transaction-check timestamp"
+  },
+  "apple": {
+    "archive": true,
+    "localSignedExportVerified": true,
+    "packageProof": "signed-package-verification.json",
+    "uploaded": false,
+    "uploadLog": "evidence/build16-upload.log",
+    "blocker": "Failed to Use Accounts; same existing Xcode blocker",
+    "publicReviewChanged": false,
+    "publicRelease": false,
+    "realPurchase": false,
+    "agreementAccepted": false,
+    "metadata": "metadata-prepared.json",
+    "metadataSavedToApple": false,
+    "publicReviewLastObserved": {
+      "date": "2026-10-11",
+      "build": 11,
+      "status": "Waiting for Review",
+      "recheckedToday": false
+    },
+    "browserAndNativeControl": "Native window could not be located; no fresh Chrome review/group check is claimed."
+  },
+  "cleanup": {
+    "storeQAStopped": true,
+    "iPadQAStopped": true,
+    "personalPreviewBooted": true,
+    "unrelatedDevicesUntouched": true,
+    "onlyCompletedRegenerableArtifactsAndShutdownQAOSCachesCleared": true
+  },
+  "limits": [
+    "Physical Apple sign-in/private iCloud/signed sandbox/ranking",
+    "Hardware VoiceOver, sound/haptics and performance",
+    "Smallest devices/split view and unrestricted accessibility text",
+    "Harvest protection lasts 1.1 seconds on that patch only; animation state is not saved, so relaunch permits a new deliberate planting"
+  ]
+}

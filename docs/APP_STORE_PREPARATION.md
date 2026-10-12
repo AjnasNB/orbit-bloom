@@ -1,3 +1,11 @@
+# Latest internal preparation — build 16, 12 October 2026
+
+Build **1.0 (16)** fixes repeated harvest taps silently spending a seed and two water to replant. Collection briefly protects only that patch and shows Harvested; other patches remain active. [Verification and captures](release-draft/build16/README.md) record 109 unique passing affected cases, nine original screenshots and the complete preserved ordinary preview save. Source `3b70e92` is archived, signed and exported with Production Game Center/private iCloud, matching privacy manifest and no test plug-ins.
+
+**Build 16 is not uploaded:** the single current Xcode attempt returns the unchanged **Failed to Use Accounts** error. No repeated sign-in request was sent. [Prepared metadata](release-draft/build16/metadata-prepared.json) and [ten-per-device galleries](release-draft/build16/apple-gallery-prepared.json) are local only. No daily public review replacement/release, purchase or agreement occurred. The public build-11 Waiting for Review observation remains dated **11 October**; it was not rechecked today.
+
+---
+
 # Latest internal preparation — build 15, 11 October 2026
 
 Build **1.0 (15)** replaces the farm cards with a native living field and distinct apple-tree/rose-bush growth, offline harvests and a recognizable leaf shared with the puzzle. [Delivery evidence](release-draft/build15/README.md) records source `3896b3f`, 108 unique affected passing cases, eleven original screenshots and the preserved ordinary preview save. The signed App Store archive/export passes local signature, Production private iCloud/Game Center, privacy and no-test-plug-in checks.

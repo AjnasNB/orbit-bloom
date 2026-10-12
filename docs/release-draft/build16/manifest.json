@@ -1,0 +1,214 @@
+{
+  "build": 16,
+  "screenshots": [
+    {
+      "file": "screenshots/phone-03-deliberate-replant.png",
+      "sha256": "9f9cedeaf12130d71179b7eb343469d77bcf13958b0b62b5f4e9c2d0bb2cc63a",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "displayPixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "testIdentifier": "GameplayUITests/testFarmDoubleTapHarvestKeepsResourcesAndAllowsNextPlant()",
+      "testOutcome": "Passed",
+      "sourceResultBundle": "evidence/Build16-HarvestPhone.xcresult",
+      "sourceResultOutcome": "Passed",
+      "sourceAttachment": "5148F2EE-B338-45EF-8E97-0AE59AB4CE9E.png",
+      "timestamp": 1791779840.229,
+      "originalBytesPreserved": true,
+      "transformations": []
+    },
+    {
+      "file": "screenshots/phone-02-harvest-collected.png",
+      "sha256": "4edbec84f1e325bed615d750a00b8a378985f31fe0a93cea866e484aa5e63d63",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "displayPixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "testIdentifier": "GameplayUITests/testFarmDoubleTapHarvestKeepsResourcesAndAllowsNextPlant()",
+      "testOutcome": "Passed",
+      "sourceResultBundle": "evidence/Build16-HarvestPhone.xcresult",
+      "sourceResultOutcome": "Passed",
+      "sourceAttachment": "1923AFC2-3991-4A87-9C88-24DCEE7A4757.png",
+      "timestamp": 1791779837.461,
+      "originalBytesPreserved": true,
+      "transformations": []
+    },
+    {
+      "file": "screenshots/phone-01-ready-crop.png",
+      "sha256": "a09c11154b4c24518b8d0c370569837f15a61da92c2e25e8c82ef31441f5ee94",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "displayPixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "testIdentifier": "GameplayUITests/testFarmDoubleTapHarvestKeepsResourcesAndAllowsNextPlant()",
+      "testOutcome": "Passed",
+      "sourceResultBundle": "evidence/Build16-HarvestPhone.xcresult",
+      "sourceResultOutcome": "Passed",
+      "sourceAttachment": "C4B4A244-5E9C-4A48-B2F9-3295F3FD0923.png",
+      "timestamp": 1791779836.886,
+      "originalBytesPreserved": true,
+      "transformations": []
+    },
+    {
+      "file": "screenshots/phone-06-tool-shed.png",
+      "sha256": "7ad22f2def1d38c8e225fbf33ce141ee7491ca772d90a1cdb961f5862fa0b852",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "displayPixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "testIdentifier": "GameplayUITests/testFarmHarvestCraftAndSave()",
+      "testOutcome": "Passed",
+      "sourceResultBundle": "evidence/Build16-HarvestPhone.xcresult",
+      "sourceResultOutcome": "Passed",
+      "sourceAttachment": "705E2E64-F2D0-4139-8AF6-B0B56E422E2C.png",
+      "timestamp": 1791779863.472,
+      "originalBytesPreserved": true,
+      "transformations": []
+    },
+    {
+      "file": "screenshots/phone-04-ripe-apple-and-rose.png",
+      "sha256": "ed0be66327204c9ec0ab5db3f681dabb9c65533f67039f69c0bc0caaf513150f",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "displayPixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "testIdentifier": "GameplayUITests/testLivingFarmGrowsBothSpeciesAndHarvestsAfterOfflineReturn()",
+      "testOutcome": "Passed",
+      "sourceResultBundle": "evidence/Build16-HarvestPhone.xcresult",
+      "sourceResultOutcome": "Passed",
+      "sourceAttachment": "8809F548-88B7-4E82-BFB3-42A7EFC89AD3.png",
+      "timestamp": 1791779906.161,
+      "originalBytesPreserved": true,
+      "transformations": []
+    },
+    {
+      "file": "screenshots/phone-05-maximum-text.png",
+      "sha256": "703bff4f0b64296f6983596623686f836fd9ce6ea367b069650e2333c06298cf",
+      "nativePixels": [
+        1320,
+        2868
+      ],
+      "displayPixels": [
+        1320,
+        2868
+      ],
+      "orientation": 1,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "deviceName": "Orbit Bloom Store QA",
+      "testIdentifier": "GameplayUITests/testLivingFarmMaximumTextKeepsSixPatchesAndShedReachable()",
+      "testOutcome": "Passed",
+      "sourceResultBundle": "evidence/Build16-HarvestPhone.xcresult",
+      "sourceResultOutcome": "Passed",
+      "sourceAttachment": "CDB4A85C-908A-4D8E-ADD5-14AAD3F8132B.png",
+      "timestamp": 1791779933.488,
+      "originalBytesPreserved": true,
+      "transformations": []
+    },
+    {
+      "file": "screenshots/ipad-02-landscape.png",
+      "sha256": "36edf441095eb1f6734715dd5d647d10c4cc47cc249c3bca9ef4e18f97ea2e62",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "displayPixels": [
+        2752,
+        2064
+      ],
+      "orientation": 8,
+      "deviceID": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "deviceName": "Orbit Bloom App Store iPad QA",
+      "testIdentifier": "IPadReleaseUITests/testLivingFarmFitsBothOrientationsWithAllSixWorldTargets()",
+      "testOutcome": "Passed",
+      "sourceResultBundle": "evidence/Build16-HarvestIPad.xcresult",
+      "sourceResultOutcome": "Passed",
+      "sourceAttachment": "6E8B7FA3-92A9-45CA-AF84-281A252A968A.png",
+      "timestamp": 1791780059.058,
+      "originalBytesPreserved": true,
+      "transformations": []
+    },
+    {
+      "file": "screenshots/ipad-01-portrait.png",
+      "sha256": "d3d83f097d8105a91ee688c288e7b8a4189e4fa195c7b9b93f5aaa47dc89bace",
+      "nativePixels": [
+        2064,
+        2752
+      ],
+      "displayPixels": [
+        2064,
+        2752
+      ],
+      "orientation": 1,
+      "deviceID": "5F9C9D94-3186-46FE-AAF8-3BF5CEC1A147",
+      "deviceName": "Orbit Bloom App Store iPad QA",
+      "testIdentifier": "IPadReleaseUITests/testLivingFarmFitsBothOrientationsWithAllSixWorldTargets()",
+      "testOutcome": "Passed",
+      "sourceResultBundle": "evidence/Build16-HarvestIPad.xcresult",
+      "sourceResultOutcome": "Passed",
+      "sourceAttachment": "FFB0A12B-0CD9-4395-9130-A9639E697F16.png",
+      "timestamp": 1791780049.731,
+      "originalBytesPreserved": true,
+      "transformations": []
+    },
+    {
+      "file": "screenshots/preview-build16-preserved.png",
+      "sha256": "1418e5b99050ad3a69a8e9bd935ddcbdc29aacd77de8343e33b0f2717308ddc9",
+      "nativePixels": [
+        1206,
+        2622
+      ],
+      "displayPixels": [
+        1206,
+        2622
+      ],
+      "orientation": 1,
+      "deviceID": "64173F47-C4DC-46B4-82EC-0027675F7780",
+      "deviceName": "Orbit Bloom QA personal preview",
+      "source": "Ordinary in-place build 16 launch; simctl native screen capture",
+      "testFlags": [],
+      "reset": false,
+      "saveChecks": [
+        "preview-after-install.json",
+        "preview-after-launch.json"
+      ],
+      "originalBytesPreserved": true,
+      "transformations": []
+    }
+  ],
+  "sourceCommit": "3b70e9264b9b191c50e7362af958a5b3e6a4641e"
+}

@@ -1,3 +1,15 @@
+# Build 16 — harvest input protection, 12 October 2026
+
+A confirmed farming bug let a second immediate Harvest action replant the cleared bed and spend one seed/two water. The old-source native reproduction fails one case with five assertions and shows that the unwanted crop survives a model relaunch. The fix protects only the harvested patch for 1.1 seconds and shows Harvested with a checkmark while collection finishes; other beds stay active, and deliberate planting resumes afterward. Animation state is not saved. Invalid patch IDs are ignored safely.
+
+[Build-16 evidence](release-draft/build16/README.md) records source `3b70e92`, **109 unique passing affected cases**: 51 core, 53 native, four phone UI and one iPad UI. Final phone/iPad bundles have no failures or skips. New native cases verify resource/wallet conservation, relaunch, independent beds and later replanting. The actual phone double-tap credits one harvest/195 coins, leaves eight seeds and unchanged water, then saves a deliberately planted apple. Offline crop growth, harvest/craft/save, maximum phone text and readonly iPad rotation also pass. The campaign solver completes 1,020 stages/six projects in 6,470 legal swaps and 18 retries, without paid items/extra moves. The failing reproduction and preliminary test-comparison compile diagnostic are retained, never relabeled as passes.
+
+[Nine original native PNGs](release-draft/build16/manifest.json) preserve hashes, dimensions, orientation and individual test provenance. The ordinary personal preview is updated in place with the full private backup retained: six typed preferences/plist bytes match after install, and the full decoded wallet, farm, inventory, receipts, settings and timers match after ordinary launch. Only StoreKit check metadata changes. Its save remains 520 coins, three completed levels, six hints and five lives. No reset/test flags or test plug-ins were used; Store/iPad QA are stopped and unrelated work is untouched.
+
+The tested source is archived/exported and passes local signature, Production Apple-service and privacy checks. The new upload attempt returns the same **Failed to Use Accounts** blocker; build 16 is not uploaded or server-validated. New metadata/gallery selections are prepared locally, with no public review or product-page edit, purchase or agreement. The last public build-11 review observation remains dated 11 October, not a fresh check. Hardware Apple services/VoiceOver/audio/performance and smallest-device/split-view layouts remain unverified.
+
+---
+
 # Orbit Bloom build 15 verification — 11 October 2026
 
 Farm now renders saved apple trees and rose bushes through shoots, leaves, blossom and harvest stages in a continuous native 3D field. The same new veined leaf is used in the puzzle. World-aligned 48-point patch actions replace the card layout, with watering/harvest feedback and Reduce Motion support. [UX findings](FARM_FIELD_REDESIGN.md) record the anatomy/readability changes and dense-field font caps.
