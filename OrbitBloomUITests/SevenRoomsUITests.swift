@@ -21,7 +21,14 @@ import UIKit
     func testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory() {
         for id in ["openBloom","openFarm","openRace","openCanal","openFireflies","openWindmill","openObservatory","openShuttle","playLevel","openTasks"] { fits(app.buttons[id]) }
         XCTAssertFalse(app.buttons["openIslandHub"].exists);XCTAssertFalse(app.staticTexts["Moonseed meadow"].exists);XCTAssertEqual(app.scrollViews.count,0)
-        capture("build17-island-direct-icons")
+        for id in ["sharedWater","sharedSeeds","sharedCompost","sharedCargo","sharedStars","restorationCount"] { XCTAssertTrue(element(id).exists) }
+        capture("build18-island-equal-activities")
+        app.buttons["openIslandStory"].tap();fits(app.buttons["closeIslandStory"]);capture("build18-connected-story")
+        let pages=element("gardenStoryPages")
+        for title in ["Farm Terraces","Harvest Rally","Canal Weave","Firefly Trail","Windmill Works","Moon Observatory","Sky Shuttle"] {
+            pages.swipeLeft();XCTAssertTrue(app.staticTexts[title].waitForExistence(timeout:3))
+        }
+        app.buttons["closeIslandStory"].tap()
         for (room,surface) in [("canal","canalBoard"),("fireflies","fireflyStatus"),("windmill","windmillDial"),("observatory","observatoryBoard"),("shuttle","shuttleBus")] {
             enter(room);XCTAssertTrue(element(surface).waitForExistence(timeout:5));fits(app.buttons["activityExit"]);capture("build17-\(room)-game")
             app.buttons["activityExit"].tap();XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
@@ -36,9 +43,14 @@ import UIKit
         enter("observatory");try solveObservatory();collect("A new route is in the stars!",room:"observatory")
         enter("shuttle");try solveShuttle();XCTAssertTrue(app.buttons["activitySaveResult"].waitForExistence(timeout:5));capture("build17-shuttle-full-winning-plan");app.buttons["activitySaveResult"].tap()
         XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5));XCTAssertEqual(try coins(),before+125)
+        XCTAssertTrue(element("sharedWater").label.contains("22"));XCTAssertTrue(element("sharedStars").label.hasPrefix("5 restoration stars"))
+        for id in ["openCanal","openFireflies","openWindmill","openObservatory","openShuttle"] { XCTAssertTrue((app.buttons[id].value as? String ?? "").hasPrefix("2 next challenge")) }
+        app.buttons["restoreProject"].tap();XCTAssertEqual(element("restorationCount").label,"1 of 6 island projects restored")
+        XCTAssertTrue(element("sharedStars").label.hasPrefix("3 restoration stars"));capture("build18-five-games-restored-one-garden")
         XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("5 lives"))
         app.terminate();app.launchArguments=["--uitesting","--keep-progress"];app.launch();XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:15))
         XCTAssertEqual(try coins(),before+125)
+        XCTAssertEqual(element("restorationCount").label,"1 of 6 island projects restored");XCTAssertTrue(element("sharedWater").label.contains("22"))
         enter("shuttle");XCTAssertEqual(app.staticTexts["activityTitle"].label,"Sky Shuttle, challenge 2");capture("build17-shuttle-saved-progression")
     }
     func testMaximumTextKeepsActivityIconsSeatsAndHelpUsable() {

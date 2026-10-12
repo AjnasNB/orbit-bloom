@@ -16,6 +16,7 @@ private extension EnvironmentValues {
 
 /// Each room has a single play surface, a clear exit, and its own distinct mechanic.
 struct IslandActivityView: View {
+    @EnvironmentObject private var game:GameModel
     let kind: IslandActivityKind
     let level: Int
     let onComplete: (Int) -> Void
@@ -69,6 +70,11 @@ struct IslandActivityView: View {
                 Text("\(min(1000,max(1,level)))").font(.system(size:20,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
                     .accessibilityLabel("\(kind.title), challenge \(min(1000,max(1,level)))").accessibilityIdentifier("activityTitle")
                 Spacer()
+                HStack(spacing:10) {
+                    Label("\(game.progress.stars)",systemImage:"star.fill").foregroundStyle(Color(hex:0xB77919))
+                    Label("\(game.ecosystem.water)",systemImage:"drop.fill").foregroundStyle(Color(hex:0x3688AB))
+                }.font(.system(size:14,weight:.bold,design:.rounded)).monospacedDigit().contentTransition(.numericText())
+                    .accessibilityElement(children:.ignore).accessibilityLabel("Shared garden: \(game.progress.stars) restoration stars and \(game.ecosystem.water) water").accessibilityIdentifier("activityGardenWallet")
             }
             ZStack {
                 activity.id(restartID).allowsHitTesting(!paused && !helpOpen).accessibilityHidden(paused || helpOpen)

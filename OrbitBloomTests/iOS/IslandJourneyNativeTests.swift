@@ -86,7 +86,7 @@ import XCTest
         }
     }
 
-    func testAllFourRealActivityWinsGrantEachFirstClearExactlyOnce() throws {
+    func testAllFiveRealActivityWinsGrantEachFirstClearExactlyOnce() throws {
         let game = GameModel(defaults: try preferences())
         let initialCoins = game.progress.coins, initialStars = game.progress.stars
         let initialWater = game.ecosystem.water, initialLives = game.ecosystem.lives
@@ -106,8 +106,47 @@ import XCTest
             XCTAssertEqual(game.journey.bestScores[kind.rawValue], score)
             game.exitActivity()
         }
-        XCTAssertEqual(game.ecosystem.lives, initialLives, "These four rooms must not charge puzzle lives")
+        XCTAssertEqual(game.ecosystem.lives, initialLives, "All five skill activities must preserve puzzle lives")
         XCTAssertTrue(game.wallet.isValid)
+    }
+
+    func testHarvestCraftDeliveryAndSkillStarsUseOnePersistentGardenWallet() throws {
+        let prefs=try preferences(),game=GameModel(defaults:prefs)
+        for kind in IslandActivityKind.allCases {
+            game.enterActivity(kind); game.completeActivity(try winningScore(kind,level:1)); game.exitActivity()
+        }
+        XCTAssertEqual(game.progress.stars,5); XCTAssertEqual(game.ecosystem.water,22)
+        game.restore(GardenTask.all[0]); XCTAssertEqual(game.progress.restored,[0]); XCTAssertEqual(game.progress.stars,3)
+        for id in 0..<2 {
+            game.farmAction(id,crop:.rose)
+            // Advance only this test garden's crop deadline; no production save is touched.
+            game.ecosystem.plots[id].readyAt=Date().addingTimeInterval(-1)
+            game.farmAction(id,crop:.rose)
+        }
+        XCTAssertEqual(game.ecosystem.water,18); XCTAssertEqual(game.ecosystem.produce,3)
+        XCTAssertEqual(game.ecosystem.compost,2)
+        let stock=game.ecosystem.tools[.bomb,default:0]
+        game.craft(.bomb); XCTAssertEqual(game.ecosystem.tools[.bomb],stock+1); XCTAssertEqual(game.ecosystem.compost,0)
+        let beforeDelivery=game.progress.coins
+        var run=DeliveryRun(difficulty:game.rallyDifficulty)
+        for _ in 0..<500 where !run.finished { if let traffic=run.nextTraffic { run.lane=traffic.coinLane }; _=run.tick(0.05) }
+        XCTAssertTrue(run.won); game.completeDelivery(run)
+        XCTAssertEqual(game.progress.coins,beforeDelivery+run.reward+40); XCTAssertEqual(game.ecosystem.produce,2)
+        let beforePuzzle=game.progress.coins
+        game.prepareStart(Level.campaign[0]); game.toggleLoadout(.bomb); XCTAssertTrue(game.beginPreparedAttempt())
+        XCTAssertEqual(game.ecosystem.tools[.bomb],stock); XCTAssertEqual(game.ecosystem.lives.total,4)
+        game.abandonCircuit()
+        let restored=GameModel(defaults:prefs)
+        XCTAssertEqual(restored.progress.coins,beforePuzzle); XCTAssertEqual(restored.progress.restored,[0])
+        XCTAssertEqual(restored.progress.stars,3); XCTAssertEqual(restored.journey.levels.count,5)
+        XCTAssertEqual(restored.ecosystem.harvested,2); XCTAssertEqual(restored.ecosystem.water,18)
+        XCTAssertEqual(restored.ecosystem.produce,2); XCTAssertEqual(restored.ecosystem.tools[.bomb],stock)
+        XCTAssertEqual(restored.ecosystem.lives.total,4)
+        let cloud=SavedGarden(playerKey:"connected-island",wallet:restored.wallet)
+        let decoded=try XCTUnwrap(SavedGarden.decode(cloud.encoded(),playerKey:"connected-island")).wallet
+        XCTAssertEqual(decoded.progress,restored.progress); XCTAssertEqual(decoded.ecosystem,restored.ecosystem)
+        XCTAssertEqual(decoded.journey,restored.journey); XCTAssertEqual(decoded.assistance,restored.assistance)
+        XCTAssertEqual(decoded.momentum,restored.momentum); XCTAssertNil(decoded.session)
     }
 
     func testNextChallengeAdvancesOnlyAfterWinningAndInvalidResultsMintNothing() throws {

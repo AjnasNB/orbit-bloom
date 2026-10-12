@@ -124,7 +124,7 @@ struct GardenView: View {
         GeometryReader { geo in
             let wide=geo.size.width > geo.size.height
             ZStack {
-                GardenMapScene(page:page,selected:chosen,topInset:wide ? 88 : 102,bottomInset:wide ? 144 : 228) { chosen=$0 }
+                GardenMapScene(page:page,selected:chosen,topInset:wide ? 88 : 102,bottomInset:wide ? 188 : 296) { chosen=$0 }
                     .contentShape(Rectangle()).simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
                         guard abs(value.translation.width) > abs(value.translation.height) else { return }
                         turnPage(value.translation.width < 0 ? 1 : -1)
@@ -135,10 +135,10 @@ struct GardenView: View {
                     HStack(spacing:8) {
                         Button { story=true } label: { Image("KeeperLio").resizable().scaledToFit().frame(width:47,height:47).background(.white.opacity(0.9),in:Circle()) }.accessibilityLabel("Meet Lio, your island keeper").accessibilityIdentifier("openIslandStory")
                         if let task=nextTask {
-                            Button { game.restore(task); game.effect("craft") } label: { HStack(spacing:5) { Image(systemName:task.icon); Image(systemName:"star.fill"); Text("2") }.font(.system(size:16,weight:.bold)).padding(.horizontal,12).frame(height:48).background(Palette.paper,in:Capsule()) }.accessibilityLabel("Restore \(task.title) for 2 stars").accessibilityIdentifier("restoreProject")
+                            Button { game.restore(task); game.effect("craft") } label: { HStack(spacing:5) { Image(systemName:task.icon); Image(systemName:"star.fill"); Text("\(min(2,game.progress.stars))/2").monospacedDigit().contentTransition(.numericText()) }.font(.system(size:16,weight:.bold)).padding(.horizontal,12).frame(height:48).background(game.progress.stars >= 2 ? Palette.sunlight : Palette.paper,in:Capsule()) }.buttonStyle(PressStyle()).accessibilityLabel("Restore \(task.title) for 2 stars. \(min(2,game.progress.stars)) of 2 ready").accessibilityIdentifier("restoreProject")
                         }
                         Spacer(minLength:0)
-                        Label("\(game.progress.stars)",systemImage:"star.fill").font(.system(size:16,weight:.black)).foregroundStyle(Color(hex:0xB77919)).padding(10).background(Palette.paper,in:Capsule()).accessibilityLabel("\(game.progress.stars) restoration stars").anchorPreference(key:WalletFlightAnchors.self,value:.bounds) { ["stars":$0] }
+                        Label("\(game.progress.stars)",systemImage:"star.fill").font(.system(size:16,weight:.black)).foregroundStyle(Color(hex:0xB77919)).padding(10).background(Palette.paper,in:Capsule()).accessibilityLabel("\(game.progress.stars) restoration stars").accessibilityIdentifier("sharedStars").anchorPreference(key:WalletFlightAnchors.self,value:.bounds) { ["stars":$0] }
                         icon("book.closed.fill","Field tasks and power patterns","openTasks") { game.showTasks=true }
                     }.foregroundStyle(Palette.night).padding(.horizontal,16)
                     Spacer(minLength:0)
@@ -147,31 +147,16 @@ struct GardenView: View {
             }
         }.onAppear(perform:openCurrent).onChange(of:game.progress.nextLevel) { _,_ in openCurrent() }
         .sheet(isPresented:$story) {
-            VStack(spacing:22) {
-                Image("KeeperLio").resizable().scaledToFit().frame(height:220)
-                Text("Lio, keeper of the atoll").font(.system(.title,design:.rounded,weight:.heavy))
-                Text("The Great Eclipse scattered the island's light. Lio is a young gardener rebuilding its home: flowers make water, harvests bring cargo, deliveries bring coins, and clever challenges earn stars for restoration.").multilineTextAlignment(.center)
-                Text("Your next project: \(nextTask?.title ?? "The island is restored").").font(.headline)
-                Button("Back to the island") { story=false }.frame(minHeight:48)
-            }.foregroundStyle(Palette.night).padding(28).presentationDetents([.large])
+            GardenStoryView().environmentObject(game)
         }
     }
     private func dock(wide:Bool)->some View {
         VStack(spacing:8) {
+            GardenSuppliesStrip()
             let columns=Array(repeating:GridItem(.flexible(),spacing:10),count:wide ? 8 : 4)
             LazyVGrid(columns:columns,spacing:8) {
                 ForEach(IslandRoom.allCases) { room in
-                    Button {
-                        switch room {
-                        case .bloom: game.prepareStart(Level.campaign[chosen-1])
-                        case .farm: game.tab=2
-                        case .rally: game.tab=3
-                        default: if let kind=IslandActivityKind(rawValue:room.rawValue) { game.enterActivity(kind) }
-                        }; game.effect("tap")
-                    } label: { ActivityEmblem(room:room).frame(width:wide ? 52 : 57,height:wide ? 52 : 57) }
-                        .buttonStyle(PressStyle()).accessibilityLabel("Play \(room.title). \(room.shortPurpose)")
-                        .accessibilityIdentifier(room == .farm ? "openFarm" : room == .rally ? "openRace" : "open\(room.rawValue.capitalized)")
-                        .disabled(room == .bloom && !game.progress.isUnlocked(chosen))
+                    activityDoor(room,wide:wide)
                 }
             }
             HStack(spacing:8) {
@@ -179,11 +164,45 @@ struct GardenView: View {
                 icon("trophy.fill","Activity records and Game Center leaderboard","openRoomRecords") { game.showRoomRecords=true }
                 if game.progress.isUnlocked(chosen) {
                     Button { game.prepareStart(Level.campaign[chosen-1]) } label: {
-                        HStack(spacing:12) { Image(systemName:"play.fill"); Text("\(chosen)").monospacedDigit(); Spacer(minLength:0); Image(systemName:"arrow.triangle.swap").font(.system(size:15)); Text("\(Level.campaign[chosen-1].moves)").font(.system(size:18)) }.font(.system(size:24,weight:.black,design:.rounded)).foregroundStyle(Palette.night).padding(.horizontal,22).frame(maxWidth:.infinity,minHeight:56).background(Palette.sunlight,in:Capsule()).shadow(color:Color(hex:0xBE933E).opacity(0.4),radius:0,y:4)
+                        HStack(spacing:8) { Image(systemName:"play.fill"); Text("\(chosen)").monospacedDigit(); Image(systemName:"arrow.triangle.swap"); Text("\(Level.campaign[chosen-1].moves)") }.font(.system(size:16,weight:.black,design:.rounded)).foregroundStyle(Palette.night).padding(.horizontal,15).frame(minHeight:48).background(Palette.paper,in:Capsule())
                     }.buttonStyle(PressStyle()).accessibilityLabel("Play level \(chosen), \(Level.campaign[chosen-1].difficulty.title), \(Level.campaign[chosen-1].moves) moves. Choose up to 3 starting powers").accessibilityIdentifier("playLevel")
                 } else { icon("arrow.uturn.backward","Return to open island","openCurrentIsland",openCurrent) }
+                Spacer(minLength:0)
+                Image(systemName:"house.lodge.fill").foregroundStyle(Palette.mint)
+                Text("\(game.progress.restored.count)/6").font(.system(size:13,weight:.bold,design:.rounded)).foregroundStyle(Palette.night).monospacedDigit().contentTransition(.numericText()).accessibilityLabel("\(game.progress.restored.count) of 6 island projects restored").accessibilityIdentifier("restorationCount")
             }
         }.padding(12).frame(maxWidth:wide ? 900 : 520).background(Palette.sky.opacity(0.91),in:RoundedRectangle(cornerRadius:28)).overlay(RoundedRectangle(cornerRadius:28).stroke(.white.opacity(0.8),lineWidth:2)).padding(.horizontal,12)
+    }
+    private func activityDoor(_ room:IslandRoom,wide:Bool)->some View {
+        let progressUnit = room == .farm ? "harvests" : room == .rally ? "successful deliveries" : "next challenge"
+        let identifier = room == .farm ? "openFarm" : room == .rally ? "openRace" : "open\(room.rawValue.capitalized)"
+        return Button {
+            switch room {
+            case .bloom: game.prepareStart(Level.campaign[chosen-1])
+            case .farm: game.tab=2
+            case .rally: game.tab=3
+            default: if let kind=IslandActivityKind(rawValue:room.rawValue) { game.enterActivity(kind) }
+            }; game.effect("tap")
+        } label: {
+            VStack(spacing:3) {
+                ActivityEmblem(room:room).frame(width:wide ? 48 : 52,height:wide ? 48 : 52)
+                    .overlay(alignment:.topTrailing) { progressBadge(room).offset(x:7,y:-3) }
+                Text(room.homeTitle).font(.system(size:12,weight:.bold,design:.rounded)).lineLimit(1).minimumScaleFactor(0.8)
+            }.foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:78)
+        }.buttonStyle(PressStyle()).accessibilityLabel("Play \(room.title). \(room.shortPurpose)")
+            .accessibilityValue("\(activityProgress(room)) \(progressUnit). \(room.reward)")
+            .accessibilityIdentifier(identifier).disabled(room == .bloom && !game.progress.isUnlocked(chosen))
+    }
+    private func progressBadge(_ room:IslandRoom)->some View {
+        Text("\(activityProgress(room))").font(.system(size:10,weight:.black,design:.rounded)).monospacedDigit().contentTransition(.numericText()).padding(.horizontal,4).frame(minWidth:19).frame(height:19).background(Palette.paper,in:Capsule()).overlay(Capsule().stroke(room.accent.opacity(0.5),lineWidth:1))
+    }
+    private func activityProgress(_ room:IslandRoom)->Int {
+        switch room {
+        case .bloom: chosen
+        case .farm: game.ecosystem.harvested
+        case .rally: game.ecosystem.deliveries
+        default: min(1000,game.journey.levels[room.rawValue,default:0]+1)
+        }
     }
     private func icon(_ symbol:String,_ label:String,_ id:String,_ action:@escaping()->Void)->some View {
         Button { action(); game.effect("tap") } label: { Image(systemName:symbol).font(.system(size:21,weight:.bold)).foregroundStyle(Palette.night).frame(width:48,height:48).background(Palette.paper,in:Circle()) }.buttonStyle(PressStyle()).accessibilityLabel(label).accessibilityIdentifier(id)

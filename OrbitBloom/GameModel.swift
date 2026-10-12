@@ -339,7 +339,7 @@ import Match3Kit
     func gardenAfterWin() { leave(); tab = 0 }
     func restore(_ task: GardenTask) {
         if progress.restore(task.id) { save(); showToast(progress.gardenComplete ? "Your little world is in bloom!" : "\(task.title) · restored!"); feedback(.medium) }
-        else { showToast("Finish puzzles to earn 2 stars for this project.") }
+        else { showToast("New Bloom, Canal, Firefly, Windmill, Stars or Shuttle wins earn restoration stars. This project needs 2.") }
     }
     func showToast(_ value: String) {
         toast = value

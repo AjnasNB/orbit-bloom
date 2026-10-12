@@ -1,5 +1,59 @@
 import SwiftUI
 
+/// One live wallet across the island; no separate balances for an activity.
+struct GardenSuppliesStrip: View {
+    @EnvironmentObject var game:GameModel
+    var body:some View {
+        HStack(spacing:12) {
+            resource("Water",game.ecosystem.water,"drop.fill",0x3688AB,"sharedWater")
+            resource("Seeds",game.ecosystem.seeds,"leaf.fill",0x4C784A,"sharedSeeds")
+            resource("Compost",game.ecosystem.compost,"bag.fill",0x99734D,"sharedCompost")
+            resource("Cargo",game.ecosystem.produce,"shippingbox.fill",0xB97930,"sharedCargo")
+        }.padding(.horizontal,10).padding(.vertical,7).frame(maxWidth:.infinity)
+            .background(Palette.paper.opacity(0.95),in:Capsule())
+    }
+    private func resource(_ name:String,_ amount:Int,_ icon:String,_ color:UInt32,_ id:String)->some View {
+        HStack(spacing:4) {
+            Image(systemName:icon).foregroundStyle(Color(hex:color)).shadow(color:.white,radius:1,y:-1)
+            Text(amount.formatted()).monospacedDigit().contentTransition(.numericText()).foregroundStyle(Palette.night).lineLimit(1).minimumScaleFactor(0.7)
+        }.font(.system(size:13,weight:.bold,design:.rounded)).frame(maxWidth:.infinity)
+            .accessibilityElement(children:.ignore).accessibilityLabel("\(name), \(amount). Shared by every adventure")
+            .accessibilityIdentifier(id)
+    }
+}
+
+struct GardenStoryView: View {
+    @EnvironmentObject var game:GameModel
+    @Environment(\.dismiss) private var dismiss
+    var body:some View {
+        VStack(spacing:12) {
+            HStack {
+                Image("KeeperLio").resizable().scaledToFit().frame(width:80,height:90).accessibilityHidden(true)
+                VStack(alignment:.leading,spacing:5) {
+                    Text("Lio's island").font(.system(.title2,design:.rounded,weight:.heavy))
+                    Text("The Eclipse took its light. Every adventure helps you bring it back.").font(.system(.subheadline,design:.rounded))
+                }
+            }
+            GardenSuppliesStrip()
+            TabView {
+                ForEach(IslandRoom.allCases) { room in
+                    VStack(spacing:12) {
+                        ActivityEmblem(room:room).frame(width:80,height:80)
+                        Text(room.title).font(.system(.headline,design:.rounded))
+                        Text(room.story).font(.system(.body,design:.rounded)).multilineTextAlignment(.center)
+                        Text(room.reward).font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(room.accent)
+                        Text(room.lifeRule).font(.system(.caption,design:.rounded))
+                    }.padding(16).padding(.bottom,22).frame(maxWidth:.infinity,maxHeight:.infinity).background(room.accent.opacity(0.08),in:RoundedRectangle(cornerRadius:26))
+                }
+            }.tabViewStyle(.page(indexDisplayMode:.always)).indexViewStyle(.page(backgroundDisplayMode:.always))
+                .accessibilityHint("Swipe left or right to read all eight adventures")
+                .accessibilityIdentifier("gardenStoryPages")
+            Text("2 stars → 1 restoration project").font(.system(.subheadline,design:.rounded,weight:.bold))
+            Button("Back to the island") { dismiss() }.font(.headline).frame(maxWidth:.infinity,minHeight:48).background(Palette.sunlight,in:Capsule()).accessibilityIdentifier("closeIslandStory")
+        }.padding(20).foregroundStyle(Palette.night).presentationDetents([.large])
+    }
+}
+
 /// The island's doors are pictures; their complete names and rules remain available to VoiceOver.
 struct ActivityEmblem: View {
     let room: IslandRoom

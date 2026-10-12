@@ -5,6 +5,30 @@ import SceneKit
 enum IslandRoom: String, CaseIterable, Identifiable {
     case bloom, farm, rally, canal, fireflies, windmill, observatory, shuttle
     var id: String { rawValue }
+    var homeTitle: String {
+        switch self {
+        case .bloom: "Bloom"
+        case .farm: "Farm"
+        case .rally: "Rally"
+        case .canal: "Canal"
+        case .fireflies: "Fireflies"
+        case .windmill: "Windmill"
+        case .observatory: "Stars"
+        case .shuttle: "Shuttle"
+        }
+    }
+    var story: String {
+        switch self {
+        case .bloom: "Lio clears the Eclipse frost so the gardens can bloom again."
+        case .farm: "Living orchards feed the atoll. Their compost makes powers and their cargo fuels deliveries."
+        case .rally: "Take the harvest across the island. Delivery coins buy supplies or refill puzzle lives."
+        case .canal: "Reconnect the waterways so every new clear brings water and restoration stars home."
+        case .fireflies: "Remember the lights that guide the pollinators. Each new signal helps restore their home."
+        case .windmill: "Bring power back to Lio's workshop with a well-timed charge."
+        case .observatory: "Put the sky chart in order so the island's travellers can find their way."
+        case .shuttle: "Plan a seat for every traveller. Their safe journey earns supplies for Lio's garden."
+        }
+    }
     var title: String {
         switch self {
         case .bloom: return "Bloom Circuits"
