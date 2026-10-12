@@ -13,20 +13,16 @@ struct RootView: View {
             SpaceBackdrop()
             if game.raceActive { DeliveryRaceView() }
             else if let activity = game.activity {
-                VStack(spacing:0) {
-                    GameHUD()
-                    IslandActivityView(kind:activity,level:game.activityLevel,onComplete: { score in
-                        game.completeActivity(score); game.exitActivity()
-                    },onExit:game.exitActivity)
-                }.frame(maxWidth:650).frame(maxWidth:.infinity)
+                IslandActivityView(kind:activity,level:game.activityLevel,onComplete: { score in
+                    game.completeActivity(score); game.exitActivity()
+                },onExit:game.exitActivity)
             }
             else if game.engine != nil { PuzzleView().id(game.engine?.level.id) }
             else {
                 VStack(spacing:0) {
-                    if game.tab != 0 && game.tab != 1 { GameHUD() }
+                    if game.tab != 0 && game.tab != 1 && game.tab != 2 && game.tab != 3 { GameHUD() }
                     if game.tab == 2 || game.tab == 3 {
-                        RoomExitHeader(kind:game.tab == 2 ? .farm : .rally) { game.tab = 0; game.effect("tap") }
-                            .frame(maxWidth:650)
+                        HStack { RoomExitHeader(kind:game.tab == 2 ? .farm : .rally) { game.tab = 0; game.effect("tap") }; GameHUD() }
                     } else if game.tab != 0 && game.tab != 1 && game.tab != 5 {
                         Button { game.tab = 0; game.effect("tap") } label: {
                             Label("Back to your island",systemImage:"arrow.uturn.backward").font(.system(.subheadline,design:.rounded,weight:.bold)).foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:44,alignment:.leading)
@@ -42,16 +38,27 @@ struct RootView: View {
                             initialRoom:selectedHubRoom,onChoose:chooseRoom,onExit:{ game.tab = 0 })
                         default: GardenView()
                         }
-                    }.id(game.tab).transition(.opacity).frame(maxWidth:game.tab == 0 || game.tab == 1 || game.tab == 2 ? .infinity : 650).frame(maxWidth:.infinity,maxHeight:.infinity)
+                    }.id(game.tab).transition(.opacity).frame(maxWidth:game.tab == 4 ? 650 : .infinity).frame(maxWidth:.infinity,maxHeight:.infinity)
                 }.accessibilityHidden(loading)
                     .animation(reduceMotion ? nil : .easeInOut(duration:0.2),value:game.tab)
             }
             if loading { loadingScreen.transition(.opacity) }
-            if let flight = game.coinFlight { CoinFlightView(amount:game.lastCoinAward).id(flight).allowsHitTesting(false) }
+
             if let toast = game.toast {
                 VStack { Spacer(); Text(toast).font(.system(.subheadline,design:.rounded,weight:.semibold)).multilineTextAlignment(.center).foregroundStyle(Palette.night).padding(16).background(Palette.paper,in:RoundedRectangle(cornerRadius:20)).padding(.horizontal,24).padding(.bottom,80) }.allowsHitTesting(false)
             }
         }
+        .overlayPreferenceValue(WalletFlightAnchors.self) { anchors in
+            GeometryReader { geo in
+                if let flight=game.coinFlight, let target=anchors["coins"] {
+                    let destination=geo[target]
+                    let origin=game.coinSourcePlot.flatMap { anchors["plot\($0)"] }.map { geo[$0] }
+                    let starTarget=anchors["stars"].map { geo[$0] }
+                    CoinFlightView(amount:game.lastCoinAward,start:origin.map { CGPoint(x:$0.midX,y:$0.midY) } ?? CGPoint(x:geo.size.width*0.5,y:geo.size.height*0.67),end:CGPoint(x:destination.midX,y:destination.midY),starEnd:game.starAward ? (starTarget.map { CGPoint(x:$0.midX,y:$0.midY) } ?? CGPoint(x:geo.size.width*0.5,y:geo.size.height*0.3)) : nil).id(flight)
+                }
+            }.allowsHitTesting(false).accessibilityHidden(true)
+        }
+        .sheet(item:$game.upcomingLevel) { level in GameLoadoutView(level:level).presentationDetents([.large]) }
         .sheet(isPresented:$game.showSettings) { SettingsView() }
         .sheet(isPresented:$game.showTasks) { FieldJournalView() }
         .sheet(isPresented:$game.showWorldEvents) { WorldEventsView(clock:game.eventClock,onChoose:chooseRoom) }
@@ -86,7 +93,7 @@ struct RootView: View {
             Image("LivingGarden").resizable().scaledToFill().ignoresSafeArea().opacity(0.22)
             VStack(spacing:24) {
                 Image("BloomLogo").resizable().scaledToFit().frame(width:132,height:132).clipShape(RoundedRectangle(cornerRadius:33))
-                Text("ORBIT BLOOM").font(.system(size:28,weight:.black,design:.rounded)).tracking(3).foregroundStyle(Palette.cream)
+                Text("ORBIT BLOOM").font(.system(size:28,weight:.black,design:.rounded)).tracking(3).foregroundStyle(Palette.night)
                 Text("Your next little adventure is growing.").font(.system(.subheadline,design:.rounded)).foregroundStyle(Palette.mint)
                 ProgressView().tint(Palette.gold).accessibilityLabel("Loading your garden")
             }.padding(24)
@@ -99,110 +106,92 @@ struct GameHUD: View {
     @EnvironmentObject var game: GameModel
     var body: some View {
         HStack(spacing:8) {
-            Image("BloomLogo").resizable().frame(width:38,height:38).clipShape(RoundedRectangle(cornerRadius:11)).accessibilityHidden(true)
-            VStack(alignment:.leading,spacing:1) { Text("ORBIT").tracking(2); Text("BLOOM").tracking(1.5) }.font(.system(size:12,weight:.black,design:.rounded)).foregroundStyle(Palette.cream).accessibilityLabel("Orbit Bloom")
-            Spacer(minLength:2)
-            Button { game.tab = 4 } label: { HStack(spacing:4) { Image(systemName:"heart.fill").foregroundStyle(Palette.coral); Text("\(game.ecosystem.lives.total)").foregroundStyle(Palette.cream) }.font(.system(size:15,weight:.bold,design:.rounded)).frame(minWidth:48,minHeight:44) }.accessibilityLabel("\(game.ecosystem.lives.total) lives. Open refill shop").accessibilityIdentifier("lifeBalance").disabled(game.activity != nil || game.engine != nil)
-            Button { game.tab = 4; game.effect("tap") } label: { HStack(spacing:3) { SpriteView(index:11).frame(width:24,height:24); Text(game.progress.coins.formatted()).monospacedDigit().contentTransition(.numericText()).font(.system(size:15,weight:.bold,design:.rounded)).foregroundStyle(Palette.night) }.frame(minHeight:44) }.accessibilityLabel("Coins, \(game.progress.coins). Open supplies").accessibilityIdentifier("openShop").disabled(game.activity != nil || game.engine != nil)
+            Button { game.tab = 4 } label: { HStack(spacing:4) { Image(systemName:"heart.fill").foregroundStyle(Palette.coral); Text("\(game.ecosystem.lives.total)").foregroundStyle(Palette.night) }.font(.system(size:15,weight:.bold,design:.rounded)).frame(minWidth:48,minHeight:44) }.accessibilityLabel("\(game.ecosystem.lives.total) lives. Open refill shop").accessibilityIdentifier("lifeBalance").disabled(game.activity != nil || game.engine != nil)
+            Button { game.tab = 4; game.effect("tap") } label: { HStack(spacing:3) { SpriteView(index:11).frame(width:24,height:24); Text(game.progress.coins.formatted()).monospacedDigit().contentTransition(.numericText()).font(.system(size:15,weight:.bold,design:.rounded)).foregroundStyle(Palette.night) }.frame(minHeight:44) }.accessibilityLabel("Coins, \(game.progress.coins). Open supplies").accessibilityIdentifier("openShop").anchorPreference(key:WalletFlightAnchors.self,value:.bounds) { ["coins":$0] }.disabled(game.activity != nil || game.engine != nil)
             Button { game.showSettings = true } label: { Image(systemName:"gearshape.fill").font(.system(size:20,weight:.bold)).foregroundStyle(Palette.muted).frame(width:44,height:44) }.accessibilityLabel("Settings").accessibilityIdentifier("settings")
         }.padding(.horizontal,18).padding(.vertical,6)
     }
 }
 
 struct GardenView: View {
-    @EnvironmentObject var game: GameModel
+    @EnvironmentObject var game:GameModel
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var page = 0
-    @State private var chosen = 1
-    var region: GardenRegion { GardenRegion.all[page] }
-    var nextTask: GardenTask? { GardenTask.all.first { !game.progress.restored.contains($0.id) } }
-    var body: some View {
-        GeometryReader { geometry in
-            let wide = geometry.size.width > geometry.size.height
+    @State private var page=0
+    @State private var chosen=1
+    @State private var story=false
+    var nextTask:GardenTask? { GardenTask.all.first { !game.progress.restored.contains($0.id) } }
+    var body:some View {
+        GeometryReader { geo in
+            let wide=geo.size.width > geo.size.height
             ZStack {
-                GardenMapScene(page:page,selected:chosen,topInset:wide ? 154 : 142,bottomInset:wide ? 172 : 210) { chosen = $0 }
-                    .contentShape(Rectangle())
-                    .simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
+                GardenMapScene(page:page,selected:chosen,topInset:wide ? 88 : 102,bottomInset:wide ? 144 : 228) { chosen=$0 }
+                    .contentShape(Rectangle()).simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
                         guard abs(value.translation.width) > abs(value.translation.height) else { return }
                         turnPage(value.translation.width < 0 ? 1 : -1)
                     }).accessibilityElement(children:.contain).accessibilityIdentifier("gardenMap")
-                    .accessibilityAction(named:"Next island") { turnPage(1) }
-                    .accessibilityAction(named:"Previous island") { turnPage(-1) }
-                VStack(spacing:8) {
+                    .accessibilityAction(named:"Next island") { turnPage(1) }.accessibilityAction(named:"Previous island") { turnPage(-1) }
+                VStack(spacing:5) {
                     GameHUD().background(Palette.paper.opacity(0.96),in:Capsule()).padding(.horizontal,12)
-                    HStack(alignment:.top,spacing:8) {
-                        VStack(alignment:.leading,spacing:3) {
-                            Text("AURORA ATOLL").font(.system(size:10,weight:.black,design:.rounded)).tracking(2)
-                            Text(region.title).font(.system(size:22,weight:.heavy,design:.rounded)).lineLimit(1).minimumScaleFactor(0.8)
-                            Text("District \(page+1)/\(GardenRegion.all.count) · Swipe to explore").font(.system(size:11,weight:.bold,design:.rounded))
-                        }.foregroundStyle(Palette.night).padding(.horizontal,14).padding(.vertical,8).background(Palette.paper.opacity(0.94),in:RoundedRectangle(cornerRadius:18))
+                    HStack(spacing:8) {
+                        Button { story=true } label: { Image("KeeperLio").resizable().scaledToFit().frame(width:47,height:47).background(.white.opacity(0.9),in:Circle()) }.accessibilityLabel("Meet Lio, your island keeper").accessibilityIdentifier("openIslandStory")
+                        if let task=nextTask {
+                            Button { game.restore(task); game.effect("craft") } label: { HStack(spacing:5) { Image(systemName:task.icon); Image(systemName:"star.fill"); Text("2") }.font(.system(size:16,weight:.bold)).padding(.horizontal,12).frame(height:48).background(Palette.paper,in:Capsule()) }.accessibilityLabel("Restore \(task.title) for 2 stars").accessibilityIdentifier("restoreProject")
+                        }
                         Spacer(minLength:0)
-                        mapButton("Field tasks and power patterns",symbol:"book.closed.fill",id:"openTasks") { game.showTasks = true }
-                    }.padding(.horizontal,16)
+                        Label("\(game.progress.stars)",systemImage:"star.fill").font(.system(size:16,weight:.black)).foregroundStyle(Color(hex:0xB77919)).padding(10).background(Palette.paper,in:Capsule()).accessibilityLabel("\(game.progress.stars) restoration stars").anchorPreference(key:WalletFlightAnchors.self,value:.bounds) { ["stars":$0] }
+                        icon("book.closed.fill","Field tasks and power patterns","openTasks") { game.showTasks=true }
+                    }.foregroundStyle(Palette.night).padding(.horizontal,16)
                     Spacer(minLength:0)
-                    gardenDock(wide:wide)
+                    dock(wide:wide)
                 }.padding(.top,4).padding(.bottom,8)
-            }.frame(maxWidth:.infinity,maxHeight:.infinity)
-        }.onAppear { openCurrent() }.onChange(of:game.progress.nextLevel) { _,_ in openCurrent() }
+            }
+        }.onAppear(perform:openCurrent).onChange(of:game.progress.nextLevel) { _,_ in openCurrent() }
+        .sheet(isPresented:$story) {
+            VStack(spacing:22) {
+                Image("KeeperLio").resizable().scaledToFit().frame(height:220)
+                Text("Lio, keeper of the atoll").font(.system(.title,design:.rounded,weight:.heavy))
+                Text("The Great Eclipse scattered the island's light. Lio is a young gardener rebuilding its home: flowers make water, harvests bring cargo, deliveries bring coins, and clever challenges earn stars for restoration.").multilineTextAlignment(.center)
+                Text("Your next project: \(nextTask?.title ?? "The island is restored").").font(.headline)
+                Button("Back to the island") { story=false }.frame(minHeight:48)
+            }.foregroundStyle(Palette.night).padding(28).presentationDetents([.large])
+        }
     }
-    private func gardenDock(wide:Bool)->some View {
+    private func dock(wide:Bool)->some View {
         VStack(spacing:8) {
-            HStack(spacing:8) {
-                if let task=nextTask {
-                    Button { game.restore(task); game.effect("craft") } label: {
-                        Label("\(task.title) · 2 ★",systemImage:task.icon).font(.system(size:11,weight:.heavy,design:.rounded)).lineLimit(1)
-                            .foregroundStyle(Palette.night).padding(.horizontal,12).frame(minHeight:44).background(Palette.paper,in:Capsule())
-                    }.buttonStyle(PressStyle()).accessibilityLabel("Restore \(task.title) for 2 stars").accessibilityIdentifier("restoreProject")
+            let columns=Array(repeating:GridItem(.flexible(),spacing:10),count:wide ? 8 : 4)
+            LazyVGrid(columns:columns,spacing:8) {
+                ForEach(IslandRoom.allCases) { room in
+                    Button {
+                        switch room {
+                        case .bloom: game.prepareStart(Level.campaign[chosen-1])
+                        case .farm: game.tab=2
+                        case .rally: game.tab=3
+                        default: if let kind=IslandActivityKind(rawValue:room.rawValue) { game.enterActivity(kind) }
+                        }; game.effect("tap")
+                    } label: { ActivityEmblem(room:room).frame(width:wide ? 52 : 57,height:wide ? 52 : 57) }
+                        .buttonStyle(PressStyle()).accessibilityLabel("Play \(room.title). \(room.shortPurpose)")
+                        .accessibilityIdentifier(room == .farm ? "openFarm" : room == .rally ? "openRace" : "open\(room.rawValue.capitalized)")
+                        .disabled(room == .bloom && !game.progress.isUnlocked(chosen))
                 }
-                Spacer(minLength:0)
-                Label("\(game.progress.stars)",systemImage:"star.fill").font(.system(size:14,weight:.black,design:.rounded)).foregroundStyle(Palette.gold)
-                    .padding(.horizontal,12).frame(height:44).background(Palette.paper,in:Capsule()).accessibilityLabel("\(game.progress.stars) restoration stars")
             }
             HStack(spacing:8) {
-                roomDoor("Farm",symbol:"leaf.fill",id:"openFarm",label:"Enter Farm room. Plant & harvest. No life cost.") { game.tab = 2 }
-                roomDoor("Rally",symbol:"car.fill",id:"openRace",label:"Enter Rally room. Drive & deliver. No life cost.") { game.tab = 3 }
-                roomDoor("7 rooms",symbol:"door.left.hand.open",id:"openIslandHub",label:"Explore all seven game rooms") { game.tab = 5 }
-                mapButton("Worldwide timed events",symbol:"globe.europe.africa.fill",id:"openWorldEvents") { game.showWorldEvents = true }
-                mapButton("Room records and Game Center leaderboard",symbol:"trophy.fill",id:"openRoomRecords") { game.showRoomRecords = true }
+                icon("globe.europe.africa.fill","Worldwide timed events","openWorldEvents") { game.showWorldEvents=true }
+                icon("trophy.fill","Activity records and Game Center leaderboard","openRoomRecords") { game.showRoomRecords=true }
+                if game.progress.isUnlocked(chosen) {
+                    Button { game.prepareStart(Level.campaign[chosen-1]) } label: {
+                        HStack(spacing:12) { Image(systemName:"play.fill"); Text("\(chosen)").monospacedDigit(); Spacer(minLength:0); Image(systemName:"arrow.triangle.swap").font(.system(size:15)); Text("\(Level.campaign[chosen-1].moves)").font(.system(size:18)) }.font(.system(size:24,weight:.black,design:.rounded)).foregroundStyle(Palette.night).padding(.horizontal,22).frame(maxWidth:.infinity,minHeight:56).background(Palette.sunlight,in:Capsule()).shadow(color:Color(hex:0xBE933E).opacity(0.4),radius:0,y:4)
+                    }.buttonStyle(PressStyle()).accessibilityLabel("Play level \(chosen), \(Level.campaign[chosen-1].difficulty.title), \(Level.campaign[chosen-1].moves) moves. Choose up to 3 starting powers").accessibilityIdentifier("playLevel")
+                } else { icon("arrow.uturn.backward","Return to open island","openCurrentIsland",openCurrent) }
             }
-            if game.progress.isUnlocked(chosen) {
-                HStack(spacing:8) {
-                    VStack(alignment:.leading,spacing:4) {
-                        Text("LEVEL \(chosen)").font(.system(size:12,weight:.black,design:.rounded)).foregroundStyle(Palette.night)
-                        DifficultyBadge(level:Level.campaign[chosen-1]).accessibilityIdentifier("selectedDifficulty")
-                    }.frame(minWidth:102)
-                    PrimaryButton(title:"Play",subtitle:"\(Level.campaign[chosen-1].moves) \(Level.campaign[chosen-1].moves == 1 ? "turn" : "turns")",symbol:"leaf.fill",id:"playLevel") { game.start(Level.campaign[chosen-1]) }
-                }
-            } else {
-                Button { openCurrent() } label: {
-                    VStack(spacing:3) {
-                        Text("District locked · complete level \(game.progress.nextLevel)").font(.system(size:12,weight:.heavy,design:.rounded))
-                        Label("Return to your open district",systemImage:"arrow.uturn.backward").font(.system(size:13,weight:.bold,design:.rounded))
-                    }.frame(maxWidth:.infinity,minHeight:60).foregroundStyle(Palette.night).background(Palette.sunlight,in:RoundedRectangle(cornerRadius:18))
-                }.buttonStyle(PressStyle()).accessibilityIdentifier("openCurrentIsland")
-            }
-        }.padding(10).frame(maxWidth:wide ? 660 : 600).background(Palette.sky.opacity(0.93),in:RoundedRectangle(cornerRadius:26))
-            .overlay(RoundedRectangle(cornerRadius:26).stroke(.white.opacity(0.8),lineWidth:2)).padding(.horizontal,12)
+        }.padding(12).frame(maxWidth:wide ? 900 : 520).background(Palette.sky.opacity(0.91),in:RoundedRectangle(cornerRadius:28)).overlay(RoundedRectangle(cornerRadius:28).stroke(.white.opacity(0.8),lineWidth:2)).padding(.horizontal,12)
     }
-    private func roomDoor(_ title:String,symbol:String,id:String,label:String,action:@escaping()->Void)->some View {
-        Button { action(); game.effect("tap") } label: {
-            VStack(spacing:2) { Image(systemName:symbol).font(.system(size:17,weight:.heavy)); Text(title).font(.system(size:11,weight:.heavy,design:.rounded)).lineLimit(1) }
-                .foregroundStyle(Palette.night).frame(maxWidth:.infinity,minHeight:48).background(Palette.paper,in:RoundedRectangle(cornerRadius:14))
-        }.buttonStyle(PressStyle()).accessibilityLabel(label).accessibilityHint("Opens a separate room with a clear exit back to the island").accessibilityIdentifier(id)
-    }
-    private func mapButton(_ label:String,symbol:String,id:String,action:@escaping()->Void)->some View {
-        Button { action(); game.effect("tap") } label: {
-            Image(systemName:symbol).font(.system(size:20,weight:.bold)).foregroundStyle(Palette.night).frame(width:48,height:48)
-                .background(Palette.paper,in:RoundedRectangle(cornerRadius:16))
-        }.buttonStyle(PressStyle()).accessibilityLabel(label).accessibilityIdentifier(id)
+    private func icon(_ symbol:String,_ label:String,_ id:String,_ action:@escaping()->Void)->some View {
+        Button { action(); game.effect("tap") } label: { Image(systemName:symbol).font(.system(size:21,weight:.bold)).foregroundStyle(Palette.night).frame(width:48,height:48).background(Palette.paper,in:Circle()) }.buttonStyle(PressStyle()).accessibilityLabel(label).accessibilityIdentifier(id)
     }
     private func turnPage(_ step:Int) {
-        let target=min(GardenRegion.all.count-1,max(0,page+step))
-        guard target != page else { return }
-        withAnimation(reduceMotion ? nil : .easeInOut(duration:0.35)) { page=target }
-        let first=target*10+1
-        chosen=game.progress.isUnlocked(first) ? min(game.progress.nextLevel,first+9) : first
-        game.effect("tap")
+        let target=min(GardenRegion.all.count-1,max(0,page+step)); guard target != page else { return }
+        withAnimation(reduceMotion ? nil : .easeInOut(duration:0.3)) { page=target }
+        let first=target*10+1; chosen=game.progress.isUnlocked(first) ? min(game.progress.nextLevel,first+9) : first; game.effect("tap")
     }
     func openCurrent() { page=(game.progress.nextLevel-1)/10; chosen=game.progress.nextLevel }
 }
@@ -367,22 +356,26 @@ struct PatternDiagram:View {
     var body:some View { LazyVGrid(columns:Array(repeating:GridItem(.flexible(),spacing:2),count:5),spacing:2) { ForEach(0..<25) { key in ZStack { RoundedRectangle(cornerRadius:3).fill(Palette.deep); if keys.contains(key) { SpriteView(index:3).padding(1) } }.aspectRatio(1,contentMode:.fit) } }.accessibilityElement(children:.ignore).accessibilityLabel("\(tool.title) formation") }
 }
 
-struct CoinFlightView: View {
-    let amount: Int
-    @State private var flying = false
-    @Environment(\.accessibilityReduceMotion) var reduceMotion
-    var body: some View {
-        GeometryReader { geo in
-            ZStack {
+struct WalletFlightAnchors:PreferenceKey {
+    static var defaultValue:[String:Anchor<CGRect>]=[:]
+    static func reduce(value:inout [String:Anchor<CGRect>],nextValue:()->[String:Anchor<CGRect>]) { value.merge(nextValue(),uniquingKeysWith:{ _,new in new }) }
+}
+struct CoinFlightView:View {
+    let amount:Int
+    let start:CGPoint,end:CGPoint
+    var starEnd:CGPoint?=nil
+    @State private var flying:CGFloat=0
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    var body:some View {
+        ZStack {
+            if !reduceMotion {
                 ForEach(0..<8) { i in
-                    SpriteView(index:11).frame(width:25,height:25)
-                        .position(x:flying ? geo.size.width*0.76 : geo.size.width*0.5+CGFloat(i%4-2)*18,y:flying ? 29 : geo.size.height*0.67+CGFloat(i/4)*20)
-                        .scaleEffect(flying ? 0.45 : 1).opacity(flying ? 0 : 1)
-                        .animation(reduceMotion ? .linear(duration:0.1) : .easeInOut(duration:0.8).delay(Double(i)*0.05),value:flying)
+                    SpriteView(index:11).frame(width:25,height:25).position(x:start.x+(end.x-start.x)*flying+sin(flying * .pi)*CGFloat(i%4-2)*17,y:start.y+(end.y-start.y)*flying-sin(flying * .pi)*60).scaleEffect(1-flying*0.5).opacity(flying > 0.98 ? 0 : 1).animation(.easeInOut(duration:0.8).delay(Double(i)*0.05),value:flying)
                 }
-                Text("+\(amount)").font(.system(size:30,weight:.heavy,design:.rounded)).foregroundStyle(Palette.gold).position(x:geo.size.width/2,y:geo.size.height*0.61).opacity(flying ? 0 : 1).animation(.easeOut(duration:1),value:flying)
-            }.onAppear { flying = true }
-        }.accessibilityHidden(true)
+                if let starEnd { Image(systemName:"star.fill").font(.system(size:32)).foregroundStyle(Palette.gold).shadow(color:.white,radius:4).position(x:start.x+(starEnd.x-start.x)*flying,y:start.y+(starEnd.y-start.y)*flying-sin(flying * .pi)*45).scaleEffect(1-flying*0.4).opacity(flying > 0.98 ? 0 : 1).animation(.easeInOut(duration:1),value:flying) }
+            }
+            Text("+\(amount)").font(.system(size:28,weight:.heavy,design:.rounded)).foregroundStyle(Palette.gold).position(x:start.x,y:start.y-25).opacity(flying > 0 ? 0 : 1).animation(.easeOut(duration:reduceMotion ? 0.8 : 1.1),value:flying)
+        }.onAppear { flying=1 }.accessibilityHidden(true)
     }
 }
 

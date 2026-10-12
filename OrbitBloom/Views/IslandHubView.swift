@@ -3,7 +3,7 @@ import SceneKit
 
 /// Stable identifiers keep the world doors independent of the current activity level.
 enum IslandRoom: String, CaseIterable, Identifiable {
-    case bloom, farm, rally, canal, fireflies, windmill, observatory
+    case bloom, farm, rally, canal, fireflies, windmill, observatory, shuttle
     var id: String { rawValue }
     var title: String {
         switch self {
@@ -14,6 +14,7 @@ enum IslandRoom: String, CaseIterable, Identifiable {
         case .fireflies: return "Firefly Trail"
         case .windmill: return "Windmill Works"
         case .observatory: return "Moon Observatory"
+        case .shuttle: return "Sky Shuttle"
         }
     }
     var purpose: String {
@@ -25,6 +26,7 @@ enum IslandRoom: String, CaseIterable, Identifiable {
         case .fireflies: return "Remember the lantern sequence"
         case .windmill: return "Time each charge to power the workshop"
         case .observatory: return "Slide star tiles to align the chart"
+        case .shuttle: return "Seat travellers by deck, window and companions"
         }
     }
     var shortPurpose: String {
@@ -36,6 +38,7 @@ enum IslandRoom: String, CaseIterable, Identifiable {
         case .fireflies: return "Repeat lanterns"
         case .windmill: return "Time the charge"
         case .observatory: return "Slide star tiles"
+        case .shuttle: return "Plan the passenger seats"
         }
     }
     var symbol: String {
@@ -47,6 +50,7 @@ enum IslandRoom: String, CaseIterable, Identifiable {
         case .fireflies: return "lightbulb.fill"
         case .windmill: return "wind"
         case .observatory: return "moon.stars.fill"
+        case .shuttle: return "bus.doubledecker.fill"
         }
     }
     var accent: Color { Color(hex: colorHex) }
@@ -59,6 +63,7 @@ enum IslandRoom: String, CaseIterable, Identifiable {
         case .fireflies: return 0xA26E13
         case .windmill: return 0x74669A
         case .observatory: return 0x4F6098
+        case .shuttle: return 0x277F9E
         }
     }
     var reward: String {
@@ -444,6 +449,8 @@ private struct AtollRoomScene: UIViewRepresentable {
             blades.addChildNode(node(SCNSphere(radius: 0.18), 0xE8C784, .init(0, 0, 0.06))); root.addChildNode(blades)
             water(root: root, x: -1.8, z: 0.3, length: 1.2)
             flower(root: root, x: 1.7, z: 0.5, color: 0xDFC5EF)
+        case .shuttle:
+            house(root:root,x:0,z:0,color:0x55B9C8)
         case .observatory:
             root.addChildNode(node(SCNCylinder(radius: 1.1, height: 0.75), 0xFFF0D7, .init(0, 0.53, 0)))
             let dome = node(SCNSphere(radius: 1.1), 0x7D9FC0, .init(0, 0.94, 0)); dome.scale.y = 0.6; root.addChildNode(dome)

@@ -106,9 +106,9 @@ final class EcosystemTests: XCTestCase {
     }
     func testRaceCollisionsPickupsPauseAndFinishAreDeterministic() {
         var safe = DeliveryRun(); safe.lane = 0
-        for _ in 0..<440 { _ = safe.tick(0.05) }
+        for _ in 0..<500 where !safe.finished { if let traffic=safe.nextTraffic { safe.lane=traffic.coinLane }; _=safe.tick(0.05) }
         if !safe.finished { _ = safe.tick(0.05) }
-        XCTAssertTrue(safe.won); XCTAssertEqual(safe.health,1); XCTAssertEqual(safe.distance,440)
+        XCTAssertTrue(safe.won); XCTAssertEqual(safe.health,3); XCTAssertEqual(safe.distance,440)
         let reward = safe.reward; _ = safe.tick(0.2); XCTAssertEqual(safe.reward,reward)
         var crash = DeliveryRun(); crash.lane = 1
         for _ in 0..<1000 { _ = crash.tick(0.05) }

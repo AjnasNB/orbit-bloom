@@ -7,6 +7,7 @@ enum BotanicalSprites {
         // Cartoon atlas: four columns, three rows, with transparent gutters in every cell.
         // Preserve the existing index contract used by gems, tools, Pip and the wallet.
         return (0..<12).compactMap { index in
+            if index == Gem.sun.rawValue, let apple = UIImage(named: "PocketApple") { return apple }
             if index == Gem.leaf.rawValue, let leaf = UIImage(named: "LivingLeaf") { return leaf }
             let x = (index % 4) * sheet.width / 4
             let y = (index / 4) * sheet.height / 3

@@ -2,7 +2,7 @@ import Foundation
 
 /// Four short, no-life-cost activities that support the same island restoration story.
 enum IslandActivityKind: String, Codable, CaseIterable, Identifiable {
-    case canal, fireflies, windmill, observatory
+    case canal, fireflies, windmill, observatory, shuttle
     var id: String { rawValue }
     var title: String {
         switch self {
@@ -10,6 +10,7 @@ enum IslandActivityKind: String, Codable, CaseIterable, Identifiable {
         case .fireflies: return "Firefly Trail"
         case .windmill: return "Windmill Works"
         case .observatory: return "Moon Observatory"
+        case .shuttle: return "Sky Shuttle"
         }
     }
     var subtitle: String {
@@ -18,6 +19,7 @@ enum IslandActivityKind: String, Codable, CaseIterable, Identifiable {
         case .fireflies: return "Remember the island's light language"
         case .windmill: return "Charge the restoration workshop"
         case .observatory: return "Chart a route through the night sky"
+        case .shuttle: return "Seat every traveller with their companions"
         }
     }
     var symbol: String {
@@ -26,7 +28,82 @@ enum IslandActivityKind: String, Codable, CaseIterable, Identifiable {
         case .fireflies: return "sparkles"
         case .windmill: return "wind"
         case .observatory: return "moon.stars.fill"
+        case .shuttle: return "bus.doubledecker.fill"
         }
+    }
+}
+
+struct ShuttlePassenger: Identifiable {
+    let id: Int
+    let deck: Int
+    let window: Bool
+    let front: Bool
+    let group: Int?
+    var color: Int { group ?? id % 6 }
+}
+
+/// Two decks, six seats per deck. Rules come from a generated valid plan,
+/// but tickets are shuffled and the player must build a plan from their icons.
+struct ShuttleRun {
+    let level: Int
+    let passengers: [ShuttlePassenger]
+    let queue: [Int]
+    let solution: [Int]
+    let moveLimit: Int
+    private(set) var seats: [Int?] = Array(repeating:nil,count:12)
+    private(set) var moves = 0
+    private(set) var won = false
+    private(set) var rejected: Set<Int> = []
+    var finished: Bool { won || moves >= moveLimit }
+    var score: Int { won ? activityScore(320 + level * 11 + (moveLimit-moves) * 25) : 0 }
+    var seated: Int { seats.compactMap { $0 }.count }
+    init(level: Int) {
+        self.level = activityLevel(level)
+        var random = ActivityRandom(state:UInt64(self.level) &* 811 &+ 271)
+        var ids = Array(0..<12)
+        for i in stride(from:11,through:1,by:-1) { ids.swapAt(i,random.next(i+1)) }
+        solution = ids
+        var tickets: [ShuttlePassenger] = []
+        for position in 0..<12 {
+            let row = position / 3, column = position % 3
+            let pairStart = (row + self.level) % 2
+            let grouped = column == pairStart || column == pairStart+1
+            tickets.append(.init(id:ids[position],deck:position / 6,
+                window:column != 1 && (self.level >= 3 || !grouped),
+                front:position % 6 < 3 && (!grouped || self.level >= 12),
+                group:grouped ? row : nil))
+        }
+        passengers = tickets.sorted { $0.id < $1.id }
+        var order = Array(0..<12)
+        for i in stride(from:11,through:1,by:-1) { order.swapAt(i,random.next(i+1)) }
+        queue = order
+        moveLimit = 12 + max(2,6-self.level/5)
+    }
+    func validSeat(_ position: Int, passenger: ShuttlePassenger) -> Bool {
+        guard (0..<12).contains(position), position/6 == passenger.deck else { return false }
+        if passenger.window && position%3 == 1 { return false }
+        if passenger.front && position%6 >= 3 { return false }
+        if let group = passenger.group {
+            guard let mate = passengers.first(where: { $0.group == group && $0.id != passenger.id }),
+                  let other = seats.firstIndex(where: { $0 == mate.id }) else { return false }
+            if position/3 != other/3 || abs(position%3-other%3) != 1 { return false }
+        }
+        return true
+    }
+    @discardableResult mutating func seat(_ passenger: Int, at position: Int) -> Bool {
+        guard !finished, (0..<12).contains(position), passengers.indices.contains(passenger), seats[position] != passenger else { return false }
+        if let old = seats.firstIndex(where: { $0 == passenger }) { seats[old] = nil }
+        seats[position] = passenger; moves += 1; rejected = []
+        return true
+    }
+    @discardableResult mutating func depart() -> Bool {
+        guard !finished, seated == 12 else { return false }
+        rejected = Set(seats.enumerated().compactMap { position,id in
+            guard let id else { return position }
+            return validSeat(position,passenger:passengers[id]) ? nil : position
+        })
+        if rejected.isEmpty { won = true } else { moves += 1 }
+        return won
     }
 }
 
@@ -78,7 +155,7 @@ struct CanalWorksRun {
         var random = ActivityRandom(state: UInt64(level) &* 71 &+ 809)
         var scrambled = solved
         var indices = Array(solved.indices)
-        let count = min(solved.count, 3 + level / 2)
+        let count = min(solved.count, 6 + level / 2)
         var required = 0
         for _ in 0..<count {
             let selected = indices.remove(at: random.next(indices.count))
@@ -95,7 +172,7 @@ struct CanalWorksRun {
             } while restore != solved[selected]
         }
         pipes = scrambled
-        moveLimit = required + (level < 12 ? 3 : 1)
+        moveLimit = required + 1
     }
 
     @discardableResult mutating func turnPipe(at index: Int) -> Bool {
@@ -152,7 +229,7 @@ struct FireflySignalRun {
     init(level: Int) {
         let level = activityLevel(level)
         self.level = level
-        initialLength = min(6, 3 + level / 6)
+        initialLength = min(8, 4 + level / 5)
         rounds = level >= 18 ? 4 : 3
         var random = ActivityRandom(state: UInt64(level) &* 419 &+ 27)
         var pattern: [Int] = []
@@ -210,8 +287,8 @@ struct WindmillRhythmRun {
     var score: Int { won ? activityScore(200 + level * 10 + hits * 60 + remaining * 3 - misses * 30) : 0 }
     init(level: Int) {
         self.level = activityLevel(level)
-        targetHits = level >= 15 ? 6 : 4
-        targetHalfWidth = max(0.055, 0.13 - Double(min(self.level, 30)) * 0.0025)
+        targetHits = level >= 15 ? 8 : 6
+        targetHalfWidth = max(0.055, 0.095 - Double(min(self.level, 30)) * 0.0013)
         duration = level >= 15 ? 32 : 24
     }
     mutating func start() { if !started { started = true } }
@@ -274,7 +351,7 @@ struct ObservatoryRun {
         }
         tiles = board
         scrambleHistory = history
-        moveLimit = history.count + (level < 15 ? 8 : 3)
+        moveLimit = history.count + 2
     }
     @discardableResult mutating func slide(tile: Int, direction: IslandSwipeDirection? = nil) -> Bool {
         guard !finished, tile > 0, let index = tiles.firstIndex(of: tile), Self.neighbours(of: gap, width: width).contains(index) else { return false }

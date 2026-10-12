@@ -74,6 +74,10 @@ import XCTest
             }
             guard run.won else { XCTFail("Charging in real timing windows must win"); throw PlayError.didNotFinish }
             return run.score
+        case .shuttle:
+            var run=ShuttleRun(level:level)
+            for (position,id) in run.solution.enumerated() { XCTAssertTrue(run.seat(id,at:position)) }
+            XCTAssertTrue(run.depart()); return run.score
         case .observatory:
             var run = ObservatoryRun(level: level)
             for tile in run.scrambleHistory.reversed() where !run.won { XCTAssertTrue(run.slide(tile: tile)) }
@@ -134,7 +138,7 @@ import XCTest
         XCTAssertEqual(relaunched.journey, expectedJourney)
         XCTAssertEqual(relaunched.progress, expectedProgress); XCTAssertEqual(relaunched.ecosystem, expectedEcosystem)
         let cloud = SavedGarden(playerKey: "player-one", wallet: relaunched.wallet)
-        XCTAssertEqual(cloud.schema, 3)
+        XCTAssertEqual(cloud.schema, 4)
         let decoded = try XCTUnwrap(SavedGarden.decode(cloud.encoded(), playerKey: "player-one"))
         XCTAssertEqual(decoded.wallet.journey, expectedJourney)
         XCTAssertEqual(decoded.wallet.progress, expectedProgress)

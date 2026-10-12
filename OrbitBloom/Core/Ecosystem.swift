@@ -85,6 +85,19 @@ public enum FarmGrowthStage: String {
 public struct Ecosystem: Codable, Equatable {
     public var lives = LifeBank()
     public var plots = (0..<6).map(FarmPlot.init)
+    public var extraPlots: [FarmPlot]? = nil
+    public func plot(_ id: Int) -> FarmPlot? {
+        guard (0..<18).contains(id) else { return nil }
+        return id < 6 ? plots[id] : extraPlots?[id-6] ?? FarmPlot(id:id)
+    }
+    public func field(_ page: Int) -> [FarmPlot] { (page*6..<page*6+6).compactMap { plot($0) } }
+    private mutating func setPlot(_ plot: FarmPlot) {
+        if plot.id < 6 { plots[plot.id] = plot }
+        else {
+            if extraPlots == nil { extraPlots = (6..<18).map(FarmPlot.init) }
+            extraPlots?[plot.id-6] = plot
+        }
+    }
     public var seeds = 8
     public var water = 12
     public var compost = 0
@@ -97,16 +110,16 @@ public struct Ecosystem: Codable, Equatable {
     public var creditedTransactions: Set<String> = []
     public init() {}
     @discardableResult public mutating func plant(_ id: Int, crop: Crop, at now: Date) -> Bool {
-        guard plots.indices.contains(id), plots[id].crop == nil, seeds > 0, water >= 2 else { return false }
-        seeds -= 1; water -= 2; plots[id].crop = crop; plots[id].readyAt = now.addingTimeInterval(crop.duration); return true
+        guard var plot = plot(id), plot.crop == nil, seeds > 0, water >= 2 else { return false }
+        seeds -= 1; water -= 2; plot.crop = crop; plot.readyAt = now.addingTimeInterval(crop.duration); setPlot(plot); return true
     }
     @discardableResult public mutating func waterPlot(_ id: Int, at now: Date) -> Bool {
-        guard plots.indices.contains(id), plots[id].crop != nil, !plots[id].ready(at: now), water > 0, let ready = plots[id].readyAt else { return false }
-        water -= 1; plots[id].readyAt = max(now, ready.addingTimeInterval(-10)); return true
+        guard var plot = plot(id), plot.crop != nil, !plot.ready(at: now), water > 0, let ready = plot.readyAt else { return false }
+        water -= 1; plot.readyAt = max(now, ready.addingTimeInterval(-10)); setPlot(plot); return true
     }
     public mutating func harvest(_ id: Int, at now: Date) -> Int? {
-        guard plots.indices.contains(id), plots[id].ready(at: now), let crop = plots[id].crop else { return nil }
-        plots[id] = FarmPlot(id: id); compost += 1; produce += 1; seeds += 1; harvested += 1; return crop.coins
+        guard let plot = plot(id), plot.ready(at: now), let crop = plot.crop else { return nil }
+        setPlot(FarmPlot(id: id)); compost += 1; produce += 1; seeds += 1; harvested += 1; return crop.coins
     }
     @discardableResult public mutating func craft(_ tool: GardenTool) -> Bool {
         guard compost >= tool.compostCost else { return false }
@@ -143,6 +156,7 @@ public struct StorePack: Identifiable {
 public struct RallyTraffic: Equatable {
     public let id: Int
     public let barrierLane: Int
+    public var secondaryBarrierLane: Int? = nil
     public var coinLane: Int { (barrierLane + 1) % 3 }
 }
 
@@ -155,7 +169,7 @@ public struct DeliveryRun {
     public private(set) var collected = 0
     public private(set) var passed: Set<Int> = []
     public let duration: Double = 22
-    public init(difficulty: Int = 0) { self.difficulty = min(4,max(0,difficulty)) }
+    public init(difficulty: Int = 0) { self.difficulty = min(4,max(2,difficulty)) }
     public var finished: Bool { elapsed >= duration || health <= 0 }
     public var won: Bool { elapsed >= duration && health > 0 }
     public var distance: Int { min(440, Int(elapsed * 20)) }
@@ -163,8 +177,9 @@ public struct DeliveryRun {
     /// Use the same unprocessed crossing as collisions and pickups, including while paused.
     public var nextTraffic: RallyTraffic? {
         guard !finished, let id = (0..<obstacleCount).first(where: { !passed.contains($0) }) else { return nil }
-        return RallyTraffic(id: id, barrierLane: obstacleLane(id))
+        return RallyTraffic(id: id, barrierLane: obstacleLane(id), secondaryBarrierLane: secondObstacleLane(id))
     }
+    public func secondObstacleLane(_ index: Int) -> Int? { difficulty >= 3 && index % 3 == 0 ? (obstacleLane(index)+2)%3 : nil }
     public func obstacleLane(_ index: Int) -> Int { [1,2,1,0,2,1,2,0,1,2][(max(0,index)%10+difficulty*3) % 10] }
     public func crossingTime(_ index: Int) -> Double { duration / Double(obstacleCount + 1) * Double(min(obstacleCount-1,max(0,index)) + 1) }
     public mutating func tick(_ delta: Double) -> (hit: Bool, pickup: Bool) {
@@ -175,7 +190,7 @@ public struct DeliveryRun {
             let crossing = crossingTime(id)
             if elapsed >= crossing && !passed.contains(id) {
                 passed.insert(id)
-                if lane == obstacleLane(id) { health -= 1; hit = true }
+                if lane == obstacleLane(id) || lane == secondObstacleLane(id) { health -= 1; hit = true }
                 else if lane == (obstacleLane(id)+1)%3 { collected += 1; pickup = true }
             }
         }

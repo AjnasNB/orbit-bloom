@@ -45,7 +45,7 @@ import UIKit
                     "Sprite \(index) crosses its gutter and could bleed into another tool")
             }
         }
-        for name in ["KeeperLio","RallyRover"] {
+        for name in ["KeeperLio","RallyRover","PocketApple"] {
             let image=try XCTUnwrap(UIImage(named:name)?.cgImage,"Missing \(name)")
             XCTAssertGreaterThanOrEqual(image.width,512)
             XCTAssertTrue([CGImageAlphaInfo.last,.first,.premultipliedLast,.premultipliedFirst].contains(image.alphaInfo),

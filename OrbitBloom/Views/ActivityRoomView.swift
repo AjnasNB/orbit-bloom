@@ -48,18 +48,8 @@ struct RoomExitHeader: View {
     let kind:ActivityRoomKind
     let action:()->Void
     var body:some View {
-        Button(action:action) {
-            HStack(spacing:10) {
-                Image(systemName:"xmark.circle.fill").font(.system(size:23)).accessibilityHidden(true)
-                Text(textSize.isAccessibilitySize ? "Exit \(kind == .farm ? "Farm" : "Rally")" : "Exit \(kind.title)")
-                    .font(.system(.subheadline,design:.rounded,weight:.bold))
-                Spacer(minLength:4)
-                if !textSize.isAccessibilitySize {
-                    Label("Island",systemImage:"globe").font(.system(.caption,design:.rounded,weight:.bold))
-                }
-            }.foregroundStyle(Palette.night).padding(.horizontal,14).frame(minHeight:48)
-                .background(Palette.paper,in:Capsule()).overlay(Capsule().stroke(kind.accent.opacity(0.2),lineWidth:1))
-        }.buttonStyle(PressStyle()).padding(.horizontal,22).padding(.bottom,8)
+        Button(action:action) { Image(systemName:"xmark").font(.system(size:22,weight:.bold)).foregroundStyle(Palette.night).frame(width:48,height:48).background(Palette.paper,in:Circle()) }
+            .buttonStyle(PressStyle()).padding(.leading,12)
             .accessibilityLabel("Exit \(kind.title). Return to your island. Progress stays saved.").accessibilityIdentifier("returnWorld")
     }
 }
@@ -71,7 +61,7 @@ struct RallyRoomMap: View {
             ZStack {
                 ActivityRoomScene(kind:.rally,detailed:true).allowsHitTesting(false).accessibilityHidden(true)
                 VStack {
-                    HStack { Text("ROUTE PREVIEW · 440 m").font(.system(size:10,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night).padding(9).background(Palette.paper.opacity(0.95),in:Capsule()); Spacer() }
+                    HStack { Label("440",systemImage:"flag.checkered").font(.system(size:10,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night).padding(9).background(Palette.paper.opacity(0.95),in:Capsule()); Spacer() }
                     Spacer()
                 }.padding(10)
                 if !compact {
@@ -83,10 +73,7 @@ struct RallyRoomMap: View {
         }
     }
     private func marker(_ name:String,symbol:String,detail:String)->some View {
-        VStack(spacing:3) {
-            Label(detail,systemImage:symbol).font(.system(size:9,weight:.heavy,design:.rounded)).foregroundStyle(Color(hex:0x356C8B))
-            Text(name).font(.system(size:11,weight:.bold,design:.rounded)).foregroundStyle(Palette.night)
-        }.padding(.horizontal,10).padding(.vertical,7).background(Palette.paper,in:RoundedRectangle(cornerRadius:14)).compositingGroup().shadow(color:Palette.night.opacity(0.15),radius:0,y:3)
+        Image(systemName:symbol).font(.system(size:24,weight:.heavy)).foregroundStyle(Color(hex:0x356C8B)).frame(width:48,height:48).background(Palette.paper,in:Circle()).shadow(color:Palette.night.opacity(0.15),radius:0,y:3).accessibilityHidden(true)
     }
 }
 

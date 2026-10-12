@@ -19,7 +19,7 @@ final class SavedGardenTests: XCTestCase {
         wallet.session = GameEngine(level:Level.campaign[79],seed:8080).snapshot
         XCTAssertTrue(wallet.isValid)
         var newCloud = SavedGarden(playerKey:"player",wallet:wallet)
-        XCTAssertEqual(newCloud.schema,2)
+        XCTAssertEqual(newCloud.schema,4)
         XCTAssertNotNil(SavedGarden.decode(try newCloud.encoded(),playerKey:"player"))
         newCloud.schema = 1
         XCTAssertNil(SavedGarden.decode(try newCloud.encoded(),playerKey:"player"),"New active rules cannot masquerade as an older cloud format")
@@ -81,7 +81,7 @@ final class SavedGardenTests: XCTestCase {
         var save = SavedGarden(playerKey: "player-a", wallet: GardenWallet())
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-b"))
         XCTAssertNil(SavedGarden.decode(Data("broken".utf8), playerKey: "player-a"))
-        save.schema = 4
+        save.schema = 5
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-a"))
         save.schema = 1; save.wallet.progress.coins = -10
         XCTAssertNil(SavedGarden.decode(try save.encoded(), playerKey: "player-a"))

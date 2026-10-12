@@ -2,7 +2,7 @@ import Foundation
 
 /// Persistent first-win progression. Replaying a room never mints another star.
 public struct IslandJourney: Codable, Equatable {
-    public static let rooms = Set(["canal", "fireflies", "windmill", "observatory"])
+    public static let rooms = Set(["canal", "fireflies", "windmill", "observatory", "shuttle"])
     public var levels: [String: Int] = [:]
     public var bestScores: [String: Int] = [:]
     public var events: [String: Int] = [:]

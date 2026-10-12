@@ -13,6 +13,7 @@ struct PuzzleView: View {
           let compact = geometry.size.height < 750
           ZStack {
             PuzzleCourtyard()
+            Color.black.opacity(game.busy ? (reduceMotion ? 0.08 : 0.23) : 0).ignoresSafeArea().allowsHitTesting(false).animation(reduceMotion ? nil : .easeOut(duration:0.18),value:game.busy)
             VStack(spacing:compact ? 4 : 8) {
                 puzzleHeader
                 if landscape {
@@ -37,14 +38,14 @@ struct PuzzleView: View {
             Button { game.paused = true; game.effect("tap") } label: {
                 Image(systemName:"pause.fill").accessibilityHidden(true).frame(width:44,height:44)
             }.accessibilityLabel("Pause garden").accessibilityIdentifier("pauseGame")
-            Text("LEVEL \(game.engine?.level.id ?? 1)").font(.system(size:12,weight:.black,design:.rounded)).lineLimit(1)
+            Text("\(game.engine?.level.id ?? 1)").font(.system(size:12,weight:.black,design:.rounded)).lineLimit(1)
             Spacer(minLength:0)
             Button {} label: {
                 HStack(spacing:3) { Image(systemName:"heart.fill").accessibilityHidden(true).foregroundStyle(Color(hex:0xDF536A)); Text("\(game.ecosystem.lives.total)") }.frame(minWidth:44,minHeight:44)
             }.disabled(true).accessibilityLabel("\(game.ecosystem.lives.total) lives. This attempt already spent one life").accessibilityIdentifier("lifeBalance")
             Button {} label: {
                 HStack(spacing:2) { SpriteView(index:11).frame(width:22,height:22); Text(game.progress.coins.formatted()).monospacedDigit() }.frame(minHeight:44)
-            }.disabled(true).accessibilityLabel("Coins, \(game.progress.coins)").accessibilityIdentifier("openShop")
+            }.disabled(true).accessibilityLabel("Coins, \(game.progress.coins)").accessibilityIdentifier("openShop").anchorPreference(key:WalletFlightAnchors.self,value:.bounds) { ["coins":$0] }
         }.font(.system(size:14,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
             .padding(.horizontal,8).background(Palette.paper,in:Capsule()).disabled(game.busy)
             .frame(maxWidth:1100).frame(maxWidth:.infinity)
@@ -54,7 +55,7 @@ struct PuzzleView: View {
         return VStack(spacing:compact ? 4 : 7) {
             if !compact {
                 HStack {
-                    Text(game.engine?.level.title ?? "Garden").font(.system(size:16,weight:.heavy,design:.rounded)).foregroundStyle(.white)
+                    Image(systemName:"flag.fill").foregroundStyle(.white)
                     Spacer()
                     if let level=game.engine?.level { DifficultyBadge(level:level).accessibilityIdentifier("puzzleDifficulty") }
                 }
@@ -82,7 +83,7 @@ struct PuzzleView: View {
         return HStack(spacing:14) {
             VStack(spacing:12) {
                 Image("KeeperLio").resizable().scaledToFit().frame(height:min(150,size.height*0.18)).accessibilityHidden(true)
-                Text(game.engine?.level.title ?? "Garden").font(.system(.headline,design:.rounded,weight:.heavy)).multilineTextAlignment(.center).foregroundStyle(.white)
+                EmptyView()
                 if let level=game.engine?.level { DifficultyBadge(level:level).accessibilityIdentifier("puzzleDifficulty") }
                 goals(vertical:true)
                 turns
@@ -103,7 +104,7 @@ struct PuzzleView: View {
     private var turns:some View {
         VStack(spacing:0) {
             Text("\(game.moves)").font(.system(size:30,weight:.black,design:.rounded)).foregroundStyle(Color(hex:0x784506)).accessibilityIdentifier("movesCounter")
-            Text(game.moves == 1 ? "TURN" : "TURNS").font(.system(size:9,weight:.black,design:.rounded))
+            Image(systemName:"arrow.triangle.swap").font(.system(size:12,weight:.bold))
         }.foregroundStyle(Palette.night).frame(minWidth:56,minHeight:48).background(Color(hex:0xFFDE89),in:RoundedRectangle(cornerRadius:15))
             .accessibilityElement(children:.contain)
     }
@@ -121,7 +122,7 @@ struct PuzzleView: View {
             GemView(gem:gem).frame(width:30,height:34)
             VStack(spacing:1) {
                 Text(done == target ? "✓" : "\(done)/\(target)").font(.system(size:14,weight:.black,design:.rounded)).monospacedDigit()
-                Text(done == target ? "DONE" : "COLLECT").font(.system(size:7,weight:.black,design:.rounded)).tracking(0.4)
+                EmptyView()
             }
         }.foregroundStyle(Palette.night).padding(.horizontal,6).frame(maxWidth:.infinity,minHeight:46)
             .background(done == target ? Color(hex:0xC6EDB3) : Palette.paper,in:RoundedRectangle(cornerRadius:14))
@@ -129,6 +130,9 @@ struct PuzzleView: View {
             .accessibilityIdentifier("goal\(gem.rawValue)")
     }
     @ViewBuilder private var frostGoal:some View {
+        if !(game.engine?.obstacles.isEmpty ?? true) {
+            HStack(spacing:3) { Image(systemName:"square.stack.3d.up.fill"); Text("\(game.engine?.obstacles.count ?? 0)").monospacedDigit() }.font(.system(size:15,weight:.black)).foregroundStyle(Color(hex:0x276F85)).frame(minWidth:44,minHeight:46).background(Palette.paper,in:RoundedRectangle(cornerRadius:13)).accessibilityElement(children:.ignore).accessibilityLabel("\(game.engine?.obstacles.count ?? 0) layered obstacles remaining. Nearby matches weaken them once per move").accessibilityIdentifier("obstaclesRemaining")
+        }
         if !game.frost.isEmpty {
             VStack(spacing:2) {
                 Image(systemName:"snowflake").accessibilityHidden(true)
@@ -149,7 +153,7 @@ struct PuzzleView: View {
         }.accessibilityElement(children:.combine).accessibilityLabel("Score \(game.score), target \(game.engine?.level.target ?? 0)")
     }
     private var instruction:some View {
-        Text(game.hintText.isEmpty ? (game.message.isEmpty ? "Swipe neighboring pieces · tap a power to blast" : game.message) : game.hintText)
+        Text(game.hintText.isEmpty ? (game.message.isEmpty ? "" : game.message) : game.hintText)
             .font(.system(size:11,weight:.semibold,design:.rounded)).foregroundStyle(.white).multilineTextAlignment(.center)
             .lineLimit(2).accessibilityIdentifier("hintInstruction")
     }
@@ -158,7 +162,7 @@ struct PuzzleView: View {
             HStack(spacing:1) {
                 SpriteView(index:tool.sprite).frame(width:compact ? 32 : 40,height:compact ? 36 : 48)
                 VStack(spacing:3) {
-                    Text(tool.title).font(.system(size:9,weight:.black,design:.rounded)).lineLimit(1).minimumScaleFactor(0.8)
+                    EmptyView()
                     Text("×\(game.ecosystem.tools[tool,default:0])").font(.system(size:14,weight:.black,design:.rounded)).monospacedDigit()
                 }
             }.foregroundStyle(Palette.night).frame(maxWidth:.infinity,maxHeight:.infinity)
@@ -189,13 +193,14 @@ struct PuzzleView: View {
                                 .overlay(alignment:.top) { RoundedRectangle(cornerRadius:side*0.18).stroke(.white.opacity(0.3),lineWidth:1) }
                             if let power = cell.power { SpriteView(index:power.sprite).padding(side*0.04) }
                             else { GemView(gem:cell.gem).padding(side*0.015) }
+                            if let obstacle=game.engine?.obstacles[key] { ObstacleArtwork(obstacle:obstacle).transition(.opacity) }
                             if game.frost.contains(key) { RoundedRectangle(cornerRadius:10).fill(.cyan.opacity(0.24)).overlay(RoundedRectangle(cornerRadius:10).stroke(.cyan.opacity(0.8),lineWidth:2)); Image(systemName:"snowflake").font(.system(size:10)).foregroundStyle(.white).offset(x:side*0.3,y:-side*0.3) }
                             if game.hinted.contains(key) || game.pendingTool != nil || game.burstMode { RoundedRectangle(cornerRadius:10).stroke(Palette.gold,lineWidth:3).allowsHitTesting(false).accessibilityHidden(true) }
                         }.frame(width:side,height:side).contentShape(Rectangle()).scaleEffect(game.clearing.contains(key) && !reduceMotion ? 0.04 : 1).opacity(game.clearing.contains(key) ? 0 : 1)
                     }.buttonStyle(.plain).contentShape(Rectangle()).highPriorityGesture(DragGesture(minimumDistance:0).updating($pieceDragActive) { _,active,_ in active = true }.onEnded { value in
                         if max(abs(value.translation.width),abs(value.translation.height)) >= 16 { game.swipe(key,dx:value.translation.width,dy:value.translation.height) }
                         else { game.tap(key) }
-                    }).disabled(game.busy).accessibilityLabel("\(cell.power?.title ?? cell.gem.name), row \(7-cell.row), column \(cell.column+1)\(game.frost.contains(key) ? ", frozen" : "")").accessibilityHint("Swipe to swap neighbors. Tap a group, board power-up or tool target").accessibilityIdentifier("tile\(key)").position(x:inset+CGFloat(cell.column)*(side+gap)+side/2,y:inset+CGFloat(6-cell.row)*(side+gap)+side/2)
+                    }).disabled(game.busy).accessibilityLabel("\(cell.power?.title ?? cell.gem.name), row \(7-cell.row), column \(cell.column+1)\(game.frost.contains(key) ? ", frozen" : "")\(game.engine?.obstacles[key].map { ", \($0.kind.title), \($0.remaining) hits remaining" } ?? "")").accessibilityHint("Swipe to swap neighbors. Tap a group, board power-up or tool target").accessibilityIdentifier("tile\(key)").position(x:inset+CGFloat(cell.column)*(side+gap)+side/2,y:inset+CGFloat(6-cell.row)*(side+gap)+side/2)
                 }
                 if let key = game.blastKey {
                     BlastParticles().id(game.blastID).frame(width:side*4,height:side*4).position(x:inset+CGFloat(key%7)*(side+gap)+side/2,y:inset+CGFloat(6-key/7)*(side+gap)+side/2).allowsHitTesting(false)
@@ -213,11 +218,12 @@ struct PuzzleView: View {
                 SectionEyebrow(text:won ? "A thriving little circuit" : "Another chance to grow")
                 Text(won ? "Beautifully grown!" : "Let's try again.").font(.system(size:32,weight:.heavy,design:.rounded)).foregroundStyle(Palette.cream).multilineTextAlignment(.center).accessibilityIdentifier(won ? "winTitle" : "loseTitle")
                 Text(won ? "Dew goes to your farm. Coins go to your wallet. Your life is returned." : "A new garden life returns every 30 minutes. Farming and racing are still open.").font(.system(.body,design:.rounded)).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
-                if won { HStack { ResourcePill(symbol:"star.fill",value:game.firstWin ? "+1" : "Replay"); ResourcePill(symbol:"circle.inset.filled",value:game.firstWin ? "+120" : "+30") } }
+                if won { HStack { ResourcePill(symbol:"star.fill",value:game.firstWin ? "+1" : "Replay").anchorPreference(key:WalletFlightAnchors.self,value:.bounds) { ["stars":$0] }; ResourcePill(symbol:"circle.inset.filled",value:game.firstWin ? "+120" : "+30") } }
+                if won { HStack { ForEach(game.momentum.kit) { tool in SpriteView(index:tool.sprite).frame(width:58,height:58) } }.accessibilityElement(children:.ignore).accessibilityLabel("Next start kit: \(game.momentum.kit.map(\.title).joined(separator:", "))").accessibilityIdentifier("nextStartKit") }
                 Spacer()
                 if won, let level = game.engine?.level, level.id < Level.total {
-                    PrimaryButton(title:"Next garden circuit",id:"nextLevel") { game.start(Level.campaign[level.id]) }
-                } else if !won { PrimaryButton(title:"Try again · 1 life",symbol:"arrow.clockwise",id:"retryLevel") { if let level = game.engine?.level { game.start(level) } } }
+                    PrimaryButton(title:"Next garden circuit",id:"nextLevel") { game.prepareStart(Level.campaign[level.id]) }
+                } else if !won { PrimaryButton(title:"Try again · 1 life",symbol:"arrow.clockwise",id:"retryLevel") { if let level = game.engine?.level { game.prepareStart(level) } } }
                 PrimaryButton(title:"Return to your world",symbol:"globe",id:"backToGarden") { game.gardenAfterWin() }
             }.padding(26).frame(maxWidth:500)
         }.accessibilityElement(children:.contain)
@@ -250,7 +256,7 @@ struct PuzzleView: View {
                 PrimaryButton(title:choice == .abandon ? "Abandon · lose 1 life" : "Restart · 1 more life",symbol:"arrow.uturn.backward",id:choice == .abandon ? "confirmAbandon" : "confirmRestart") {
                     exitChoice = nil
                     if choice == .abandon { game.abandonCircuit() }
-                    else if let level = game.engine?.level { game.start(level) }
+                    else if let level = game.engine?.level { game.prepareStart(level) }
                 }
                 Button { exitChoice = nil; game.paused = false } label: {
                     Text("Keep playing").font(.headline).foregroundStyle(Palette.night)
@@ -274,9 +280,9 @@ private struct PuzzleUtilityRow:View {
         button(shuffle,"shuffle","shuffleButton",onShuffle).disabled(oneShot)
     }
     private func button(_ title:String,_ icon:String,_ id:String,_ action:@escaping()->Void)->some View {
-        Button(action:action) { Label(title,systemImage:icon).font(.system(size:10,weight:.heavy,design:.rounded))
+        Button(action:action) { Image(systemName:icon).font(.system(size:24,weight:.heavy))
             .frame(maxWidth:.infinity,minHeight:44).foregroundStyle(Palette.night).background(Palette.paper,in:RoundedRectangle(cornerRadius:13))
-        }.buttonStyle(PressStyle()).disabled(busy).accessibilityIdentifier(id)
+        }.buttonStyle(PressStyle()).disabled(busy).accessibilityLabel(title).accessibilityIdentifier(id)
     }
 }
 
@@ -301,7 +307,7 @@ struct DifficultyBadge: View {
     let level: Level
     var tint: Color { switch level.difficulty { case .simple: return Palette.mint; case .hard: return Palette.gold; case .superHard: return Palette.coral; case .oneShot: return Color(hex:0x685291) } }
     var body: some View {
-        Label(level.difficulty.title,systemImage:level.difficulty.symbol).font(.system(size:11,weight:.heavy,design:.rounded)).foregroundStyle(tint).padding(.horizontal,10).padding(.vertical,4).background(Palette.paper,in:Capsule())
+        HStack(spacing:3) { Image(systemName:level.difficulty.symbol); if level.difficulty == .superHard { Image(systemName:"flame.fill") }; if level.isOneShot { Text("1") } }.font(.system(size:11,weight:.heavy,design:.rounded)).foregroundStyle(tint).padding(.horizontal,10).padding(.vertical,4).background(Palette.paper,in:Capsule())
             .accessibilityElement(children:.ignore).accessibilityLabel("\(level.difficulty.title)\(level.isOneShot ? ", ultra super hard, one move, hints allowed" : " difficulty")")
     }
 }

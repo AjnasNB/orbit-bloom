@@ -3,11 +3,11 @@ import XCTest
 
 final class IslandJourneyTests: XCTestCase {
     func testRallyTrafficIncreasesWithTierAndEveryTierIsPlayable() {
-        XCTAssertEqual(DeliveryRun(difficulty:-100).difficulty,0)
+        XCTAssertEqual(DeliveryRun(difficulty:-100).difficulty,2)
         XCTAssertEqual(DeliveryRun(difficulty:Int.max).difficulty,4)
         for tier in 0...4 {
             var run = DeliveryRun(difficulty:tier)
-            XCTAssertEqual(run.obstacleCount,10+tier*2)
+            XCTAssertEqual(run.obstacleCount,10+max(2,tier)*2)
             for index in 0..<run.obstacleCount {
                 run.lane = (run.obstacleLane(index)+1)%3
                 let crossing = run.crossingTime(index)

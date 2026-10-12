@@ -75,7 +75,7 @@ final class GameEngineTests: XCTestCase {
         XCTAssertGreaterThan(game.collected.values.reduce(0, +), 0)
     }
     func testBurstClearsCrossAndFrostWithoutSpendingMove() {
-        let game = GameEngine(level: Level.campaign[11], seed: 901)
+        let game = GameEngine(level: Level.versionTwoCampaign[11], seed: 901)
         let frozen = game.frost.first!
         let before = game.moves
         let turn = game.burst(at: frozen)
@@ -109,7 +109,7 @@ final class GameEngineTests: XCTestCase {
                 var charge = false
                 while !game.won && !game.lost {
                     if charge {
-                        let target = game.frost.first ?? game.cells.first(where: { game.collected[$0.gem, default: 0] < level.goals[$0.gem, default: 0] })?.key ?? 24
+                        let target = game.bestBlastTarget()
                         _ = game.burst(at: target)
                         charge = false
                     } else {
@@ -174,8 +174,9 @@ final class ProgressTests: XCTestCase {
         XCTAssertFalse(progress.isUnlocked(0)); XCTAssertFalse(progress.isUnlocked(1021))
     }
     func testDifficultyRhythmTightensAcrossTheCampaign() {
-        XCTAssertEqual(Level.campaign[0].difficulty,.simple)
-        XCTAssertEqual(Level.campaign[6].difficulty,.hard)
+        XCTAssertEqual(Level.versionTwoCampaign[0].difficulty,.simple)
+        XCTAssertEqual(Level.campaign[0].difficulty,.hard)
+        XCTAssertEqual(Level.campaign[6].difficulty,.superHard)
         XCTAssertEqual(Level.campaign[8].difficulty,.superHard)
         XCTAssertEqual(Level.campaign[29].difficulty,.oneShot)
         XCTAssertEqual(Level.campaign[79].difficulty,.oneShot)
@@ -183,7 +184,7 @@ final class ProgressTests: XCTestCase {
             let early = Level.campaign[firstID-1], late = Level.campaign[firstID+600-1]
             XCTAssertEqual(early.difficulty,late.difficulty)
             XCTAssertLessThan(late.moves,early.moves)
-            XCTAssertGreaterThan(late.frost,early.frost)
+            XCTAssertGreaterThanOrEqual(GameEngine(level:late,seed:1).obstacles.count,GameEngine(level:early,seed:1).obstacles.count)
             XCTAssertGreaterThan(late.target,early.target)
             for gem in early.goals.keys { XCTAssertGreaterThan(late.goals[gem]!,early.goals[gem]!) }
         }

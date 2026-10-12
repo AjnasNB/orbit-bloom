@@ -46,11 +46,11 @@ struct IslandActivityView: View {
         VStack(spacing: compact ? 8 : 12) {
             HStack(spacing: 10) {
                 Button(action: onExit) {
-                    Label("Rooms", systemImage: "xmark.circle.fill")
+                    Image(systemName:"xmark")
                         .font(compact ? .system(size: 17, weight: .bold, design: .rounded) : .system(.subheadline, design: .rounded, weight: .bold))
-                        .padding(.horizontal, 10).frame(minWidth: 88, minHeight: 48)
+                        .padding(.horizontal, 10).frame(width:48,height:48)
                         .background(Palette.paper, in: Capsule()).contentShape(Capsule())
-                }.buttonStyle(PressStyle()).accessibilityLabel("Exit \(kind.title), return to rooms")
+                }.buttonStyle(PressStyle()).accessibilityLabel("Exit \(kind.title), return to island")
                     .accessibilityHint("Discards this unfinished attempt without using a life. Saved successful rooms remain safe.")
                     .accessibilityIdentifier("activityExit")
                 Spacer(minLength: 0)
@@ -64,21 +64,12 @@ struct IslandActivityView: View {
                 }.accessibilityLabel(paused ? "Resume activity" : "Pause activity")
                     .accessibilityIdentifier("activityPause")
             }.foregroundStyle(Palette.night).background(Palette.paper.opacity(0.85), in: Capsule())
-            HStack(alignment: .center) {
-                VStack(alignment: .leading, spacing: 4) {
-                    if !compact { SectionEyebrow(text: "Restoration room · \(min(1000, max(1, level)))") }
-                    Text(kind.title).font(compact ? .system(size: 20, weight: .heavy, design: .rounded) : .system(.title2, design: .rounded, weight: .heavy))
-                        .foregroundStyle(Palette.night).accessibilityIdentifier("activityTitle")
-                }
-                Spacer(minLength: 8)
-                if compact {
-                    Text("\(min(1000, max(1, level)))").font(.system(size: 17, weight: .bold, design: .rounded))
-                        .foregroundStyle(kind.activityAccent).accessibilityLabel("Challenge \(min(1000, max(1, level)))")
-                } else {
-                    Image(systemName: kind.symbol).font(.system(size: 29, weight: .bold))
-                        .foregroundStyle(kind.activityAccent).accessibilityHidden(true)
-                }
-            }.frame(minHeight: compact ? 30 : 0)
+            HStack(spacing:8) {
+                ActivityEmblem(room:IslandRoom(rawValue:kind.rawValue)!).frame(width:48,height:48)
+                Text("\(min(1000,max(1,level)))").font(.system(size:20,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
+                    .accessibilityLabel("\(kind.title), challenge \(min(1000,max(1,level)))").accessibilityIdentifier("activityTitle")
+                Spacer()
+            }
             ZStack {
                 activity.id(restartID).allowsHitTesting(!paused && !helpOpen).accessibilityHidden(paused || helpOpen)
                 if paused {
@@ -93,11 +84,6 @@ struct IslandActivityView: View {
                         .shadow(color: Palette.night.opacity(0.18), radius: 18, y: 10).padding(16)
                 }
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            if !compact {
-                Text("No life cost. Exiting discards this attempt; save a successful result to keep it.")
-                    .font(.system(.caption, design: .rounded)).foregroundStyle(Palette.mint)
-                    .fixedSize(horizontal: false, vertical: true).multilineTextAlignment(.center)
-            }
         }.padding(.horizontal, 18).padding(.bottom, 10)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: paused)
@@ -109,6 +95,7 @@ struct IslandActivityView: View {
         case .fireflies: FireflyRoom(level: level, paused: paused || helpOpen, complete: finish)
         case .windmill: WindmillRoom(level: level, paused: paused || helpOpen, complete: finish)
         case .observatory: ObservatoryRoom(level: level, paused: paused || helpOpen, complete: finish)
+        case .shuttle: ShuttleRoomView(level:level,paused:paused || helpOpen,complete:finish)
         }
     }
     private func finish(_ score: Int) {
@@ -125,6 +112,7 @@ private extension IslandActivityKind {
         case .fireflies: return Color(hex: 0x817420)
         case .windmill: return Color(hex: 0x378161)
         case .observatory: return Color(hex: 0x71639E)
+        case .shuttle: return Color(hex:0x277F9E)
         }
     }
 }
@@ -136,19 +124,8 @@ private struct ActivityInstruction: View {
     @Environment(\.activityHelpChanged) private var helpChanged
     var body: some View {
         Group {
-            if compact {
-                Button { showHelp = true } label: {
-                    Label("How to play · exit rules", systemImage: "questionmark.circle.fill")
-                        .font(.system(size: 17, weight: .semibold, design: .rounded))
-                        .foregroundStyle(Palette.night).frame(maxWidth: .infinity, minHeight: 48)
-                        .background(Palette.paper, in: Capsule())
-                }.buttonStyle(PressStyle()).accessibilityIdentifier("activityHelp")
-                    .accessibilityHint("Opens large text instructions. Swipe between steps.")
-            } else {
-                Text(text).font(.system(.subheadline, design: .rounded, weight: .medium))
-                    .foregroundStyle(Palette.mint).multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true).frame(maxWidth: .infinity)
-            }
+            Button { showHelp=true } label: { Image(systemName:"questionmark.circle.fill").font(.system(size:22,weight:.bold)).foregroundStyle(Palette.night).frame(width:48,height:48).background(Palette.paper,in:Circle()) }
+                .buttonStyle(PressStyle()).accessibilityLabel("How to play and exit rules").accessibilityIdentifier("activityHelp")
         }.sheet(isPresented: $showHelp) { ActivityHelpSheet(text: text).presentationDetents([.large]) }
             .onChange(of: showHelp) { _, visible in helpChanged(visible) }
             .onDisappear { helpChanged(false) }
@@ -209,12 +186,12 @@ private struct ActivityMeter: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: symbol).foregroundStyle(Palette.gold).accessibilityHidden(true)
-            Text(title).foregroundStyle(Palette.mint)
+            Spacer(minLength:0)
             Spacer(minLength: 6)
             Text(value).fontWeight(.bold).monospacedDigit().foregroundStyle(Palette.night)
         }.font(compact ? .system(size: 17, design: .rounded) : .system(.subheadline, design: .rounded)).padding(12)
             .background(Palette.paper, in: RoundedRectangle(cornerRadius: 15))
-            .accessibilityElement(children: .combine)
+            .accessibilityElement(children:.ignore).accessibilityLabel("\(title): \(value)")
     }
 }
 
@@ -241,7 +218,7 @@ private struct ActivityOutcome: View {
                 PrimaryButton(title: compact ? "Save" : "Save result & return", symbol: "checkmark", id: "activityCollect") {
                     guard !submitted else { return }
                     submitted = true; complete(score)
-                }.disabled(submitted).accessibilityLabel("Save result and return to rooms")
+                }.disabled(submitted).accessibilityLabel("Save result and return to island")
             } else {
                 PrimaryButton(title: compact ? "Try again" : "Try this room again", symbol: "arrow.counterclockwise", id: "activityRetry", action: retry)
             }
@@ -364,6 +341,8 @@ private struct FireflyRoom: View {
     @Environment(\.activityCompactLayout) private var compact
     @State private var run: FireflySignalRun
     @State private var glowing: Int? = nil
+    @State private var answerGlow:Int?
+    @State private var answerToken=UUID()
     @State private var playback: Task<Void, Never>? = nil
     @State private var playbackID = UUID()
     private let names = ["Sun", "Leaf", "Sky", "Rose"]
@@ -386,25 +365,26 @@ private struct FireflyRoom: View {
                     ForEach(0..<4) { index in
                         Button {
                             guard !paused, run.phase == .answering else { return }
+                            answerGlow=index; let token=UUID(); answerToken=token
+                            Task { try? await Task.sleep(for:.milliseconds(700)); if answerToken == token { answerGlow=nil } }
                             let correct = run.selectLight(index)
                             game.effect(correct ? "tap" : "collision")
                             game.feedback(correct ? .light : .medium)
                         } label: {
-                            LanternTile(number: index + 1, name: names[index], color: colors[index], glowing: glowing == index)
+                            LanternTile(number: index + 1, name: names[index], color: colors[index], glowing: glowing == index || answerGlow == index)
                                 .padding(5).frame(width: side, height: side)
                         }.buttonStyle(PressStyle()).disabled(run.phase != .answering || paused)
                             .position(x: origin.x + (CGFloat(index % 2) + 0.5) * side,
                                       y: origin.y + (CGFloat(index / 2) + 0.5) * side)
                             .accessibilityLabel("Lantern \(index + 1), \(names[index])")
-                            .accessibilityValue(glowing == index ? "Lit" : "Waiting")
+                            .accessibilityValue(glowing == index || answerGlow == index ? "Lit" : "Waiting")
                             .accessibilityIdentifier("fireflyLight\(index)")
                     }
                 }.frame(minHeight: 176, maxHeight: .infinity).frame(maxWidth: 400)
                 if run.phase == .ready {
                     PrimaryButton(title: compact ? "Watch" : run.round == 0 && run.mistakes == 0 ? "Watch the first signal" : "Watch this signal", symbol: "eye.fill", id: "fireflyWatch", action: watch)
                 } else {
-                    Text(run.phase == .answering ? "Your turn: \(run.answerIndex) / \(run.sequence.count) lights repeated" : "Watch carefully · \(run.sequence.count) lights")
-                        .font(compact ? .system(size: 17, design: .rounded) : .system(.subheadline, design: .rounded)).foregroundStyle(Palette.mint).frame(minHeight: 60)
+                    HStack(spacing:6) { ForEach(0..<run.sequence.count,id:\.self) { i in Circle().fill(i < run.answerIndex ? Palette.gold : Palette.mint.opacity(0.22)).frame(width:14,height:14).overlay { if i < run.answerIndex { Image(systemName:"checkmark").font(.system(size:8,weight:.black)).foregroundStyle(Palette.night) } } } }.frame(minHeight:48).accessibilityElement(children:.ignore).accessibilityLabel("\(run.answerIndex) of \(run.sequence.count) lights repeated").accessibilityIdentifier("fireflyProgress")
                 }
             }.accessibilityHidden(run.finished)
             if run.finished {

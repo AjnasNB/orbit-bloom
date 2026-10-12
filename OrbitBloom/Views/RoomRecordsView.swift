@@ -93,7 +93,7 @@ struct RoomRecordsView: View {
     @ViewBuilder private func rankingInformation(part: Int, compact: Bool) -> some View {
         Text("Atoll Skills").font(.system(compact ? .subheadline : .title2, design: .rounded, weight: .heavy)).foregroundStyle(Palette.night)
         if !compact || part == 0 {
-            Text("Four personal bests. One skill score.").font(.subheadline).multilineTextAlignment(.center)
+            Text("Canal, Fireflies, Windmill and Observatory form your Apple skill score. Shuttle records stay in your garden.").font(.subheadline).multilineTextAlignment(.center)
                 .foregroundStyle(Palette.mint).fixedSize(horizontal: false, vertical: true)
         }
         if !compact || part == 1 {
@@ -133,7 +133,7 @@ struct RoomRecordsView: View {
         guard !submitting, !game.testing, let key = matchedPlayerKey, game.journey.isValid else { return }
         let player = GKLocalPlayer.local
         let playerID = player.gamePlayerID
-        let scores = IslandActivityKind.allCases.map { game.journey.bestScores[$0.rawValue, default: 0] }
+        let scores = IslandActivityKind.allCases.filter { $0 != .shuttle }.map { game.journey.bestScores[$0.rawValue, default: 0] }
         guard scores.allSatisfy({ (0...20_000).contains($0) }) else {
             status = "A saved score cannot be ranked. Your local records stay saved."; return
         }

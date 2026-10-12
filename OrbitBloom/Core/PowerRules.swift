@@ -1,5 +1,16 @@
 import Foundation
 
+public struct GardenMomentum: Codable, Equatable {
+    public var wins = 0
+    public var companion = false
+    public var helperLevels: Set<Int> = []
+    public init() {}
+    public var kit: [GardenTool] { Array([GardenTool.bomb, .tnt, .rainbow].prefix(min(3, max(0,wins)))) }
+    public mutating func won(firstClear: Bool) { if firstClear { wins = min(3,wins + 1) } }
+    public mutating func failed() { wins = 0 }
+    public mutating func claimHelper(level: Int) -> Bool { companion && (1...Level.total).contains(level) && helperLevels.insert(level).inserted }
+}
+
 /// Reproducible formation rules. Keys use a seven-column garden grid.
 public enum PowerRules {
     public static func tool(for keys:Set<Int>) -> GardenTool? {

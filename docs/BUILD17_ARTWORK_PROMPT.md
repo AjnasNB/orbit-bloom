@@ -1,0 +1,9 @@
+# Pocket Apple — original game asset
+
+Tool: built-in imagegen. Transparent background requested. The original 1280-square PNG is copied unchanged into `OrbitBloom/Resources/Assets.xcassets/PocketApple.imageset/PocketApple.png` and replaces only the existing apple sprite index. It was not cropped, resized, composited or taken from another game. Native asset checks require the named image, readable content and transparent safety margins.
+
+Prompt:
+
+Use case: original stylized-concept mobile game sprite. Create ONE clearly recognizable red apple, not cherries or berries, for Orbit Bloom's friendly rounded 3D cartoon garden game. Broad single apple body with two subtle shoulders, central top dimple, tapered bottom and a tiny calyx. Rich warm scarlet red with softly shaded lower right, golden-red upper left sunlit rim, satin highlights rather than realistic speckled skin. One slim brown woody stem rising naturally from the top depression, and ONE small pointed fresh green leaf with a clear midrib attached near the stem. Slight three-quarter angle showing the apple's volume, one object only. Simple readable silhouette at 40 pixels. Original art, cheerful polished 3D cartoon with organic shape and rounded bevels, consistent with a miniature garden and illustrated rover. Entire fruit, stem and leaf visible, centered within a square canvas with generous transparent margins on every side. No plate, no ground, no hard shadow outside the silhouette, no text, no icon frame, no watermark, no logo, no extra fruit. Genuinely transparent background.
+
+The layered obstacles, sickle, road hazards and shuttle travellers are original native code drawings. The existing Lio, rover and pointed leaf retain their recorded provenance. New screenshots are native captures of actual screens, separate from illustration assets.

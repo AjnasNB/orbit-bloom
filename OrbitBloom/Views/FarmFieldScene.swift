@@ -34,9 +34,10 @@ struct FarmFieldScene: UIViewRepresentable {
     let plots: [FarmPlot]
     let now: Date
     let interaction: FarmFieldInteraction?
+    var variant:Int=0
     let onLocations: ([CGPoint]) -> Void
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    func makeCoordinator() -> FarmFieldWorld { FarmFieldWorld() }
+    func makeCoordinator() -> FarmFieldWorld { FarmFieldWorld(variant:variant) }
     func makeUIView(context: Context) -> FarmFieldSceneView {
         let world = context.coordinator
         let view = FarmFieldSceneView()
@@ -66,7 +67,7 @@ final class FarmFieldWorld {
     private var lastInteraction: UUID?
     private var reducedMotion = false
 
-    init() {
+    init(variant:Int=0) {
         camera.camera = SCNCamera(); camera.camera?.usesOrthographicProjection = true
         camera.camera?.orthographicScale = 4.8
         camera.position = SCNVector3(0, 12, 13); camera.look(at: SCNVector3(0, 0.4, 0.3))
@@ -77,7 +78,7 @@ final class FarmFieldWorld {
         sun.position = SCNVector3(-8, 15, 9); sun.look(at: .init(0, 0, 0)); scene.rootNode.addChildNode(sun)
         let sky = SCNNode(); sky.light = SCNLight(); sky.light?.type = .ambient; sky.light?.intensity = 600
         sky.light?.color = UIColor(red: 0.86, green: 0.95, blue: 1, alpha: 1); scene.rootNode.addChildNode(sky)
-        let ground = mesh(SCNPlane(width: 28, height: 28), 0xB6CF7A)
+        let ground = mesh(SCNPlane(width:28,height:28), [UInt32(0xB6CF7A),0xADCDA2,0xCCD596][min(2,max(0,variant))])
         ground.eulerAngles.x = -.pi / 2; scene.rootNode.addChildNode(ground)
         // Continuous paths, furrowed soil and borders form a farm, without floating plot cards.
         path(from: .init(0, 0.04, -6.5), to: .init(0, 0.04, 7), width: 0.7)
@@ -133,6 +134,7 @@ final class FarmFieldWorld {
         if let interaction, interaction.token != lastInteraction {
             lastInteraction = interaction.token
             if interaction.kind == .water && !reducedMotion { water(at: interaction.plot) }
+            if interaction.kind == .harvest && !reducedMotion { swingSickle(at:interaction.plot) }
         }
     }
 
@@ -245,6 +247,17 @@ final class FarmFieldWorld {
             drop.scale.y = 1.5; scene.rootNode.addChildNode(drop)
             drop.runAction(.sequence([.wait(duration: Double(i) * 0.025), .group([.moveBy(x: 0, y: -1.1, z: 0, duration: 0.55), .fadeOut(duration: 0.6)]), .removeFromParentNode()]))
         }
+    }
+    private func swingSickle(at id:Int) {
+        guard patches.indices.contains(id) else { return }
+        let tool=SCNNode(); let base=FarmFieldSceneView.location(id); tool.position=SCNVector3(base.x+0.65,0.9,base.z+0.3)
+        let curve=UIBezierPath(); curve.move(to:CGPoint(x:0.35,y:0.3))
+        curve.addCurve(to:CGPoint(x:-0.3,y:0.65),controlPoint1:CGPoint(x:-0.65,y:0.15),controlPoint2:CGPoint(x:-0.6,y:0.85))
+        curve.addCurve(to:CGPoint(x:0.35,y:0.3),controlPoint1:CGPoint(x:-0.5,y:0.45),controlPoint2:CGPoint(x:0,y:0.4)); curve.close()
+        let blade=mesh(SCNShape(path:curve,extrusionDepth:0.04),0xD3E7EA); blade.geometry?.firstMaterial?.metalness.contents=0.55; tool.addChildNode(blade)
+        let grip=mesh(SCNCylinder(radius:0.06,height:0.5),0xA77847,.init(0.4,0.05,0)); grip.eulerAngles.z=0.7; tool.addChildNode(grip)
+        scene.rootNode.addChildNode(tool)
+        tool.runAction(.sequence([.rotateBy(x:0,y:0,z:-1.4,duration:0.28),.rotateBy(x:0,y:0,z:0.8,duration:0.22),.fadeOut(duration:0.18),.removeFromParentNode()]))
     }
     private func harvestIntoBasket(from position: SCNVector3) {
         for i in 0..<4 {

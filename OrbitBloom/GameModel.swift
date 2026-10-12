@@ -8,6 +8,11 @@ import Match3Kit
     @Published var ecosystem = Ecosystem()
     @Published var assistance = Assistance()
     @Published var journey = IslandJourney()
+    @Published var momentum = GardenMomentum()
+    @Published var coinSourcePlot:Int?
+    @Published var starAward=false
+    @Published var upcomingLevel: Level?
+    @Published var loadout: [GardenTool] = []
     @Published var activity: IslandActivityKind?
     @Published private(set) var activityLevel = 1
     private var activityRewarded = false
@@ -66,7 +71,7 @@ import Match3Kit
         let wallet = sources.compactMap { key in
             defaults.data(forKey: key).flatMap { try? JSONDecoder().decode(GardenWallet.self, from: $0) }
         }.first(where: { $0.isValid })
-        if let wallet { progress = wallet.progress; ecosystem = wallet.ecosystem; assistance = wallet.assistance ?? Assistance(); journey = wallet.journey ?? IslandJourney() }
+        if let wallet { progress = wallet.progress; ecosystem = wallet.ecosystem; assistance = wallet.assistance ?? Assistance(); journey = wallet.journey ?? IslandJourney(); momentum = wallet.momentum ?? GardenMomentum() }
         #if DEBUG
         // Explicit, resetting Store QA fixture. Never runs in Release or with keep-progress.
         if testing && !ProcessInfo.processInfo.arguments.contains("--keep-progress"),
@@ -83,13 +88,13 @@ import Match3Kit
         if let snapshot, GardenWallet(progress: progress, session: snapshot).isValid,
            let restored = GameEngine(snapshot:snapshot) {
             engine = restored; charged = wallet?.charged ?? defaults.bool(forKey: "orbitBloom.charged.v1"); sync()
-            if restored.won { firstWin = progress.finish(level: restored.level.id, score: restored.score); ecosystem.lives.rewardWin(); result = true; save() }
-            else if restored.lost { result = false; save() }
+            if restored.won { firstWin = progress.finish(level: restored.level.id, score: restored.score); momentum.won(firstClear:firstWin); ecosystem.lives.rewardWin(); result = true; save() }
+            else if restored.lost { momentum.failed(); result = false; save() }
         }
     }
     var wallet: GardenWallet {
         GardenWallet(progress: progress, ecosystem: ecosystem, session: result == nil ? engine?.snapshot : nil,
-                     charged: charged, assistance: assistance, journey: journey)
+                     charged: charged, assistance: assistance, journey: journey, momentum: momentum)
     }
     func save() {
         if let data = try? JSONEncoder().encode(wallet) {
@@ -144,25 +149,52 @@ import Match3Kit
     private func installWallet(_ saved: GardenWallet) {
         runID = UUID(); raceActive = false; activity = nil; activityRewarded = false; pendingTool = nil; blastKey = nil; busy = false
         result = nil; paused = false; selected = nil; hinted = []; clearing = []; tab = 0
-        progress = saved.progress; ecosystem = saved.ecosystem; assistance = saved.assistance ?? Assistance(); journey = saved.journey ?? IslandJourney()
+        progress = saved.progress; ecosystem = saved.ecosystem; assistance = saved.assistance ?? Assistance(); journey = saved.journey ?? IslandJourney(); momentum = saved.momentum ?? GardenMomentum()
         charged = saved.charged ?? false; engine = saved.session.flatMap(GameEngine.init(snapshot:))
         ecosystem.lives.refresh(at: Date()); sync()
         if let engine, engine.won {
             firstWin = progress.finish(level: engine.level.id, score: engine.score)
+            momentum.won(firstClear:firstWin)
             ecosystem.lives.rewardWin(); result = true
-        } else if engine?.lost == true { result = false }
+        } else if engine?.lost == true { momentum.failed(); result = false }
     }
-    func start(_ level: Level) {
-        guard progress.isUnlocked(level.id) else { showToast("Complete circuit \(progress.nextLevel) to open this place."); return }
-        guard ecosystem.lives.spend(at:Date()) else { leave(); tab = 4; showToast("No lives yet. One returns every 30 minutes; farming and racing stay open."); return }
+    var availableStreakKit: [GardenTool] { engine != nil && result != true ? [] : momentum.kit }
+    func prepareStart(_ level: Level) {
+        guard !busy, progress.isUnlocked(level.id) else { return }
+        upcomingLevel = level; loadout = level.isOneShot ? [] : availableStreakKit
+    }
+    func toggleLoadout(_ tool: GardenTool) {
+        guard upcomingLevel?.isOneShot != true else { return }
+        if let index = loadout.firstIndex(of: tool) { loadout.remove(at:index) }
+        else if loadout.count < 3 && (availableStreakKit.contains(tool) || ecosystem.tools[tool,default:0] > 0) { loadout.append(tool) }
+    }
+    @discardableResult func beginPreparedAttempt() -> Bool {
+        guard let level = upcomingLevel, loadout.count <= 3,
+              Set(loadout).count == loadout.count, loadout.allSatisfy({ availableStreakKit.contains($0) || ecosystem.tools[$0,default:0] > 0 }) else { return false }
+        let selected = level.isOneShot ? [] : loadout
+        let paid = selected.filter { !availableStreakKit.contains($0) }
+        guard start(level, boosters:selected, consuming:paid) else { return false }
+        upcomingLevel = nil; loadout = []; return true
+    }
+    func unlockCompanion() {
+        guard !momentum.companion, progress.coins >= 200 else { return }
+        progress.coins -= 200; momentum.companion = true; effect("craft"); save()
+    }
+    @discardableResult func start(_ level: Level, boosters: [GardenTool] = [], consuming paid: [GardenTool] = []) -> Bool {
+        guard progress.isUnlocked(level.id) else { showToast("Complete circuit \(progress.nextLevel) to open this place."); return false }
+        guard ecosystem.lives.spend(at:Date()) else { showToast("No lives yet. One returns every 30 minutes; farming and racing stay open."); return false }
+        if engine != nil && result != true { momentum.failed() }
         pendingTool = nil
         blastKey = nil; blastID = UUID()
         runID = UUID()
         let seed = UInt64(level.id * 101)
         engine = GameEngine(level: level, seed: seed)
+        engine?.seedPowers(boosters)
+        for tool in paid { ecosystem.tools[tool,default:0] -= 1 }
+        if momentum.claimHelper(level:level.id) { assistance.freeHints += 1 }
         selected = nil; hinted = []; clearing = []; result = nil; busy = false; paused = false
         charged = false; burstMode = false; hintText = ""; message = level.isOneShot ? "One move to clear every goal. Hints work; tools and shuffle rest." : "Swipe neighbors to match three, or tap a touching group."
-        sync(); save()
+        sync(); save(); return true
     }
     func sync() {
         guard let engine else { return }
@@ -209,11 +241,13 @@ import Match3Kit
     }
     private func play(_ turn: Turn, allowCharge: Bool = true) {
         guard turn.accepted else { message = "That swap needs to make a match. Try another!"; feedback(.rigid); return }
+        if let first=turn.cascades.first?.cleared.sorted().first { showBlast(at:first) }
         busy = true; hinted = []; hintText = ""; selected = nil
         let currentRun = runID
         if turn.earnedCharge && allowCharge { charged = true }
         // Save farm water with the resolved board. Animations must not own rewards.
         ecosystem.water += turn.cascades.reduce(0) { $0 + $1.collected[.water,default:0] }
+        ecosystem.seeds += turn.cascades.reduce(0) { $0 + $1.seeds }
         save()
         Task {
             if let swapped = turn.swappedCells {
@@ -236,10 +270,11 @@ import Match3Kit
             if let engine, engine.won {
                 let before = progress.coins
                 firstWin = progress.finish(level: engine.level.id, score: engine.score)
+                momentum.won(firstClear:firstWin)
                 if firstWin { recordWorldEvent(room:"bloom") }
-                ecosystem.lives.rewardWin(); animateCoins(progress.coins-before); effect("win")
+                ecosystem.lives.rewardWin(); animateCoins(progress.coins-before,star:firstWin); effect("win")
                 result = true; feedback(.medium)
-            } else if engine?.lost == true { result = false }
+            } else if engine?.lost == true { momentum.failed(); result = false }
             save()
         }
     }
@@ -297,6 +332,7 @@ import Match3Kit
     func leave() { pendingTool = nil; blastKey = nil; blastID = UUID(); runID = UUID(); engine = nil; result = nil; busy = false; paused = false; charged = false; burstMode = false; hinted = []; clearing = []; hintText = ""; save() }
     func abandonCircuit() {
         guard engine != nil else { return }
+        momentum.failed()
         // A life was already committed by start(). Leaving never charges a second one.
         leave(); tab = 0; showToast("Circuit left. The attempt's life stays spent; your world is saved.")
     }
@@ -315,15 +351,17 @@ import Match3Kit
     func tone(_ chain: Int) { effect(chain > 0 ? "cascade" : "match") }
     func effect(_ name: String) { AudioDirector.shared.effect(name,enabled:progress.sound) }
     func updateMusic() { AudioDirector.shared.theme(raceActive ? "race" : engine != nil ? "puzzle" : tab == 2 ? "farm" : "garden",enabled:ecosystem.music) }
+    var rallyDifficulty:Int { min(4,2+ecosystem.deliveries/3) }
     func refreshClock() { let old = ecosystem.lives; ecosystem.lives.refresh(at:Date()); if old != ecosystem.lives { save() } }
-    func animateCoins(_ amount: Int) {
+    func animateCoins(_ amount: Int, fromPlot:Int?=nil, star:Bool=false) {
+        coinSourcePlot=fromPlot; starAward=star
         lastCoinAward = amount; coinFlight = UUID()
         let event = coinFlight
         Task { try? await Task.sleep(for:.seconds(1.5)); if coinFlight == event { coinFlight = nil } }
     }
-    func awardCoins(_ amount: Int) { progress.coins += max(0,amount); animateCoins(amount); effect("coin"); save() }
+    func awardCoins(_ amount: Int, fromPlot:Int?=nil, star:Bool=false) { progress.coins += max(0,amount); animateCoins(amount,fromPlot:fromPlot,star:star); effect("coin"); save() }
     func farmAction(_ id: Int, crop: Crop) {
-        guard ecosystem.plots.indices.contains(id), !harvestingPlots.contains(id) else { return }
+        guard (0..<18).contains(id), id/6 < farmFieldCount, !harvestingPlots.contains(id) else { return }
         let now = Date()
         if let amount = ecosystem.harvest(id,at:now) {
             // Keep a second tap from becoming a planting charge while this
@@ -333,15 +371,16 @@ import Match3Kit
                 try? await Task.sleep(for: .milliseconds(1100))
                 self?.harvestingPlots.remove(id)
             }
-            recordWorldEvent(room:"farm"); awardCoins(amount); effect("harvest"); showToast("Harvested! +\(amount) coins · +1 compost · +1 cargo")
+            recordWorldEvent(room:"farm"); awardCoins(amount,fromPlot:id); effect("harvest"); showToast("Harvested! +\(amount) coins · +1 compost · +1 cargo")
         }
-        else if ecosystem.plots[id].crop == nil {
+        else if ecosystem.plot(id)?.crop == nil {
             if ecosystem.plant(id,crop:crop,at:now) { effect("plant"); showToast("\(crop.title) planted. Tap to water and grow faster.") }
             else { showToast("Planting needs 1 seed and 2 water. Garden puzzles collect water.") }
         } else if ecosystem.waterPlot(id,at:now) { effect("water") }
         else { showToast("Your crop is growing. Come back when it blooms.") }
         save()
     }
+    var farmFieldCount: Int { min(3, 1 + (ecosystem.harvested >= 3 || progress.completed.count >= 3 ? 1 : 0) + (ecosystem.harvested >= 9 || progress.completed.count >= 9 ? 1 : 0)) }
     func craft(_ tool: GardenTool) {
         if ecosystem.craft(tool) { effect("craft"); showToast("\(tool.title) crafted!"); save() }
         else { showToast("Harvest \(tool.compostCost) compost to craft \(tool.title).") }
@@ -376,7 +415,7 @@ import Match3Kit
         activity = kind; activityLevel = min(1000, journey.levels[kind.rawValue, default:0] + 1)
         activityRewarded = false; tab = 6; effect("tap"); updateMusic()
     }
-    func exitActivity() { activity = nil; activityRewarded = false; tab = 5; save(); updateMusic() }
+    func exitActivity() { activity = nil; activityRewarded = false; tab = 0; save(); updateMusic() }
     func completeActivity(_ score: Int) {
         guard let activity, !activityRewarded,
               journey.complete(room:activity.rawValue, level:activityLevel, score:score) else { return }
@@ -384,7 +423,7 @@ import Match3Kit
         progress.stars = min(100_000_000, progress.stars + 1)
         ecosystem.water = min(100_000_000, ecosystem.water + 2)
         recordWorldEvent(room:activity.rawValue)
-        awardCoins(25); effect("win"); feedback(.medium)
+        awardCoins(25,star:true); effect("win"); feedback(.medium)
         showToast("Lio's project fund: +1 star · +25 coins · +2 water. Saved."); save()
     }
     func recordWorldEvent(room:String) {

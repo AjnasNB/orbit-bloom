@@ -3,7 +3,7 @@ import XCTest
 
 final class IslandActivitiesTests: XCTestCase {
     func testFourRoomsHaveStableSaveIdentifiersAndDifferentMechanics() throws {
-        XCTAssertEqual(Set(IslandActivityKind.allCases.map(\.rawValue)), ["canal", "fireflies", "windmill", "observatory"])
+        XCTAssertEqual(Set(IslandActivityKind.allCases.map(\.rawValue)), ["canal", "fireflies", "windmill", "observatory", "shuttle"])
         for kind in IslandActivityKind.allCases {
             XCTAssertEqual(try JSONDecoder().decode(IslandActivityKind.self, from: JSONEncoder().encode(kind)), kind)
             XCTAssertFalse(kind.title.isEmpty); XCTAssertFalse(kind.subtitle.isEmpty)

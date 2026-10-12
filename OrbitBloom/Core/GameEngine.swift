@@ -44,7 +44,8 @@ public struct Level: Identifiable {
     public let frost: Int
     public var rulesVersion = 2
     public var difficulty: LevelDifficulty {
-        if rulesVersion == 2 && id >= 30 && (id-30)%50 == 0 { return .oneShot }
+        if rulesVersion >= 2 && id >= 30 && (id-30)%50 == 0 { return .oneShot }
+        if rulesVersion >= 3 { return id % 10 >= 7 || id % 10 == 0 ? .superHard : .hard }
         if id <= 6 { return .simple }
         if id <= 8 { return .hard }
         if id <= 12 { return .superHard }
@@ -54,7 +55,16 @@ public struct Level: Identifiable {
     public var isOneShot: Bool { difficulty == .oneShot }
     public var subtitle: String { isOneShot ? "Ultra super hard: one move, all goals. No tools or shuffle; hints work." : frost > 0 ? "Bloom beside frozen patches to melt them." : "Collect resources to bring your little moon to life." }
     public static let total = 1020
-    public static let campaign: [Level] = opening + (13...total).map { id in
+    public static let campaign: [Level] = versionTwoCampaign.map { original in
+        var level = original; level.rulesVersion = 3
+        guard !level.isOneShot else { return level }
+        let second = Gem.allCases[(level.id + 2) % 5]
+        return Level(id: level.id, title: level.title, biome: level.biome,
+            moves: max(10, min(16, level.moves - 2)), target: max(700, level.target),
+            goals: level.goals.count == 1 ? [level.goals.keys.first!: 10, second: 8] : level.goals,
+            frost: 0, rulesVersion: 3)
+    }
+    public static let versionTwoCampaign: [Level] = opening + (13...total).map { id in
         let region = (id-1)/10
         let names = GardenRegion.biomes
         let a = Gem.allCases[id%5], b = Gem.allCases[(id+2)%5]
@@ -78,7 +88,8 @@ public struct Level: Identifiable {
         guard (1...total).contains(id) else { return nil }
         switch rulesVersion ?? 1 {
         case 1: return legacyCampaign[id-1]
-        case 2: return campaign[id-1]
+        case 2: return versionTwoCampaign[id-1]
+        case 3: return campaign[id-1]
         default: return nil
         }
     }
@@ -111,6 +122,18 @@ public struct Cascade {
     public let cells: [CellState]
     public let collected: [Gem: Int]
     public let points: Int
+    public var seeds = 0
+}
+
+public enum ObstacleKind: String, Codable, CaseIterable {
+    case ice, rope, mud, sack, tube
+    public var hits: Int { self == .mud ? 1 : self == .sack || self == .tube ? 3 : 2 }
+    public var title: String { ["ice":"Layered ice", "rope":"Knotted rope", "mud":"Buried diamond", "sack":"Seed sack", "tube":"Water tube"][rawValue]! }
+}
+public struct BoardObstacle: Codable, Equatable {
+    public let kind: ObstacleKind
+    public var remaining: Int
+    public init(_ kind: ObstacleKind) { self.kind = kind; remaining = kind.hits }
 }
 public struct Turn {
     public let accepted: Bool
@@ -126,6 +149,7 @@ public final class GameEngine {
     public private(set) var moves: Int
     public private(set) var collected: [Gem: Int] = [:]
     public private(set) var frost: Set<Int> = []
+    public private(set) var obstacles: [Int: BoardObstacle] = [:]
     public let level: Level
     public private(set) var specials: [UUID:GardenTool] = [:]
     public var powers: [Int:GardenTool] { Dictionary(uniqueKeysWithValues:cells.compactMap { cell in cell.power.map { (cell.key,$0) } }) }
@@ -135,7 +159,7 @@ public final class GameEngine {
             return .init(id: cell.id, column: index.column, row: index.row, gem: cell.filling, power:specials[cell.id])
         }
     }
-    public var won: Bool { score >= level.target && frost.isEmpty && level.goals.allSatisfy { collected[$0.key, default: 0] >= $0.value } }
+    public var won: Bool { score >= level.target && frost.isEmpty && obstacles.isEmpty && level.goals.allSatisfy { collected[$0.key, default: 0] >= $0.value } }
     public var lost: Bool { moves <= 0 && !won }
     public var hint: (Int, Int)? {
         guard let pair = board.findPossibleSwap() else { return nil }
@@ -149,6 +173,11 @@ public final class GameEngine {
         resetBoard()
         // Spread frost deterministically across the board, with no repeated cells.
         frost = Set((0..<level.frost).map { ($0 * 11 + 16) % 49 })
+        if level.rulesVersion >= 3 && !level.isOneShot {
+            let count = min(9, 3 + level.id / 180 + (level.difficulty == .superHard ? 2 : 0))
+            let kinds: [ObstacleKind] = level.id < 12 ? [.ice, .rope, .mud] : ObstacleKind.allCases
+            for i in 0..<count { obstacles[(i * 11 + level.id * 7 + 16) % 49] = BoardObstacle(kinds[i % kinds.count]) }
+        }
         if level.isOneShot { prepareOneShot() }
     }
     private func key(_ index: Index) -> Int { index.row * 7 + index.column }
@@ -171,7 +200,8 @@ public final class GameEngine {
             func value(_ cell: CellState) -> Int {
                 let group = cluster(at:cell.key)
                 let warmed = frost.filter { frozen in group.contains { matched in abs(matched/7-frozen/7)+abs(matched%7-frozen%7) <= 1 } }
-                return group.count * (collected[cell.gem,default:0] < level.goals[cell.gem,default:0] ? 5 : 1) + warmed.count * 8
+                let damage = obstacles.keys.filter { key in group.contains { abs($0/7-key/7)+abs($0%7-key%7) <= 1 } }.count
+                return group.count * (collected[cell.gem,default:0] < level.goals[cell.gem,default:0] ? 5 : 1) + warmed.count * 8 + damage * 14
             }
             return value(a) < value(b)
         }?.key
@@ -263,6 +293,7 @@ public final class GameEngine {
         var matches = initial
         var waves: [Cascade] = []
         let charge = matches.count >= 4
+        var damagedThisTurn: Set<Int> = []
         for chain in 1...64 {
             guard !matches.isEmpty else { break }
             // Expand every touched on-board power before removing any pieces.
@@ -280,8 +311,23 @@ public final class GameEngine {
             for id in detonated { specials.removeValue(forKey:id) }
             var tally: [Gem: Int] = [:]
             for i in matches { tally[board.grid[i].filling, default: 0] += 1 }
-            for (gem, amount) in tally { collected[gem, default: 0] += amount }
             let cleared = Set(matches.map(key))
+            var seeds = 0
+            for position in Array(obstacles.keys).sorted() where !damagedThisTurn.contains(position) {
+                let touched = cleared.contains { matched in
+                    let distance = abs(matched/7-position/7) + abs(matched%7-position%7)
+                    return bloomWarmth ? distance <= 1 : distance == 0
+                }
+                guard touched, var obstacle = obstacles[position] else { continue }
+                damagedThisTurn.insert(position); obstacle.remaining -= 1
+                if obstacle.remaining == 0 {
+                    obstacles.removeValue(forKey: position)
+                    if obstacle.kind == .mud { tally[.crystal, default: 0] += 1 }
+                    if obstacle.kind == .tube { tally[.water, default: 0] += 3 }
+                    if obstacle.kind == .sack { seeds += 1 }
+                } else { obstacles[position] = obstacle }
+            }
+            for (gem, amount) in tally { collected[gem, default: 0] += amount }
             frost.subtract(cleared)
             if bloomWarmth {
                 let warmed = frost.filter { frozen in cleared.contains { cell in
@@ -292,7 +338,7 @@ public final class GameEngine {
             let points = matches.count * 30 * min(chain, 4)
             score += points
             board.remove(indices: matches, refill: .spill)
-            waves.append(.init(cleared: cleared, cells: cells, collected: tally, points: points))
+            waves.append(.init(cleared: cleared, cells: cells, collected: tally, points: points, seeds: seeds))
             matches = board.findAllMatches()
         }
         // Guarantee a stable, playable board, including after a pathological long cascade.
@@ -333,14 +379,28 @@ public final class GameEngine {
                 var grid = board.grid
                 grid.swapCell(at: i, with: j)
                 let matches = board.matcher.findAllMatches(on: grid)
-                let value = matches.reduce(0) { sum, index in
+                var value = matches.reduce(0) { sum, index in
                     let gem = grid[index].filling
                     return sum + 1 + (frost.contains(key(index)) ? 6 : 0) + (collected[gem, default: 0] < level.goals[gem, default: 0] ? 4 : 0)
                 }
+                value += obstacles.keys.filter { position in matches.contains { abs(key($0)/7-position/7)+abs(key($0)%7-position%7) <= 1 } }.count * 14
                 if value > weight { weight = value; best = (key(i), key(j)) }
             }
         }
         return best
+    }
+    public func bestBlastTarget(_ tool: GardenTool = .tnt) -> Int {
+        (0..<49).max { a,b in
+            func value(_ cell: Int) -> Int {
+                let area = blastArea(tool, at: cell)
+                return area.intersection(Set(obstacles.keys)).count * 20 + area.intersection(frost).count * 8 + cells.filter { area.contains($0.key) && collected[$0.gem,default:0] < level.goals[$0.gem,default:0] }.count * 3
+            }
+            return value(a) < value(b)
+        } ?? 24
+    }
+    public func seedPowers(_ tools: [GardenTool]) {
+        guard !level.isOneShot, moves == level.moves, score == 0 else { return }
+        for (offset, tool) in tools.prefix(3).enumerated() { specials[board.grid[index([9,24,39][offset])].id] = tool }
     }
 }
 
@@ -354,13 +414,17 @@ extension GameEngine {
         public let frost: Set<Int>
         public var specials: [UUID:GardenTool]? = nil
         public var rulesVersion: Int? = nil
+        public var obstacles: [Int: BoardObstacle]? = nil
     }
-    public var snapshot: Snapshot { .init(levelID: level.id, grid: board.grid, score: score, moves: moves, collected: collected, frost: frost, specials:specials,rulesVersion:level.rulesVersion) }
+    public var snapshot: Snapshot { .init(levelID: level.id, grid: board.grid, score: score, moves: moves, collected: collected, frost: frost, specials:specials,rulesVersion:level.rulesVersion,obstacles:obstacles) }
     public convenience init?(snapshot: Snapshot) {
         guard let level = Level.savedLevel(id:snapshot.levelID,rulesVersion:snapshot.rulesVersion), snapshot.grid.size == Size(columns: 7, rows: 7), snapshot.grid.columns.count == 7, snapshot.grid.columns.allSatisfy({ $0.count == 7 }), snapshot.moves >= 0 else { return nil }
         self.init(level: level, seed: UInt64.random(in: 1...UInt64.max))
         board = Board(grid: snapshot.grid, basic: Set(Gem.allCases), bonuse: [], obstacles: [])
         specials = snapshot.specials ?? [:]
+        if level.rulesVersion >= 3 && !level.isOneShot && snapshot.obstacles == nil { return nil }
+        obstacles = snapshot.obstacles ?? [:]
+        guard obstacles.allSatisfy({ (0..<49).contains($0.key) && (1...$0.value.kind.hits).contains($0.value.remaining) }) else { return nil }
         score = snapshot.score; moves = snapshot.moves; collected = snapshot.collected; frost = snapshot.frost.filter { (0..<49).contains($0) }
         if !board.findAllMatches().isEmpty || board.findPossibleSwap() == nil || bestCluster() == nil { resetBoard() }
     }
