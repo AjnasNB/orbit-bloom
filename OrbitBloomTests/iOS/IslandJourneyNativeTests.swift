@@ -149,6 +149,57 @@ import XCTest
         XCTAssertEqual(decoded.momentum,restored.momentum); XCTAssertNil(decoded.session)
     }
 
+    func testEveryAdventureUnlocksFarmFieldsWithoutReplaysOrAbandonedAttempts() throws {
+        let prefs=try preferences(),game=GameModel(defaults:prefs)
+        game.enterActivity(.canal); game.exitActivity()
+        game.completeActivity(500)
+        XCTAssertEqual(game.farmAdventureWins,0); XCTAssertEqual(game.farmFieldCount,1)
+        for (index,kind) in IslandActivityKind.allCases.enumerated() {
+            game.enterActivity(kind)
+            let score=try winningScore(kind,level:1)
+            game.completeActivity(score); game.completeActivity(score)
+            game.exitActivity()
+            XCTAssertEqual(game.farmAdventureWins,index+1,"Repeated callbacks cannot unlock land")
+            XCTAssertEqual(game.farmFieldCount,index < 2 ? 1 : 2)
+        }
+        XCTAssertTrue(game.progress.finish(level:1,score:900))
+        XCTAssertFalse(game.progress.finish(level:1,score:1000))
+        XCTAssertEqual(game.farmAdventureWins,6,"Replaying Bloom cannot add another expansion clear")
+        var failed=DeliveryRun(difficulty:game.rallyDifficulty)
+        for _ in 0..<500 where !failed.finished {
+            if let traffic=failed.nextTraffic { failed.lane=traffic.barrierLane }
+            _=failed.tick(0.05)
+        }
+        XCTAssertFalse(failed.won); game.completeDelivery(failed)
+        XCTAssertEqual(game.farmAdventureWins,6)
+        for delivery in 1...3 {
+            var run=DeliveryRun(difficulty:game.rallyDifficulty)
+            for _ in 0..<500 where !run.finished {
+                if let traffic=run.nextTraffic { run.lane=traffic.coinLane }
+                _=run.tick(0.05)
+            }
+            XCTAssertTrue(run.won); game.completeDelivery(run)
+            XCTAssertEqual(game.farmAdventureWins,6+delivery)
+            XCTAssertEqual(game.farmFieldCount,delivery < 3 ? 2 : 3)
+            if delivery < 3 {
+                let before=game.ecosystem
+                game.farmAction(12,crop:.apple); XCTAssertEqual(game.ecosystem,before)
+            }
+        }
+        game.farmAction(6,crop:.rose); game.farmAction(12,crop:.apple)
+        let restored=GameModel(defaults:prefs)
+        XCTAssertEqual(restored.farmAdventureWins,9); XCTAssertEqual(restored.farmFieldCount,3)
+        XCTAssertEqual(restored.ecosystem.plot(6)?.crop,.rose)
+        XCTAssertEqual(restored.ecosystem.plot(12)?.crop,.apple)
+        XCTAssertEqual(restored.ecosystem.harvested,0,"New adventures can open all fields without forcing harvest grinding")
+        let saved=SavedGarden(playerKey:"expanded-farm",wallet:restored.wallet)
+        let cloud=try XCTUnwrap(SavedGarden.decode(saved.encoded(),playerKey:"expanded-farm"))
+        let other=GameModel(defaults:try preferences())
+        XCTAssertTrue(other.restoreWallet(cloud.wallet))
+        XCTAssertEqual(other.farmAdventureWins,9); XCTAssertEqual(other.farmFieldCount,3)
+        XCTAssertEqual(other.ecosystem,restored.ecosystem)
+    }
+
     func testNextChallengeAdvancesOnlyAfterWinningAndInvalidResultsMintNothing() throws {
         let game = GameModel(defaults: try preferences()), initial = Progress()
         game.completeActivity(500)

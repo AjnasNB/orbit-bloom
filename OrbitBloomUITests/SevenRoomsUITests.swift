@@ -64,6 +64,30 @@ import UIKit
         }
         XCTAssertEqual(app.scrollViews.count,0)
     }
+    func testThreeRealSkillWinsOpenSecondFarmFieldAndPersistItsCrop() throws {
+        app.buttons["openFarm"].tap()
+        let map=element("farmRoomMap"),locked=element("lockedFarmField")
+        map.swipeLeft();XCTAssertTrue(locked.waitForExistence(timeout:5))
+        XCTAssertTrue(locked.label.contains("0 wins so far"));XCTAssertFalse(app.buttons["plot6"].exists)
+        capture("build19-farm-before-adventure-wins");app.buttons["returnWorld"].tap()
+        enter("canal");try solveCanal();collect("Water reaches the garden!",room:"canal")
+        enter("fireflies");try repeatFireflies();collect("The island hears your signal!",room:"fireflies")
+        enter("windmill");chargeWindmill();collect("The workshop has power!",room:"windmill")
+        app.buttons["openFarm"].tap();map.swipeLeft()
+        fits(app.buttons["plot6"]);XCTAssertFalse(locked.exists)
+        app.buttons["cropapple"].tap();app.buttons["plot6"].tap()
+        XCTAssertTrue((app.buttons["plot6"].value as? String ?? "").contains("Moon apple"))
+        capture("build19-farm-opened-by-three-skill-games")
+        map.swipeLeft();XCTAssertTrue(locked.waitForExistence(timeout:5))
+        XCTAssertTrue(locked.label.contains("3 wins so far"));XCTAssertFalse(app.buttons["plot12"].exists)
+        capture("build19-farm-third-field-progress")
+        app.buttons["returnWorld"].tap();app.terminate()
+        app.launchArguments=["--uitesting","--keep-progress"];app.launch()
+        XCTAssertTrue(app.buttons["openFarm"].waitForExistence(timeout:15))
+        app.buttons["openFarm"].tap();map.swipeLeft();fits(app.buttons["plot6"])
+        XCTAssertTrue((app.buttons["plot6"].value as? String ?? "").contains("Moon apple"))
+        capture("build19-farm-unlock-and-crop-after-relaunch")
+    }
     private func solveShuttle() throws {
         struct Ticket { let deck:Int;let window:Bool;let front:Bool;let mate:Int? }
         var tickets:[Ticket]=[]

@@ -375,12 +375,16 @@ import Match3Kit
         }
         else if ecosystem.plot(id)?.crop == nil {
             if ecosystem.plant(id,crop:crop,at:now) { effect("plant"); showToast("\(crop.title) planted. Tap to water and grow faster.") }
-            else { showToast("Planting needs 1 seed and 2 water. Garden puzzles collect water.") }
+            else { showToast("Planting needs 1 seed and 2 water. Bloom and skill-game clears earn water.") }
         } else if ecosystem.waterPlot(id,at:now) { effect("water") }
         else { showToast("Your crop is growing. Come back when it blooms.") }
         save()
     }
-    var farmFieldCount: Int { min(3, 1 + (ecosystem.harvested >= 3 || progress.completed.count >= 3 ? 1 : 0) + (ecosystem.harvested >= 9 || progress.completed.count >= 9 ? 1 : 0)) }
+    // Derive expansion from the same saved results as the shared garden wallet.
+    // Skill first clears and successful deliveries help just like Bloom clears;
+    // unfinished attempts and duplicate skill-result callbacks add no progress.
+    var farmAdventureWins: Int { progress.completed.count + journey.levels.values.reduce(0,+) + ecosystem.deliveries }
+    var farmFieldCount: Int { min(3, 1 + (ecosystem.harvested >= 3 || farmAdventureWins >= 3 ? 1 : 0) + (ecosystem.harvested >= 9 || farmAdventureWins >= 9 ? 1 : 0)) }
     func craft(_ tool: GardenTool) {
         if ecosystem.craft(tool) { effect("craft"); showToast("\(tool.title) crafted!"); save() }
         else { showToast("Harvest \(tool.compostCost) compost to craft \(tool.title).") }

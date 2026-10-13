@@ -86,4 +86,13 @@ import XCTest
         let restored=try XCTUnwrap(SavedGarden.decode(try cloud.encoded(),playerKey:"farmer"))
         XCTAssertEqual(restored.wallet.ecosystem,game.ecosystem)
     }
+    func testExistingCampaignClearsStillUnlockFieldsWithoutSkillResults() throws {
+        let game=try model()
+        for level in 1...9 {
+            XCTAssertTrue(game.progress.finish(level:level,score:900))
+            XCTAssertEqual(game.farmFieldCount,level < 3 ? 1 : level < 9 ? 2 : 3)
+        }
+        XCTAssertTrue(game.journey.levels.isEmpty); XCTAssertEqual(game.ecosystem.deliveries,0)
+        XCTAssertEqual(game.ecosystem.harvested,0); XCTAssertTrue(game.wallet.isValid)
+    }
 }

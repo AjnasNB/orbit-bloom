@@ -34,8 +34,9 @@ struct FarmView:View {
                             } else {
                                 VStack(spacing:18) {
                                     Image(systemName:"lock.fill").font(.system(size:55)).foregroundStyle(Palette.mint)
-                                    HStack { Image(systemName:"basket.fill"); Text(page == 1 ? "3" : "9"); Image(systemName:"arrow.left.arrow.right"); Image(systemName:"flag.fill"); Text(page == 1 ? "3" : "9") }.font(.system(size:22,weight:.bold))
-                                }.padding(28).background(Palette.paper.opacity(0.95),in:RoundedRectangle(cornerRadius:28)).accessibilityElement(children:.ignore).accessibilityLabel("Field \(page+1) locked. Complete \(page == 1 ? 3 : 9) harvests or puzzle levels to open it").accessibilityIdentifier("lockedFarmField")
+                                    HStack { Image(systemName:"basket.fill"); Text("\(min(game.ecosystem.harvested,unlockTarget))/\(unlockTarget)"); Image(systemName:"arrow.left.arrow.right"); Image(systemName:"flag.fill"); Text("\(min(game.farmAdventureWins,unlockTarget))/\(unlockTarget)") }.font(.system(size:22,weight:.bold))
+                                    Text("Harvests or adventure wins").font(.system(size:14,weight:.bold,design:.rounded))
+                                }.padding(28).background(Palette.paper.opacity(0.95),in:RoundedRectangle(cornerRadius:28)).accessibilityElement(children:.ignore).accessibilityLabel("Field \(page+1) locked. Complete \(unlockTarget) harvests or adventure wins to open it. \(game.ecosystem.harvested) harvests and \(game.farmAdventureWins) wins so far. Bloom, skill games and successful Rally deliveries count.").accessibilityIdentifier("lockedFarmField")
                             }
                         }.accessibilityElement(children:.contain).accessibilityLabel("Farm field \(page+1) of three, \(unlocked ? "open with six saved patches" : "locked"). Swipe horizontally to change field").accessibilityIdentifier("farmRoomMap")
                     }.frame(minHeight:220,maxHeight:.infinity)
@@ -54,6 +55,7 @@ struct FarmView:View {
                 .accessibilityAction(named:"Next farm field") { changeField(1) }.accessibilityAction(named:"Previous farm field") { changeField(-1) }
         }
     }
+    private var unlockTarget:Int { page == 1 ? 3 : 9 }
     private var localPlots:[FarmPlot] { game.ecosystem.field(page).map { plot in var local=FarmPlot(id:plot.id%6); local.crop=plot.crop; local.readyAt=plot.readyAt; return local } }
     private func changeField(_ step:Int) {
         let next=min(2,max(0,page+step)); guard next != page else { return }
