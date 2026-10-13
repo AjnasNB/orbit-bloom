@@ -11,3 +11,5 @@ The exact `orbitbloom.cognifyr.co` DNS search was empty before deployment on 12 
 10 October 2026: the home hero uses the original native build13 cartoon puzzle screenshot `assets/game-v13.png`. Deployment `8786ad9b-5de6-47ff-a68c-064d97529ab2` passed the five-route HTTPS/security check and visual verification in Chrome. No event-clock or privacy/support logic changed.
 
 12 October 2026: deployment `651367f7-33c3-4d47-9a9e-f4b293dcb802` presents eight development activities, three farm fields and tier-3-to-5 Rally, with an original native build-17 puzzle image. Chrome confirms the new page; all five HTTPS/security routes pass. App Store availability remains pending and is not represented as live.
+
+13 October 2026: deployment `f4e3edfa-04d2-42ca-a714-4dd5e8478115` changes only support guidance for development build 19. Combined Bloom/skill/Rally wins now expand fields at three and nine; separate harvest thresholds remain. Chrome and five HTTPS/security route checks pass. App Store availability remains pending; no DNS or player-save backend changed.

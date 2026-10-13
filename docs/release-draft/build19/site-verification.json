@@ -1,0 +1,19 @@
+{
+  "origin": "https://orbitbloom.cognifyr.co",
+  "deployment": "f4e3edfa-04d2-42ca-a714-4dd5e8478115",
+  "scope": "Existing isolated Worker support asset only",
+  "chromeVerified": true,
+  "copyLabelsDevelopmentBuild19": true,
+  "securityCheckPassed": true,
+  "routes": {
+    "/": 200,
+    "/privacy/": 200,
+    "/support/": 200,
+    "/style.css": 200,
+    "/missing-security-check/": 404
+  },
+  "dnsOrOtherProjectsChanged": false,
+  "playerSaveBackendChanged": false,
+  "proof": "proof/live-support-rules.png",
+  "log": "evidence/build19-site-security.log"
+}

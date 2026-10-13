@@ -1,3 +1,13 @@
+# Latest delivery — build 19, 13 October 2026
+
+Farm fields now expand through Bloom first clears, all five skill-game first clears and successful Rally deliveries: three wins open the second field, nine open the third. The existing three/nine-harvest alternative is preserved. Locked fields display both progress counters and accessible explanations. [Delivery record](release-draft/build19/README.md) documents **125 passing affected core/native/phone checks**, fifteen original native screenshots and full local/cloud progression regressions. Source **34b5770** is pushed to public main.
+
+The ordinary preview runs **1.0 (19)** with the complete save intact: 555 coins, three campaign clears and the active rules-2 level-4 board with nine moves. Strict local signature/export and frozen-source checks pass. The support page on **https://orbitbloom.cognifyr.co/support/** explicitly describes development build 19; Chrome and HTTPS/security routes pass.
+
+**Build 19 remains local, not uploaded/submitted.** The previously established Apple account/control blocker has no new sign-in signal, so this daily run did not repeat a sign-in request or replace the pending build-18 Transporter package. The public review's last authenticated observation remains 12 October; today's Chrome Apple tab is at login. Local metadata/gallery preparation is updated, with unchanged build-18 gallery provenance explicit. No public release, purchase, agreement or duplicate Apple inquiry occurred.
+
+---
+
 # Latest delivery — build 18, 12 October 2026
 
 Build **1.0 (18)** makes all eight home activities equally prominent, adds named progress badges, shared garden supplies/restoration counters and eight swipeable Lio story pages. [Delivery record](release-draft/build18/README.md) covers **135 unique passing core/native/phone/iPad cases**, a final successful 61-case polish rerun, 36 original native images and the complete preserved preview save. Source **eef0460** is on public main; the normal owner preview runs 18 with 555 coins and its active level-4 board intact.

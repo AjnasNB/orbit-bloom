@@ -1,0 +1,31 @@
+{
+  "build": 19,
+  "status": "Prepared locally, not uploaded or saved to Apple; mixed original-capture provenance is explicit.",
+  "iPhone": [
+    "../build18/captures/iphone-world.png",
+    "../build18/captures/iphone-puzzle.png",
+    "captures/phone-field2-opened-by-skill-wins.png",
+    "../build18/captures/iphone-rally.png",
+    "../build18/captures/iphone-shuttle.png",
+    "../build18/captures/iphone-fireflies.png",
+    "../build18/captures/iphone-canal.png",
+    "../build18/captures/iphone-windmill.png",
+    "../build18/captures/iphone-observatory.png",
+    "../build18/captures/iphone-loadout.png"
+  ],
+  "iPad": [
+    "../build18/captures/ipad-island-portrait.png",
+    "../build18/captures/ipad-puzzle-portrait.png",
+    "../build18/captures/ipad-farm-portrait.png",
+    "../build18/captures/ipad-rally-road-portrait.png",
+    "../build18/captures/ipad-shuttle-portrait.png",
+    "../build18/captures/ipad-fireflies-portrait.png",
+    "../build18/captures/ipad-canal-portrait.png",
+    "../build18/captures/ipad-windmill-portrait.png",
+    "../build18/captures/ipad-observatory-portrait.png",
+    "../build18/captures/ipad-loadout-portrait.png"
+  ],
+  "countPerDevice": 10,
+  "originalNativePNGs": true,
+  "provenance": "One fresh native build-19 farm capture; the nine other phone and ten iPad images are unchanged original build-18 views. Not a fresh 19 tablet verification."
+}

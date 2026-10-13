@@ -1,0 +1,33 @@
+{
+  "build": 19,
+  "sourceCommit": "34b57700b9576ac3ca73b78fc256fbc14ca3a9bb",
+  "uniquePassingCases": 125,
+  "core": 60,
+  "native": 62,
+  "phoneUI": 3,
+  "tabletUIThisRun": 0,
+  "coreLog": "evidence/build19-core.log",
+  "campaign": "1020 levels, six projects, 6125 legal swaps and 24 retries, no paid items or extra moves",
+  "runs": [
+    {
+      "bundle": "evidence/Build19-Native.xcresult",
+      "passed": 62,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "bundle": "evidence/Build19-ConnectedFarm-UI.xcresult",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "scope": "Real skill inputs open field two, planting and relaunch preserve it; all three fields/harvests and lock/shed controls; native mixed Bloom/five skills/Rally thresholds, abandoned/failed attempts, repeat clears, local/cloud encoding and old harvest/campaign thresholds.",
+  "nativeScreenshotCount": 15,
+  "limits": [
+    "No new iPad run; build-18 tablet evidence remains separate.",
+    "Physical Game Center, iCloud, signed sandbox purchases and VoiceOver timing remain hardware checks.",
+    "Automated campaign reachability does not measure human difficulty."
+  ],
+  "allFinalChecksPassed": true
+}
