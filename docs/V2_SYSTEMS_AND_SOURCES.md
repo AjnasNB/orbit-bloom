@@ -1,4 +1,14 @@
-# Latest delivery — build 19, 13 October 2026
+# Latest verified delivery — build 19, 13 October 2026
+
+The owner-requested full retest brings build **1.0 (19)** to **138 unique passing affected checks**: 60 core, 62 native, fifteen real-input phone flows and a complete iPad portrait/landscape tour. The first expanded attempt hit host storage exhaustion during test-app installation; generated own test caches were cleared and the full rerun passes. [Final delivery record](release-draft/build19/README.md) retains both diagnostics and successful results, with 38 fresh native screenshots and twenty current-build gallery selections. Game source and the signed package are unchanged.
+
+**Apple validated, received and processed build 19.** Transporter verification finished at 6:35 PM India time and delivery at 6:43 PM. The **Orbit Bloom QA** internal group has access (one tester/invite); What to Test was saved and verified after reload. [Apple proof](release-draft/build19/proof/apple-build19-ready.png), [status](release-draft/build19/apple-retest-status.json). Native upload control now works, resolving the previous Transporter blocker for this session. No manual upload of the older build-18 package is needed.
+
+The ordinary preview remains build 19 with 555 coins and the active level-4 rules-2 board at nine moves; no preview reset or test arguments were used. Both QA devices are closed. The authenticated public submission remains **build 11 Waiting for Review**, with manual release. Build 19 is available for internal testing, not submitted for public review or publicly released. Physical Game Center/iCloud, signed sandbox checkout and VoiceOver timing remain hardware checks; no real purchase, agreement or duplicate Apple inquiry occurred.
+
+---
+
+# Initial local delivery — build 19, 13 October 2026 (before full retest)
 
 Farm fields now expand through Bloom first clears, all five skill-game first clears and successful Rally deliveries: three wins open the second field, nine open the third. The existing three/nine-harvest alternative is preserved. Locked fields display both progress counters and accessible explanations. [Delivery record](release-draft/build19/README.md) documents **125 passing affected core/native/phone checks**, fifteen original native screenshots and full local/cloud progression regressions. Source **34b5770** is pushed to public main.
 

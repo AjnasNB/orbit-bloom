@@ -1,0 +1,11 @@
+{
+  "build": 19,
+  "ordinaryPreview": true,
+  "testPlugins": false,
+  "noPreviewResetOrUninstallDuringRetest": true,
+  "coins": 555,
+  "completedStages": 3,
+  "activeLevel": 4,
+  "activeMoves": 9,
+  "activeRules": 2
+}

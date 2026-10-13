@@ -1,0 +1,18 @@
+{
+  "observedDate": "2026-10-13",
+  "version": "1.0",
+  "build": 19,
+  "appleServerValidated": true,
+  "uploaded": true,
+  "processed": true,
+  "internalGroup": "Orbit Bloom QA",
+  "internalTesters": 1,
+  "internalInvites": 1,
+  "whatToTestSavedAndReloadVerified": true,
+  "testFlightURL": "https://appstoreconnect.apple.com/teams/bcfecac0-16a7-4c72-86df-f101b0d4e6d4/apps/6820591529/testflight/ios/aeff4c65-2164-4632-89ec-14bd044ebb36",
+  "publicReviewBuild": 11,
+  "publicReviewStatus": "Waiting for Review",
+  "manualPublicRelease": true,
+  "newBuildPublicSubmission": false,
+  "proof": "proof/apple-build19-ready.png"
+}

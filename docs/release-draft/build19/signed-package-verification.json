@@ -31,8 +31,15 @@
   },
   "testPlugins": false,
   "sourceHashesStillMatch": true,
-  "appleServerValidated": false,
-  "uploaded": false,
-  "uploadAttemptedThisRun": false,
-  "uploadStatus": "Existing Failed to Use Accounts / opaque Transporter delivery blocker was established on build 18. No new sign-in signal; the Chrome App Store tab is at login. No repeated sign-in request or public submission this daily run. Final 18 package in Transporter was not replaced."
+  "appleServerValidated": true,
+  "uploaded": true,
+  "uploadAttemptedThisRun": true,
+  "uploadStatus": "Transporter verified build 19 on 13 October 2026 at 6:35 PM India time and delivered it at 6:43 PM. Apple processed it, assigned Orbit Bloom QA (one tester/invite), and retained its saved What to Test notes after reload. Public review remains build 11.",
+  "nativeDelivery": "Native coordinate control now works. Latest tested build 19 was loaded, verified and delivered; build 18 remains undelivered in the local queue.",
+  "serverValidationProof": "evidence/build19-transporter-verified.png",
+  "deliveryProof": "evidence/build19-transporter-delivered.png",
+  "processed": true,
+  "internalGroup": "Orbit Bloom QA",
+  "internalTesters": 1,
+  "whatToTestSavedAndReloadVerified": true
 }
