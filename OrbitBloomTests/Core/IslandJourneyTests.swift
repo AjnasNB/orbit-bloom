@@ -2,6 +2,14 @@ import XCTest
 @testable import OrbitBloomCore
 
 final class IslandJourneyTests: XCTestCase {
+    func testRallyAttemptIdentitySurvivesValueCopiesAndDiffersForEachNewRun() {
+        var original=DeliveryRun(difficulty:2)
+        let copy=original
+        _=original.tick(0.25)
+        XCTAssertEqual(original.id,copy.id)
+        XCTAssertNotEqual(original.id,DeliveryRun(difficulty:2).id)
+        XCTAssertEqual(copy.elapsed,0);XCTAssertEqual(original.elapsed,0.25)
+    }
     func testRallyTrafficIncreasesWithTierAndEveryTierIsPlayable() {
         XCTAssertEqual(DeliveryRun(difficulty:-100).difficulty,2)
         XCTAssertEqual(DeliveryRun(difficulty:Int.max).difficulty,4)

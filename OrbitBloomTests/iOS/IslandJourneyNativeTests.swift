@@ -29,7 +29,8 @@ import XCTest
         let startingCoins = game.progress.coins
         let startingLives = game.ecosystem.lives
         let startingJourney = game.journey
-        var run = DeliveryRun(difficulty: 4)
+        game.ecosystem.deliveries=6
+        var run = game.prepareDeliveryRun()
         for _ in 0..<500 where !run.finished {
             if let traffic = run.nextTraffic { run.lane = traffic.coinLane }
             _ = run.tick(0.05)
@@ -39,11 +40,94 @@ import XCTest
         let restored = GameModel(defaults: defaults)
         XCTAssertEqual(restored.progress.coins, startingCoins + 60 + 18 * 10 + 40)
         XCTAssertEqual(restored.ecosystem.produce, 0)
-        XCTAssertEqual(restored.ecosystem.deliveries, 1)
+        XCTAssertEqual(restored.ecosystem.deliveries, 7)
         XCTAssertEqual(restored.ecosystem.raceBest, 440)
         XCTAssertEqual(restored.ecosystem.lives, startingLives)
         XCTAssertEqual(restored.journey.levels, startingJourney.levels)
         XCTAssertEqual(restored.journey.bestScores, startingJourney.bestScores)
+    }
+
+    func testRepeatedRallyFinishCannotMintCoinsConsumeCargoOrUnlockFields() throws {
+        let prefs=try preferences(),game=GameModel(defaults:prefs)
+        game.ecosystem.produce=3
+        var run=game.prepareDeliveryRun()
+        for _ in 0..<500 where !run.finished {
+            if let traffic=run.nextTraffic { run.lane=traffic.coinLane }
+            _=run.tick(0.05)
+        }
+        XCTAssertTrue(run.won); game.completeDelivery(run)
+        XCTAssertEqual(game.progress.coins,160+run.reward+40)
+        let earned=game.progress.coins,remaining=game.ecosystem.produce
+        let generation=game.saveGeneration
+        for _ in 0..<3 { game.completeDelivery(run) }
+        XCTAssertEqual(game.saveGeneration,generation,"Ignored callbacks must not write another checkpoint")
+        XCTAssertEqual(game.progress.coins,earned,"The same result must not pay twice")
+        XCTAssertEqual(game.ecosystem.produce,remaining,"One delivery consumes only one cargo")
+        XCTAssertEqual(game.ecosystem.deliveries,1)
+        XCTAssertEqual(game.farmFieldCount,1,"One winning route cannot masquerade as three wins")
+        let reopened=GameModel(defaults:prefs)
+        XCTAssertEqual(reopened.progress.coins,earned)
+        XCTAssertEqual(reopened.ecosystem.produce,remaining)
+        XCTAssertEqual(reopened.ecosystem.deliveries,1)
+    }
+
+    func testRallyRewardSavesOnceEvenWhenCompletionReentersFromSave() throws {
+        let game=GameModel(defaults:try preferences())
+        var run=game.prepareDeliveryRun()
+        for _ in 0..<500 where !run.finished {
+            if let traffic=run.nextTraffic { run.lane=traffic.coinLane }
+            _=run.tick(0.05)
+        }
+        let repeated=run; var writes=0
+        game.onSave={ writes+=1; game.completeDelivery(repeated) }
+        game.completeDelivery(run); game.onSave=nil
+        XCTAssertEqual(writes,1,"Coins, cargo and delivery progression belong to one saved result")
+        XCTAssertEqual(game.ecosystem.deliveries,1)
+        XCTAssertEqual(game.ecosystem.produce,0)
+        XCTAssertEqual(game.progress.coins,160+run.reward+40)
+    }
+
+    func testAbandonedSupersededAndPreviousWalletRallyResultsAreIgnored() throws {
+        let game=GameModel(defaults:try preferences())
+        func finish(_ original:DeliveryRun) -> DeliveryRun {
+            var run=original
+            for _ in 0..<500 where !run.finished {
+                if let traffic=run.nextTraffic { run.lane=traffic.coinLane }
+                _=run.tick(0.05)
+            }
+            XCTAssertTrue(run.won);return run
+        }
+        let abandoned=finish(game.prepareDeliveryRun());game.leaveDelivery()
+        game.completeDelivery(abandoned);XCTAssertEqual(game.progress.coins,160)
+        let superseded=finish(game.prepareDeliveryRun()),current=finish(game.prepareDeliveryRun())
+        game.completeDelivery(superseded);XCTAssertEqual(game.ecosystem.deliveries,0)
+        game.completeDelivery(current);XCTAssertEqual(game.ecosystem.deliveries,1)
+        let earned=game.progress.coins
+        let next=finish(game.prepareDeliveryRun());game.completeDelivery(next)
+        XCTAssertEqual(game.progress.coins,earned+next.reward,"A genuinely new run still pays after the first settled result")
+        XCTAssertEqual(game.ecosystem.deliveries,2)
+        let stale=finish(game.prepareDeliveryRun());game.useSaveAccount("first-player");game.useSaveAccount("other-player")
+        let generation=game.saveGeneration
+        game.completeDelivery(stale)
+        XCTAssertEqual(game.progress.coins,160);XCTAssertEqual(game.ecosystem.deliveries,0)
+        XCTAssertEqual(game.saveGeneration,generation,"A previous account's callback cannot touch this garden")
+        let restored=GameModel(defaults:try preferences());restored.completeDelivery(next)
+        XCTAssertEqual(restored.progress.coins,160,"Unfinished Rally attempts do not persist across app/model creation")
+    }
+
+    func testCrashedRallySalvagePaysOnceAndAnUnfinishedRunCannotBankCoins() throws {
+        let game=GameModel(defaults:try preferences()),cargo=game.ecosystem.produce
+        var run=game.prepareDeliveryRun()
+        game.completeDelivery(run);XCTAssertEqual(game.progress.coins,160)
+        for _ in 0..<500 where !run.finished {
+            if let traffic=run.nextTraffic { run.lane=traffic.id == 0 ? traffic.coinLane : traffic.barrierLane }
+            _=run.tick(0.05)
+        }
+        XCTAssertTrue(run.finished);XCTAssertFalse(run.won);XCTAssertGreaterThan(run.collected,0)
+        game.completeDelivery(run);game.completeDelivery(run)
+        XCTAssertEqual(game.progress.coins,160+run.reward)
+        XCTAssertEqual(game.ecosystem.produce,cargo);XCTAssertEqual(game.ecosystem.deliveries,0)
+        XCTAssertEqual(game.farmFieldCount,1)
     }
 
     /// Drive each real engine through legal input, then pass its winning score to the model.
@@ -128,7 +212,7 @@ import XCTest
         let stock=game.ecosystem.tools[.bomb,default:0]
         game.craft(.bomb); XCTAssertEqual(game.ecosystem.tools[.bomb],stock+1); XCTAssertEqual(game.ecosystem.compost,0)
         let beforeDelivery=game.progress.coins
-        var run=DeliveryRun(difficulty:game.rallyDifficulty)
+        var run=game.prepareDeliveryRun()
         for _ in 0..<500 where !run.finished { if let traffic=run.nextTraffic { run.lane=traffic.coinLane }; _=run.tick(0.05) }
         XCTAssertTrue(run.won); game.completeDelivery(run)
         XCTAssertEqual(game.progress.coins,beforeDelivery+run.reward+40); XCTAssertEqual(game.ecosystem.produce,2)
@@ -165,7 +249,7 @@ import XCTest
         XCTAssertTrue(game.progress.finish(level:1,score:900))
         XCTAssertFalse(game.progress.finish(level:1,score:1000))
         XCTAssertEqual(game.farmAdventureWins,6,"Replaying Bloom cannot add another expansion clear")
-        var failed=DeliveryRun(difficulty:game.rallyDifficulty)
+        var failed=game.prepareDeliveryRun()
         for _ in 0..<500 where !failed.finished {
             if let traffic=failed.nextTraffic { failed.lane=traffic.barrierLane }
             _=failed.tick(0.05)
@@ -173,7 +257,7 @@ import XCTest
         XCTAssertFalse(failed.won); game.completeDelivery(failed)
         XCTAssertEqual(game.farmAdventureWins,6)
         for delivery in 1...3 {
-            var run=DeliveryRun(difficulty:game.rallyDifficulty)
+            var run=game.prepareDeliveryRun()
             for _ in 0..<500 where !run.finished {
                 if let traffic=run.nextTraffic { run.lane=traffic.coinLane }
                 _=run.tick(0.05)

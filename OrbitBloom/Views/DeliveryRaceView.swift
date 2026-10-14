@@ -60,7 +60,7 @@ struct DeliveryRaceView: View {
             coinFlightID = nil
         }
         .onAppear {
-            if !prepared { run = DeliveryRun(difficulty:game.rallyDifficulty); prepared = true }
+            if !prepared { run = game.prepareDeliveryRun(); prepared = true }
             announceTraffic()
         }
         .onChange(of: scenePhase) { _, phase in if phase != .active && !run.finished { paused = true } }
@@ -107,7 +107,7 @@ struct DeliveryRaceView: View {
     private var raceHeader: some View {
         VStack(spacing: 8) {
             HStack(spacing: 12) {
-                Button { game.raceActive=false; game.tab=0 } label: { Image(systemName:"xmark").font(.system(size:22,weight:.bold)).frame(width:48,height:48).background(Palette.paper,in:Circle()) }.accessibilityLabel("Exit rally to island. No life cost. Rally coins are saved only when this run ends").accessibilityIdentifier("leaveRace")
+                Button { game.leaveDelivery() } label: { Image(systemName:"xmark").font(.system(size:22,weight:.bold)).frame(width:48,height:48).background(Palette.paper,in:Circle()) }.accessibilityLabel("Exit rally to island. No life cost. Rally coins are saved only when this run ends").accessibilityIdentifier("leaveRace")
                 Button { paused.toggle(); game.effect("tap") } label: {
                     Image(systemName: paused ? "play.fill" : "pause.fill").font(.system(size: 17, weight: .bold)).accessibilityHidden(true)
                         .frame(width: 48, height: 48).background(Palette.paper, in: Circle()).overlay(Circle().stroke(Palette.night.opacity(0.10), lineWidth: 1))
@@ -201,7 +201,7 @@ struct DeliveryRaceView: View {
                 .multilineTextAlignment(.center).accessibilityIdentifier("raceResult")
             Text(run.won ? "Your harvest made it home. Coins are in your wallet." : "Your collected coin reward is safe. Try another route.")
                 .font(.subheadline).foregroundStyle(Palette.mint).multilineTextAlignment(.center)
-            PrimaryButton(title: "Back to the world", symbol: "globe", id: "raceDone") { game.raceActive = false; game.tab = 0 }
+            PrimaryButton(title: "Back to the world", symbol: "globe", id: "raceDone") { game.leaveDelivery() }
         }.padding(24).background(Palette.paper.opacity(0.98), in: RoundedRectangle(cornerRadius: 25)).padding(22)
     }
 }

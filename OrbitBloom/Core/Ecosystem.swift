@@ -161,6 +161,7 @@ public struct RallyTraffic: Equatable {
 }
 
 public struct DeliveryRun {
+    public let id = UUID()
     public let difficulty: Int
     public var obstacleCount: Int { 10 + difficulty * 2 }
     public var lane = 1

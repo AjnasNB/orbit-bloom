@@ -53,6 +53,7 @@ import Match3Kit
     private(set) var saveAccount: String?
     private var creditedOnDevice: Set<String> = []
     private var runID = UUID()
+    private var pendingDeliveryID: UUID?
     let testing: Bool
 
     init(defaults: UserDefaults = .standard) {
@@ -147,6 +148,7 @@ import Match3Kit
         return true
     }
     private func installWallet(_ saved: GardenWallet) {
+        pendingDeliveryID = nil
         runID = UUID(); raceActive = false; activity = nil; activityRewarded = false; pendingTool = nil; blastKey = nil; busy = false
         result = nil; paused = false; selected = nil; hinted = []; clearing = []; tab = 0
         progress = saved.progress; ecosystem = saved.ecosystem; assistance = saved.assistance ?? Assistance(); journey = saved.journey ?? IslandJourney(); momentum = saved.momentum ?? GardenMomentum()
@@ -402,8 +404,20 @@ import Match3Kit
         progress.coins += pack.grant.coins
         save(); animateCoins(pack.grant.coins); effect("coin"); return true
     }
+    func prepareDeliveryRun() -> DeliveryRun {
+        let run = DeliveryRun(difficulty:rallyDifficulty)
+        pendingDeliveryID = run.id
+        return run
+    }
+    func leaveDelivery() {
+        pendingDeliveryID = nil
+        raceActive = false; tab = 0
+    }
     func completeDelivery(_ run: DeliveryRun) {
-        guard run.finished else { return }
+        guard run.finished, pendingDeliveryID == run.id else { return }
+        // Retire this attempt before saving: repeated or reentrant callbacks
+        // cannot spend cargo, pay coins or advance the shared farm twice.
+        pendingDeliveryID = nil
         if run.won {
             recordWorldEvent(room:"rally")
             ecosystem.deliveries += 1; ecosystem.raceBest = max(ecosystem.raceBest,run.distance)
@@ -411,7 +425,6 @@ import Match3Kit
             else { awardCoins(run.reward) }
             effect("win")
         } else { awardCoins(run.reward) }
-        save()
     }
 
     func enterActivity(_ kind: IslandActivityKind) {

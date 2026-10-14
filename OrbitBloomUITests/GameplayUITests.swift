@@ -117,6 +117,8 @@ import StoreKitTest
         XCTFail("Circuit never completed")
     }
     func testRallyCanFinishByFollowingItsVisibleCoinGuide() {
+        func walletCoins()->Int { Int(app.buttons["openShop"].label.components(separatedBy:CharacterSet.decimalDigits.inverted).filter { !$0.isEmpty }.joined()) ?? -1 }
+        let before=walletCoins()
         app.buttons["openRace"].tap();app.buttons["startRace"].tap()
         let road=app.descendants(matching:.any)["raceTrack"].firstMatch, guide=app.descendants(matching:.any)["raceTrafficGuide"].firstMatch
         XCTAssertTrue(road.waitForExistence(timeout:5))
@@ -127,7 +129,19 @@ import StoreKitTest
         }
         XCTAssertEqual(app.staticTexts["raceResult"].label,"Delivery complete!");attach("build17-rally-real-delivery")
         XCTAssertFalse(app.descendants(matching:.any)["raceCollectedCoins"].firstMatch.label.hasPrefix("0 coins"))
+        let collected=Int(app.descendants(matching:.any)["raceCollectedCoins"].firstMatch.label.components(separatedBy:CharacterSet.decimalDigits.inverted).filter { !$0.isEmpty }.joined()) ?? -1
+        XCTAssertGreaterThan(collected,0)
         app.buttons["raceDone"].tap();XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
+        XCTAssertEqual(walletCoins(),before+60+collected*10+40,"The completed route banks its real pickups and exactly one starting-cargo bonus")
+        XCTAssertTrue((app.buttons["openRace"].value as? String ?? "").hasPrefix("1 successful deliveries"))
+        app.buttons["openFarm"].tap();app.descendants(matching:.any)["farmRoomMap"].firstMatch.swipeLeft()
+        let lock=app.descendants(matching:.any)["lockedFarmField"].firstMatch
+        XCTAssertTrue(lock.waitForExistence(timeout:5));XCTAssertTrue(lock.label.contains("1 wins so far"))
+        attach("build20-one-delivery-one-farm-win");app.buttons["returnWorld"].tap()
+        let banked=walletCoins();app.terminate();app.launchArguments=["--uitesting","--keep-progress"];app.launch()
+        XCTAssertTrue(app.buttons["openRace"].waitForExistence(timeout:15));XCTAssertEqual(walletCoins(),banked)
+        XCTAssertTrue((app.buttons["openRace"].value as? String ?? "").hasPrefix("1 successful deliveries"))
+        attach("build20-rally-single-reward-after-relaunch")
     }
     func testRallyTrafficGuideUpdatesAndPauseKeepsRouteStable() {
         XCUIDevice.shared.orientation = .portrait
