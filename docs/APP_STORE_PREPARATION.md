@@ -1,3 +1,13 @@
+# Latest local delivery — build 20, 14 October 2026
+
+Rally now settles each registered finished attempt once. Duplicate, reentrant, abandoned, superseded and previous-account callbacks cannot mint coins, consume extra cargo or count false farm unlock wins. The old-source reproduction paid one route four times and persisted the wrong wallet; the failed result remains separate. [Change and rationale](BUILD20_RALLY_SETTLEMENT.md), [delivery record](release-draft/build20/README.md).
+
+**131 unique affected checks pass:** 61 core, 66 native and four real-input phone flows, including an exact completed-route reward, field two remaining locked at 1/3, relaunch, pause/exit, maximum text and skill-to-farm progression. Fifteen original native screenshots are preserved. This run has no new tablet test; previous build-19 tablet evidence remains separate. Source **8f72c7b** is pushed to public main. The ordinary preview runs **1.0 (20)** with the full save intact: 555 coins, three completed stages and active rules-2 level 4 at nine moves. Other QA devices are closed.
+
+Strict signed archive/export verification and all 88 frozen source hashes pass. **Build 20 is local, not uploaded or submitted.** Native control reports a locked Mac with failed automatic unlock; Chrome Apple-tab attachment times out. Unlocking the Mac is required to resume Transporter delivery. No repeated sign-in request was made. The last authenticated Apple observation remains **13 October**: internal build 19 processed in Orbit Bloom QA, public build 11 Waiting for Review with manual release. Local metadata/gallery preparation is aligned; the pending public submission and website are unchanged. No daily public release, real purchase, agreement or duplicate Apple inquiry occurred. Physical Apple/iCloud, signed sandbox checkout and VoiceOver timing remain hardware checks.
+
+---
+
 # Latest verified delivery — build 19, 13 October 2026
 
 The owner-requested full retest brings build **1.0 (19)** to **138 unique passing affected checks**: 60 core, 62 native, fifteen real-input phone flows and a complete iPad portrait/landscape tour. The first expanded attempt hit host storage exhaustion during test-app installation; generated own test caches were cleared and the full rerun passes. [Final delivery record](release-draft/build19/README.md) retains both diagnostics and successful results, with 38 fresh native screenshots and twenty current-build gallery selections. Game source and the signed package are unchanged.

@@ -1,0 +1,39 @@
+{
+  "build": 20,
+  "uniquePassingCases": 131,
+  "core": 61,
+  "native": 66,
+  "phoneUI": 4,
+  "tabletUIThisRun": 0,
+  "coreLog": "evidence/build20-core.log",
+  "runs": [
+    {
+      "bundle": "evidence/Build20-Native.xcresult",
+      "passed": 66,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "bundle": "evidence/Build20-Rally-UI.xcresult",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "campaign": "1020 stages and six projects, 6125 legal swaps and 24 retries, no paid items/extra moves",
+  "reproduction": {
+    "bundle": "evidence/Build20-Rally-Reproduction.xcresult",
+    "source": "Previous build-19 implementation before the fix",
+    "failedCases": 1,
+    "failedAssertions": 7,
+    "result": "One route paid four times: 1080 instead of 400 coins; consumed three cargo instead of one; counted four wins and opened field two. All wrong values persisted after model relaunch."
+  },
+  "scope": "Duplicate/reentrant/late/superseded/abandoned/foreign-account completions; valid next runs and crash salvage; single atomic save; retained local/cloud wallet cases; real road swipes, exact first reward, farm 1/3 lock, relaunch, pause/exit and maximum text; connected skill-to-farm flow.",
+  "nativeScreenshotCount": 15,
+  "allFinalChecksPassed": true,
+  "limits": [
+    "No new tablet layout run; previous build-19 tablet evidence remains separate.",
+    "Physical Apple Game Center/iCloud, signed sandbox purchases, VoiceOver timing and human difficulty remain device checks.",
+    "Model guards prevent stale/repeated callback rewards; they are not server anti-cheat or a guarantee against a compromised client."
+  ]
+}

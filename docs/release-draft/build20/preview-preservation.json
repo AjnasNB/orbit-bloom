@@ -1,0 +1,22 @@
+{
+  "build": 20,
+  "ordinaryInstall": true,
+  "previewResetOrUninstall": false,
+  "testArguments": false,
+  "freshFullPrivateContainerBackups": true,
+  "allTypedPreferencesEqualAfterInstall": true,
+  "allSavedGameplayValuesEqualAfterOrdinaryLaunch": true,
+  "acceptedDifferences": [
+    "Codable enum dictionary ordering",
+    "exact previous-primary backup rotation",
+    "StoreKit system check timestamp advanced"
+  ],
+  "preferenceCount": 7,
+  "installedExecutableMatches": true,
+  "testPlugins": false,
+  "coins": 555,
+  "completedStages": 3,
+  "activeLevel": 4,
+  "activeMoves": 9,
+  "activeRules": 2
+}

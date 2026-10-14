@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-14",
+  "build": 20,
+  "freshAuthenticatedAppleStatusVerified": false,
+  "appleServerValidation": false,
+  "uploaded": false,
+  "processed": false,
+  "internalGroupAssigned": false,
+  "publicReviewOrReleaseChanged": false,
+  "nativeObservation": "The Mac is locked and automatic unlock could not unlock it. Native Transporter control could not attach.",
+  "chromeObservation": "The existing App Store Connect build-19 tab was listed, but attachment timed out at Emulation.setFocusEmulationEnabled. No authenticated page content was read or changed.",
+  "lastAuthenticatedObservation": {
+    "date": "2026-10-13",
+    "internalBuild": 19,
+    "internalGroup": "Orbit Bloom QA",
+    "testersOrInvites": 1,
+    "publicBuild": 11,
+    "publicStatus": "Waiting for Review",
+    "releaseMode": "Manual",
+    "source": "docs/release-draft/build19/apple-retest-status.json"
+  },
+  "requiredAction": "Unlock the Mac so the prepared signed build 20 can be delivered through Transporter.",
+  "knownXcodeSigninRequestRepeated": false,
+  "newLegalAgreementOrRealPurchase": false,
+  "existingAppleInquiryCase": "102994340844"
+}
