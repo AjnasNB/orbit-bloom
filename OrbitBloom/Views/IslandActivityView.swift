@@ -29,6 +29,9 @@ struct IslandActivityView: View {
     @State private var deliveredResult = false
     @State private var restartID = 0
     @State private var confirmRestart = false
+    // A decision sheet must freeze the same timers and playback as Pause/Help.
+    // Dismissal leaves the player's explicit pause state unchanged.
+    private var activitySuspended: Bool { paused || helpOpen || confirmRestart }
 
     var body: some View {
         GeometryReader { geometry in
@@ -40,7 +43,7 @@ struct IslandActivityView: View {
         .confirmationDialog("Restart this room?", isPresented: $confirmRestart, titleVisibility: .visible) {
             Button("Restart · no life cost") { restartID += 1; paused = false }
             Button("Keep playing", role: .cancel) { }
-        } message: { Text("Only the current attempt restarts. Your completed rooms and rewards stay saved.") }
+        } message: { Text("Play pauses while you choose. Only this attempt restarts. Your saved results and rewards stay safe.") }
     }
 
     private func room(compact: Bool) -> some View {
@@ -77,7 +80,9 @@ struct IslandActivityView: View {
                     .accessibilityElement(children:.ignore).accessibilityLabel("Shared garden: \(game.progress.stars) restoration stars and \(game.ecosystem.water) water").accessibilityIdentifier("activityGardenWallet")
             }
             ZStack {
-                activity.id(restartID).allowsHitTesting(!paused && !helpOpen).accessibilityHidden(paused || helpOpen)
+                // The native decision sheet manages modal accessibility focus.
+                // Keep the underlying elements stable across its dismissal.
+                activity.id(restartID).allowsHitTesting(!activitySuspended).accessibilityHidden(paused || helpOpen)
                 if paused {
                     VStack(spacing: compact ? 10 : 14) {
                         if !compact { Image(systemName: "pause.circle.fill").accessibilityHidden(true).font(.system(size: 42)).foregroundStyle(kind.activityAccent) }
@@ -97,11 +102,11 @@ struct IslandActivityView: View {
 
     @ViewBuilder private var activity: some View {
         switch kind {
-        case .canal: CanalRoom(level: level, paused: paused || helpOpen, complete: finish)
-        case .fireflies: FireflyRoom(level: level, paused: paused || helpOpen, complete: finish)
-        case .windmill: WindmillRoom(level: level, paused: paused || helpOpen, complete: finish)
-        case .observatory: ObservatoryRoom(level: level, paused: paused || helpOpen, complete: finish)
-        case .shuttle: ShuttleRoomView(level:level,paused:paused || helpOpen,complete:finish)
+        case .canal: CanalRoom(level: level, paused: activitySuspended, complete: finish)
+        case .fireflies: FireflyRoom(level: level, paused: activitySuspended, complete: finish)
+        case .windmill: WindmillRoom(level: level, paused: activitySuspended, complete: finish)
+        case .observatory: ObservatoryRoom(level: level, paused: activitySuspended, complete: finish)
+        case .shuttle: ShuttleRoomView(level:level,paused:activitySuspended,complete:finish)
         }
     }
     private func finish(_ score: Int) {

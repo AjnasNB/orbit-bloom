@@ -14,9 +14,57 @@ import UIKit
     private func fits(_ e:XCUIElement) { XCTAssertTrue(e.waitForExistence(timeout:5));XCTAssertTrue(e.isHittable);XCTAssertTrue(app.frame.insetBy(dx:-1,dy:-1).contains(e.frame),"\(e.identifier): \(e.frame)");XCTAssertGreaterThanOrEqual(e.frame.height,44-1e-6) }
     private func coins() throws ->Int { try XCTUnwrap(Int(app.buttons["openShop"].label.components(separatedBy:CharacterSet.decimalDigits.inverted).filter { !$0.isEmpty }.joined())) }
     private func enter(_ room:String) { let id=room == "rally" ? "openRace" : "open\(room.capitalized)";fits(app.buttons[id]);app.buttons[id].tap() }
+    func testRestartDecisionFreezesWindmillAndCancelKeepsAttempt() throws {
+        func cancelRestart() {
+            if app.buttons["Keep playing"].exists { app.buttons["Keep playing"].tap() }
+            else { app.coordinate(withNormalizedOffset:CGVector(dx:0.1,dy:0.2)).tap() }
+        }
+        enter("windmill"); app.buttons["windmillCharge"].tap()
+        let clock=app.staticTexts.matching(NSPredicate(format:"label MATCHES '^[0-9]+ seconds$'")).firstMatch
+        XCTAssertTrue(clock.waitForExistence(timeout:5))
+        let before=try XCTUnwrap(Int(clock.label.components(separatedBy:" ")[0]))
+        app.buttons["activityRestart"].tap()
+        XCTAssertTrue(app.buttons["Restart · no life cost"].waitForExistence(timeout:5))
+        capture("restart-decision-windmill")
+        // Longer than the full 24-second route: thinking in a modal must not lose it.
+        Thread.sleep(forTimeInterval:26)
+        cancelRestart()
+        XCTAssertTrue(app.buttons["windmillCharge"].waitForExistence(timeout:5),"Cancelling a restart must retain the running attempt")
+        XCTAssertFalse(app.staticTexts["activityResult"].exists)
+        let after=try XCTUnwrap(Int(clock.label.components(separatedBy:" ")[0]))
+        XCTAssertGreaterThanOrEqual(after,before-3,"The decision must not consume workshop time")
+        capture("restart-cancel-retained-workshop")
+        app.buttons["activityPause"].tap();app.buttons["activityRestart"].tap()
+        cancelRestart()
+        XCTAssertTrue(app.buttons["activityResume"].exists,"Cancelling while already paused must keep it paused")
+        app.buttons["activityRestart"].tap();app.buttons["Restart · no life cost"].tap()
+        XCTAssertTrue(app.buttons["windmillCharge"].waitForExistence(timeout:5))
+        XCTAssertEqual(app.buttons["windmillCharge"].label,"Start windmill")
+        XCTAssertFalse(app.buttons["activityResume"].exists)
+        XCTAssertEqual(clock.label,"24 seconds")
+        capture("restart-confirm-fresh-workshop")
+        app.buttons["activityExit"].tap()
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("5 lives"))
+    }
     private func collect(_ title:String,room:String) {
         XCTAssertTrue(app.staticTexts["activityResult"].waitForExistence(timeout:5));XCTAssertEqual(app.staticTexts["activityResult"].label,title)
         fits(app.buttons["activityCollect"]);capture("build17-\(room)-victory");app.buttons["activityCollect"].tap();XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
+    }
+    func testRestartDecisionInterruptsFireflyPlaybackWithoutAMistakeOrRewardLoss() throws {
+        let before=try coins()
+        enter("fireflies");app.buttons["fireflyWatch"].tap();app.buttons["activityRestart"].tap()
+        XCTAssertTrue(app.buttons["Restart · no life cost"].waitForExistence(timeout:5))
+        Thread.sleep(forTimeInterval:4)
+        if app.buttons["Keep playing"].exists { app.buttons["Keep playing"].tap() }
+        else { app.coordinate(withNormalizedOffset:CGVector(dx:0.1,dy:0.2)).tap() }
+        XCTAssertEqual(app.staticTexts["fireflyStatus"].label,"Ready to watch")
+        XCTAssertTrue(app.buttons["fireflyWatch"].isEnabled)
+        capture("restart-cancel-fireflies-ready-to-replay")
+        try repeatFireflies();collect("The island hears your signal!",room:"fireflies")
+        XCTAssertEqual(try coins(),before+25)
+        XCTAssertTrue(element("sharedWater").label.contains("14"))
+        XCTAssertTrue(element("sharedStars").label.hasPrefix("1 restoration stars"))
+        XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("5 lives"))
     }
     func testEightDirectActivitiesHaveClearExitsAndNoRoomDirectory() {
         for id in ["openBloom","openFarm","openRace","openCanal","openFireflies","openWindmill","openObservatory","openShuttle","playLevel","openTasks"] { fits(app.buttons[id]) }
@@ -58,6 +106,12 @@ import UIKit
         XCTAssertTrue(app.buttons["openShuttle"].waitForExistence(timeout:15));capture("build17-island-maximum-text")
         for room in ["canal","fireflies","windmill","observatory","shuttle"] {
             enter(room);for id in ["activityExit","activityRestart","activityPause"] { fits(app.buttons[id]) }
+            app.buttons["activityRestart"].tap();fits(app.buttons["Restart · no life cost"])
+            capture("build21-\(room)-restart-maximum-text")
+            if app.buttons["Keep playing"].exists { app.buttons["Keep playing"].tap() }
+            // The native maximum-text popover widens: use its outside screen edge.
+            else { app.coordinate(withNormalizedOffset:CGVector(dx:0.005,dy:0.5)).tap() }
+            XCTAssertFalse(app.buttons["Restart · no life cost"].exists)
             if room == "shuttle" { for i in 0..<12 { fits(app.buttons["shuttleSeat\(i)"]);fits(app.buttons["passenger\(i)"]) };capture("build17-shuttle-maximum-text") }
             else { fits(app.buttons["activityHelp"]);app.buttons["activityHelp"].tap();fits(app.buttons["activityHelpDone"]);capture("build17-\(room)-help");app.buttons["activityHelpDone"].tap() }
             app.buttons["activityExit"].tap();XCTAssertTrue(app.buttons["openFarm"].waitForExistence(timeout:5))
