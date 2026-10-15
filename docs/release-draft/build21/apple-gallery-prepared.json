@@ -1,0 +1,31 @@
+{
+  "build": 21,
+  "status": "Prepared locally; public build-11 product page unchanged.",
+  "countPerDevice": 10,
+  "originalNativePNGs": true,
+  "provenance": "One fresh final-source build-21 Firefly view after interruption/replay; retained original build-20 Rally and build-19 remaining views. No new tablet layout run.",
+  "iPhone": [
+    "../build19/retest-captures/phone-world.png",
+    "../build19/retest-captures/phone-puzzle.png",
+    "../build19/retest-captures/phone-farm.png",
+    "../build20/captures/build14-rally-traffic-driving.png",
+    "../build19/retest-captures/phone-shuttle.png",
+    "captures/signal-restart-cancel-fireflies-ready-to-replay.png",
+    "../build19/retest-captures/phone-canal.png",
+    "../build19/retest-captures/phone-windmill.png",
+    "../build19/retest-captures/phone-observatory.png",
+    "../build19/retest-captures/phone-loadout.png"
+  ],
+  "iPad": [
+    "../build19/retest-captures/ipad-island-portrait.png",
+    "../build19/retest-captures/ipad-puzzle-portrait.png",
+    "../build19/retest-captures/ipad-farm-portrait.png",
+    "../build19/retest-captures/ipad-rally-road-portrait.png",
+    "../build19/retest-captures/ipad-shuttle-portrait.png",
+    "../build19/retest-captures/ipad-fireflies-portrait.png",
+    "../build19/retest-captures/ipad-canal-portrait.png",
+    "../build19/retest-captures/ipad-windmill-portrait.png",
+    "../build19/retest-captures/ipad-observatory-portrait.png",
+    "../build19/retest-captures/ipad-loadout-portrait.png"
+  ]
+}

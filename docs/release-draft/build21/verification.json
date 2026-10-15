@@ -1,0 +1,70 @@
+{
+  "build": 21,
+  "uniquePassingCases": 131,
+  "core": 61,
+  "native": 66,
+  "phoneUI": 4,
+  "tabletUIThisRun": 0,
+  "allRequiredFinalChecksHavePassingRecords": true,
+  "coreLog": "evidence/build21-core.log",
+  "runs": [
+    {
+      "bundle": "evidence/Build21-Native-Final.xcresult",
+      "passed": 66,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "bundle": "evidence/Build21-Restart-Final.xcresult",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "bundle": "evidence/Build21-MaximumText-ModalFocus.xcresult",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "bundle": "evidence/Build21-Restart-UI.xcresult",
+      "passed": 3,
+      "failed": 1,
+      "skipped": 0,
+      "countedUniqueCase": "Five-skill-game real-input win, restoration and relaunch tour. The two restart cases were rerun on final source; its maximum-text failure was repaired and rerun separately."
+    }
+  ],
+  "campaign": "1020 stages, six restoration projects, 6125 legal swaps and 24 retries without purchases or extra moves",
+  "productReproduction": {
+    "bundle": "evidence/Build21-Restart-Reproduction2.xcresult",
+    "source": "Previous build-20 implementation with new UI regression",
+    "failedCases": 1,
+    "result": "Windmill timed out behind a restart prompt held for 26 seconds; failure outcome remained after cancelling."
+  },
+  "diagnosticsRetained": [
+    {
+      "bundle": "evidence/Build21-Restart-Reproduction.xcresult",
+      "reason": "Initial test expected a cancel-role button, omitted by native popover; corrected test uses its visible presentation."
+    },
+    {
+      "bundle": "evidence/Build21-Restart-UI.xcresult",
+      "reason": "Maximum-text popover widened beyond the original outside-tap coordinate; corrected to outside screen edge."
+    },
+    {
+      "bundle": "evidence/Build21-MaximumText-Retry.xcresult",
+      "reason": "Help could not be opened after modal dismissal with the initial accessibility visibility policy."
+    },
+    {
+      "bundle": "evidence/Build21-MaximumText-Final.xcresult",
+      "reason": "A provisional fixed help-button frame did not resolve Observatory accessibility. Removed that provisional edit; native modal now owns focus while underlying element visibility stays stable."
+    }
+  ],
+  "scope": "Restart cancellation beyond Windmill timeout, retained timer and explicit Pause, confirmed fresh attempt, interrupted Firefly playback/replay and normal garden reward; maximum-text restart/cancel/help across all five skills; all-five real wins/restoration/relaunch; current native/core wallet, cloud, StoreKit and campaign cases.",
+  "nativeScreenshotCount": 25,
+  "limits": [
+    "All-five tour precedes the final accessibility-focus refinement; affected restart cases and maximum text were rerun afterward.",
+    "No new tablet layout run.",
+    "Physical Apple Game Center/iCloud, signed sandbox purchases, real VoiceOver timing and human difficulty remain device checks.",
+    "Local signature verification is not Apple server validation or public release approval."
+  ]
+}

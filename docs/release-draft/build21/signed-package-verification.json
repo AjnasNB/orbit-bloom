@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "build": "21",
+  "bundle": "com.orbitbloom.game",
+  "sourceCommit": "e1ee94dfbf4cc28261ff1ee9e4918e466189a5b7",
+  "archive": "build/OrbitBloom-Build21-AppStore.xcarchive",
+  "ipa": "build/AppStoreExport21/OrbitBloom.ipa",
+  "ipaSha256": "edf0413c7c2b9ff5f5a975df9e11e2368f08e325957c9ead4b48ee328abc80ea",
+  "signatureVerified": true,
+  "debuggerAllowed": false,
+  "gameCenter": true,
+  "iCloudEnvironment": "Production",
+  "privacyManifest": {
+    "NSPrivacyTracking": false,
+    "NSPrivacyTrackingDomains": [],
+    "NSPrivacyCollectedDataTypes": [],
+    "NSPrivacyAccessedAPITypes": [
+      {
+        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+        "NSPrivacyAccessedAPITypeReasons": [
+          "CA92.1"
+        ]
+      },
+      {
+        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
+        "NSPrivacyAccessedAPITypeReasons": [
+          "35F9.1"
+        ]
+      }
+    ]
+  },
+  "testPlugins": false,
+  "sourceHashesStillMatch": true,
+  "sourceHashCount": 88,
+  "appleServerValidated": false,
+  "uploaded": false,
+  "uploadAttemptedThisRun": false,
+  "processed": false,
+  "uploadStatus": "Prepared locally. The existing locked-Mac native delivery blocker remains; no repeated account/sign-in request or delivery attempt was made. Last authenticated internal beta observation is build 19 on 13 October."
+}

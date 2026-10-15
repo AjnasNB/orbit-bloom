@@ -1,3 +1,13 @@
+# Latest local delivery — build 21, 15 October 2026
+
+Restart decisions now pause all five skill games. Cancelling preserves the current attempt and prior Pause state; confirming starts fresh. Windmill no longer times out behind the prompt, and Firefly safely replays a covered demonstration without a mistake charge. Native modal focus keeps underlying accessibility elements stable. [Change and reproduced timeout](BUILD21_RESTART_DECISIONS.md), [delivery record](release-draft/build21/README.md).
+
+**131 unique affected checks have passing records:** 61 core, 66 native and four real-input phone flows. Final restart, maximum-text and native runs pass; unsuccessful diagnostics and source-stage provenance remain explicit. All five games were played through real wins, shared garden restoration and relaunch; restart/cancel/help works at maximum text across all five. Twenty-five original native PNGs are pinned. No new tablet run. Source **e1ee94d** is pushed to public main. Ordinary preview **1.0 (21)** retains every saved game value, including 555 coins and the active rules-2 level-4 board with nine moves; Store QA is closed.
+
+Signed archive/export, Production private iCloud/Game Center, unchanged privacy and all 88 source hashes pass. **Build 21 is local, not uploaded/submitted.** The known native delivery blocker remains; no repeated sign-in/unlock request was made. The last authenticated Apple observation remains dated **13 October**: internal build 19 in Orbit Bloom QA and public build 11 Waiting for Review/manual release. Local metadata/gallery preparation is aligned. No daily public release, purchase, agreement, duplicate Apple inquiry or website/save-backend change occurred. Physical Apple/iCloud, signed sandbox checkout and actual VoiceOver timing remain hardware checks.
+
+---
+
 # Latest local delivery — build 20, 14 October 2026
 
 Rally now settles each registered finished attempt once. Duplicate, reentrant, abandoned, superseded and previous-account callbacks cannot mint coins, consume extra cargo or count false farm unlock wins. The old-source reproduction paid one route four times and persisted the wrong wallet; the failed result remains separate. [Change and rationale](BUILD20_RALLY_SETTLEMENT.md), [delivery record](release-draft/build20/README.md).
