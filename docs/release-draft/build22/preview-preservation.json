@@ -1,0 +1,40 @@
+{
+  "build": 22,
+  "ordinaryInstall": true,
+  "previewResetOrUninstall": false,
+  "testArguments": false,
+  "freshFullPrivateContainerBackup": true,
+  "dataContainerRelocatedByInstaller": true,
+  "allSevenTypedPreferencesEqualAfterInstall": true,
+  "allSavedGameplayValuesEqualAfterOrdinaryLaunch": true,
+  "frostSetMembershipPreserved": true,
+  "frostCount": 2,
+  "installedExecutableMatches": true,
+  "testPlugins": false,
+  "beforePublicSave": {
+    "coins": 555,
+    "completed": 3,
+    "activeLevel": 4,
+    "rulesVersion": 2,
+    "moves": 9,
+    "freeHints": 6,
+    "lives": 5
+  },
+  "afterPublicSave": {
+    "coins": 555,
+    "completed": 3,
+    "activeLevel": 4,
+    "rulesVersion": 2,
+    "moves": 9,
+    "freeHints": 6,
+    "lives": 5
+  },
+  "acceptedDifferences": [
+    "JSON dictionary key order",
+    "Swift enum-key dictionary array order: collected, specials, tools",
+    "Snapshot.frost Set<Int>: identical unique 0...48 members; encoding order only",
+    "Exact previous-primary recovery-slot rotation",
+    "Finite advancing StoreKit system check timestamp"
+  ],
+  "note": "Official container paths resolved before/after installation. The legacy helper treated frost as an ordered array; source declares Snapshot.frost as Set<Int>. Comparison validates identical unique members; no grid, identity, plot, counter, timer, inventory, receipt or other ordered array was excluded."
+}

@@ -1,3 +1,13 @@
+# Latest local delivery — build 22, 16 October 2026
+
+A correct Shuttle plan seated on the final move can now **Depart**. Seats lock at zero; wrong final checks and incomplete plans still lose. The counter uses a checkered flag and explains the final check to accessibility users. Budgets, ticket constraints and rewards stay the same. [Change and old-source reproduction](BUILD22_SHUTTLE_FINAL_MOVE.md), [delivery record](release-draft/build22/README.md).
+
+**132 unique affected checks pass:** 63 core, 67 native and two real-input phone flows, with no final native/UI failures or skips. All 1,000 Shuttle challenges pass ordinary and exact-budget plans. Maximum-text play verifies a final-move win, one shared garden reward and challenge 2 after relaunch; all five skill games also complete the shared restoration loop. Fourteen original native screenshots are pinned. Source **5cb0681** is pushed to public main. The ordinary preview runs **1.0 (22)** with every saved gameplay value intact, including 555 coins, both frozen patches and the active rules-2 level-4 board at nine moves. Store QA is closed.
+
+Signed archive/export, Production private iCloud/Game Center, unchanged privacy and all 88 frozen source hashes pass. **Build 22 is local, not uploaded/submitted.** The known delivery blocker is unchanged; no repeated account/unlock request was made. Last authenticated Apple status remains dated **13 October**: internal build 19 in Orbit Bloom QA, public build 11 Waiting for Review/manual release. Local metadata/gallery preparation is aligned. No daily public release, purchase, agreement, duplicate Apple inquiry or website/backend change occurred. Physical Apple/iCloud, signed sandbox checkout and actual VoiceOver timing remain device checks.
+
+---
+
 # Latest local delivery — build 21, 15 October 2026
 
 Restart decisions now pause all five skill games. Cancelling preserves the current attempt and prior Pause state; confirming starts fresh. Windmill no longer times out behind the prompt, and Firefly safely replays a covered demonstration without a mistake charge. Native modal focus keeps underlying accessibility elements stable. [Change and reproduced timeout](BUILD21_RESTART_DECISIONS.md), [delivery record](release-draft/build21/README.md).

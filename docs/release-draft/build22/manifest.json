@@ -1,0 +1,173 @@
+{
+  "build": 22,
+  "originalNativePNGs": true,
+  "sourceNotes": "All images captured from the final build-22 source. Legacy attachment names can contain earlier build numbers; actual executable is 22.",
+  "images": [
+    {
+      "file": "captures/all-five-build17-shuttle-saved-progression.png",
+      "sha256": "c1f89a282ce91896078678a4fc008121990aeec347940beeba89d9408d222d76",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+      "attachment": "build17-shuttle-saved-progression_0_F3C4FC86-5168-4D4D-9B1C-0AAA97C0DBE9.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/all-five-build18-five-games-restored-one-garden.png",
+      "sha256": "62750513c3439b4b544b971ea2461838af1e5858187c3f5868ba782fc70ee93c",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+      "attachment": "build18-five-games-restored-one-garden_0_906FF8C1-60AD-443E-96E8-E8192D8E7152.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/all-five-build17-shuttle-full-winning-plan.png",
+      "sha256": "cd172a05d0e8f5304807662af3bdcb187122ac94b4f1ca3a6a1c3a3d45953c35",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+      "attachment": "build17-shuttle-full-winning-plan_0_2E38FCF6-40FD-4239-8FC9-4D1F2B9ACC5E.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/all-five-build17-shuttle-tickets-seated.png",
+      "sha256": "8412ff94b404a271fe3c3c5135de6f92258b528a7867dc7da47bd9e0191b284a",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+      "attachment": "build17-shuttle-tickets-seated_0_5912F754-CE62-4D67-9768-466661A198F1.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/all-five-build17-observatory-victory.png",
+      "sha256": "fba86cec7691838f04573bb2a0daae592cd467cabef5434debefaa734318ddbb",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+      "attachment": "build17-observatory-victory_0_5B1139E2-F427-4A84-82D0-A2F4528E7A8A.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/all-five-build17-windmill-victory.png",
+      "sha256": "847f1eccd7c4afd0f52e8a3a96b0b5ff110c6872e7341ffb8f21e4f8aa56ea50",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+      "attachment": "build17-windmill-victory_0_EE743DA2-5B1E-4495-AE3E-6732BE451404.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/all-five-build17-fireflies-victory.png",
+      "sha256": "9169add302ba8ad5b5f97e9418aed0a1e7cb0816ee4a84f192a8e1064549ab91",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+      "attachment": "build17-fireflies-victory_0_84ECA520-B23F-438E-B612-4A8CE72DB0B6.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/all-five-build17-canal-victory.png",
+      "sha256": "f24f793ebff026bc3f22de67944168eb6f5e244034023da68517b7f2221dfdcd",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testFiveSkillGamesWinThroughRealInputAndSaveAcrossRelaunch()",
+      "attachment": "build17-canal-victory_0_D083C16B-DE24-4B93-A918-B831ED2DB8AE.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/last-move-build22-shuttle-final-move-progress-after-relaunch.png",
+      "sha256": "caefd428733279a7d80d044e6d2f12d6bddc56e2a42990069babc7c670f7e295",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testLastMoveShuttleDepartureAtMaximumTextSavesTheSharedGarden()",
+      "attachment": "build22-shuttle-final-move-progress-after-relaunch_0_5CC09402-87CB-4CA9-A39D-FA7C3DA0063C.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/last-move-build22-shuttle-last-move-shared-garden.png",
+      "sha256": "91ba7cbbc695ef484fca38270263697033e001b407f3a31a73aa4fab921ada1e",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testLastMoveShuttleDepartureAtMaximumTextSavesTheSharedGarden()",
+      "attachment": "build22-shuttle-last-move-shared-garden_0_428AC353-8746-4E1F-8D90-50BC06270B07.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/last-move-build22-shuttle-final-move-victory.png",
+      "sha256": "04b7f99fd25577664a3be52ad8afbd5fd2cf026477140eea88e004670c912523",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testLastMoveShuttleDepartureAtMaximumTextSavesTheSharedGarden()",
+      "attachment": "build22-shuttle-final-move-victory_0_5692B522-A28A-4AB1-AD50-6881EC6D6377.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/last-move-build17-shuttle-tickets-seated.png",
+      "sha256": "ca515ac53aa728e97d3d84a210f5ecb95c217f2aa56df8d2e81c362865812334",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testLastMoveShuttleDepartureAtMaximumTextSavesTheSharedGarden()",
+      "attachment": "build17-shuttle-tickets-seated_0_6FFD2906-3A10-4E8E-8891-9B99E3C69C37.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/last-move-build22-shuttle-zero-moves-valid-plan.png",
+      "sha256": "f31946fd2006a327e54663f45628b6ea77967f4698e3597a3dad086c1a8b5a8a",
+      "width": 1320,
+      "height": 2868,
+      "actualBuild": 22,
+      "deviceID": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+      "resultBundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "test": "SevenRoomsUITests/testLastMoveShuttleDepartureAtMaximumTextSavesTheSharedGarden()",
+      "attachment": "build22-shuttle-zero-moves-valid-plan_0_55788301-FEA4-49CD-83F1-D55495EDBB8A.png",
+      "edits": "None"
+    },
+    {
+      "file": "captures/preview-preserved.png",
+      "sha256": "7a401f9676cc62876fb870f6185586b681eeefa0b68926639294d36f35478793",
+      "width": 1206,
+      "height": 2622,
+      "actualBuild": 22,
+      "deviceID": "64173F47-C4DC-46B4-82EC-0027675F7780",
+      "source": "Ordinary in-place install with full preserved-save verification; no test arguments",
+      "edits": "None"
+    }
+  ]
+}

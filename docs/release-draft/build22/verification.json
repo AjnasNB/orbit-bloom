@@ -1,0 +1,46 @@
+{
+  "build": 22,
+  "uniquePassingCases": 132,
+  "core": 63,
+  "native": 67,
+  "phoneUI": 2,
+  "tabletUIThisRun": 0,
+  "allFinalChecksPassed": true,
+  "coreLog": "evidence/build22-core.log",
+  "runs": [
+    {
+      "bundle": "evidence/Build22-Native.xcresult",
+      "passed": 67,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "bundle": "evidence/Build22-Shuttle-UI.xcresult",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "productReproduction": {
+    "log": "evidence/build22-last-seat-reproduction.log",
+    "source": "Previous build-21 implementation with the new core regression",
+    "failedCases": 1,
+    "failedAssertions": 9,
+    "levels": [
+      1,
+      20,
+      1000
+    ],
+    "result": "A correct full plan on its final placement was marked finished; departure and win both failed."
+  },
+  "campaign": "1020 stages, six projects, 6125 legal swaps and 24 retries without paid items or extra moves",
+  "shuttleCoverage": "All 1000 seeded challenges checked with ordinary and exact-budget winning plans; boundary cases cover invalid final checks, incomplete plans, blocked extra placements and repeated checks.",
+  "scope": "Native last-move win grants exactly one star/25 coins/2 water, saves it and preserves lives. Real-input maximum-text last-move departure and saved challenge 2, plus all five skill wins/restoration/relaunch.",
+  "nativeScreenshotCount": 14,
+  "previewComparison": "Full before/after typed preferences and decoded gameplay compared. Snapshot.frost is a declared Set<Int>; exact membership was verified despite JSON order changes.",
+  "limits": [
+    "No fresh tablet layout run.",
+    "Physical Apple Game Center/iCloud, signed sandbox checkout, actual VoiceOver timing and human difficulty remain device checks.",
+    "Local signature verification does not establish Apple server acceptance, public release approval or server anti-cheat."
+  ]
+}

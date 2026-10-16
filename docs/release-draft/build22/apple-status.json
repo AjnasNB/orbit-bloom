@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-16",
+  "build": 22,
+  "freshAuthenticatedAppleStatusVerified": false,
+  "appleServerValidated": false,
+  "uploaded": false,
+  "processed": false,
+  "publicReviewOrReleaseChanged": false,
+  "nativeObservation": "Transporter attachment reports cgWindowNotFound. Native inventory confirms the Mac remains locked and automatic unlock failed.",
+  "knownExternalBlockerUnchanged": true,
+  "repeatedSigninOrUnlockRequest": false,
+  "lastAuthenticatedObservation": {
+    "date": "2026-10-13",
+    "internalBuild": 19,
+    "internalGroup": "Orbit Bloom QA",
+    "testersOrInvites": 1,
+    "publicBuild": 11,
+    "publicStatus": "Waiting for Review",
+    "releaseMode": "Manual"
+  },
+  "newLegalAgreementOrRealPurchase": false
+}
