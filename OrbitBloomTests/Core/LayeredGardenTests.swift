@@ -108,6 +108,11 @@ final class LayeredGardenTests:XCTestCase {
             XCTAssertTrue(run.depart(),"Level \(level) must be solvable")
             XCTAssertEqual(run.rejected,[]); XCTAssertGreaterThan(run.score,0); XCTAssertLessThanOrEqual(run.score,20000)
             let moves=run.moves; XCTAssertFalse(run.seat(0,at:0)); XCTAssertEqual(run.moves,moves)
+            var last=ShuttleRun(level:level)
+            for move in 0..<(last.moveLimit-12) { XCTAssertTrue(last.seat(last.solution[0],at:1+move%2)) }
+            for (seat,id) in last.solution.enumerated() { XCTAssertTrue(last.seat(id,at:seat)) }
+            XCTAssertEqual(last.moves,last.moveLimit);XCTAssertFalse(last.canSeat)
+            XCTAssertFalse(last.finished);XCTAssertTrue(last.depart(),"Final-seat ticket check at level \(level)")
         }
     }
     func testShuttleChecksDeckWindowFrontAndPairsAndAllowsCorrections() {
@@ -126,5 +131,32 @@ final class LayeredGardenTests:XCTestCase {
         XCTAssertTrue(fixed.validSeat(actual,passenger:paired))
         XCTAssertFalse(fixed.validSeat(paired.deck*6+(actual%6 < 3 ? 3 : 0),passenger:paired))
         XCTAssertTrue(fixed.depart())
+    }
+    func testShuttleMayValidateItsLastSeatWithoutAnotherPlacement() {
+        for level in [1,20,1000] {
+            var run=ShuttleRun(level:level)
+            for move in 0..<(run.moveLimit-12) { XCTAssertTrue(run.seat(run.solution[0],at:1+move%2)) }
+            for (seat,id) in run.solution.enumerated() { XCTAssertTrue(run.seat(id,at:seat)) }
+            XCTAssertEqual(run.moves,run.moveLimit)
+            XCTAssertFalse(run.finished,"A full plan on the final move still deserves its ticket check")
+            let plan=run.seats
+            XCTAssertFalse(run.seat(run.solution[0],at:1));XCTAssertEqual(run.seats,plan)
+            XCTAssertTrue(run.depart(),"A correct final-move plan must depart")
+            XCTAssertTrue(run.won)
+        }
+    }
+    func testWrongFinalMoveShuttlePlanAndIncompleteBudgetCannotGetExtraMoves() {
+        for level in [1,20,1000] {
+            var wrong=ShuttleRun(level:level)
+            for move in 0..<(wrong.moveLimit-12) { XCTAssertTrue(wrong.seat(wrong.solution[0],at:1+move%2)) }
+            for (seat,id) in wrong.solution.enumerated() { XCTAssertTrue(wrong.seat(id,at:(seat+6)%12)) }
+            XCTAssertFalse(wrong.finished);XCTAssertFalse(wrong.canSeat)
+            XCTAssertFalse(wrong.depart());XCTAssertTrue(wrong.finished);XCTAssertFalse(wrong.won)
+            XCTAssertEqual(wrong.moves,wrong.moveLimit);XCTAssertEqual(wrong.rejected.count,12)
+            XCTAssertFalse(wrong.depart());XCTAssertFalse(wrong.seat(wrong.solution[0],at:0))
+            var incomplete=ShuttleRun(level:level)
+            for move in 0..<incomplete.moveLimit { XCTAssertTrue(incomplete.seat(0,at:move%2)) }
+            XCTAssertTrue(incomplete.finished);XCTAssertFalse(incomplete.canSeat);XCTAssertFalse(incomplete.depart())
+        }
     }
 }

@@ -22,6 +22,22 @@ import XCTest
         suites.append(name)
         return try XCTUnwrap(UserDefaults(suiteName: name))
     }
+    func testLastMoveShuttleBanksOneSharedRewardAndPersistsItsClear() throws {
+        let prefs=try preferences(),game=GameModel(defaults:prefs)
+        let coins=game.progress.coins,water=game.ecosystem.water,lives=game.ecosystem.lives
+        game.enterActivity(.shuttle)
+        var run=ShuttleRun(level:game.activityLevel)
+        for move in 0..<(run.moveLimit-12) { XCTAssertTrue(run.seat(run.solution[0],at:1+move%2)) }
+        for (seat,id) in run.solution.enumerated() { XCTAssertTrue(run.seat(id,at:seat)) }
+        XCTAssertEqual(run.moves,run.moveLimit);XCTAssertTrue(run.depart())
+        game.completeActivity(run.score);game.completeActivity(run.score);game.exitActivity()
+        XCTAssertEqual(game.progress.coins,coins+25);XCTAssertEqual(game.progress.stars,1)
+        XCTAssertEqual(game.ecosystem.water,water+2);XCTAssertEqual(game.ecosystem.lives,lives)
+        XCTAssertEqual(game.farmAdventureWins,1);XCTAssertEqual(game.journey.levels["shuttle"],1)
+        let reopened=GameModel(defaults:prefs)
+        XCTAssertEqual(reopened.progress,game.progress);XCTAssertEqual(reopened.ecosystem,game.ecosystem)
+        XCTAssertEqual(reopened.journey,game.journey);XCTAssertNil(reopened.wallet.session)
+    }
 
     func testFollowingRallyTrafficGuideBanksRewardAndPreservesOtherProgress() throws {
         let defaults = try preferences()

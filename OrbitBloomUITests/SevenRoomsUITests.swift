@@ -142,7 +142,23 @@ import UIKit
         XCTAssertTrue((app.buttons["plot6"].value as? String ?? "").contains("Moon apple"))
         capture("build19-farm-unlock-and-crop-after-relaunch")
     }
-    private func solveShuttle() throws {
+    func testLastMoveShuttleDepartureAtMaximumTextSavesTheSharedGarden() throws {
+        app.terminate();app.launchArguments=["--uitesting","-UIPreferredContentSizeCategoryName","UICTContentSizeCategoryAccessibilityXXXL"];app.launch()
+        XCTAssertTrue(app.buttons["openShuttle"].waitForExistence(timeout:15))
+        let before=try coins();enter("shuttle")
+        let budget=try XCTUnwrap(Int(element("shuttleMoves").label.components(separatedBy:" ")[0]))
+        try solveShuttle(extraMoves:budget-12)
+        fits(app.buttons["activitySaveResult"]);capture("build22-shuttle-final-move-victory")
+        app.buttons["activitySaveResult"].tap();XCTAssertTrue(app.buttons["playLevel"].waitForExistence(timeout:5))
+        XCTAssertEqual(try coins(),before+25);XCTAssertTrue(element("sharedStars").label.hasPrefix("1 restoration stars"))
+        XCTAssertTrue(element("sharedWater").label.contains("14"));XCTAssertTrue(app.buttons["lifeBalance"].label.hasPrefix("5 lives"))
+        capture("build22-shuttle-last-move-shared-garden")
+        app.terminate();app.launchArguments=["--uitesting","--keep-progress"];app.launch()
+        XCTAssertTrue(app.buttons["openShuttle"].waitForExistence(timeout:15));XCTAssertEqual(try coins(),before+25)
+        enter("shuttle");XCTAssertEqual(app.staticTexts["activityTitle"].label,"Sky Shuttle, challenge 2")
+        capture("build22-shuttle-final-move-progress-after-relaunch")
+    }
+    private func solveShuttle(extraMoves:Int=0) throws {
         struct Ticket { let deck:Int;let window:Bool;let front:Bool;let mate:Int? }
         var tickets:[Ticket]=[]
         for id in 0..<12 {
@@ -163,7 +179,13 @@ import UIKit
             };return false
         }
         XCTAssertTrue(search(0),"The visible tickets must admit a plan without knowing the game's seed")
+        for move in 0..<extraMoves { app.buttons["passenger\(plan[0])"].tap();app.buttons["shuttleSeat\(1+move%2)"].tap() }
         for (seat,id) in plan.enumerated() { app.buttons["passenger\(id)"].tap();app.buttons["shuttleSeat\(seat)"].tap();XCTAssertEqual(app.buttons["shuttleSeat\(seat)"].value as? String,"Traveller \(id+1)") }
+        if extraMoves > 0 {
+            XCTAssertEqual(element("shuttleMoves").label,"0 moves remaining. All seated; depart to check the final plan")
+            XCTAssertFalse(app.buttons["shuttleSeat0"].isEnabled);XCTAssertFalse(app.buttons["passenger\(plan[0])"].isEnabled)
+            capture("build22-shuttle-zero-moves-valid-plan")
+        }
         capture("build17-shuttle-tickets-seated");fits(app.buttons["shuttleDepart"]);app.buttons["shuttleDepart"].tap()
     }
     private func solveCanal() throws {

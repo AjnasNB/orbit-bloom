@@ -54,7 +54,9 @@ struct ShuttleRun {
     private(set) var moves = 0
     private(set) var won = false
     private(set) var rejected: Set<Int> = []
-    var finished: Bool { won || moves >= moveLimit }
+    // A full final-move plan still gets its departure check, without another seat move.
+    var finished: Bool { won || (moves >= moveLimit && (seated < 12 || !rejected.isEmpty)) }
+    var canSeat: Bool { !won && moves < moveLimit }
     var score: Int { won ? activityScore(320 + level * 11 + (moveLimit-moves) * 25) : 0 }
     var seated: Int { seats.compactMap { $0 }.count }
     init(level: Int) {
@@ -91,7 +93,7 @@ struct ShuttleRun {
         return true
     }
     @discardableResult mutating func seat(_ passenger: Int, at position: Int) -> Bool {
-        guard !finished, (0..<12).contains(position), passengers.indices.contains(passenger), seats[position] != passenger else { return false }
+        guard canSeat, (0..<12).contains(position), passengers.indices.contains(passenger), seats[position] != passenger else { return false }
         if let old = seats.firstIndex(where: { $0 == passenger }) { seats[old] = nil }
         seats[position] = passenger; moves += 1; rejected = []
         return true
@@ -102,7 +104,7 @@ struct ShuttleRun {
             guard let id else { return position }
             return validSeat(position,passenger:passengers[id]) ? nil : position
         })
-        if rejected.isEmpty { won = true } else { moves += 1 }
+        if rejected.isEmpty { won = true } else { moves = min(moveLimit,moves+1) }
         return won
     }
 }

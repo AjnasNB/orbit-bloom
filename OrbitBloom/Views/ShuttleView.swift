@@ -20,7 +20,8 @@ struct ShuttleRoomView:View {
                 HStack {
                     Label("\(run.seated)/12",systemImage:"person.fill").accessibilityLabel("\(run.seated) of 12 travellers seated")
                     Spacer()
-                    Label("\(max(0,run.moveLimit-run.moves))",systemImage:"arrow.triangle.swap").accessibilityLabel("\(max(0,run.moveLimit-run.moves)) moves remaining")
+                    Label("\(max(0,run.moveLimit-run.moves))",systemImage:run.canSeat ? "arrow.triangle.swap" : "flag.checkered")
+                        .accessibilityLabel("\(max(0,run.moveLimit-run.moves)) moves remaining\(!run.canSeat && !run.finished ? ". All seated; depart to check the final plan" : "")").accessibilityIdentifier("shuttleMoves")
                     Button { help=true } label: { Image(systemName:"questionmark.circle.fill").frame(width:48,height:48) }.accessibilityLabel("Shuttle seating rules").accessibilityIdentifier("shuttleHelp")
                 }.font(.system(size:18,weight:.heavy,design:.rounded))
                 bus.frame(maxWidth:540,maxHeight:.infinity).layoutPriority(1)
@@ -36,12 +37,12 @@ struct ShuttleRoomView:View {
                                 .accessibilityValue(selected == id ? "Selected. Tap a seat" : run.seats.contains(id) ? "Already seated. Select to move" : "Waiting")
                                 .accessibilityIdentifier("passenger\(id)")
                         }
-                    }.frame(maxWidth:700).disabled(paused)
+                    }.frame(maxWidth:700).disabled(paused || !run.canSeat)
                     Button {
                         if run.depart() { game.effect("win") } else { game.effect("collision") }
                     } label: {
                         Image(systemName:"flag.checkered").font(.system(size:26,weight:.bold)).frame(maxWidth:.infinity,minHeight:54).background(Palette.sunlight,in:Capsule())
-                    }.buttonStyle(PressStyle()).disabled(run.seated != 12 || paused).accessibilityLabel("Depart. Check all twelve tickets").accessibilityHint("A wrong plan costs one move; marked seats show tickets to reconsider").accessibilityIdentifier("shuttleDepart")
+                    }.buttonStyle(PressStyle()).disabled(run.seated != 12 || paused).accessibilityLabel("Depart. Check all twelve tickets").accessibilityHint("A complete final-move plan can still depart. A wrong check costs one move, or ends the attempt at zero").accessibilityIdentifier("shuttleDepart")
                 } else {
                     HStack(spacing:16) {
                         Image(systemName:run.won ? "checkmark.seal.fill" : "arrow.counterclockwise.circle.fill").font(.system(size:38)).foregroundStyle(run.won ? Palette.mint : Palette.coral)
@@ -71,7 +72,7 @@ struct ShuttleRoomView:View {
                     LazyVGrid(columns:Array(repeating:GridItem(.flexible(),spacing:8),count:3),spacing:8) {
                         ForEach(deck*6..<(deck+1)*6,id:\.self) { position in
                             Button {
-                                guard !paused,!run.finished else { return }
+                                guard !paused,run.canSeat else { return }
                                 if let id=selected { if run.seat(id,at:position) { game.effect("tap"); game.feedback(.light); selected=nil } }
                                 else if let id=run.seats[position] { selected=id }
                             } label: {
@@ -82,7 +83,7 @@ struct ShuttleRoomView:View {
                                     else { Image(systemName:"chair.lounge.fill").font(.system(size:22)).foregroundStyle(Color(hex:0x507E88)) }
                                     if position%3 != 1 { Image(systemName:"rectangle.split.1x2.fill").font(.system(size:9)).foregroundStyle(.white).offset(x:position%3 == 0 ? -28 : 28,y:-18) }
                                 }.frame(minHeight:52,maxHeight:100)
-                            }.buttonStyle(PressStyle()).disabled(paused || run.finished)
+                            }.buttonStyle(PressStyle()).disabled(paused || !run.canSeat)
                                 .accessibilityLabel("Seat \(position+1), \(deck == 1 ? "upper" : "lower") deck, \(position%6 < 3 ? "front" : "back") row, \(position%3 == 1 ? "aisle" : "window")")
                                 .accessibilityValue(run.seats[position].map { "Traveller \($0+1)\(run.rejected.contains(position) ? ", ticket not satisfied" : "")" } ?? "Empty")
                                 .accessibilityIdentifier("shuttleSeat\(position)")
