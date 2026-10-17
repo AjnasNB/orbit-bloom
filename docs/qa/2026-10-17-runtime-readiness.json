@@ -1,0 +1,108 @@
+{
+  "observedAtUTC": "2026-10-17T04:35:01.824503+00:00",
+  "scope": "QA runner safety only; no game build or gameplay changes",
+  "requiredDevice": "6D8263A8-F049-48C0-AC3D-5FCBCFD3A3C7",
+  "requiredRuntime": "com.apple.CoreSimulator.SimRuntime.iOS-26-1",
+  "installedRuntimes": [
+    {
+      "identifier": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+      "available": true
+    }
+  ],
+  "storeDeviceObservation": {
+    "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-26-1",
+    "state": "Shutdown",
+    "available": false,
+    "error": "runtime profile not found using \"System\" match policy"
+  },
+  "nativeReadiness": {
+    "exitCode": 2,
+    "status": "blocked before compilation or boot",
+    "nativeTestsRun": false,
+    "uiTestsRun": false
+  },
+  "runnerChecks": {
+    "passed": 11,
+    "failed": 0,
+    "commandsMocked": true,
+    "doesNotRepresentNativeGameplayTests": true
+  },
+  "coreChecks": {
+    "passed": 63,
+    "failed": 0,
+    "command": "swift test -j 2",
+    "levels": 1020,
+    "gardenProjects": 6,
+    "legalSwaps": 6125,
+    "retries": 24,
+    "purchasesOrExtraMoves": false
+  },
+  "diagnostics": {
+    "oldRunner": {
+      "cases": 10,
+      "failed": 9,
+      "expectedReproduction": true
+    },
+    "intermediateRevision": {
+      "cases": 10,
+      "failed": 2,
+      "reason": "malformed inventory exits 1 rather than 2"
+    },
+    "final": "all eleven cases pass"
+  },
+  "unchangedGame": {
+    "build": 22,
+    "sourceCommit": "5cb068161e36abf5cfd65c0fd9070b1edc989213",
+    "frozenFilesVerified": 88,
+    "newArchive": false,
+    "newExport": false,
+    "newScreenshots": false,
+    "newPreviewInstall": false
+  },
+  "preview": {
+    "device": "64173F47-C4DC-46B4-82EC-0027675F7780",
+    "preferencesBytesUnchanged": true,
+    "reset": false,
+    "launched": false,
+    "state": "Shutdown"
+  },
+  "allSimulatorsShutdown": true,
+  "apple": {
+    "freshlyAuthenticated": false,
+    "lastAuthenticatedObservationDate": "2026-10-13",
+    "lastKnownInternalBuild": 19,
+    "lastKnownPublicBuild": 11,
+    "lastKnownPublicStatus": "Waiting for Review, manual release",
+    "uploadAttempted": false,
+    "publicRelease": false,
+    "purchase": false,
+    "agreementAccepted": false
+  },
+  "privateLogHashes": {
+    "oldRunnerReproduction": {
+      "path": "evidence/2026-10-17-runner-before.log",
+      "sha256": "bd3f8199846e72c43f56609ae64f94595488bbe70f01d80478197d4ede29b9f0"
+    },
+    "intermediateDiagnostic": {
+      "path": "evidence/2026-10-17-runner-preliminary.log",
+      "sha256": "6327372cb0624e8dbeb71bdeaa1d11c89f0987dd34563a12f1fbe2f5a40d939e"
+    },
+    "finalRunnerSafety": {
+      "path": "evidence/2026-10-17-runner-final.log",
+      "sha256": "42e89f1a47d7962f436a9ed42ee8580a8ecd934c56c53831c282235a96899bee"
+    },
+    "realCore": {
+      "path": "evidence/2026-10-17-core.log",
+      "sha256": "3ea41479a6a937da7743897ed5a944f56ffb37b8156ca26dbc02644dd0709c4c"
+    },
+    "realNativeReadiness": {
+      "path": "evidence/2026-10-17-native-readiness-final.log",
+      "sha256": "8bbd935e5868993f7e62af000ac568519b8c905ee50981138d055b873621bb13"
+    }
+  },
+  "verificationFileHashes": {
+    "scripts/test-ios.sh": "76ba2be9641bd113db9be01a56e89a59855d942437d1ac66f46ab49e95b65d48",
+    "scripts/tests/test_ios_runner.py": "186dbb8013920714640682b41eb4e07db07b4d13dcb9b83060c3eee0f6131e8c"
+  },
+  "recovery": "Free sufficient disk space, restore iOS 26.1 in Xcode, then rerun against the existing Store QA UUID. Do not substitute the personal preview."
+}

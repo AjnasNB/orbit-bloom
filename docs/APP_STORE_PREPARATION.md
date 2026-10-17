@@ -1,3 +1,11 @@
+# QA runtime recovery needed — 17 October 2026
+
+The required Store QA iOS 26.1 runtime is missing. [The revised runner](QA_RUNTIME_PREFLIGHT.md) stops before compiling or booting instead of attempting native tests on an unavailable device. Eleven runner checks and 63 core cases pass; native/UI verification is blocked. Restore that runtime after freeing sufficient disk space and retain the existing QA devices/saves.
+
+Build **1.0 (22)**, its signed local package, prepared metadata and original galleries remain current and unchanged; all 88 frozen source files match. No new package or screenshot was produced, installed or uploaded. The personal preview save is intact and every simulator remains shut down. Apple status was not freshly checked: the last authenticated observation is still **13 October**, with internal build 19 and public build 11 Waiting for Review/manual release. No public submission/release, purchase, agreement or duplicate inquiry occurred.
+
+---
+
 # Latest local delivery — build 22, 16 October 2026
 
 A correct Shuttle plan seated on the final move can now **Depart**. Seats lock at zero; wrong final checks and incomplete plans still lose. The counter uses a checkered flag and explains the final check to accessibility users. Budgets, ticket constraints and rewards stay the same. [Change and old-source reproduction](BUILD22_SHUTTLE_FINAL_MOVE.md), [delivery record](release-draft/build22/README.md).

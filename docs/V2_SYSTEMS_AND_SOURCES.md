@@ -1,3 +1,11 @@
+# QA runtime guard — 17 October 2026
+
+`scripts/test-ios.sh` now checks the exact Store QA device/runtime before compilation, rejects unavailable or busy inventories, avoids duplicate boot attempts and stops on boot failure. Eleven isolated safety checks pass; 63 real core tests still pass. [Evidence and recovery](QA_RUNTIME_PREFLIGHT.md).
+
+The host currently has only iOS 26.5; the pinned iOS 26.1 Store QA runtime is missing, blocking native/UI verification. No game code, artwork, save schema or package changed: all 88 build-22 hashes match. No personal preview reset, install or launch occurred; its preferences remain byte-for-byte intact. Build 22 remains the latest local game version. No new gameplay screenshots or Apple upload are claimed.
+
+---
+
 # Latest local delivery — build 22, 16 October 2026
 
 A correct Shuttle plan seated on the final move can now **Depart**. Seats lock at zero; wrong final checks and incomplete plans still lose. The counter uses a checkered flag and explains the final check to accessibility users. Budgets, ticket constraints and rewards stay the same. [Change and old-source reproduction](BUILD22_SHUTTLE_FINAL_MOVE.md), [delivery record](release-draft/build22/README.md).
