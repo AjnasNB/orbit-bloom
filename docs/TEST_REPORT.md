@@ -1,3 +1,11 @@
+# Development update — Sky Shuttle world events, 20 October 2026
+
+Sky Shuttle now has its own automatic global relay window every six hours, open for three hours. Its new event key leaves the four existing skill-event schedules and saved receipts unchanged. Three cleared Shuttle challenges qualify one Bomb; the claim is durable exactly once. Receipt saves use schema 5, and older builds reject them instead of losing the new claim.
+
+The focused event/save suite passes (**7/7**); all **64 core tests** pass. Xcode's generic iOS Simulator `build-for-testing` compiled the app and both test bundles against the available 26.5 SDK, without launching or resetting a simulator. Native gameplay/UI execution is still blocked because the pinned Store QA iOS 26.1 runtime is missing; the actual runner exited 2 before tests. Build **1.0 (23)** has not been archived, installed or uploaded; no new screenshots or App Store metadata were submitted. The personal preview and unrelated booted QA simulator were left alone. [Structured verification record](qa/2026-10-20-shuttle-events.json).
+
+---
+
 # QA infrastructure update — 17 October 2026
 
 The test runner now checks the pinned Store QA runtime before compilation or boot and stops clearly when it is unavailable. **11 isolated runner safety checks and all 63 real core tests pass**; the complete campaign still solves in 6,125 legal swaps and 24 retries. [Change, reproduction and recovery](QA_RUNTIME_PREFLIGHT.md).

@@ -79,13 +79,15 @@ public struct SavedGarden: Codable, Identifiable {
         // Old clients must reject new active rules rather than reinterpret their goals.
         self.schema = wallet.journey != nil ? 3 : wallet.session?.rulesVersion == 2 ? 2 : 1
         if wallet.ecosystem.extraPlots != nil || wallet.momentum != nil || wallet.session?.rulesVersion == 3 || wallet.journey?.levels["shuttle"] != nil { self.schema = 4 }
+        if wallet.journey?.hasShuttleEventReceipts == true { self.schema = 5 }
     }
     public func encoded() throws -> Data { try JSONEncoder().encode(self) }
     public static func decode(_ data: Data, playerKey: String) -> SavedGarden? {
         guard data.count <= 1_000_000,
               let save = try? JSONDecoder().decode(Self.self, from: data),
-              (1...4).contains(save.schema), !(save.schema == 1 && save.wallet.session?.rulesVersion == 2),
+              (1...5).contains(save.schema), !(save.schema == 1 && save.wallet.session?.rulesVersion == 2),
               !(save.schema < 4 && (save.wallet.ecosystem.extraPlots != nil || save.wallet.momentum != nil || save.wallet.session?.rulesVersion == 3 || save.wallet.journey?.levels["shuttle"] != nil)),
+              !(save.schema < 5 && save.wallet.journey?.hasShuttleEventReceipts == true),
               !(save.schema < 3 && save.wallet.journey != nil),
               save.playerKey == playerKey, !playerKey.isEmpty,
               validSaveDate(save.savedAt), save.wallet.isValid else { return nil }

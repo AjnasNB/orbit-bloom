@@ -1,3 +1,11 @@
+# Build 23 development — Sky Shuttle event progression, 20 October 2026
+
+The source now includes a dedicated scheduled Sky Shuttle event. Existing event windows keep their IDs and rotation; new Shuttle claims use **save schema 5** so older builds refuse the new receipt format safely. The focused core tests pass and generic iOS test-bundle compilation succeeds.
+
+**This source change is not a signed or tested app release.** Device gameplay checks still need the missing pinned iOS 26.1 Store QA runtime. The App Store metadata, gallery and package remain at build 22 until that verification is complete; no new metadata was entered, upload or review was attempted, and no screenshots were replaced. The personal preview save remains untouched.
+
+---
+
 # QA runtime recovery needed — 17 October 2026
 
 The required Store QA iOS 26.1 runtime is missing. [The revised runner](QA_RUNTIME_PREFLIGHT.md) stops before compiling or booting instead of attempting native tests on an unavailable device. Eleven runner checks and 63 core cases pass; native/UI verification is blocked. Restore that runtime after freeing sufficient disk space and retain the existing QA devices/saves.

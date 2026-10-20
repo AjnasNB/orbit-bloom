@@ -1,0 +1,64 @@
+{
+  "observedAtUTC": "2026-10-20",
+  "scope": "Sky Shuttle scheduled world event and save compatibility",
+  "change": {
+    "event": "Separate UTC Sky Shuttle relay every 6 hours; active for 3 hours; 3 Shuttle clears award one Bomb",
+    "compatibility": "Existing skill event rotation/IDs retained; shuttle event receipts promote saves to schema 5; older schema decoders reject the new receipt format"
+  },
+  "verification": {
+    "focusedTests": {
+      "passed": 7,
+      "failed": 0,
+      "command": "swift test --filter IslandJourneyTests"
+    },
+    "coreTests": {
+      "passed": 64,
+      "failed": 0,
+      "command": "swift test -j 2",
+      "levels": 1020,
+      "gardenProjects": 6,
+      "legalSwaps": 6125,
+      "retries": 24,
+      "purchasesOrExtraMoves": false
+    },
+    "genericSimulatorBuildForTesting": {
+      "status": "succeeded",
+      "compiled": [
+        "OrbitBloom",
+        "OrbitBloomTests",
+        "OrbitBloomUITests"
+      ],
+      "sdkRuntime": "iOS 26.5",
+      "launchedSimulator": false
+    },
+    "nativeReadiness": {
+      "exitCode": 2,
+      "status": "blocked before build/boot/tests: required iOS 26.1 runtime is missing",
+      "nativeTestsRun": false,
+      "uiTestsRun": false
+    }
+  },
+  "release": {
+    "build": "1.0 (23)",
+    "archived": false,
+    "installed": false,
+    "uploaded": false,
+    "appStoreMetadataUpdated": false,
+    "screenshotsCaptured": false
+  },
+  "preservation": {
+    "personalPreviewReset": false,
+    "personalPreviewInstalled": false,
+    "unrelatedSimulatorTouched": false
+  },
+  "privateEvidenceSHA256": {
+    "OrbitBloom/Core/IslandJourney.swift": "1f9a2f27f578f15c322417d3ee137b344b121934fbe481f8fe63e8eda8adef53",
+    "OrbitBloom/Core/SavedGarden.swift": "ee30ef2935db273756a56fed9a029912641a5a3693181320967dd83f7652f02b",
+    "OrbitBloomTests/Core/IslandJourneyTests.swift": "f8fdd505e680f16ab86ea02d9b6e00550a39cb2d63ae128fed593271960bacf2",
+    "OrbitBloomTests/Core/SavedGardenTests.swift": "fc71d0eb4dfb1f8eebedfdd080fb350a52a02132035f66f888e7f79e7682e1f0",
+    "OrbitBloom.xcodeproj/project.pbxproj": "3b74598a07a3431810b92ef1aa01dafaf91a8cf7fb16bc3a30697f10b5c2cf44",
+    "evidence/2026-10-20-core.log": "d1fe4a7439c469038bba10e001fed12efa2ea207400c2a5745f60a923610315d",
+    "evidence/2026-10-20-apple-test-build.log": "f7d7f0cf021240fd855676af37cc6e4582314374ddfa6a77d611c3fa3de0946c",
+    "evidence/2026-10-20-native-readiness.log": "8bbd935e5868993f7e62af000ac568519b8c905ee50981138d055b873621bb13"
+  }
+}

@@ -43,9 +43,20 @@ final class IslandJourneyTests: XCTestCase {
         XCTAssertFalse(journey.complete(room:"fireflies",level:1,score:Int.max))
         XCTAssertTrue(journey.isValid)
     }
-    func testWorldwideScheduleUsesExactStartEndAndAutomaticGaps() {
+    func testWorldwideScheduleUsesExactStartEndAndAutomaticGaps() throws {
         let boundary = Date(timeIntervalSince1970:21_600 * 100_000)
-        let skill = WorldEvent.windows(at:boundary)[0]
+        let windows = WorldEvent.windows(at:boundary)
+        let skill = windows[0]
+        XCTAssertEqual(skill.id,"skills:100000")
+        XCTAssertEqual(skill.room,"canal")
+        XCTAssertEqual(windows.count,4)
+        let shuttle = try XCTUnwrap(windows.first { $0.id == "shuttle:100000" })
+        XCTAssertEqual(shuttle.room,"shuttle")
+        XCTAssertEqual(shuttle.title,"Sky Shuttle relay")
+        XCTAssertEqual(shuttle.tool,.bomb)
+        XCTAssertTrue(shuttle.isActive(at:boundary))
+        XCTAssertTrue(shuttle.isActive(at:shuttle.ends.addingTimeInterval(-0.001)))
+        XCTAssertFalse(shuttle.isActive(at:shuttle.ends))
         XCTAssertTrue(skill.isActive(at:boundary))
         XCTAssertTrue(skill.isActive(at:skill.ends.addingTimeInterval(-0.001)))
         XCTAssertFalse(skill.isActive(at:skill.ends))
@@ -56,6 +67,33 @@ final class IslandJourneyTests: XCTestCase {
         XCTAssertEqual(WorldEvent.windows(at:Date(timeIntervalSince1970:boundary.timeIntervalSince1970)),WorldEvent.windows(at:boundary))
         XCTAssertTrue(WorldEvent.windows(at:Date(timeIntervalSince1970:-1)).isEmpty)
         XCTAssertTrue(WorldEvent.windows(at:Date(timeIntervalSince1970:1e100)).isEmpty)
+    }
+
+    func testShuttleEventProgressAndClaimsUseVersionedReceipts() throws {
+        let now = Date(timeIntervalSince1970:21_600 * 100_000 + 10)
+        let windows = WorldEvent.windows(at:now)
+        let shuttle = try XCTUnwrap(windows.first { $0.room == "shuttle" })
+        XCTAssertTrue(WorldEvent.validID(shuttle.id))
+        var journey = IslandJourney()
+        journey.record(room:"canal",at:now)
+        XCTAssertEqual(journey.events["skills:100000"],1,"The existing event and rotation keep their original key")
+        journey.record(room:"shuttle",at:now)
+        journey.record(room:"shuttle",at:now)
+        journey.record(room:"shuttle",at:now)
+        XCTAssertEqual(journey.events[shuttle.id],3)
+        XCTAssertTrue(journey.claim(shuttle,at:now))
+        XCTAssertFalse(journey.claim(shuttle,at:now))
+        XCTAssertTrue(journey.hasShuttleEventReceipts)
+        XCTAssertTrue(journey.isValid)
+
+        let save = try SavedGarden(playerKey:"shuttle",wallet:GardenWallet(journey:journey))
+        XCTAssertEqual(save.schema,5)
+        let decoded = try XCTUnwrap(SavedGarden.decode(save.encoded(),playerKey:"shuttle"))
+        XCTAssertEqual(decoded.wallet.journey,journey)
+        var previousBuild = save
+        previousBuild.schema = 4
+        XCTAssertNil(SavedGarden.decode(try previousBuild.encoded(),playerKey:"shuttle"),
+            "Older builds must reject the new receipt format instead of dropping a claimed reward")
     }
     func testEventsCountCorrectRoomAndClaimOnlyOnceDuringActiveWindow() {
         let now = Date(timeIntervalSince1970:21_600 * 100_000 + 10)

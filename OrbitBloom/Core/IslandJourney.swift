@@ -8,6 +8,10 @@ public struct IslandJourney: Codable, Equatable {
     public var events: [String: Int] = [:]
     public var claimedEvents: Set<String> = []
     public init() {}
+    public var hasShuttleEventReceipts: Bool {
+        events.keys.contains(where: { $0.hasPrefix("shuttle:") }) ||
+        claimedEvents.contains(where: { $0.hasPrefix("shuttle:") })
+    }
     public var isValid: Bool {
         levels.allSatisfy { Self.rooms.contains($0.key) && (0...1000).contains($0.value) } &&
         bestScores.allSatisfy { Self.rooms.contains($0.key) && (1...20_000).contains($0.value) } &&
@@ -48,19 +52,20 @@ public struct WorldEvent: Identifiable, Equatable {
     public func isActive(at now: Date) -> Bool { starts <= now && now < ends }
     public static func validID(_ id: String) -> Bool {
         let parts = id.split(separator: ":")
-        return parts.count == 2 && ["skills", "harvest", "rally"].contains(String(parts[0])) &&
+        return parts.count == 2 && ["skills", "harvest", "rally", "shuttle"].contains(String(parts[0])) &&
             parts[1].count <= 9 && Int(parts[1]).map { (0...10_000_000).contains($0) } == true
     }
     public static func windows(at now: Date) -> [WorldEvent] {
         let seconds = now.timeIntervalSince1970
         guard seconds.isFinite, (0...4_102_444_800).contains(seconds) else { return [] }
+        let period = 21_600.0, duration = 10_800.0
         let specs: [(String, Double, Double, [String], [String], GardenTool)] = [
             ("skills", 21_600, 10_800, ["canal","fireflies","windmill","observatory"],
              ["Waterlight workshop","Firefly gathering","Windmill festival","Stargazer night"], .bomb),
             ("harvest", 86_400, 28_800, ["farm"], ["Atoll harvest fair"], .tnt),
             ("rally", 172_800, 21_600, ["rally"], ["Moonseed convoy"], .mega)
         ]
-        return specs.map { key, period, duration, rooms, titles, tool in
+        let regular = specs.map { key, period, duration, rooms, titles, tool in
             let cycle = Int(seconds / period)
             let current = Double(cycle) * period
             let active = seconds < current + duration
@@ -70,5 +75,15 @@ public struct WorldEvent: Identifiable, Equatable {
             return WorldEvent(id: "\(key):\(selected)", title: titles[index], room: rooms[index],
                               starts: start, ends: start.addingTimeInterval(duration), tool: tool)
         }
+        // Shuttle gets its own event key so the existing skill rotation and
+        // saved skill-event receipts keep their schedule and meaning.
+        let shuttleCycle = Int(seconds / period)
+        let shuttleStart = Double(shuttleCycle) * period
+        let shuttleActive = seconds < shuttleStart + duration
+        let selectedShuttleCycle = shuttleActive ? shuttleCycle : shuttleCycle + 1
+        let starts = Date(timeIntervalSince1970: Double(selectedShuttleCycle) * period)
+        let shuttle = WorldEvent(id: "shuttle:\(selectedShuttleCycle)", title: "Sky Shuttle relay",
+            room: "shuttle", starts: starts, ends: starts.addingTimeInterval(duration), tool: .bomb)
+        return regular + [shuttle]
     }
 }

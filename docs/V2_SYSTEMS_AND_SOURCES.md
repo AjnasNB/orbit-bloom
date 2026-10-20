@@ -1,3 +1,11 @@
+# Sky Shuttle world events — 20 October 2026
+
+Sky Shuttle now receives a separate UTC event every six hours with a three-hour active window. Three sequential Shuttle clears during that event earn the same Bomb claim as the rotating skill workshop. Its `shuttle:` receipt IDs have a new allowlisted namespace; saved wallets advance to **schema 5** when they carry that receipt. Previous builds reject schema 5 to protect the receipt. Existing Canal, Firefly, Windmill and Observatory rotations and keys remain unchanged.
+
+The focused event/save tests (7/7) and all 64 core tests pass. The iOS app, unit-test bundle and UI-test bundle compile for a generic Simulator destination. The iOS 26.1 Store QA runtime is still missing, so no device gameplay, screenshot, signed archive or preview update is verified. Build 23 remains development source; the App Store package/gallery remain build 22. [Structured verification](qa/2026-10-20-shuttle-events.json).
+
+---
+
 # QA runtime guard — 17 October 2026
 
 `scripts/test-ios.sh` now checks the exact Store QA device/runtime before compilation, rejects unavailable or busy inventories, avoids duplicate boot attempts and stops on boot failure. Eleven isolated safety checks pass; 63 real core tests still pass. [Evidence and recovery](QA_RUNTIME_PREFLIGHT.md).
