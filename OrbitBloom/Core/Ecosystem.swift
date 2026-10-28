@@ -88,14 +88,25 @@ public struct Ecosystem: Codable, Equatable {
     public var extraPlots: [FarmPlot]? = nil
     public func plot(_ id: Int) -> FarmPlot? {
         guard (0..<18).contains(id) else { return nil }
-        return id < 6 ? plots[id] : extraPlots?[id-6] ?? FarmPlot(id:id)
+        if id < 6 {
+            guard plots.indices.contains(id), plots[id].id == id else { return nil }
+            return plots[id]
+        }
+        guard let extraPlots else { return FarmPlot(id:id) }
+        let index = id - 6
+        guard extraPlots.indices.contains(index), extraPlots[index].id == id else { return nil }
+        return extraPlots[index]
     }
     public func field(_ page: Int) -> [FarmPlot] { (page*6..<page*6+6).compactMap { plot($0) } }
     private mutating func setPlot(_ plot: FarmPlot) {
-        if plot.id < 6 { plots[plot.id] = plot }
-        else {
+        guard (0..<18).contains(plot.id) else { return }
+        if plot.id < 6 {
+            guard plots.indices.contains(plot.id) else { return }
+            plots[plot.id] = plot
+        } else {
             if extraPlots == nil { extraPlots = (6..<18).map(FarmPlot.init) }
-            extraPlots?[plot.id-6] = plot
+            guard let index = extraPlots?.firstIndex(where: { $0.id == plot.id }) else { return }
+            extraPlots?[index] = plot
         }
     }
     public var seeds = 8
@@ -110,16 +121,23 @@ public struct Ecosystem: Codable, Equatable {
     public var creditedTransactions: Set<String> = []
     public init() {}
     @discardableResult public mutating func plant(_ id: Int, crop: Crop, at now: Date) -> Bool {
-        guard var plot = plot(id), plot.crop == nil, seeds > 0, water >= 2 else { return false }
+        guard canAddressPlot(id), var plot = plot(id), plot.crop == nil, seeds > 0, water >= 2 else { return false }
         seeds -= 1; water -= 2; plot.crop = crop; plot.readyAt = now.addingTimeInterval(crop.duration); setPlot(plot); return true
     }
     @discardableResult public mutating func waterPlot(_ id: Int, at now: Date) -> Bool {
-        guard var plot = plot(id), plot.crop != nil, !plot.ready(at: now), water > 0, let ready = plot.readyAt else { return false }
+        guard canAddressPlot(id), var plot = plot(id), plot.crop != nil, !plot.ready(at: now), water > 0, let ready = plot.readyAt else { return false }
         water -= 1; plot.readyAt = max(now, ready.addingTimeInterval(-10)); setPlot(plot); return true
     }
     public mutating func harvest(_ id: Int, at now: Date) -> Int? {
-        guard let plot = plot(id), plot.ready(at: now), let crop = plot.crop else { return nil }
+        guard canAddressPlot(id), let plot = plot(id), plot.ready(at: now), let crop = plot.crop else { return nil }
         setPlot(FarmPlot(id: id)); compost += 1; produce += 1; seeds += 1; harvested += 1; return crop.coins
+    }
+    private func canAddressPlot(_ id: Int) -> Bool {
+        guard (0..<18).contains(id) else { return false }
+        if id < 6 { return plots.indices.contains(id) && plots[id].id == id }
+        guard let extraPlots else { return true }
+        let index = id - 6
+        return extraPlots.indices.contains(index) && extraPlots[index].id == id
     }
     @discardableResult public mutating func craft(_ tool: GardenTool) -> Bool {
         guard compost >= tool.compostCost else { return false }

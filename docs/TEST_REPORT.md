@@ -506,3 +506,8 @@ The standalone website was inspected in Chrome at its default desktop size and 3
 `swift test` runs core checks. `scripts/test-ios.sh` runs core and all native checks on the separate Orbit Bloom Store QA iOS 26.1 simulator. `scripts/run-ios.sh` builds/installs the preview without clearing its save. Xcode 26.6 (17F113), Swift 6.3.3; gameplay device: iPhone 17 Pro, iOS 26.5; StoreKit device: iPhone 17 Pro Max, iOS 26.1.
 
 Physical-device audio/haptics, VoiceOver and larger text, iPad layouts/orientations, older iOS versions, signed purchase interruptions and production save recovery remain unverified. There is no TestFlight upload, public release or App Review approval. Distribution signing requires the owner's Xcode account sign-in. Only Orbit Bloom is built; the other portfolio games remain concepts.
+# Farm save bounds — 28 October 2026
+
+Farm plot lookup and actions now reject truncated or misindexed base/extra plot arrays safely. They return no plot/operation instead of indexing past the array; failed plant/water/harvest calls leave resources unchanged. Regression coverage checks both the 6-slot base field and 12-slot expanded fields.
+
+All **64 core tests pass**, including the malformed-farm regression and complete 1,020-level campaign. Generic iOS Simulator **build-for-testing succeeds** for the app, unit and UI test bundles. The pinned iOS 26.1 Store QA runtime is missing: `scripts/test-ios.sh` exits 2 before compiling/booting, so simulator play-through, screenshots and preview installation were not possible. No visual behavior changed. Preview save and other simulators were left untouched. Source is build **1.0 (24)**; no archive, upload or App Store submission was made.

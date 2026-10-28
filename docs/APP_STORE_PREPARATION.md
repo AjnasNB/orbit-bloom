@@ -240,3 +240,8 @@ The final signed Release archive/export and exact package signature/Production c
 3. Check physical VoiceOver focus/timing, performance/audio/haptics, broader accessibility, smaller/older devices, split-screen and human pacing before public release.
 
 Daily improvement automation remains ACTIVE at 10:00 Asia/Kolkata for coding, tests, screenshots and internal build uploads. It does not accept agreements, perform real purchases or submit public releases. The current eight-item submission is this explicitly authorized release task, separate from unattended daily work.
+# Build 24 development — safe farm plot access, 28 October 2026
+
+Farm lookups and plant/water/harvest actions now safely reject malformed plot storage instead of risking an out-of-bounds crash or resource loss. Core tests pass and all three iOS Simulator targets compile for testing.
+
+**Build 24 has not been run on the pinned Store QA simulator, archived, uploaded or submitted.** The required iOS 26.1 runtime is absent, and the guarded runner exits before device operations. No screenshots were changed because this is a nonvisual safety fix. The App Store draft and signed package remain at build 22; do not represent this source change as a reviewed release.

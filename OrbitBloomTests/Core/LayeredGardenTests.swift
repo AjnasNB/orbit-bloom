@@ -89,6 +89,18 @@ final class LayeredGardenTests:XCTestCase {
         var disguised=cloud; disguised.schema=3
         XCTAssertNil(SavedGarden.decode(try disguised.encoded(),playerKey:"garden"))
         wallet.ecosystem.extraPlots?.removeLast(); XCTAssertFalse(wallet.isValid)
+        var truncated = eco
+        truncated.extraPlots?.removeLast()
+        let seeds = truncated.seeds, water = truncated.water
+        XCTAssertNil(truncated.plot(17)); XCTAssertEqual(truncated.field(2).count,5)
+        XCTAssertFalse(truncated.plant(17,crop:.rose,at:now))
+        XCTAssertFalse(truncated.waterPlot(17,at:now))
+        XCTAssertNil(truncated.harvest(17,at:now.addingTimeInterval(60)))
+        XCTAssertEqual(truncated.seeds,seeds); XCTAssertEqual(truncated.water,water)
+        var truncatedBase = eco
+        truncatedBase.plots.removeLast()
+        XCTAssertNil(truncatedBase.plot(5)); XCTAssertEqual(truncatedBase.field(0).count,5)
+        XCTAssertFalse(truncatedBase.plant(5,crop:.apple,at:now))
     }
     func testNewCampaignIsHardAndOldActiveBoardsKeepTheirOriginalRules() throws {
         XCTAssertTrue(Level.campaign.allSatisfy { $0.isOneShot || ($0.difficulty != .simple && (10...16).contains($0.moves)) })
