@@ -84,7 +84,7 @@ struct FarmView:View {
         return Button {
             let previous=plot, waterBefore=game.ecosystem.water
             game.farmAction(plot.id,crop:selected)
-            let after=game.ecosystem.plot(plot.id)!
+            guard let after=game.ecosystem.plot(plot.id) else { return }
             if previous.crop != nil && after.crop == nil { interaction=FarmFieldInteraction(plot:plot.id%6,kind:.harvest) }
             else if previous.crop == nil && after.crop != nil { interaction=FarmFieldInteraction(plot:plot.id%6,kind:.plant) }
             else if game.ecosystem.water < waterBefore { interaction=FarmFieldInteraction(plot:plot.id%6,kind:.water) }

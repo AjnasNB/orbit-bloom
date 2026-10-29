@@ -245,3 +245,6 @@ Daily improvement automation remains ACTIVE at 10:00 Asia/Kolkata for coding, te
 Farm lookups and plant/water/harvest actions now safely reject malformed plot storage instead of risking an out-of-bounds crash or resource loss. Core tests pass and all three iOS Simulator targets compile for testing.
 
 **Build 24 has not been run on the pinned Store QA simulator, archived, uploaded or submitted.** The required iOS 26.1 runtime is absent, and the guarded runner exits before device operations. No screenshots were changed because this is a nonvisual safety fix. The App Store draft and signed package remain at build 22; do not represent this source change as a reviewed release.
+# Build 25 development — safe farm action result handling, 29 October 2026
+
+The Farm screen now exits its post-action feedback path safely if a requested plot becomes unavailable. Core checks and generic iOS test compilation pass. Native play-through remains unverified because the pinned iOS 26.1 runtime is absent. Build 25 is not archived, uploaded or submitted; App Store materials remain unchanged.

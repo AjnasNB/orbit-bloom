@@ -198,3 +198,6 @@ The hub, event, records and help flows use horizontal pages with accessible adju
 # Farm model safety — 28 October 2026
 
 `Ecosystem.plot` and farm mutations validate both the requested plot ID and the stored slot identity/bounds. This prevents malformed in-memory or decoded farm arrays from trapping during lookup or consuming seeds/water before a failed write. Regression coverage exercises truncated base and expanded fields. The 64-case core suite and generic iOS Simulator test-bundle compilation pass. Native simulator execution is blocked by the absent pinned iOS 26.1 runtime; see [test report](TEST_REPORT.md). Build 24 is development source only.
+# Farm action UI guard — 29 October 2026
+
+Farm actions now tolerate a missing plot returned by the validated ecosystem model instead of force-unwrapping it in the view. All 64 core tests pass and the app/unit/UI targets compile for Simulator. The pinned iOS 26.1 native runtime remains unavailable; see `TEST_REPORT.md`. Build 25 is development source, not an App Store candidate.
