@@ -248,3 +248,6 @@ Farm lookups and plant/water/harvest actions now safely reject malformed plot st
 # Build 25 development — safe farm action result handling, 29 October 2026
 
 The Farm screen now exits its post-action feedback path safely if a requested plot becomes unavailable. Core checks and generic iOS test compilation pass. Native play-through remains unverified because the pinned iOS 26.1 runtime is absent. Build 25 is not archived, uploaded or submitted; App Store materials remain unchanged.
+# Build 26 development — bounded farm page lookup, 30 October 2026
+
+Farm pages outside the three supported fields now return empty before range arithmetic. Core tests and generic iOS test-bundle compilation pass. The pinned native QA runtime remains absent; no screenshots, preview install, archive, upload or App Store submission were made. The draft package is unchanged.

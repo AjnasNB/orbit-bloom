@@ -201,3 +201,6 @@ The hub, event, records and help flows use horizontal pages with accessible adju
 # Farm action UI guard — 29 October 2026
 
 Farm actions now tolerate a missing plot returned by the validated ecosystem model instead of force-unwrapping it in the view. All 64 core tests pass and the app/unit/UI targets compile for Simulator. The pinned iOS 26.1 native runtime remains unavailable; see `TEST_REPORT.md`. Build 25 is development source, not an App Store candidate.
+# Farm page bounds — 30 October 2026
+
+Farm field lookup validates the page before calculating its six-plot range, safely rejecting invalid/extreme page values. Core regression tests pass. Generic simulator compilation succeeds; pinned iOS 26.1 gameplay verification remains unavailable. See `TEST_REPORT.md`. Build 26 is development source.

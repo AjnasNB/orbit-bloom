@@ -514,3 +514,6 @@ All **64 core tests pass**, including the malformed-farm regression and complete
 # Farm view rejects unavailable plots safely — 29 October 2026
 
 The farm action button now handles a missing post-action plot without force-unwrapping it. A malformed plot rejected by the core model therefore cannot crash the farm screen. `swift test` passes all 64 core tests; the app and both native test bundles compile with generic iOS Simulator `build-for-testing`. The pinned iOS 26.1 Store QA runtime is still missing, so native play-through, screenshots and preview installation were not run. No visual change. Development build 1.0 (25); not archived, uploaded or submitted.
+# Farm field index validation — 30 October 2026
+
+`Ecosystem.field(_:)` now checks its three-page range before calculating offsets. Negative and `Int.max` pages return an empty field instead of risking an arithmetic overflow. Regression coverage also preserves normal field contents. All 64 core tests pass; generic iOS Simulator app/unit/UI build-for-testing succeeds. `scripts/test-ios.sh` remains blocked before simulator operations by missing iOS 26.1 Store QA runtime. No screenshots or preview installation; no visual change. Source build 1.0 (26), not archived or uploaded.

@@ -78,6 +78,7 @@ final class LayeredGardenTests:XCTestCase {
         var eco=Ecosystem(); let now=Date(timeIntervalSince1970:100_000)
         for id in [0,6,17] { XCTAssertTrue(eco.plant(id,crop:id == 6 ? .rose : .apple,at:now)) }
         XCTAssertEqual(eco.field(0).count,6); XCTAssertEqual(eco.field(2).count,6)
+        XCTAssertTrue(eco.field(-1).isEmpty); XCTAssertTrue(eco.field(Int.max).isEmpty)
         let restored=try JSONDecoder().decode(Ecosystem.self,from:JSONEncoder().encode(eco))
         XCTAssertEqual(restored,eco)
         XCTAssertEqual(eco.harvest(6,at:now.addingTimeInterval(31)),35)

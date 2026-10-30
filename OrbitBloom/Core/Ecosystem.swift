@@ -97,7 +97,10 @@ public struct Ecosystem: Codable, Equatable {
         guard extraPlots.indices.contains(index), extraPlots[index].id == id else { return nil }
         return extraPlots[index]
     }
-    public func field(_ page: Int) -> [FarmPlot] { (page*6..<page*6+6).compactMap { plot($0) } }
+    public func field(_ page: Int) -> [FarmPlot] {
+        guard (0..<3).contains(page) else { return [] }
+        return (page*6..<page*6+6).compactMap { plot($0) }
+    }
     private mutating func setPlot(_ plot: FarmPlot) {
         guard (0..<18).contains(plot.id) else { return }
         if plot.id < 6 {
