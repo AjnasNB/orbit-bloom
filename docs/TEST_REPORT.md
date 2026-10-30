@@ -517,3 +517,10 @@ The farm action button now handles a missing post-action plot without force-unwr
 # Farm field index validation — 30 October 2026
 
 `Ecosystem.field(_:)` now checks its three-page range before calculating offsets. Negative and `Int.max` pages return an empty field instead of risking an arithmetic overflow. Regression coverage also preserves normal field contents. All 64 core tests pass; generic iOS Simulator app/unit/UI build-for-testing succeeds. `scripts/test-ios.sh` remains blocked before simulator operations by missing iOS 26.1 Store QA runtime. No screenshots or preview installation; no visual change. Source build 1.0 (26), not archived or uploaded.
+# Store discovery update — build 27, 30 October 2026
+
+Apple’s 23 October review of build 11 rejected it under **2.1(b), Information Needed / App Completeness**: review could not locate the six IAPs. The current build-11 flow does not require sign-in (App Store Connect’s “Sign-in required” is unchecked). Purchases are behind the island coin-balance button, then a “Explore coin packs” action, with individual purchases on horizontal pages. This was too easy to miss and the App Review Notes omitted the extra tap.
+
+Build 27 labels the coin control “SHOP,” changes the first supplies action to “View Apple purchases,” and explicitly says the six packs are optional and need no account. A UI regression checks the guest-accessible path through to the first purchase card without buying. **64 core tests pass; the app and native test bundles compile for generic Simulator.** The pinned iOS 26.1 QA runtime remains unavailable, so this UI test and screenshot could not be run. The App Store Connect Business page for checking Paid Apps Agreement was temporarily unavailable; no agreement was accepted. Build 27 is development source, not submitted.
+
+The purchase-navigation reply was confirmed in App Store Connect on 30 October 2026. The rejected build remains unresolved pending a corrected build and review; paid agreement status is still unverified.

@@ -204,3 +204,8 @@ Farm actions now tolerate a missing plot returned by the validated ecosystem mod
 # Farm page bounds — 30 October 2026
 
 Farm field lookup validates the page before calculating its six-plot range, safely rejecting invalid/extreme page values. Core regression tests pass. Generic simulator compilation succeeds; pinned iOS 26.1 gameplay verification remains unavailable. See `TEST_REPORT.md`. Build 26 is development source.
+# App Review purchase discovery — 30 October 2026
+
+Apple’s latest Orbit Bloom note is 2.1(b): reviewers did not find the six IAPs in build 11. The shop entry looked like only a coin counter; “Explore coin packs” was a second step and the packs were horizontal pages. Build 27 makes “SHOP” visible on the island balance and labels the browse action “View Apple purchases · six optional packs · no account needed.” Guest play and IAP behavior are unchanged. Regression coverage follows this path without making a purchase. Generic iOS test compilation passes; the iOS 26.1 Store QA runtime is unavailable. Agreement status could not be checked because App Store Connect Business was temporarily unavailable. See `TEST_REPORT.md`.
+
+The purchase-navigation steps were sent and confirmed in App Store Connect on 30 October 2026. This response does not change build 11's rejected status.

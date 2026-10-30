@@ -12,7 +12,8 @@ struct ShopView: View {
                 lifePanel
                 Spacer(minLength:0)
                 SpriteView(index:11).frame(height:115).frame(maxWidth:.infinity)
-                PrimaryButton(title:"Explore coin packs",subtitle:"Swipe supplies",symbol:"bag.fill",id:"explorePacks") { withAnimation { page = 1 } }
+                PrimaryButton(title:"View Apple purchases",subtitle:"Six optional packs · no account needed",symbol:"bag.fill",id:"explorePacks") { withAnimation { page = 1 } }
+                    .accessibilityLabel("View six optional Apple purchases. No account needed.")
             } else {
                 SpriteView(index:StorePack.all[page-1].grant.coins > 0 ? 11 : 3).frame(height:125).frame(maxWidth:.infinity).shadow(color:Palette.mint.opacity(0.2),radius:3,y:8)
                 packRow(StorePack.all[page-1])

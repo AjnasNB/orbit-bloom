@@ -107,7 +107,15 @@ struct GameHUD: View {
     var body: some View {
         HStack(spacing:8) {
             Button { game.tab = 4 } label: { HStack(spacing:4) { Image(systemName:"heart.fill").foregroundStyle(Palette.coral); Text("\(game.ecosystem.lives.total)").foregroundStyle(Palette.night) }.font(.system(size:15,weight:.bold,design:.rounded)).frame(minWidth:48,minHeight:44) }.accessibilityLabel("\(game.ecosystem.lives.total) lives. Open refill shop").accessibilityIdentifier("lifeBalance").disabled(game.activity != nil || game.engine != nil)
-            Button { game.tab = 4; game.effect("tap") } label: { HStack(spacing:3) { SpriteView(index:11).frame(width:24,height:24); Text(game.progress.coins.formatted()).monospacedDigit().contentTransition(.numericText()).font(.system(size:15,weight:.bold,design:.rounded)).foregroundStyle(Palette.night) }.frame(minHeight:44) }.accessibilityLabel("Coins, \(game.progress.coins). Open supplies").accessibilityIdentifier("openShop").anchorPreference(key:WalletFlightAnchors.self,value:.bounds) { ["coins":$0] }.disabled(game.activity != nil || game.engine != nil)
+            Button { game.tab = 4; game.effect("tap") } label: {
+                HStack(spacing:3) {
+                    SpriteView(index:11).frame(width:24,height:24)
+                    VStack(alignment:.leading,spacing:0) {
+                        Text(game.progress.coins.formatted()).monospacedDigit().contentTransition(.numericText()).font(.system(size:15,weight:.bold,design:.rounded)).foregroundStyle(Palette.night)
+                        Text("SHOP").font(.system(size:8,weight:.black,design:.rounded)).foregroundStyle(Palette.mint)
+                    }
+                }.frame(minHeight:44)
+            }.accessibilityLabel("Shop. Coins, \(game.progress.coins)").accessibilityHint("Open optional Apple purchases and earned supplies").accessibilityIdentifier("openShop").anchorPreference(key:WalletFlightAnchors.self,value:.bounds) { ["coins":$0] }.disabled(game.activity != nil || game.engine != nil)
             Button { game.showSettings = true } label: { Image(systemName:"gearshape.fill").font(.system(size:20,weight:.bold)).foregroundStyle(Palette.muted).frame(width:44,height:44) }.accessibilityLabel("Settings").accessibilityIdentifier("settings")
         }.padding(.horizontal,18).padding(.vertical,6)
     }

@@ -251,3 +251,10 @@ The Farm screen now exits its post-action feedback path safely if a requested pl
 # Build 26 development — bounded farm page lookup, 30 October 2026
 
 Farm pages outside the three supported fields now return empty before range arithmetic. Core tests and generic iOS test-bundle compilation pass. The pinned native QA runtime remains absent; no screenshots, preview install, archive, upload or App Store submission were made. The draft package is unchanged.
+# Build 27 development — App Review purchase discovery, 30 October 2026
+
+Apple’s 23 October review of build 11 says the six IAPs were not located (2.1(b), App Completeness). They are optional and accessible without Game Center login, but build 11 hid the store behind an icon-only balance, a generic browse button and horizontal pack pages. Build 27 makes the store entry and optional-purchase path explicit and adds a guest-to-first-pack UI regression. Core tests and generic iOS test compilation pass; native execution and new screenshots are blocked by the missing pinned iOS 26.1 runtime.
+
+The rejection details request a reply with steps. The App Review Notes in the rejected version already say no login is required but omit the store path. App Store Connect confirmed “Sign-in required” is unchecked. The Business page was temporarily unavailable, so Paid Apps Agreement status remains unverified; no agreement was accepted. Build 27 has not been archived, uploaded or submitted; do not claim review resolution. The app remains free to download; the six listed IAPs remain optional.
+
+Apple’s review thread for submission 83b00d39-0873-4771-8bc9-5d94d4be04b4 now contains the requested purchase-navigation reply. This does not clear the rejection or replace a corrected build submission.
