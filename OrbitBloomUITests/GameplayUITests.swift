@@ -72,10 +72,14 @@ import StoreKitTest
         app.buttons["settings"].tap();app.buttons["playerAccount"].tap();fits(app.buttons["connectGameCenter"])
         XCTAssertTrue(app.staticTexts["saveStatus"].label.contains("Saved on this device"));attach("build17-apple-save-settings")
         app.navigationBars.buttons["Settings"].tap();app.navigationBars.buttons["Done"].tap()
-        XCTAssertTrue(app.buttons["openShop"].label.contains("Shop"));app.buttons["openShop"].tap();fits(app.buttons["explorePacks"])
-        XCTAssertTrue(app.buttons["explorePacks"].label.contains("Apple purchases"));XCTAssertTrue(app.buttons["explorePacks"].label.contains("no account needed"));attach("build27-optional-purchases-entry")
-        app.buttons["explorePacks"].tap();fits(app.buttons["buy_com.orbitbloom.coins400"])
-        XCTAssertTrue(app.staticTexts["Pocket of coins"].exists || app.staticTexts["Seed pouch"].exists)
+        XCTAssertTrue(app.buttons["openShop"].label.contains("Shop"));app.buttons["openShop"].tap()
+        fits(app.buttons["buy_com.orbitbloom.coins400"])
+        XCTAssertTrue(app.staticTexts["Pocket of coins"].exists)
+        XCTAssertTrue(app.staticTexts["optionalPurchaseNotice"].label.contains("no account needed"))
+        XCTAssertEqual(app.staticTexts["supplyPage"].label,"Swipe supplies · 1 of 6");attach("build28-shop-first-pack-visible")
+        app.descendants(matching:.any)["suppliesScene"].swipeLeft()
+        XCTAssertTrue(app.staticTexts["Garden chest"].waitForExistence(timeout:5))
+        XCTAssertEqual(app.staticTexts["supplyPage"].label,"Swipe supplies · 2 of 6")
     }
     func settle() {
         let hint = app.buttons["hintButton"]

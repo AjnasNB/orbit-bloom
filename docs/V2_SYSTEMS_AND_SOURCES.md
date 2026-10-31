@@ -1,3 +1,9 @@
+# Build 28 — App Review purchase visibility — 31 October 2026
+
+The shop's opening page now displays the first optional StoreKit pack, the existing life-refill controls, and a concise no-account/six-pack explanation together. A horizontal swipe browses the other five product pages. This removes an extra discovery action for reviewers and players; purchase verification and transaction behavior are unchanged. No checkout was initiated. Build 28 is local development source; its generic Simulator compile and 64 core tests pass, while pinned iOS 26.1 native verification remains unavailable. See [TEST_REPORT.md](TEST_REPORT.md) and [APP_STORE_PREPARATION.md](APP_STORE_PREPARATION.md).
+
+---
+
 # Sky Shuttle world events — 20 October 2026
 
 Sky Shuttle now receives a separate UTC event every six hours with a three-hour active window. Three sequential Shuttle clears during that event earn the same Bomb claim as the rotating skill workshop. Its `shuttle:` receipt IDs have a new allowlisted namespace; saved wallets advance to **schema 5** when they carry that receipt. Previous builds reject schema 5 to protect the receipt. Existing Canal, Firefly, Windmill and Observatory rotations and keys remain unchanged.
@@ -209,3 +215,8 @@ Farm field lookup validates the page before calculating its six-plot range, safe
 Apple’s latest Orbit Bloom note is 2.1(b): reviewers did not find the six IAPs in build 11. The shop entry looked like only a coin counter; “Explore coin packs” was a second step and the packs were horizontal pages. Build 27 makes “SHOP” visible on the island balance and labels the browse action “View Apple purchases · six optional packs · no account needed.” Guest play and IAP behavior are unchanged. Regression coverage follows this path without making a purchase. Generic iOS test compilation passes; the iOS 26.1 Store QA runtime is unavailable. Agreement status could not be checked because App Store Connect Business was temporarily unavailable. See `TEST_REPORT.md`.
 
 The purchase-navigation steps were sent and confirmed in App Store Connect on 30 October 2026. This response does not change build 11's rejected status.
+# Build 28 — App Review purchase visibility — 31 October 2026
+
+The shop's opening page now displays the first optional StoreKit pack, the existing life-refill controls, and a concise no-account/six-pack explanation together. A horizontal swipe browses the other five product pages. This removes an extra discovery action for reviewers and players; purchase verification and transaction behavior are unchanged. No checkout was initiated. Build 28 is local development source; its generic Simulator compile and 64 core tests pass, while pinned iOS 26.1 native verification remains unavailable. See [TEST_REPORT.md](TEST_REPORT.md) and [APP_STORE_PREPARATION.md](APP_STORE_PREPARATION.md).
+
+# Sky Shuttle world events — 20 October 2026

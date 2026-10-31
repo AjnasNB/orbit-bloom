@@ -1,3 +1,11 @@
+# Development build 28 — immediate purchase visibility, 31 October 2026
+
+Build **1.0 (28)** changes the shop landing page so the first optional Apple purchase is visible immediately beside the existing life panel, with a clear “Six optional Apple packs · no account needed” notice. Swiping reaches the remaining five packs. Regression coverage verifies the first pack and the second page without purchasing. All **64 core tests** pass and generic iOS Simulator test-bundle compilation succeeds.
+
+This is a local development build, not an App Store candidate: native UI execution and changed-screen captures are blocked by the missing pinned iOS 26.1 Store QA runtime. Build 28 was installed over the owner preview and its in-progress save was preserved. The previously recorded build-11 rejection for Guideline 2.1(b) remains unresolved until a corrected build and its IAP configuration are actually submitted and reviewed. App Store submission is also blocked by the Account Holder's pending Apple Developer Program License Agreement; this run accepted no agreement and made no submission. See [the test report](TEST_REPORT.md).
+
+---
+
 # Build 23 development — Sky Shuttle event progression, 20 October 2026
 
 The source now includes a dedicated scheduled Sky Shuttle event. Existing event windows keep their IDs and rotation; new Shuttle claims use **save schema 5** so older builds refuse the new receipt format safely. The focused core tests pass and generic iOS test-bundle compilation succeeds.

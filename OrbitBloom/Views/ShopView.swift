@@ -5,28 +5,28 @@ struct ShopView: View {
     @EnvironmentObject var purchases: PurchaseStore
     @State private var page = 0
     var body: some View {
-        VStack(alignment:.leading,spacing:14) {
-            Text(page == 0 ? "Your garden supplies" : StorePack.all[page-1].title).font(.system(size:28,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
+        VStack(alignment:.leading,spacing:12) {
+            Text(page == 0 ? "Your garden supplies" : StorePack.all[page].title).font(.system(size:28,weight:.heavy,design:.rounded)).foregroundStyle(Palette.night)
             Text("Earn coins by playing. Apple purchases are optional.").font(.system(.subheadline,design:.rounded)).foregroundStyle(Palette.mint)
             if page == 0 {
                 lifePanel
-                Spacer(minLength:0)
-                SpriteView(index:11).frame(height:115).frame(maxWidth:.infinity)
-                PrimaryButton(title:"View Apple purchases",subtitle:"Six optional packs · no account needed",symbol:"bag.fill",id:"explorePacks") { withAnimation { page = 1 } }
-                    .accessibilityLabel("View six optional Apple purchases. No account needed.")
+                Text("Six optional Apple packs · no account needed")
+                    .font(.caption.bold()).foregroundStyle(Palette.mint)
+                    .accessibilityIdentifier("optionalPurchaseNotice")
+                packRow(StorePack.all[0])
             } else {
-                SpriteView(index:StorePack.all[page-1].grant.coins > 0 ? 11 : 3).frame(height:125).frame(maxWidth:.infinity).shadow(color:Palette.mint.opacity(0.2),radius:3,y:8)
-                packRow(StorePack.all[page-1])
+                SpriteView(index:StorePack.all[page].grant.coins > 0 ? 11 : 3).frame(height:125).frame(maxWidth:.infinity).shadow(color:Palette.mint.opacity(0.2),radius:3,y:8)
+                packRow(StorePack.all[page])
                 Text("Consumable coins and lives never expire. Spent packs are not restored. Extra lives stay in reserve.").font(.caption).foregroundStyle(Palette.mint)
                 Spacer(minLength:4)
             }
             if let status = purchases.status { Text(status).font(.caption).foregroundStyle(Palette.night).accessibilityIdentifier("purchaseStatus") }
             HStack { Button("Refresh shop") { Task { await purchases.load() } }.disabled(purchases.loading || purchases.purchasing).accessibilityIdentifier("refreshShop"); Spacer(); Button("Restore purchases") { Task { await purchases.restore() } }.disabled(purchases.purchasing).accessibilityIdentifier("restorePurchases") }.font(.caption.bold()).foregroundStyle(Palette.night).frame(minHeight:44)
-            Text("Swipe supplies · \(page+1) of \(StorePack.all.count+1)").font(.caption.bold()).foregroundStyle(Palette.mint).frame(maxWidth:.infinity).accessibilityIdentifier("supplyPage")
+            Text("Swipe supplies · \(page+1) of \(StorePack.all.count)").font(.caption.bold()).foregroundStyle(Palette.mint).frame(maxWidth:.infinity).accessibilityIdentifier("supplyPage")
         }.padding(.horizontal,22).padding(.bottom,12).frame(maxHeight:.infinity).contentShape(Rectangle())
         .simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
             guard abs(value.translation.width) > abs(value.translation.height) else { return }
-            withAnimation { page = min(StorePack.all.count,max(0,page+(value.translation.width < 0 ? 1 : -1))) }; game.effect("tap")
+            withAnimation { page = min(StorePack.all.count-1,max(0,page+(value.translation.width < 0 ? 1 : -1))) }; game.effect("tap")
         }).accessibilityElement(children:.contain).accessibilityIdentifier("suppliesScene")
     }
     var lifePanel: some View {

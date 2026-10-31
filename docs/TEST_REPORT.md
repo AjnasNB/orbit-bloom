@@ -1,3 +1,11 @@
+# Development update — Shop purchase visibility, 31 October 2026
+
+The shop now opens directly on its first optional Apple purchase, with the existing life-refill panel and a clear six-pack/no-account notice visible on the same page. Horizontal swipes move through all six packs; the prior extra discovery tap is gone. UI regression coverage checks the first product and the second swipe page without initiating a purchase. Build **1.0 (28)** is a local development build.
+
+All **64 core tests pass**, including the full 1,020-level campaign. Generic iOS Simulator `build-for-testing` and app/test-bundle compilation passed against the available SDK. The pinned Store QA runner still exits 2 because its iOS 26.1 runtime/device is missing; no test reset or native UI run occurred. Build 28 was installed over the personal preview, and its saved active puzzle/wallet were verified intact. The active level prevents safe navigation into the shop without abandoning the attempt, so the changed shop has no fresh device capture and release galleries were not replaced. No archive, upload, App Store submission, or review status change is claimed. See [App Store preparation](APP_STORE_PREPARATION.md).
+
+---
+
 # Development update — Sky Shuttle world events, 20 October 2026
 
 Sky Shuttle now has its own automatic global relay window every six hours, open for three hours. Its new event key leaves the four existing skill-event schedules and saved receipts unchanged. Three cleared Shuttle challenges qualify one Bomb; the claim is durable exactly once. Receipt saves use schema 5, and older builds reject them instead of losing the new claim.
