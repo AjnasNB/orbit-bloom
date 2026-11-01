@@ -38,7 +38,11 @@ struct FarmView:View {
                                     Text("Harvests or adventure wins").font(.system(size:14,weight:.bold,design:.rounded))
                                 }.padding(28).background(Palette.paper.opacity(0.95),in:RoundedRectangle(cornerRadius:28)).accessibilityElement(children:.ignore).accessibilityLabel("Field \(page+1) locked. Complete \(unlockTarget) harvests or adventure wins to open it. \(game.ecosystem.harvested) harvests and \(game.farmAdventureWins) wins so far. Bloom, skill games and successful Rally deliveries count.").accessibilityIdentifier("lockedFarmField")
                             }
-                        }.accessibilityElement(children:.contain).accessibilityLabel("Farm field \(page+1) of three, \(unlocked ? "open with six saved patches" : "locked"). Swipe horizontally to change field").accessibilityIdentifier("farmRoomMap")
+                    }.accessibilityElement(children:.contain).accessibilityLabel("Farm field \(page+1) of three, \(unlocked ? "open with six saved patches" : "locked"). Swipe horizontally to change field").accessibilityIdentifier("farmRoomMap")
+                        .highPriorityGesture(DragGesture(minimumDistance:35).onEnded { value in
+                            guard abs(value.translation.width) > abs(value.translation.height) else { return }
+                            changeField(value.translation.width < 0 ? 1 : -1)
+                        })
                     }.frame(minHeight:220,maxHeight:.infinity)
                 }
                 HStack(spacing:12) {
@@ -48,10 +52,7 @@ struct FarmView:View {
                     Button { withAnimation(reduceMotion ? nil : .easeOut(duration:0.2)) { shed.toggle() }; game.effect("tap") } label: { Image(systemName:shed ? "leaf.fill" : "house.lodge.fill").font(.system(size:24)).frame(width:48,height:48).background(Palette.paper,in:Circle()) }.accessibilityLabel(shed ? "Back to the fields" : "Enter tool shed").accessibilityIdentifier(shed ? "backToTerraces" : "openToolShed")
                 }.font(.system(size:15,weight:.heavy,design:.rounded)).accessibilityElement(children:.contain).accessibilityIdentifier("farmTotals")
             }.foregroundStyle(Palette.night).padding(.horizontal,12).padding(.bottom,6).contentShape(Rectangle())
-                .simultaneousGesture(DragGesture(minimumDistance:35).onEnded { value in
-                    guard !shed,abs(value.translation.width) > abs(value.translation.height) else { return }
-                    changeField(value.translation.width < 0 ? 1 : -1)
-                }).accessibilityElement(children:.contain).accessibilityIdentifier("farmScene")
+                .accessibilityElement(children:.contain).accessibilityIdentifier("farmScene")
                 .accessibilityAction(named:"Next farm field") { changeField(1) }.accessibilityAction(named:"Previous farm field") { changeField(-1) }
         }
     }

@@ -52,8 +52,8 @@ import StoreKitTest
         for id in 0..<6 { fits(app.buttons["plot\(id)"]) }
         app.buttons["cropapple"].tap();app.buttons["plot0"].tap();XCTAssertTrue((app.buttons["plot0"].value as? String)?.contains("Moon apple") == true);app.buttons["plot0"].tap();app.buttons["plot0"].tap()
         app.buttons["croprose"].tap();app.buttons["plot1"].tap();app.buttons["plot1"].tap();attach("build17-farm-first-field-growing")
-        let map=app.descendants(matching:.any)["farmRoomMap"].firstMatch;map.swipeLeft();fits(app.buttons["plot6"]);app.buttons["plot6"].tap();app.buttons["plot6"].tap();attach("build17-farm-second-field")
-        map.swipeLeft();fits(app.buttons["plot12"]);app.buttons["plot12"].tap();app.buttons["plot12"].tap();attach("build17-farm-third-field")
+        let map=app.descendants(matching:.any)["farmRoomMap"].firstMatch;map.swipeLeft();fits(app.buttons["plot6"]);XCTAssertTrue(app.buttons["plot6"].label.contains("empty"),"Changing fields by swipe must not activate a plot action");app.buttons["plot6"].tap();app.buttons["plot6"].tap();attach("build17-farm-second-field")
+        map.swipeLeft();fits(app.buttons["plot12"]);XCTAssertTrue(app.buttons["plot12"].label.contains("empty"),"Changing fields by swipe must not activate a plot action");app.buttons["plot12"].tap();app.buttons["plot12"].tap();attach("build17-farm-third-field")
         map.swipeRight();XCTAssertTrue(app.buttons["plot6"].label.contains("growing") || app.buttons["plot6"].label.contains("ready"))
         app.buttons["returnWorld"].tap();app.terminate();app.launchArguments=["--uitesting","--keep-progress"];app.launch();XCTAssertTrue(app.buttons["openFarm"].waitForExistence(timeout:15));app.buttons["openFarm"].tap()
         let ready=XCTNSPredicateExpectation(predicate:NSPredicate { _,_ in self.app.buttons["plot0"].label.contains("ready") && self.app.buttons["plot1"].label.contains("ready") },object:app)

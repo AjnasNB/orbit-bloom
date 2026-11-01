@@ -1,3 +1,11 @@
+# Development build 29 — Farm swipe protection, 1 November 2026
+
+Field navigation now uses a high-priority horizontal gesture on the farm map itself, so plot controls do not compete with map swipes. The UI regression verifies that swiping to fields two and three leaves the first plot empty before the player acts. All 64 core tests and Swift parsing pass.
+
+Build 29 has not been type-checked by Xcode or installed: the pinned iOS 26.1 QA runtime is missing, and Xcode currently reports that the iOS 26.5 platform is not installed for a generic simulator build. Native UI screenshots and release galleries were not changed. The owner preview remains untouched. This is development source, not an App Store candidate. No archive, upload, or submission occurred.
+
+---
+
 # Development build 28 — immediate purchase visibility, 31 October 2026
 
 Build **1.0 (28)** changes the shop landing page so the first optional Apple purchase is visible immediately beside the existing life panel, with a clear “Six optional Apple packs · no account needed” notice. Swiping reaches the remaining five packs. Regression coverage verifies the first pack and the second page without purchasing. All **64 core tests** pass and generic iOS Simulator test-bundle compilation succeeds.

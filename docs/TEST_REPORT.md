@@ -1,3 +1,11 @@
+# Development update — Farm swipe action protection, 1 November 2026
+
+Farm field swipes now take priority only inside the field map. This prevents a horizontal drag over a plot from also firing its plant, water, or harvest button. The farm UI regression now asserts the first plots on fields two and three remain empty immediately after swiping. Build **1.0 (29)** is unverified development source; it was not installed on the preview device.
+
+All **64 core tests pass**, including the 1,020-level campaign. Swift parser checks pass for the edited view and UI test. The native runner still stops before testing because the pinned iOS 26.1 runtime/device is unavailable. A generic simulator build also could not start: Xcode reports the iOS 26.5 platform is not installed. No native UI run, screenshot, archive, upload, or App Store submission occurred. The personal preview was left untouched. Restore an iOS simulator platform/runtime before claiming UI verification.
+
+---
+
 # Development update — Shop purchase visibility, 31 October 2026
 
 The shop now opens directly on its first optional Apple purchase, with the existing life-refill panel and a clear six-pack/no-account notice visible on the same page. Horizontal swipes move through all six packs; the prior extra discovery tap is gone. UI regression coverage checks the first product and the second swipe page without initiating a purchase. Build **1.0 (28)** is a local development build.

@@ -1,3 +1,9 @@
+# Build 29 — Farm swipe action protection — 1 November 2026
+
+Horizontal field navigation now has gesture priority within the farm map, protecting its plot buttons against accidental activation during a swipe. Farm UI coverage asserts the destination field remains empty immediately after navigation. The core suite (64 tests) and Swift parser checks pass. Full Xcode type-checking and simulator play remain blocked: iOS 26.5 platform is absent and pinned iOS 26.1 QA runtime/device is unavailable. Build 29 is unverified development source; see [TEST_REPORT.md](TEST_REPORT.md).
+
+---
+
 # Build 28 — App Review purchase visibility — 31 October 2026
 
 The shop's opening page now displays the first optional StoreKit pack, the existing life-refill controls, and a concise no-account/six-pack explanation together. A horizontal swipe browses the other five product pages. This removes an extra discovery action for reviewers and players; purchase verification and transaction behavior are unchanged. No checkout was initiated. Build 28 is local development source; its generic Simulator compile and 64 core tests pass, while pinned iOS 26.1 native verification remains unavailable. See [TEST_REPORT.md](TEST_REPORT.md) and [APP_STORE_PREPARATION.md](APP_STORE_PREPARATION.md).
