@@ -1,3 +1,9 @@
+# Build 30 — Farm crop selection accessibility — 2 November 2026
+
+Farm crop controls now announce whether each crop is selected, so planting choice is clear to VoiceOver users. The regression verifies state changes between apple and rose. All 64 core tests and Swift parsing pass. Native UI/type-check verification remains blocked by missing iOS simulator runtimes/platform; build 30 is development source only. See [TEST_REPORT.md](TEST_REPORT.md).
+
+---
+
 # Build 29 — Farm swipe action protection — 1 November 2026
 
 Horizontal field navigation now has gesture priority within the farm map, protecting its plot buttons against accidental activation during a swipe. Farm UI coverage asserts the destination field remains empty immediately after navigation. The core suite (64 tests) and Swift parser checks pass. Full Xcode type-checking and simulator play remain blocked: iOS 26.5 platform is absent and pinned iOS 26.1 QA runtime/device is unavailable. Build 29 is unverified development source; see [TEST_REPORT.md](TEST_REPORT.md).

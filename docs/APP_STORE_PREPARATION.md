@@ -1,3 +1,11 @@
+# Development build 30 — Farm crop selection accessibility, 2 November 2026
+
+Farm crop controls now expose “Selected” or “Not selected” as their accessibility value. A UI regression checks the value when switching between Moon apple and Star rose, before any planting action. Core tests and Swift parser checks pass.
+
+Build 30 remains unverified: the pinned iOS 26.1 runtime and the installed generic iOS Simulator platform are unavailable. Native test execution, device installation and fresh screenshots were not possible. This development change has not been archived, uploaded or submitted.
+
+---
+
 # Development build 29 — Farm swipe protection, 1 November 2026
 
 Field navigation now uses a high-priority horizontal gesture on the farm map itself, so plot controls do not compete with map swipes. The UI regression verifies that swiping to fields two and three leaves the first plot empty before the player acts. All 64 core tests and Swift parsing pass.

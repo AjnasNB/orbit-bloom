@@ -19,7 +19,7 @@ struct FarmView:View {
                         ForEach(Crop.allCases) { crop in
                             Button { selected=crop; game.effect("tap") } label: {
                                 HStack(spacing:4) { SpriteView(index:crop.sprite).frame(width:40,height:40); Image(systemName:"clock"); Text("\(Int(crop.duration))"); SpriteView(index:11).frame(width:22,height:22); Text("\(crop.coins)") }.font(.system(size:12,weight:.bold,design:.rounded)).frame(maxWidth:.infinity,minHeight:50).background(selected == crop ? Palette.sunlight : Palette.paper,in:Capsule()).overlay(Capsule().stroke(selected == crop ? Palette.gold : .clear,lineWidth:2))
-                            }.buttonStyle(PressStyle()).accessibilityLabel("Choose \(crop.title), \(Int(crop.duration)) seconds, \(crop.coins) coins per harvest. Plant costs one seed and two water").accessibilityIdentifier("crop\(crop.rawValue)")
+                            }.buttonStyle(PressStyle()).accessibilityLabel("Choose \(crop.title), \(Int(crop.duration)) seconds, \(crop.coins) coins per harvest. Plant costs one seed and two water").accessibilityValue(selected == crop ? "Selected" : "Not selected").accessibilityIdentifier("crop\(crop.rawValue)")
                         }
                     }
                     GeometryReader { geo in

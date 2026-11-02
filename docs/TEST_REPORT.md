@@ -1,3 +1,11 @@
+# Development update — Farm crop selection accessibility, 2 November 2026
+
+Farm crop buttons now expose their selected state as an accessibility value. VoiceOver users can tell whether Moon apple or Star rose will be planted, and the UI regression checks selection changes before planting. Build **1.0 (30)** is unverified development source; the preview was not replaced.
+
+All **64 core tests pass**, and Swift parser checks pass for the changed view and UI test. The pinned iOS 26.1 runner remains unavailable, so native UI testing and a selection-flow screenshot could not run. Xcode also still lacks the iOS simulator platform needed for generic build/type-checking. No archive, upload, or submission occurred. See [App Store preparation](APP_STORE_PREPARATION.md).
+
+---
+
 # Development update — Farm swipe action protection, 1 November 2026
 
 Farm field swipes now take priority only inside the field map. This prevents a horizontal drag over a plot from also firing its plant, water, or harvest button. The farm UI regression now asserts the first plots on fields two and three remain empty immediately after swiping. Build **1.0 (29)** is unverified development source; it was not installed on the preview device.
