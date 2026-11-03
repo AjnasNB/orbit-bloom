@@ -1,3 +1,9 @@
+# Build 30 verification update — 3 November 2026
+
+The iOS 26.5 platform has returned, and Xcode now compiles the app plus unit/UI test bundles for a generic Simulator destination. All 64 core tests pass. The separate iOS 26.1 Store QA runtime is still unavailable, so the Farm selection regression has not run in UI and no screenshots or preview install were made. Build 30 is still development source and has not been archived or uploaded.
+
+---
+
 # Development build 30 — Farm crop selection accessibility, 2 November 2026
 
 Farm crop controls now expose “Selected” or “Not selected” as their accessibility value. A UI regression checks the value when switching between Moon apple and Star rose, before any planting action. Core tests and Swift parser checks pass.

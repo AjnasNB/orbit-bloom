@@ -1,3 +1,9 @@
+# Build 30 verification — 3 November 2026
+
+Generic iOS 26.5 `build-for-testing` now compiles the app and both test bundles, and all 64 core tests pass. The pinned iOS 26.1 QA runtime/device is still missing, so no native UI playback or accessibility screenshot verifies the selected crop value. The preview remains untouched; this is not an App Store build.
+
+---
+
 # Build 30 — Farm crop selection accessibility — 2 November 2026
 
 Farm crop controls now announce whether each crop is selected, so planting choice is clear to VoiceOver users. The regression verifies state changes between apple and rose. All 64 core tests and Swift parsing pass. Native UI/type-check verification remains blocked by missing iOS simulator runtimes/platform; build 30 is development source only. See [TEST_REPORT.md](TEST_REPORT.md).

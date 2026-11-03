@@ -1,3 +1,9 @@
+# Verification update — Build 30 generic simulator compile, 3 November 2026
+
+Xcode's iOS 26.5 simulator platform is available again. Build 30 and its app, unit-test and UI-test bundles now compile successfully with generic `build-for-testing`; all 64 core tests also pass. The pinned Store QA runner still exits before tests because its iOS 26.1 runtime/device is missing. No native UI flow, screenshot, preview install, archive or upload was performed. The accessibility selection change remains unverified in a running app; the personal preview save is untouched.
+
+---
+
 # Development update — Farm crop selection accessibility, 2 November 2026
 
 Farm crop buttons now expose their selected state as an accessibility value. VoiceOver users can tell whether Moon apple or Star rose will be planted, and the UI regression checks selection changes before planting. Build **1.0 (30)** is unverified development source; the preview was not replaced.
