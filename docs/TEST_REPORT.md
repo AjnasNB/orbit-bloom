@@ -1,3 +1,11 @@
+# Development update — Farm crop selection cue, 4 November 2026
+
+The selected crop now has a visible checkmark as well as its accessible selection value, making the planting choice easier to spot. Build **1.0 (31)** compiles with the app and both test bundles for the generic iOS 26.5 Simulator destination; all 64 core tests pass.
+
+The pinned iOS 26.1 Store QA runtime/device is still unavailable, so the updated Farm interaction was not played and no release screenshot was captured. The personal preview simulator was not available in the current device list; no simulator was reset or repurposed. Build 31 was not installed, archived, uploaded, or submitted. See [App Store preparation](APP_STORE_PREPARATION.md).
+
+---
+
 # Verification update — Build 30 generic simulator compile, 3 November 2026
 
 Xcode's iOS 26.5 simulator platform is available again. Build 30 and its app, unit-test and UI-test bundles now compile successfully with generic `build-for-testing`; all 64 core tests also pass. The pinned Store QA runner still exits before tests because its iOS 26.1 runtime/device is missing. No native UI flow, screenshot, preview install, archive or upload was performed. The accessibility selection change remains unverified in a running app; the personal preview save is untouched.

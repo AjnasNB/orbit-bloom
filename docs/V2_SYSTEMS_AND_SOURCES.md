@@ -1,3 +1,9 @@
+# Build 31 — Farm crop selection cue — 4 November 2026
+
+The selected Farm crop now carries a visible checkmark to strengthen the selected state already exposed to accessibility. The 64-case core suite passes and generic iOS 26.5 app/unit/UI build-for-testing succeeds. Native play and a changed-screen capture remain blocked by the absent pinned iOS 26.1 QA runtime/device. No preview device was available, so no install or reset occurred. Build 31 is development source only; see [TEST_REPORT.md](TEST_REPORT.md).
+
+---
+
 # Build 30 verification — 3 November 2026
 
 Generic iOS 26.5 `build-for-testing` now compiles the app and both test bundles, and all 64 core tests pass. The pinned iOS 26.1 QA runtime/device is still missing, so no native UI playback or accessibility screenshot verifies the selected crop value. The preview remains untouched; this is not an App Store build.

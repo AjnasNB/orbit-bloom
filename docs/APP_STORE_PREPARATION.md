@@ -1,3 +1,11 @@
+# Development build 31 — Farm crop selection cue, 4 November 2026
+
+The selected crop now shows a small checkmark to reinforce the gold selected-state styling and VoiceOver value. All 64 core tests pass and generic iOS 26.5 `build-for-testing` compiles the app and both test bundles.
+
+The pinned iOS 26.1 Store QA runtime/device remains missing, so native UI play and a fresh screenshot could not be completed. The personal preview was not listed as available and was not touched. Build 31 is not an App Store candidate, archive, upload, or submission.
+
+---
+
 # Build 30 verification update — 3 November 2026
 
 The iOS 26.5 platform has returned, and Xcode now compiles the app plus unit/UI test bundles for a generic Simulator destination. All 64 core tests pass. The separate iOS 26.1 Store QA runtime is still unavailable, so the Farm selection regression has not run in UI and no screenshots or preview install were made. Build 30 is still development source and has not been archived or uploaded.
