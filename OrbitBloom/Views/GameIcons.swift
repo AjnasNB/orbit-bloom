@@ -121,7 +121,13 @@ struct ObstacleArtwork: View {
                     Image(systemName:"drop.fill").font(.system(size:s*0.30)).foregroundStyle(Color(hex:0xD5F7FF))
                     ForEach([-0.34,0.34],id:\.self) { y in Capsule().fill(Color(hex:0x96C7D4)).frame(width:s*0.63,height:s*0.11).offset(y:s*y) }
                 }
-                HStack(spacing:2) { ForEach(0..<obstacle.remaining,id:\.self) { _ in Circle().fill(.white).frame(width:5,height:5).shadow(color:.black.opacity(0.4),radius:1) } }.offset(y:s*0.35)
+                Text("\(obstacle.remaining)")
+                    .font(.system(size:max(8,s*0.24),weight:.black,design:.rounded)).monospacedDigit()
+                    .foregroundStyle(.white).frame(width:s*0.34,height:s*0.34)
+                    .background(Color(hex:0x195A73),in:Circle())
+                    .overlay(Circle().stroke(.white.opacity(0.95),lineWidth:max(1,s*0.025)))
+                    .shadow(color:.black.opacity(0.35),radius:1,y:1)
+                    .position(x:s*0.80,y:s*0.80)
             }
         }.allowsHitTesting(false).accessibilityHidden(true)
     }

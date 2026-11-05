@@ -1,3 +1,9 @@
+# Build 31 — Puzzle obstacle durability cue — 5 November 2026
+
+Obstacle overlays replace tiny durability dots with a high-contrast number badge, making remaining hits legible on small puzzle cells. Existing accessibility labels continue to describe kind and remaining hits. All 64 core tests and generic iOS 26.5 app/test compilation pass. Native play and updated screenshot capture remain blocked by the missing pinned iOS 26.1 Store QA runtime/device. Build 31 is not installed or submitted; see [TEST_REPORT.md](TEST_REPORT.md).
+
+---
+
 # Build 31 — Farm crop selection cue — 4 November 2026
 
 The selected Farm crop now carries a visible checkmark to strengthen the selected state already exposed to accessibility. The 64-case core suite passes and generic iOS 26.5 app/unit/UI build-for-testing succeeds. Native play and a changed-screen capture remain blocked by the absent pinned iOS 26.1 QA runtime/device. No preview device was available, so no install or reset occurred. Build 31 is development source only; see [TEST_REPORT.md](TEST_REPORT.md).

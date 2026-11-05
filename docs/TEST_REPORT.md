@@ -1,3 +1,11 @@
+# Build 31 visual clarity update — obstacle layers, 5 November 2026
+
+Layered ice, rope, mud, seed sacks and water tubes now show their remaining hit count in a high-contrast numbered badge instead of tiny dots. The tile's accessibility label still announces the obstacle and hits remaining. All 64 core tests pass, including layered-obstacle rules; generic iOS 26.5 app/unit/UI `build-for-testing` succeeds.
+
+The pinned iOS 26.1 Store QA runtime/device remains unavailable. No native gameplay, screenshot, preview install, archive, or upload was performed; the only booted simulator belongs to another app and was left untouched. Build 31 remains unverified on device.
+
+---
+
 # Development update — Farm crop selection cue, 4 November 2026
 
 The selected crop now has a visible checkmark as well as its accessible selection value, making the planting choice easier to spot. Build **1.0 (31)** compiles with the app and both test bundles for the generic iOS 26.5 Simulator destination; all 64 core tests pass.

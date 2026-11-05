@@ -1,3 +1,9 @@
+# Build 31 visual clarity update — obstacle layers, 5 November 2026
+
+Puzzle obstacles now show remaining hit points in a high-contrast numbered badge, while tile accessibility labels retain the same hit count. Core obstacle and full campaign tests pass; generic iOS 26.5 app/test bundle compilation succeeds. The pinned iOS 26.1 runtime remains unavailable, so no affected UI screenshot, preview installation, archive or upload was produced. This is development source only.
+
+---
+
 # Development build 31 — Farm crop selection cue, 4 November 2026
 
 The selected crop now shows a small checkmark to reinforce the gold selected-state styling and VoiceOver value. All 64 core tests pass and generic iOS 26.5 `build-for-testing` compiles the app and both test bundles.
