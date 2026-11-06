@@ -1,3 +1,9 @@
+# Build 32 — Animated obstacle durability cue — 6 November 2026
+
+Obstacle hit counts now animate as they decrease, reinforcing the damage feedback while keeping the high-contrast badge and existing accessibility labels. The 64-case core suite and generic iOS 26.5 app/unit/UI build-for-testing pass. The pinned iOS 26.1 runtime/device is still missing, so native playback and screenshots remain unverified. Build 32 is development source only; see [TEST_REPORT.md](TEST_REPORT.md).
+
+---
+
 # Build 31 — Puzzle obstacle durability cue — 5 November 2026
 
 Obstacle overlays replace tiny durability dots with a high-contrast number badge, making remaining hits legible on small puzzle cells. Existing accessibility labels continue to describe kind and remaining hits. All 64 core tests and generic iOS 26.5 app/test compilation pass. Native play and updated screenshot capture remain blocked by the missing pinned iOS 26.1 Store QA runtime/device. Build 31 is not installed or submitted; see [TEST_REPORT.md](TEST_REPORT.md).

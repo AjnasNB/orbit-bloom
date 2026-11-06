@@ -1,3 +1,11 @@
+# Development update — Animated obstacle layer count, 6 November 2026
+
+The obstacle durability badge now animates its number change when a match damages a layer, giving a clear hit-confirmation cue. Build **1.0 (32)** compiles with the app and both test bundles for generic iOS 26.5 Simulator; all **64 core tests pass**, including layered-obstacle regressions.
+
+The pinned iOS 26.1 Store QA runtime/device remains unavailable, so the damage animation was not played and no release screenshot or preview install was produced. No unrelated simulator was used. Build 32 remains development source only.
+
+---
+
 # Build 31 visual clarity update — obstacle layers, 5 November 2026
 
 Layered ice, rope, mud, seed sacks and water tubes now show their remaining hit count in a high-contrast numbered badge instead of tiny dots. The tile's accessibility label still announces the obstacle and hits remaining. All 64 core tests pass, including layered-obstacle rules; generic iOS 26.5 app/unit/UI `build-for-testing` succeeds.

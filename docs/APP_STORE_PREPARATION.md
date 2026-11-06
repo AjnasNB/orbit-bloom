@@ -1,3 +1,9 @@
+# Development build 32 — Animated obstacle layers, 6 November 2026
+
+The remaining-hit number on each layered puzzle obstacle now uses a numeric content transition, animating the count down when a match damages it. Generic iOS 26.5 app/test compilation and all 64 core tests pass. The iOS 26.1 Store QA simulator remains unavailable, preventing UI playback, screenshot capture and save-preserving preview installation. No archive, upload or submission occurred.
+
+---
+
 # Build 31 visual clarity update — obstacle layers, 5 November 2026
 
 Puzzle obstacles now show remaining hit points in a high-contrast numbered badge, while tile accessibility labels retain the same hit count. Core obstacle and full campaign tests pass; generic iOS 26.5 app/test bundle compilation succeeds. The pinned iOS 26.1 runtime remains unavailable, so no affected UI screenshot, preview installation, archive or upload was produced. This is development source only.

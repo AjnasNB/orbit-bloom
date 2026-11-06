@@ -123,6 +123,7 @@ struct ObstacleArtwork: View {
                 }
                 Text("\(obstacle.remaining)")
                     .font(.system(size:max(8,s*0.24),weight:.black,design:.rounded)).monospacedDigit()
+                    .contentTransition(.numericText())
                     .foregroundStyle(.white).frame(width:s*0.34,height:s*0.34)
                     .background(Color(hex:0x195A73),in:Circle())
                     .overlay(Circle().stroke(.white.opacity(0.95),lineWidth:max(1,s*0.025)))
