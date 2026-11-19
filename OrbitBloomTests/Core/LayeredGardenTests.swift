@@ -145,6 +145,20 @@ final class LayeredGardenTests:XCTestCase {
         XCTAssertFalse(fixed.validSeat(paired.deck*6+(actual%6 < 3 ? 3 : 0),passenger:paired))
         XCTAssertTrue(fixed.depart())
     }
+    func testShuttleReplacingAnOccupiedSeatReturnsDisplacedTravellerToQueue() {
+        var run=ShuttleRun(level:20)
+        let first=run.solution[0], replacement=run.solution[1]
+        XCTAssertTrue(run.seat(first,at:0))
+        XCTAssertTrue(run.seat(replacement,at:0))
+        XCTAssertEqual(run.seated,1)
+        XCTAssertEqual(run.seats[0],replacement)
+        XCTAssertFalse(run.seats.contains(first))
+        XCTAssertTrue(run.seat(first,at:1))
+        XCTAssertEqual(run.seated,2)
+        XCTAssertEqual(run.seats[1],first)
+        let seated=run.seats.compactMap{$0}
+        XCTAssertEqual(Set(seated).count,seated.count,"Replacing and recovering tickets must never duplicate or lose seated travellers")
+    }
     func testShuttleMayValidateItsLastSeatWithoutAnotherPlacement() {
         for level in [1,20,1000] {
             var run=ShuttleRun(level:level)

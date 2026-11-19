@@ -1,3 +1,7 @@
+# QA update — Shuttle seat-replacement coverage, 19 November 2026
+
+The latest development change adds regression coverage for returning a displaced Shuttle passenger to the queue and seating them again. All 65 core tests pass and the app plus both test bundles compile for generic iOS 26.5 Simulator. The separate pinned iOS 26.1 Store QA device/runtime remains unavailable, so this change has no device screenshots or preview installation. It is test-only: the app binary, current App Store metadata and submitted version are unchanged; no archive, upload, review submission, real purchase or agreement action occurred. See [TEST_REPORT.md](TEST_REPORT.md).
+
 # Development build 32 — Animated obstacle layers, 6 November 2026
 
 The remaining-hit number on each layered puzzle obstacle now uses a numeric content transition, animating the count down when a match damages it. Generic iOS 26.5 app/test compilation and all 64 core tests pass. The iOS 26.1 Store QA simulator remains unavailable, preventing UI playback, screenshot capture and save-preserving preview installation. No archive, upload or submission occurred.

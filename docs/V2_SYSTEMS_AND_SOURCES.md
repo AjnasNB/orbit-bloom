@@ -1,3 +1,7 @@
+# Shuttle seat-replacement regression — 19 November 2026
+
+The focused Shuttle test now covers the occupied-seat recovery documented in the help sheet: the displaced traveller returns to the queue and can be seated again without duplicates or lost passenger state. All 65 core tests pass, including the 1,020-level campaign, and generic iOS 26.5 `build-for-testing` compiles the app and both test bundles. The pinned iOS 26.1 Store QA runtime/device remains unavailable, so there was no in-simulator playthrough or screenshot. This changes test coverage only; app behavior and build number are unchanged. See [TEST_REPORT.md](TEST_REPORT.md).
+
 # Build 32 — Animated obstacle durability cue — 6 November 2026
 
 Obstacle hit counts now animate as they decrease, reinforcing the damage feedback while keeping the high-contrast badge and existing accessibility labels. The 64-case core suite and generic iOS 26.5 app/unit/UI build-for-testing pass. The pinned iOS 26.1 runtime/device is still missing, so native playback and screenshots remain unverified. Build 32 is development source only; see [TEST_REPORT.md](TEST_REPORT.md).

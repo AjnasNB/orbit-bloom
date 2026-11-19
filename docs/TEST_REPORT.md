@@ -1,3 +1,7 @@
+# Shuttle seating recovery regression — 19 November 2026
+
+Added a core regression for the documented occupied-seat recovery: replacing a seated traveller returns them to the queue, they can be seated again, and the seat map contains no duplicate passenger IDs. The focused `LayeredGardenTests` suite passes (12 tests), and the full core suite passes (65 tests), including all 1,020 campaign levels. Generic iOS 26.5 `build-for-testing` compiles the app, unit-test bundle and UI-test bundle. The pinned iOS 26.1 Store QA runner still exits before testing because its runtime/device are unavailable; no simulator gameplay, screenshot or preview install was performed. This is test-only hardening; the app build number and App Store package are unchanged.
+
 # Development update — Animated obstacle layer count, 6 November 2026
 
 The obstacle durability badge now animates its number change when a match damages a layer, giving a clear hit-confirmation cue. Build **1.0 (32)** compiles with the app and both test bundles for generic iOS 26.5 Simulator; all **64 core tests pass**, including layered-obstacle regressions.
