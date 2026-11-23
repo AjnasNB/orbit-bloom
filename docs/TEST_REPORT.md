@@ -1,3 +1,7 @@
+# Zero-move terminal swap regression — 23 November 2026
+
+Added a focused regression that restores a valid board at zero moves, verifies a best-move candidate is refused, and confirms score, pieces, collection and move count stay unchanged. This makes the existing terminal-input contract explicit; gameplay source is unchanged. All **66 core tests pass**, including the 1,020-level campaign, and generic iOS 26.5 `build-for-testing` succeeds for the app and both test bundles. The pinned iOS 26.1 Store QA runner still exits before tests because its runtime/device is unavailable; no simulator gameplay, screenshot, preview installation, archive or upload occurred. Build number and App Store package are unchanged.
+
 # Shuttle seating recovery regression — 19 November 2026
 
 Added a core regression for the documented occupied-seat recovery: replacing a seated traveller returns them to the queue, they can be seated again, and the seat map contains no duplicate passenger IDs. The focused `LayeredGardenTests` suite passes (12 tests), and the full core suite passes (65 tests), including all 1,020 campaign levels. Generic iOS 26.5 `build-for-testing` compiles the app, unit-test bundle and UI-test bundle. The pinned iOS 26.1 Store QA runner still exits before testing because its runtime/device are unavailable; no simulator gameplay, screenshot or preview install was performed. This is test-only hardening; the app build number and App Store package are unchanged.

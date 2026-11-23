@@ -59,6 +59,24 @@ final class GameEngineTests: XCTestCase {
         XCTAssertEqual(game.cells.map(\.gem), before.grid.allIndices().map { before.grid[$0].filling })
         XCTAssertEqual(game.score, 0)
     }
+    func testLostBoardRejectsSwapWithoutChangingSavedState() throws {
+        let active = GameEngine(level: Level.campaign[11], seed: 2026)
+        var snapshot = active.snapshot
+        snapshot = .init(levelID: snapshot.levelID, grid: snapshot.grid, score: snapshot.score,
+                         moves: 0, collected: snapshot.collected, frost: snapshot.frost,
+                         specials: snapshot.specials, rulesVersion: snapshot.rulesVersion,
+                         obstacles: snapshot.obstacles)
+        let lost = try XCTUnwrap(GameEngine(snapshot: snapshot))
+        XCTAssertTrue(lost.lost)
+        let before = lost.snapshot
+        let move = try XCTUnwrap(lost.bestMove())
+
+        XCTAssertFalse(lost.swap(move.0, move.1).accepted)
+        XCTAssertEqual(lost.moves, 0)
+        XCTAssertEqual(lost.cells.map(\.id), before.grid.allIndices().map { before.grid[$0].id })
+        XCTAssertEqual(lost.score, before.score)
+        XCTAssertEqual(lost.collected, before.collected)
+    }
     func testSwapsCascadeCollectAndLeavePlayableBoard() {
         let game = GameEngine(level: Level.campaign[11], seed: 1212)
         for _ in 0..<15 {

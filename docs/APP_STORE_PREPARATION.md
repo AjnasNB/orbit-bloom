@@ -1,3 +1,7 @@
+# Development QA — zero-move terminal swap regression, 23 November 2026
+
+An explicit regression now reloads a valid board at zero moves and proves a candidate swap leaves pieces, score, collected goals and move count unchanged. This tests the existing terminal guard without changing game behavior. All 66 core tests and generic iOS 26.5 app/unit/UI `build-for-testing` pass. The pinned iOS 26.1 Store QA runtime/device is unavailable, so no device playthrough, screenshot, preview installation, archive, upload or review submission was performed. Current App Store metadata and the submitted package are unchanged. See [TEST_REPORT.md](TEST_REPORT.md).
+
 # QA update — Shuttle seat-replacement coverage, 19 November 2026
 
 The latest development change adds regression coverage for returning a displaced Shuttle passenger to the queue and seating them again. All 65 core tests pass and the app plus both test bundles compile for generic iOS 26.5 Simulator. The separate pinned iOS 26.1 Store QA device/runtime remains unavailable, so this change has no device screenshots or preview installation. It is test-only: the app binary, current App Store metadata and submitted version are unchanged; no archive, upload, review submission, real purchase or agreement action occurred. See [TEST_REPORT.md](TEST_REPORT.md).

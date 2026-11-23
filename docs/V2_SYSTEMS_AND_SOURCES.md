@@ -1,3 +1,7 @@
+# Zero-move terminal puzzle regression — 23 November 2026
+
+A regression restores a valid saved board at zero moves and verifies a candidate swap is refused without changing gameplay state. This protects the existing engine contract with deterministic test coverage. All 66 core tests and generic iOS 26.5 app/test-bundle compilation pass. The pinned iOS 26.1 Store QA runtime/device is still unavailable, so native playback and screenshots could not be captured. See [TEST_REPORT.md](TEST_REPORT.md).
+
 # Shuttle seat-replacement regression — 19 November 2026
 
 The focused Shuttle test now covers the occupied-seat recovery documented in the help sheet: the displaced traveller returns to the queue and can be seated again without duplicates or lost passenger state. All 65 core tests pass, including the 1,020-level campaign, and generic iOS 26.5 `build-for-testing` compiles the app and both test bundles. The pinned iOS 26.1 Store QA runtime/device remains unavailable, so there was no in-simulator playthrough or screenshot. This changes test coverage only; app behavior and build number are unchanged. See [TEST_REPORT.md](TEST_REPORT.md).
